@@ -6,4 +6,13 @@
   "assets": {
     "directory": "./dist",
   },
+  // Declaring the apex here keeps the live hostname part of the reviewed
+  // configuration: a deploy reconciles it rather than it living only as state
+  // someone set by hand in the dashboard.
+  "routes": [
+    {
+      "pattern": "panel-assistant.io",
+      "custom_domain": true,
+    },
+  ],
 }
