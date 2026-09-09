@@ -13,8 +13,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "format": "prettier --write \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \"*.{mjs,md}\" package.json tsconfig.json",
-    "format:check": "prettier --check \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \"*.{mjs,md}\" package.json tsconfig.json"
+    "format": "prettier --write \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \".github/**/*.yml\" \"*.{mjs,md}\" package.json tsconfig.json",
+    "format:check": "prettier --check \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \".github/**/*.yml\" \"*.{mjs,md}\" package.json tsconfig.json"
   },
   "prettier": {
     "printWidth": 100,
