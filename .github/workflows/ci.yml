@@ -14,7 +14,9 @@ env:
 
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  # Superseded pull-request runs are cancelled, but a push to main is never
+  # interrupted: that run can be part-way through publishing the site.
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   build:
@@ -44,3 +46,46 @@ jobs:
       # Internal links are validated during the build, so a broken one fails here.
       - name: Build
         run: npm run build
+
+      # The deploy job publishes this exact directory, so what goes live is the
+      # output these checks passed over rather than a second, unverified build.
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          name: site
+          path: dist/
+          retention-days: 7
+          if-no-files-found: error
+
+  deploy:
+    name: Publish to Cloudflare
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # Holds CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID. Keeping them on a
+    # protected environment rather than in repository secrets means the checks
+    # above can never reach the publishing credential.
+    environment:
+      name: cloudflare
+    # A publish is not safe to interrupt part-way, so this never cancels itself.
+    concurrency:
+      group: deploy-cloudflare
+      cancel-in-progress: false
+    steps:
+      # wrangler.jsonc names the assets directory, so the repository is needed
+      # alongside the built output.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: site
+          path: dist
+
+      - name: Publish
+        uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4.0.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Workers Static Assets, which Cloudflare recommends over Pages for new
+          # projects. The name and the assets directory come from wrangler.jsonc.
+          command: deploy

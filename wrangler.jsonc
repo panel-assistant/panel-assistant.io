@@ -1,0 +1,9 @@
+{
+  // A purely static site: Workers serves the built directory directly and there
+  // is no Worker script. Cloudflare recommends this over Pages for new projects.
+  "name": "panel-assistant-io",
+  "compatibility_date": "2026-09-09",
+  "assets": {
+    "directory": "./dist",
+  },
+}
