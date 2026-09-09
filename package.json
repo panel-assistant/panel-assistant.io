@@ -1,0 +1,47 @@
+{
+  "name": "panel-assistant.io",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "format": "prettier --write \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \"*.{mjs,md}\" package.json tsconfig.json",
+    "format:check": "prettier --check \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \"*.{mjs,md}\" package.json tsconfig.json"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "proseWrap": "preserve",
+    "plugins": [
+      "prettier-plugin-astro"
+    ],
+    "overrides": [
+      {
+        "files": "*.astro",
+        "options": {
+          "parser": "astro"
+        }
+      }
+    ]
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.42.0",
+    "astro": "^7.3.2",
+    "sharp": "^0.35.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^1.0.0",
+    "starlight-links-validator": "^0.26.0",
+    "typescript": "^5.9.3"
+  }
+}

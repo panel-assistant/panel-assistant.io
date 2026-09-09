@@ -1,0 +1,65 @@
+---
+title: Panel Assistant
+description: Home Assistant dashboards on Android wall panels, using the ha-paneld app.
+template: splash
+hero:
+  tagline: Home Assistant dashboards on Android wall panels. ha-paneld is the Android app that does the work on the panel.
+  image:
+    alt: ''
+    file: ../../assets/icon.svg
+  actions:
+    - text: Get started
+      link: /start/getting-started/
+      icon: right-arrow
+    - text: ha-paneld on GitHub
+      link: https://github.com/maxlyth/ha-paneld
+      icon: external
+      variant: minimal
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## What it is
+
+The wall panels sold as smart-home controllers are mostly slow Android tablets behind a bit of glass, and a Home Assistant dashboard is a heavy page to put in front of one. ha-paneld is an Android app that renders the dashboard on the panel itself and subscribes only to the entities that dashboard actually uses, instead of the whole state machine.
+
+It also publishes the panel's own hardware to Home Assistant over MQTT discovery, so the screen, LEDs, buttons, sensors and relays turn up as entities without per-device YAML. What a given panel exposes depends on the model, and the entities follow the same conventions across makes.
+
+This is for dedicated wall panels, not for phones.
+
+## The path from a bare panel to a working one
+
+<CardGrid>
+  <LinkCard
+    title="1. Choose a panel"
+    href="/install/supported-panels/"
+    description="Support varies by model. Check yours before you buy or flash anything."
+  />
+  <LinkCard
+    title="2. Prepare the panel"
+    href="/install/prepare-a-panel/"
+    description="Network access, developer options and an up-to-date system WebView."
+  />
+  <LinkCard
+    title="3. Install ha-paneld"
+    href="/install/installing-ha-paneld/"
+    description="Sideload the app from a computer on the same network, or from the project's own F-Droid repository."
+  />
+  <LinkCard
+    title="4. Connect Home Assistant"
+    href="/home-assistant/connect-a-panel/"
+    description="Point the panel at a dashboard and let MQTT discovery bring the hardware in."
+  />
+</CardGrid>
+
+## Where the project stands
+
+ha-paneld is pre-1.0. It is sideloaded rather than installed from Google Play, and its [releases](https://github.com/maxlyth/ha-paneld/releases) come as release candidates before each stable version. Hardware support is uneven and is tracked per model, so the [panel list](/install/supported-panels/) is worth reading before you commit to a device.
+
+A [Home Assistant custom integration](/home-assistant/custom-integration/) is being built alongside the app. It has not been released yet.
+
+This site is new. It is an entry point rather than a complete manual, and the reference documentation still lives with the code in the [ha-paneld repository](https://github.com/maxlyth/ha-paneld/tree/main/docs). Every page here links to the source it summarises.
+
+---
+
+The icon is the ha-paneld application icon and includes the Home Assistant mark, which remains the property of the Home Assistant project and is not covered by this repository's licence. Panel Assistant is an independent project and is not affiliated with or endorsed by Home Assistant. All product names, trademarks and registered trademarks are the property of their respective owners.
