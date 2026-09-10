@@ -2,6 +2,11 @@
 title: Panel Assistant
 description: Home Assistant dashboards on Android wall panels, using the ha-paneld app.
 template: splash
+# Starlight renders "<page title> | <site title>", which on this page is the same
+# string twice. This sets the tag outright.
+head:
+  - tag: title
+    content: Panel Assistant
 hero:
   tagline: Home Assistant dashboards on Android wall panels. ha-paneld is the Android app that does the work on the panel.
   image:
@@ -25,30 +30,32 @@ The wall panels sold as smart-home controllers are mostly slow Android tablets b
 
 It also publishes the panel's own hardware to Home Assistant over MQTT discovery, so the screen, LEDs, buttons, sensors and relays turn up as entities without per-device YAML. What a given panel exposes depends on the model, and the entities follow the same conventions across makes.
 
+Setting a panel up starts in Home Assistant. The Panel Assistant custom integration is installed through HACS, and from there it prepares a panel and puts ha-paneld on it, so the app does not have to be sideloaded by hand. ha-paneld is what runs on the panel afterwards and does the work on the wall.
+
 This is for dedicated wall panels, not for phones.
 
 ## The path from a bare panel to a working one
 
 <CardGrid>
   <LinkCard
-    title="1. Choose a panel"
+    title="1. Install the integration"
+    href="/home-assistant/custom-integration/"
+    description="Add Panel Assistant through HACS as a custom repository, then restart Home Assistant."
+  />
+  <LinkCard
+    title="2. Choose a panel"
     href="/install/supported-panels/"
     description="Support varies by model. Check yours before you buy or flash anything."
   />
   <LinkCard
-    title="2. Prepare the panel"
+    title="3. Prepare the panel"
     href="/install/prepare-a-panel/"
-    description="Network access, developer options and an up-to-date system WebView."
+    description="Network access, ADB and an up-to-date system WebView."
   />
   <LinkCard
-    title="3. Install ha-paneld"
+    title="4. Add the panel"
     href="/install/installing-ha-paneld/"
-    description="Sideload the app from a computer on the same network, or from the project's own F-Droid repository."
-  />
-  <LinkCard
-    title="4. Connect Home Assistant"
-    href="/home-assistant/connect-a-panel/"
-    description="Point the panel at a dashboard and let MQTT discovery bring the hardware in."
+    description="The integration installs ha-paneld over the network, or adopts a panel already running it."
   />
 </CardGrid>
 
@@ -56,7 +63,7 @@ This is for dedicated wall panels, not for phones.
 
 ha-paneld is pre-1.0. It is sideloaded rather than installed from Google Play, and its [releases](https://github.com/maxlyth/ha-paneld/releases) come as release candidates before each stable version. Hardware support is uneven and is tracked per model, so the [panel list](/install/supported-panels/) is worth reading before you commit to a device.
 
-A [Home Assistant custom integration](/home-assistant/custom-integration/) is being built alongside the app. It has not been released yet.
+The [Home Assistant custom integration](/home-assistant/custom-integration/) is a beta and its own readme calls it a proof of concept rather than a finished installer. It has no stable release, upgrades through it are not supported yet, and MQTT still owns the panel entities and their controls.
 
 This site is new. It is an entry point rather than a complete manual, and the reference documentation still lives with the code in the [ha-paneld repository](https://github.com/maxlyth/ha-paneld/tree/main/docs). Every page here links to the source it summarises.
 

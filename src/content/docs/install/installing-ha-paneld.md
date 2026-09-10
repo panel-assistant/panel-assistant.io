@@ -3,11 +3,13 @@ title: Install ha-paneld
 description: Sideloading ha-paneld onto a prepared Android wall panel.
 ---
 
-ha-paneld is not on Google Play. It is sideloaded, either from a computer on the same network or, once a panel is already running it, from the project's own F-Droid repository.
+ha-paneld is not on Google Play, so it has to be installed onto the panel rather than downloaded on it.
 
-Work through [Prepare the panel](/install/prepare-a-panel/) first. The installer needs network ADB reachable on the panel.
+The route most people want is the [custom integration](/home-assistant/custom-integration/): add the panel in Home Assistant and it installs ha-paneld over the network for you. The rest of this page is the manual alternative, which is also what to use when the integration cannot reach a panel.
 
-## From a computer
+Work through [Prepare the panel](/install/prepare-a-panel/) first. Both routes need network ADB reachable on the panel.
+
+## By hand, from a computer
 
 The documented route is a single command run against the panel's address. Replace the example address with your own.
 

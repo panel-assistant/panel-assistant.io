@@ -1,26 +1,38 @@
 ---
 title: Custom integration
-description: The Home Assistant custom integration for ha-paneld, which is still unreleased.
+description: Installing the Panel Assistant custom integration through HACS, which is where setting up a panel starts.
 ---
 
-:::caution[Not released]
-The custom integration has no release yet. It is still in development, and everything on this page describes work in progress that may change before it ships. To connect a panel today, use [MQTT discovery](/home-assistant/connect-a-panel/).
+Setting up a panel starts here. The Panel Assistant custom integration runs inside Home Assistant and handles getting ha-paneld onto a panel, so you do not have to sideload the app by hand. It lives in its own repository, [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration).
+
+:::caution[Beta]
+The integration is a beta, and its own readme describes it as a proof of concept rather than a finished installer. There is no stable release. Upgrading a panel through it is not supported yet, and browser USB installation is experimental. Expect it to change.
 :::
 
-A Home Assistant custom integration is being built alongside the app, in a separate repository: [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration).
+## Install it
 
-## What it is intended to do
+You need Home Assistant 2026.8.3 or newer, and [HACS](https://hacs.xyz/).
 
-The integration is aimed at the setup problem rather than at day-to-day control. From inside Home Assistant it is intended to install ha-paneld on a clean panel over network ADB, or adopt a panel that is already running it, and then present that panel as a Home Assistant device with a diagnostic status sensor and downloadable diagnostics.
+1. In HACS, add `https://github.com/panel-assistant/ha-integration` as a custom repository with the category **Integration**.
+2. Download **Panel Assistant**, then restart Home Assistant.
+3. Go to **Settings → Devices & services → Add integration**, choose **Panel Assistant**, and follow the prompts.
 
-Setting up a panel would run as a config flow: give it the panel's address, let it check what is there, approve the ADB debugging prompt on the panel's own screen if it asks, confirm the release it is about to install, and watch it through. Adopting an existing installation is the shorter path of the two.
+[Open in HACS](https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration) opens step one directly on your own Home Assistant.
 
-## What it is not intended to do
+## What it does
 
-It does not replace MQTT discovery. MQTT stays the authority for the panel's entities and for controlling them, and the integration is not planned to proxy panel traffic, reproduce those entities, or configure ha-paneld after it launches. It is also not planned to upgrade or overwrite an existing installation.
+From inside Home Assistant it can install ha-paneld on a clean panel over network ADB, or adopt a panel that is already running it. Either way the panel then appears as a Home Assistant device with a status sensor and downloadable diagnostics.
 
-## Requirements as they currently stand
+Setting up a panel runs as a config flow: give it the panel's address, let it check what is there, approve the ADB debugging prompt on the panel's own screen if it asks, choose the ha-paneld release to install, and watch it through. Release candidates are marked as such in the picker. Adopting an existing installation is the shorter path of the two.
 
-Home Assistant 2026.8.3 or newer, network ADB reachable on the panel, physical access to the panel to approve the debugging prompt, and internet access from Home Assistant to fetch the release.
+For a network installation, [prepare the panel](/install/prepare-a-panel/) first so ADB is reachable. If an installation stops part way, the [recovery guide](https://github.com/maxlyth/ha-paneld/blob/main/docs/provisioning-safety.md) covers what to do.
 
-Both figures and behaviours above are provisional until there is a release. The repository is the place to watch.
+## What it does not do
+
+It does not replace MQTT discovery. MQTT remains the authority for the panel's entities and for controlling them, and the integration does not proxy panel traffic, reproduce those entities, or configure ha-paneld once it is running. It does not upgrade or overwrite an existing installation.
+
+So the integration is how a panel gets set up, and [MQTT discovery](/home-assistant/connect-a-panel/) is how it is used afterwards.
+
+## If you used the earlier 0.1.0 integration
+
+Remove the old integration entry under **Settings → Devices & services**, then remove its download from HACS. Add this repository, enable beta releases, download Panel Assistant and restart Home Assistant, then add the integration again using your panel's hostname or address. That replaces the integration's status entity. It does not change ha-paneld's own MQTT entities, topics or panel settings.
