@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 
-const paneldRepo = 'https://github.com/maxlyth/ha-paneld';
+const integrationRepo = 'https://github.com/panel-assistant/ha-integration';
 
 export default defineConfig({
   site: 'https://panel-assistant.io',
@@ -11,13 +11,14 @@ export default defineConfig({
     starlight({
       title: 'Panel Assistant',
       description:
-        'Documentation for Panel Assistant, the project behind ha-paneld, the Home Assistant dashboard app for Android wall panels.',
+        'The universal wall panel product for Home Assistant. Fast, dependable Android wall panels that run your existing dashboards, set up and managed from Home Assistant itself.',
       logo: {
         src: './src/assets/icon.svg',
         alt: '',
       },
       favicon: '/favicon.svg',
-      social: [{ icon: 'github', label: 'ha-paneld on GitHub', href: paneldRepo }],
+      social: [{ icon: 'github', label: 'Panel Assistant on GitHub', href: integrationRepo }],
+      components: { SiteTitle: './src/components/SiteTitle.astro' },
       plugins: [starlightLinksValidator()],
       credits: false,
       lastUpdated: true,
@@ -26,7 +27,7 @@ export default defineConfig({
           label: 'Start here',
           items: [
             { label: 'Getting started', slug: 'start/getting-started' },
-            { label: 'What Panel Assistant is', slug: 'start/what-it-is' },
+            { label: 'How it works', slug: 'start/what-it-is' },
           ],
         },
         {
@@ -34,14 +35,15 @@ export default defineConfig({
           items: [
             { label: 'Choose a panel', slug: 'install/supported-panels' },
             { label: 'Prepare the panel', slug: 'install/prepare-a-panel' },
-            { label: 'Install ha-paneld', slug: 'install/installing-ha-paneld' },
+            { label: 'Add a panel', slug: 'install/installing-ha-paneld' },
+            { label: 'Install over USB', slug: 'install/install-over-usb' },
           ],
         },
         {
           label: 'Home Assistant',
           items: [
+            { label: 'Install the integration', slug: 'home-assistant/custom-integration' },
             { label: 'Connect a panel', slug: 'home-assistant/connect-a-panel' },
-            { label: 'Custom integration', slug: 'home-assistant/custom-integration' },
           ],
         },
         {
@@ -49,6 +51,7 @@ export default defineConfig({
           items: [
             { label: 'Updates and recovery', slug: 'manage/updates-and-recovery' },
             { label: 'Troubleshooting', slug: 'manage/troubleshooting' },
+            { label: 'Command-line install', slug: 'manage/command-line-install' },
           ],
         },
       ],

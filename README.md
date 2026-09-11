@@ -1,15 +1,15 @@
 # panel-assistant.io
 
-Source for the Panel Assistant website: the product pages and documentation for running Home Assistant dashboards on Android wall panels.
+Source for [panel-assistant.io](https://panel-assistant.io), the website for Panel Assistant, the Home Assistant integration that turns Android wall panels into fast, dependable appliances running your existing dashboards.
 
-The site is a static build made with [Astro](https://astro.build/) and [Starlight](https://starlight.astro.build/). It is not deployed from this repository yet, and nothing here changes hosting or DNS.
+The site is a static build made with [Astro](https://astro.build/) and [Starlight](https://starlight.astro.build/). Every push to `main` builds the site and publishes it to Cloudflare through GitHub Actions.
 
 ## The project
 
-Panel Assistant is the project around **ha-paneld**, the Android application that runs on a wall panel and turns it into a Home Assistant control surface. ha-paneld is the runtime component; this repository is only the website.
+Panel Assistant has two parts. This repository is only the website.
 
-- [maxlyth/ha-paneld](https://github.com/maxlyth/ha-paneld) is the Android app, and the reference documentation lives there.
-- [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration) is the Home Assistant custom integration. It has not been released.
+- [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration) is the Home Assistant integration: the installer, the per-panel devices and the page that shows all of your panels. It is installed through HACS.
+- [maxlyth/ha-paneld](https://github.com/maxlyth/ha-paneld) is the app the integration puts on each panel, and the reference documentation lives there.
 
 ## Local preview
 
@@ -49,4 +49,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Free and open source under the Apache License 2.0. See [LICENSE](LICENSE).
 
-The icon and favicon in `src/assets/` and `public/` are the ha-paneld application artwork, shared from [maxlyth/ha-paneld](https://github.com/maxlyth/ha-paneld) as part of the same project. They include the Home Assistant mark, which remains the property of the Home Assistant project and is not covered by this repository's licence. Panel Assistant is an independent project and is not affiliated with or endorsed by Home Assistant. All product names, trademarks and registered trademarks are the property of their respective owners.
+The icon and favicon in `src/assets/` and `public/` are the project's application artwork, shared from [maxlyth/ha-paneld](https://github.com/maxlyth/ha-paneld) as part of the same project. They include the Home Assistant mark, which remains the property of the Home Assistant project and is not covered by this repository's licence. Panel Assistant is an independent project and is not affiliated with or endorsed by Home Assistant. All product names, trademarks and registered trademarks are the property of their respective owners.

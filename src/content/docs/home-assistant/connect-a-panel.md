@@ -1,30 +1,20 @@
 ---
 title: Connect a panel
-description: Pointing ha-paneld at a dashboard and bringing the panel's hardware into Home Assistant.
+description: Putting your dashboard on the panel, and how the panel's own hardware shows up in Home Assistant.
 ---
 
-A panel running ha-paneld connects to Home Assistant in two independent ways. One puts a dashboard on the screen. The other brings the panel's own hardware in as entities. You can have either without the other.
+A panel that has been added to Home Assistant connects to it in two ways. One puts a dashboard on the screen. The other brings the panel's own hardware in as entities.
 
 ## The dashboard on the screen
 
-ha-paneld has a built-in renderer that loads a Home Assistant dashboard and can learn which entities that dashboard uses, so it subscribes to those rather than to everything. You configure the dashboard address through the panel's own interface on port 8888.
+Open the panel's status page in your browser, at its address on port 8888, and choose the dashboard you want on the wall. The panel loads that dashboard itself, works out which entities it shows, and asks Home Assistant for only those, which is what keeps it fast. Details of how the dashboard is loaded and what the panel does if it fails to load are in the [renderer documentation](https://github.com/maxlyth/ha-paneld/blob/main/docs/built-in-renderer.md).
 
-The renderer is documented in [built-in renderer](https://github.com/maxlyth/ha-paneld/blob/main/docs/built-in-renderer.md), including its startup and recovery behaviour.
+## The panel's hardware in Home Assistant
 
-## The panel's hardware as entities
+The screen, LEDs, buttons, sensors and relays that your model has appear in Home Assistant as entities on the panel's device, so a physical button can trigger an automation and an LED can show the state of anything. Which entities you get depends on the hardware profile for the model; the [hardware pages](https://github.com/maxlyth/ha-paneld/blob/main/docs/hardware/README.md) say what each panel exposes.
 
-The screen, LEDs, buttons, sensors, relays and audio hardware reach Home Assistant over MQTT discovery. Give the panel your broker details, either at install time with `--mqtt` or afterwards through its interface, and the entities appear against a device for that panel without any YAML on the Home Assistant side.
+Under the hood these entities arrive through Home Assistant's MQTT integration, so Home Assistant needs a broker it is already using, such as the Mosquitto add-on, and the panel needs to be told about it. You can enter the broker details on the panel's status page. Once that is done the entities appear on their own, with nothing to configure on the Home Assistant side.
 
-Which entities you get depends on the hardware profile for that model. The entity contracts are documented in the [API reference](https://github.com/maxlyth/ha-paneld/blob/main/docs/api.md).
+## The panel's status page
 
-:::note
-This is the path that works today. The [custom integration](/home-assistant/custom-integration/) is a separate and newer piece of work, and it is not a replacement for MQTT discovery.
-:::
-
-## The panel's local API
-
-Each panel serves an HTTP API on port 8888 on your local network, with an OpenAPI description at `/api/v1/openapi.json` and a diagnostic report at `/diag`. It is designed for a trusted local network, so treat access to it the same way you treat access to the panel itself. The endpoints and the trust model are covered in the [API reference](https://github.com/maxlyth/ha-paneld/blob/main/docs/api.md) and in [security mode](https://github.com/maxlyth/ha-paneld/blob/main/docs/security-mode.md).
-
-## Requirements
-
-Home Assistant 2026.4.2 or newer, and an MQTT broker that Home Assistant already uses if you want the hardware entities.
+Each panel serves its own page on your local network on port 8888. It is where you choose the dashboard, enter the broker details, see what the panel is doing and read its diagnostic report. It is designed for a trusted home network, so treat access to it the same way you treat access to the panel itself. The [API reference](https://github.com/maxlyth/ha-paneld/blob/main/docs/api.md) and [security mode](https://github.com/maxlyth/ha-paneld/blob/main/docs/security-mode.md) cover what it offers and the trust model.

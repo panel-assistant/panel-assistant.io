@@ -1,40 +1,28 @@
 ---
 title: Updates and recovery
-description: Updating ha-paneld on one panel or several, and what can be recovered when something goes wrong.
+description: Keeping the app on a panel current, and what can be recovered when something goes wrong.
 ---
 
-## Updating one panel
+## Updating a panel
 
-An update is the same command as an install. Point it at the panel again and it fetches the current release and provisions it:
+Updating a panel from inside Home Assistant is not part of the integration yet; it is one of the next things on the list. Until then there are two routes.
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555
-```
+**From the panel, with no computer.** Panels set up with the project's [F-Droid repository](https://github.com/maxlyth/ha-paneld/blob/main/docs/fdroid.md) are told when a new version is published and the update is a tap on the panel. Stable releases go to that channel; release candidates do not.
 
-Without `--prerelease` it follows stable releases only. An update leaves the panel's existing setup in place; the separate `--reset-config` option is what erases it and starts guided setup as a genuine first run.
+**From a computer.** The [command-line installer](/manage/command-line-install/) run against the panel's address again fetches the current release and installs it over the top, leaving the panel's setup in place. The same tool can update several panels in one run.
 
-Panels set up through the project's [F-Droid repository](https://github.com/maxlyth/ha-paneld/blob/main/docs/fdroid.md) can be updated from the panel instead. F-Droid notifies the panel when a new version is published and the update is a tap, with no computer involved. Stable releases go to that channel; release candidates do not.
+## What an update protects
 
-## Updating several panels
+The installer takes a snapshot of the panel's data before it changes anything, refuses to proceed in conditions it cannot recover from, and leaves your setup in place. [Provisioning safety](https://github.com/maxlyth/ha-paneld/blob/main/docs/provisioning-safety.md) describes exactly what is protected and when it stops.
 
-There is a script for updating a set of panels in one run, described under _Updating a whole fleet_ in [provisioning](https://github.com/maxlyth/ha-paneld/blob/main/docs/provisioning.md). It takes a list of addresses and applies the same release to each.
-
-## What the installer protects
-
-[Provisioning safety](https://github.com/maxlyth/ha-paneld/blob/main/docs/provisioning-safety.md) is the document to read before any update that matters. It covers the snapshot the installer takes of a panel's database before it changes anything, the conditions under which a run refuses to proceed, and the boundaries that apply when several panels are updated together.
-
-Export a panel's configuration before a change you are unsure about. The installer's `--export` option writes it to a file you can restore later, and it is documented in [provisioning](https://github.com/maxlyth/ha-paneld/blob/main/docs/provisioning.md).
+Before a change you are unsure about, export the panel's configuration. The installer can write it to a file you can restore later, as described in [provisioning](https://github.com/maxlyth/ha-paneld/blob/main/docs/provisioning.md).
 
 ## Recovery
 
-For a dashboard that will not load after an update, the built-in renderer has its own [startup and recovery](https://github.com/maxlyth/ha-paneld/blob/main/docs/built-in-renderer.md#startup-and-recovery) behaviour, and [troubleshooting](/manage/troubleshooting/) covers the usual causes. Returning a panel to an earlier release is not something the documentation currently describes, so treat a configuration export as your way back rather than assuming you can reinstall over the top.
+A dashboard that will not load after an update is usually the system WebView or the dashboard itself, and the panel has its own [startup and recovery](https://github.com/maxlyth/ha-paneld/blob/main/docs/built-in-renderer.md#startup-and-recovery) behaviour for that. [Troubleshooting](/manage/troubleshooting/) covers the usual causes. Going back to an earlier release is not something the documentation currently describes, so treat a configuration export as your way back.
 
-Recovery below the app is a different matter. Some rooted panels can have their firmware partitions backed up and restored, and that is documented in [firmware backup and restore](https://github.com/maxlyth/ha-paneld/blob/main/docs/firmware-backup-restore.md).
+Recovery below the app is a different matter. Panel Assistant never touches a panel's firmware, but some rooted panels can have their firmware partitions backed up and restored by hand, and that is documented in [firmware backup and restore](https://github.com/maxlyth/ha-paneld/blob/main/docs/firmware-backup-restore.md).
 
 :::danger
 Firmware restore is experimental and has not been tested against a bricked device. Treat partition-level work on a panel as something that can leave it unusable, and read that document in full before starting.
 :::
-
-## Before you change anything on a panel you depend on
-
-Take the configuration export first and check you can still reach the panel over ADB, because most of what goes wrong during an update is far easier to undo when you have both.

@@ -1,9 +1,9 @@
 ---
 title: Choose a panel
-description: Which Android wall panels ha-paneld supports, and how far that support goes.
+description: Which Android wall panels Panel Assistant supports today, how far that support goes, and how to check before you buy.
 ---
 
-Support is per model and it is uneven. Three panels are fully supported. Several more work to varying degrees, and at least one is blocked by its stock software rather than by anything ha-paneld does. Check your model before you buy hardware or start flashing it.
+Most wall panels are bought from overseas marketplaces on little more than a listing and a hope. This page is the check to do before the money leaves your account. Support is per model, three panel families are fully supported, several more are documented, and at least one is blocked by its own software rather than by anything Panel Assistant does.
 
 :::caution
 The list below is a summary. The [hardware reference](https://github.com/maxlyth/ha-paneld/blob/main/docs/hardware/README.md) carries the current per-model status, the fact sheets, and the footnotes marking anything that has not been verified on a physical unit. Read it before committing to a device.
@@ -11,7 +11,7 @@ The list below is a summary. The [hardware reference](https://github.com/maxlyth
 
 ## Fully supported
 
-These three have the fullest hardware coverage.
+These three have the fullest hardware coverage: screen, LEDs, buttons, sensors and relays where the model has them.
 
 - **Sonoff NSPanel Pro** (including the 120 and 86 variants)
 - **Tuya TPA10**
@@ -27,17 +27,17 @@ These have fact sheets and varying degrees of support, from community-tested thr
 - Shelly Wall Display, and the X1i, X2, X2i and XL models
 
 :::note
-The original Shelly Wall Display ships Android 7.0, which is older than the minimum ha-paneld supports.
+The original Shelly Wall Display ships Android 7.0, which is older than the minimum supported.
 :::
 
 ## What decides whether a panel works
 
-- **Android version.** ha-paneld needs Android 8.0 or newer.
-- **System WebView.** The built-in renderer needs a current `com.android.webview`. Many panels ship with a very old one, and updating it is part of [preparing the panel](/install/prepare-a-panel/).
-- **ADB access.** Installation happens over the network with ADB, so the panel has to allow it.
-- **A hardware profile.** The screen, LEDs, buttons, sensors and relays reach Home Assistant through a YAML profile for that model. Without one you still get a dashboard, but not the panel's own hardware as entities.
+- **Android version.** Android 8.0 or newer.
+- **System WebView.** The dashboard needs a current one. Many panels ship with a very old WebView, and updating it is part of [preparing the panel](/install/prepare-a-panel/).
+- **Debugging access.** The installer uses Android's debugging interface, so the panel has to let you turn it on in developer options. Almost all do.
+- **A hardware profile.** The panel's own hardware reaches Home Assistant through a profile for that model. Without one you still get a fast dashboard, but not the LEDs, buttons, relays and sensors as entities.
 - **Root, sometimes.** A few capabilities on some models need root. The hardware pages say which, and what the route is.
 
-## Adding a model
+## Not on the list?
 
-Hardware support is data, not code, so a new panel is a profile rather than a new build of the app. The [hardware reference](https://github.com/maxlyth/ha-paneld/blob/main/docs/hardware/README.md) and the [profile documentation](https://github.com/maxlyth/ha-paneld/tree/main/docs/profiles) describe what a profile has to contain. Reports from panels that are not yet listed are welcome in the [repository issues](https://github.com/maxlyth/ha-paneld/issues).
+Hardware support is data, not code, so a new panel is a profile rather than a new build of the app, and the fastest way to get your model supported is to report it. Say what the model is and what happened in the [issues](https://github.com/maxlyth/ha-paneld/issues), and if you are inclined, the [profile documentation](https://github.com/maxlyth/ha-paneld/tree/main/docs/profiles) describes what a profile contains. Every report, working or not, moves the project closer to supporting every panel.

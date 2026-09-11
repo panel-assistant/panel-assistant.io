@@ -1,0 +1,37 @@
+---
+title: Install the integration
+description: Adding Panel Assistant to Home Assistant through HACS, which is where everything starts.
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+Panel Assistant is a custom integration, added through [HACS](https://hacs.xyz/). You need Home Assistant 2026.8.3 or newer and HACS.
+
+<LinkButton
+  href="https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration"
+  icon="external"
+>
+  Open in HACS
+</LinkButton>
+
+That button opens the repository in the HACS on your own Home Assistant, ready to download. If you would rather do it by hand:
+
+1. In HACS, add `https://github.com/panel-assistant/ha-integration` as a custom repository with the category **Integration**.
+2. Download **Panel Assistant**, then restart Home Assistant.
+3. Go to **Settings**, **Devices and services**, **Add integration**, and choose **Panel Assistant**.
+
+Releases are currently published from the repository's default branch, so turn on pre-release versions for this repository in HACS if it offers nothing to download.
+
+## What you get
+
+- **The installer.** Adding a panel is a guided flow inside Home Assistant. It checks the panel, installs the panel app over the network or [over USB](/install/install-over-usb/), starts it, and only then creates the device. A panel already running the app is adopted rather than reinstalled.
+- **A device per panel.** Each panel appears under Devices and services with a status sensor and downloadable diagnostics, redacted so they can be shared when you ask for help.
+- **All your panels on one page.** A Panel Assistant entry in the sidebar lists every panel with whether it is reachable, the version it is running and anything that needs attention.
+
+## What is still to come
+
+Panel Assistant is new and evolving quickly. Updating the app on a panel that is already installed is not part of the integration yet, so updates still go through the routes on [Updates and recovery](/manage/updates-and-recovery/). The USB installer is the newest part and is marked experimental; it is safe to retry, but expect rough edges. Feedback on both is welcome in the [issues](https://github.com/panel-assistant/ha-integration/issues).
+
+## If you used the earlier 0.1.0 integration
+
+Remove the old integration entry under Devices and services, then remove its download from HACS. Add this repository, download Panel Assistant, restart Home Assistant, then add the integration again using your panel's hostname or address. Nothing on the panel itself changes.
