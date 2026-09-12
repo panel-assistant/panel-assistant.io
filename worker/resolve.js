@@ -1,7 +1,9 @@
 // Maps a /go/<topic> request to its redirect target. Pure, so it can be tested
-// without a Worker runtime. Query parameters travel through untouched: shipped
-// software sends v and build today, and may send more later without the site
-// needing to know in advance.
+// without a Worker runtime. Query parameters travel through untouched to the
+// site's own pages: shipped software sends v and build today, and may send more
+// later without the site needing to know in advance. A destination off the site
+// receives none of them, because a third party has no use for them and the
+// reader's version is not theirs to collect.
 const PREFIX = '/go/';
 
 export function resolve(requestUrl, topics) {
@@ -10,7 +12,9 @@ export function resolve(requestUrl, topics) {
   const topic = decodeURIComponent(url.pathname.slice(PREFIX.length)).replace(/\/+$/, '');
   const known = Object.prototype.hasOwnProperty.call(topics, topic) && !topic.startsWith('$');
   const target = new URL(known ? topics[topic] : '/', url.origin);
-  for (const [key, value] of url.searchParams) target.searchParams.append(key, value);
+  if (target.origin === url.origin) {
+    for (const [key, value] of url.searchParams) target.searchParams.append(key, value);
+  }
   if (!known && topic) target.searchParams.set('go', topic);
   return { location: target.toString(), known, topic };
 }

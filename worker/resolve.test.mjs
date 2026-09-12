@@ -15,9 +15,11 @@ test('a known topic redirects to its page and keeps every parameter', () => {
   );
 });
 
-test('an off-site topic redirects to the absolute URL', () => {
-  const hit = go('/go/issues?v=1.0.0b1');
-  assert.equal(hit.location, 'https://github.com/panel-assistant/ha-integration/issues?v=1.0.0b1');
+test('an off-site topic redirects to the absolute URL and forwards no parameters', () => {
+  const hit = go('/go/issues?v=1.0.0b1&build=37&model=tpa10');
+  assert.equal(hit.location, 'https://github.com/panel-assistant/ha-integration/issues');
+  const discord = go('/go/discord?v=probe&build=0');
+  assert.ok(!new URL(discord.location).search, `discord received ${discord.location}`);
 });
 
 test('an unknown topic lands on the homepage, named, with its parameters', () => {
