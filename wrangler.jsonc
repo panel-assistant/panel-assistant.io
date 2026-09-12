@@ -1,10 +1,14 @@
 {
-  // A purely static site: Workers serves the built directory directly and there
-  // is no Worker script. Cloudflare recommends this over Pages for new projects.
+  // A static site served by Workers Static Assets, which Cloudflare recommends
+  // over Pages for new projects. The one Worker script answers /go/<topic>
+  // redirects; every other request is served from the built directory.
   "name": "panel-assistant-io",
+  "main": "worker/index.js",
   "compatibility_date": "2026-09-09",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/go/*", "/go"],
   },
   // Declaring the apex here keeps the live hostname part of the reviewed
   // configuration: a deploy reconciles it rather than it living only as state

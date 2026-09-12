@@ -47,6 +47,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      # The /go redirect table is checked against the pages this build produced,
+      # so a topic can never point at a page or anchor that does not exist.
+      - name: Test the redirect router
+        run: npm test
+
       # The deploy job publishes this exact directory, so what goes live is the
       # output these checks passed over rather than a second, unverified build.
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

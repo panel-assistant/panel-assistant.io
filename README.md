@@ -11,6 +11,10 @@ Panel Assistant has two parts. This repository is only the website.
 - [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration) is the Home Assistant integration: the installer, the per-panel devices and the page that shows all of your panels. It is installed through HACS.
 - [maxlyth/ha-paneld](https://github.com/maxlyth/ha-paneld) is the app the integration puts on each panel, and the reference documentation lives there.
 
+## Help links: `/go/<topic>`
+
+Software that ships a link to this site never links to a page path, because a link inside a released integration outlives any page layout. It links to `https://panel-assistant.io/go/<topic>`, and the site answers with a redirect to whatever the current best page for that topic is. The table of topics is [worker/topics.json](worker/topics.json), served by the small Worker in [worker/index.js](worker/index.js). Re-pointing a topic is a one-line change there; removing one is not allowed, because links already shipped depend on it. Query parameters such as the caller's version travel through to the destination untouched, and an unknown topic lands on the homepage with the topic named in a `go` parameter rather than on a 404. `npm test` checks every topic against the pages and anchors the build actually produced.
+
 ## Local preview
 
 Node.js 22.12 or newer.
@@ -28,18 +32,20 @@ That serves the site at http://localhost:4321 with live reload. `npm run build` 
 npm run format:check   # Prettier
 npm run check          # Astro content and type check
 npm run build          # production build, which also validates internal links
+npm test               # the /go redirect table against the pages the build produced
 ```
 
-`npm run format` rewrites files in place. The same three checks run in CI on every push and pull request.
+`npm run format` rewrites files in place. The same checks run in CI on every push and pull request. To exercise the redirect Worker itself, `npx wrangler dev` serves the built site with the router in front of it.
 
 ## Layout
 
-| Path                | What it holds                                         |
-| ------------------- | ----------------------------------------------------- |
-| `src/content/docs/` | Every page, as Markdown. The homepage is `index.mdx`. |
-| `src/assets/`       | Images processed at build time.                       |
-| `public/`           | Files served as they are, such as the favicon.        |
-| `astro.config.mjs`  | Site configuration and the sidebar.                   |
+| Path                | What it holds                                          |
+| ------------------- | ------------------------------------------------------ |
+| `src/content/docs/` | Every page, as Markdown. The homepage is `index.mdx`.  |
+| `src/assets/`       | Images processed at build time.                        |
+| `public/`           | Files served as they are, such as the favicon.         |
+| `astro.config.mjs`  | Site configuration and the sidebar.                    |
+| `worker/`           | The `/go/<topic>` redirect router and its topic table. |
 
 ## Contributing
 

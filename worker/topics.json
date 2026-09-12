@@ -1,0 +1,15 @@
+{
+  "$comment": "Topics behind https://panel-assistant.io/go/<topic>. Shipped software links here and nowhere else, so a topic may be re-pointed but never removed. Values are site paths, with an optional #anchor, or absolute URLs for destinations off the site.",
+  "getting-started": "/start/getting-started/",
+  "how-it-works": "/start/what-it-is/",
+  "supported-panels": "/install/supported-panels/",
+  "prepare-a-panel": "/install/prepare-a-panel/",
+  "add-a-panel": "/install/installing-ha-paneld/",
+  "usb-install": "/install/install-over-usb/",
+  "install-integration": "/home-assistant/custom-integration/",
+  "connect-a-panel": "/home-assistant/connect-a-panel/",
+  "panel-unreachable": "/manage/troubleshooting/#the-installer-cannot-reach-the-panel",
+  "troubleshooting": "/manage/troubleshooting/",
+  "updates": "/manage/updates-and-recovery/",
+  "issues": "https://github.com/panel-assistant/ha-integration/issues"
+}
