@@ -1,0 +1,32 @@
+---
+// Starlight's footer, plus the line saying which build of the site this is.
+import Default from '@astrojs/starlight/components/Footer.astro';
+import build from '../build-info/build.json';
+
+const label =
+  build.number === null
+    ? 'Unnumbered local build'
+    : `Build ${build.number} · ${build.sha}${build.channel === 'main' ? '' : ' · ' + build.channel}`;
+---
+
+<Default />
+<p class="build-info">
+  <a href="/build.json">{label}</a>
+</p>
+
+<style>
+  .build-info {
+    margin: 0.5rem 0 0;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+    text-align: end;
+  }
+  .build-info a {
+    color: inherit;
+    text-decoration: none;
+    font-variant-numeric: tabular-nums;
+  }
+  .build-info a:hover {
+    color: var(--sl-color-white);
+  }
+</style>

@@ -8,14 +8,16 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "predev": "node src/build-info/write.mjs",
     "dev": "astro dev",
     "start": "astro dev",
+    "prebuild": "node src/build-info/write.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
     "test": "node --test \"worker/**/*.test.mjs\"",
-    "format": "prettier --write \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \"worker/**/*.{js,mjs,json}\" \".github/**/*.yml\" \"*.{mjs,md}\" package.json tsconfig.json wrangler.jsonc",
-    "format:check": "prettier --check \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \"worker/**/*.{js,mjs,json}\" \".github/**/*.yml\" \"*.{mjs,md}\" package.json tsconfig.json wrangler.jsonc"
+    "format": "prettier --write \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \"worker/**/*.{js,mjs,json,jsonc}\" \".github/**/*.yml\" \"*.{mjs,md}\" package.json tsconfig.json",
+    "format:check": "prettier --check \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \"worker/**/*.{js,mjs,json,jsonc}\" \".github/**/*.yml\" \"*.{mjs,md}\" package.json tsconfig.json"
   },
   "prettier": {
     "printWidth": 100,

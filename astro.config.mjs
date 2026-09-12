@@ -18,7 +18,10 @@ export default defineConfig({
       },
       favicon: '/favicon.svg',
       social: [{ icon: 'github', label: 'Panel Assistant on GitHub', href: integrationRepo }],
-      components: { SiteTitle: './src/components/SiteTitle.astro' },
+      components: {
+        SiteTitle: './src/components/SiteTitle.astro',
+        Footer: './src/components/Footer.astro',
+      },
       plugins: [starlightLinksValidator()],
       credits: false,
       lastUpdated: true,

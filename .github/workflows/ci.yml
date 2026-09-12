@@ -11,6 +11,8 @@ permissions:
 env:
   # The site sends nothing to anyone at runtime, and its build should not either.
   ASTRO_TELEMETRY_DISABLED: '1'
+  # Only a build of main is a numbered release of the site; see src/build-info.
+  BUILD_CHANNEL: ${{ github.ref == 'refs/heads/main' && 'main' || 'preview' }}
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -77,8 +79,8 @@ jobs:
       group: deploy-cloudflare
       cancel-in-progress: false
     steps:
-      # wrangler.jsonc names the assets directory, so the repository is needed
-      # alongside the built output.
+      # worker/wrangler.jsonc names the assets directory and the Worker script,
+      # so the repository is needed alongside the built output.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
@@ -92,5 +94,21 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # Workers Static Assets, which Cloudflare recommends over Pages for new
-          # projects. The name and the assets directory come from wrangler.jsonc.
-          command: deploy
+          # projects. The name and the assets directory come from worker/wrangler.jsonc.
+          command: deploy --config worker/wrangler.jsonc
+
+      # The live site names the commit it was built from, so this is the proof
+      # that the publish landed rather than an assumption from the step above.
+      - name: Verify the live build
+        run: |
+          expected="${GITHUB_SHA:0:7}"
+          for attempt in 1 2 3 4 5 6; do
+            live=$(curl -fsS --max-time 20 "https://panel-assistant.io/build.json?attempt=${attempt}" | node -pe 'JSON.parse(require("fs").readFileSync(0,"utf8")).sha') || live=""
+            if [ "$live" = "$expected" ]; then
+              echo "live site reports build sha $live"
+              exit 0
+            fi
+            echo "attempt $attempt: live site reports '$live', expected $expected"
+            sleep 10
+          done
+          exit 1

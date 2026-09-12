@@ -15,6 +15,10 @@ Panel Assistant has two parts. This repository is only the website.
 
 Software that ships a link to this site never links to a page path, because a link inside a released integration outlives any page layout. It links to `https://panel-assistant.io/go/<topic>`, and the site answers with a redirect to whatever the current best page for that topic is. The table of topics is [worker/topics.json](worker/topics.json), served by the small Worker in [worker/index.js](worker/index.js). Re-pointing a topic is a one-line change there; removing one is not allowed, because links already shipped depend on it. Query parameters such as the caller's version travel through to the destination untouched, and an unknown topic lands on the homepage with the topic named in a `go` parameter rather than on a 404. `npm test` checks every topic against the pages and anchors the build actually produced.
 
+## Build numbers
+
+Every page ends with a build line, and the same facts are published at [/build.json](https://panel-assistant.io/build.json). The number is the count of commits reachable from the built commit, so it climbs by one for every commit that lands on `main`, is the same on a laptop and in CI, and needs no counter kept anywhere else; the short SHA beside it makes any build traceable. A build of anything other than `main` is marked `preview`. After publishing, CI fetches the live `/build.json` and fails if it does not name the commit just published, so a green deploy run means the site really changed.
+
 ## Local preview
 
 Node.js 22.12 or newer.
@@ -35,21 +39,22 @@ npm run build          # production build, which also validates internal links
 npm test               # the /go redirect table against the pages the build produced
 ```
 
-`npm run format` rewrites files in place. The same checks run in CI on every push and pull request. To exercise the redirect Worker itself, `npx wrangler dev` serves the built site with the router in front of it.
+`npm run format` rewrites files in place. The same checks run in CI on every push and pull request. To exercise the redirect Worker itself, `npx wrangler dev --config worker/wrangler.jsonc` serves the built site with the router in front of it.
 
 ## Layout
 
-| Path                | What it holds                                          |
-| ------------------- | ------------------------------------------------------ |
-| `src/content/docs/` | Every page, as Markdown. The homepage is `index.mdx`.  |
-| `src/assets/`       | Images processed at build time.                        |
-| `public/`           | Files served as they are, such as the favicon.         |
-| `astro.config.mjs`  | Site configuration and the sidebar.                    |
-| `worker/`           | The `/go/<topic>` redirect router and its topic table. |
+| Path                | What it holds                                                                         |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `src/content/docs/` | Every page, as Markdown. The homepage is `index.mdx`.                                 |
+| `src/assets/`       | Images processed at build time.                                                       |
+| `public/`           | Files served as they are, such as the favicon.                                        |
+| `astro.config.mjs`  | Site configuration and the sidebar.                                                   |
+| `worker/`           | The `/go/<topic>` redirect router, its topic table, and the Cloudflare configuration. |
+| `src/build-info/`   | Writes the build number before every build; see below.                                |
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+See [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 ## Licence
 
