@@ -11,7 +11,7 @@ export default {
     const hit = resolve(request.url, topics);
     if (!hit) return env.ASSETS.fetch(request);
 
-    if (!hit.known && hit.topic) recordMiss(env.MISSES, hit.topic);
+    if (!hit.known && hit.topic) recordMiss(env.GO_MISSES, hit.topic);
     return new Response(null, {
       status: 302,
       headers: {

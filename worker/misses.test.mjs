@@ -7,7 +7,10 @@ const sink = () => {
   const points = [];
   return { points, writeDataPoint: (p) => points.push(p) };
 };
-const env = (misses) => ({ MISSES: misses, ASSETS: { fetch: async () => new Response('site') } });
+const env = (misses) => ({
+  GO_MISSES: misses,
+  ASSETS: { fetch: async () => new Response('site') },
+});
 const go = (path, e) => worker.fetch(new Request('https://panel-assistant.io' + path), e);
 
 test('a plausible topic is recorded as itself, lowercased', () => {
