@@ -4,6 +4,7 @@
   "how-it-works": "/start/what-it-is/",
   "supported-panels": "/install/supported-panels/",
   "prepare-a-panel": "/install/prepare-a-panel/",
+  "panel-access": "/install/prepare-a-panel/#1-developer-options-and-debugging-are-on",
   "add-a-panel": "/install/installing-ha-paneld/",
   "usb-install": "/install/install-over-usb/",
   "install-integration": "/home-assistant/custom-integration/",

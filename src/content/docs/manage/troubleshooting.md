@@ -17,7 +17,7 @@ Some of this is the panel and some of it is the dashboard. [Performance](https:/
 
 ## The installer cannot reach the panel
 
-Over the network: confirm the panel's address and that wireless debugging is still turned on, because some panels turn it off again after a reboot. The first connection from a new computer raises an authorisation prompt on the panel's screen that has to be accepted there. Over USB: make sure you are using a Chromium-based browser, that the cable goes to the computer running the browser, and that USB debugging is on.
+Over the network: confirm the panel's address and that wireless debugging is still turned on, because some panels turn it off again after a reboot. The first connection from a new computer raises an authorisation prompt on the panel's screen that has to be accepted there. Over USB: make sure you are using a Chromium-based browser, that the cable goes to the computer running the browser, and that USB debugging is on. How to reach developer options and turn debugging on differs per model and is covered in [Prepare the panel](/install/prepare-a-panel/) and the [hardware pages](https://github.com/maxlyth/ha-paneld/blob/main/docs/hardware/README.md). If the panel simply will not accept a network connection, [install over USB](/install/install-over-usb/) instead: it needs no network at all.
 
 ## The panel's hardware is missing from Home Assistant
 
