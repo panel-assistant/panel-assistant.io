@@ -14,6 +14,7 @@
     "prebuild": "node src/build-info/write.mjs",
     "build": "astro build",
     "preview": "astro preview",
+    "precheck": "node src/build-info/write.mjs",
     "check": "astro check",
     "test": "node --test \"worker/**/*.test.mjs\"",
     "format": "prettier --write \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \"worker/**/*.{js,mjs,json,jsonc}\" \".github/**/*.yml\" \"*.{mjs,md}\" package.json tsconfig.json",
