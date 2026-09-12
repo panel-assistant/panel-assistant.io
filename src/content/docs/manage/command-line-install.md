@@ -21,9 +21,9 @@ The full set of options, including exporting and restoring a panel's configurati
 On Windows, run it from Git Bash or WSL. PowerShell is not supported.
 :::
 
-## From the panel itself
+## Without a computer
 
-The project publishes its own F-Droid repository, which lets a panel that already runs the app install updates without a computer. Setting that up is covered in the [F-Droid documentation](https://github.com/maxlyth/ha-paneld/blob/main/docs/fdroid.md). Stable releases go to that channel; release candidates do not.
+The project used to publish an F-Droid repository so a panel could update itself. It is retired: it installed the app but could not set a panel up, and Home Assistant now does both. Add the panel to Home Assistant and use its update entity, described in [updates and recovery](/manage/updates-and-recovery/).
 
 ## Building it yourself
 

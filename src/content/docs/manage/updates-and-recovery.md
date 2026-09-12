@@ -5,11 +5,9 @@ description: Keeping the app on a panel current, and what can be recovered when 
 
 ## Updating a panel
 
-Updating a panel from inside Home Assistant is not part of the integration yet; it is one of the next things on the list. Until then there are two routes.
+**From Home Assistant.** Each panel has an update entity. When a newer version is published the entity offers it, and installing is a button press; Home Assistant asks the panel to update itself and then confirms it came back healthy. This is the route to use.
 
-**From the panel, with no computer.** Panels set up with the project's [F-Droid repository](https://github.com/maxlyth/ha-paneld/blob/main/docs/fdroid.md) are told when a new version is published and the update is a tap on the panel. Stable releases go to that channel; release candidates do not.
-
-**From a computer.** The [command-line installer](/manage/command-line-install/) run against the panel's address again fetches the current release and installs it over the top, leaving the panel's setup in place. The same tool can update several panels in one run.
+**From a computer.** The [command-line installer](/manage/command-line-install/) run against the panel's address fetches the current release and installs it over the top, leaving the panel's setup in place. The same tool can update several panels in one run, which is why it is still the better option for a large change across many panels.
 
 ## What an update protects
 
