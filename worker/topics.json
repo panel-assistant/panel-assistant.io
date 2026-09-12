@@ -11,5 +11,6 @@
   "panel-unreachable": "/manage/troubleshooting/#the-installer-cannot-reach-the-panel",
   "troubleshooting": "/manage/troubleshooting/",
   "updates": "/manage/updates-and-recovery/",
-  "issues": "https://github.com/panel-assistant/ha-integration/issues"
+  "issues": "https://github.com/panel-assistant/ha-integration/issues",
+  "discord": "https://discord.gg/qey8RQkSW"
 }
