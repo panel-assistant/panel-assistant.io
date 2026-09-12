@@ -10,6 +10,9 @@
     "binding": "ASSETS",
     "run_worker_first": ["/go/*", "/go"],
   },
+  // Unknown /go topics are counted here, topic only, so a topic shipped before
+  // the site learned it shows up. Read with `node worker/misses-report.mjs`.
+  "analytics_engine_datasets": [{ "binding": "MISSES", "dataset": "panel_assistant_go_misses" }],
   // Declaring the apex here keeps the live hostname part of the reviewed
   // configuration: a deploy reconciles it rather than it living only as state
   // someone set by hand in the dashboard.
