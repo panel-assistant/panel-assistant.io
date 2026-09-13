@@ -51,8 +51,12 @@ const rows = panels.map((p) => {
   .hardware-table table {
     display: table;
     width: 100%;
+    font-size: var(--sl-text-sm);
   }
-  .hardware-table th[scope='row'] {
+  .hardware-table th {
     white-space: nowrap;
+  }
+  .hardware-table td {
+    min-width: 7rem;
   }
 </style>
