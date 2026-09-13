@@ -80,7 +80,7 @@ This defect is distinct from a stable `zgateway` busy-looping against a radio th
 
 Home Assistant's frontend normally subscribes to the state of every entity the signed-in user can see. The panel has to receive and process all of those states even when its dashboard uses only a few. The built-in renderer can add the dashboard's learned entity set to that subscription, so Home Assistant filters the stream before it serialises and sends it. The panel keeps its ordinary authenticated connection to Home Assistant; no proxy or extra server is involved.
 
-The automatic filter is opt-in and applies only to the built-in renderer:
+The entity filter applies only to the built-in renderer. Guided setup asks whether to turn it on before the first dashboard load; on a panel that is already set up:
 
 1. On port 8888, open **Configure**, then **Dashboard**, select **Built-in renderer (ha-paneld)**, and turn on **Entity filtering**.
 2. Open the **Entities** tab and select **Scan dashboard now**.
@@ -93,7 +93,7 @@ Automatic learning cannot prove every dependency of a custom card or dynamic tem
 
 If old learned evidence or manual choices no longer describe the dashboard, use **Reset learned data** on the Entities page. After you confirm, it clears learned membership, pins, exclusions and ignored safety decisions, keeps the known-good active filter and starts a new scan. The filter stays in place as the fallback while the candidate is rebuilt.
 
-Advanced testers can supply and inspect an exact list through the API. The workflow, the list format, the runtime status and the commands to undo it are in [the built-in renderer](/manage/built-in-renderer/#experimental-entity-filter).
+Advanced users can supply and inspect an exact list through the API. The workflow, the list format, the runtime status and the commands to undo it are in [the built-in renderer](/manage/built-in-renderer/#entity-filter).
 
 ### 2. Lighten the dashboard itself
 

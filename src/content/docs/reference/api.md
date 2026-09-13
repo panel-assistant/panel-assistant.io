@@ -50,8 +50,6 @@ Discovery payloads and current states are republished after MQTT reconnects and 
 | `/logs`      | Redacted live application logs.                                                                                                 |
 | `/api`       | Interactive explorer for the bundled OpenAPI document.                                                                          |
 
-![The panel's REST API explorer, listing GET routes such as /health, /api/v1/health, /api/v1/openapi.json and /api/v1/status with a short description of each](asset:api-explorer-dark.png)
-
 ## HTTP API conventions
 
 The canonical machine API is under `/api/v1`. Flat legacy machine paths such as `/config`, `/perf`, `/action` and `/proximity` return `308 Permanent Redirect` to their versioned equivalents, preserving the method and body. Clients should use `/api/v1` directly.

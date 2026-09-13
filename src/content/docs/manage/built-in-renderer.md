@@ -7,9 +7,7 @@ The panel app draws your Home Assistant dashboard in its own WebView instead of 
 
 Once the dashboard is running, the panel app can detect a stalled connection, release accumulated WebView memory and contain renderer crashes. The built-in connection is also what makes dashboard entity filtering possible. The panel stays a single-app appliance, with one app to install and update.
 
-:::note
-The built-in renderer is experimental. A separate dashboard app is still the choice for a panel that needs more than one Home Assistant server, Assist voice control or native notifications.
-:::
+The built-in renderer is by far the preferred way to show your dashboard, and the one guided setup chooses. A separate dashboard app is still supported as an option, for example when a panel needs more than one Home Assistant server, Assist voice control or native notifications (see [Limits](#limits)).
 
 ## Startup and recovery
 
@@ -47,7 +45,7 @@ How the WebView is updated by hand depends on the panel: some take it from Googl
 
 The built-in renderer never falls back to a less isolated bridge. Another renderer may help when Home Assistant itself cannot be upgraded, but any dashboard app on the panel uses the same system WebView, so none can get around an obsolete one.
 
-## Turning it on
+## Setting it up
 
 On a new or reset panel, open `http://<panel>:8888/setup` from a laptop or phone, or select **Set up** on the panel itself. The guided setup chooses the renderer, signs in to Home Assistant, selects the account default, a dashboard or a specific dashboard tab, and asks about the entity filter before the first dashboard loads. Authorisation happens in the administrator's browser, so no credentials are typed on the panel.
 
@@ -78,10 +76,10 @@ Advanced settings on the Configure page include three independent controls, each
 
 For a cleaner dashboard, start with **Hide Home Assistant navigation (native)**, **Hide Android system bars**, or both. Turn on **Lock Android to dashboard** only when you need to discourage casual escape from the app, and only after testing the ways out: the Configure page, the Home Assistant switch, `adb`, seven rapid taps in the top-left corner, or the unlocked window after a reboot.
 
-## Experimental entity filter
+## Entity filter
 
 :::caution
-This is an opt-in feature for testers. Automatic learning cannot prove every dependency of a custom card or dynamic template, and an incomplete entity set can leave cards missing or stale. Try it on a panel you do not depend on first, and keep the way to turn the filter off to hand.
+Automatic learning cannot prove every dependency of a custom card or dynamic template, and an incomplete entity set can leave cards missing or stale. Review the learned set after changing a dashboard, and keep the way to turn the filter off to hand.
 :::
 
 The filter applies only to the built-in renderer. It changes the frontend's subscription to Home Assistant, so Home Assistant filters the states before it serialises them and sends them to the panel. Other dashboard apps are unaffected. [Performance](/manage/performance/) explains why this is usually the biggest improvement on a slow panel.
@@ -124,7 +122,7 @@ The stronger API reset below can also remove the stored active filter, by sendin
 
 ### Manual exact list
 
-Advanced testers can skip automatic learning and supply an exact list through the [API](/reference/api/). Create a JSON file containing every entity that every dashboard tab needs, including entities that custom cards or templates use indirectly:
+Advanced users can skip automatic learning and supply an exact list through the [API](/reference/api/). Create a JSON file containing every entity that every dashboard tab needs, including entities that custom cards or templates use indirectly:
 
 ```json
 {
@@ -187,9 +185,9 @@ There is one case it cannot override. If this Home Assistant user has explicitly
 
 The panel's web interface on port 8888 is separate from all of this and always follows the browser you are viewing it in.
 
-## Switching to another dashboard app
+## Using a separate dashboard app instead
 
-Open the Configure page, select the other installed dashboard app under **Dashboard app** and save. The switch takes effect immediately. Do not choose **Auto** for this, because Auto uses the built-in renderer whenever it is ready.
+If a panel needs one of the capabilities listed under [Limits](#limits), open the Configure page, select the other installed dashboard app under **Dashboard app** and save. The switch takes effect immediately. Do not choose **Auto** for this, because Auto uses the built-in renderer whenever it is ready.
 
 ## Limits
 
