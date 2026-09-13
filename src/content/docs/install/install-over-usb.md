@@ -14,7 +14,7 @@ The USB installer is opened from the Panel Assistant page in the Home Assistant 
 - The [integration](/home-assistant/custom-integration/) installed, and an administrator account.
 - A Chromium-based browser such as Chrome or Edge. Firefox and Safari cannot talk to USB devices.
 - A USB cable from the panel to the computer or phone running that browser. Not to the Home Assistant server.
-- USB debugging turned on in the panel's developer options, and someone at the panel to approve the authorisation prompt when it appears. The [hardware pages](https://github.com/maxlyth/ha-paneld/blob/main/docs/hardware/README.md) show how to reach developer options on each model.
+- USB debugging turned on in the panel's developer options, and someone at the panel to approve the authorisation prompt when it appears. The [hardware pages](/hardware/) show how to reach developer options on each model.
 
 ## What happens
 

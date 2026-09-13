@@ -29,13 +29,13 @@ For the same reason, hardware support is where the project most needs help. Ever
 
 ## Where the pieces live
 
-| Piece                   | What it is                                                                         | Where                                                                                        |
-| ----------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Panel Assistant         | The Home Assistant integration: installer, devices, and the all-panels page.       | [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration)          |
-| ha-paneld               | The app on the panel: dashboard, hardware, launcher, status page.                  | [maxlyth/ha-paneld](https://github.com/maxlyth/ha-paneld)                                    |
-| Hardware profiles       | The per-model descriptions that tell the app what a panel has and how to drive it. | [Hardware reference](https://github.com/maxlyth/ha-paneld/blob/main/docs/hardware/README.md) |
-| Reference documentation | The detail behind every page on this site.                                         | [ha-paneld docs](https://github.com/maxlyth/ha-paneld/tree/main/docs)                        |
+| Piece                   | What it is                                                                         | Where                                                                               |
+| ----------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Panel Assistant         | The Home Assistant integration: installer, devices, and the all-panels page.       | [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration) |
+| ha-paneld               | The app on the panel: dashboard, hardware, launcher, status page.                  | [maxlyth/ha-paneld](https://github.com/maxlyth/ha-paneld)                           |
+| Hardware profiles       | The per-model descriptions that tell the app what a panel has and how to drive it. | [Hardware reference](/hardware/)                                                    |
+| Reference documentation | The API, hardware profiles and security model in detail.                           | [Reference](/reference/api/)                                                        |
 
 ## What it is not
 
-It is for dedicated wall panels. Tablets and phones can run it, but anything with a battery has a cable, and the design assumes a mains-powered panel that is set up once and left alone. It is not a dashboard builder; it runs the dashboards you already have. And it is not finished: the direction is universal hardware support and hands-off management of every panel, and the [roadmap](https://github.com/maxlyth/ha-paneld/blob/main/docs/roadmap.md) records where that is going.
+It is for dedicated wall panels. Tablets and phones can run it, but anything with a battery has a cable, and the design assumes a mains-powered panel that is set up once and left alone. It is not a dashboard builder; it runs the dashboards you already have. And it is not finished: the direction is universal hardware support and hands-off management of every panel.

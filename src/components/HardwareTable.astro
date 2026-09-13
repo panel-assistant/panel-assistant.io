@@ -1,0 +1,58 @@
+---
+// The hardware catalogue table, generated from the front matter of every page under
+// hardware/panels/. Columns come from the pages, not from a list here.
+import { getCollection } from 'astro:content';
+import { cellText, collectFields, fieldLabel, nearDuplicates } from '../hardware/fields.mjs';
+
+const panels = (await getCollection('docs', (e) => e.id.startsWith('hardware/panels/'))).sort(
+  (a, b) => a.data.title.localeCompare(b.data.title),
+);
+const fields = collectFields(panels.map((p) => p.data));
+for (const [a, b] of nearDuplicates(fields)) {
+  console.warn(
+    `[hardware table] front-matter keys "${a}" and "${b}" look like one field spelled two ways`,
+  );
+}
+const rows = panels.map((p) => {
+  const data: Record<string, unknown> = p.data;
+  return { href: `/${p.id}/`, title: p.data.title, cells: fields.map((f) => cellText(data[f])) };
+});
+---
+
+<div class="hardware-table">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Panel</th>
+        {fields.map((f) => (
+          <th scope="col">{fieldLabel(f)}</th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          <th scope="row">
+            <a href={r.href}>{r.title}</a>
+          </th>
+          {r.cells.map((c) => (
+            <td>{c}</td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .hardware-table {
+    overflow-x: auto;
+  }
+  .hardware-table table {
+    display: table;
+    width: 100%;
+  }
+  .hardware-table th[scope='row'] {
+    white-space: nowrap;
+  }
+</style>

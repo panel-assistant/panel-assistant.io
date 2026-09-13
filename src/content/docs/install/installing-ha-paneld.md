@@ -17,11 +17,15 @@ For a panel that is still in the box, or whose vendor software makes network acc
 
 ## What the installer protects
 
-Both routes check the panel before changing anything and refuse to install over an existing installation rather than risk what is on it. The network route takes a snapshot of the panel's data before it makes a change. If an install is interrupted it can be run again and will check any half-finished step before carrying on. The [safety notes](https://github.com/maxlyth/ha-paneld/blob/main/docs/provisioning-safety.md) describe exactly what is protected and when the installer stops.
+Both routes check the panel before changing anything and refuse to install over an existing installation rather than risk what is on it. The network route takes a snapshot of the panel's data before it makes a change. If an install is interrupted it can be run again and will check any half-finished step before carrying on. The [install safety notes](/manage/install-safety/) describe exactly what is protected and when the installer stops.
 
 ## After it is installed
 
-The panel appears as a device with a status sensor and diagnostics, and on the Panel Assistant page in the sidebar. The panel also serves its own status page on your network on port 8888, which is where you point it at a dashboard. Continue with [Connect a panel](/home-assistant/connect-a-panel/).
+The panel appears as a device with a status sensor and diagnostics, and on the Panel Assistant page in the sidebar. The panel also serves its own status page on your network on port 8888, which is where you point it at a dashboard. Until then, the panel's own screen shows that address, with a QR code and buttons to configure it or open the dashboard.
+
+![The panel's standing screen before setup, showing its configuration address, a QR code, and Configure and Dashboard buttons](asset:standing-screen.png)
+
+Continue with [Connect a panel](/home-assistant/connect-a-panel/).
 
 ## Other ways in
 

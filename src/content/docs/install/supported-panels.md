@@ -6,25 +6,25 @@ description: Which Android wall panels Panel Assistant supports today, how far t
 Most wall panels are bought from overseas marketplaces on little more than a listing and a hope. This page is the check to do before the money leaves your account. Support is per model, three panel families are fully supported, several more are documented, and at least one is blocked by its own software rather than by anything Panel Assistant does.
 
 :::caution
-The list below is a summary. The [hardware reference](https://github.com/maxlyth/ha-paneld/blob/main/docs/hardware/README.md) carries the current per-model status, the fact sheets, and the footnotes marking anything that has not been verified on a physical unit. Read it before committing to a device.
+The list below is a summary. The [hardware reference](/hardware/) carries the current per-model status, the fact sheets, and the footnotes marking anything that has not been verified on a physical unit. Read it before committing to a device.
 :::
 
 ## Fully supported
 
 These three have the fullest hardware coverage: screen, LEDs, buttons, sensors and relays where the model has them.
 
-- **Sonoff NSPanel Pro** (including the 120 and 86 variants)
-- **Tuya TPA10**
-- **Electron WF1589T**
+- **[Sonoff NSPanel Pro](/hardware/panels/sonoff-nspanel-pro/)** (including the 120 and 86 variants)
+- **[Tuya TPA10](/hardware/panels/tuya-tpa10/)**
+- **[Electron WF1589T](/hardware/panels/electron-wf1589t/)**
 
 ## Also documented
 
 These have fact sheets and varying degrees of support, from community-tested through preliminary and experimental to research only. The hardware reference states where each one currently sits.
 
-- ZHICAI SMT1019
-- ZX-SMT156 / RK3566_T
-- Smatek S9E
-- Shelly Wall Display, and the X1i, X2, X2i and XL models
+- [ZHICAI SMT1019](/hardware/panels/zhicai-smt1019/)
+- [ZX-SMT156 / RK3566_T](/hardware/panels/zx-smt156/)
+- [Smatek S9E](/hardware/panels/smatek-s9e/)
+- [Shelly Wall Display](/hardware/panels/shelly-wall-display/), and the X1i, X2, X2i and XL models
 
 :::note
 The original Shelly Wall Display ships Android 7.0, which is older than the minimum supported.
@@ -40,4 +40,4 @@ The original Shelly Wall Display ships Android 7.0, which is older than the mini
 
 ## Not on the list?
 
-Hardware support is data, not code, so a new panel is a profile rather than a new build of the app, and the fastest way to get your model supported is to report it. Say what the model is and what happened in the [issues](https://github.com/maxlyth/ha-paneld/issues), and if you are inclined, the [profile documentation](https://github.com/maxlyth/ha-paneld/tree/main/docs/profiles) describes what a profile contains. Every report, working or not, moves the project closer to supporting every panel.
+Hardware support is data, not code, so a new panel is a profile rather than a new build of the app, and the fastest way to get your model supported is to report it. Say what the model is and what happened in the [issues](https://github.com/maxlyth/ha-paneld/issues), and if you are inclined, the [profile documentation](/reference/profiles/) describes what a profile contains. Every report, working or not, moves the project closer to supporting every panel.

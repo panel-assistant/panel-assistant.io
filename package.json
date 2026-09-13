@@ -16,7 +16,7 @@
     "preview": "astro preview",
     "precheck": "node src/build-info/write.mjs",
     "check": "astro check",
-    "test": "node --test \"worker/**/*.test.mjs\"",
+    "test": "node --test \"worker/**/*.test.mjs\" \"src/**/*.test.mjs\"",
     "format": "prettier --write \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \"worker/**/*.{js,mjs,json,jsonc}\" \".github/**/*.yml\" \"*.{mjs,md}\" package.json tsconfig.json",
     "format:check": "prettier --check \"src/**/*.{astro,ts,js,mjs,md,mdx,json,css}\" \"worker/**/*.{js,mjs,json,jsonc}\" \".github/**/*.yml\" \"*.{mjs,md}\" package.json tsconfig.json"
   },
@@ -37,6 +37,7 @@
     ]
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "0.4.1",
     "@astrojs/starlight": "^0.42.0",
     "astro": "^7.3.2",
     "sharp": "^0.35.4"
@@ -45,6 +46,7 @@
     "@astrojs/check": "^0.9.10",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^1.0.0",
+    "satteri": "^0.10.5",
     "starlight-links-validator": "^0.26.0",
     "typescript": "^5.9.3"
   }

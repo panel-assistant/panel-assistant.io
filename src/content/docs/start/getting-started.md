@@ -31,4 +31,4 @@ Once the panel is running, point it at the dashboard you want on the wall. See [
 
 ## Where the detail lives
 
-This site is the front door. The reference documentation is kept with the code, in [the ha-paneld repository](https://github.com/maxlyth/ha-paneld/tree/main/docs), and it is the version to trust when the two disagree.
+The pages under **Keep it running** cover each feature of the panel app in depth. The reference section documents the [API](/reference/api/), [hardware profiles](/reference/profiles/) and the [security model](/reference/security/), and the [hardware pages](/hardware/) cover each supported panel.
