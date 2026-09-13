@@ -18,7 +18,7 @@ The USB installer is opened from the Panel Assistant page in the Home Assistant 
 
 ## What happens
 
-1. Choose a version on the Panel Assistant page. Stable is the default; release candidates are marked as such.
+1. Choose a version on the Panel Assistant page. Only ha-paneld releases that Home Assistant can verify for installation are listed, and release candidates are marked as test versions. Until the next stable ha-paneld release, release candidates are the only choices.
 2. The installer window verifies the release and asks you to pick the panel from the browser's USB prompt.
 3. Approve the USB debugging prompt on the panel's screen.
 4. Confirm. Nothing on the panel changes until you do, and the installer first checks that the panel is genuinely clean: it refuses to install over an existing installation rather than risk the panel's data.
