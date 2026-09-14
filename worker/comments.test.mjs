@@ -1,7 +1,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { handleComment, termFor, sha1, commentBody, appJwt } from './comments.js';
+import {
+  handleComment,
+  handleCommentCount,
+  termFor,
+  sha1,
+  commentBody,
+  appJwt,
+} from './comments.js';
 import config from './comments.json' with { type: 'json' };
 import worker from './index.js';
 
@@ -359,6 +366,102 @@ test('a GitHub failure is reported without detail', async () => {
   assert.deepEqual(await res.json(), { error: 'github' });
 });
 
+// An edge cache with the Cache API's shape, recording what was stored.
+const edgeCache = () => {
+  const store = new Map();
+  return {
+    store,
+    async match(req) {
+      return store.get(req.url)?.clone();
+    },
+    async put(req, res) {
+      store.set(req.url, res.clone());
+    },
+  };
+};
+
+const countOf = (page, env, fetcher, cache) =>
+  handleCommentCount(
+    new Request(`${ORIGIN}/comments/count?page=${encodeURIComponent(page)}`),
+    env,
+    config,
+    fetcher,
+    cache,
+  );
+
+test('the count is the comments in the discussion giscus shows for the page', async () => {
+  const here = await sha1('start/getting-started/');
+  const { calls, fetcher } = upstream({
+    recent: [
+      { body: `# start/getting-started/\n\n<!-- sha1: ${here} -->`, comments: { totalCount: 3 } },
+      { body: `# other/\n\n<!-- sha1: ${await sha1('other/')} -->`, comments: { totalCount: 9 } },
+      { body: 'no marker, not a page discussion', comments: { totalCount: 5 } },
+    ],
+  });
+  const res = await countOf('/start/getting-started/', makeEnv(), fetcher, edgeCache());
+  assert.equal(res.status, 200);
+  assert.deepEqual(await res.json(), { count: 3 });
+  assert.equal(res.headers.get('cache-control'), 'public, max-age=300');
+  const list = calls.find((c) => c.query?.includes('discussions('));
+  assert.equal(list.variables.cat, config.categoryId);
+  assert.equal(list.auth, 'bearer installation-token');
+});
+
+test('a page with no discussion counts zero', async () => {
+  const { fetcher } = upstream({ recent: [] });
+  const res = await countOf('/install/prepare-a-panel/', makeEnv(), fetcher, edgeCache());
+  assert.deepEqual(await res.json(), { count: 0 });
+});
+
+test('counts come from the edge cache for five minutes, so page views do not reach GitHub', async () => {
+  const here = await sha1('start/getting-started/');
+  const { calls, fetcher } = upstream({
+    recent: [{ body: `<!-- sha1: ${here} -->`, comments: { totalCount: 2 } }],
+  });
+  const cache = edgeCache();
+  await countOf('/start/getting-started/', makeEnv(), fetcher, cache);
+  const afterFirst = calls.length;
+  const again = await countOf('/start/getting-started/', makeEnv(), fetcher, cache);
+  const other = await countOf('/other/', makeEnv(), fetcher, cache);
+  assert.deepEqual(await again.json(), { count: 2 });
+  assert.deepEqual(await other.json(), { count: 0 });
+  assert.equal(calls.length, afterFirst);
+  const [stored] = cache.store.values();
+  assert.equal(stored.headers.get('cache-control'), 'public, max-age=300');
+  // Only numbers are kept: no token, no comment text.
+  assert.deepEqual(await stored.clone().json(), { [here]: 2 });
+});
+
+test('reading a count never spends the comment rate limit', async () => {
+  const env = makeEnv();
+  const { fetcher } = upstream({ recent: [] });
+  const cache = edgeCache();
+  for (let i = 0; i < 5; i++) await countOf('/start/getting-started/', env, fetcher, cache);
+  assert.equal(env.COMMENT_RATE.keys.size, 0);
+});
+
+test('a count for a junk path, a non-GET, or without the App fails without asking GitHub', async () => {
+  const { calls, fetcher } = upstream();
+  for (const page of ['/start/getting-started', 'https://evil.example/', '/../x/']) {
+    assert.equal((await countOf(page, makeEnv(), fetcher, edgeCache())).status, 400, page);
+  }
+  const post = new Request(`${ORIGIN}/comments/count?page=/`, { method: 'POST' });
+  assert.equal(
+    (await handleCommentCount(post, makeEnv(), config, fetcher, edgeCache())).status,
+    405,
+  );
+  const noKey = makeEnv({ GITHUB_APP_PRIVATE_KEY: undefined });
+  assert.equal((await countOf('/', noKey, fetcher, edgeCache())).status, 503);
+  assert.equal(calls.length, 0);
+});
+
+test('a GitHub failure is not cached', async () => {
+  const cache = edgeCache();
+  const failing = async (url) => Response.json({}, { status: 500 });
+  assert.equal((await countOf('/', makeEnv(), failing, cache)).status, 502);
+  assert.equal(cache.store.size, 0);
+});
+
 test('reader text cannot mention people or inject HTML, however it is encoded', () => {
   // Each of these rendered as a real mention on GitHub before this escaping, or would have.
   const hostile = [
@@ -390,6 +493,7 @@ test('the live worker routes /comments to the handler and everything else as bef
   assert.equal((await worker.fetch(new Request(`${ORIGIN}/go/usb-install`), env)).status, 302);
   const wrangler = readFileSync(new URL('./wrangler.jsonc', import.meta.url), 'utf8');
   assert.match(wrangler, /"run_worker_first": \[[^\]]*"\/comments"/);
+  assert.match(wrangler, /"run_worker_first": \[[^\]]*"\/comments\/count"/);
 });
 
 test('the Worker holds no comment state: no storage binding and no module-level cache', () => {

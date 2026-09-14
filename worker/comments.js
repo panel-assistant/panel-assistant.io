@@ -13,6 +13,10 @@ const json = (status, body) =>
     headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
   });
 
+// Every page path ends in a slash; the same page without one would name a discussion giscus never
+// shows.
+const PAGE = /^\/([a-z0-9_-]+\/)*$/;
+
 // The discussion title giscus uses for a page under `data-mapping="pathname"`.
 export function termFor(pathname) {
   return pathname.length < 2 ? 'index' : pathname.substring(1).replace(/\.\w+$/, '');
@@ -178,8 +182,7 @@ export async function handleComment(request, env, config, fetcher = fetch) {
   const token = String(form.get('cf-turnstile-response') ?? '');
   if (!text) return json(400, { error: 'empty' });
   if (text.length > config.maxBody) return json(413, { error: 'long' });
-  // Every page ends in a slash; the same page without one would name a discussion giscus never shows.
-  if (!/^\/([a-z0-9_-]+\/)*$/.test(page)) return json(400, { error: 'page' });
+  if (!PAGE.test(page)) return json(400, { error: 'page' });
 
   const verify = await fetcher(SITEVERIFY, {
     method: 'POST',
@@ -228,4 +231,55 @@ export async function handleComment(request, env, config, fetcher = fetch) {
   } catch {
     return json(502, { error: 'github' });
   }
+}
+
+// Tells a page how many comments its discussion has, so a reader can see a conversation exists
+// without loading anything from GitHub. The category's counts are fetched at most every five
+// minutes and kept only in Cloudflare's edge cache, which may drop them at any time. Only
+// numbers are cached: no comment text and no credential.
+export async function handleCommentCount(
+  request,
+  env,
+  config,
+  fetcher = fetch,
+  cache = caches.default,
+) {
+  if (request.method !== 'GET') return json(405, { error: 'method' });
+  const url = new URL(request.url);
+  const page = url.searchParams.get('page') ?? '';
+  if (!PAGE.test(page)) return json(400, { error: 'page' });
+
+  const key = new Request(`${url.origin}/comments/count`);
+  let listing = await cache.match(key);
+  if (!listing) {
+    if (!env.GITHUB_APP_ID || !env.GITHUB_APP_PRIVATE_KEY) {
+      return json(503, { error: 'unavailable' });
+    }
+    try {
+      const token = await installationToken(fetcher, env, config);
+      const [owner, name] = config.repo.split('/');
+      const data = await graphql(
+        fetcher,
+        token,
+        'query($owner: String!, $name: String!, $cat: ID!) { repository(owner: $owner, name: $name) { discussions(first: 100, categoryId: $cat, orderBy: { field: CREATED_AT, direction: DESC }) { nodes { body comments { totalCount } } } } }',
+        { owner, name, cat: config.categoryId },
+      );
+      const counts = {};
+      for (const node of data.repository.discussions.nodes) {
+        const marker = node?.body?.match(/<!-- sha1: ([0-9a-f]{40}) -->/);
+        if (marker) counts[marker[1]] = (counts[marker[1]] ?? 0) + node.comments.totalCount;
+      }
+      listing = new Response(JSON.stringify(counts), {
+        headers: { 'content-type': 'application/json', 'cache-control': 'public, max-age=300' },
+      });
+      await cache.put(key, listing.clone());
+    } catch {
+      return json(502, { error: 'github' });
+    }
+  }
+  const counts = await listing.json();
+  const count = counts[await sha1(termFor(page))] ?? 0;
+  return new Response(JSON.stringify({ count }), {
+    headers: { 'content-type': 'application/json', 'cache-control': 'public, max-age=300' },
+  });
 }

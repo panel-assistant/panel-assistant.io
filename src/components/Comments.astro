@@ -70,6 +70,19 @@ import config from '../../worker/comments.json';
       button.after(s);
       button.remove();
     });
+    // The count comes from this site, so a reader sees there is a conversation before anything
+    // loads from GitHub. Without it (a local preview, or GitHub unavailable) the label stays.
+    fetch(`/comments/count?page=${encodeURIComponent(location.pathname)}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((out) => {
+        const count = out?.count;
+        if (!Number.isInteger(count)) return;
+        button.textContent =
+          count === 0
+            ? 'Be the first to comment'
+            : `Show ${count} comment${count === 1 ? '' : 's'}`;
+      })
+      .catch(() => {});
   }
 
   for (const details of document.querySelectorAll<HTMLDetailsElement>('details.anonymous')) {

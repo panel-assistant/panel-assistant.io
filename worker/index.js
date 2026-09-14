@@ -3,7 +3,7 @@
 import topics from './topics.json' with { type: 'json' };
 import { resolve } from './resolve.js';
 import { recordMiss } from './misses.js';
-import { handleComment } from './comments.js';
+import { handleComment, handleCommentCount } from './comments.js';
 import commentConfig from './comments.json' with { type: 'json' };
 import { handleEditorAuth } from './editor-auth.js';
 import editorConfig from './editor.json' with { type: 'json' };
@@ -14,6 +14,9 @@ import build from '../dist/build.json' with { type: 'json' };
 export default {
   async fetch(request, env) {
     const { pathname } = new URL(request.url);
+    if (pathname === '/comments/count') {
+      return handleCommentCount(request, env, commentConfig);
+    }
     if (pathname === '/comments') {
       return handleComment(request, env, commentConfig);
     }

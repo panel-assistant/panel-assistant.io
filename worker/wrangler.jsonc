@@ -8,7 +8,7 @@
   "assets": {
     "directory": "../dist",
     "binding": "ASSETS",
-    "run_worker_first": ["/go/*", "/go", "/comments", "/oauth/*"],
+    "run_worker_first": ["/go/*", "/go", "/comments", "/comments/count", "/oauth/*"],
   },
   // Anonymous comments are limited per address. Cloudflare keeps and expires the counter; the
   // Worker stores nothing. Worker secrets: GITHUB_APP_ID, GITHUB_APP_PRIVATE_KEY (PKCS#8) and
