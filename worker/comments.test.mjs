@@ -25,8 +25,10 @@ const makeEnv = (over = {}) => ({
   TURNSTILE_SECRET_KEY: 'turnstile-secret',
   GITHUB_BOT_TOKEN: 'bot-token',
   ASSETS: {
+    // Like Static Assets under wrangler dev: the host is ignored and a page answers with or
+    // without its trailing slash.
     fetch: async (req) =>
-      new URL(req.url).pathname === '/start/getting-started/'
+      ['/', '/start/getting-started/', '/start/getting-started'].includes(new URL(req.url).pathname)
         ? new Response(PAGE_HTML)
         : new Response('not found', { status: 404 }),
   },
