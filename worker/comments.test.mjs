@@ -249,11 +249,27 @@ test('a GitHub failure is reported without detail', async () => {
   assert.deepEqual(await res.json(), { error: 'github' });
 });
 
-test('reader text cannot mention people or inject HTML', () => {
-  const body = commentBody('hi @someone <img src=x>', 'Sam @x');
-  assert.ok(!body.includes('@'));
-  assert.ok(!body.includes('<img'));
-  assert.match(body, /&#64;someone &lt;img src=x>/);
+test('reader text cannot mention people or inject HTML, however it is encoded', () => {
+  // Each of these rendered as a real mention on GitHub before this escaping, or would have.
+  const hostile = [
+    '@octocat',
+    '&#64;octocat',
+    '&#x40;octocat',
+    '&commat;octocat',
+    '\\@octocat',
+    '| @octocat |\n|---|',
+    '@<!-- -->octocat',
+    '@github/security',
+  ];
+  for (const input of hostile) {
+    const body = commentBody(input, 'Sam @x &#64;y');
+    assert.ok(!body.includes('@'), input);
+    // Every ampersand left is one this function wrote, so nothing decodes to an at sign.
+    assert.deepEqual(body.match(/&(?!amp;|lt;)/g), null, input);
+    assert.ok(!body.includes('<!--'), input);
+  }
+  assert.match(commentBody('hi @someone <img src=x>', ''), /hi \uff20someone &lt;img src=x>/);
+  assert.match(commentBody('&#64;x', ''), /^&amp;#64;x/);
   assert.match(commentBody('hi', ''), /A reader posted this/);
 });
 

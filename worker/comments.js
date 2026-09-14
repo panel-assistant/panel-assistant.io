@@ -22,9 +22,12 @@ export async function sha1(text) {
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
-// A reader's text must not ping people or carry raw HTML into the repository.
+// A reader's text must not ping people or carry raw HTML into the repository. GitHub decodes
+// entities before it looks for mentions, and an HTML comment between `@` and a name still
+// mentions inside a table cell, so every `@` becomes the fullwidth at sign, which GitHub never
+// reads as a mention in any context. `&` is escaped first so no entity can decode back to `@`.
 export function commentBody(text, name) {
-  const safe = (s) => s.replaceAll('<', '&lt;').replaceAll('@', '&#64;');
+  const safe = (s) => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('@', '\uff20');
   const who = name ? `**${safe(name)}**` : 'A reader';
   return `${safe(text)}\n\n<sub>${who} posted this on panel-assistant.io without a GitHub account.</sub>`;
 }
