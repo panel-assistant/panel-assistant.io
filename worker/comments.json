@@ -1,0 +1,10 @@
+{
+  "repo": "panel-assistant/panel-assistant.io",
+  "repoId": "R_kgDOUTsIYw",
+  "category": "General",
+  "categoryId": "DIC_kwDOUTsIY84DFkdl",
+  "turnstileSiteKey": "1x00000000000000000000AA",
+  "turnstileHostnames": ["panel-assistant.io"],
+  "maxBody": 3000,
+  "maxName": 40
+}

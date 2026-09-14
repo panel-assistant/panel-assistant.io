@@ -1,13 +1,20 @@
-// Answers /go/<topic> with a redirect and hands everything else to the static site.
+// Answers /go/<topic> with a redirect, takes anonymous comments at /comments, and hands
+// everything else to the static site.
 import topics from './topics.json' with { type: 'json' };
 import { resolve } from './resolve.js';
 import { recordMiss } from './misses.js';
+import { handleComment } from './comments.js';
+import commentConfig from './comments.json' with { type: 'json' };
 // The build facts come from the published directory, which is what the deploy
 // job has in hand; the source copy is not part of a checkout.
 import build from '../dist/build.json' with { type: 'json' };
 
 export default {
   async fetch(request, env) {
+    if (new URL(request.url).pathname === '/comments') {
+      return handleComment(request, env, commentConfig);
+    }
+
     const hit = resolve(request.url, topics);
     if (!hit) return env.ASSETS.fetch(request);
 

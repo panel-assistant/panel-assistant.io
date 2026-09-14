@@ -1,0 +1,153 @@
+---
+// Comments under a page. Readers with a GitHub account use giscus; everyone else uses the form,
+// which the Worker at /comments posts into the same discussion. One discussion per page, found by
+// pathname, in the website repository's Discussions.
+import config from '../../worker/comments.json';
+---
+
+<section class="comments" aria-labelledby="comments-heading">
+  <h2 id="comments-heading">Comments</h2>
+  <div class="giscus"></div>
+  <script
+    is:inline
+    src="https://giscus.app/client.js"
+    data-repo={config.repo}
+    data-repo-id={config.repoId}
+    data-category={config.category}
+    data-category-id={config.categoryId}
+    data-mapping="pathname"
+    data-strict="1"
+    data-reactions-enabled="0"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async
+  ></script>
+  <details class="anonymous">
+    <summary>Comment without a GitHub account</summary>
+    <form class="anonymous-form" method="post" action="/comments">
+      <label>
+        Name <span class="optional">(optional, shown with the comment)</span>
+        <input name="name" maxlength={config.maxName} autocomplete="nickname" />
+      </label>
+      <label>
+        Comment
+        <textarea name="body" required maxlength={config.maxBody} rows="5"></textarea>
+      </label>
+      <p class="note">
+        Your comment is posted publicly to this page's discussion on GitHub. Nothing else about you
+        is kept.
+      </p>
+      <div class="challenge" data-sitekey={config.turnstileSiteKey}></div>
+      <button type="submit">Post comment</button>
+      <p class="status" role="status" aria-live="polite"></p>
+    </form>
+  </details>
+</section>
+
+<script>
+  const MESSAGES: Record<string, string> = {
+    rate: 'Please wait a minute before posting again.',
+    challenge: 'The check did not pass. Please try again.',
+    empty: 'Write a comment first.',
+    long: 'That comment is too long.',
+    unavailable: 'Comments without an account are not available right now.',
+  };
+
+  for (const details of document.querySelectorAll<HTMLDetailsElement>('details.anonymous')) {
+    const form = details.querySelector<HTMLFormElement>('form')!;
+    const status = form.querySelector<HTMLElement>('.status')!;
+    const challenge = form.querySelector<HTMLElement>('.challenge')!;
+    let widget: string | undefined;
+
+    // Turnstile loads only when someone opens the form, not on every page view.
+    details.addEventListener('toggle', () => {
+      if (!details.open || document.getElementById('turnstile-api')) return;
+      const s = document.createElement('script');
+      s.id = 'turnstile-api';
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      s.onload = () => {
+        widget = (window as any).turnstile.render(challenge, {
+          sitekey: challenge.dataset.sitekey,
+        });
+      };
+      document.head.append(s);
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      data.set('page', location.pathname);
+      status.textContent = 'Posting…';
+      try {
+        const res = await fetch('/comments', { method: 'POST', body: data });
+        const out = await res.json();
+        if (res.ok) {
+          form.reset();
+          status.textContent = 'Posted. Reload the page to see it in the discussion.';
+        } else {
+          status.textContent = MESSAGES[out.error] ?? 'The comment could not be posted.';
+        }
+      } catch {
+        status.textContent = 'The comment could not be posted.';
+      }
+      (window as any).turnstile?.reset(widget);
+    });
+  }
+</script>
+
+<style>
+  .comments {
+    margin-block: 2rem 1rem;
+  }
+  .anonymous {
+    margin-top: 1rem;
+  }
+  .anonymous summary {
+    cursor: pointer;
+    color: var(--sl-color-text-accent);
+  }
+  .anonymous-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+  .anonymous-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .anonymous-form input,
+  .anonymous-form textarea {
+    font: inherit;
+    padding: 0.5rem;
+    color: var(--sl-color-white);
+    background: var(--sl-color-black);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.25rem;
+    max-width: 100%;
+  }
+  .anonymous-form button {
+    align-self: flex-start;
+    font: inherit;
+    padding: 0.4rem 1rem;
+    color: var(--sl-color-black);
+    background: var(--sl-color-text-accent);
+    border: 0;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  .optional,
+  .note {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .note,
+  .status {
+    margin: 0;
+  }
+</style>

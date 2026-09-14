@@ -43,6 +43,7 @@ export default defineConfig({
               items: [
                 { label: 'Getting started', slug: 'start/getting-started' },
                 { label: 'How it works', slug: 'start/what-it-is' },
+                { label: 'Community', slug: 'start/community' },
               ],
             },
             {

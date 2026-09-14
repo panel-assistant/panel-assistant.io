@@ -1,7 +1,11 @@
 ---
-// Starlight's footer, plus the line saying which build of the site this is.
+// Starlight's footer, with comments above it on documentation pages and the line saying which
+// build of the site this is below it.
 import Default from '@astrojs/starlight/components/Footer.astro';
 import build from '../build-info/build.json';
+import Comments from './Comments.astro';
+
+const isDoc = Astro.locals.starlightRoute.entry.data.template !== 'splash';
 
 const label =
   build.number === null
@@ -9,6 +13,7 @@ const label =
     : `Build ${build.number} · ${build.sha}${build.channel === 'main' ? '' : ' · ' + build.channel}`;
 ---
 
+{isDoc && <Comments />}
 <Default />
 <p class="build-info">
   <a href="/build.json">{label}</a>
