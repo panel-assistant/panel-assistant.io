@@ -106,7 +106,6 @@ export async function installationToken(fetcher, env, config, now) {
     repositories: [name],
     permissions: { discussions: 'write' },
   });
-  if (!token) throw new Error('github');
   return token;
 }
 
