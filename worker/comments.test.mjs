@@ -1,12 +1,44 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { handleComment, termFor, sha1, commentBody } from './comments.js';
+import { handleComment, termFor, sha1, commentBody, appJwt } from './comments.js';
 import config from './comments.json' with { type: 'json' };
 import worker from './index.js';
 
 const ORIGIN = 'https://panel-assistant.io';
 const PAGE_HTML = '<meta property="og:description" content="Start &amp; finish."/>';
+
+// A real RSA key for the App, so the fake GitHub below can verify the JWT signature.
+const appKeys = await crypto.subtle.generateKey(
+  {
+    name: 'RSASSA-PKCS1-v1_5',
+    modulusLength: 2048,
+    publicExponent: new Uint8Array([1, 0, 1]),
+    hash: 'SHA-256',
+  },
+  true,
+  ['sign', 'verify'],
+);
+const pkcs8 = Buffer.from(await crypto.subtle.exportKey('pkcs8', appKeys.privateKey)).toString(
+  'base64',
+);
+// PEM armour assembled at run time: the key is generated above and never committed.
+const armour = (edge) => `-----${edge} ${['PRIVATE', 'KEY'].join(' ')}-----`;
+const APP_PEM = `${armour('BEGIN')}\n${pkcs8.match(/.{1,64}/g).join('\n')}\n${armour('END')}\n`;
+
+// Returns the JWT's claims when its RS256 signature verifies against the App key, else null.
+async function verifiedClaims(jwt, publicKey = appKeys.publicKey) {
+  const [header, payload, signature] = jwt.split('.');
+  const bytes = (b64) => Buffer.from(b64, 'base64url');
+  const ok = await crypto.subtle.verify(
+    'RSASSA-PKCS1-v1_5',
+    publicKey,
+    bytes(signature),
+    new TextEncoder().encode(`${header}.${payload}`),
+  );
+  if (!ok || JSON.parse(bytes(header)).alg !== 'RS256') return null;
+  return JSON.parse(bytes(payload));
+}
 
 // A rate limiter with the binding's shape: the first `limit` calls per key succeed.
 const limiter = (limit = 2) => {
@@ -23,7 +55,8 @@ const limiter = (limit = 2) => {
 const makeEnv = (over = {}) => ({
   COMMENT_RATE: limiter(),
   TURNSTILE_SECRET_KEY: 'turnstile-secret',
-  GITHUB_BOT_TOKEN: 'bot-token',
+  GITHUB_APP_ID: '123456',
+  GITHUB_APP_PRIVATE_KEY: APP_PEM,
   ASSETS: {
     // Like Static Assets under wrangler dev: the host is ignored and a page answers with or
     // without its trailing slash.
@@ -46,6 +79,24 @@ const upstream = ({
     if (url.includes('turnstile')) {
       calls.push({ kind: 'turnstile', form: Object.fromEntries(init.body) });
       return Response.json(turnstile);
+    }
+    // GitHub REST for App authentication: only a JWT signed by the App key, issued for its id.
+    if (!url.endsWith('/graphql')) {
+      const path = new URL(url).pathname;
+      const jwt = init.headers.authorization.replace(/^Bearer /, '');
+      const claims = await verifiedClaims(jwt);
+      calls.push({ kind: 'github', rest: `${init.method} ${path}`, claims, body: init.body });
+      if (!claims || claims.iss !== '123456') return Response.json({}, { status: 401 });
+      if (
+        init.method === 'GET' &&
+        path === '/repos/panel-assistant/panel-assistant.io/installation'
+      ) {
+        return Response.json({ id: 42 });
+      }
+      if (init.method === 'POST' && path === '/app/installations/42/access_tokens') {
+        return Response.json({ token: 'installation-token' }, { status: 201 });
+      }
+      return Response.json({}, { status: 404 });
     }
     const { query, variables } = JSON.parse(init.body);
     calls.push({ kind: 'github', query, variables, auth: init.headers.authorization });
@@ -114,7 +165,56 @@ test('a comment on a page with no discussion creates it the way giscus does, the
   );
   const add = calls.find((c) => c.query?.includes('addDiscussionComment'));
   assert.equal(add.variables.input.discussionId, 'D_new');
-  assert.ok(calls.filter((c) => c.kind === 'github').every((c) => c.auth === 'bearer bot-token'));
+  const graph = calls.filter((c) => c.query);
+  assert.ok(graph.length > 0 && graph.every((c) => c.auth === 'bearer installation-token'));
+});
+
+test('the App signs a short-lived RS256 JWT for its own id', async () => {
+  const now = Date.UTC(2026, 8, 14, 12, 0, 0);
+  const claims = await verifiedClaims(await appJwt('123456', APP_PEM, now));
+  assert.deepEqual(claims, { iat: now / 1000 - 60, exp: now / 1000 + 540, iss: '123456' });
+  // A different key does not verify, so the fake GitHub really checks the signature.
+  const other = await crypto.subtle.generateKey(
+    {
+      name: 'RSASSA-PKCS1-v1_5',
+      modulusLength: 2048,
+      publicExponent: new Uint8Array([1, 0, 1]),
+      hash: 'SHA-256',
+    },
+    true,
+    ['sign', 'verify'],
+  );
+  assert.equal(await verifiedClaims(await appJwt('123456', APP_PEM, now), other.publicKey), null);
+});
+
+test('comments post with an installation token narrowed to Discussions on this repository', async () => {
+  const { calls, fetcher } = upstream();
+  assert.equal((await handleComment(post(), makeEnv(), config, fetcher)).status, 201);
+  const rest = calls.filter((c) => c.rest);
+  assert.deepEqual(
+    rest.map((c) => c.rest),
+    [
+      'GET /repos/panel-assistant/panel-assistant.io/installation',
+      'POST /app/installations/42/access_tokens',
+    ],
+  );
+  assert.ok(rest.every((c) => c.claims?.iss === '123456'));
+  assert.deepEqual(JSON.parse(rest[1].body), {
+    repositories: ['panel-assistant.io'],
+    permissions: { discussions: 'write' },
+  });
+});
+
+test('an App key that GitHub rejects posts nothing', async () => {
+  const { calls, fetcher } = upstream();
+  const env = makeEnv({ GITHUB_APP_ID: '999' });
+  const res = await handleComment(post(), env, config, fetcher);
+  assert.equal(res.status, 502);
+  // The refused installation lookup ends it: no token request and no GraphQL call follow.
+  assert.deepEqual(
+    calls.filter((c) => c.kind === 'github').map((c) => c.rest),
+    ['GET /repos/panel-assistant/panel-assistant.io/installation'],
+  );
 });
 
 test('an existing discussion is reused, not duplicated', async () => {
@@ -232,7 +332,12 @@ test('empty, oversized, cross-origin and non-POST requests are refused', async (
 
 test('without its secrets or limiter the endpoint fails closed', async () => {
   const { calls, fetcher } = upstream();
-  for (const missing of ['COMMENT_RATE', 'TURNSTILE_SECRET_KEY', 'GITHUB_BOT_TOKEN']) {
+  for (const missing of [
+    'COMMENT_RATE',
+    'TURNSTILE_SECRET_KEY',
+    'GITHUB_APP_ID',
+    'GITHUB_APP_PRIVATE_KEY',
+  ]) {
     const res = await handleComment(post(), makeEnv({ [missing]: undefined }), config, fetcher);
     assert.equal(res.status, 503, missing);
   }
