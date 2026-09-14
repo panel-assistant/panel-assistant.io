@@ -31,6 +31,8 @@ export default defineConfig({
         SiteTitle: './src/components/SiteTitle.astro',
         Footer: './src/components/Footer.astro',
       },
+      // Panel pages link to their entry in the page editor at /admin/.
+      routeMiddleware: './src/editor/route-data.ts',
       plugins: [starlightLinksValidator()],
       credits: false,
       lastUpdated: true,

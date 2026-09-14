@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
-import { editorConfig, fieldFor } from './config.mjs';
+import { editUrlFor, editorConfig, fieldFor } from './config.mjs';
 import { collectFields } from '../hardware/fields.mjs';
 import settings from '../../worker/editor.json' with { type: 'json' };
 
@@ -94,4 +94,41 @@ test('the built editor configuration declares every front-matter key the panel p
     assert.ok(declared.has(key), `panel key "${key}" has no editor field`);
   }
   assert.equal(built.collections[0].folder, settings.panelsFolder);
+});
+
+test('panel pages, and only panel pages, get an edit link to their editor entry', () => {
+  assert.equal(
+    editUrlFor('hardware/panels/tuya-tpa10', settings),
+    'https://panel-assistant.io/admin/#/collections/panels/entries/tuya-tpa10',
+  );
+  for (const id of [
+    'start/getting-started',
+    'hardware',
+    'hardware/panels',
+    'hardware/panels/',
+    'hardware/firmware/nspanel-pro',
+    'hardware/panels/a/b',
+    undefined,
+  ]) {
+    assert.equal(editUrlFor(id, settings), null, String(id));
+  }
+});
+
+test('the built panel pages carry the edit link and other pages do not', () => {
+  const page = (p) => readFileSync(new URL(`../../dist/${p}index.html`, import.meta.url), 'utf8');
+  const dir = new URL(`../../${settings.panelsFolder}/`, import.meta.url);
+  const slugs = readdirSync(dir)
+    .filter((f) => f.endsWith('.md'))
+    .map((f) => f.slice(0, -3));
+  for (const slug of slugs) {
+    assert.ok(
+      page(`hardware/panels/${slug}/`).includes(
+        `href="https://panel-assistant.io/admin/#/collections/panels/entries/${slug}"`,
+      ),
+      `${slug} has no edit link`,
+    );
+  }
+  for (const other of ['start/getting-started/', 'hardware/', '']) {
+    assert.ok(!page(other).includes('/admin/'), `${other || '/'} links to the editor`);
+  }
 });

@@ -86,3 +86,15 @@ export function editorConfig(entries, settings) {
     ],
   };
 }
+
+/**
+ * The editor entry for a docs page, or null when the editor does not handle that page. `entryId` is
+ * the content id, such as `hardware/panels/tuya-tpa10`.
+ */
+export function editUrlFor(entryId, settings) {
+  const prefix = settings.panelsFolder.replace(/^src\/content\/docs\//, '') + '/';
+  if (!entryId?.startsWith(prefix)) return null;
+  const slug = entryId.slice(prefix.length);
+  if (!/^[a-z0-9-]+$/.test(slug)) return null;
+  return `${settings.siteOrigin}/admin/#/collections/panels/entries/${slug}`;
+}
