@@ -111,7 +111,8 @@ export async function handleComment(request, env, config, fetcher = fetch) {
   const token = String(form.get('cf-turnstile-response') ?? '');
   if (!text) return json(400, { error: 'empty' });
   if (text.length > config.maxBody) return json(413, { error: 'long' });
-  if (!/^\/[a-z0-9/_-]*$/.test(page) || page.includes('//')) return json(400, { error: 'page' });
+  // Every page ends in a slash; the same page without one would name a discussion giscus never shows.
+  if (!/^\/([a-z0-9_-]+\/)*$/.test(page)) return json(400, { error: 'page' });
 
   const verify = await fetcher(SITEVERIFY, {
     method: 'POST',

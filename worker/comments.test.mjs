@@ -193,7 +193,13 @@ test('a Turnstile pass for another hostname is refused', async () => {
 });
 
 test('a page the site does not serve gets no discussion', async () => {
-  for (const page of ['/no-such-page/', 'https://evil.example/', '/../etc/', '//evil.example/']) {
+  for (const page of [
+    '/no-such-page/',
+    'https://evil.example/',
+    '/../etc/',
+    '//evil.example/',
+    '/start/getting-started',
+  ]) {
     const { calls, fetcher } = upstream();
     const res = await handleComment(post({ page }), makeEnv(), config, fetcher);
     assert.equal(res.status, 400, page);
