@@ -37,6 +37,7 @@ const makeEnv = (over = {}) => ({
 const upstream = ({
   turnstile = { success: true, hostname: 'panel-assistant.io' },
   existing = null,
+  recent = [],
 } = {}) => {
   const calls = [];
   const fetcher = async (url, init) => {
@@ -50,7 +51,7 @@ const upstream = ({
       return Response.json({ data: { search: { nodes: existing ? [existing] : [] } } });
     }
     if (query.includes('discussions(')) {
-      return Response.json({ data: { repository: { discussions: { nodes: [] } } } });
+      return Response.json({ data: { repository: { discussions: { nodes: recent } } } });
     }
     if (query.includes('createDiscussion')) {
       return Response.json({ data: { createDiscussion: { discussion: { id: 'D_new' } } } });
@@ -128,6 +129,23 @@ test('an existing discussion is reused, not duplicated', async () => {
   );
 });
 
+test('a discussion too new for search is found among recent ones, not duplicated', async () => {
+  const hash = await sha1('start/getting-started/');
+  const { calls, fetcher } = upstream({
+    recent: [
+      { id: 'D_other', body: '<!-- sha1: 0000 -->' },
+      { id: 'D_fresh', body: `# x\n\n<!-- sha1: ${hash} -->` },
+    ],
+  });
+  const res = await handleComment(post(), makeEnv(), config, fetcher);
+  assert.equal(res.status, 201);
+  assert.ok(!calls.some((c) => c.query?.includes('createDiscussion')));
+  assert.equal(
+    calls.find((c) => c.query?.includes('addDiscussionComment')).variables.input.discussionId,
+    'D_fresh',
+  );
+});
+
 test('the rate limit refuses the third comment from one address within the window, before any upstream call', async () => {
   const env = makeEnv();
   const { calls, fetcher } = upstream();
@@ -152,7 +170,9 @@ test('the configured limit is per address, two a minute', () => {
 });
 
 test('a failed Turnstile check posts nothing to GitHub', async () => {
-  const { calls, fetcher } = upstream({ turnstile: { success: false, 'error-codes': ['bad'] } });
+  const { calls, fetcher } = upstream({
+    turnstile: { success: false, hostname: 'panel-assistant.io', 'error-codes': ['bad'] },
+  });
   const res = await handleComment(post(), makeEnv(), config, fetcher);
   assert.equal(res.status, 403);
   assert.deepEqual(await res.json(), { error: 'challenge' });
