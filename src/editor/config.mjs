@@ -58,6 +58,9 @@ export function editorConfig(entries, settings) {
       open_authoring: true,
     },
     publish_mode: 'editorial_workflow',
+    // Deliberately unservable: an image attached in the editor lands here in the pull request and
+    // renders as a broken image until a reviewer moves it to the asset host and writes `asset:<key>`,
+    // so a forgotten move shows on the page instead of a binary quietly reaching main.
     media_folder: 'src/assets/uploads',
     public_folder: '/uploads',
     collections: [
