@@ -11,3 +11,5 @@ dist/
 # written by src/build-info/write.mjs before every build
 src/build-info/build.json
 public/build.json
+# copied from node_modules by src/editor/copy-bundle.mjs before every build
+public/admin/

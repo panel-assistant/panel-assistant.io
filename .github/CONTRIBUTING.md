@@ -37,6 +37,12 @@ The built site loads nothing from anywhere else and contains no analytics. Astro
 
 Conventional commit subjects: `feat:`, `fix:`, `docs:`, `chore:`, `build:`, `ci:`. Keep the subject in the imperative and explain the reasoning in the body when it is not obvious.
 
+## Editing pages in the browser
+
+Panel pages can also be edited at [panel-assistant.io/admin/](https://panel-assistant.io/admin/) without cloning anything. Signing in uses your GitHub account with public-repository access only. If you cannot write to this repository, the editor forks it to your account; submitting a change for review opens a pull request here, reviewed like any other. The editor's form fields are generated at build time from the front matter the panel pages already use, so a new field starts life as a key added to a page, not as a change to the editor. Keys with mixed or structured values have no form field and are kept exactly as written. The editor itself is served from this site; a few of its optional features load libraries from a CDN when used.
+
+Images you attach in the editor arrive in the pull request. Published images live on the asset host rather than in this repository, so a reviewer moves them there before merging.
+
 ## Reporting a problem with the site
 
 Open an issue in this repository. Problems with a panel, an installation or the app itself belong in the [ha-paneld issues](https://github.com/maxlyth/ha-paneld/issues), where the people who can answer them are looking.

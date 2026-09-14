@@ -1,0 +1,18 @@
+---
+// The page editor. Sveltia CMS is copied from node_modules into public/admin/ before every build by
+// src/editor/copy-bundle.mjs, so it is served from this site at the version package.json pins.
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Edit pages · Panel Assistant</title>
+    <link rel="cms-config-url" href="/admin/config.json" type="application/json" />
+  </head>
+  <body>
+    <script is:inline src="/admin/sveltia-cms.js"></script>
+  </body>
+</html>

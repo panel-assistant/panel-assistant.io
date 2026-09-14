@@ -1,0 +1,8 @@
+{
+  "repo": "panel-assistant/panel-assistant.io",
+  "branch": "main",
+  "siteOrigin": "https://panel-assistant.io",
+  "authBase": "/oauth",
+  "scope": "public_repo",
+  "panelsFolder": "src/content/docs/hardware/panels"
+}

@@ -8,10 +8,10 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "predev": "node src/build-info/write.mjs",
+    "predev": "node src/build-info/write.mjs && node src/editor/copy-bundle.mjs",
     "dev": "astro dev",
     "start": "astro dev",
-    "prebuild": "node src/build-info/write.mjs",
+    "prebuild": "node src/build-info/write.mjs && node src/editor/copy-bundle.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "precheck": "node src/build-info/write.mjs",
@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@sveltia/cms": "0.212.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^1.0.0",
     "satteri": "^0.10.5",
