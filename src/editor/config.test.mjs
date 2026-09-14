@@ -57,6 +57,18 @@ test('keys whose pages disagree, or hold richer values, stay raw front matter', 
   assert.ok(!names(config).includes('ports'));
 });
 
+test('the editor accepts no images and saves the body as typed', () => {
+  const body = fieldsOf(editorConfig([], settings)).at(-1);
+  assert.equal(body.name, 'body');
+  assert.deepEqual(body.modes, ['raw']);
+  assert.deepEqual(body.editor_components, []);
+  assert.ok(
+    !fieldsOf(editorConfig([{ title: 'A', photo: 'x.png' }], settings)).some((f) =>
+      ['image', 'file'].includes(f.widget),
+    ),
+  );
+});
+
 test('every save is a pull request: open authoring, editorial workflow, public scope only', () => {
   const { backend, publish_mode } = editorConfig([], settings);
   assert.equal(backend.open_authoring, true);

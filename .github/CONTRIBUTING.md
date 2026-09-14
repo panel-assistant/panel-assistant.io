@@ -41,7 +41,7 @@ Conventional commit subjects: `feat:`, `fix:`, `docs:`, `chore:`, `build:`, `ci:
 
 Panel pages can also be edited at [panel-assistant.io/admin/](https://panel-assistant.io/admin/) without cloning anything. Signing in uses your GitHub account with public-repository access only. If you cannot write to this repository, the editor forks it to your account; submitting a change for review opens a pull request here, reviewed like any other. The editor's form fields are generated at build time from the front matter the panel pages already use, so a new field starts life as a key added to a page, not as a change to the editor. Keys with mixed or structured values have no form field and are kept exactly as written. The editor itself is served from this site, but unlike the rest of the site its page fetches fonts from a CDN, checks for a newer editor release and reads GitHub's status page.
 
-Images you attach in the editor arrive in the pull request. Published images live on the asset host rather than in this repository, so a reviewer moves them there before merging.
+The editor is text only and does not accept images. If your change needs one, share it through [Discord](https://panel-assistant.io/go/discord) or a file-sharing link, say where it belongs in your pull request, and a moderator adds it to the page. Please do not attach images to the pull request itself.
 
 ## Reporting a problem with the site
 

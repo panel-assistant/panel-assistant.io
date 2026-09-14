@@ -58,11 +58,11 @@ export function editorConfig(entries, settings) {
       open_authoring: true,
     },
     publish_mode: 'editorial_workflow',
-    // Deliberately unservable: an image attached in the editor lands here in the pull request and
-    // renders as a broken image until a reviewer moves it to the asset host and writes `asset:<key>`,
-    // so a forgotten move shows on the page instead of a binary quietly reaching main.
-    media_folder: 'src/assets/uploads',
-    public_folder: '/uploads',
+    // The editor takes no images: anything uploaded would be hosted by GitHub in a pull request. The
+    // CMS still requires a media folder, so it names one no page uses; contributors cannot upload
+    // under open authoring, and the body is a plain Markdown text area with no image component,
+    // so pasting or dropping an image does nothing.
+    media_folder: 'src/assets/editor-uploads-disabled',
     collections: [
       {
         name: 'panels',
@@ -78,7 +78,9 @@ export function editorConfig(entries, settings) {
           { name: 'title', widget: 'string' },
           { name: 'description', widget: 'text', required: false },
           ...discovered,
-          { name: 'body', widget: 'markdown' },
+          // Plain Markdown, saved as typed. The rich-text mode rewrites what it reads (table padding,
+          // emphasis markers, and bold around inline code escaped into literal asterisks).
+          { name: 'body', widget: 'markdown', modes: ['raw'], editor_components: [] },
         ],
       },
     ],
