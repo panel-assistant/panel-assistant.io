@@ -5,10 +5,10 @@ vendor: Electron
 model: WF1589T
 soc: Rockchip RK3576
 android: '14'
-screen: '10.1 in, 1920 × 1200'
+screen: 10.1 in, 1920 × 1200
 support: Full
-root: 'userdebug, adb root; rarely needed'
-webview: 'Google Play, updates itself'
+root: userdebug, adb root; rarely needed
+webview: Google Play, updates itself
 sidebar:
   label: WF1589T
 ---

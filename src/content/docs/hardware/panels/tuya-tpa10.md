@@ -5,10 +5,10 @@ vendor: Tuya
 model: TPA10
 soc: Rockchip RK3566
 android: '11'
-screen: '10.1 in, 1920 × 1200'
+screen: 10.1 in, 1920 × 1200
 support: Full
-root: 'su present; helper for LED, climate, 5th button'
-webview: 'Chrome 83; root swap to LineageOS 150'
+root: su present; helper for LED, climate, 5th button
+webview: Chrome 83; root swap to LineageOS 150
 sidebar:
   label: TPA10
 ---

@@ -4,10 +4,10 @@ description: Research notes on the Shelly Wall Display family, covering the mode
 vendor: Shelly
 model: Wall Display (original, X2, X1i, X2i, XL)
 soc: MT6580, SC7731E, RK3326-S or RK3566 by model
-android: '7.0 to 11 by model'
-screen: '4 to 10.1 in by model'
+android: 7.0 to 11 by model
+screen: 4 to 10.1 in by model
 support: Research
-root: 'No user-facing adb or root'
+root: No user-facing adb or root
 webview: 'Original: Shelly WebView 119 ZIP; others unknown'
 sidebar:
   label: Shelly Wall Display

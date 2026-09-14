@@ -5,10 +5,10 @@ vendor: Sonoff
 model: NSPanel Pro (86P, 120P)
 soc: Rockchip PX30 / RK3326
 android: '8.1'
-screen: '4 in, 480 × 480 (86P); 750 × 1334 (120P)'
+screen: 4 in, 480 × 480 (86P); 750 × 1334 (120P)
 support: Full
-root: 'userdebug, no adb password; su for backlight-off'
-webview: 'Chromium 107 on 3.5.1; sideload LineageOS 138'
+root: userdebug, no adb password; su for backlight-off
+webview: Chromium 107 on 3.5.1; sideload LineageOS 138
 sidebar:
   label: NSPanel Pro
 ---

@@ -5,10 +5,10 @@ vendor: ZHICAI
 model: SMT1019
 soc: Rockchip RK3576
 android: '14'
-screen: '10.1 in, 1280 × 800'
+screen: 10.1 in, 1280 × 800
 support: Community-tested
-root: 'None on stock; supplier userdebug build rooted'
-webview: 'Google Play, update from the Play Store'
+root: None on stock; supplier userdebug build rooted
+webview: Google Play, update from the Play Store
 sidebar:
   label: SMT1019
 ---

@@ -5,10 +5,10 @@ vendor: OEM (ZX)
 model: ZX-SMT156 / RK3566_T
 soc: Rockchip RK3566
 android: '13'
-screen: '15.6 in, 1920 × 1080'
+screen: 15.6 in, 1920 × 1080
 support: Preliminary
-root: 'No app su reported; other routes untested'
-webview: 'Google WebView 149, current'
+root: No app su reported; other routes untested
+webview: Google WebView 149, current
 sidebar:
   label: ZX-SMT156
 ---
