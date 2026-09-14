@@ -6,48 +6,61 @@ import config from '../../worker/comments.json';
 ---
 
 <section class="comments" aria-labelledby="comments-heading">
-  <h2 id="comments-heading">Comments</h2>
-  <p class="note">
-    Comments are held in this page's discussion on GitHub. Nothing loads from GitHub until you ask.
-  </p>
-  <button
-    type="button"
-    class="show-comments"
-    data-repo={config.repo}
-    data-repo-id={config.repoId}
-    data-category={config.category}
-    data-category-id={config.categoryId}
-    data-mapping="pathname"
-    data-strict="1"
-    data-reactions-enabled="0"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="preferred_color_scheme"
-    data-lang="en"
-  >
-    Show comments
-  </button>
-  <div class="giscus"></div>
-  <details class="anonymous">
-    <summary>Comment without a GitHub account</summary>
-    <form class="anonymous-form" method="post" action="/comments">
-      <label>
-        Name <span class="optional">(optional, shown with the comment)</span>
-        <input name="name" maxlength={config.maxName} autocomplete="nickname" />
-      </label>
-      <label>
-        Comment
-        <textarea name="body" required maxlength={config.maxBody} rows="5"></textarea>
-      </label>
-      <p class="note">
-        Your comment is posted publicly to this page's discussion on GitHub. Nothing else about you
-        is kept.
-      </p>
-      <div class="challenge" data-sitekey={config.turnstileSiteKey}></div>
-      <button type="submit">Post comment</button>
-      <p class="status" role="status" aria-live="polite"></p>
-    </form>
-  </details>
+  <h2 id="comments-heading">
+    Comments<span class="count"></span>
+  </h2>
+  <div class="gate">
+    <button
+      type="button"
+      class="show-comments"
+      data-repo={config.repo}
+      data-repo-id={config.repoId}
+      data-category={config.category}
+      data-category-id={config.categoryId}
+      data-mapping="pathname"
+      data-strict="1"
+      data-reactions-enabled="0"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="en"
+    >
+      Load comments
+    </button>
+    <p class="note">
+      Comments are kept in this page's discussion on GitHub, so loading them connects your browser
+      to GitHub. This browser remembers the choice and loads comments on other pages when you scroll
+      down to them.
+    </p>
+  </div>
+  <div class="comments-body" hidden>
+    <div class="giscus"></div>
+    <details class="anonymous">
+      <summary>Comment without a GitHub account</summary>
+      <form class="anonymous-form" method="post" action="/comments">
+        <label>
+          Name <span class="optional">(optional, shown with the comment)</span>
+          <input name="name" maxlength={config.maxName} autocomplete="nickname" />
+        </label>
+        <label>
+          Comment
+          <textarea name="body" required maxlength={config.maxBody} rows="5"></textarea>
+        </label>
+        <p class="note">
+          Your comment is posted publicly to this page's discussion on GitHub. Nothing else about
+          you is kept.
+        </p>
+        <div class="challenge" data-sitekey={config.turnstileSiteKey}></div>
+        <button type="submit">Post comment</button>
+        <p class="status" role="status" aria-live="polite"></p>
+      </form>
+    </details>
+    <p class="note autoload">
+      <button type="button" class="stop-autoload">
+        Stop loading comments automatically
+      </button>
+    </p>
+  </div>
 </section>
 
 <script>
@@ -59,19 +72,76 @@ import config from '../../worker/comments.json';
     unavailable: 'Comments without an account are not available right now.',
   };
 
-  // giscus loads only when a reader asks for it, so an ordinary page view reaches no third party.
-  for (const button of document.querySelectorAll<HTMLButtonElement>('button.show-comments')) {
-    button.addEventListener('click', () => {
+  // Nothing loads from GitHub until a reader asks once. That choice is kept in this browser, and
+  // from then on comments load when the reader scrolls near them, so a reader who never reaches
+  // them still contacts no third party. Both kinds of reader see the anonymous form only with the
+  // comments.
+  const PREFERENCE = 'panel-assistant:load-comments';
+  const remembered = () => {
+    try {
+      return localStorage.getItem(PREFERENCE) === 'yes';
+    } catch {
+      return false;
+    }
+  };
+  const remember = (on: boolean) => {
+    try {
+      if (on) localStorage.setItem(PREFERENCE, 'yes');
+      else localStorage.removeItem(PREFERENCE);
+    } catch {
+      // Storage refused (a private window, blocked site data): the button simply asks again.
+    }
+  };
+
+  for (const section of document.querySelectorAll<HTMLElement>('section.comments')) {
+    const gate = section.querySelector<HTMLElement>('.gate')!;
+    const button = section.querySelector<HTMLButtonElement>('button.show-comments')!;
+    const body = section.querySelector<HTMLElement>('.comments-body')!;
+    const stop = section.querySelector<HTMLButtonElement>('button.stop-autoload')!;
+    let loaded = false;
+
+    const load = () => {
+      if (loaded) return;
+      loaded = true;
       const s = document.createElement('script');
       s.src = 'https://giscus.app/client.js';
       s.crossOrigin = 'anonymous';
       s.async = true;
       Object.assign(s.dataset, button.dataset);
-      button.after(s);
-      button.remove();
+      gate.remove();
+      body.hidden = false;
+      body.querySelector('.giscus')!.after(s);
+    };
+
+    button.addEventListener('click', () => {
+      remember(true);
+      load();
     });
+    stop.addEventListener('click', () => {
+      remember(false);
+      stop.parentElement!.textContent =
+        'Comments will no longer load by themselves on other pages.';
+    });
+
+    if (remembered()) {
+      gate.hidden = true;
+      if ('IntersectionObserver' in window) {
+        const watch = new IntersectionObserver(
+          (entries) => {
+            if (!entries.some((e) => e.isIntersecting)) return;
+            watch.disconnect();
+            load();
+          },
+          { rootMargin: '400px 0px' },
+        );
+        watch.observe(section);
+      } else {
+        load();
+      }
+    }
+
     // The count comes from this site, so a reader sees there is a conversation before anything
-    // loads from GitHub. Without it (a local preview, or GitHub unavailable) the label stays.
+    // loads from GitHub. Without it (a local preview, or GitHub unavailable) the labels stay.
     fetch(`/comments/count?page=${encodeURIComponent(location.pathname)}`)
       .then((res) => (res.ok ? res.json() : null))
       .then((out) => {
@@ -80,7 +150,8 @@ import config from '../../worker/comments.json';
         button.textContent =
           count === 0
             ? 'Be the first to comment'
-            : `Show ${count} comment${count === 1 ? '' : 's'}`;
+            : `Load ${count} comment${count === 1 ? '' : 's'}`;
+        if (count > 0) section.querySelector('.count')!.textContent = ` (${count})`;
       })
       .catch(() => {});
   }
@@ -131,9 +202,6 @@ import config from '../../worker/comments.json';
   .comments {
     margin-block: 2rem 1rem;
   }
-  .anonymous {
-    margin-top: 1rem;
-  }
   .anonymous summary {
     cursor: pointer;
     color: var(--sl-color-text-accent);
@@ -159,6 +227,29 @@ import config from '../../worker/comments.json';
     border-radius: 0.25rem;
     max-width: 100%;
   }
+  /* The layout rules below set display, which would otherwise override the hidden attribute. */
+  .comments [hidden] {
+    display: none;
+  }
+  .comments-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .gate {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .stop-autoload {
+    font: inherit;
+    padding: 0;
+    color: var(--sl-color-gray-3);
+    background: none;
+    border: 0;
+    text-decoration: underline;
+    cursor: pointer;
+  }
   .show-comments,
   .anonymous-form button {
     align-self: flex-start;
@@ -175,7 +266,6 @@ import config from '../../worker/comments.json';
     font-size: var(--sl-text-sm);
     color: var(--sl-color-gray-3);
   }
-  .comments > .note,
   .note,
   .status {
     margin: 0;
