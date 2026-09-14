@@ -263,6 +263,11 @@ test('the rate limit refuses the third comment from one address within the windo
   assert.equal((await handleComment(other, env, config, fetcher)).status, 201);
 });
 
+test('the form uses a real Turnstile site key, not a test key', () => {
+  // Cloudflare's test site keys start 1x, 2x or 3x; a live key starts 0x.
+  assert.match(config.turnstileSiteKey, /^0x[\w-]{20,}$/);
+});
+
 test('the configured limit is per address, two a minute', () => {
   const text = readFileSync(new URL('./wrangler.jsonc', import.meta.url), 'utf8');
   assert.match(
