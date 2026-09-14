@@ -7,10 +7,12 @@ import config from '../../worker/comments.json';
 
 <section class="comments" aria-labelledby="comments-heading">
   <h2 id="comments-heading">Comments</h2>
-  <div class="giscus"></div>
-  <script
-    is:inline
-    src="https://giscus.app/client.js"
+  <p class="note">
+    Comments are held in this page's discussion on GitHub. Nothing loads from GitHub until you ask.
+  </p>
+  <button
+    type="button"
+    class="show-comments"
     data-repo={config.repo}
     data-repo-id={config.repoId}
     data-category={config.category}
@@ -22,10 +24,10 @@ import config from '../../worker/comments.json';
     data-input-position="top"
     data-theme="preferred_color_scheme"
     data-lang="en"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async
-  ></script>
+  >
+    Show comments
+  </button>
+  <div class="giscus"></div>
   <details class="anonymous">
     <summary>Comment without a GitHub account</summary>
     <form class="anonymous-form" method="post" action="/comments">
@@ -56,6 +58,19 @@ import config from '../../worker/comments.json';
     long: 'That comment is too long.',
     unavailable: 'Comments without an account are not available right now.',
   };
+
+  // giscus loads only when a reader asks for it, so an ordinary page view reaches no third party.
+  for (const button of document.querySelectorAll<HTMLButtonElement>('button.show-comments')) {
+    button.addEventListener('click', () => {
+      const s = document.createElement('script');
+      s.src = 'https://giscus.app/client.js';
+      s.crossOrigin = 'anonymous';
+      s.async = true;
+      Object.assign(s.dataset, button.dataset);
+      button.after(s);
+      button.remove();
+    });
+  }
 
   for (const details of document.querySelectorAll<HTMLDetailsElement>('details.anonymous')) {
     const form = details.querySelector<HTMLFormElement>('form')!;
@@ -131,6 +146,7 @@ import config from '../../worker/comments.json';
     border-radius: 0.25rem;
     max-width: 100%;
   }
+  .show-comments,
   .anonymous-form button {
     align-self: flex-start;
     font: inherit;
@@ -146,6 +162,7 @@ import config from '../../worker/comments.json';
     font-size: var(--sl-text-sm);
     color: var(--sl-color-gray-3);
   }
+  .comments > .note,
   .note,
   .status {
     margin: 0;
