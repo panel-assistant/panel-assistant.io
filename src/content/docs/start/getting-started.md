@@ -1,33 +1,33 @@
 ---
 title: Getting started
-description: The four steps from a bare Android wall panel to one showing your Home Assistant dashboard, all from Home Assistant.
+description: From a bare Android wall panel to your Home Assistant dashboard in minutes, with Home Assistant guiding you through every step.
 ---
 
-Getting a panel working takes four steps, and none of them involve a command line. Each has its own page.
+If you have tried to turn a wall panel or kiosk into a Home Assistant display before, you may remember how it went: sideloading apps, hunting for a browser engine that could draw a dashboard, guessing at settings, and never quite knowing whether the next reboot would undo it all. Setting up a panel with Panel Assistant will come as a pleasant shock. You can be done in minutes, and apart from a couple of taps on the panel itself, you can do all of it in Home Assistant without leaving your chair.
 
 ## 1. Install the integration
 
-Everything starts in Home Assistant, not on the panel. Add Panel Assistant through HACS, restart, and you have the installer, the devices and the all-panels page. See [Install the integration](/home-assistant/custom-integration/).
+Add Panel Assistant through HACS and restart Home Assistant. This is the only thing you install by hand. From here on, Home Assistant guides you. See [Install the integration](/home-assistant/custom-integration/).
 
-## 2. Choose a panel
+## 2. Switch on debugging on the panel
 
-Support is per model. Three panel families have full support, three more are confirmed by their owners, and the Shelly Wall Display family is documented. Read [Choose a panel](/install/supported-panels/) before buying hardware, and check the model you already own before going further.
+Open developer options on the panel and turn on wireless debugging, or USB debugging if you would rather plug the panel into your computer. That is what lets Home Assistant do the installing for you. The [hardware pages](/hardware/) show where the switch is on each model, and [Prepare the panel](/install/prepare-a-panel/) has the details.
 
-## 3. Prepare the panel
+## 3. Add the panel
 
-The panel needs developer options turned on so that it will accept an installer, and it needs an up-to-date system WebView, which is the single most common reason a first dashboard looks broken. See [Prepare the panel](/install/prepare-a-panel/).
+In Home Assistant, go to **Settings**, **Devices and services**, **Add integration**, and choose **Panel Assistant**. The wizard asks where the panel is: type its address, or choose the USB option to set up a brand-new panel from your browser.
 
-## 4. Add the panel
+From there the wizard takes care of the messy part. It checks what is already on the panel, offers the current release of the panel app, asks you to tap **Allow** once on the panel's screen, then installs the app, starts it and confirms it is healthy. A panel that already runs the app is adopted, not reinstalled. The panel recognises its own model and loads the matching hardware profile, so its screen, buttons, LEDs and sensors arrive in Home Assistant ready to use. See [Add a panel](/install/installing-ha-paneld/).
 
-In Home Assistant, add the Panel Assistant integration and give it the panel's address, or plug a brand-new panel into your laptop and install over USB from your browser. Approve one prompt on the panel and watch it through. The panel then appears as a device. See [Add a panel](/install/installing-ha-paneld/).
+## 4. Choose your dashboard
 
-Once the panel is running, point it at the dashboard you want on the wall. See [Connect a panel](/home-assistant/connect-a-panel/).
+Home Assistant then offers the panel's own setup wizard. It connects the panel to Home Assistant and lets you pick the dashboard for the wall, and the panel loads only the entities that dashboard shows, which is what keeps it fast. See [Connect a panel](/home-assistant/connect-a-panel/).
 
 ## What you need
 
 - Home Assistant 2026.8.3 or newer, with HACS.
-- A wall panel running Android 8.0 or newer, ideally one from the [supported list](/install/supported-panels/).
-- For the USB route, a Chromium-based browser such as Chrome or Edge on the computer you plug the panel into.
+- A wall panel running Android 8.0 or newer. Most panels work with the generic hardware profile, and [Choose a panel](/install/supported-panels/) lists the models with full hardware support.
+- For the USB option, a Chromium-based browser such as Chrome or Edge.
 
 ## Where the detail lives
 
