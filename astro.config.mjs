@@ -20,15 +20,29 @@ export default defineConfig({
     starlight({
       title: 'Panel Assistant',
       description:
-        'The universal wall panel product for Home Assistant. Fast, dependable Android wall panels that run your existing dashboards, set up and managed from Home Assistant itself.',
+        'Home Assistant, on the wall, done properly. Fast, dependable Android wall panels for your Home Assistant dashboards, installed and managed from Home Assistant itself.',
       logo: {
         src: './src/assets/icon.svg',
         alt: '',
       },
       favicon: '/favicon.svg',
-      social: [{ icon: 'github', label: 'Panel Assistant on GitHub', href: integrationRepo }],
+      social: [
+        {
+          icon: 'discord',
+          label: 'Panel Assistant on Discord',
+          href: 'https://panel-assistant.io/go/discord',
+        },
+        { icon: 'github', label: 'Panel Assistant on GitHub', href: integrationRepo },
+      ],
+      customCss: [
+        '@fontsource-variable/manrope',
+        '@fontsource-variable/source-sans-3',
+        './src/styles/theme.css',
+      ],
       components: {
-        SiteTitle: './src/components/SiteTitle.astro',
+        Header: './src/components/Header.astro',
+        Hero: './src/components/Hero.astro',
+        ThemeSelect: './src/components/ThemeSelect.astro',
         Footer: './src/components/Footer.astro',
       },
       // Panel pages link to their entry in the page editor at /admin/.

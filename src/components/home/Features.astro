@@ -1,0 +1,74 @@
+---
+// The homepage's short feature grid. Each item names one outline icon from the set below.
+interface Props {
+  items: { title: string; icon: keyof typeof icons; text: string }[];
+}
+const { items } = Astro.props;
+
+const icons = {
+  gauge: '<path d="M4 20a10 10 0 0 1 20 0"/><path d="M14 20l6-7"/>',
+  screen: '<rect x="4" y="5" width="20" height="14" rx="2"/><path d="M10 23h8M14 19v4"/>',
+  shield: '<path d="M14 3l9 3v7c0 6-4 10-9 12-5-2-9-6-9-12V6z"/><path d="M10 14l3 3 5-6"/>',
+  chip: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M11 3v5M17 3v5M11 20v5M17 20v5M3 11h5M3 17h5M20 11h5M20 17h5"/>',
+  wave: '<path d="M4 14c3 0 3-6 6-6s3 12 6 12 3-6 6-6"/><circle cx="14" cy="14" r="2"/>',
+  grid: '<rect x="4" y="4" width="8" height="8" rx="1"/><rect x="16" y="4" width="8" height="8" rx="1"/><rect x="4" y="16" width="8" height="8" rx="1"/><rect x="16" y="16" width="8" height="8" rx="1"/>',
+  wall: '<rect x="5" y="6" width="18" height="16" rx="2"/><path d="M2 26h24M14 22v4"/>',
+  search: '<circle cx="12" cy="12" r="7"/><path d="M17 17l7 7"/>',
+};
+---
+
+<div class="features not-content">
+  {items.map((f) => (
+    <div class="feat">
+      <svg viewBox="0 0 28 28" aria-hidden="true" set:html={icons[f.icon]} />
+      <h3>{f.title}</h3>
+      <p>{f.text}</p>
+    </div>
+  ))}
+</div>
+
+<style>
+  .features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--pa-line);
+    border-left: 1px solid var(--pa-line);
+    margin-block: 0 2.75rem;
+  }
+  .feat {
+    padding: 1.5rem 1.35rem 1.6rem;
+    border-right: 1px solid var(--pa-line);
+    border-bottom: 1px solid var(--pa-line);
+  }
+  svg {
+    width: 30px;
+    height: 30px;
+    fill: none;
+    stroke: var(--sl-color-text-accent);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  h3 {
+    font: 700 1.0625rem/1.3 var(--pa-font-display);
+    letter-spacing: -0.01em;
+    color: var(--sl-color-white);
+    margin: 0.75rem 0 0.5rem;
+  }
+  p {
+    margin: 0;
+    font-size: 0.97rem;
+    line-height: 1.55;
+    color: var(--sl-color-gray-3);
+  }
+  @media (max-width: 62rem) {
+    .features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 34rem) {
+    .features {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

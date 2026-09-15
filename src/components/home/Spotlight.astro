@@ -1,0 +1,79 @@
+---
+// The one homepage section given a figure: a feature whose number is the point.
+interface Props {
+  title: string;
+  figure: string;
+  caption: string;
+}
+const { title, figure, caption } = Astro.props;
+---
+
+<section class="spotlight not-content">
+  <div class="head">
+    <h2>{title}</h2>
+    <p class="figure">
+      <strong>{figure}</strong>
+      <span>{caption}</span>
+    </p>
+  </div>
+  <div class="body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .spotlight {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 2.5rem;
+    padding: 2.5rem clamp(1.25rem, 3vw, 2.5rem);
+    margin-block: 0 2.75rem;
+    border-radius: 1.1rem;
+    background: var(--pa-surface);
+    border: 1px solid var(--pa-line);
+  }
+  h2 {
+    font: 800 clamp(1.6rem, 3vw, 2.25rem) / 1.08 var(--pa-font-display);
+    letter-spacing: -0.025em;
+    color: var(--sl-color-white);
+    margin: 0;
+    text-wrap: balance;
+  }
+  .figure {
+    display: grid;
+    gap: 0.35rem;
+    margin: 1.75rem 0 0;
+  }
+  .figure strong {
+    font: 800 clamp(2.6rem, 5vw, 3.5rem) / 1 var(--pa-font-display);
+    letter-spacing: -0.03em;
+    color: var(--sl-color-text-accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .figure span {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+    max-width: 18em;
+  }
+  .body {
+    max-width: 40em;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--sl-color-gray-1);
+  }
+  .body :global(p) {
+    margin: 0;
+  }
+  .body :global(p + p) {
+    margin-top: 1rem;
+  }
+  .body :global(a) {
+    color: var(--sl-color-text-accent);
+  }
+  @media (max-width: 62rem) {
+    .spotlight {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+</style>

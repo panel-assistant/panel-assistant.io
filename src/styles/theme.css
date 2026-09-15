@@ -1,0 +1,121 @@
+/*
+ * Site palette and type. Starlight defaults to the dark palette on :root and switches to the light
+ * one with data-theme="light"; its theme provider picks the visitor's browser preference until they
+ * choose one with the toggle in the header.
+ *
+ * The accent is the blue of the icon's house, and every neutral leans slightly towards it.
+ */
+
+:root {
+  --sl-font: 'Source Sans 3 Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --pa-font-display: 'Manrope Variable', 'Segoe UI', system-ui, sans-serif;
+
+  --sl-color-accent-low: #0e3345;
+  --sl-color-accent: #18bcf2;
+  --sl-color-accent-high: #72d3f7;
+  --sl-color-text-invert: #06202c;
+
+  --sl-color-white: #f2f6f9;
+  --sl-color-gray-1: #dce4ea;
+  --sl-color-gray-2: #bac6d0;
+  --sl-color-gray-3: #93a3b1;
+  --sl-color-gray-4: #647482;
+  --sl-color-gray-5: #2d3c49;
+  --sl-color-gray-6: #1a2631;
+  --sl-color-gray-7: #141f29;
+  --sl-color-black: #0e1620;
+
+  --sl-color-bg-nav: var(--sl-color-black);
+  --sl-color-bg-sidebar: var(--sl-color-black);
+  --sl-color-hairline: #253442;
+  --sl-color-hairline-light: #2d3c49;
+
+  /* Homepage surfaces */
+  --pa-surface: #15202b;
+  --pa-sunk: #1b2733;
+  --pa-line: #253442;
+  --pa-wall: #131d27;
+  --pa-bezel: #37474f;
+  --pa-amber: #f2b85a;
+  --pa-shadow: 0 34px 70px -30px rgb(0 0 0 / 0.85);
+
+  /* The Home Assistant dashboard drawn on the homepage panel, in Home Assistant's own colours */
+  --pa-ha-bg: #111111;
+  --pa-ha-card: #1c1c1c;
+  --pa-ha-text: #e1e1e1;
+  --pa-ha-muted: #9b9b9b;
+  --pa-ha-primary: #03a9f4;
+  --pa-ha-on: #ffc107;
+  --pa-ha-divider: #2c2c2c;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #d3eaf6;
+  --sl-color-accent: #0a84bd;
+  --sl-color-accent-high: #06537b;
+  --sl-color-text-accent: #06689a;
+  --sl-color-text-invert: #ffffff;
+
+  --sl-color-white: #17222c;
+  --sl-color-gray-1: #22303b;
+  --sl-color-gray-2: #34424e;
+  --sl-color-gray-3: #566573;
+  --sl-color-gray-4: #8492a0;
+  --sl-color-gray-5: #c5d0d9;
+  --sl-color-gray-6: #e1e8ed;
+  --sl-color-gray-7: #e9eef2;
+  --sl-color-black: #f2f5f8;
+
+  --sl-color-bg-nav: var(--sl-color-black);
+  --sl-color-bg-sidebar: var(--sl-color-black);
+  --sl-color-bg-accent: var(--sl-color-accent);
+  --sl-color-hairline: #d3dce3;
+  --sl-color-hairline-light: #d3dce3;
+  --sl-color-hairline-shade: #d3dce3;
+
+  --pa-surface: #ffffff;
+  --pa-sunk: #e3e9ee;
+  --pa-line: #d3dce3;
+  --pa-wall: #dde4ea;
+  --pa-amber: #c7821c;
+  --pa-shadow: 0 34px 60px -32px rgb(23 34 44 / 0.45);
+
+  --pa-ha-bg: #fafafa;
+  --pa-ha-card: #ffffff;
+  --pa-ha-text: #212121;
+  --pa-ha-muted: #727272;
+  --pa-ha-on: #ffb300;
+  --pa-ha-divider: #e6e6e6;
+}
+
+/* The homepage is wider than a documentation page. */
+:root[data-has-hero] {
+  --sl-content-width: 72.5rem;
+}
+
+.site-title,
+.sl-markdown-content :is(h1, h2, h3, h4),
+h1#_top {
+  font-family: var(--pa-font-display);
+  letter-spacing: -0.015em;
+}
+
+.site-title {
+  font-weight: 800;
+  color: var(--sl-color-white);
+}
+
+h1#_top {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.pa-legal {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--pa-line);
+  font-size: var(--sl-text-xs);
+  line-height: 1.6;
+  color: var(--sl-color-gray-3);
+  max-width: 62em;
+}

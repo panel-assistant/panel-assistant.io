@@ -1,0 +1,52 @@
+---
+// A homepage section: the heading on the left, its prose on the right.
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<section class="split not-content">
+  <h2>{title}</h2>
+  <div class="body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 2.5rem;
+    padding-block: 2.75rem;
+    border-top: 1px solid var(--pa-line);
+  }
+  h2 {
+    font: 800 clamp(1.4rem, 2.4vw, 1.75rem) / 1.12 var(--pa-font-display);
+    letter-spacing: -0.02em;
+    color: var(--sl-color-white);
+    margin: 0;
+    text-wrap: balance;
+  }
+  .body {
+    max-width: 40em;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--sl-color-gray-1);
+  }
+  .body :global(p) {
+    margin: 0;
+  }
+  .body :global(p + p) {
+    margin-top: 1rem;
+  }
+  .body :global(a) {
+    color: var(--sl-color-text-accent);
+  }
+  @media (max-width: 62rem) {
+    .split {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>

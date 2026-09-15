@@ -1,0 +1,473 @@
+---
+// The homepage hero: the headline, what the product is, the ways in, and a wall panel showing a
+// Home Assistant dashboard drawn in Home Assistant's own colours for the current theme.
+const { data } = Astro.locals.starlightRoute.entry;
+const { title = data.title, tagline, actions = [] } = data.hero || {};
+
+const eyebrow = 'Made for Home Assistant, and nothing else';
+const sub = 'Your wall panels, the way you imagined them before reality hit.';
+const facts = ['Free and open source', 'Home Assistant 2026.8.3+', 'Android 8.0+ panels'];
+
+const bulb =
+  'M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2zM9 20h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z';
+const cards = [
+  { name: 'Kitchen', state: 'On · 80%', tone: 'lit', icon: bulb },
+  {
+    name: 'Front door',
+    state: 'Locked',
+    tone: 'blue',
+    icon: 'M17 9V7a5 5 0 0 0-10 0v2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2zm-8-2a3 3 0 0 1 6 0v2H9z',
+  },
+  { name: 'Hallway', state: 'Off', tone: '', icon: bulb },
+  { name: 'Sofa lamp', state: 'On · 35%', tone: 'lit', icon: 'M4 14h16v4H4zM6 8h12l2 5H4z' },
+];
+---
+
+<div class="hero not-content">
+  <div class="words">
+    <p class="eyebrow">
+      <i aria-hidden="true"></i>
+      {eyebrow}
+    </p>
+    <h1 id="_top" data-page-title set:html={title} />
+    <p class="sub">{sub}</p>
+    {tagline && <p class="lede" set:html={tagline} />}
+    <div class="actions">
+      {actions.map(({ text, link, variant = 'primary' }) => (
+        <a class:list={['action', variant]} href={link}>
+          {text}
+          {variant === 'primary' && (
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          )}
+        </a>
+      ))}
+    </div>
+    <ul class="facts">
+      {facts.map((f) => (
+        <li>{f}</li>
+      ))}
+    </ul>
+  </div>
+
+  <figure class="scene">
+    <div
+      class="panel"
+      role="img"
+      aria-label="A wall panel showing a Home Assistant dashboard with lights, a thermostat, a lock and the weather"
+    >
+      <div class="ha">
+        <div class="ha-bar">
+          <span class="on">Home</span>
+          <span>Lights</span>
+          <span>Climate</span>
+          <span>Security</span>
+          <em>18:42</em>
+        </div>
+        <div class="ha-grid">
+          {cards.slice(0, 1).map((c) => (
+            <div class:list={['card', c.tone]}>
+              <div class="ico">
+                <svg viewBox="0 0 24 24">
+                  <path d={c.icon} />
+                </svg>
+              </div>
+              <div>
+                <b>{c.name}</b>
+                <small>{c.state}</small>
+              </div>
+            </div>
+          ))}
+          <div class="card tall">
+            <div class="dial">
+              <svg viewBox="0 0 100 100">
+                <circle class="track" cx="50" cy="50" r="40" stroke-dasharray="188 64"></circle>
+                <circle class="heat" cx="50" cy="50" r="40" stroke-dasharray="118 134"></circle>
+              </svg>
+              <strong>21.5°</strong>
+            </div>
+            <div>
+              <b>Living room</b>
+              <small>Heating to 21.5 °C</small>
+            </div>
+          </div>
+          {cards.slice(1).map((c) => (
+            <div class:list={['card', c.tone]}>
+              <div class="ico">
+                <svg viewBox="0 0 24 24">
+                  <path d={c.icon} />
+                </svg>
+              </div>
+              <div>
+                <b>{c.name}</b>
+                <small>{c.state}</small>
+              </div>
+            </div>
+          ))}
+          <div class="card wide blue">
+            <div class="ico">
+              <svg viewBox="0 0 24 24">
+                <path d="M7 19a5 5 0 0 1-.6-9.96A6.5 6.5 0 0 1 19 10.5 4.25 4.25 0 0 1 18 19z"></path>
+              </svg>
+            </div>
+            <div>
+              <b>Cloudy · 14 °C</b>
+              <small>Rain from 21:00</small>
+            </div>
+          </div>
+          <div class="card blue">
+            <div class="ico">
+              <svg viewBox="0 0 24 24">
+                <path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm6 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM7 4.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
+              </svg>
+            </div>
+            <div>
+              <b>Washer</b>
+              <small>12 min left</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <figcaption>Your own Home Assistant dashboard on the wall, not a lookalike app.</figcaption>
+  </figure>
+</div>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1.02fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+    padding-block: 2.5rem 2rem;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font: 700 0.75rem/1.2 var(--pa-font-display);
+    color: var(--sl-color-text-accent);
+  }
+  .eyebrow i {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--sl-color-accent);
+  }
+  h1 {
+    font: 800 clamp(2.5rem, 5.4vw, 4.25rem) / 1 var(--pa-font-display);
+    letter-spacing: -0.035em;
+    color: var(--sl-color-white);
+    margin: 1.1rem 0 0;
+    max-width: 10.5em;
+    text-wrap: balance;
+  }
+  h1 :global(span) {
+    color: var(--sl-color-text-accent);
+  }
+  .sub {
+    font: 600 clamp(1.2rem, 2vw, 1.45rem) / 1.3 var(--pa-font-display);
+    letter-spacing: -0.01em;
+    color: var(--sl-color-gray-3);
+    margin: 1.25rem 0 0;
+    max-width: 24em;
+  }
+  .lede {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--sl-color-gray-1);
+    margin: 1rem 0 1.9rem;
+    max-width: 33em;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font: 700 1rem/1 var(--pa-font-display);
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 0.8rem 1.25rem;
+    border-radius: 0.75rem;
+    border: 1.5px solid transparent;
+  }
+  .action svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .primary {
+    background: var(--sl-color-accent);
+    color: var(--sl-color-text-invert);
+  }
+  .primary:hover {
+    filter: brightness(1.08);
+  }
+  .secondary {
+    background: var(--pa-surface);
+    border-color: var(--pa-line);
+    color: var(--sl-color-white);
+  }
+  .secondary:hover {
+    border-color: var(--sl-color-accent);
+  }
+  .minimal {
+    color: var(--sl-color-text-accent);
+    padding-inline: 0.4rem;
+  }
+  .minimal:hover {
+    text-decoration: underline;
+  }
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.2rem;
+    list-style: none;
+    padding: 0;
+    margin: 1.6rem 0 0;
+    font-family: var(--sl-font-mono);
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+  .facts li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .facts li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--sl-color-accent);
+  }
+
+  .scene {
+    margin: 0;
+    border-radius: 1.4rem;
+    background: linear-gradient(180deg, var(--pa-wall), var(--sl-color-black) 92%);
+    padding: 2.5rem 2rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1rem;
+  }
+  .panel {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    aspect-ratio: 4 / 3;
+    background: var(--pa-bezel);
+    border-radius: 18px;
+    padding: 3.4%;
+    box-shadow: var(--pa-shadow);
+  }
+  .panel::after {
+    content: '';
+    position: absolute;
+    right: 5%;
+    bottom: 1.6%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--pa-amber);
+    box-shadow: 0 0 8px var(--pa-amber);
+  }
+  .ha {
+    height: 100%;
+    border-radius: 9px;
+    background: var(--pa-ha-bg);
+    color: var(--pa-ha-text);
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    font-family: Roboto, var(--sl-font-system);
+  }
+  .ha-bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 4%;
+    height: 36px;
+    border-bottom: 1px solid var(--pa-ha-divider);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--pa-ha-muted);
+  }
+  .ha-bar span {
+    padding: 11px 7px 9px;
+    border-bottom: 2px solid transparent;
+  }
+  .ha-bar span.on {
+    color: var(--pa-ha-primary);
+    border-color: var(--pa-ha-primary);
+  }
+  .ha-bar em {
+    margin-left: auto;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .ha-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    padding: 8px;
+    min-height: 0;
+  }
+  .card {
+    background: var(--pa-ha-card);
+    border-radius: 10px;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var(--pa-ha-divider);
+  }
+  .ico {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--pa-ha-muted) 16%, transparent);
+    color: var(--pa-ha-muted);
+  }
+  .ico svg {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+  }
+  .lit .ico {
+    background: color-mix(in srgb, var(--pa-ha-on) 22%, transparent);
+    color: var(--pa-ha-on);
+  }
+  .blue .ico {
+    background: color-mix(in srgb, var(--pa-ha-primary) 20%, transparent);
+    color: var(--pa-ha-primary);
+  }
+  .card b {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card small {
+    display: block;
+    font-size: 10px;
+    color: var(--pa-ha-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tall {
+    grid-row: span 2;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+  }
+  .wide {
+    grid-column: span 2;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  .dial {
+    position: relative;
+    width: 78%;
+    max-width: 118px;
+    aspect-ratio: 1;
+  }
+  .dial svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform: rotate(135deg);
+  }
+  .dial circle {
+    fill: none;
+    stroke-width: 7;
+    stroke-linecap: round;
+  }
+  .track {
+    stroke: var(--pa-ha-divider);
+  }
+  .heat {
+    stroke: #ff9800;
+  }
+  .dial strong {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  figcaption {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+    text-align: center;
+  }
+
+  @media (max-width: 62rem) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+  @media (max-width: 34rem) {
+    .scene {
+      padding: 1.5rem 1rem 1.2rem;
+    }
+    .ha-bar {
+      height: 30px;
+      font-size: 10px;
+    }
+    .ha-grid {
+      gap: 5px;
+      padding: 5px;
+    }
+    .card {
+      padding: 5px 6px;
+      border-radius: 7px;
+    }
+    .ico {
+      width: 18px;
+      height: 18px;
+    }
+    .ico svg {
+      width: 11px;
+      height: 11px;
+    }
+    .card b {
+      font-size: 10px;
+    }
+    .card small {
+      display: none;
+    }
+    .dial strong {
+      font-size: 14px;
+    }
+  }
+</style>

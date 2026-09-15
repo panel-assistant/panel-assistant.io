@@ -1,0 +1,92 @@
+---
+// A single light/dark toggle in place of Starlight's three-way select. Until a visitor presses it,
+// the site follows their browser's preference; pressing it stores an explicit choice under
+// Starlight's own key, so its theme provider applies that choice before the page paints.
+---
+
+<button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme">
+  <svg class="moon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path>
+  </svg>
+  <svg class="sun" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+  </svg>
+</button>
+
+<script>
+  const key = 'starlight-theme';
+  const root = document.documentElement;
+
+  function stored(): string {
+    try {
+      return localStorage.getItem(key) || '';
+    } catch {
+      return '';
+    }
+  }
+
+  function label() {
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    document.querySelectorAll('[data-theme-toggle]').forEach((b) => {
+      b.setAttribute('aria-label', `Switch to ${next} theme`);
+    });
+  }
+
+  document.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target?.closest('[data-theme-toggle]')) return;
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem(key, next);
+    } catch {
+      // Private browsing: the choice lasts for this page only.
+    }
+    label();
+  });
+
+  matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+    if (stored()) return;
+    root.dataset.theme = event.matches ? 'light' : 'dark';
+    label();
+  });
+
+  label();
+</script>
+
+<style>
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.6rem;
+    border: 1px solid var(--sl-color-hairline-light);
+    background: transparent;
+    color: var(--sl-color-gray-2);
+    cursor: pointer;
+  }
+  .theme-toggle:hover {
+    color: var(--sl-color-white);
+    border-color: var(--sl-color-gray-4);
+  }
+  svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .sun {
+    display: none;
+  }
+  :global(:root[data-theme='light']) .sun {
+    display: block;
+  }
+  :global(:root[data-theme='light']) .moon {
+    display: none;
+  }
+</style>

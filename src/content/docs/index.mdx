@@ -1,6 +1,6 @@
 ---
 title: Panel Assistant
-description: The universal wall panel product for Home Assistant. Fast, dependable Android wall panels that run your existing dashboards, set up and managed from Home Assistant itself.
+description: Home Assistant, on the wall, done properly. Panel Assistant turns Android wall panels into fast, dependable homes for your Home Assistant dashboards, installed and managed from Home Assistant itself.
 template: splash
 # Starlight renders "<page title> | <site title>", which on this page is the same
 # string twice. This sets the tag outright.
@@ -8,154 +8,194 @@ head:
   - tag: title
     content: Panel Assistant
 hero:
-  tagline: Your wall panels, the way you imagined them before reality hit. Fast, dependable and set up from Home Assistant itself, whoever made them.
-  image:
-    alt: ''
-    file: ../../assets/icon.svg
+  title: Home Assistant, on the wall, <span>done properly.</span>
+  tagline: Panel Assistant turns an Android wall panel into a fast, dependable home for your Home Assistant dashboards. You install and manage every panel from Home Assistant itself.
   actions:
+    - text: Get started
+      link: /start/getting-started/
     - text: Open in HACS
       link: https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration
-      icon: external
+      variant: secondary
     - text: Is my panel supported?
       link: /install/supported-panels/
-      icon: right-arrow
-      variant: secondary
-    - text: Star on GitHub
-      link: https://github.com/panel-assistant/ha-integration
-      icon: star
       variant: minimal
 ---
 
-import { Card, CardGrid, LinkButton, LinkCard } from '@astrojs/starlight/components';
+import Features from '../../components/home/Features.astro';
+import Split from '../../components/home/Split.astro';
+import Spotlight from '../../components/home/Spotlight.astro';
+import Tiles from '../../components/home/Tiles.astro';
 
-## Capable hardware, let down by its software
+<Split title="Capable hardware, let down by its software">
 
 Android wall panels are genuinely good hardware wrapped in genuinely bad software. The dashboard lags, taps vanish, the vendor's own app elbows its way onto the screen, and every make demands a different app and a different ritual to set it up. Most people simply endure it, because a panel with no buttons and no dependable reset is an expensive thing to break.
 
-Panel Assistant is the free and open-source cure. It turns any Android wall panel into an appliance that runs your existing Home Assistant dashboards quickly and keeps running them, with one consistent way to set up and manage every panel you own, and nothing to nurse, tune or tweak by hand.
+Panel Assistant is the free and open-source cure. It does one job: run your Home Assistant dashboards on the wall, quickly and without fuss. Every panel you own is set up and managed the same way, from Home Assistant, with nothing to nurse, tune or tweak by hand.
 
-<CardGrid>
-  <Card title="Performance you can feel" icon="rocket">
-    Your existing Lovelace dashboards, rendered on the panel with only the data they actually use.
-    In real homes that cuts the traffic a panel has to chew through by ten to a hundred times, and
-    it is the difference between a panel that lags and one that answers the moment you touch it.
-  </Card>
-  <Card title="Set up from Home Assistant" icon="setting">
-    Add a panel the way you add any other device: from Settings, in your browser, without a command
-    line in sight. The integration inspects the panel, installs what it needs, starts it, and only
-    then adds it as a device.
-  </Card>
-  <Card title="Safe to install" icon="padlock">
-    Every install is checked before anything changes, refuses to overwrite what it should not, and
-    picks up exactly where it left off if it is interrupted. One repeatable process instead of a
-    random walk you could never retrace.
-  </Card>
-  <Card title="Every scrap of hardware, put to work" icon="puzzle">
-    Screen, LEDs, buttons, relays, light and proximity sensors arrive in Home Assistant
-    automatically, described per model and driven directly, with no vendor libraries in the way.
-    Where a panel lacks something, the capability degrades gracefully rather than breaking.
-  </Card>
-  <Card title="Panel and house, working together" icon="random">
-    The panel dims with the room and wakes as you approach, learning its own sensors rather than
-    relying on hand-tuned thresholds. Where it has no such sensor, or a motion sensor across the
-    room knows better, Home Assistant drives the screen instead, so every panel gets the behaviour,
-    not just the ones with the hardware.
-  </Card>
-  <Card title="Every panel, one system" icon="laptop">
-    Different makes and models end up looking and behaving identically from Home Assistant. Add
-    another panel and it joins the same setup, the same management and the same view, rather than a
-    second app with its own rules.
-  </Card>
-  <Card title="Made for the wall" icon="heart">
-    Tablets work too, but a wall panel is meant to be fitted once and forgotten. Panel Assistant is
-    built for dedicated, mains-powered panels that behave like part of the house, not like a device
-    that needs charging and minding.
-  </Card>
-  <Card title="Know before you buy" icon="magnifier">
-    Most panels are bought on a marketplace listing and a hope. The supported-panels list tells you
-    what works, how far, and what to expect from a model that is not there yet, before you spend the
-    money or the evenings.
-  </Card>
-</CardGrid>
+</Split>
 
-## Getting a panel up, whatever shape its firmware is in
+<Features
+  items={[
+    {
+      icon: 'gauge',
+      title: 'Performance you can feel',
+      text: 'Your existing dashboards, fed only the data they actually use, so the panel answers the moment you touch it.',
+    },
+    {
+      icon: 'screen',
+      title: 'Set up from Home Assistant',
+      text: 'Add a panel the way you add any other device: from Settings, in your browser, without a command line in sight.',
+    },
+    {
+      icon: 'shield',
+      title: 'Safe to install',
+      text: 'Checked before anything changes, refuses to overwrite what it should not, and picks up where it left off if interrupted.',
+    },
+    {
+      icon: 'chip',
+      title: "The panel's hardware, in Home Assistant",
+      text: 'Screen, LEDs, buttons, relays, light and proximity sensors appear as entities automatically, driven directly with no vendor libraries in the way.',
+    },
+    {
+      icon: 'wave',
+      title: 'Panel and house, working together',
+      text: 'Dims with the room and wakes as you approach. Where the panel lacks a sensor, Home Assistant drives the screen instead.',
+    },
+    {
+      icon: 'grid',
+      title: 'Every panel, one system',
+      text: 'Different makes and models look and behave identically in Home Assistant. Another panel joins the same setup, not a second app.',
+    },
+    {
+      icon: 'wall',
+      title: 'Made for the wall',
+      text: 'Built for dedicated, mains-powered panels that behave like part of the house, not a tablet that needs charging and minding.',
+    },
+    {
+      icon: 'search',
+      title: 'Know before you buy',
+      text: 'The hardware pages say what works on each model, how far, and what to expect, before you spend the money or the evenings.',
+    },
+  ]}
+/>
+
+<Spotlight
+  title="Only the entities your dashboard uses"
+  figure="10–100×"
+  caption="less Home Assistant state traffic reaching the panel, measured in real homes"
+>
+
+A dashboard on a wall panel normally receives every state change in the house, whether it shows that entity or not. On a large installation a low-powered panel spends its time decoding thousands of entities it never displays, and that is usually why it lags.
+
+Panel Assistant's entity filter learns which entities your dashboard really depends on, by reading its configuration and by watching the dashboard while it runs, then asks Home Assistant to send only those. Home Assistant does the filtering before anything is sent, so the rest never reaches the panel. Anything learning cannot prove, you settle yourself: pin an entity in or keep one out, and those choices are never undone automatically.
+
+It is the difference between a panel that lags and one that answers the moment you touch it. [See how it works and how to turn it on](/manage/performance/).
+
+</Spotlight>
+
+<Split title="Getting a panel up, whatever shape its firmware is in">
 
 Most panels arrive from an overseas marketplace with a thin manual and no promise that anything beyond the vendor's own app will ever run on them. You discover whether it works only after the money and the evenings are spent. Panel Assistant is meant to take that uncertainty away: [check your model](/install/supported-panels/) before you buy, and know that once it arrives there is a tested, repeatable way to get it running.
 
 The hard part of any panel is the first hour. Panel Assistant does that hour for you, from inside Home Assistant. If the panel is already on your network, give the integration its address and it does the rest. If it is still in the box, plug it into your laptop with a USB cable and install straight from your browser, before it ever goes on the wall. Either way you approve one prompt on the panel and watch it through.
 
-<LinkButton href="/start/getting-started/" icon="right-arrow">
-  See how to get started
-</LinkButton>
-<LinkButton href="/start/what-it-is/" variant="secondary">
-  How it works
-</LinkButton>
+</Split>
 
-## Not on the list? Describe it, and it is
+<Split title="Panel not on the list? Describe it, and it is">
 
-Hardware support in Panel Assistant is data, not code. Every model is described by a profile: how to recognise the panel, what hardware it carries, and which routes are safe for driving its screen, LEDs, relays and sensors. Profiles are plain text, edited and validated in your browser on the panel itself, with no development tools and no rebuild of the app. A panel the project has never seen still gets the essentials from the conservative Generic profile, and from there you, or the manufacturer, can teach it the rest and share the result with everyone.
+Hardware support in Panel Assistant is data, not code. Every model is described by a profile: how to recognise the panel, what hardware it carries, and which routes are safe for driving its screen, LEDs, relays and sensors. Profiles are plain text, edited and validated in your browser, with no development tools and no rebuild. A panel the project has never seen still gets the essentials from the conservative Generic profile, and you can teach it the rest and share the result.
 
-Profiles describe what a panel might have; the running panel proves what it actually has. Anything that cannot be verified is shown with a lock and an explanation rather than a broken control, a profile that fails on startup rolls back automatically to the last one that worked, and the screen always finds the safest route it can, from a true backlight-off down to a gentle dim. Nothing is ever faked, and nothing that works is ever left on the table.
+</Split>
 
-## Performance you can measure, not just feel
+<Split title="Performance you can measure">
 
-Cheap panels are slow for reasons, and Panel Assistant shows you the reasons. The panel's own status page measures the real latency of your taps, time to interactive, main-thread blocking, unexpected reloads, state updates per second and the three entities responsible for most of them, alongside CPU, GPU, memory, clock speed, temperature and the busiest processes. A likely-cause row reads all of that and tells you what is holding the panel back and how sure it is. When you want to compare a change, an anonymised snapshot leaves out every identifier so it can be shared safely.
+Cheap panels are slow for reasons, and Panel Assistant shows you the reasons. The panel's status page measures tap latency, time to interactive, main-thread blocking, unexpected reloads, state updates per second and the three entities responsible for most of them, alongside CPU, memory and temperature. A likely-cause row reads all of that and tells you what is holding the panel back.
 
-## Fit it, forget it
+</Split>
 
-A wall panel should behave like a light switch: always there, never needing you. Panel Assistant learns the normal light in the room over the week and dims and brightens with it, records a manual adjustment as a temporary preference rather than fighting you, and learns its proximity sensor's own baseline so a wave wakes the screen and a passing cat does not. Overnight it freezes the dashboard while the screen is off, saving most of the panel's processing, and quietly releases accumulated memory before morning. A dashboard that keeps crashing is contained rather than restarted all night, a Home Assistant outage is shown plainly on the panel and cleared only when Home Assistant is genuinely back, and the last good dashboard reopens by itself after a restart.
+<Split title="Fit it, forget it">
 
-## Vendor software, tamed
+A wall panel should behave like a light switch: always there, never needing you. Panel Assistant learns the normal light in the room and dims with it, learns its proximity sensor so a wave wakes the screen and a passing cat does not, releases memory overnight while the screen is off, and reopens the last good dashboard by itself after a restart.
 
-The software that came with your panel is not going to help, and Panel Assistant is built for that. It takes over the home screen and gives a button-less panel an on-screen way to get around. It knows that most panels ship with a browser engine years too old to draw a modern Home Assistant dashboard, keeps a curated collection of known-good versions, and on supported panels can install one for you. When a vendor's control widget insists on drawing itself on top of your dashboard, Panel Assistant can keep it out of the way, while refusing by design to touch anything the panel needs to stay alive. And because every panel's hardware was worked out by hand rather than taken from the vendor's closed libraries, the whole product can be given away as unrestricted open source, with no account, no cloud and no per-device licence.
+</Split>
 
-## New, and moving fast
+<Split title="Vendor software, tamed">
 
-Panel Assistant is new and evolving quickly. Three panel families have full hardware support today and several more are documented, and the goal is universal support for every Android wall panel worth mounting. That takes real hardware in real houses, which is where you come in.
+Panel Assistant takes over the home screen and gives a button-less panel an on-screen way to get around. It keeps known-good browser engines for panels that ship one years too old, and keeps a vendor's control widget from drawing over your dashboard, while refusing by design to touch anything the panel needs to stay alive.
 
-- **Star the project on GitHub.** It is the simplest way to tell other Home Assistant users this exists. [The integration](https://github.com/panel-assistant/ha-integration) is where it starts.
-- **Report your panel.** If your model is not fully supported yet, say so, with the model name and what worked, in the [issues](https://github.com/panel-assistant/ha-integration/issues). Better still, share the profile you taught it.
-- **Tell people.** A mention in the Home Assistant community, on a forum thread or in a video, reaches the people still nursing a laggy panel.
+</Split>
 
-## Go deeper
+<Tiles
+  boxed
+  title="New, and moving fast"
+  links={[
+    {
+      title: 'Star the project on GitHub',
+      href: 'https://github.com/panel-assistant/ha-integration',
+      text: 'The simplest way to tell other Home Assistant users this exists.',
+    },
+    {
+      title: 'Report your panel',
+      href: 'https://github.com/panel-assistant/ha-integration/issues',
+      text: 'Model name and what worked, or share the profile you taught it.',
+    },
+    {
+      title: 'Chat on Discord',
+      href: 'https://panel-assistant.io/go/discord',
+      text: 'Questions, panels in the wild, and what to build next.',
+    },
+  ]}
+>
 
-<CardGrid>
-  <LinkCard
-    title="Getting started"
-    description="The four steps from a bare panel to your dashboard on the wall, all from Home Assistant."
-    href="/start/getting-started/"
-  />
-  <LinkCard
-    title="How it works"
-    description="What goes on the panel, what stays in Home Assistant, and why the whole thing can be open source."
-    href="/start/what-it-is/"
-  />
-  <LinkCard
-    title="Choose a panel"
-    description="What is fully supported today, what is documented, and what to expect from a model that is not there yet."
-    href="/install/supported-panels/"
-  />
-  <LinkCard
-    title="Install the integration"
-    description="Add Panel Assistant through HACS and what you get once it is in."
-    href="/home-assistant/custom-integration/"
-  />
-  <LinkCard
-    title="Install over USB"
-    description="A brand-new panel, a cable, and your browser, before it ever goes on the wall."
-    href="/install/install-over-usb/"
-  />
-  <LinkCard
-    title="Troubleshooting"
-    description="The things that usually go wrong, and where to look first."
-    href="/manage/troubleshooting/"
-  />
-</CardGrid>
+Panel Assistant is new and evolving quickly. Three panel families have full hardware support today and several more are documented. Getting every Android wall panel worth mounting onto that list takes real hardware in real houses, which is where you come in.
 
-## Free, open, and yours
+</Tiles>
+
+<Tiles
+  title="Go deeper"
+  links={[
+    {
+      title: 'Getting started',
+      href: '/start/getting-started/',
+      text: 'Four steps from a bare panel to your dashboard on the wall.',
+    },
+    {
+      title: 'How it works',
+      href: '/start/what-it-is/',
+      text: 'What goes on the panel, and what stays in Home Assistant.',
+    },
+    {
+      title: 'Hardware',
+      href: '/hardware/',
+      text: 'Every documented panel, its firmware and its quirks.',
+    },
+    {
+      title: 'Install the integration',
+      href: '/home-assistant/custom-integration/',
+      text: 'Add Panel Assistant through HACS.',
+    },
+    {
+      title: 'Install over USB',
+      href: '/install/install-over-usb/',
+      text: 'A new panel, a cable, and your browser.',
+    },
+    {
+      title: 'Troubleshooting',
+      href: '/manage/troubleshooting/',
+      text: 'What usually goes wrong, and where to look first.',
+    },
+  ]}
+/>
+
+<Split title="Free, open, and yours">
 
 Everything here is free and open-source software under permissive licences, with no account, no cloud service and no subscription. It is built by a Home Assistant user who wanted wall panels to work the way the hardware always promised, and it is shared so that yours can too.
 
----
+</Split>
 
-The icon includes the Home Assistant mark, which remains the property of the Home Assistant project and is not covered by this project's licence. Panel Assistant is an independent project and is not affiliated with or endorsed by Home Assistant. All product names, trademarks and registered trademarks are the property of their respective owners.
+<p class="not-content pa-legal">
+  The icon includes the Home Assistant mark, which remains the property of the Home Assistant
+  project and is not covered by this project's licence. Panel Assistant is an independent project
+  and is not affiliated with or endorsed by Home Assistant or the Open Home Foundation. All product
+  names, trademarks and registered trademarks are the property of their respective owners.
+</p>

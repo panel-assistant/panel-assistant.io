@@ -1,0 +1,125 @@
+---
+// One header for the homepage and every documentation page: the site title, the three areas of
+// the site, search, the Discord and GitHub links, the theme toggle and a way into the docs.
+import Search from '@astrojs/starlight/components/Search.astro';
+import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
+import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+import ThemeSelect from './ThemeSelect.astro';
+
+const path = Astro.url.pathname;
+const inArea = (prefix: string) => path.startsWith(prefix);
+const onHome = path === '/';
+
+const areas = [
+  {
+    label: 'Documentation',
+    href: '/start/getting-started/',
+    current: !onHome && !inArea('/hardware/') && !inArea('/reference/'),
+  },
+  { label: 'Hardware', href: '/hardware/', current: inArea('/hardware/') },
+  { label: 'Reference', href: '/reference/', current: inArea('/reference/') },
+];
+---
+
+<div class="header">
+  <div class="title-wrapper sl-flex">
+    <SiteTitle />
+  </div>
+  <nav class="areas" aria-label="Site">
+    {areas.map((a) => (
+      <a href={a.href} aria-current={a.current ? 'true' : undefined}>
+        {a.label}
+      </a>
+    ))}
+  </nav>
+  <div class="sl-flex print:hidden search">
+    <Search />
+  </div>
+  <div class="right-group print:hidden">
+    <div class="sl-flex social-icons">
+      <SocialIcons />
+    </div>
+    <ThemeSelect />
+    <a class="get-started" href="/start/getting-started/">
+      Get started
+    </a>
+  </div>
+</div>
+
+<style>
+  .header {
+    display: flex;
+    align-items: center;
+    gap: var(--sl-nav-gap);
+    height: 100%;
+  }
+  .title-wrapper {
+    overflow: clip;
+    padding: 0.25rem;
+    margin: -0.25rem;
+    min-width: 0;
+    flex: none;
+  }
+  .areas {
+    display: none;
+    gap: 0.25rem;
+  }
+  .areas a {
+    font-family: var(--pa-font-display);
+    font-weight: 600;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+    text-decoration: none;
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.5rem;
+    white-space: nowrap;
+  }
+  .areas a:hover,
+  .areas a[aria-current] {
+    color: var(--sl-color-white);
+    background: var(--pa-sunk);
+  }
+  .search {
+    margin-inline-start: auto;
+  }
+  .right-group {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .social-icons {
+    gap: 1rem;
+    align-items: center;
+    padding-inline: 0.25rem;
+  }
+  .get-started {
+    display: none;
+    font-family: var(--pa-font-display);
+    font-weight: 700;
+    font-size: var(--sl-text-sm);
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--sl-color-text-invert);
+    background: var(--sl-color-accent);
+    padding: 0.5rem 0.9rem;
+    border-radius: 0.6rem;
+  }
+  .get-started:hover {
+    filter: brightness(1.08);
+  }
+  /* The homepage has no mobile menu, so its header keeps the links and the theme toggle. */
+  :global(:root[data-has-hero]) .right-group {
+    display: flex;
+  }
+  @media (min-width: 50rem) {
+    .right-group {
+      display: flex;
+    }
+  }
+  @media (min-width: 64rem) {
+    .areas,
+    .get-started {
+      display: flex;
+    }
+  }
+</style>
