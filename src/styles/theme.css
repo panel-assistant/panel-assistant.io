@@ -153,3 +153,15 @@ h1#_top {
     padding-inline: calc(var(--sl-content-inline-start) + var(--pa-gutter)) var(--pa-gutter);
   }
 }
+
+/* Home Assistant dialog screenshots: the captures keep the dialog's own rounded corners. */
+.pa-shot {
+  margin-inline: 0;
+}
+.pa-shot img {
+  width: 100%;
+  max-width: 36.25rem;
+  height: auto;
+  border-radius: 1.75rem;
+  box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 0.18);
+}
