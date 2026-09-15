@@ -169,10 +169,24 @@ h1#_top {
   :root[data-has-sidebar][data-has-toc] .right-sidebar {
     width: var(--pa-toc-width);
   }
+  :root[data-has-sidebar][data-has-toc] .right-sidebar {
+    border-inline-start: 0;
+  }
   :root[data-has-sidebar][data-has-toc] .main-pane {
     --sl-content-margin-inline: auto;
     width: calc(100% - var(--pa-toc-width));
   }
+}
+
+/* The "On this page" heading is a small uppercase label, not a title. */
+.right-sidebar-panel h2 {
+  font-family: var(--pa-font-display);
+  font-size: var(--sl-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sl-color-gray-2);
+  margin-bottom: 0.75rem;
 }
 
 /* Wizard screenshots: a sideways strip of Home Assistant dialogs, one per step, in order. */
