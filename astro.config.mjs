@@ -77,6 +77,7 @@ export default defineConfig({
               items: [
                 { label: 'Install the integration', slug: 'home-assistant/custom-integration' },
                 { label: 'Connect a panel', slug: 'home-assistant/connect-a-panel' },
+                { label: 'Move a panel from MQTT', slug: 'home-assistant/move-from-mqtt' },
               ],
             },
             {

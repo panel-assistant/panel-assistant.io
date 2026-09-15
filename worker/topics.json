@@ -9,6 +9,7 @@
   "usb-install": "/install/install-over-usb/",
   "install-integration": "/home-assistant/custom-integration/",
   "connect-a-panel": "/home-assistant/connect-a-panel/",
+  "move-from-mqtt": "/home-assistant/move-from-mqtt/",
   "panel-unreachable": "/manage/troubleshooting/#the-installer-cannot-reach-the-panel",
   "troubleshooting": "/manage/troubleshooting/",
   "updates": "/manage/updates-and-recovery/",
