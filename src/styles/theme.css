@@ -119,3 +119,37 @@ h1#_top {
   color: var(--sl-color-gray-3);
   max-width: 62em;
 }
+
+/*
+ * One page width for the header and the body. On pages without a sidebar the header's contents
+ * sit in the same column as the content. On documentation pages the sidebar, content and table of
+ * contents stop widening at --pa-page-max and centre, with the header's contents between the same
+ * edges. Everything derives from 100vw, so a scrollbar shifts header and body together.
+ */
+:root {
+  --pa-page-max: 90rem;
+}
+
+:root:not([data-has-sidebar]) {
+  --sl-nav-pad-x: var(--sl-content-pad-x);
+}
+
+:root:not([data-has-sidebar]) header.header > .header {
+  max-width: var(--sl-content-width);
+  margin-inline: auto;
+}
+
+@media (min-width: 50rem) {
+  :root[data-has-sidebar] {
+    --pa-gutter: max(0px, calc((100vw - var(--pa-page-max)) / 2));
+  }
+  :root[data-has-sidebar] header.header {
+    padding-inline: calc(var(--pa-gutter) + var(--sl-nav-pad-x));
+  }
+  :root[data-has-sidebar] .sidebar-pane {
+    inset-inline-start: var(--pa-gutter);
+  }
+  :root[data-has-sidebar] .main-frame {
+    padding-inline: calc(var(--sl-content-inline-start) + var(--pa-gutter)) var(--pa-gutter);
+  }
+}
