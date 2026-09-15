@@ -127,7 +127,7 @@ h1#_top {
  * edges. Everything derives from 100vw, so a scrollbar shifts header and body together.
  */
 :root {
-  --pa-page-max: 90rem;
+  --pa-page-max: 97.5rem;
 }
 
 :root:not([data-has-sidebar]) {
@@ -158,12 +158,12 @@ h1#_top {
  * The "On this page" column is a fixed width narrower than the sidebar. Starlight gives it half of
  * any spare width and makes its fixed panel as wide as the viewport, which left it wider than the
  * sidebar and running past the page edge. The main pane takes the rest, and content may use up to
- * 50rem of it.
+ * 55rem of it.
  */
 @media (min-width: 72rem) {
   :root[data-has-sidebar][data-has-toc] {
     --pa-toc-width: 15rem;
-    --sl-content-width: 50rem;
+    --sl-content-width: 55rem;
   }
   :root[data-has-sidebar][data-has-toc] .right-sidebar-container,
   :root[data-has-sidebar][data-has-toc] .right-sidebar {
