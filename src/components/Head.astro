@@ -1,0 +1,12 @@
+---
+// Starlight's head, plus preloads for the two Latin variable fonts every page uses, so they start
+// downloading with the stylesheet instead of after it and the first paint is less likely to use the
+// fallback face. The ?url imports resolve to the same hashed files the stylesheet references.
+import Default from '@astrojs/starlight/components/Head.astro';
+import manrope from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
+import sourceSans from '@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2?url';
+---
+
+<Default />
+<link rel="preload" href={manrope} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={sourceSans} as="font" type="font/woff2" crossorigin />
