@@ -154,6 +154,27 @@ h1#_top {
   }
 }
 
+/*
+ * The "On this page" column is a fixed width narrower than the sidebar. Starlight gives it half of
+ * any spare width and makes its fixed panel as wide as the viewport, which left it wider than the
+ * sidebar and running past the page edge. The main pane takes the rest, and content may use up to
+ * 50rem of it.
+ */
+@media (min-width: 72rem) {
+  :root[data-has-sidebar][data-has-toc] {
+    --pa-toc-width: 15rem;
+    --sl-content-width: 50rem;
+  }
+  :root[data-has-sidebar][data-has-toc] .right-sidebar-container,
+  :root[data-has-sidebar][data-has-toc] .right-sidebar {
+    width: var(--pa-toc-width);
+  }
+  :root[data-has-sidebar][data-has-toc] .main-pane {
+    --sl-content-margin-inline: auto;
+    width: calc(100% - var(--pa-toc-width));
+  }
+}
+
 /* Wizard screenshots: a sideways strip of Home Assistant dialogs, one per step, in order. */
 .sl-markdown-content .pa-steps {
   display: flex;
