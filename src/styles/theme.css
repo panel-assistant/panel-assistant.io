@@ -183,9 +183,13 @@ h1#_top {
   border-radius: 0.75rem;
 }
 .sl-markdown-content .pa-steps figcaption {
-  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  min-height: 1.5rem;
+  margin: 0 0 0.75rem;
   font-size: var(--sl-text-sm);
-  color: var(--sl-color-gray-2);
+  font-weight: 600;
+  color: var(--sl-color-white);
 }
 .sl-markdown-content .pa-steps figcaption span {
   display: inline-grid;
