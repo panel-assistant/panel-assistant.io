@@ -17,19 +17,40 @@ Open developer options on the panel and turn on wireless debugging, or USB debug
 
 ## 3. Add the panel
 
-In Home Assistant, go to **Settings**, **Devices and services**, **Add integration**, and choose **Panel Assistant**. The wizard starts by asking how the panel is connected.
+In Home Assistant, go to **Settings**, **Devices and services**, **Add integration**, and choose **Panel Assistant**. This is the whole wizard for a panel on your network:
 
-<figure class="pa-shot">
+<div class="pa-steps" role="region" aria-label="The add panel wizard, step by step" tabindex="0">
+<figure>
 <img class="light:sl-hidden" src="asset:ha-setup-panel-menu-dark.png" width="580" height="314" alt="The Set up a panel step in Home Assistant, offering Add a panel on your network or Install using USB on this computer">
 <img class="dark:sl-hidden" src="asset:ha-setup-panel-menu-light.png" width="580" height="314" alt="The Set up a panel step in Home Assistant, offering Add a panel on your network or Install using USB on this computer">
+<figcaption><span>1</span> Choose how the panel is connected</figcaption>
 </figure>
-
-For a panel on your network, all it needs from you is the address.
-
-<figure class="pa-shot">
-<img class="light:sl-hidden" src="asset:ha-add-panel-address-dark.png" width="580" height="377" alt="The Add a panel step in Home Assistant, with the panel's IP address entered and a Submit button">
-<img class="dark:sl-hidden" src="asset:ha-add-panel-address-light.png" width="580" height="377" alt="The Add a panel step in Home Assistant, with the panel's IP address entered and a Submit button">
+<figure>
+<img class="light:sl-hidden" src="asset:ha-add-panel-address-dark.png" width="580" height="377" alt="The Add a panel step, with the panel's IP address entered">
+<img class="dark:sl-hidden" src="asset:ha-add-panel-address-light.png" width="580" height="377" alt="The Add a panel step, with the panel's IP address entered">
+<figcaption><span>2</span> Give it the panel's address</figcaption>
 </figure>
+<figure>
+<img class="light:sl-hidden" src="asset:ha-choose-version-dark.png" width="580" height="305" alt="The Choose a version step, with the recommended release at the top of the list">
+<img class="dark:sl-hidden" src="asset:ha-choose-version-light.png" width="580" height="305" alt="The Choose a version step, with the recommended release at the top of the list">
+<figcaption><span>3</span> Pick a version</figcaption>
+</figure>
+<figure>
+<img class="light:sl-hidden" src="asset:ha-authorize-panel-dark.png" width="580" height="361" alt="The Authorize Home Assistant on the panel step, asking you to approve the debugging prompt on the panel's screen">
+<img class="dark:sl-hidden" src="asset:ha-authorize-panel-light.png" width="580" height="361" alt="The Authorize Home Assistant on the panel step, asking you to approve the debugging prompt on the panel's screen">
+<figcaption><span>4</span> Tap Allow on the panel</figcaption>
+</figure>
+<figure>
+<img class="light:sl-hidden" src="asset:ha-installing-dark.png" width="580" height="420" alt="The installing step, with a progress spinner while Home Assistant installs and checks the panel app">
+<img class="dark:sl-hidden" src="asset:ha-installing-light.png" width="580" height="420" alt="The installing step, with a progress spinner while Home Assistant installs and checks the panel app">
+<figcaption><span>5</span> Watch it install</figcaption>
+</figure>
+<figure>
+<img class="light:sl-hidden" src="asset:ha-panel-added-dark.png" width="580" height="210" alt="The Success step, confirming the panel was added to Home Assistant">
+<img class="dark:sl-hidden" src="asset:ha-panel-added-light.png" width="580" height="210" alt="The Success step, confirming the panel was added to Home Assistant">
+<figcaption><span>6</span> Done</figcaption>
+</figure>
+</div>
 
 From there the wizard takes care of the messy part. It checks what is already on the panel, offers the current release of the panel app, asks you to tap **Allow** once on the panel's screen, then installs the app, starts it and confirms it is healthy. A panel that already runs the app is adopted, not reinstalled. The panel recognises its own model and loads the matching hardware profile, so its screen, buttons, LEDs and sensors arrive in Home Assistant ready to use. See [Add a panel](/install/installing-ha-paneld/).
 

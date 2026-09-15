@@ -154,14 +154,42 @@ h1#_top {
   }
 }
 
-/* Home Assistant dialog screenshots: the captures keep the dialog's own rounded corners. */
-.pa-shot {
-  margin-inline: 0;
+/* Wizard screenshots: a sideways strip of Home Assistant dialogs, one per step, in order. */
+.sl-markdown-content .pa-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-block: 0.75rem 1.25rem;
 }
-.pa-shot img {
+.sl-markdown-content .pa-steps > figure {
+  flex: 0 0 min(30rem, 88%);
+  margin: 0;
+  scroll-snap-align: start;
+}
+.sl-markdown-content .pa-steps img {
   width: 100%;
-  max-width: 36.25rem;
   height: auto;
-  border-radius: 1.75rem;
-  box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 0.18);
+  margin: 0;
+  vertical-align: top;
+  border-radius: 1.5rem;
+  box-shadow: 0 0.35rem 1.25rem rgb(0 0 0 / 0.16);
+}
+.sl-markdown-content .pa-steps figcaption {
+  margin-top: 0.75rem;
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-2);
+}
+.sl-markdown-content .pa-steps figcaption span {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-inline-end: 0.4rem;
+  border-radius: 50%;
+  background: var(--sl-color-accent);
+  color: var(--sl-color-black);
+  font-weight: 700;
+  font-size: var(--sl-text-xs);
 }
