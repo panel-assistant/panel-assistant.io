@@ -88,11 +88,6 @@
   --pa-ha-divider: #e6e6e6;
 }
 
-/* The homepage is wider than a documentation page. */
-:root[data-has-hero] {
-  --sl-content-width: 72.5rem;
-}
-
 .site-title,
 .sl-markdown-content :is(h1, h2, h3, h4),
 h1#_top {
@@ -121,29 +116,26 @@ h1#_top {
 }
 
 /*
- * One page width for the header and the body. On pages without a sidebar the header's contents
- * sit in the same column as the content. On documentation pages the sidebar, content and table of
- * contents stop widening at --pa-page-max and centre, with the header's contents between the same
- * edges. Everything derives from 100vw, so a scrollbar shifts header and body together.
+ * One page width for every page. The header's contents sit --sl-nav-pad-x inside --pa-page-max,
+ * centred, on the homepage and documentation pages alike, so navigating between them never moves
+ * the header. The homepage's content spans the same inner edges; on documentation pages the
+ * sidebar, content and table of contents fill the same width. Everything derives from 100vw, so a
+ * scrollbar shifts header and body together.
  */
 :root {
   --pa-page-max: 97.5rem;
 }
 
-:root:not([data-has-sidebar]) {
-  --sl-nav-pad-x: var(--sl-content-pad-x);
-}
-
-:root:not([data-has-sidebar]) header.header > .header {
-  max-width: var(--sl-content-width);
-  margin-inline: auto;
+:root[data-has-hero] {
+  --sl-content-pad-x: var(--sl-nav-pad-x);
+  --sl-content-width: calc(var(--pa-page-max) - 2 * var(--sl-nav-pad-x));
 }
 
 @media (min-width: 50rem) {
-  :root[data-has-sidebar] {
+  :root {
     --pa-gutter: max(0px, calc((100vw - var(--pa-page-max)) / 2));
   }
-  :root[data-has-sidebar] header.header {
+  header.header {
     padding-inline: calc(var(--pa-gutter) + var(--sl-nav-pad-x));
   }
   :root[data-has-sidebar] .sidebar-pane {
