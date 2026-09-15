@@ -11,7 +11,7 @@ Everything starts in Home Assistant, not on the panel. Add Panel Assistant throu
 
 ## 2. Choose a panel
 
-Support is per model. Three panel families are fully supported, several more are documented, and a few ship software that cannot be worked with. Read [Choose a panel](/install/supported-panels/) before buying hardware, and check the model you already own before going further.
+Support is per model. Three panel families have full support, three more are confirmed by their owners, and the Shelly Wall Display family is documented. Read [Choose a panel](/install/supported-panels/) before buying hardware, and check the model you already own before going further.
 
 ## 3. Prepare the panel
 

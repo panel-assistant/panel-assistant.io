@@ -1,42 +1,43 @@
 ---
 title: Choose a panel
-description: Which Android wall panels Panel Assistant supports today, how far that support goes, and how to check before you buy.
+description: The Android wall panels Panel Assistant supports today, what makes a panel a good fit, and how to get a model that is not listed supported.
 ---
 
-Most wall panels are bought from overseas marketplaces on little more than a listing and a hope. This page is the check to do before the money leaves your account. Support is per model, three panel families are fully supported, several more are documented, and at least one is blocked by its own software rather than by anything Panel Assistant does.
+Most wall panels are bought from overseas marketplaces on little more than a listing and a hope. This page is the check to do before you buy. Every panel below runs Panel Assistant, and owners have confirmed all of them on real hardware except the Shelly Wall Display family, which is documented and waiting for its first confirmed unit.
 
-:::caution
-The list below is a summary. The [hardware reference](/hardware/) carries the current per-model status, the fact sheets, and the footnotes marking anything that has not been verified on a physical unit. Read it before committing to a device.
+:::tip
+Each model has its own [hardware page](/hardware/) with its fact sheet, what reaches Home Assistant, and how to get it running.
 :::
 
-## Fully supported
+## Full support
 
-These three have the fullest hardware coverage: screen, LEDs, buttons, sensors and relays where the model has them.
+Tested on units in hand, with the fullest hardware coverage: screen, LEDs, buttons, sensors and relays where the model has them.
 
 - **[Sonoff NSPanel Pro](/hardware/panels/sonoff-nspanel-pro/)** (including the 120 and 86 variants)
 - **[Tuya TPA10](/hardware/panels/tuya-tpa10/)**
 - **[Electron WF1589T](/hardware/panels/electron-wf1589t/)**
 
-## Also documented
+## Community-tested
 
-These have fact sheets and varying degrees of support, from community-tested through preliminary and experimental to research only. The hardware reference states where each one currently sits.
+Owners run Panel Assistant on these models. Their profiles were built from owners' reports, and each hardware page shows exactly which of the panel's hardware reaches Home Assistant.
 
-- [ZHICAI SMT1019](/hardware/panels/zhicai-smt1019/)
-- [ZX-SMT156 / RK3566_T](/hardware/panels/zx-smt156/)
-- [Smatek S9E](/hardware/panels/smatek-s9e/)
-- [Shelly Wall Display](/hardware/panels/shelly-wall-display/), and the X1i, X2, X2i and XL models
+- **[ZHICAI SMT1019](/hardware/panels/zhicai-smt1019/)**
+- **[ZX-SMT156 / RK3566_T](/hardware/panels/zx-smt156/)**
+- **[Smatek S9E](/hardware/panels/smatek-s9e/)**
 
-:::note
-The original Shelly Wall Display ships Android 7.0, which is older than the minimum supported.
-:::
+## Documented
 
-## What decides whether a panel works
+Profiles written from firmware research, ready for the first owner to confirm on a unit. If you have one, a report is the quickest way to move it up this page.
 
-- **Android version.** Android 8.0 or newer.
-- **System WebView.** The dashboard needs a current one. Many panels ship with a very old WebView, and updating it is part of [preparing the panel](/install/prepare-a-panel/).
-- **Debugging access.** The installer uses Android's debugging interface, so the panel has to let you turn it on in developer options. Almost all do.
-- **A hardware profile.** The panel's own hardware reaches Home Assistant through a profile for that model. Without one you still get a fast dashboard, but not the LEDs, buttons, relays and sensors as entities.
-- **Root, sometimes.** A few capabilities on some models need root. The hardware pages say which, and what the route is.
+- [Shelly Wall Display](/hardware/panels/shelly-wall-display/) X2, X1i, X2i and XL
+
+## What makes a panel a good fit
+
+- **Android 8.0 or newer.**
+- **Developer options.** The installer uses Android's debugging interface, which almost every panel lets you turn on.
+- **Any system WebView.** Vendors often ship a browser engine years out of date. Panel Assistant checks it, and where the panel allows, installs a known-good version for you. [Preparing the panel](/install/prepare-a-panel/) covers the rest.
+- **A hardware profile, for the best results.** Most Android panels work straight away with the Generic profile, which brings the dashboard and the panel's standard sensors, such as light and proximity, into Home Assistant. A model's own profile adds everything else it has: LEDs, buttons, relays and model-specific sensors.
+- **Root, for a few extras.** A few capabilities on some models need root. Each hardware page says which ones, and the path to get it.
 
 ## Not on the list?
 
