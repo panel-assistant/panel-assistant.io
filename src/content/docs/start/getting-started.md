@@ -54,9 +54,52 @@ In Home Assistant, go to **Settings**, **Devices and services**, **Add integrati
 
 From there the wizard takes care of the messy part. It checks what is already on the panel, offers the current release of the panel app, asks you to tap **Allow** once on the panel's screen, then installs the app, starts it and confirms it is healthy. A panel that already runs the app is adopted, not reinstalled. The panel recognises its own model and loads the matching hardware profile, so its screen, buttons, LEDs and sensors arrive in Home Assistant ready to use. See [Add a panel](/install/installing-ha-paneld/).
 
-## 4. Choose your dashboard
+## 4. Finish on the panel's own wizard
 
-Home Assistant then offers the panel's own setup wizard. It connects the panel to Home Assistant and lets you pick the dashboard for the wall, and the panel loads only the entities that dashboard shows, which is what keeps it fast. See [Connect a panel](/home-assistant/connect-a-panel/).
+Home Assistant then opens the panel's own setup wizard, which asks a few quick questions. It finds Home Assistant and your MQTT broker on the network for you, so most steps are a matter of checking and pressing **Save and continue**. On the way you pick the dashboard for the wall, and the panel loads only the entities that dashboard shows, which is what keeps it fast. See [Connect a panel](/home-assistant/connect-a-panel/).
+
+<div class="pa-steps pa-steps--panel" role="region" aria-label="The panel setup wizard, step by step" tabindex="0">
+<figure>
+<img class="light:sl-hidden" src="asset:panel-setup-name-dark.png" width="524" height="702" alt="The panel's setup wizard asking for a panel ID and friendly name, with a preview of the entity names Home Assistant will use">
+<img class="dark:sl-hidden" src="asset:panel-setup-name-light.png" width="524" height="702" alt="The panel's setup wizard asking for a panel ID and friendly name, with a preview of the entity names Home Assistant will use">
+<figcaption><span>1</span> Name the panel</figcaption>
+</figure>
+<figure>
+<img class="light:sl-hidden" src="asset:panel-setup-ha-url-dark.png" width="524" height="440" alt="The wizard showing the Home Assistant address it found on the network, ready to confirm">
+<img class="dark:sl-hidden" src="asset:panel-setup-ha-url-light.png" width="524" height="440" alt="The wizard showing the Home Assistant address it found on the network, ready to confirm">
+<figcaption><span>2</span> Confirm where Home Assistant is</figcaption>
+</figure>
+<figure>
+<img class="light:sl-hidden" src="asset:panel-setup-sign-in-dark.png" width="524" height="686" alt="The wizard offering to sign in to Home Assistant from this browser, or on the panel itself">
+<img class="dark:sl-hidden" src="asset:panel-setup-sign-in-light.png" width="524" height="686" alt="The wizard offering to sign in to Home Assistant from this browser, or on the panel itself">
+<figcaption><span>3</span> Sign in</figcaption>
+</figure>
+<figure>
+<img class="light:sl-hidden" src="asset:panel-setup-dashboard-dark.png" width="524" height="485" alt="The wizard with a dashboard and a Home Assistant area selected for the panel">
+<img class="dark:sl-hidden" src="asset:panel-setup-dashboard-light.png" width="524" height="485" alt="The wizard with a dashboard and a Home Assistant area selected for the panel">
+<figcaption><span>4</span> Pick the dashboard and area</figcaption>
+</figure>
+<figure>
+<img class="light:sl-hidden" src="asset:panel-setup-mqtt-dark.png" width="524" height="694" alt="The wizard showing the MQTT broker it found on the network, with username and password fields">
+<img class="dark:sl-hidden" src="asset:panel-setup-mqtt-light.png" width="524" height="694" alt="The wizard showing the MQTT broker it found on the network, with username and password fields">
+<figcaption><span>5</span> Confirm the MQTT broker</figcaption>
+</figure>
+<figure>
+<img class="light:sl-hidden" src="asset:panel-setup-filter-dark.png" width="524" height="629" alt="The wizard recommending the entity filter for this panel, with the Home Assistant entity count">
+<img class="dark:sl-hidden" src="asset:panel-setup-filter-light.png" width="524" height="629" alt="The wizard recommending the entity filter for this panel, with the Home Assistant entity count">
+<figcaption><span>6</span> Turn on the entity filter</figcaption>
+</figure>
+<figure>
+<img class="light:sl-hidden" src="asset:panel-setup-almost-there-dark.png" width="524" height="339" alt="The wizard waiting while the panel builds its filtered entity set and loads the dashboard">
+<img class="dark:sl-hidden" src="asset:panel-setup-almost-there-light.png" width="524" height="339" alt="The wizard waiting while the panel builds its filtered entity set and loads the dashboard">
+<figcaption><span>7</span> Almost there</figcaption>
+</figure>
+<figure>
+<img class="light:sl-hidden" src="asset:panel-setup-done-dark.png" width="524" height="526" alt="The wizard confirming the panel is set up, connected and showing the dashboard">
+<img class="dark:sl-hidden" src="asset:panel-setup-done-light.png" width="524" height="526" alt="The wizard confirming the panel is set up, connected and showing the dashboard">
+<figcaption><span>8</span> All set</figcaption>
+</figure>
+</div>
 
 ## What you need
 

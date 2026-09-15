@@ -176,6 +176,12 @@ h1#_top {
   border-radius: 1.5rem;
   box-shadow: 0 0.35rem 1.25rem rgb(0 0 0 / 0.16);
 }
+.sl-markdown-content .pa-steps--panel > figure {
+  flex-basis: min(22rem, 80%);
+}
+.sl-markdown-content .pa-steps--panel img {
+  border-radius: 0.75rem;
+}
 .sl-markdown-content .pa-steps figcaption {
   margin-top: 0.75rem;
   font-size: var(--sl-text-sm);
