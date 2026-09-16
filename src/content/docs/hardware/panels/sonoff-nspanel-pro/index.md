@@ -2,16 +2,10 @@
 title: Sonoff NSPanel Pro
 description: Hardware facts for the original Sonoff NSPanel Pro 86P and 120P, a Rockchip PX30 panel with a built-in Zigbee radio.
 vendor: Sonoff
-model: NSPanel Pro (86P, 120P)
-soc: Rockchip PX30 / RK3326
-android: '8.1'
-screen: 4 in, 480 × 480 (86P); 750 × 1334 (120P)
-support: Full
-root: userdebug, no adb password; su for backlight-off
-webview: Chromium 107 on 3.5.1; sideload LineageOS 138
 panelIndex: true
 sidebar:
-  label: NSPanel Pro
+  label: Overview
+  order: 0
 ---
 
 The original NSPanel Pro line ships as two physically different panels, the **[86P](/hardware/panels/sonoff-nspanel-pro/86p/)** and the **[120P](/hardware/panels/sonoff-nspanel-pro/120p/)**, named for the EU 86 mm and 120 mm wall boxes. Both are built-in **Zigbee 3.0 coordinator** panels with no NFC or IR, and the lowest-power CPU of the fully supported panels. They share almost everything documented on this page (root process, WebView, LED, sensors, Zigbee gateway); each variant's own page carries only its own clean specification and the handful of facts that differ. This page was reverse-engineered primarily on a live **86P** (Android 8.1, rooted, toolbox `su`), with the 120P separately verified live where noted.

@@ -4,7 +4,8 @@ description: Research notes on the Shelly Wall Display family, covering the mode
 vendor: Shelly
 panelIndex: true
 sidebar:
-  label: Wall Display
+  label: Overview
+  order: 0
 ---
 
 :::note
