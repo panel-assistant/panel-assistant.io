@@ -256,6 +256,9 @@ const cards = [
   }
 
   .scene {
+    width: 100%;
+    max-width: calc(520px + 4rem);
+    justify-self: end;
     margin: 0;
     border-radius: 1.4rem;
     background: linear-gradient(180deg, var(--pa-wall), var(--sl-color-black) 92%);
@@ -265,13 +268,19 @@ const cards = [
     align-items: center;
     gap: 1.1rem;
   }
+  /*
+   * The panel is drawn at 520 by 390 and scales as one picture: everything inside it is sized in
+   * --u, a 520th of the panel's width, so the screen, bezel and cards keep their proportions at
+   * every size and content can never stretch the frame.
+   */
   .panel {
     position: relative;
+    container-type: inline-size;
     width: 100%;
     max-width: 520px;
     aspect-ratio: 4 / 3;
     background: var(--pa-bezel);
-    border-radius: 18px;
+    border-radius: 3.46% / 4.62%;
     padding: 3.4%;
     box-shadow: var(--pa-shadow);
   }
@@ -280,15 +289,16 @@ const cards = [
     position: absolute;
     right: 5%;
     bottom: 1.6%;
-    width: 5px;
-    height: 5px;
+    width: calc(5 * 100cqw / 520);
+    height: calc(5 * 100cqw / 520);
     border-radius: 50%;
     background: var(--pa-amber);
     box-shadow: 0 0 8px var(--pa-amber);
   }
   .ha {
+    --u: calc(100cqw / 520);
     height: 100%;
-    border-radius: 9px;
+    border-radius: calc(9 * var(--u));
     background: var(--pa-ha-bg);
     color: var(--pa-ha-text);
     overflow: hidden;
@@ -299,17 +309,17 @@ const cards = [
   .ha-bar {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: calc(4 * var(--u));
     padding: 0 4%;
-    height: 36px;
+    height: calc(36 * var(--u));
     border-bottom: 1px solid var(--pa-ha-divider);
-    font-size: 11px;
+    font-size: calc(11 * var(--u));
     font-weight: 600;
     color: var(--pa-ha-muted);
   }
   .ha-bar span {
-    padding: 11px 7px 9px;
-    border-bottom: 2px solid transparent;
+    padding: calc(11 * var(--u)) calc(7 * var(--u)) calc(9 * var(--u));
+    border-bottom: calc(2 * var(--u)) solid transparent;
   }
   .ha-bar span.on {
     color: var(--pa-ha-primary);
@@ -324,14 +334,14 @@ const cards = [
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-    padding: 8px;
+    gap: calc(8 * var(--u));
+    padding: calc(8 * var(--u));
     min-height: 0;
   }
   .card {
     background: var(--pa-ha-card);
-    border-radius: 10px;
-    padding: 8px 10px;
+    border-radius: calc(10 * var(--u));
+    padding: calc(8 * var(--u)) calc(10 * var(--u));
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -341,8 +351,8 @@ const cards = [
     box-shadow: 0 0 0 1px var(--pa-ha-divider);
   }
   .ico {
-    width: 26px;
-    height: 26px;
+    width: calc(26 * var(--u));
+    height: calc(26 * var(--u));
     border-radius: 50%;
     display: grid;
     place-items: center;
@@ -350,8 +360,8 @@ const cards = [
     color: var(--pa-ha-muted);
   }
   .ico svg {
-    width: 15px;
-    height: 15px;
+    width: calc(15 * var(--u));
+    height: calc(15 * var(--u));
     fill: currentColor;
   }
   .lit .ico {
@@ -364,7 +374,7 @@ const cards = [
   }
   .card b {
     display: block;
-    font-size: 11px;
+    font-size: calc(11 * var(--u));
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -372,7 +382,7 @@ const cards = [
   }
   .card small {
     display: block;
-    font-size: 10px;
+    font-size: calc(10 * var(--u));
     color: var(--pa-ha-muted);
     white-space: nowrap;
     overflow: hidden;
@@ -382,7 +392,7 @@ const cards = [
     grid-row: span 2;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: calc(6 * var(--u));
     text-align: center;
   }
   .wide {
@@ -390,12 +400,12 @@ const cards = [
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap: 10px;
+    gap: calc(10 * var(--u));
   }
   .dial {
     position: relative;
     width: 78%;
-    max-width: 118px;
+    max-width: calc(118 * var(--u));
     aspect-ratio: 1;
   }
   .dial svg {
@@ -420,7 +430,7 @@ const cards = [
     inset: 0;
     display: grid;
     place-items: center;
-    font-size: 19px;
+    font-size: calc(19 * var(--u));
     font-weight: 500;
     letter-spacing: -0.02em;
   }
@@ -435,39 +445,16 @@ const cards = [
       grid-template-columns: 1fr;
       gap: 2rem;
     }
+    .scene {
+      justify-self: center;
+    }
   }
   @media (max-width: 34rem) {
     .scene {
       padding: 1.5rem 1rem 1.2rem;
     }
-    .ha-bar {
-      height: 30px;
-      font-size: 10px;
-    }
-    .ha-grid {
-      gap: 5px;
-      padding: 5px;
-    }
-    .card {
-      padding: 5px 6px;
-      border-radius: 7px;
-    }
-    .ico {
-      width: 18px;
-      height: 18px;
-    }
-    .ico svg {
-      width: 11px;
-      height: 11px;
-    }
-    .card b {
-      font-size: 10px;
-    }
     .card small {
       display: none;
-    }
-    .dial strong {
-      font-size: 14px;
     }
   }
 </style>
