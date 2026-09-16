@@ -9,6 +9,10 @@ screen: 10.1 in
 support: Research
 root: No user-facing adb or root
 webview: 'Not established (WallDisplayV2 track carries no OTA WebView package)'
+photos:
+  - src: 'asset:hardware-shelly-wall-display-xl-front.jpg'
+    alt: Shelly Wall Display XL, front
+photoCredit: 'Photo: Shelly'
 sidebar:
   label: XL
   order: 5

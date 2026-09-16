@@ -9,6 +9,10 @@ screen: 6.9 in, 1440 × 720
 support: Research
 root: No user-facing adb or root
 webview: 'Not established (WallDisplayV2 track carries no OTA WebView package)'
+photos:
+  - src: 'asset:hardware-shelly-wall-display-x2i-front.jpg'
+    alt: Shelly Wall Display X2i, front
+photoCredit: 'Photo: Shelly'
 sidebar:
   label: X2i
   order: 4
