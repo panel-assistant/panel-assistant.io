@@ -4,8 +4,8 @@
 const { data } = Astro.locals.starlightRoute.entry;
 const { title = data.title, tagline, actions = [] } = data.hero || {};
 
-const eyebrow = 'Made for Home Assistant, and nothing else';
-const sub = 'Your wall panels, the way you imagined them before reality hit.';
+const heart =
+  'M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.2 0 3.7 1.2 5.4 3.3 1.7-2.1 3.2-3.3 5.4-3.3 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z';
 const facts = ['Free and open source', 'Home Assistant 2026.8.3+', 'Android 8.0+ panels'];
 
 const bulb =
@@ -26,11 +26,16 @@ const cards = [
 <div class="hero not-content">
   <div class="words">
     <p class="eyebrow">
-      <i aria-hidden="true"></i>
-      {eyebrow}
+      Made with
+      <svg viewBox="0 0 24 24" role="img" aria-label="love">
+        <path d={heart} />
+      </svg>
+      for Home Assistant, and nothing else
     </p>
     <h1 id="_top" data-page-title set:html={title} />
-    <p class="sub">{sub}</p>
+    <p class="sub">
+      Your wall panels, the way you imagined them <em>before reality hit.</em>
+    </p>
     {tagline && <p class="lede" set:html={tagline} />}
     <div class="actions">
       {actions.map(({ text, link, variant = 'primary' }) => (
@@ -145,18 +150,17 @@ const cards = [
   .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4em;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     font: 700 0.75rem/1.2 var(--pa-font-display);
     color: var(--sl-color-text-accent);
   }
-  .eyebrow i {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background: var(--sl-color-accent);
+  .eyebrow svg {
+    width: 1.05em;
+    height: 1.05em;
+    fill: #e5484d;
   }
   h1 {
     font: 800 clamp(2.5rem, 5.4vw, 4.25rem) / 1 var(--pa-font-display);
@@ -175,6 +179,10 @@ const cards = [
     color: var(--sl-color-gray-3);
     margin: 1.25rem 0 0;
     max-width: 24em;
+  }
+  .sub em {
+    font-style: normal;
+    color: var(--pa-amber);
   }
   .lede {
     font-size: 1.15rem;
