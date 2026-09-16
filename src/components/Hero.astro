@@ -18,8 +18,29 @@ const cards = [
     tone: 'blue',
     icon: 'M17 9V7a5 5 0 0 0-10 0v2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2zm-8-2a3 3 0 0 1 6 0v2H9z',
   },
+  {
+    name: 'Garage',
+    state: 'Closed',
+    tone: 'blue',
+    icon: 'M3 10l9-6 9 6v10h-2v-9H5v9H3zm4 3h10v2H7zm0 3h10v2H7z',
+  },
   { name: 'Hallway', state: 'Off', tone: '', icon: bulb },
   { name: 'Sofa lamp', state: 'On · 35%', tone: 'lit', icon: 'M4 14h16v4H4zM6 8h12l2 5H4z' },
+  { name: 'Energy', state: '1.2 kW now', tone: 'lit', icon: 'M13 2 4 14h6l-1 8 9-12h-6z' },
+];
+const lastCards = [
+  {
+    name: 'Washer',
+    state: '12 min left',
+    tone: 'blue',
+    icon: 'M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm6 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM7 4.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z',
+  },
+  {
+    name: 'Blinds',
+    state: '60% open',
+    tone: '',
+    icon: 'M4 3h16v2H4zm1 3h14v3H5zm0 4h14v3H5zm0 4h14v3H5zm6 4h2v3h-2z',
+  },
 ];
 ---
 
@@ -60,7 +81,7 @@ const cards = [
     <div
       class="panel"
       role="img"
-      aria-label="A wall panel showing a Home Assistant dashboard with lights, a thermostat, a lock and the weather"
+      aria-label="A widescreen wall panel showing a Home Assistant dashboard with lights, a thermostat, locks, energy use and the weather"
     >
       <div class="ha">
         <div class="ha-bar">
@@ -121,17 +142,19 @@ const cards = [
               <small>Rain from 21:00</small>
             </div>
           </div>
-          <div class="card blue">
-            <div class="ico">
-              <svg viewBox="0 0 24 24">
-                <path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm6 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM7 4.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
-              </svg>
+          {lastCards.map((c) => (
+            <div class:list={['card', c.tone]}>
+              <div class="ico">
+                <svg viewBox="0 0 24 24">
+                  <path d={c.icon} />
+                </svg>
+              </div>
+              <div>
+                <b>{c.name}</b>
+                <small>{c.state}</small>
+              </div>
             </div>
-            <div>
-              <b>Washer</b>
-              <small>12 min left</small>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
@@ -142,7 +165,7 @@ const cards = [
 <style>
   .hero {
     display: grid;
-    grid-template-columns: 1.02fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
     gap: 3.5rem;
     align-items: center;
     padding-block: 2.5rem 2rem;
@@ -265,7 +288,7 @@ const cards = [
 
   .scene {
     width: 100%;
-    max-width: calc(520px + 4rem);
+    max-width: calc(760px + 4rem);
     justify-self: end;
     margin: 0;
     border-radius: 1.4rem;
@@ -277,19 +300,19 @@ const cards = [
     gap: 1.1rem;
   }
   /*
-   * The panel is drawn at 520 by 390 and scales as one picture: everything inside it is sized in
-   * --u, a 520th of the panel's width, so the screen, bezel and cards keep their proportions at
+   * The panel is a 16:9 screen drawn at 640 by 360 and scales as one picture: everything inside it
+   * is sized in --u, a 640th of the panel's width, so the screen, bezel and cards keep their proportions at
    * every size and content can never stretch the frame.
    */
   .panel {
     position: relative;
     container-type: inline-size;
     width: 100%;
-    max-width: 520px;
-    aspect-ratio: 4 / 3;
+    max-width: 760px;
+    aspect-ratio: 16 / 9;
     background: var(--pa-bezel);
-    border-radius: 3.46% / 4.62%;
-    padding: 3.4%;
+    border-radius: 2.81% / 5%;
+    padding: 2.8%;
     box-shadow: var(--pa-shadow);
   }
   .panel::after {
@@ -297,14 +320,14 @@ const cards = [
     position: absolute;
     right: 5%;
     bottom: 1.6%;
-    width: calc(5 * 100cqw / 520);
-    height: calc(5 * 100cqw / 520);
+    width: calc(5 * 100cqw / 640);
+    height: calc(5 * 100cqw / 640);
     border-radius: 50%;
     background: var(--pa-amber);
     box-shadow: 0 0 8px var(--pa-amber);
   }
   .ha {
-    --u: calc(100cqw / 520);
+    --u: calc(100cqw / 640);
     height: 100%;
     border-radius: calc(9 * var(--u));
     background: var(--pa-ha-bg);
@@ -340,7 +363,7 @@ const cards = [
   }
   .ha-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: repeat(3, minmax(0, 1fr));
     gap: calc(8 * var(--u));
     padding: calc(8 * var(--u));
