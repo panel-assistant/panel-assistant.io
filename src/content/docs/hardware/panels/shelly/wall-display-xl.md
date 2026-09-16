@@ -9,6 +9,7 @@ screen: 10.1 in
 support: Research
 root: No user-facing adb or root
 webview: 'Not established (WallDisplayV2 track carries no OTA WebView package)'
+released: '2025-09 (est.)'
 photos:
   - src: 'asset:hardware-shelly-wall-display-xl-front.jpg'
     alt: Shelly Wall Display XL, front
@@ -32,15 +33,16 @@ The Wall Display XL, firmware codename **Blake**, is a 10.1 in panel on a Rockch
 
 Shelly Wall Display XL, firmware codename Blake.
 
-|         |                                                                                                                    |
-| ------- | ------------------------------------------------------------------------------------------------------------------ |
-| SoC     | Rockchip **RK3566**, Cortex-A55                                                                                    |
-| Display | 10.1 in                                                                                                            |
-| Android | 11                                                                                                                 |
-| ABI     | arm64-v8a                                                                                                          |
-| Sensors | Ambient light documented; a motion sensor (official, exact technology unverified); Android API exposure unverified |
-| Relay   | 1 output                                                                                                           |
-| Root    | No user-facing adb or root; the modern OTA declares no build type                                                  |
+|          |                                                                                                                    |
+| -------- | ------------------------------------------------------------------------------------------------------------------ |
+| SoC      | Rockchip **RK3566**, Cortex-A55                                                                                    |
+| Display  | 10.1 in                                                                                                            |
+| Android  | 11                                                                                                                 |
+| ABI      | arm64-v8a                                                                                                          |
+| Sensors  | Ambient light documented; a motion sensor (official, exact technology unverified); Android API exposure unverified |
+| Relay    | 1 output                                                                                                           |
+| Root     | No user-facing adb or root; the modern OTA declares no build type                                                  |
+| Released | About September 2025 (est.); Shelly launched the XL in Europe around 10 September 2025                             |
 
 :::caution
 The built-in Home Assistant browser on the XL had rendering and layout problems with Home Assistant frontend 2025.12 and a 2026.1 pre-release (tracked in [home-assistant/frontend#28755](https://github.com/home-assistant/frontend/issues/28755) and `#28746`; core compatibility in [home-assistant/core#162665](https://github.com/home-assistant/core/issues/162665)). An app using the system WebView on the same device rendered correctly, which shows the issue was specific to the built-in browser's WebView rather than the hardware.

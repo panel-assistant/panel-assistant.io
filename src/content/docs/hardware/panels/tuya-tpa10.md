@@ -9,6 +9,7 @@ screen: 10.1 in, 1920 × 1200
 support: Full
 root: su present; helper for LED, climate, 5th button
 webview: Chrome 83; root swap to LineageOS 150
+released: '2023-08 (est.)'
 photos:
   - src: 'asset:hardware-tuya-tpa10-front.jpg'
     alt: Tuya TPA10, front, with its side button strip
@@ -29,14 +30,15 @@ Tuya TPA10, TPA10, TPA10-M2 (M2A, M2E, M2U, M2X), TPA10 Control Panel MAX, Contr
 The most-needed facts: adb is **password-protected**, so use the USB diagnostics-app backdoor. The LED and the root-only sensors need the **`hapaneld-helper` root helper daemon**. The front LED's `custom_animation` write can **reboot the panel** (see the warning below). Update the **WebView first**; see [WebView: update this first](#webview-update-this-first).
 :::
 
-|         |                                                                                                                                                                                                    |
-| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SoC     | Rockchip **rk3566**                                                                                                                                                                                |
-| Display | **1920×1200** (16:10 landscape), about 10.1 in, **about 226 physical ppi**, 56 Hz. Android factory base logical density **240 dpi** (commonly overridden for dashboard sizing; 212 is recommended) |
-| Android | 11 (API 30)                                                                                                                                                                                        |
-| ABI     | armeabi-v7a (32-bit userspace)                                                                                                                                                                     |
-| Radios  | Wi-Fi, Bluetooth and BLE, plus a vendor `com.smartos.xinch.platform.ethernet` feature (wired, PoE). **No Zigbee, NFC, IR or cellular.**                                                            |
-| Root    | `su` available; the LED and sysfs sensors are `system:system`, so a **root helper daemon is required** (see below).                                                                                |
+|          |                                                                                                                                                                                                    |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SoC      | Rockchip **rk3566**                                                                                                                                                                                |
+| Display  | **1920×1200** (16:10 landscape), about 10.1 in, **about 226 physical ppi**, 56 Hz. Android factory base logical density **240 dpi** (commonly overridden for dashboard sizing; 212 is recommended) |
+| Android  | 11 (API 30)                                                                                                                                                                                        |
+| ABI      | armeabi-v7a (32-bit userspace)                                                                                                                                                                     |
+| Radios   | Wi-Fi, Bluetooth and BLE, plus a vendor `com.smartos.xinch.platform.ethernet` feature (wired, PoE). **No Zigbee, NFC, IR or cellular.**                                                            |
+| Root     | `su` available; the LED and sysfs sensors are `system:system`, so a **root helper daemon is required** (see below).                                                                                |
+| Released | About August 2023 (est.); FCC ID 2A789-TPA10, listed as "Control Panel MAX," was granted around 22 August 2023                                                                                     |
 
 :::tip
 Changing firmware on a button-less panel? Read [Firmware backup and restore](/hardware/guides/firmware-backup-and-restore/) first. The TPA10 (rk3566, Android 11, 7.28 GB eMMC `mmcblk2`) has a verified software-entered Loader route through `adb reboot loader` and `rkdeveloptool`. The recessed [pin-hole button](#buttons) is not a Linux input, and its factory-reset or Maskrom behaviour has not been safely confirmed, so do not rely on it as a recovery route.

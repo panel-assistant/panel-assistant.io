@@ -9,6 +9,7 @@ screen: 4 in, 480 × 480
 support: Research
 root: No user-facing adb; userdebug base build, unconfirmed
 webview: 'com.google.android.webview 119.0.6045.194 via official ZIP'
+released: '2023-09 (est.)'
 photos:
   - src: 'asset:hardware-shelly-wall-display-front.jpg'
     alt: Shelly Wall Display, original model, with its H&T sensor accessory
@@ -34,16 +35,17 @@ The original Wall Display, firmware codename **Stargate**, is the entry model of
 
 Shelly Wall Display, Wall Display U1 (US), Wall Display D1, SAWD-0A1XX10EU1, firmware codename Stargate, device ID k400_mt6580_32_n.
 
-|         |                                                                                                                                                                                                                                                 |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SoC     | MediaTek **MT6580**                                                                                                                                                                                                                             |
-| Display | **480×480 square**, 4 in                                                                                                                                                                                                                        |
-| Android | 7.0                                                                                                                                                                                                                                             |
-| ABI     | armeabi-v7a                                                                                                                                                                                                                                     |
-| Sensors | Temperature, humidity and ambient light documented; Android API exposure unverified                                                                                                                                                             |
-| Relay   | 1 output                                                                                                                                                                                                                                        |
-| WebView | Not in the standard OTA; Shelly publishes a separate ZIP installing `com.google.android.webview` **119.0.6045.194**                                                                                                                             |
-| Root    | No user-facing adb or root. The OTA declares a `userdebug` base build (`alps/full_k400_mt6580_32_n/...:7.0/.../userdebug/test-keys`), so `adb root` may work **if** an adb connection can be established, though this is unconfirmed on a unit. |
+|          |                                                                                                                                                                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SoC      | MediaTek **MT6580**                                                                                                                                                                                                                             |
+| Display  | **480×480 square**, 4 in                                                                                                                                                                                                                        |
+| Android  | 7.0                                                                                                                                                                                                                                             |
+| ABI      | armeabi-v7a                                                                                                                                                                                                                                     |
+| Sensors  | Temperature, humidity and ambient light documented; Android API exposure unverified                                                                                                                                                             |
+| Relay    | 1 output                                                                                                                                                                                                                                        |
+| WebView  | Not in the standard OTA; Shelly publishes a separate ZIP installing `com.google.android.webview` **119.0.6045.194**                                                                                                                             |
+| Root     | No user-facing adb or root. The OTA declares a `userdebug` base build (`alps/full_k400_mt6580_32_n/...:7.0/.../userdebug/test-keys`), so `adb root` may work **if** an adb connection can be established, though this is unconfirmed on a unit. |
+| Released | About September 2023 (est.); Shelly first showed the Wall Display at IFA Berlin in September 2023                                                                                                                                               |
 
 See the [Wall Display family page](/hardware/panels/shelly/) for the full access-model reasoning, the OTA update endpoints (`WallDisplay` track) and the firmware version history.
 

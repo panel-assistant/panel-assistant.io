@@ -9,6 +9,7 @@ screen: 15.6 in, 1920 × 1080
 support: Community-tested
 root: No app su reported; other routes untested
 webview: Google WebView 149, current
+released: '2025 (est., first listed)'
 photos:
   - src: 'asset:hardware-zx-smt156-front.jpg'
     alt: Generic 15.6 inch SMT156 wall panel, front, as sold by ELC OEM
@@ -31,19 +32,20 @@ This 15.6 in Android wall panel identifies its firmware as `ZX-SMT156` and its e
 
 ZX-SMT156, SMT156, RK3566_T, rk3566_t, generic 15.6 inch SMT156 wall panel (ELC OEM). Firmware `ZX-SMT156-R128V1.2B-15.6-GG-J4.79U-20250926`.
 
-|                     |                                                                                                                                           |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Profile fingerprint | model and device `rk3566_t`; reported firmware `ZX-SMT156-R128V1.2B-15.6-GG-J4.79U-20250926`                                              |
-| SoC                 | Rockchip rk3566, four cores, `rk30board` hardware                                                                                         |
-| Android             | 13 (API 33)                                                                                                                               |
-| ABI                 | arm64-v8a, with 32-bit compatibility                                                                                                      |
-| Display             | 1920×1080 at 160 dpi, 15.6 in                                                                                                             |
-| RAM and storage     | 4 GB / 32 GB                                                                                                                              |
-| Root                | no app-accessible `su` on the reported installation; USB `adb root`, vendor engineering mode and persistent unlock routes were not tested |
-| RGB LED             | app-direct `/dev/ledjni`, confirmed working                                                                                               |
-| Sensors             | binary proximity and ambient light confirmed; GXHT30 climate inputs identified through reporter-supplied `adb shell` evidence             |
-| System WebView      | Google WebView 149.0.7827.164 reported; current enough for the Home Assistant frontend                                                    |
-| Relays              | present in the vendor's own MQTT implementation according to the reporter, but no Android or sysfs control path has been identified       |
+|                     |                                                                                                                                                                       |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Profile fingerprint | model and device `rk3566_t`; reported firmware `ZX-SMT156-R128V1.2B-15.6-GG-J4.79U-20250926`                                                                          |
+| SoC                 | Rockchip rk3566, four cores, `rk30board` hardware                                                                                                                     |
+| Android             | 13 (API 33)                                                                                                                                                           |
+| ABI                 | arm64-v8a, with 32-bit compatibility                                                                                                                                  |
+| Display             | 1920×1080 at 160 dpi, 15.6 in                                                                                                                                         |
+| RAM and storage     | 4 GB / 32 GB                                                                                                                                                          |
+| Root                | no app-accessible `su` on the reported installation; USB `adb root`, vendor engineering mode and persistent unlock routes were not tested                             |
+| RGB LED             | app-direct `/dev/ledjni`, confirmed working                                                                                                                           |
+| Sensors             | binary proximity and ambient light confirmed; GXHT30 climate inputs identified through reporter-supplied `adb shell` evidence                                         |
+| System WebView      | Google WebView 149.0.7827.164 reported; current enough for the Home Assistant frontend                                                                                |
+| Relays              | present in the vendor's own MQTT implementation according to the reporter, but no Android or sysfs control path has been identified                                   |
+| Released            | Not confidently dated; the earliest archived listing found for this OEM product is from January 2025, which confirms it existed by then but not when it first shipped |
 
 ## Panel app support
 

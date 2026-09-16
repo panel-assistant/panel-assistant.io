@@ -9,6 +9,7 @@ screen: 10.1 in, 1920 × 1200
 support: Community-tested
 root: Relays, button LEDs, proximity (unconfirmed su)
 webview: Chromium 83 on 2024-07; 131 on 2025-12
+released: 'not before 2021 (est., RK3566 SoC)'
 photos:
   - src: 'asset:hardware-smatek-s9e-front.jpg'
     alt: Smatek S9E, front and rear, showing the relay and terminal wiring
@@ -42,6 +43,7 @@ The most-needed facts: it shares the TPA10's **RK3566** platform, so app-side fe
 | Inputs          | **4 physical buttons** with individual LEDs                                                                                                                                                                                                                                          |
 | Relays          | **2 on-board mains relays**                                                                                                                                                                                                                                                          |
 | Root            | the vendor app uses `execRootCmd`, so root is available; some units ship with developer mode unlocked. Whether `su` is reachable from a normal app sandbox is **unconfirmed**, and it decides whether the panel app drives the sysfs nodes directly or needs the root helper daemon. |
+| Released        | Not confidently dated; the RK3566 SoC family did not reach the market until around 2021, the best lower bound found for this panel                                                                                                                                                   |
 
 :::danger
 The control surfaces below are **root sysfs** writes, and the relays switch **mains loads**. The support is implemented from the reported paths but is **untested on hardware**, so validate it on a real S9E before relying on it.

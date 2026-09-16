@@ -9,6 +9,7 @@ screen: 10.1 in, 1920 × 1200
 support: Full
 root: userdebug, adb root; rarely needed
 webview: Google Play, updates itself
+released: 'not before 2024 (est., RK3576 SoC)'
 photos:
   - src: 'asset:hardware-electron-wf1589t-black-front.jpg'
     alt: Electron WF1589T, black finish, front, running third-party meeting-room software as a UI example
@@ -38,6 +39,7 @@ The most-needed facts: it is `userdebug`, so **`adb root` just works**. The LED 
 | ABI             | arm64-v8a                                                                                                                                                                                                                    |
 | Navigation      | Android's own Back, Home and Recents bar; the bundled profile enables the panel app's `Native` navbar mode                                                                                                                   |
 | Radios          | Wi-Fi (with Wi-Fi Direct and Passpoint), Bluetooth and BLE. **No Zigbee, IR or cellular.**                                                                                                                                   |
+| Released        | Not confidently dated; Rockchip's rk3576 did not reach the market until roughly 2024, the best lower bound found for this panel                                                                                              |
 
 :::tip
 Changing firmware on a button-less panel? Read [Firmware backup and restore](/hardware/guides/firmware-backup-and-restore/) first. The WF1589T (rk3576, Android 14, 58.24 GB eMMC `mmcblk1`, updater `com.elclcd.otaupdater`) uses `adb reboot loader` and `rkdeveloptool`; its Maskrom test-point has not been located.

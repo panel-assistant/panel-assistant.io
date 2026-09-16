@@ -9,6 +9,7 @@ screen: 6.9 in, 1440 × 720
 support: Research
 root: No user-facing adb or root
 webview: 'Not established (WallDisplay track carries no OTA WebView package for this model)'
+released: '2025-01 (est.)'
 photos:
   - src: 'asset:hardware-shelly-wall-display-x2-front.jpg'
     alt: Shelly Wall Display X2, front
@@ -28,15 +29,16 @@ The Wall Display X2, firmware codename **Pegasus**, is a 6.9 in 1440×720 panel 
 
 Shelly Wall Display X2, SAWD-2A1XX10EU1, firmware codename Pegasus, device ID e500_7731e_32u_o.
 
-|         |                                                                                                |
-| ------- | ---------------------------------------------------------------------------------------------- |
-| SoC     | Spreadtrum/UNISOC **SC7731E**, Cortex-A7                                                       |
-| Display | **1440×720**, 6.9 in                                                                           |
-| Android | 8.1                                                                                            |
-| ABI     | armeabi-v7a                                                                                    |
-| Sensors | Temperature, humidity, ambient light and proximity documented; Android API exposure unverified |
-| Relay   | 1 output                                                                                       |
-| Root    | No user-facing adb or root; no OTA build-type evidence established for this model specifically |
+|          |                                                                                                |
+| -------- | ---------------------------------------------------------------------------------------------- |
+| SoC      | Spreadtrum/UNISOC **SC7731E**, Cortex-A7                                                       |
+| Display  | **1440×720**, 6.9 in                                                                           |
+| Android  | 8.1                                                                                            |
+| ABI      | armeabi-v7a                                                                                    |
+| Sensors  | Temperature, humidity, ambient light and proximity documented; Android API exposure unverified |
+| Relay    | 1 output                                                                                       |
+| Root     | No user-facing adb or root; no OTA build-type evidence established for this model specifically |
+| Released | About January 2025 (est.); announced with Shelly's Gen4 series at CES 2025                     |
 
 See the [Wall Display family page](/hardware/panels/shelly/) for the full access-model reasoning, the OTA update endpoints (`WallDisplay` track) and the firmware version history.
 
