@@ -12,6 +12,8 @@ webview: 'Not established (WallDisplayV2 track carries no OTA WebView package)'
 photos:
   - src: 'asset:hardware-shelly-wall-display-x2i-front.jpg'
     alt: Shelly Wall Display X2i, front
+  - src: 'asset:hardware-shelly-wall-display-x2i-on-wall.jpg'
+    alt: Shelly Wall Display X2i, mounted, showing a different dashboard layout
 photoCredit: 'Photo: Shelly'
 sidebar:
   label: X2i

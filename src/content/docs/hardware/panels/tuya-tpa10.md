@@ -12,6 +12,8 @@ webview: Chrome 83; root swap to LineageOS 150
 photos:
   - src: 'asset:hardware-tuya-tpa10-front.jpg'
     alt: Tuya TPA10, front, with its side button strip
+  - src: 'asset:hardware-tuya-tpa10-front-flat.jpg'
+    alt: Tuya TPA10, flat front view, showing the side button strip and bezel edge
 photoCredit: 'Photo: Tuya'
 sidebar:
   label: TPA10

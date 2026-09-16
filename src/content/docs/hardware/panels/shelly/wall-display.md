@@ -12,6 +12,8 @@ webview: 'com.google.android.webview 119.0.6045.194 via official ZIP'
 photos:
   - src: 'asset:hardware-shelly-wall-display-front.jpg'
     alt: Shelly Wall Display, original model, with its H&T sensor accessory
+  - src: 'asset:hardware-shelly-wall-display-rear-label.jpg'
+    alt: Shelly Wall Display, rear, showing the model label and wall box
 photoCredit: 'Photo: Shelly'
 sidebar:
   label: Original

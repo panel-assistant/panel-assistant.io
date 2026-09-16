@@ -12,6 +12,10 @@ webview: 'Not established (WallDisplayV2 track carries no OTA WebView package)'
 photos:
   - src: 'asset:hardware-shelly-wall-display-x1i-front.jpg'
     alt: Shelly Wall Display X1i, front
+  - src: 'asset:hardware-shelly-wall-display-x1i-silver.jpg'
+    alt: Shelly Wall Display X1i, silver finish, front
+  - src: 'asset:hardware-shelly-wall-display-x1i-rear-label.jpg'
+    alt: Shelly Wall Display X1i, rear, showing the model label SAWD-6A1XX10EU0
 photoCredit: 'Photo: Shelly'
 sidebar:
   label: X1i

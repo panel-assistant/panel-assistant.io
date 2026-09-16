@@ -12,6 +12,8 @@ webview: Google Play, update from the Play Store
 photos:
   - src: 'asset:hardware-zhicai-smt1019-front.jpg'
     alt: ZHICAI SMT1019, front, with its RGB LED bezel lit
+  - src: 'asset:hardware-zhicai-smt1019-front-dims.jpg'
+    alt: ZHICAI SMT1019, flat front view with the front camera and physical dimensions labelled
 photoCredit: 'Photo: ELC'
 sidebar:
   label: SMT1019

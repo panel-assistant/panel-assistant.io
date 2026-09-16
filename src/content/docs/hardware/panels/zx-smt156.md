@@ -12,6 +12,10 @@ webview: Google WebView 149, current
 photos:
   - src: 'asset:hardware-zx-smt156-front.jpg'
     alt: Generic 15.6 inch SMT156 wall panel, front, as sold by ELC OEM
+  - src: 'asset:hardware-zx-smt156-angled.jpg'
+    alt: Generic 15.6 inch SMT156 wall panel, angled, showing the app-direct RGB LED bezel lit green
+  - src: 'asset:hardware-zx-smt156-profile.jpg'
+    alt: Generic 15.6 inch SMT156 wall panel, side profile, showing the mounting depth
 photoCredit: 'Photo: ELC'
 sidebar:
   label: ZX-SMT156
