@@ -45,6 +45,7 @@ export default defineConfig({
         Hero: './src/components/Hero.astro',
         ThemeSelect: './src/components/ThemeSelect.astro',
         Footer: './src/components/Footer.astro',
+        LastUpdated: './src/components/LastUpdated.astro',
       },
       // Panel pages link to their entry in the page editor at /admin/.
       routeMiddleware: './src/editor/route-data.ts',

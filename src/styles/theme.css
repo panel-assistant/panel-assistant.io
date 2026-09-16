@@ -114,6 +114,9 @@ h1#_top {
   font-size: var(--sl-text-xs);
   line-height: 1.6;
   color: var(--sl-color-gray-3);
+}
+.pa-legal p {
+  margin: 0;
   max-width: 62em;
 }
 

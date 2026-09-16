@@ -1,11 +1,13 @@
 ---
 // Starlight's footer, with comments above it on documentation pages and, below it, one line with
-// our thanks to Home Assistant on the left and the build of the site on the right.
+// our thanks to Home Assistant on the left, when the page was last updated in the middle, and the
+// build of the site on the right. Starlight's own last-updated row is emptied (LastUpdated.astro).
 import Default from '@astrojs/starlight/components/Footer.astro';
 import build from '../build-info/build.json';
 import Comments from './Comments.astro';
 
-const isDoc = Astro.locals.starlightRoute.entry.data.template !== 'splash';
+const { entry, lang, lastUpdated } = Astro.locals.starlightRoute;
+const isDoc = entry.data.template !== 'splash';
 
 const label =
   build.number === null
@@ -24,27 +26,51 @@ const label =
     <a href="https://www.home-assistant.io/">Home Assistant</a> and everything the{' '}
     <a href="https://www.openhomefoundation.org/">Open Home Foundation</a> does.
   </p>
+  {lastUpdated && (
+    <p class="updated">
+      {Astro.locals.t('page.lastUpdated')}{' '}
+      <time datetime={lastUpdated.toISOString()}>
+        {lastUpdated.toLocaleDateString(lang, { dateStyle: 'medium', timeZone: 'UTC' })}
+      </time>
+    </p>
+  )}
   <p class="build-info">
     <a href="/build.json">{label}</a>
   </p>
 </div>
 
 <style>
+  /* Starlight's meta row is empty now that the date lives on this line. */
+  :global(footer .meta:empty) {
+    display: none;
+  }
   .site-foot {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.25rem 1.5rem;
-    margin: 0.5rem 0 0;
+    display: grid;
+    gap: 0.25rem;
+    margin: 3rem 0 0;
     font-size: var(--sl-text-xs);
     color: var(--sl-color-gray-3);
   }
   .site-foot p {
     margin: 0;
   }
-  .build-info {
-    margin-inline-start: auto;
+  @media (min-width: 50rem) {
+    .site-foot {
+      grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+      align-items: baseline;
+      gap: 1.5rem;
+    }
+    .thanks {
+      grid-column: 1;
+    }
+    .updated {
+      grid-column: 2;
+      text-align: center;
+    }
+    .build-info {
+      grid-column: 3;
+      text-align: end;
+    }
   }
   .site-foot a {
     color: inherit;
