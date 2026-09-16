@@ -9,15 +9,12 @@ screen: 4 in, 480 × 480 (86P); 750 × 1334 (120P)
 support: Full
 root: userdebug, no adb password; su for backlight-off
 webview: Chromium 107 on 3.5.1; sideload LineageOS 138
-photos:
-  - src: 'asset:hardware-sonoff-nspanel-pro-front.jpg'
-    alt: Sonoff NSPanel Pro 86P, front, wall-mounted
-photoCredit: 'Photo: Sonoff'
+panelIndex: true
 sidebar:
   label: NSPanel Pro
 ---
 
-The original NSPanel Pro is a small **480×480 square** PX30 panel with a built-in **Zigbee 3.0 coordinator**, no NFC or IR, and the lowest-power CPU of the fully supported panels. Its **86P** and **120P** variants use different displays and boards; see [Variants](#variants-86p-and-120p). This page was reverse-engineered primarily on a live **86P** (Android 8.1, rooted, toolbox `su`) and covers those original variants unless it says otherwise.
+The original NSPanel Pro line ships as two physically different panels, the **[86P](/hardware/panels/sonoff-nspanel-pro/86p/)** and the **[120P](/hardware/panels/sonoff-nspanel-pro/120p/)**, named for the EU 86 mm and 120 mm wall boxes. Both are built-in **Zigbee 3.0 coordinator** panels with no NFC or IR, and the lowest-power CPU of the fully supported panels. They share almost everything documented on this page (root process, WebView, LED, sensors, Zigbee gateway); each variant's own page carries only its own clean specification and the handful of facts that differ. This page was reverse-engineered primarily on a live **86P** (Android 8.1, rooted, toolbox `su`), with the 120P separately verified live where noted.
 
 ## Also sold as
 
@@ -49,7 +46,7 @@ Changing firmware on a button-less panel? Read [Firmware backup and restore](/ha
 
 ## Variants: 86P and 120P
 
-The original NSPanel Pro line ships as two physically different panels, named for the EU **86 mm** and **120 mm** wall boxes. The specification table above and most of this page were captured on an **86P**; the **120P** is a different board:
+The specification table above and most of this page were captured on an **86P**; the **120P** is a different board. See the [86P](/hardware/panels/sonoff-nspanel-pro/86p/) and [120P](/hardware/panels/sonoff-nspanel-pro/120p/) pages for each variant's own clean specification table and photo.
 
 |                      | NSPanel Pro **86P**                                                                                                                              | NSPanel Pro **120P**                                                                                                 |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |

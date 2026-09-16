@@ -24,6 +24,9 @@ const PAGE_KEYS = new Set([
   // a text column, and curated by maintainers rather than offered as an editor form field.
   'photos',
   'photoCredit',
+  // A vendor family page (one manufacturer, several models) rather than one panel: excluded from
+  // the comparison table and the editor's discovered fields the same way.
+  'panelIndex',
 ]);
 
 /** Panel fields across all entries: most widely used first, then first appearance. */
