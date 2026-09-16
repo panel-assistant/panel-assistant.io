@@ -47,10 +47,10 @@ const lastCards = [
 <div class="hero not-content">
   <div class="words">
     <p class="eyebrow">
-      Made with
+      Made with{' '}
       <svg viewBox="0 0 24 24" role="img" aria-label="love">
         <path d={heart} />
-      </svg>
+      </svg>{' '}
       for Home Assistant, and nothing else
     </p>
     <h1 id="_top" data-page-title set:html={title} />
@@ -72,11 +72,13 @@ const lastCards = [
         ))}
       </div>
     </div>
-    <ul class="facts">
-      {facts.map((f) => (
-        <li>{f}</li>
-      ))}
-    </ul>
+    <div class="facts-wrap">
+      <ul class="facts">
+        {facts.map((f) => (
+          <li>{f}</li>
+        ))}
+      </ul>
+    </div>
   </div>
 
   <figure class="scene">
@@ -173,9 +175,6 @@ const lastCards = [
     padding-block: 2.5rem 2rem;
   }
   .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4em;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -185,6 +184,8 @@ const lastCards = [
   .eyebrow svg {
     width: 1.05em;
     height: 1.05em;
+    margin-inline: 0.1em;
+    vertical-align: -0.18em;
     fill: #e5484d;
   }
   h1 {
@@ -275,26 +276,32 @@ const lastCards = [
   .minimal:hover {
     text-decoration: underline;
   }
+  /* Like the buttons, the three facts keep one line and shrink with the column when it is too narrow. */
+  .facts-wrap {
+    container-type: inline-size;
+    margin: 1.6rem 0 0;
+  }
   .facts {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 1.2rem;
+    flex-wrap: nowrap;
+    gap: 1.5em;
     list-style: none;
     padding: 0;
-    margin: 1.6rem 0 0;
+    margin: 0;
     font-family: var(--sl-font-mono);
-    font-size: var(--sl-text-xs);
+    font-size: min(var(--sl-text-xs), 100cqw / 34.5);
     color: var(--sl-color-gray-3);
+    white-space: nowrap;
   }
   .facts li {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6em;
   }
   .facts li::before {
     content: '';
-    width: 5px;
-    height: 5px;
+    width: 0.4em;
+    height: 0.4em;
     border-radius: 50%;
     background: var(--sl-color-accent);
   }
@@ -313,9 +320,10 @@ const lastCards = [
     gap: 1.1rem;
   }
   /*
-   * The panel is a 16:9 screen drawn at 640 by 360 and scales as one picture: everything inside it
-   * is sized in --u, a 640th of the panel's width, so the screen, bezel and cards keep their proportions at
-   * every size and content can never stretch the frame.
+   * The panel is a 16:9 frame, 678 units wide, whose screen is placed inside it by absolute insets
+   * rather than padding, so nothing inside can change the frame's height. Everything on the screen is
+   * sized in --u, a 678th of the frame's width, so bezel, screen and cards keep their proportions at
+   * every size in every browser (WebKit let the screen's content stretch a padded frame).
    */
   .panel {
     position: relative;
@@ -325,7 +333,6 @@ const lastCards = [
     aspect-ratio: 16 / 9;
     background: var(--pa-bezel);
     border-radius: 2.81% / 5%;
-    padding: 2.8%;
     box-shadow: var(--pa-shadow);
   }
   .panel::after {
@@ -333,15 +340,17 @@ const lastCards = [
     position: absolute;
     right: 5%;
     bottom: 1.6%;
-    width: calc(5 * 100cqw / 640);
-    height: calc(5 * 100cqw / 640);
+    width: calc(5 * 100cqw / 678);
+    height: calc(5 * 100cqw / 678);
     border-radius: 50%;
     background: var(--pa-amber);
     box-shadow: 0 0 8px var(--pa-amber);
   }
   .ha {
-    --u: calc(100cqw / 640);
-    height: 100%;
+    --u: calc(100cqw / 678);
+    position: absolute;
+    /* An even bezel: 2.8% of the width on every side, which is 4.978% of a 16:9 height. */
+    inset: 4.978% 2.8%;
     border-radius: calc(9 * var(--u));
     background: var(--pa-ha-bg);
     color: var(--pa-ha-text);
