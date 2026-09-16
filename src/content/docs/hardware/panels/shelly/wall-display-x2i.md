@@ -35,16 +35,16 @@ The Wall Display X2i, firmware codename **Jenna**, is a 6.9 in 1440×720 panel o
 
 Shelly Wall Display X2i, firmware codename Jenna.
 
-|          |                                                                                                            |
-| -------- | ---------------------------------------------------------------------------------------------------------- |
-| SoC      | Rockchip **RK3326-S**, Cortex-A35                                                                          |
-| Display  | **1440×720**, 6.9 in                                                                                       |
-| Android  | 11                                                                                                         |
-| ABI      | arm64-v8a                                                                                                  |
-| Sensors  | Ambient light and proximity documented; no temperature or humidity sensor; Android API exposure unverified |
-| Relay    | Interchangeable base: 1 output as standard, optional 2-output base                                         |
-| Root     | No user-facing adb or root; the modern OTA declares no build type                                          |
-| Released | About December 2025 (est.); Shelly quietly released the X2i in Europe around 22 December 2025              |
+|          |                                                                                                                                                                                                                                                          |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SoC      | Rockchip **RK3326-S**, Cortex-A35                                                                                                                                                                                                                        |
+| Display  | **1440×720**, 6.9 in                                                                                                                                                                                                                                     |
+| Android  | 11                                                                                                                                                                                                                                                       |
+| ABI      | arm64-v8a                                                                                                                                                                                                                                                |
+| Sensors  | Ambient light and proximity documented; no temperature or humidity sensor; Android API exposure unverified                                                                                                                                               |
+| Relay    | Interchangeable base: 1 output as standard, optional 2-output base                                                                                                                                                                                       |
+| Root     | No user-facing adb or root; the modern OTA declares no build type                                                                                                                                                                                        |
+| Released | About December 2025 (est.); Shelly quietly released the X2i in Europe around 22 December 2025 ([launch coverage, Notebookcheck, December 2025](https://www.notebookcheck.net/Shelly-quietly-launches-new-Wall-Display-XL-smart-home-hub.1190942.0.html)) |
 
 See the [Wall Display family page](/hardware/panels/shelly/) for the full access-model reasoning, the OTA update endpoints (`WallDisplayV2` track) and the firmware version history.
 

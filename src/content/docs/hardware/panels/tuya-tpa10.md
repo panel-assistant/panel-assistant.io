@@ -38,7 +38,7 @@ The most-needed facts: adb is **password-protected**, so use the USB diagnostics
 | ABI      | armeabi-v7a (32-bit userspace)                                                                                                                                                                     |
 | Radios   | Wi-Fi, Bluetooth and BLE, plus a vendor `com.smartos.xinch.platform.ethernet` feature (wired, PoE). **No Zigbee, NFC, IR or cellular.**                                                            |
 | Root     | `su` available; the LED and sysfs sensors are `system:system`, so a **root helper daemon is required** (see below).                                                                                |
-| Released | About August 2023 (est.); FCC ID 2A789-TPA10, listed as "Control Panel MAX," was granted around 22 August 2023                                                                                     |
+| Released | About August 2023 (est.); FCC ID 2A789-TPA10, listed as "Control Panel MAX," was granted around 22 August 2023 ([FCC ID 2A789-TPA10 grant record](https://fccid.io/2A789-TPA10))                   |
 
 :::tip
 Changing firmware on a button-less panel? Read [Firmware backup and restore](/hardware/guides/firmware-backup-and-restore/) first. The TPA10 (rk3566, Android 11, 7.28 GB eMMC `mmcblk2`) has a verified software-entered Loader route through `adb reboot loader` and `rkdeveloptool`. The recessed [pin-hole button](#buttons) is not a Linux input, and its factory-reset or Maskrom behaviour has not been safely confirmed, so do not rely on it as a recovery route.

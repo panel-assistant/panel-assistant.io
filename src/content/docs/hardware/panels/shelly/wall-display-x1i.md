@@ -33,16 +33,16 @@ The Wall Display X1i, firmware codename **Cally**, is a 4 in 720×720 panel on a
 
 Shelly Wall Display X1i, firmware codename Cally.
 
-|          |                                                                                                            |
-| -------- | ---------------------------------------------------------------------------------------------------------- |
-| SoC      | Rockchip **RK3326-S**, Cortex-A35                                                                          |
-| Display  | **720×720 square**, 4 in                                                                                   |
-| Android  | 11                                                                                                         |
-| ABI      | arm64-v8a                                                                                                  |
-| Sensors  | Ambient light and proximity documented; no temperature or humidity sensor; Android API exposure unverified |
-| Relay    | Interchangeable base: 1 output as standard, optional 2-output base                                         |
-| Root     | No user-facing adb or root; the modern OTA declares no build type                                          |
-| Released | About July 2026 (est.); Shelly announced the X1i on 15 July 2026                                           |
+|          |                                                                                                                                                                                                                                            |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| SoC      | Rockchip **RK3326-S**, Cortex-A35                                                                                                                                                                                                          |
+| Display  | **720×720 square**, 4 in                                                                                                                                                                                                                   |
+| Android  | 11                                                                                                                                                                                                                                         |
+| ABI      | arm64-v8a                                                                                                                                                                                                                                  |
+| Sensors  | Ambient light and proximity documented; no temperature or humidity sensor; Android API exposure unverified                                                                                                                                 |
+| Relay    | Interchangeable base: 1 output as standard, optional 2-output base                                                                                                                                                                         |
+| Root     | No user-facing adb or root; the modern OTA declares no build type                                                                                                                                                                          |
+| Released | About July 2026 (est.); Shelly announced the X1i on 15 July 2026 ([launch coverage, TechBuzz Ireland, July 2026](https://techbuzzireland.com/2026/07/15/shelly-expands-its-smart-home-portfolio-with-wall-display-x1i-and-blu-motion-zb/)) |
 
 See the [Wall Display family page](/hardware/panels/shelly/) for the full access-model reasoning, the OTA update endpoints (`WallDisplayV2` track) and the firmware version history.
 
