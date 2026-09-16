@@ -162,7 +162,9 @@ const lastCards = [
         </div>
       </div>
     </div>
-    <figcaption>Your own Home Assistant dashboard on the wall, not a lookalike app.</figcaption>
+    <figcaption>
+      Your full Home Assistant dashboard on the wall, at speed, without compromise.
+    </figcaption>
   </figure>
 </div>
 
@@ -219,7 +221,7 @@ const lastCards = [
   }
   /*
    * The three buttons always share one row. Their text, padding and gaps are in em, and the row's
-   * font size shrinks with its own width once the buttons' natural 34.5em no longer fits, so at a
+   * font size shrinks with its own width once the buttons' natural 34em (plus room for wider font rendering) no longer fits, so at a
    * narrow column they scale down together instead of wrapping.
    */
   .actions {
@@ -230,13 +232,13 @@ const lastCards = [
     flex-wrap: nowrap;
     align-items: center;
     gap: 0.75em;
-    font-size: min(1rem, 100cqw / 34.5);
+    font-size: min(1rem, 100cqw / 37);
   }
   .action {
     display: inline-flex;
     align-items: center;
     gap: 0.5em;
-    min-width: 0;
+    flex: none;
     font: 700 1em/1 var(--pa-font-display);
     text-decoration: none;
     white-space: nowrap;
@@ -289,7 +291,7 @@ const lastCards = [
     padding: 0;
     margin: 0;
     font-family: var(--sl-font-mono);
-    font-size: min(var(--sl-text-xs), 100cqw / 34.5);
+    font-size: min(var(--sl-text-xs), 100cqw / 37);
     color: var(--sl-color-gray-3);
     white-space: nowrap;
   }
@@ -304,6 +306,14 @@ const lastCards = [
     height: 0.4em;
     border-radius: 50%;
     background: var(--sl-color-accent);
+  }
+
+  /* Browsers without container units cannot shrink the rows, so let them wrap instead of overflow. */
+  @supports not (font-size: 1cqw) {
+    .actions-row,
+    .facts {
+      flex-wrap: wrap;
+    }
   }
 
   .scene {
