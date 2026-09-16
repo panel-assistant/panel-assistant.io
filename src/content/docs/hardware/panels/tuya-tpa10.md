@@ -9,6 +9,10 @@ screen: 10.1 in, 1920 × 1200
 support: Full
 root: su present; helper for LED, climate, 5th button
 webview: Chrome 83; root swap to LineageOS 150
+photos:
+  - src: 'asset:hardware-tuya-tpa10-front.jpg'
+    alt: Tuya TPA10, front, with its side button strip
+photoCredit: 'Photo: Tuya'
 sidebar:
   label: TPA10
 ---
@@ -17,7 +21,7 @@ A roomy **10.1 in 1920×1200** rk3566 panel with a single front RGB LED, a monoc
 
 ## Also sold as
 
-Tuya TPA10, TPA10, rk3566 Tuya panel, SmartOS Xinch (vendor packages `com.smartos.xinch.setting`, `com.smartos.xinch.hardware`, `com.smartos.xinch.platform.ethernet`), `com.tuya.devicetest`.
+Tuya TPA10, TPA10, TPA10-M2 (M2A, M2E, M2U, M2X), TPA10 Control Panel MAX, Control Panel MAX, Panel MAX, rk3566 Tuya panel, SmartOS Xinch (vendor packages `com.smartos.xinch.setting`, `com.smartos.xinch.hardware`, `com.smartos.xinch.platform.ethernet`), `com.tuya.devicetest`.
 
 :::tip
 The most-needed facts: adb is **password-protected**, so use the USB diagnostics-app backdoor. The LED and the root-only sensors need the **`hapaneld-helper` root helper daemon**. The front LED's `custom_animation` write can **reboot the panel** (see the warning below). Update the **WebView first**; see [WebView: update this first](#webview-update-this-first).
