@@ -9,6 +9,10 @@ screen: 15.6 in, 1920 × 1080
 support: Community-tested
 root: No app su reported; other routes untested
 webview: Google WebView 149, current
+photos:
+  - src: 'asset:hardware-zx-smt156-front.jpg'
+    alt: Generic 15.6 inch SMT156 wall panel, front, as sold by ELC OEM
+photoCredit: 'Photo: ELC'
 sidebar:
   label: ZX-SMT156
 ---

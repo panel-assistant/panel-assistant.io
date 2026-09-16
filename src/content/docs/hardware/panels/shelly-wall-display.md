@@ -9,6 +9,10 @@ screen: 4 to 10.1 in by model
 support: Research
 root: No user-facing adb or root
 webview: 'Original: Shelly WebView 119 ZIP; others unknown'
+photos:
+  - src: 'asset:hardware-shelly-wall-display-front.jpg'
+    alt: Shelly Wall Display, original model, with its H&T sensor accessory
+photoCredit: 'Photo: Shelly'
 sidebar:
   label: Shelly Wall Display
 ---

@@ -9,6 +9,10 @@ screen: 10.1 in, 1920 × 1200
 support: Community-tested
 root: Relays, button LEDs, proximity (unconfirmed su)
 webview: Chromium 83 on 2024-07; 131 on 2025-12
+photos:
+  - src: 'asset:hardware-smatek-s9e-front.jpg'
+    alt: Smatek S9E, front and rear, showing the relay and terminal wiring
+photoCredit: 'Photo: Smatek'
 sidebar:
   label: S9E
 ---
