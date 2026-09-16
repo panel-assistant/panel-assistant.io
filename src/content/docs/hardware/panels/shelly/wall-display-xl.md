@@ -12,6 +12,10 @@ webview: 'Not established (WallDisplayV2 track carries no OTA WebView package)'
 photos:
   - src: 'asset:hardware-shelly-wall-display-xl-front.jpg'
     alt: Shelly Wall Display XL, front
+  - src: 'asset:hardware-shelly-wall-display-xl-screen-trim.jpg'
+    alt: Shelly Wall Display XL, straight-on view of the screen
+  - src: 'asset:hardware-shelly-wall-display-xl-profile-trim.jpg'
+    alt: Shelly Wall Display XL, side profile, showing the mounting depth
 photoCredit: 'Photo: Shelly'
 sidebar:
   label: XL
