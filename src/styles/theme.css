@@ -109,7 +109,7 @@ h1#_top {
 
 .pa-legal {
   margin-top: 2rem;
-  padding-top: 1.5rem;
+  padding: 1.5rem var(--pa-inset, 0) 0;
   border-top: 1px solid var(--pa-line);
   font-size: var(--sl-text-xs);
   line-height: 1.6;
@@ -129,6 +129,8 @@ h1#_top {
 }
 
 :root[data-has-hero] {
+  /* Homepage sections, carded or not, start their text this far in from the page edge. */
+  --pa-inset: clamp(1.25rem, 3vw, 2.5rem);
   --sl-content-pad-x: var(--sl-nav-pad-x);
   --sl-content-width: calc(var(--pa-page-max) - 2 * var(--sl-nav-pad-x));
 }

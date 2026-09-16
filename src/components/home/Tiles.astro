@@ -25,14 +25,14 @@ const { title, links, boxed = false } = Astro.props;
 
 <style>
   .tiles {
-    padding-block: 2.75rem;
+    padding: 2.75rem var(--pa-inset);
     border-top: 1px solid var(--pa-line);
   }
   .boxed {
     border: 1px solid var(--pa-line);
     border-radius: 1.1rem;
     background: var(--pa-surface);
-    padding: 2.5rem clamp(1.25rem, 3vw, 2.5rem);
+    padding: 2.5rem calc(var(--pa-inset) - 1px);
     margin-block: 1rem 2.75rem;
   }
   .boxed + :global(*) {
