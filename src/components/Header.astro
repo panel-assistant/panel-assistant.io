@@ -82,6 +82,13 @@ const areas = [
   .search {
     margin-inline-start: auto;
   }
+  /* Wide enough to read as a field you type into, not a button. */
+  @media (min-width: 50rem) {
+    .search {
+      flex: 0 1 18rem;
+      min-width: 10rem;
+    }
+  }
   .right-group {
     display: none;
     align-items: center;

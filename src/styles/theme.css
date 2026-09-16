@@ -98,6 +98,8 @@ h1#_top {
 .site-title {
   font-weight: 800;
   color: var(--sl-color-white);
+  /* The icon carries its own margin, so the wordmark sits close to it. */
+  gap: 0.4rem;
 }
 
 h1#_top {
