@@ -107,9 +107,10 @@ h1#_top {
   letter-spacing: -0.03em;
 }
 
+/* The homepage's trademark note opens the footer: full width, the footer's size and colour. */
 .pa-legal {
   margin-top: 2rem;
-  padding: 1.5rem var(--pa-inset, 0) 0;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--pa-line);
   font-size: var(--sl-text-xs);
   line-height: 1.6;
@@ -117,7 +118,6 @@ h1#_top {
 }
 .pa-legal p {
   margin: 0;
-  max-width: 62em;
 }
 
 /*

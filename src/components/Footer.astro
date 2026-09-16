@@ -54,6 +54,10 @@ const label =
   .site-foot p {
     margin: 0;
   }
+  /* On the homepage the trademark note directly above is part of the footer. */
+  :global(:root[data-has-hero]) .site-foot {
+    margin-top: 1rem;
+  }
   @media (min-width: 50rem) {
     .site-foot {
       grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
