@@ -9,6 +9,12 @@ screen: 10.1 in, 1920 × 1200
 support: Full
 root: userdebug, adb root; rarely needed
 webview: Google Play, updates itself
+photos:
+  - src: 'asset:hardware-electron-wf1589t-black-front.jpg'
+    alt: Electron WF1589T, black finish, front, running third-party meeting-room software as a UI example
+  - src: 'asset:hardware-electron-wf1589t-black-rear.jpg'
+    alt: Electron WF1589T, black finish, rear, showing the mounting bracket and port cover
+photoCredit: 'Photos: maintainer-confirmed match to a black-finish unit; the on-screen app is third-party, not the panel vendor'
 sidebar:
   label: WF1589T
 ---
