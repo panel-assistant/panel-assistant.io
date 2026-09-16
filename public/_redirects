@@ -1,0 +1,3 @@
+# The Shelly Wall Display page split into a vendor family page plus one page per model
+# (2026-09-16). The original model, which the old combined page mostly described, moved here.
+/hardware/panels/shelly-wall-display/ /hardware/panels/shelly/wall-display/ 301

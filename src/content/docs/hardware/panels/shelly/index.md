@@ -2,24 +2,22 @@
 title: Shelly Wall Display
 description: Research notes on the Shelly Wall Display family, covering the model platforms, firmware tracks, WebView, sensors and why there is no user-facing adb or root.
 vendor: Shelly
-model: Wall Display (original, X2, X1i, X2i, XL)
-soc: MT6580, SC7731E, RK3326-S or RK3566 by model
-android: 7.0 to 11 by model
-screen: 4 to 10.1 in by model
-support: Research
-root: No user-facing adb or root
-webview: 'Original: Shelly WebView 119 ZIP; others unknown'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-front.jpg'
-    alt: Shelly Wall Display, original model, with its H&T sensor accessory
-photoCredit: 'Photo: Shelly'
+panelIndex: true
 sidebar:
-  label: Shelly Wall Display
+  label: Wall Display
 ---
 
 :::note
 **Research only: no physical unit has been tested.** Product specifications come from Shelly's current product and knowledge base pages; firmware behaviour comes from OTA analysis, including a device-tree parse of the modern partition image, and the official [Wall Display changelog](https://github.com/ShellyGroup/Wall-Display-Changelog). The two bundled profiles predate the current model-specific specifications and remain **speculative** until they can be split and verified on hardware.
 :::
+
+Shelly sells the Wall Display as five named models on two unrelated hardware platforms: the **original** and **X2** on an armeabi-v7a legacy track, and **X1i**, **X2i** and **XL** on an arm64-v8a modern track. Firmware, OTA mechanism, access model and security are shared within each track, and mostly shared across both, so this page covers them once; each model's own page carries only its clean specification, alias list and photo.
+
+- [Wall Display (original)](/hardware/panels/shelly/wall-display/) — 4 in, 480×480, Android 7
+- [Wall Display X2](/hardware/panels/shelly/wall-display-x2/) — 6.9 in, 1440×720, Android 8.1
+- [Wall Display X1i](/hardware/panels/shelly/wall-display-x1i/) — 4 in, 720×720, Android 11
+- [Wall Display X2i](/hardware/panels/shelly/wall-display-x2i/) — 6.9 in, 1440×720, Android 11
+- [Wall Display XL](/hardware/panels/shelly/wall-display-xl/) — 10.1 in, Android 11
 
 :::caution
 The **original Wall Display ships Android 7.0**, which is below the minimum Android version Panel Assistant supports. The X2 runs Android 8.1, and the X1i, X2i and XL run Android 11.
@@ -31,20 +29,20 @@ Shelly Wall Display, Shelly Wall Display X2, Shelly Wall Display X1i, Shelly Wal
 
 ## Product family
 
-Shelly's current range spans several distinct Android platforms. Firmware codenames are useful when inspecting an OTA, but are not a substitute for the retail model name.
+Firmware codenames are useful when inspecting an OTA, but are not a substitute for the retail model name.
 
-| Firmware codename | Market name                                                                        | Display          | Platform                         | Relay hardware                                                     |
-| ----------------- | ---------------------------------------------------------------------------------- | ---------------- | -------------------------------- | ------------------------------------------------------------------ |
-| Stargate          | Wall Display (original)                                                            | 4 in, 480×480    | MT6580, Android 7                | 1 output                                                           |
-| Pegasus           | [Wall Display X2](https://kb.shelly.cloud/knowledge-base/shelly-wall-display-x2)   | 6.9 in, 1440×720 | SC7731E, Cortex-A7, Android 8.1  | 1 output                                                           |
-| Cally             | [Wall Display X1i](https://kb.shelly.cloud/knowledge-base/shelly-wall-display-x1i) | 4 in, 720×720    | RK3326-S, Cortex-A35, Android 11 | interchangeable base: 1 output as standard, optional 2-output base |
-| Jenna             | [Wall Display X2i](https://kb.shelly.cloud/knowledge-base/shelly-wall-display-x2i) | 6.9 in, 1440×720 | RK3326-S, Cortex-A35, Android 11 | interchangeable base: 1 output as standard, optional 2-output base |
-| Blake             | [Wall Display XL](https://kb.shelly.cloud/knowledge-base/shelly-wall-display-xl)   | 10.1 in          | RK3566, Cortex-A55, Android 11   | 1 output                                                           |
-| Maverick          | Wall Display U1 (US)                                                               | not established  | not established                  | not established                                                    |
-| Dayna             | Wall Display D1                                                                    | not established  | not established                  | not established                                                    |
+| Firmware codename | Market name                                                      | Display          | Platform                         | Relay hardware                                                     |
+| ----------------- | ---------------------------------------------------------------- | ---------------- | -------------------------------- | ------------------------------------------------------------------ |
+| Stargate          | [Wall Display (original)](/hardware/panels/shelly/wall-display/) | 4 in, 480×480    | MT6580, Android 7                | 1 output                                                           |
+| Pegasus           | [Wall Display X2](/hardware/panels/shelly/wall-display-x2/)      | 6.9 in, 1440×720 | SC7731E, Cortex-A7, Android 8.1  | 1 output                                                           |
+| Cally             | [Wall Display X1i](/hardware/panels/shelly/wall-display-x1i/)    | 4 in, 720×720    | RK3326-S, Cortex-A35, Android 11 | interchangeable base: 1 output as standard, optional 2-output base |
+| Jenna             | [Wall Display X2i](/hardware/panels/shelly/wall-display-x2i/)    | 6.9 in, 1440×720 | RK3326-S, Cortex-A35, Android 11 | interchangeable base: 1 output as standard, optional 2-output base |
+| Blake             | [Wall Display XL](/hardware/panels/shelly/wall-display-xl/)      | 10.1 in          | RK3566, Cortex-A55, Android 11   | 1 output                                                           |
+| Maverick          | Wall Display U1 (US)                                             | not established  | not established                  | not established                                                    |
+| Dayna             | Wall Display D1                                                  | not established  | not established                  | not established                                                    |
 
 :::note
-A variant called **Atlantis** is reported by a community project but has not been matched to a current official product page. Treat it as undocumented until it can be identified from a live unit.
+A variant called **Atlantis** is reported by a community project but has not been matched to a current official product page. Treat it as undocumented until it can be identified from a live unit. Maverick and Dayna have no established specification and no page here yet.
 :::
 
 :::caution

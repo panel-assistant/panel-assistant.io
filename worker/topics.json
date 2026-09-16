@@ -33,7 +33,7 @@
     "hardware/nspanel-pro-firmware-archive": "/hardware/firmware/",
     "hardware/readme": "/hardware/",
     "hardware/s9e": "/hardware/panels/smatek-s9e/",
-    "hardware/shelly-wall-display": "/hardware/panels/shelly-wall-display/",
+    "hardware/shelly-wall-display": "/hardware/panels/shelly/",
     "hardware/smt1019": "/hardware/panels/zhicai-smt1019/",
     "hardware/tpa10": "/hardware/panels/tuya-tpa10/",
     "hardware/wf1589t": "/hardware/panels/electron-wf1589t/",

@@ -29,7 +29,7 @@ Owners run Panel Assistant on these models. Their profiles were built from owner
 
 Profiles written from firmware research, ready for the first owner to confirm on a unit. If you have one, a report is the quickest way to move it up this page.
 
-- [Shelly Wall Display](/hardware/panels/shelly-wall-display/) X2, X1i, X2i and XL
+- [Shelly Wall Display](/hardware/panels/shelly/) X2, X1i, X2i and XL
 
 ## What makes a panel a good fit
 

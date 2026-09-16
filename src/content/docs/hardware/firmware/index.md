@@ -24,7 +24,7 @@ An entry exists only because a probe found it. Vendor CDNs cannot be listed, so 
 ## Firmware by vendor
 
 - [Sonoff NSPanel Pro](/hardware/firmware/nspanel-pro/): the CoolKit CDN URL scheme, how to verify a URL, the update path and the hardware-verified flashing procedure.
-- Shelly Wall Display: the OTA tracks, update endpoints and file format are on the [Shelly Wall Display](/hardware/panels/shelly-wall-display/#firmware-ota-mechanism) page. Its release URLs are tracked in the same index.
+- Shelly Wall Display: the OTA tracks, update endpoints and file format are on the [Shelly Wall Display family page](/hardware/panels/shelly/#firmware-ota-mechanism). Its release URLs are tracked in the same index.
 - Smatek S9E: the two analysed stock images and their differences are on the [Smatek S9E](/hardware/panels/smatek-s9e/#firmware-versions) page.
 
 Before changing firmware on any panel, read [Firmware backup and restore](/hardware/guides/firmware-backup-and-restore/).
