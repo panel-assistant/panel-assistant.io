@@ -9,6 +9,10 @@ screen: 4 in, 480 × 480 (86P); 750 × 1334 (120P)
 support: Full
 root: userdebug, no adb password; su for backlight-off
 webview: Chromium 107 on 3.5.1; sideload LineageOS 138
+photos:
+  - src: 'asset:hardware-sonoff-nspanel-pro-front.jpg'
+    alt: Sonoff NSPanel Pro 86P, front, wall-mounted
+photoCredit: 'Photo: Sonoff'
 sidebar:
   label: NSPanel Pro
 ---

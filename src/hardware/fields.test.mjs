@@ -17,6 +17,13 @@ test('a key present on one page only still becomes a field', () => {
   assert.ok(collectFields([{ title: 'A' }, { title: 'B', zigbee: true }]).includes('zigbee'));
 });
 
+test('photos and photoCredit are page chrome, not table columns', () => {
+  const fields = collectFields([
+    { title: 'A', photos: [{ src: 'asset:a/front.jpg', alt: 'A, front' }], photoCredit: 'Sonoff' },
+  ]);
+  assert.deepEqual(fields, []);
+});
+
 test('near-duplicate spellings are reported', () => {
   assert.deepEqual(nearDuplicates(['soc', 'SoC']), [['soc', 'SoC']]);
   assert.deepEqual(nearDuplicates(['android_version', 'androidVersion']), [

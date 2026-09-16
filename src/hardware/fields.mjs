@@ -20,6 +20,10 @@ const PAGE_KEYS = new Set([
   'badge',
   'pagefind',
   'draft',
+  // Vendor product photos: shown as a thumbnail (HardwareTable) or a gallery (PageTitle), never as
+  // a text column, and curated by maintainers rather than offered as an editor form field.
+  'photos',
+  'photoCredit',
 ]);
 
 /** Panel fields across all entries: most widely used first, then first appearance. */

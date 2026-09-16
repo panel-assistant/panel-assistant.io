@@ -1,6 +1,9 @@
 // Rewrites `asset:<key>` image URLs in Markdown to the asset host, so pages never spell out the
-// host and moving the images to another provider is one change to the base URL in the site config.
-// A Sätteri mdast plugin: Astro 7's default Markdown processor.
+// host and moving the images to another provider is one change here. A Sätteri mdast plugin:
+// Astro 7's default Markdown processor. Front-matter fields (such as hardware photos) are not
+// Markdown, so components that read `asset:<key>` values directly import ASSET_BASE and
+// rewriteAssetUrl from here instead of hardcoding the host a second time.
+export const ASSET_BASE = 'https://assets.panel-assistant.io';
 const PREFIX = 'asset:';
 
 export function rewriteAssetUrl(url, base) {

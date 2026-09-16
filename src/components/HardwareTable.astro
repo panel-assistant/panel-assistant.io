@@ -3,6 +3,7 @@
 // hardware/panels/. Columns come from the pages, not from a list here.
 import { getCollection } from 'astro:content';
 import { cellText, collectFields, fieldLabel, nearDuplicates } from '../hardware/fields.mjs';
+import { rewriteAssetUrl, ASSET_BASE } from '../plugins/asset-urls.mjs';
 
 const panels = (await getCollection('docs', (e) => e.id.startsWith('hardware/panels/'))).sort(
   (a, b) => a.data.title.localeCompare(b.data.title),
@@ -15,7 +16,13 @@ for (const [a, b] of nearDuplicates(fields)) {
 }
 const rows = panels.map((p) => {
   const data: Record<string, unknown> = p.data;
-  return { href: `/${p.id}/`, title: p.data.title, cells: fields.map((f) => cellText(data[f])) };
+  const photo = Array.isArray(data.photos) ? data.photos[0] : undefined;
+  return {
+    href: `/${p.id}/`,
+    title: p.data.title,
+    thumb: photo ? { src: rewriteAssetUrl(photo.src, ASSET_BASE), alt: photo.alt ?? '' } : null,
+    cells: fields.map((f) => cellText(data[f])),
+  };
 });
 ---
 
@@ -23,6 +30,9 @@ const rows = panels.map((p) => {
   <table>
     <thead>
       <tr>
+        <th scope="col">
+          <span class="sr-only">Photo</span>
+        </th>
         <th scope="col">Panel</th>
         {fields.map((f) => (
           <th scope="col">{fieldLabel(f)}</th>
@@ -32,6 +42,13 @@ const rows = panels.map((p) => {
     <tbody>
       {rows.map((r) => (
         <tr>
+          <td class="thumb-cell">
+            {r.thumb && (
+              <a href={r.href} tabindex="-1" aria-hidden="true">
+                <img src={r.thumb.src} alt="" loading="lazy" width="48" height="48" />
+              </a>
+            )}
+          </td>
           <th scope="row">
             <a href={r.href}>{r.title}</a>
           </th>
@@ -58,5 +75,29 @@ const rows = panels.map((p) => {
   }
   .hardware-table td {
     min-width: 7rem;
+  }
+  .hardware-table .thumb-cell {
+    min-width: 0;
+    width: 3rem;
+    padding-inline-end: 0;
+  }
+  .hardware-table .thumb-cell img {
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+    border-radius: 0.25rem;
+    background: var(--sl-color-gray-6, var(--sl-color-gray-7));
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 </style>

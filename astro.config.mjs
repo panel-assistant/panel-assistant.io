@@ -3,13 +3,12 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import { satteri } from '@astrojs/markdown-satteri';
-import { assetUrls } from './src/plugins/asset-urls.mjs';
+import { assetUrls, ASSET_BASE } from './src/plugins/asset-urls.mjs';
 
 const integrationRepo = 'https://github.com/panel-assistant/ha-integration';
 
-// Images and other binaries live in one R2 bucket. Pages write `asset:<key>`; this is the only place
-// the host is named, so moving provider is this one line.
-const assetBase = 'https://assets.panel-assistant.io';
+// Images and other binaries live in one R2 bucket. Pages write `asset:<key>`.
+const assetBase = ASSET_BASE;
 
 export default defineConfig({
   site: 'https://panel-assistant.io',
@@ -43,6 +42,7 @@ export default defineConfig({
         Head: './src/components/Head.astro',
         Header: './src/components/Header.astro',
         Hero: './src/components/Hero.astro',
+        PageTitle: './src/components/PageTitle.astro',
         ThemeSelect: './src/components/ThemeSelect.astro',
         Footer: './src/components/Footer.astro',
         LastUpdated: './src/components/LastUpdated.astro',
