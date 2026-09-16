@@ -13,11 +13,11 @@ sidebar:
 
 Shelly sells the Wall Display as five named models on two unrelated hardware platforms: the **original** and **X2** on an armeabi-v7a legacy track, and **X1i**, **X2i** and **XL** on an arm64-v8a modern track. Firmware, OTA mechanism, access model and security are shared within each track, and mostly shared across both, so this page covers them once; each model's own page carries only its clean specification, alias list and photo.
 
-- [Wall Display (original)](/hardware/panels/shelly/wall-display/) — 4 in, 480×480, Android 7
-- [Wall Display X2](/hardware/panels/shelly/wall-display-x2/) — 6.9 in, 1440×720, Android 8.1
-- [Wall Display X1i](/hardware/panels/shelly/wall-display-x1i/) — 4 in, 720×720, Android 11
-- [Wall Display X2i](/hardware/panels/shelly/wall-display-x2i/) — 6.9 in, 1440×720, Android 11
-- [Wall Display XL](/hardware/panels/shelly/wall-display-xl/) — 10.1 in, Android 11
+- [Wall Display (original)](/hardware/panels/shelly/wall-display/): 4 in, 480×480, Android 7
+- [Wall Display X2](/hardware/panels/shelly/wall-display-x2/): 6.9 in, 1440×720, Android 8.1
+- [Wall Display X1i](/hardware/panels/shelly/wall-display-x1i/): 4 in, 720×720, Android 11
+- [Wall Display X2i](/hardware/panels/shelly/wall-display-x2i/): 6.9 in, 1440×720, Android 11
+- [Wall Display XL](/hardware/panels/shelly/wall-display-xl/): 10.1 in, Android 11
 
 :::caution
 The **original Wall Display ships Android 7.0**, which is below the minimum Android version Panel Assistant supports. The X2 runs Android 8.1, and the X1i, X2i and XL run Android 11.
