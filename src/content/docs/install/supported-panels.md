@@ -3,7 +3,7 @@ title: Choose a panel
 description: The Android wall panels Panel Assistant supports today, what makes a panel a good fit, and how to get a model that is not listed supported.
 ---
 
-Most wall panels are bought from overseas marketplaces on little more than a listing and a hope. This page is the check to do before you buy. Every panel below runs Panel Assistant, and owners have confirmed all of them on real hardware except the Shelly Wall Display family, which is documented and waiting for its first confirmed unit.
+Most wall panels are bought from overseas marketplaces on little more than a listing and a hope. This page is the check to do before you buy. Every panel below runs Panel Assistant, and owners have confirmed all of them on real hardware except the Shelly Wall Display family, where one X2i unit has been tested and the rest of the family is documented and waiting for a first confirmed unit.
 
 :::tip
 Each model has its own [hardware page](/hardware/) with its fact sheet, what reaches Home Assistant, and how to get it running.
@@ -25,11 +25,17 @@ Owners run Panel Assistant on these models. Their profiles were built from owner
 - **[ZX-SMT156 / RK3566_T](/hardware/panels/zx-smt156/)**
 - **[Smatek S9E](/hardware/panels/smatek-s9e/)**
 
+## Preliminary
+
+Examined on one physical unit, with hardware coverage still being confirmed.
+
+- **[Shelly Wall Display X2i](/hardware/panels/shelly/wall-display-x2i/)**
+
 ## Documented
 
 Profiles written from firmware research, ready for the first owner to confirm on a unit. If you have one, a report is the quickest way to move it up this page.
 
-- [Shelly Wall Display](/hardware/panels/shelly/) X2, X1i, X2i and XL
+- [Shelly Wall Display](/hardware/panels/shelly/) X2, X1i and XL
 
 ## What makes a panel a good fit
 

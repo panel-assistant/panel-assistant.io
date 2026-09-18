@@ -7,7 +7,7 @@ soc: MT6580
 android: '7.0'
 screen: 4 in, 480 × 480
 support: Research
-root: No user-facing adb; userdebug base build, unconfirmed
+root: Not established; userdebug base build, unconfirmed
 webview: 'com.google.android.webview 119.0.6045.194 via official ZIP'
 released: '2023-09 (est.)'
 photos:
@@ -22,7 +22,7 @@ sidebar:
 ---
 
 :::note
-**Research only: no physical unit has been tested.** See the [Wall Display family page](/hardware/panels/shelly/) for sourcing, the firmware OTA mechanism, access model and security notes shared across the whole line.
+**Research only: no unit of this model has been tested.** See the [Wall Display family page](/hardware/panels/shelly/) for sourcing, the firmware OTA mechanism, access model and security notes shared across the whole line.
 :::
 
 :::caution
@@ -44,7 +44,7 @@ Shelly Wall Display, Wall Display U1 (US), Wall Display D1, SAWD-0A1XX10EU1, fir
 | Sensors  | Temperature, humidity and ambient light documented; Android API exposure unverified                                                                                                                                                                                                      |
 | Relay    | 1 output                                                                                                                                                                                                                                                                                 |
 | WebView  | Not in the standard OTA; Shelly publishes a separate ZIP installing `com.google.android.webview` **119.0.6045.194**                                                                                                                                                                      |
-| Root     | No user-facing adb or root. The OTA declares a `userdebug` base build (`alps/full_k400_mt6580_32_n/...:7.0/.../userdebug/test-keys`), so `adb root` may work **if** an adb connection can be established, though this is unconfirmed on a unit.                                          |
+| Root     | Not established on this model. The OTA declares a `userdebug` base build (`alps/full_k400_mt6580_32_n/...:7.0/.../userdebug/test-keys`), so `adb root` may work **if** an adb connection can be established, though this is unconfirmed on a unit.                                       |
 | Released | About September 2023 (est.); Shelly first showed the Wall Display at IFA Berlin in September 2023 ([coverage of Shelly's IFA Berlin 2023 lineup, Maison et Objet Domotique](https://www.maison-et-domotique.com/en/157856-shelly-11-new-products-in-wi-fi-bluetooth-and-zwave-ifa2023/)) |
 
 See the [Wall Display family page](/hardware/panels/shelly/) for the full access-model reasoning, the OTA update endpoints (`WallDisplay` track) and the firmware version history.
