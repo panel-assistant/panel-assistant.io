@@ -57,7 +57,7 @@ Developer options and USB debugging then appear in Settings as on any Android de
 :::caution
 A USB-C to USB-C cable does **not** power or enumerate the panel. The USB port is wired for legacy host power, so a USB-C source never raises its supply. Use a USB-A to USB-C cable, as Shelly's own documentation specifies.
 
-**Cable type is not the whole story, and this is the one that wastes an afternoon.** A cable that powers the panel perfectly well may still not carry data, and the panel gives no sign of the difference: the screen lights either way. If the panel does not appear to your computer, try a different USB-A cable before you suspect the panel, the drivers or the browser. It took five cables here.
+**Cable type is not the whole story, and this is the one that wastes an afternoon.** A cable that powers this panel perfectly well may still not carry data, and the screen lights either way. It took five cables here. See [Connecting a panel to a computer](/hardware/panels/shelly/#connecting-a-panel-to-a-computer) on the family page.
 
 Note also that **the relay terminals are inert while the panel runs on USB power**. Relay behaviour can only be checked with the panel on mains through its power base.
 :::
@@ -71,7 +71,7 @@ The [browser installer](/install/install-over-usb/) completed against a factory 
 
 ## Sensors
 
-Proximity and ambient light are both exposed through the standard Android sensor API and need no permission. Panel Assistant reported reading proximity through its raw Sensortek route rather than the Android sensor, which its own diagnostics name as `driver_raw16`; either way it reads them as an ordinary app, with no privilege involved. The proximity sensor is registered as a wake-up sensor. Both parts are Sensortek STK3A5x devices on the same I²C address.
+Proximity and ambient light are both exposed through the standard Android sensor API and need no permission. Panel Assistant reported reading proximity through its raw Sensortek route rather than the Android sensor, which its own diagnostics name as `driver_raw16`, and reports it as a ranged signal rather than a near or far flag. Either way it reads them as an ordinary app, with no privilege involved. The proximity sensor is registered as a wake-up sensor. Both parts are Sensortek STK3A5x devices on the same I²C address.
 
 The X2i has **no temperature or humidity sensor**, so no room-climate readings are available from the panel itself.
 

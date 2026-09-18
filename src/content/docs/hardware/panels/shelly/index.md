@@ -108,6 +108,14 @@ One qualification keeps the scope exact: an archived **partition** image, not pa
 - The modern built-in AppStore shows that Shelly can distribute approved applications, but the panel app is not one of them. Installation is by sideload, on the X2i after the developer-mode unlock described above. Legacy devices still have no confirmed installation path.
 - **Device-owner behaviour depends on the firmware.** On the X2i's factory 2.5.4 there is no device owner and no device administrator at all, and the Stargate launcher can be disabled and re-enabled with ordinary package commands. The 2.7.3 update payload does carry the device-owner policy files, and the protected-package refusal is reported against 2.7.x by the [ShellyElevate](https://github.com/RapierXbox/ShellyElevate) project rather than observed here. Which release in between introduced it is unexamined. On that 2.5.4 unit, making Panel Assistant the home app worked without root and held, so the launcher chooser was not the obstacle it had been assumed to be there. What a device owner does to that on later firmware is untested. Wall Display updates are one-way, so a panel that has already updated behaves as the later firmware does.
 
+## Connecting a panel to a computer
+
+:::caution
+**A USB cable that powers a Wall Display may still carry no data.** That is a property of cables rather than of these panels, and the panel lights up either way, so a dead cable and a working one can look identical. When a panel never appears to your computer, the cable is a far more likely explanation than the panel, the drivers or the browser, so try another one first.
+:::
+
+The [X2i](/hardware/panels/shelly/wall-display-x2i/) additionally needs a USB-A to USB-C cable rather than USB-C to USB-C, and its page explains why. Whether the other models share that constraint is untested here.
+
 ## Built-in sensors and relay
 
 Sensor and relay details vary by model. From firmware and product pages:
@@ -120,6 +128,15 @@ Sensor and relay details vary by model. From firmware and product pages:
 | Relay                    | One output on the original, X2 and XL. The X1i and X2i ship with a one-output base and support a separately sold two-output base. An unprivileged sysfs control path exists on the X2i but is not used; see [Relays](/hardware/panels/shelly/wall-display-x2i/#relays). No path is established on any other model. |
 
 Handle relay entities through Home Assistant's Shelly integration rather than assuming the panel app can control them directly. Outside the X2i, whether ordinary Android apps can see the sensors remains unverified.
+
+## What the X2i suggests about the rest of the line
+
+One [X2i](/hardware/panels/shelly/wall-display-x2i/) has been examined on a bench. The X1i, XL, Maverick and Dayna share its OTA track and its vendor, and the X1i shares its processor family, so some of what was measured may hold for them. **None of it has been checked on any other model.** Each point below is a thing to test, not a thing to rely on, and the findings themselves are on the X2i's page.
+
+- **Recents may not work on any of them.** The X2i ignores the Recents key and Android's accessibility Recents action alike, because that firmware has no recents task directory. That cause is an operating-system fact rather than a board one, so it is worth checking on any model rather than assuming the board decides it. Both bundled profiles currently declare that these panels have Recents, which is measurably wrong for the X2i and untested for the rest.
+- **Proximity may be better than binary.** Panel Assistant reads the X2i's proximity part as a ranged signal rather than a near or far flag. The X1i also documents proximity and may share the part. The XL is the likeliest to differ, since Shelly documents it as a motion sensor rather than proximity.
+- **The relays may be reachable in principle.** The X2i exposes them through a world-writable sysfs class. Panel Assistant does not use it, and two conditions travel with the finding: the relay terminals are inert on USB power, and the write succeeded only because that firmware runs SELinux permissive.
+- **A hidden developer-mode unlock is what makes any of this measurable**, and it is confirmed only on the X2i, whose [page carries the exact sequence](/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode) and the correction that you must tap the line's title rather than its value. Shelly does not advertise it there.
 
 ## Firmware OTA mechanism
 
