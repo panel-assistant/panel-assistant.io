@@ -55,7 +55,11 @@ Shelly does not advertise it, but the X2i has the usual hidden developer-mode un
 Developer options and USB debugging then appear in Settings as on any Android device. Connect a USB-A to USB-C cable and the panel enumerates for adb. There is **no authorisation prompt to accept on the screen**, because this firmware does not require adb authorisation.
 
 :::caution
-A USB-C to USB-C cable does **not** power or enumerate the panel. The USB port is wired for legacy host power, so a USB-C source never raises its supply. Use a USB-A to USB-C cable, as Shelly's own documentation specifies. Note also that **the relay terminals are inert while the panel runs on USB power**. Relay behaviour can only be checked with the panel on mains through its power base.
+A USB-C to USB-C cable does **not** power or enumerate the panel. The USB port is wired for legacy host power, so a USB-C source never raises its supply. Use a USB-A to USB-C cable, as Shelly's own documentation specifies.
+
+**Cable type is not the whole story, and this is the one that wastes an afternoon.** A cable that powers the panel perfectly well may still not carry data, and the panel gives no sign of the difference: the screen lights either way. If the panel does not appear to your computer, try a different USB-A cable before you suspect the panel, the drivers or the browser. It took five cables here.
+
+Note also that **the relay terminals are inert while the panel runs on USB power**. Relay behaviour can only be checked with the panel on mains through its power base.
 :::
 
 ## Installing Panel Assistant
@@ -84,7 +88,7 @@ Until then, drive the relays through Home Assistant's own Shelly integration.
 
 ## What this firmware does not have
 
-- **The Recents key does nothing.** The firmware ignores it, tested from a foreground app and from Settings alike. Panel Assistant still offers a Recents control here, because the bundled profile declares this panel has one. Note that it reaches Recents through Android's accessibility service rather than through the key, and that route has not been exercised on this panel, so whether the control works has not been established either way.
+- **No Recents at all.** The firmware ignores the Recents key, and Android's accessibility Recents action does nothing either, each tested with an ordinary app and with Settings in front. The reason is below both of them: the system logs that the recents task directory does not exist, so no route can produce a task switcher. Panel Assistant still offers a Recents control here, because the bundled profile declares this panel has one, and that control cannot work.
 - **No camera.** The firmware declares camera features that no hardware backs, and Android enumerates no camera. Nothing declares a camera in the profile either, so Panel Assistant correctly offers none here.
 - **No root.** There is no `su` and no way to become root from the shell. Setting the panel up and using it day to day does not need it, but a set of features does stay unavailable: screenshots, tap-and-capture remote control, verified app and Companion updates, display density and text size, and rebooting or switching back to the vendor launcher. The onboard relays are a separate matter, covered above.
 
