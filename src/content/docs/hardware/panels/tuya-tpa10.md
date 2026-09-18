@@ -105,7 +105,7 @@ The TPA10 has limited video decoder headroom inside WebView. Several visible 720
 Download it from the mirror (stable URL):
 
 ```
-https://github.com/maxlyth/ha-paneld/releases/download/webview-mirror/lineageos-webview-150.0.7871.63-arm.apk
+https://github.com/panel-assistant/android/releases/download/webview-mirror/lineageos-webview-150.0.7871.63-arm.apk
 ```
 
 ### Why a plain install does not work
@@ -182,7 +182,7 @@ The front RGB LED is a **single** LED (`avsux_info` reports `led type:[single] n
 Writing `custom_animation` to `avsux_select` has been observed to **reboot the panel**. Use `avsux_animation` for colour, and treat `avsux_select` and `custom_animation` as read-only unless testing.
 :::
 
-There is **no app-accessible `/dev` node** for the LED (compare the [WF1589T](/hardware/panels/electron-wf1589t/)'s `/dev/ledjni`), and the sysfs attributes are `system:system`, so an `untrusted_app` cannot write them. The panel app therefore uses a small **root helper daemon** (`/system/bin/hapaneld-helper`, running as root on a Unix socket); `SocketLedController` is the client. See the [helper documentation](https://github.com/maxlyth/ha-paneld/blob/main/helper/README.md).
+There is **no app-accessible `/dev` node** for the LED (compare the [WF1589T](/hardware/panels/electron-wf1589t/)'s `/dev/ledjni`), and the sysfs attributes are `system:system`, so an `untrusted_app` cannot write them. The panel app therefore uses a small **root helper daemon** (`/system/bin/hapaneld-helper`, running as root on a Unix socket); `SocketLedController` is the client. See the [helper documentation](https://github.com/panel-assistant/android/blob/main/helper/README.md).
 
 #### `avs-pwm-led` sysfs attributes
 

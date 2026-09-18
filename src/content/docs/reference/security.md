@@ -47,7 +47,7 @@ Credential files address exposure on the provisioning host, not transport confid
 
 ### Browser-mediated attacks
 
-Browser-mediated attacks are guarded by [`OriginGuard`](https://github.com/maxlyth/ha-paneld/blob/main/app/src/main/kotlin/io/github/maxlyth/hapaneld/http/OriginGuard.kt):
+Browser-mediated attacks are guarded by [`OriginGuard`](https://github.com/panel-assistant/android/blob/main/app/src/main/kotlin/io/github/maxlyth/hapaneld/http/OriginGuard.kt):
 
 - **CSRF**: OriginGuard refuses a state-changing request (`POST`/`PUT`/`PATCH`/`DELETE`) whose `Origin`/`Referer` is present and doesn't match the request `Host`, so a malicious LAN web page can't silently drive these endpoints. Same-origin UI `fetch`es and header-less API clients (curl, Home Assistant `rest_command`) are unaffected.
 - **DNS rebinding**: the `Host` header must be an IP literal, `localhost`, `*.local` (mDNS), or an operator-configured name (`http_allowed_hosts`); any other hostname is refused (all methods), so an attacker who rebinds their own DNS name to the panel can't pose as same-origin to read secrets (`GET /config/export`) or drive the surface. Reaching a panel by IP, which is the norm, is always allowed and is inherently immune to rebinding.
@@ -63,7 +63,7 @@ Three behaviours there are easy to misread. A **missing `Host` passes** the rebi
 
 Neither guard authenticates the _caller_. Hardened mode can require physical approval for a protected operation, but decision 3 describes the route for general caller authentication.
 
-APK-installer downloads through [`AppInstaller`](https://github.com/maxlyth/ha-paneld/blob/main/app/src/main/kotlin/io/github/maxlyth/hapaneld/util/AppInstaller.kt) are HTTPS-only: the initial URL and every redirect hop must be `https`, as defence in depth on top of the post-download signer and package pin, which already blocks installing a substituted APK.
+APK-installer downloads through [`AppInstaller`](https://github.com/panel-assistant/android/blob/main/app/src/main/kotlin/io/github/maxlyth/hapaneld/util/AppInstaller.kt) are HTTPS-only: the initial URL and every redirect hop must be `https`, as defence in depth on top of the post-download signer and package pin, which already blocks installing a substituted APK.
 
 Runtime profile files are treated as untrusted data, not plugins. The closed schema can select only drivers compiled into ha-paneld; it carries no shell commands, helper verbs, native code or general scripting. Privileged paths are restricted to core allowlists, and WebView recommendations select only core-owned artifact IDs whose HTTPS URL, version and signer hash are compiled into the app. Security-sensitive driver parameters are validated by the owning driver, and declarations never substitute for live root/helper/Shizuku or hardware probes. A Shizuku recommendation cannot install the Manager, record local consent or approve ha-paneld.
 

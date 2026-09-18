@@ -32,7 +32,7 @@ For the same reason, hardware support is where the project most needs help. Ever
 | Piece                   | What it is                                                                         | Where                                                                               |
 | ----------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | Panel Assistant         | The Home Assistant integration: installer, devices, and the all-panels page.       | [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration) |
-| ha-paneld               | The app on the panel: dashboard, hardware, launcher, status page.                  | [maxlyth/ha-paneld](https://github.com/maxlyth/ha-paneld)                           |
+| ha-paneld               | The app on the panel: dashboard, hardware, launcher, status page.                  | [panel-assistant/android](https://github.com/panel-assistant/android)               |
 | Hardware profiles       | The per-model descriptions that tell the app what a panel has and how to drive it. | [Hardware reference](/hardware/)                                                    |
 | Reference documentation | The API, hardware profiles and security model in detail.                           | [Reference](/reference/api/)                                                        |
 

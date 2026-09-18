@@ -23,7 +23,7 @@ sidebar:
 ---
 
 :::note
-This is a preliminary profile based on [a diagnostic report on GitHub](https://github.com/maxlyth/ha-paneld/issues/24). It covers a genuine OEM, generic-market SMT156 wall panel identified through the owner's ELC and OEM product evidence, but it has not been validated on hardware available for local testing. Climate support is optional, and USB or vendor root and persistent unlock routes remain untested.
+This is a preliminary profile based on [a diagnostic report on GitHub](https://github.com/panel-assistant/android/issues/24). It covers a genuine OEM, generic-market SMT156 wall panel identified through the owner's ELC and OEM product evidence, but it has not been validated on hardware available for local testing. Climate support is optional, and USB or vendor root and persistent unlock routes remain untested.
 :::
 
 This 15.6 in Android wall panel identifies its firmware as `ZX-SMT156` and its exact model and device as `rk3566_t`. The `_t` device identifier is the reliable discriminator: generic `rk3566` matching would collide with the unrelated TPA10 and S9E.
@@ -49,7 +49,7 @@ ZX-SMT156, SMT156, RK3566_T, rk3566_t, generic 15.6 inch SMT156 wall panel (ELC 
 
 ## Panel app support
 
-The bundled [`zx-smt156.yaml`](https://github.com/maxlyth/ha-paneld/blob/main/app/src/main/assets/device-profiles/zx-smt156.yaml) profile provides the correct identity and explicitly routes the working `/dev/ledjni` RGB controller. It uses a conservative LED transfer curve until a reporter supplies a measured response. Standard Android brightness, light and proximity sensing, navigation, the Home Assistant entities and the built-in dashboard work without root.
+The bundled [`zx-smt156.yaml`](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/zx-smt156.yaml) profile provides the correct identity and explicitly routes the working `/dev/ledjni` RGB controller. It uses a conservative LED transfer curve until a reporter supplies a measured response. Standard Android brightness, light and proximity sensing, navigation, the Home Assistant entities and the built-in dashboard work without root.
 
 The profile exposes Room temperature and Room humidity as an optional extra, not part of the core support. Reporter evidence shows `sun-ths` temperature in hundredths of a degree Celsius on `ABS_THROTTLE`, and `sun-hum` relative humidity in hundredths of a percent on vendor axis `0x1d`. The panel app prefers its helper when present, and otherwise uses the locally approved Shizuku shell identity that the collector proved can read these nodes. A local temperature calibration offset is available, because the panel's self-heating has not been characterised.
 
@@ -62,7 +62,7 @@ Diagnostics include a bounded `[hardware]` block with input device names, bound 
 For the `sun-ths` and `sun-hum` input devices, download and run the read-only collector below. Replace `<panel-ip>` with the panel's address, then paste the complete line into the same Git Bash, WSL, macOS Terminal or Linux terminal where `adb` works:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/collect-panel-hardware.sh -o collect-panel-hardware.sh && bash collect-panel-hardware.sh --serial <panel-ip>:5555 --observe climate
+curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/collect-panel-hardware.sh -o collect-panel-hardware.sh && bash collect-panel-hardware.sh --serial <panel-ip>:5555 --observe climate
 ```
 
 This only reads the two climate input devices and does not change the panel. The live observation is limited to 10 seconds and 32 events per exact sensor name. Review the terminal output before sharing it; if the command reports an error, share that error instead. The 2026-07-17 `adb shell` report established the input names, axes, and values consistent with hundredths scaling. A reporter comparison of the panel app's readings against the vendor display or an external thermometer and hygrometer is still needed before calling them hardware-validated. Being readable from an adb shell does not give an ordinary app access; the panel app uses either the installed allowlisted helper or the same shell identity after local Shizuku approval.

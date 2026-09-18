@@ -55,4 +55,4 @@ Profiles written from firmware research, ready for the first owner to confirm on
 
 ## Not on the list?
 
-Hardware support is data, not code, so a new panel is a profile rather than a new build of the app, and the fastest way to get your model supported is to report it. Say what the model is and what happened in the [issues](https://github.com/maxlyth/ha-paneld/issues), and if you are inclined, the [profile documentation](/reference/profiles/) describes what a profile contains. Every report, working or not, moves the project closer to supporting every panel.
+Hardware support is data, not code, so a new panel is a profile rather than a new build of the app, and the fastest way to get your model supported is to report it. Say what the model is and what happened in the [issues](https://github.com/panel-assistant/android/issues), and if you are inclined, the [profile documentation](/reference/profiles/) describes what a profile contains. Every report, working or not, moves the project closer to supporting every panel.

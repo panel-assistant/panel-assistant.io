@@ -12,7 +12,7 @@ Every panel reaches adb, and root where it has it, by a different route. This pa
 
 The panel app installs and runs without root. Root matters only for hardware that Android does not expose to an ordinary app:
 
-- **Sysfs and input nodes owned by `system`.** On some panels the LED, button backlight and climate sensors are `system:system` files, which a sandboxed app cannot write or read. The panel app then talks to a small root helper daemon, `hapaneld-helper`, over a Unix socket. See the [helper documentation](https://github.com/maxlyth/ha-paneld/blob/main/helper/README.md).
+- **Sysfs and input nodes owned by `system`.** On some panels the LED, button backlight and climate sensors are `system:system` files, which a sandboxed app cannot write or read. The panel app then talks to a small root helper daemon, `hapaneld-helper`, over a Unix socket. See the [helper documentation](https://github.com/panel-assistant/android/blob/main/helper/README.md).
 - **True backlight-off, reboot and CPU governor control.** Without a root route these fall back to what Android allows, for example brightness zero instead of powering the backlight down.
 - **Relays and GPIO lines**, where a panel exposes them only through root sysfs.
 

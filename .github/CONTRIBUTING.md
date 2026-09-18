@@ -1,6 +1,6 @@
 # Contributing
 
-This repository holds the source of the Panel Assistant website. It is documentation and site code, not the application; changes to ha-paneld itself belong in [maxlyth/ha-paneld](https://github.com/maxlyth/ha-paneld), and changes to the Home Assistant integration in [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration).
+This repository holds the source of the Panel Assistant website. It is documentation and site code, not the application; changes to ha-paneld itself belong in [panel-assistant/android](https://github.com/panel-assistant/android), and changes to the Home Assistant integration in [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration).
 
 ## Getting set up
 
@@ -45,7 +45,7 @@ The editor is text only and does not accept images. If your change needs one, sh
 
 ## Reporting a problem with the site
 
-Open an issue in this repository. Problems with a panel, an installation or the app itself belong in the [ha-paneld issues](https://github.com/maxlyth/ha-paneld/issues), where the people who can answer them are looking.
+Open an issue in this repository. Problems with a panel, an installation or the app itself belong in the [ha-paneld issues](https://github.com/panel-assistant/android/issues), where the people who can answer them are looking.
 
 If you attach a diagnostic report to an issue, read it through first and remove anything that identifies your panel, your network, your Home Assistant setup or your dashboard content. An issue is public.
 

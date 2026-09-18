@@ -4,7 +4,7 @@ description: Evidence notes for the community profile covering one contributor's
 ---
 
 :::caution
-This is an import-only community profile based on one contributor's diagnostic report and a vendor firmware image supplied through GitHub [#129](https://github.com/maxlyth/ha-paneld/issues/129). It is not bundled, automatically selected or validated by the project.
+This is an import-only community profile based on one contributor's diagnostic report and a vendor firmware image supplied through GitHub [#129](https://github.com/panel-assistant/android/issues/129). It is not bundled, automatically selected or validated by the project.
 :::
 
 The reported panel is sold as a 5.5-inch Sunworld YC-SM55P and uses the Portworld YC-P76S01 board. It runs Android 14 on a Rockchip RK3576S and was rooted by its owner with Magisk. The submitted vendor image confirms the board, display, touch and key hardware without relying only on the running Android system.
@@ -37,7 +37,7 @@ The firmware also includes Portworld boot-start and human-sensor utilities. They
 
 ## First activation
 
-Follow the [community catalogue procedure](/reference/profiles/community/) to import [`community-sunworld-yc-sm55p-p76s01.yaml`](https://github.com/maxlyth/ha-paneld/blob/main/docs/profiles/unofficial/community-sunworld-yc-sm55p-p76s01.yaml), validate it and activate it while somebody can see and touch the panel. After restart:
+Follow the [community catalogue procedure](/reference/profiles/community/) to import [`community-sunworld-yc-sm55p-p76s01.yaml`](https://github.com/panel-assistant/android/blob/main/docs/profiles/unofficial/community-sunworld-yc-sm55p-p76s01.yaml), validate it and activate it while somebody can see and touch the panel. After restart:
 
 1. Confirm that the Profiles page shows `Unofficial Sunworld YC-SM55P (P76S01)` as active and does not roll back to Generic.
 2. Check brightness, screen off and touch wake from both the panel UI and Home Assistant.

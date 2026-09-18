@@ -10,7 +10,7 @@ Panel profiles describe what is special about a model of Android wall panel: how
 
 This page is the practical authoring guide. See the [format and compatibility reference](/reference/profiles/format/) for the document model, [testing and troubleshooting](/reference/profiles/testing/) before activating hardware controls, and the [sharing and contribution guide](/reference/profiles/sharing/) before publishing a profile. There is also a clearly separated catalogue of [community profiles](/reference/profiles/community/); those files are manual imports, not bundled support.
 
-The profiles bundled with the app live in the ha-paneld repository under [`app/src/main/assets/device-profiles`](https://github.com/maxlyth/ha-paneld/tree/main/app/src/main/assets/device-profiles).
+The profiles bundled with the app live in the ha-paneld repository under [`app/src/main/assets/device-profiles`](https://github.com/panel-assistant/android/tree/main/app/src/main/assets/device-profiles).
 
 ![The panel's Profile page showing a bundled revision's YAML in the editor, with review badges for package-disable recommendations, root paths and WebView installation, and the observed device facts below](asset:ui-profile-dark.png)
 
@@ -41,11 +41,11 @@ Keep the exported YAML as the exchangeable source. A screenshot of a green Profi
 
 ## Examples
 
-The [`minimal-community.yaml`](https://github.com/maxlyth/ha-paneld/blob/main/docs/profiles/examples/minimal-community.yaml) example uses the public schema accepted by the Profiles page. It is teaching material, not a claim that the fictional hardware exists. It is a conservative, standard-Android starting point that enables no vendor protocol, root/helper path, relay, evdev input, update artifact, package desired state or provisioning recipe.
+The [`minimal-community.yaml`](https://github.com/panel-assistant/android/blob/main/docs/profiles/examples/minimal-community.yaml) example uses the public schema accepted by the Profiles page. It is teaching material, not a claim that the fictional hardware exists. It is a conservative, standard-Android starting point that enables no vendor protocol, root/helper path, relay, evdev input, update artifact, package desired state or provisioning recipe.
 
 Import the example through **Profiles**, review the validation preview and save it only as an inactive local revision. Change the ID, provenance, exact fingerprint, tested firmware and limitations before using it as the basis for a real panel. An imported match is preview evidence only; local and community profiles are never selected automatically.
 
-For complete production examples, export one of the immutable bundled profiles from a running panel, or read the [bundled YAML files](https://github.com/maxlyth/ha-paneld/tree/main/app/src/main/assets/device-profiles). Those profiles exercise the same schema but may select privileged compiled drivers and core-owned artifacts that should not be copied without hardware evidence.
+For complete production examples, export one of the immutable bundled profiles from a running panel, or read the [bundled YAML files](https://github.com/panel-assistant/android/tree/main/app/src/main/assets/device-profiles). Those profiles exercise the same schema but may select privileged compiled drivers and core-owned artifacts that should not be copied without hardware evidence.
 
 ## The profile lifecycle
 

@@ -90,7 +90,7 @@ The factory `com.gulukai.pwmlightdemo` package also opens this device. Its boot-
 /dev/ledjni   crwxrwxrwx  system system  u:object_r:device:s0
 ```
 
-The ioctl protocol was reverse-engineered clean-room from the vendor sample, and no vendor binary is bundled; see [`led_jni.c`](https://github.com/maxlyth/ha-paneld/blob/main/app/src/main/cpp/led_jni.c):
+The ioctl protocol was reverse-engineered clean-room from the vendor sample, and no vendor binary is bundled; see [`led_jni.c`](https://github.com/panel-assistant/android/blob/main/app/src/main/cpp/led_jni.c):
 
 ```c
 int fd = open("/dev/ledjni", O_RDONLY | O_NOCTTY);

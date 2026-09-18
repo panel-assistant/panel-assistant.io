@@ -10,10 +10,10 @@ Wall panel vendors publish almost nothing about their firmware. Download URLs ar
 
 ## What the index records
 
-For each firmware object the index records the model and channel, the version, whether it is a full ROM, a diff between two versions or an app-only update, the verified CDN URL, the object's size, and whether a copy has been captured by the Wayback Machine. The source of truth is a set of plain data files in [`tools/firmware-index/`](https://github.com/maxlyth/ha-paneld/tree/main/tools/firmware-index) in the ha-paneld repository. Everything else is generated from them:
+For each firmware object the index records the model and channel, the version, whether it is a full ROM, a diff between two versions or an app-only update, the verified CDN URL, the object's size, and whether a copy has been captured by the Wayback Machine. The source of truth is a set of plain data files in [`tools/firmware-index/`](https://github.com/panel-assistant/android/tree/main/tools/firmware-index) in the ha-paneld repository. Everything else is generated from them:
 
-- The **complete index** lists every verified OTA URL for the Sonoff NSPanel Pro 86P and 120P, with sizes, CDN indices and archival status: [nspanel-pro-firmware-archive.md](https://github.com/maxlyth/ha-paneld/blob/main/docs/hardware/nspanel-pro-firmware-archive.md).
-- The **community Discussion** carries the recent upgrade targets and current community evidence, and takes contributions: [NSPanel Pro firmware: OTA URL index](https://github.com/maxlyth/ha-paneld/discussions/7). A scheduled job regenerates it from the data files.
+- The **complete index** lists every verified OTA URL for the Sonoff NSPanel Pro 86P and 120P, with sizes, CDN indices and archival status: [nspanel-pro-firmware-archive.md](https://github.com/panel-assistant/android/blob/main/docs/hardware/nspanel-pro-firmware-archive.md).
+- The **community Discussion** carries the recent upgrade targets and current community evidence, and takes contributions: [NSPanel Pro firmware: OTA URL index](https://github.com/panel-assistant/android/discussions/7). A scheduled job regenerates it from the data files.
 
 The Discussion can lag the data files until the scheduled job next runs. When they disagree, the data files are the authority.
 

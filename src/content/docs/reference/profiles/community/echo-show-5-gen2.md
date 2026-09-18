@@ -4,7 +4,7 @@ description: Evidence notes for the community profile covering one contributor's
 ---
 
 :::caution
-This is an import-only community profile based on one contributor's diagnostic report in GitHub [#28](https://github.com/maxlyth/ha-paneld/issues/28). It describes that user's LineageOS 18.1 reflash, not the retail device as sold. Stock Fire OS cannot run ha-paneld, and this profile is not bundled, automatically selected or validated by the project.
+This is an import-only community profile based on one contributor's diagnostic report in GitHub [#28](https://github.com/panel-assistant/android/issues/28). It describes that user's LineageOS 18.1 reflash, not the retail device as sold. Stock Fire OS cannot run ha-paneld, and this profile is not bundled, automatically selected or validated by the project.
 :::
 
 The reported 2021 device is a 5.5-inch smart display whose reflash identifies the hardware with device codename `cronos` and model `Amzn Echo Show 5 (2nd Generation)`. The community profile requires both observed values in the same match group; it can be broadened only after another diagnostic proves a real firmware variant.
@@ -24,7 +24,7 @@ The reported 2021 device is a 5.5-inch smart display whose reflash identifies th
 
 ## Profile scope
 
-The [`community-cronos-lineageos18.yaml`](https://github.com/maxlyth/ha-paneld/blob/main/docs/profiles/unofficial/community-cronos-lineageos18.yaml) profile selects only existing compiled Android mechanisms: ordinary brightness-based screen-off, Android ambient-light sensing and the reported Android-style `su` form. It declares no RGB LED, relay, radio, hardware-button, CPU-governor or density behaviour.
+The [`community-cronos-lineageos18.yaml`](https://github.com/panel-assistant/android/blob/main/docs/profiles/unofficial/community-cronos-lineageos18.yaml) profile selects only existing compiled Android mechanisms: ordinary brightness-based screen-off, Android ambient-light sensing and the reported Android-style `su` form. It declares no RGB LED, relay, radio, hardware-button, CPU-governor or density behaviour.
 
 The root declaration records evidence from one image; it does not grant authority. After activation and restart, the running driver must probe the live route. A missing or blocked route remains unavailable and must not be treated as proof that another reflash is compatible.
 

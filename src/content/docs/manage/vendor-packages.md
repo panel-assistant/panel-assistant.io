@@ -15,7 +15,7 @@ For each package you tame, the panel app applies three reversible, privileged ac
 | Disable boot relaunch | `pm disable-user --user 0 <pkg>`            | Stops it starting again on the next boot. Reversible with `pm enable <pkg>`. |
 | Block overlays        | `appops set <pkg> SYSTEM_ALERT_WINDOW deny` | Removes its permission to draw a floating window over the dashboard.         |
 
-All three are privileged, so the feature needs **root or the [root helper](https://github.com/maxlyth/ha-paneld/blob/main/helper/README.md)**. That means it also works on panels that sandbox root, such as the [Tuya TPA10](/hardware/panels/tuya-tpa10/), where the actions go through the helper's `STOP`, `DISABLE` and `OVERLAY` commands.
+All three are privileged, so the feature needs **root or the [root helper](https://github.com/panel-assistant/android/blob/main/helper/README.md)**. That means it also works on panels that sandbox root, such as the [Tuya TPA10](/hardware/panels/tuya-tpa10/), where the actions go through the helper's `STOP`, `DISABLE` and `OVERLAY` commands.
 
 ## Using it
 

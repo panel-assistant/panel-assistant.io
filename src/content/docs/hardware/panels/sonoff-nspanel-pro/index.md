@@ -164,7 +164,7 @@ Switching role is **not a reflash**: there is no `.gbl` or bootloader step, it o
 :::
 
 :::caution
-**A defect in the legacy vendor Zigbee watchdog is confirmed by a reporter on NSPanel Pro 120 stock firmware 3.8.0.** Firmware containing the recursive `LD_LIBRARY_PATH` assignment described in [the reporter's issue](https://github.com/maxlyth/ha-paneld/issues/34) can eventually make every external command the watchdog launches fail with `E2BIG`, consume one CPU core, and stop recovering a dead `zgateway`. A reboot clears the problem only temporarily. See [Performance tuning](/manage/performance/) for the evidence and the requirements for a safe repair. The reporter's workaround has not been independently validated. Community inspection of 4.0.12 and 4.6.0 did not find the vulnerable assignment.
+**A defect in the legacy vendor Zigbee watchdog is confirmed by a reporter on NSPanel Pro 120 stock firmware 3.8.0.** Firmware containing the recursive `LD_LIBRARY_PATH` assignment described in [the reporter's issue](https://github.com/panel-assistant/android/issues/34) can eventually make every external command the watchdog launches fail with `E2BIG`, consume one CPU core, and stop recovering a dead `zgateway`. A reboot clears the problem only temporarily. See [Performance tuning](/manage/performance/) for the evidence and the requirements for a safe repair. The reporter's workaround has not been independently validated. Community inspection of 4.0.12 and 4.6.0 did not find the vulnerable assignment.
 :::
 
 ### Requirements: firmware 2.2.0 or later

@@ -38,7 +38,7 @@ The local UI remains available after profile failure, so a bad profile is recove
 
 ## Sources and immutability
 
-Bundled revisions live in the APK and cannot be edited or deleted. Editing one creates a complete local fork, so a local file never depends on hidden mutable state in the bundled copy. The bundled files are in the ha-paneld repository under [`app/src/main/assets/device-profiles`](https://github.com/maxlyth/ha-paneld/tree/main/app/src/main/assets/device-profiles).
+Bundled revisions live in the APK and cannot be edited or deleted. Editing one creates a complete local fork, so a local file never depends on hidden mutable state in the bundled copy. The bundled files are in the ha-paneld repository under [`app/src/main/assets/device-profiles`](https://github.com/panel-assistant/android/tree/main/app/src/main/assets/device-profiles).
 
 Imported revisions are stored by stable profile ID and the lowercase SHA-256 of their exact YAML. Preview tokens bind import to the bytes that were inspected. Catalogue generations prevent a stale browser from overwriting or selecting a different revision after another administrator changes the catalogue.
 

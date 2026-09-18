@@ -14,7 +14,7 @@ The controls work, but the right values for each panel are not settled. Treat de
 The **Display sizing** card on the panel's **Install** tab sets a custom logical density and text size, applies them live, or resets to Android's factory base density. Both survive a reboot, because they are Android system settings.
 
 :::note
-This needs an approved privileged route: normally the vendor's `su` or the [root helper](https://github.com/maxlyth/ha-paneld/blob/main/helper/README.md). A compatible unrooted panel whose optional enhanced access has already been approved on the panel can also make these exact display changes. Where no supported route is ready, the card stays visible but locked.
+This needs an approved privileged route: normally the vendor's `su` or the [root helper](https://github.com/panel-assistant/android/blob/main/helper/README.md). A compatible unrooted panel whose optional enhanced access has already been approved on the panel can also make these exact display changes. Where no supported route is ready, the card stays visible but locked.
 :::
 
 To tune it, open the same dashboard in a desktop browser for reference. Lower the density until the layout matches (more cards fit), then nudge the text size until the text matches. Good values depend on the installation (the panel's resolution, how far away people stand, how the dashboard is designed) rather than on the model, which is why no standard values ship.

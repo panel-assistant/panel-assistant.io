@@ -67,7 +67,7 @@ Two stock images have been analysed. They are block-based OTA `.zip` files in AO
 | `S9_1920x1200_20251202_Android_US` | `S9_Android_1.1.0`   | `eng.xiaolp.20251202.160404` | `/sys/class/strelay`  |
 
 :::caution
-**The relay sysfs class was renamed between firmware versions.** Only the **initial** image (1.0.2) uses `/sys/class/st_relay`; **all newer** images (1.1.0 and later) use `/sys/class/strelay`, confirmed by [a reporter](https://github.com/maxlyth/ha-paneld/issues/3) and matched by the firmware diff. The panel app probes both class names and uses whichever the panel exposes; see [Relays](#relays-strelay-or-st_relay-class-root).
+**The relay sysfs class was renamed between firmware versions.** Only the **initial** image (1.0.2) uses `/sys/class/st_relay`; **all newer** images (1.1.0 and later) use `/sys/class/strelay`, confirmed by [a reporter](https://github.com/panel-assistant/android/issues/3) and matched by the firmware diff. The panel app probes both class names and uses whichever the panel exposes; see [Relays](#relays-strelay-or-st_relay-class-root).
 :::
 
 Both images were shared by the reporter from Smatek: `S9_1920x1200_20240712_Android_US` (**1.0.2**) and `S9_1920x1200_20251202_Android_US` (**1.1.0**). The original Smatek download links at `docs.smatek.store:10001` are no longer reachable; contact Smatek support or the reporter for a copy.
@@ -116,7 +116,7 @@ The firmware also carries an **RGB status LED** (`led_r`, `led_g`, `led_b`), a *
 ## Sensors: proximity comes from GPIO 18, not `SensorManager`
 
 :::caution
-A proximity sensor is _registered_ in `SensorManager`, advertising `Proximity=yes · Binary · 0/1 cm`, but on the S9E it **never delivers events**. A reporter's live readings, in [a follow-up report](https://github.com/maxlyth/ha-paneld/issues/5), established that the Android path stays silent. The light sensor on the same panel works (about 46 lx), so the problem is specific to proximity; the real signal is read from `gpio18`.
+A proximity sensor is _registered_ in `SensorManager`, advertising `Proximity=yes · Binary · 0/1 cm`, but on the S9E it **never delivers events**. A reporter's live readings, in [a follow-up report](https://github.com/panel-assistant/android/issues/5), established that the Android path stays silent. The light sensor on the same panel works (about 46 lx), so the problem is specific to proximity; the real signal is read from `gpio18`.
 :::
 
 The real signal is a **root GPIO read at GPIO 18**. The kernel registers a phantom Android sensor that never fires, so the value has to be read from sysfs:
@@ -137,7 +137,7 @@ The S9E profile therefore declares `sensors.proximity_gpio: 18` instead of using
 
 ## Sources
 
-- [The Smatek S9E report on GitHub](https://github.com/maxlyth/ha-paneld/issues/3): the reporter's `/diag` (detection strings, `SensorManager` proximity), the relay class rename from `st_relay` to `strelay`, and the two firmware images.
+- [The Smatek S9E report on GitHub](https://github.com/panel-assistant/android/issues/3): the reporter's `/diag` (detection strings, `SensorManager` proximity), the relay class rename from `st_relay` to `strelay`, and the two firmware images.
 - Smatek S9E stock firmware shared by that reporter: 1.0.2 (20240712) and 1.1.0 (20251202), the two images analysed. The original Smatek download links (`docs.smatek.store:10001`) are no longer reachable.
 - [seaky/nspanel_pro_tools_apk issue 98, "Add Smatek S9E Support"](https://github.com/seaky/nspanel_pro_tools_apk/issues/98): the relay (`st_relay`), button (keycodes 131 to 134), button LED (GPIO 147 to 150) and proximity (GPIO 18) control paths.
 - [Home Assistant community: "Smatek S9E Touch Panel"](https://community.home-assistant.io/t/smatek-s9e-touch-panel/828244): WebView update, GPIO 18 proximity scripts, integration notes.

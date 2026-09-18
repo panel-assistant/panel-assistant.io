@@ -159,7 +159,7 @@ export default defineConfig({
             { label: 'Development environment', slug: 'reference/development-environment' },
             {
               label: 'Code tour on DeepWiki',
-              link: 'https://deepwiki.com/maxlyth/ha-paneld',
+              link: 'https://deepwiki.com/panel-assistant/android',
               attrs: { target: '_blank', rel: 'noopener' },
             },
           ],

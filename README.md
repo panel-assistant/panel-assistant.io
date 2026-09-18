@@ -9,7 +9,7 @@ The site is a static build made with [Astro](https://astro.build/) and [Starligh
 Panel Assistant has two parts. This repository is only the website.
 
 - [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration) is the Home Assistant integration: the installer, the per-panel devices and the page that shows all of your panels. It is installed through HACS.
-- [maxlyth/ha-paneld](https://github.com/maxlyth/ha-paneld) is the app the integration puts on each panel, and the reference documentation lives there.
+- [panel-assistant/android](https://github.com/panel-assistant/android) is the app the integration puts on each panel, and the reference documentation lives there.
 
 ## Help links: `/go/<topic>`
 
@@ -60,4 +60,4 @@ See [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 Free and open source under the Apache License 2.0. See [LICENSE](LICENSE).
 
-The icon and favicon in `src/assets/` and `public/` are the project's application artwork, shared from [maxlyth/ha-paneld](https://github.com/maxlyth/ha-paneld) as part of the same project. They include the Home Assistant mark, which remains the property of the Home Assistant project and is not covered by this repository's licence. Panel Assistant is an independent project and is not affiliated with or endorsed by Home Assistant. All product names, trademarks and registered trademarks are the property of their respective owners.
+The icon and favicon in `src/assets/` and `public/` are the project's application artwork, shared from [panel-assistant/android](https://github.com/panel-assistant/android) as part of the same project. They include the Home Assistant mark, which remains the property of the Home Assistant project and is not covered by this repository's licence. Panel Assistant is an independent project and is not affiliated with or endorsed by Home Assistant. All product names, trademarks and registered trademarks are the property of their respective owners.

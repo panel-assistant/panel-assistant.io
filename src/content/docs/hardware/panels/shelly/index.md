@@ -181,7 +181,7 @@ Covers Blake, Jenna, Cally, Maverick and Dayna. The OTA updater script reads `ro
 The response has the same version and build ID as Track 1 (`2.7.1` in the example above), compiled for arm64-v8a. Both tracks share version numbers and build IDs: they are compiled together from the same codebase for different ABIs.
 
 :::note
-**The CDN URL is content-addressed**: a SHA-256 filename with no version in the path. It rotates with every release and cannot be inferred for older versions, and once a newer release ships the previous URL returns 404. Archival to the Wayback Machine is therefore **attempted** for each release as it is discovered, and is **confirmed** only once a capture timestamp is written beside that release's CDN URL in [`tools/firmware-index/fw-shelly-walldisplay.dat`](https://github.com/maxlyth/ha-paneld/blob/main/tools/firmware-index/fw-shelly-walldisplay.dat). An empty timestamp means archival is pending or has not succeeded; it does not mean the files are safe. Read which releases are confirmed from the index itself. A release that is never captured while it is current is unrecoverable.
+**The CDN URL is content-addressed**: a SHA-256 filename with no version in the path. It rotates with every release and cannot be inferred for older versions, and once a newer release ships the previous URL returns 404. Archival to the Wayback Machine is therefore **attempted** for each release as it is discovered, and is **confirmed** only once a capture timestamp is written beside that release's CDN URL in [`tools/firmware-index/fw-shelly-walldisplay.dat`](https://github.com/panel-assistant/android/blob/main/tools/firmware-index/fw-shelly-walldisplay.dat). An empty timestamp means archival is pending or has not succeeded; it does not mean the files are safe. Read which releases are confirmed from the index itself. A release that is never captured while it is current is unrecoverable.
 :::
 
 #### Static legacy CDN (SAWD-0A1XX10EU1 only)
@@ -242,7 +242,7 @@ Stable track, most recent first. The full product changelog is at [ShellyGroup/W
 
 ## Device profiles: known and unknown
 
-Two bundled profiles follow the two OTA tracks: [`shelly-wall-display.yaml`](https://github.com/maxlyth/ha-paneld/blob/main/app/src/main/assets/device-profiles/shelly-wall-display.yaml) and [`shelly-wall-display-v2.yaml`](https://github.com/maxlyth/ha-paneld/blob/main/app/src/main/assets/device-profiles/shelly-wall-display-v2.yaml). An OTA track is too broad to represent model-specific SoC, display and relay facts, so both stay deliberately generic and their fields remain preliminary. The table below describes them. For what an X2i actually reports, read [its own page](/hardware/panels/shelly/wall-display-x2i/).
+Two bundled profiles follow the two OTA tracks: [`shelly-wall-display.yaml`](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display.yaml) and [`shelly-wall-display-v2.yaml`](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display-v2.yaml). An OTA track is too broad to represent model-specific SoC, display and relay facts, so both stay deliberately generic and their fields remain preliminary. The table below describes them. For what an X2i actually reports, read [its own page](/hardware/panels/shelly/wall-display-x2i/).
 
 ### Known or derivable from firmware
 

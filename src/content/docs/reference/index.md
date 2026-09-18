@@ -28,4 +28,4 @@ These pages document how the panel app works underneath: the interfaces it expos
 ## The code
 
 - [Development environment](/reference/development-environment/): the toolchain, the build scripts and what a fork needs to know about signing.
-- [Code tour on DeepWiki](https://deepwiki.com/maxlyth/ha-paneld): a guided walk through the ha-paneld source.
+- [Code tour on DeepWiki](https://deepwiki.com/panel-assistant/android): a guided walk through the ha-paneld source.

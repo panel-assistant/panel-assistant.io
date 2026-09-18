@@ -4,7 +4,7 @@ description: Evidence notes for the community profile covering one contributor's
 ---
 
 :::caution
-This is an import-only community profile based on one contributor's diagnostic report and attended screen tests in GitHub [#130](https://github.com/maxlyth/ha-paneld/issues/130). It describes a Lenovo ThinkSmart View reflashed with LineageOS 8.1, not the retail Lenovo firmware. It is not bundled, automatically selected or validated by the project.
+This is an import-only community profile based on one contributor's diagnostic report and attended screen tests in GitHub [#130](https://github.com/panel-assistant/android/issues/130). It describes a Lenovo ThinkSmart View reflashed with LineageOS 8.1, not the retail Lenovo firmware. It is not bundled, automatically selected or validated by the project.
 :::
 
 The reported panel is a Lenovo ThinkSmart View with Android identity `lenovo starview` / `starfire`, running a community LineageOS 8.1 image with root. The Generic profile can dim it after **Modify system settings** is granted, but Android brightness zero remains visibly lit because this firmware exposes no Linux backlight-class device. An attended test confirmed that `KEYCODE_SLEEP` puts Android fully to sleep.
@@ -24,9 +24,9 @@ The reported panel is a Lenovo ThinkSmart View with Android identity `lenovo sta
 
 ## Screen and wake behaviour
 
-The [`community-lenovo-thinksmart-view-lineageos.yaml`](https://github.com/maxlyth/ha-paneld/blob/main/docs/profiles/unofficial/community-lenovo-thinksmart-view-lineageos.yaml) profile changes screen off from `brightness-zero` to `keyevent`. This makes the Home Assistant **Screen** control request Android sleep instead of moving brightness to the firmware's visible minimum.
+The [`community-lenovo-thinksmart-view-lineageos.yaml`](https://github.com/panel-assistant/android/blob/main/docs/profiles/unofficial/community-lenovo-thinksmart-view-lineageos.yaml) profile changes screen off from `brightness-zero` to `keyevent`. This makes the Home Assistant **Screen** control request Android sleep instead of moving brightness to the firmware's visible minimum.
 
-The hardware test established the local behaviour: touch does not wake the sleeping panel, while either physical volume button does. With the profile in use, the contributor then confirmed that Home Assistant can dim the panel, turn it fully off and wake it again ([#130](https://github.com/maxlyth/ha-paneld/issues/130#issuecomment-5606586655)). A direct `KEYCODE_WAKEUP` command did not wake this firmware, but ha-paneld's keyevent wake path does not rely on that command alone; it also takes an unprivileged wakelock pulse.
+The hardware test established the local behaviour: touch does not wake the sleeping panel, while either physical volume button does. With the profile in use, the contributor then confirmed that Home Assistant can dim the panel, turn it fully off and wake it again ([#130](https://github.com/panel-assistant/android/issues/130#issuecomment-5606586655)). A direct `KEYCODE_WAKEUP` command did not wake this firmware, but ha-paneld's keyevent wake path does not rely on that command alone; it also takes an unprivileged wakelock pulse.
 
 A PIN, pattern or password must not be configured. The keyevent route refuses to sleep a secured panel and dims it instead because waking into a credential screen can strand a wall-mounted device.
 
@@ -38,7 +38,7 @@ Lenovo lists camera and microphone hardware for ThinkSmart View configurations, 
 
 ## First activation
 
-Follow the [community catalogue procedure](/reference/profiles/community/) to import [`community-lenovo-thinksmart-view-lineageos.yaml`](https://github.com/maxlyth/ha-paneld/blob/main/docs/profiles/unofficial/community-lenovo-thinksmart-view-lineageos.yaml), validate it and activate it while somebody is in front of the panel. After restart:
+Follow the [community catalogue procedure](/reference/profiles/community/) to import [`community-lenovo-thinksmart-view-lineageos.yaml`](https://github.com/panel-assistant/android/blob/main/docs/profiles/unofficial/community-lenovo-thinksmart-view-lineageos.yaml), validate it and activate it while somebody is in front of the panel. After restart:
 
 1. Confirm that the Profiles page shows `Unofficial Lenovo ThinkSmart View (LineageOS)` as active and does not roll back to Generic.
 2. Turn **Screen** off from Home Assistant and confirm that Android sleeps fully.

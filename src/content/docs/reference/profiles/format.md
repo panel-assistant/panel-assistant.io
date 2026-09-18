@@ -20,7 +20,7 @@ Every profile contains these conceptual sections:
 | Named strategies         | Optional core-owned rules for the small set of supported firmware/model-dependent values.                                           |
 | Provisioning intent      | Access guidance, software/display recommendations, package desired state and selected core-owned recipes; never a permission grant. |
 
-Schema 2 has the closed root fields `schema`, `id`, `version`, `display_name`, `soc_class`, `soc`, `metadata`, `requires`, `match`, `platform`, `hardware`, `sensors`, `identity`, `input`, `cpu`, `display` and `provisioning`. Field names are lowercase `snake_case`; values are case-sensitive unless their field description says otherwise. See the [minimal community example](https://github.com/maxlyth/ha-paneld/blob/main/docs/profiles/examples/minimal-community.yaml).
+Schema 2 has the closed root fields `schema`, `id`, `version`, `display_name`, `soc_class`, `soc`, `metadata`, `requires`, `match`, `platform`, `hardware`, `sensors`, `identity`, `input`, `cpu`, `display` and `provisioning`. Field names are lowercase `snake_case`; values are case-sensitive unless their field description says otherwise. See the [minimal community example](https://github.com/panel-assistant/android/blob/main/docs/profiles/examples/minimal-community.yaml).
 
 The exact allowed enum values and driver/artifact vocabulary are defined by the schema and driver catalogue served by the running version. Validate against the same release that will activate the profile.
 

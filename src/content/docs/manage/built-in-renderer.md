@@ -55,7 +55,7 @@ For unattended setup from a computer, replace the example panel address and Home
 
 ```bash
 # First create an owner-only password file as shown in the linked provisioning guide.
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/install.sh | \
+curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/install.sh | \
   bash -s -- --provision 192.168.1.50:5555 --builtin \
   --ha-url https://homeassistant.example.com --ha-user your-user --ha-pass-file ha-password.txt
 ```

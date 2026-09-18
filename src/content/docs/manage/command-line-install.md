@@ -10,7 +10,7 @@ Nothing on this page is needed to use Panel Assistant. Adding a panel from [Home
 The script runs on a computer on the same network as the panel, with `adb` and `curl` available. Replace the example address with your panel's.
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555
+curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555
 ```
 
 That downloads the latest signed stable release and installs it on the panel. It is also an update route: run it again and it fetches the current release and installs it over the top, leaving the panel's setup in place. To follow release candidates as well as stable builds, put `--prerelease` before `--provision`; a newer stable release still wins.
@@ -28,7 +28,7 @@ On Windows, run it from Git Bash (part of [Git for Windows](https://gitforwindow
 Add options after the address. This example sets a panel ID and the broker the panel uses to reach Home Assistant:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555 --id living_room --mqtt tcp://192.168.1.10:1883
+curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555 --id living_room --mqtt tcp://192.168.1.10:1883
 ```
 
 Common options include `--force`, `--builtin`, `--ha-url`, `--ha-token-file`, `--ha-user`, `--ha-pass-file`, `--home-dashboard` and `--entity-filter`. Run the installer with `--help` for usage and the advanced entry points. A checkout of the repository also has the complete `scripts/provision.sh --help` reference.
@@ -56,10 +56,10 @@ These operations only read from the panel and do not download or install anythin
 
 ```sh
 # Export secret-inclusive settings.
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555 --export panel-config.json
+curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555 --export panel-config.json
 
 # Check the existing installation without changing it.
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555 --verify
+curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555 --verify
 ```
 
 Protect an exported configuration like a credential. It contains settings and secrets, but it is not a complete backup of the panel. The difference between configuration exports, full `.hpb` backups and the automatic database copies is described in [install safety](/manage/install-safety/#backups-and-recovery).
@@ -74,12 +74,12 @@ For an unattended install, `--builtin` selects the renderer and signs in to Home
 
 ```sh
 # Username/password: the login happens here and mints a revocable refresh token.
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/install.sh | \
+curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/install.sh | \
   bash -s -- --provision 192.168.1.50:5555 --builtin \
   --ha-url https://homeassistant.example.com --ha-user your-user --ha-pass-file ha-password.txt
 
 # Or use a long-lived access token instead of a login.
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/install.sh | \
+curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/install.sh | \
   bash -s -- --provision 192.168.1.50:5555 --builtin \
   --ha-url https://homeassistant.example.com --ha-token-file ha-token.txt
 ```
@@ -93,7 +93,7 @@ To use a separate dashboard app instead, select it as the Dashboard app on the C
 An unattended install cannot ask the guided setup's questions. By default the panel opens the Home Assistant account's default dashboard, which on a large account is often the slowest one available and can take an older panel a long time to draw. `--home-dashboard` and `--entity-filter` answer both questions before the first render:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/install.sh | \
+curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/install.sh | \
   bash -s -- --provision 192.168.1.50:5555 --builtin \
   --ha-url https://homeassistant.example.com --ha-user your-user --ha-pass-file ha-password.txt \
   --home-dashboard /panel-dashboard/living-room --entity-filter on
@@ -108,7 +108,7 @@ Either option also answers the matching question in guided setup. A later change
 `--reset-config` erases the panel app's data and starts guided setup as a genuine first run:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555 --reset-config
+curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555 --reset-config
 ```
 
 :::danger
@@ -124,13 +124,13 @@ The `--restore FILE` and `--restore-fleet FILE` options import a configuration J
 When several panels should share the same portable settings, first export a panel that is already configured:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555 --export shared-config.json
+curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/install.sh | bash -s -- --provision 192.168.1.50:5555 --export shared-config.json
 ```
 
 The export contains secrets, so store it like a credential. On each target panel, restore the portable settings and give that panel's identity and credentials explicitly:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/maxlyth/ha-paneld/main/scripts/install.sh | \
+curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/install.sh | \
   bash -s -- --provision 192.168.1.51:5555 \
   --id living_room --restore-fleet shared-config.json \
   --mqtt tcp://192.168.1.10:1883 --mqtt-user ha-paneld --mqtt-pass-file mqtt-password.txt \
@@ -143,7 +143,7 @@ Repeat the command for each panel, changing its address and `--id`. Add `--prere
 
 ### Update several panels at once
 
-Updating several panels in one run needs a checkout of the [ha-paneld repository](https://github.com/maxlyth/ha-paneld). From the repository root, run [`scripts/update-fleet.sh`](https://github.com/maxlyth/ha-paneld/blob/main/scripts/update-fleet.sh) with the panels' addresses. The script downloads the release once, authenticates the app before any panel is touched, then installs, launches and verifies each panel:
+Updating several panels in one run needs a checkout of the [ha-paneld repository](https://github.com/panel-assistant/android). From the repository root, run [`scripts/update-fleet.sh`](https://github.com/panel-assistant/android/blob/main/scripts/update-fleet.sh) with the panels' addresses. The script downloads the release once, authenticates the app before any panel is touched, then installs, launches and verifies each panel:
 
 ```sh
 scripts/update-fleet.sh --latest -- 192.168.1.10 192.168.1.11:5555
@@ -175,7 +175,7 @@ adb tcpip 5555                # expose adb on the network; this resets on reboot
 adb connect 192.168.1.50:5555 # replace this address with the panel's address
 ```
 
-If a panel has no ADB but does have a browser or file manager, download the [release app](https://github.com/maxlyth/ha-paneld/releases/latest), allow installation from that browser or file manager, and tap the file. Grant the required permissions by hand in Android's Settings, then follow the panel app's setup screen. This does not work on a locked-down panel with no browser or file manager. The [hardware pages](/hardware/) cover each supported model.
+If a panel has no ADB but does have a browser or file manager, download the [release app](https://github.com/panel-assistant/android/releases/latest), allow installation from that browser or file manager, and tap the file. Grant the required permissions by hand in Android's Settings, then follow the panel app's setup screen. This does not work on a locked-down panel with no browser or file manager. The [hardware pages](/hardware/) cover each supported model.
 
 ### Android permissions
 
