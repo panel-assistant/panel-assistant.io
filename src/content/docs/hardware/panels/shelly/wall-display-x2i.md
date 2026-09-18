@@ -7,7 +7,7 @@ soc: RK3326-S
 android: '11'
 screen: 6.9 in, 1440 × 720
 support: Preliminary
-root: 'No root, and none needed; developer mode unlocks adb'
+root: 'No root; developer mode unlocks adb, and setup needs no more than that'
 webview: Chromium 131.0.6778.200 on 2.5.4
 released: '2025-12 (est.)'
 photos:
@@ -41,7 +41,7 @@ Shelly Wall Display X2i, firmware codename Jenna.
 | WebView  | Chromium **131.0.6778.200** as shipped, well above Panel Assistant's minimum, so no WebView work is needed                                                                                                                                               |
 | Sensors  | Proximity and ambient light, both ordinary Android sensors needing no permission; **no temperature or humidity sensor**                                                                                                                                  |
 | Relay    | Interchangeable base: 1 output as standard, optional 2-output base. Present in software and confirmed switching, but not exposed by Panel Assistant; see [Relays](#relays)                                                                               |
-| Root     | None, and none needed. Developer mode unlocks adb for the user                                                                                                                                                                                           |
+| Root     | None. Developer mode unlocks adb, which is all setup needs; the privileged features below stay unavailable                                                                                                                                               |
 | Released | About December 2025 (est.); Shelly quietly released the X2i in Europe around 22 December 2025 ([launch coverage, Notebookcheck, December 2025](https://www.notebookcheck.net/Shelly-quietly-launches-new-Wall-Display-XL-smart-home-hub.1190942.0.html)) |
 
 ## Unlocking developer mode
@@ -67,7 +67,7 @@ The [browser installer](/install/install-over-usb/) completed against a factory 
 
 ## Sensors
 
-Proximity and ambient light are both exposed through the standard Android sensor API and need no permission, so Panel Assistant reads them as an ordinary app. The proximity sensor is registered as a wake-up sensor. Both parts are Sensortek STK3A5x devices on the same I²C address.
+Proximity and ambient light are both exposed through the standard Android sensor API and need no permission. Panel Assistant reported reading proximity through its raw Sensortek route rather than the Android sensor, which its own diagnostics name as `driver_raw16`; either way it reads them as an ordinary app, with no privilege involved. The proximity sensor is registered as a wake-up sensor. Both parts are Sensortek STK3A5x devices on the same I²C address.
 
 The X2i has **no temperature or humidity sensor**, so no room-climate readings are available from the panel itself.
 
@@ -86,7 +86,7 @@ Until then, drive the relays through Home Assistant's own Shelly integration.
 
 - **The Recents key does nothing.** The firmware ignores it, tested from a foreground app and from Settings alike. Panel Assistant still offers a Recents control here, because the bundled profile declares this panel has one. Note that it reaches Recents through Android's accessibility service rather than through the key, and that route has not been exercised on this panel, so whether the control works has not been established either way.
 - **No camera.** The firmware declares camera features that no hardware backs, and Android enumerates no camera. Nothing declares a camera in the profile either, so Panel Assistant correctly offers none here.
-- **No root.** There is no `su` and no way to become root from the shell. Everyday use is unaffected, but the privileged features stay unavailable: screenshots, tap-and-capture remote control, verified app and Companion updates, and display density and text size. The onboard relays are a separate matter, covered above.
+- **No root.** There is no `su` and no way to become root from the shell. Setting the panel up and using it day to day does not need it, but a set of features does stay unavailable: screenshots, tap-and-capture remote control, verified app and Companion updates, display density and text size, and rebooting or switching back to the vendor launcher. The onboard relays are a separate matter, covered above.
 
 ## Firmware, and why the shipped version matters
 
