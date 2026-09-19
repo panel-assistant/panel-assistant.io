@@ -3,11 +3,19 @@ title: Choose a panel
 description: The Android wall panels Panel Assistant supports today, what makes a panel a good fit, and how to get a model that is not listed supported.
 ---
 
-Most wall panels are bought from overseas marketplaces on little more than a listing and a hope. This page is the check to do before you buy. Every panel below runs Panel Assistant, and owners have confirmed all of them on real hardware except the Shelly Wall Display family, where one X2i unit has been tested and the rest of the family is documented and waiting for a first confirmed unit.
+Most wall panels are bought from overseas marketplaces on little more than a listing and a hope. This page is the check to do before you buy. Every model listed here runs Panel Assistant, and owners have confirmed all of them on real hardware except the Shelly Wall Display family, where one X2i unit has been tested and the rest of the family is documented and waiting for a first confirmed unit.
 
 :::tip
 Each model has its own [hardware page](/hardware/) with its fact sheet, what reaches Home Assistant, and how to get it running.
 :::
+
+## Generic support: every other Android panel
+
+**A panel that is not named on this page is not an unsupported panel.** Panel Assistant does not need to recognise your hardware to run on it. Any panel that meets the requirements further down starts on the Generic profile, and for most people that is already the panel they wanted: the Home Assistant dashboard on the screen, screen brightness and sleep, audio, navigation, and the standard Android sensors such as light and proximity, all arriving in Home Assistant as entities on the panel's own device.
+
+What a model's own profile adds is the hardware peculiar to that model: RGB LEDs, physical buttons, relays, vendor radios and climate chips. Plenty of panels have none of those, and plenty of owners never need the ones they have. In those cases Generic is not a lesser setting to be endured until something better arrives, it is the whole feature set.
+
+So buy on the requirements below rather than on this list, and treat a named profile as a bonus where it exists.
 
 ## Full support
 
@@ -42,7 +50,7 @@ Profiles written from firmware research, ready for the first owner to confirm on
 - **Android 8.0 or newer.**
 - **Developer options.** The installer uses Android's debugging interface, which almost every panel lets you turn on.
 - **Any system WebView.** Vendors often ship a browser engine years out of date. Panel Assistant checks it, and where the panel allows, installs a known-good version for you. [Preparing the panel](/install/prepare-a-panel/) covers the rest.
-- **A hardware profile, for the best results.** Most Android panels work straight away with the Generic profile, which brings the dashboard and the panel's standard sensors, such as light and proximity, into Home Assistant. A model's own profile adds everything else it has: LEDs, buttons, relays and model-specific sensors.
+- **A hardware profile, only if you want the extras.** Everything above is enough for the Generic profile. A model's own profile is what reaches the LEDs, buttons, relays and model-specific sensors, as [Generic support](#generic-support-every-other-android-panel) describes.
 - **Root, for a few extras.** A few capabilities on some models need root. Each hardware page says which ones, and the path to get it.
 
 ## Not on the list?
