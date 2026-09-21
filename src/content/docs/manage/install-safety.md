@@ -82,3 +82,17 @@ Hardware profile recommendations stay advisory. The script never disables packag
 The installer stops with a non-zero result when it cannot safely establish something the requested operation needs. Examples are a package query that does not answer, an app with the wrong package or signer, a helper transaction that cannot be recovered, a requested configuration export that cannot be verified, or a required self-check after installation that fails.
 
 Other findings are warnings, because stopping would make recovery harder. An unavailable automatic database backup, a storage health warning or a failed status call before the upgrade does not on its own prevent an ordinary in-place app replacement. The installer states that limit plainly rather than presenting a partial or invalid recovery file as a success.
+
+### Reading a refusal
+
+Every refusal names one condition and changes nothing on the panel unless it says otherwise. The wording is chosen so that the message points at what to repair, which matters because the remedy differs sharply between them.
+
+- **The canonical database kept changing while it was read.** The panel's app was still writing to its database while the installer tried to take a consistent copy. This is a busy panel, not a damaged one. The copy is retried automatically, so seeing this means the app kept writing through every attempt; running the installer again when the panel is quieter is usually enough.
+- **The canonical database could not be read**, or **is not a regular file.** This is the opposite case, and it is about the stored data rather than the app: the file is missing, is not a file, or cannot be opened at all. Recover the database before retrying.
+- **The canonical database is missing while the app is installed.** The app is present but its store is not, which an ordinary upgrade cannot resolve. Restore a backup rather than retrying.
+- **The install target is read-only.** The directory the privileged helper is installed into sits on a filesystem mounted read-only. Remounting it writable needs no reboot on most panels. The installer reports the filesystem it measured, so check that line before assuming which partition is meant.
+- **The install target has no room, or no free inodes.** Both report what was measured, and the two are distinguished because a panel can be out of one while having plenty of the other.
+- **An incomplete prior upgrade could not be reconciled.** A previous run left a recovery record the installer cannot resolve against what is now installed. Nothing is changed. This needs the recovery record examined rather than another retry, because a retry will reach the same conclusion.
+- **The app is still installed some time after the successor was provisioned.** The new app was installed but the old one was not removed inside the window the installer waits. The panel is working; the removal is what did not complete.
+
+A refusal that mentions a rollback states whether that rollback was verified. "Rolled back and verified" means the panel is as it was before the run. "Rollback could not be verified" means the privileged helper should be checked before relying on privileged operations, even though the app itself was not replaced.
