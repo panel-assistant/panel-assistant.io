@@ -1,0 +1,23 @@
+---
+// On a translated page, says the text is a machine translation and links the English page it was
+// checked against, which takes precedence. An untranslated page carries Starlight's own notice instead.
+const { locale, isFallback } = Astro.locals.starlightRoute;
+const english = Astro.url.pathname.slice(`/${locale}`.length) || '/';
+const note =
+  locale && !isFallback
+    ? Astro.locals.t('page.translation_note').replace('<a>', `<a href="${english}" hreflang="en">`)
+    : '';
+---
+
+{note && <p class="translation-note not-content" set:html={note} />}
+
+<style>
+  .translation-note {
+    margin: 0.75rem 0 0;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .translation-note :global(a) {
+    color: inherit;
+  }
+</style>

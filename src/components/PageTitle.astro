@@ -6,6 +6,7 @@
 // swipe navigation between shots.
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 import { rewriteAssetUrl, ASSET_BASE } from '../plugins/asset-urls.mjs';
+import TranslationNote from './TranslationNote.astro';
 
 const { entry } = Astro.locals.starlightRoute;
 const isPanel = entry.id.startsWith('hardware/panels/');
@@ -14,6 +15,7 @@ const credit = isPanel ? entry.data.photoCredit : undefined;
 ---
 
 <Default />
+<TranslationNote />
 {photos.length > 0 && (
   <figure class="hardware-photos not-content">
     <ul>

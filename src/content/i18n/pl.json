@@ -80,5 +80,6 @@
   "sidebar.features": "Funkcje",
   "sidebar.keep_running": "Utrzymanie działania",
   "sidebar.hardware": "Sprzęt",
-  "sidebar.reference": "Informacje techniczne"
+  "sidebar.reference": "Informacje techniczne",
+  "page.translation_note": "Ta strona została przetłumaczona maszynowo i sprawdzona względem <a>angielskiego oryginału</a>, który ma pierwszeństwo w razie rozbieżności."
 }

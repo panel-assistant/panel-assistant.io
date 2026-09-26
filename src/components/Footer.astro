@@ -5,6 +5,7 @@
 import Default from '@astrojs/starlight/components/Footer.astro';
 import build from '../build-info/build.json';
 import Comments from './Comments.astro';
+import TranslationNote from './TranslationNote.astro';
 
 const { entry, lang, lastUpdated } = Astro.locals.starlightRoute;
 const isDoc = entry.data.template !== 'splash';
@@ -30,6 +31,7 @@ const label =
 ---
 
 {isDoc && <Comments />}
+{!isDoc && <TranslationNote />}
 <Default />
 <div class="site-foot">
   <p class="thanks" set:html={thanks} />

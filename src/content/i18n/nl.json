@@ -79,5 +79,6 @@
   "sidebar.keep_running": "Draaiend houden",
   "sidebar.hardware": "Hardware",
   "sidebar.reference": "Naslag",
-  "heading.anchorLabel": "Sectie met de titel “{{title}}”"
+  "heading.anchorLabel": "Sectie met de titel “{{title}}”",
+  "page.translation_note": "Deze pagina is automatisch vertaald en gecontroleerd aan de hand van het <a>Engelse origineel</a>; bij verschillen geldt het Engelse origineel."
 }

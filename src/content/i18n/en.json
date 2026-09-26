@@ -78,5 +78,6 @@
   "sidebar.features": "Features",
   "sidebar.keep_running": "Keep it running",
   "sidebar.hardware": "Hardware",
-  "sidebar.reference": "Reference"
+  "sidebar.reference": "Reference",
+  "page.translation_note": "This page is machine-translated and checked against the <a>English original</a>, which takes precedence where they differ."
 }

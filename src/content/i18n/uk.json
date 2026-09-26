@@ -81,5 +81,6 @@
   "sidebar.keep_running": "Стабільна робота",
   "sidebar.hardware": "Обладнання",
   "sidebar.reference": "Довідка",
-  "heading.anchorLabel": "Розділ «{{title}}»"
+  "heading.anchorLabel": "Розділ «{{title}}»",
+  "page.translation_note": "Цю сторінку перекладено машинно та звірено з <a>англійським оригіналом</a>, який має перевагу в разі розбіжностей."
 }
