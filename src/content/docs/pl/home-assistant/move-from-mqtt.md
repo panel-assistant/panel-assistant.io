@@ -38,7 +38,7 @@ Wybierz **Dodaj integrację**, potem **Panel Assistant**, potem **Dodaj panel w 
 
 ## 3. Potwierdź użytkownika panelu
 
-Gdy panel połączy się po raz pierwszy, Home Assistant pokaże naprawę: **Potwierdź użytkownika Home Assistant dla** twojego panelu. Otwórz ją w **Ustawienia**, **Naprawy**, sprawdź, czy wskazany użytkownik to konto, którym loguje się panel, i potwierdź.
+Gdy panel połączy się po raz pierwszy, Home Assistant pokaże naprawę: **Potwierdź użytkownika Home Assistant dla** twojego panelu. Otwórz ją przez **Ustawienia**, **Problemy**, sprawdź, czy wskazany użytkownik to konto, którym loguje się panel, i potwierdź.
 
 Panel sam ponawia próby, więc naprawa może pojawić się dopiero po maksymalnie 15 minutach, a po twoim potwierdzeniu panel może potrzebować tyle samo czasu, żeby się połączyć.
 

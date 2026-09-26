@@ -1,6 +1,6 @@
 ---
 title: Przygotowanie panelu
-description: Dwie rzeczy, których panel potrzebuje, zanim Panel Assistant będzie mógł się na nim zainstalować, oraz aktualizacja WebView, od której zależy, czy pierwszy pulpit nawigacyjny będzie wyglądał dobrze.
+description: Dwie rzeczy, których panel potrzebuje, zanim Panel Assistant będzie mógł zainstalować na nim aplikację, oraz aktualizacja WebView, od której zależy, czy pierwszy pulpit nawigacyjny będzie wyglądał dobrze.
 sourceCommit: e132b3f499b292a1757d97d76675e840a7a25067
 ---
 

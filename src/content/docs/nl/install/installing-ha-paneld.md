@@ -24,7 +24,7 @@ Beide routes controleren het paneel voordat ze iets veranderen, en weigeren over
 
 Het paneel verschijnt als apparaat met een statussensor en diagnostiek, en op de pagina Panel Assistant in de zijbalk. Het paneel biedt ook een eigen statuspagina op je netwerk op poort 8888; daar stel je in naar welk dashboard het wijst. Tot die tijd toont het scherm van het paneel zelf dat adres, met een QR-code en knoppen om het te configureren of het dashboard te openen.
 
-![Het wachtscherm van het paneel vóór de installatie, met het configuratieadres, een QR-code en de knoppen Configure en Dashboard](asset:standing-screen.png)
+![Het wachtscherm van het paneel vóór de installatie, met het configuratieadres, een QR-code en de knoppen Configureren en Dashboard](asset:standing-screen.png)
 
 Ga verder met [Een paneel verbinden](/nl/home-assistant/connect-a-panel/).
 
