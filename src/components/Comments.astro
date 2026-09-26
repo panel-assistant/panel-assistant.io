@@ -3,11 +3,39 @@
 // which the Worker at /comments posts into the same discussion. One discussion per page, found by
 // pathname, in the website repository's Discussions.
 import config from '../../worker/comments.json';
+
+const { lang } = Astro.locals.starlightRoute;
+const t = Astro.locals.t;
+// Text the script writes later, in this page's language. Plural forms follow Intl.PluralRules;
+// a language names only the forms it uses, and a missing form falls back to "other".
+// English has only "one" and "other"; Polish and Ukrainian add "few" and "many".
+const forms = ['one', 'few', 'many', 'other'].filter((form) => t.exists(`comments.load.${form}`));
+const messages = {
+  load: Object.fromEntries(
+    forms.map((form) => [form, t(`comments.load.${form}` as 'comments.load.other')]),
+  ),
+  first: t('comments.first'),
+  stopped: t('comments.stopped'),
+  posting: t('comments.posting'),
+  posted: t('comments.posted'),
+  failed: t('comments.failed'),
+  errors: Object.fromEntries(
+    (['rate', 'challenge', 'empty', 'long', 'unavailable'] as const).map((e) => [
+      e,
+      t(`comments.error.${e}`),
+    ]),
+  ),
+};
 ---
 
-<section class="comments" aria-labelledby="comments-heading">
+<section
+  class="comments"
+  aria-labelledby="comments-heading"
+  data-messages={JSON.stringify(messages)}
+>
   <h2 id="comments-heading">
-    Comments<span class="count"></span>
+    {t('comments.heading')}
+    <span class="count"></span>
   </h2>
   <div class="gate">
     <button
@@ -23,55 +51,40 @@ import config from '../../worker/comments.json';
       data-emit-metadata="0"
       data-input-position="top"
       data-theme="preferred_color_scheme"
-      data-lang="en"
+      data-lang={lang}
     >
-      Load comments
+      {t('comments.load')}
     </button>
-    <p class="note">
-      Comments are kept in this page's discussion on GitHub, so loading them connects your browser
-      to GitHub. This browser remembers the choice and loads comments on other pages when you scroll
-      down to them.
-    </p>
+    <p class="note">{t('comments.load_note')}</p>
   </div>
   <div class="comments-body" hidden>
     <div class="giscus"></div>
     <details class="anonymous">
-      <summary>Comment without a GitHub account</summary>
+      <summary>{t('comments.anonymous')}</summary>
       <form class="anonymous-form" method="post" action="/comments">
         <label>
-          Name <span class="optional">(optional, shown with the comment)</span>
+          {t('comments.name')} <span class="optional">{t('comments.name_note')}</span>
           <input name="name" maxlength={config.maxName} autocomplete="nickname" />
         </label>
         <label>
-          Comment
+          {t('comments.comment')}
           <textarea name="body" required maxlength={config.maxBody} rows="5"></textarea>
         </label>
-        <p class="note">
-          Your comment is posted publicly to this page's discussion on GitHub. Nothing else about
-          you is kept.
-        </p>
+        <p class="note">{t('comments.post_note')}</p>
         <div class="challenge" data-sitekey={config.turnstileSiteKey}></div>
-        <button type="submit">Post comment</button>
+        <button type="submit">{t('comments.post')}</button>
         <p class="status" role="status" aria-live="polite"></p>
       </form>
     </details>
     <p class="note autoload">
       <button type="button" class="stop-autoload">
-        Stop loading comments automatically
+        {t('comments.stop_autoload')}
       </button>
     </p>
   </div>
 </section>
 
 <script>
-  const MESSAGES: Record<string, string> = {
-    rate: 'Please wait a minute before posting again.',
-    challenge: 'The check did not pass. Please try again.',
-    empty: 'Write a comment first.',
-    long: 'That comment is too long.',
-    unavailable: 'Comments without an account are not available right now.',
-  };
-
   // Nothing loads from GitHub until a reader asks once. That choice is kept in this browser, and
   // from then on comments load when the reader scrolls near them, so a reader who never reaches
   // them still contacts no third party. Both kinds of reader see the anonymous form only with the
@@ -94,6 +107,8 @@ import config from '../../worker/comments.json';
   };
 
   for (const section of document.querySelectorAll<HTMLElement>('section.comments')) {
+    const text = JSON.parse(section.dataset.messages!);
+    const plural = new Intl.PluralRules(document.documentElement.lang);
     const gate = section.querySelector<HTMLElement>('.gate')!;
     const button = section.querySelector<HTMLButtonElement>('button.show-comments')!;
     const body = section.querySelector<HTMLElement>('.comments-body')!;
@@ -119,8 +134,7 @@ import config from '../../worker/comments.json';
     });
     stop.addEventListener('click', () => {
       remember(false);
-      stop.parentElement!.textContent =
-        'Comments will no longer load by themselves on other pages.';
+      stop.parentElement!.textContent = text.stopped;
     });
 
     if (remembered()) {
@@ -147,16 +161,15 @@ import config from '../../worker/comments.json';
       .then((out) => {
         const count = out?.count;
         if (!Number.isInteger(count)) return;
-        button.textContent =
-          count === 0
-            ? 'Be the first to comment'
-            : `Load ${count} comment${count === 1 ? '' : 's'}`;
+        const form = text.load[plural.select(count)] ?? text.load.other;
+        button.textContent = count === 0 ? text.first : form.replace('{count}', String(count));
         if (count > 0) section.querySelector('.count')!.textContent = ` (${count})`;
       })
       .catch(() => {});
   }
 
   for (const details of document.querySelectorAll<HTMLDetailsElement>('details.anonymous')) {
+    const text = JSON.parse(details.closest<HTMLElement>('section.comments')!.dataset.messages!);
     const form = details.querySelector<HTMLFormElement>('form')!;
     const status = form.querySelector<HTMLElement>('.status')!;
     const challenge = form.querySelector<HTMLElement>('.challenge')!;
@@ -180,18 +193,18 @@ import config from '../../worker/comments.json';
       event.preventDefault();
       const data = new FormData(form);
       data.set('page', location.pathname);
-      status.textContent = 'Posting…';
+      status.textContent = text.posting;
       try {
         const res = await fetch('/comments', { method: 'POST', body: data });
         const out = await res.json();
         if (res.ok) {
           form.reset();
-          status.textContent = 'Posted. Reload the page to see it in the discussion.';
+          status.textContent = text.posted;
         } else {
-          status.textContent = MESSAGES[out.error] ?? 'The comment could not be posted.';
+          status.textContent = text.errors[out.error] ?? text.failed;
         }
       } catch {
-        status.textContent = 'The comment could not be posted.';
+        status.textContent = text.failed;
       }
       (window as any).turnstile?.reset(widget);
     });

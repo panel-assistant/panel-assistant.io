@@ -1,0 +1,204 @@
+---
+title: Panel Assistant
+description: Home Assistant na ścianie, zrobiony porządnie. Panel Assistant zamienia panele ścienne z Androidem w szybki i niezawodny dom dla twoich pulpitów nawigacyjnych Home Assistant, instalowany i zarządzany bezpośrednio z Home Assistant.
+template: splash
+# Starlight renders "<page title> | <site title>", which on this page is the same
+# string twice. This sets the tag outright.
+head:
+  - tag: title
+    content: Panel Assistant
+hero:
+  title: Home Assistant na ścianie, <span>zrobiony porządnie.</span>
+  tagline: Panel Assistant zamienia panel ścienny z Androidem w szybki i niezawodny dom dla twoich pulpitów nawigacyjnych Home Assistant. Każdy panel instalujesz i nim zarządzasz bezpośrednio z Home Assistant.
+  actions:
+    - text: Zacznij
+      link: /pl/start/getting-started/
+    - text: Otwórz w HACS
+      link: https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration
+      variant: secondary
+    - text: Czy mój panel jest obsługiwany?
+      link: /pl/install/supported-panels/
+      variant: secondary
+sourceCommit: 7f826badb62e49226db782fd204fd5fea2e2ee00
+---
+
+import Features from '../../../components/home/Features.astro';
+import Split from '../../../components/home/Split.astro';
+import Spotlight from '../../../components/home/Spotlight.astro';
+import Tiles from '../../../components/home/Tiles.astro';
+
+<Split title="Zdolny sprzęt, zawiedziony przez oprogramowanie">
+
+Panele ścienne z Androidem to naprawdę dobry sprzęt opakowany w naprawdę kiepskie oprogramowanie. Pulpit się przycina, dotknięcia giną, aplikacja producenta rozpycha się łokciami na ekranie, a każdy producent wymaga innej aplikacji i innego rytuału konfiguracji. Większość ludzi po prostu to znosi, bo panel bez przycisków i bez niezawodnego resetu to drogi przedmiot do zepsucia.
+
+Panel Assistant to darmowe lekarstwo o otwartym kodzie źródłowym. Ma jedno zadanie: uruchamiać twoje pulpity nawigacyjne Home Assistant na ścianie, szybko i bez zamieszania. Każdy twój panel konfigurujesz i zarządzasz nim w ten sam sposób, z Home Assistant, bez niczego, czego trzeba by ręcznie doglądać, stroić czy poprawiać.
+
+</Split>
+
+<Features
+  items={[
+    {
+      icon: 'gauge',
+      title: 'Wydajność, którą czuć',
+      text: 'Twoje istniejące pulpity nawigacyjne dostają tylko dane, których faktycznie używają, więc panel reaguje w chwili dotknięcia.',
+    },
+    {
+      icon: 'screen',
+      title: 'Konfiguracja z Home Assistant',
+      text: 'Dodajesz panel tak, jak każde inne urządzenie: w Ustawieniach, w przeglądarce, bez wiersza poleceń w zasięgu wzroku.',
+    },
+    {
+      icon: 'shield',
+      title: 'Bezpieczna instalacja',
+      text: 'Sprawdza wszystko, zanim cokolwiek zmieni, odmawia nadpisania tego, czego nie powinna, a po przerwaniu wznawia od miejsca, w którym skończyła.',
+    },
+    {
+      icon: 'chip',
+      title: 'Sprzęt panelu w Home Assistant',
+      text: 'Ekran, diody LED, przyciski, przekaźniki, czujniki światła i zbliżeniowe pojawiają się automatycznie jako encje, sterowane bezpośrednio, bez bibliotek producenta po drodze.',
+    },
+    {
+      icon: 'wave',
+      title: 'Panel i dom, razem',
+      text: 'Przygasa razem z pomieszczeniem i budzi się, gdy podchodzisz. Tam, gdzie panelowi brakuje czujnika, ekranem steruje Home Assistant.',
+    },
+    {
+      icon: 'grid',
+      title: 'Każdy panel, jeden system',
+      text: 'Różne marki i modele wyglądają i zachowują się w Home Assistant identycznie. Kolejny panel dołącza do tej samej konfiguracji, a nie do drugiej aplikacji.',
+    },
+    {
+      icon: 'wall',
+      title: 'Stworzony na ścianę',
+      text: 'Zbudowany dla dedykowanych paneli zasilanych z sieci, które zachowują się jak część domu, a nie jak tablet, który trzeba ładować i pilnować.',
+    },
+    {
+      icon: 'search',
+      title: 'Wiedz przed zakupem',
+      text: 'Strony o sprzęcie mówią, co działa na każdym modelu, w jakim stopniu i czego się spodziewać, zanim wydasz pieniądze albo poświęcisz wieczory.',
+    },
+  ]}
+/>
+
+<Spotlight
+  title="Tylko encje, których używa twój pulpit nawigacyjny"
+  figure="10–100×"
+  caption="mniej ruchu stanów z Home Assistant docierającego do panelu, zmierzone w prawdziwych domach"
+>
+
+Pulpit nawigacyjny na panelu ściennym zwykle odbiera każdą zmianę stanu w domu, niezależnie od tego, czy wyświetla daną encję. W dużej instalacji słaby panel spędza czas na dekodowaniu tysięcy encji, których nigdy nie pokazuje, i zwykle właśnie dlatego się przycina.
+
+Filtr encji Panel Assistant uczy się, od których encji twój pulpit nawigacyjny naprawdę zależy, czytając jego konfigurację i obserwując pulpit podczas działania, a potem prosi Home Assistant o wysyłanie tylko tych. Home Assistant filtruje, zanim cokolwiek zostanie wysłane, więc reszta nigdy nie trafia do panelu.
+
+To różnica między panelem, który się przycina, a takim, który reaguje w chwili dotknięcia. [Zobacz, jak to działa i jak to włączyć](/pl/manage/performance/).
+
+</Spotlight>
+
+<Split title="Uruchomienie panelu, w jakimkolwiek stanie jest jego oprogramowanie">
+
+Większość paneli przychodzi z zagranicznych platform handlowych z cienką instrukcją i bez żadnej obietnicy, że uruchomi się na nich cokolwiek poza aplikacją producenta. Czy to działa, dowiadujesz się dopiero, gdy pieniądze i wieczory są już wydane. Panel Assistant ma zdjąć z ciebie tę niepewność: [sprawdź swój model](/pl/install/supported-panels/) przed zakupem i wiedz, że gdy dotrze, istnieje przetestowany, powtarzalny sposób, żeby go uruchomić.
+
+Najtrudniejsza w każdym panelu jest pierwsza godzina. Panel Assistant przejdzie ją za ciebie, z poziomu Home Assistant. Jeśli panel jest już w twojej sieci, podaj integracji jego adres, a ona zrobi resztę. Jeśli wciąż leży w pudełku, podłącz go kablem USB do laptopa i zainstaluj prosto z przeglądarki, zanim w ogóle trafi na ścianę. Tak czy inaczej zatwierdzasz jedno pytanie na panelu i śledzisz całość do końca.
+
+</Split>
+
+<Split title="Twojego panelu nie ma na liście? Opisz go, a będzie">
+
+Obsługa sprzętu w Panel Assistant to dane, nie kod. Każdy model jest opisany profilem: jak rozpoznać panel, jaki sprzęt ma na pokładzie i które ścieżki są bezpieczne do sterowania jego ekranem, diodami LED, przekaźnikami i czujnikami. Profile to zwykły tekst, edytowany i sprawdzany w przeglądarce, bez narzędzi programistycznych i bez przebudowy. Panel, którego projekt nigdy nie widział, i tak dostaje podstawy z zachowawczego profilu ogólnego, a resztę możesz go nauczyć sam i podzielić się wynikiem.
+
+</Split>
+
+<Split title="Wydajność, którą możesz zmierzyć">
+
+Tanie panele są wolne z konkretnych powodów, a Panel Assistant pokazuje ci te powody. Strona stanu panelu mierzy opóźnienie dotyku, czas do interaktywności, blokowanie głównego wątku, nieoczekiwane przeładowania, liczbę aktualizacji stanu na sekundę i trzy encje odpowiedzialne za większość z nich, a obok tego procesor, pamięć i temperaturę. Wiersz z prawdopodobną przyczyną analizuje to wszystko i mówi ci, co hamuje panel.
+
+</Split>
+
+<Split title="Zamontuj i zapomnij">
+
+Panel ścienny powinien zachowywać się jak włącznik światła: zawsze na miejscu, nigdy cię nie potrzebuje. Panel Assistant uczy się normalnego światła w pomieszczeniu i przygasa razem z nim, uczy się swojego czujnika zbliżeniowego, tak aby machnięcie budziło ekran, a przechodzący kot nie, zwalnia pamięć w nocy, gdy ekran jest wyłączony, i po ponownym uruchomieniu sam otwiera ostatni dobrze działający pulpit.
+
+</Split>
+
+<Split title="Oprogramowanie producenta, okiełznane">
+
+Panel Assistant przejmuje ekran główny i daje panelowi bez przycisków ekranowy sposób poruszania się. Utrzymuje sprawdzone silniki przeglądarki dla paneli, które dostarczają silnik o lata za stary, i nie pozwala widżetowi sterującemu producenta rysować się na twoim pulpicie nawigacyjnym, a przy tym z założenia odmawia dotykania czegokolwiek, czego panel potrzebuje, żeby działać.
+
+</Split>
+
+<Tiles
+  boxed
+  title="Nowy i szybko się rozwija"
+  links={[
+    {
+      title: 'Oznacz ten projekt gwiazdką na GitHubie',
+      href: 'https://github.com/panel-assistant/ha-integration',
+      text: 'Najprostszy sposób, żeby dać znać innym użytkownikom Home Assistant, że to istnieje.',
+    },
+    {
+      title: 'Zgłoś swój panel',
+      href: 'https://github.com/panel-assistant/ha-integration/issues',
+      text: 'Nazwa modelu i co zadziałało, albo udostępnij profil, którego go nauczyłeś.',
+    },
+    {
+      title: 'Czatuj na Discordzie',
+      href: 'https://panel-assistant.io/go/discord',
+      text: 'Pytania, panele w prawdziwych domach i co budować dalej.',
+    },
+  ]}
+>
+
+Panel Assistant jest nowy i szybko się rozwija. Trzy rodziny paneli mają dziś pełną obsługę sprzętu, właściciele potwierdzili trzy kolejne, jeden Shelly Wall Display X2i został przetestowany, a reszta rodziny Shelly Wall Display jest udokumentowana. Wpisanie na tę listę każdego panelu ściennego z Androidem, który warto zamontować, wymaga prawdziwego sprzętu w prawdziwych domach, i tu wkraczasz ty.
+
+</Tiles>
+
+<Tiles
+  title="Dowiedz się więcej"
+  links={[
+    {
+      title: 'Pierwsze kroki',
+      href: '/pl/start/getting-started/',
+      text: 'Cztery kroki od gołego panelu do twojego pulpitu na ścianie.',
+    },
+    {
+      title: 'Jak to działa',
+      href: '/pl/start/what-it-is/',
+      text: 'Co trafia na panel, a co zostaje w Home Assistant.',
+    },
+    {
+      title: 'Sprzęt',
+      href: '/pl/hardware/',
+      text: 'Każdy opisany panel, jego oprogramowanie układowe i jego dziwactwa.',
+    },
+    {
+      title: 'Instalacja integracji',
+      href: '/pl/home-assistant/custom-integration/',
+      text: 'Dodaj Panel Assistant przez HACS.',
+    },
+    {
+      title: 'Instalacja przez USB',
+      href: '/pl/install/install-over-usb/',
+      text: 'Nowy panel, kabel i twoja przeglądarka.',
+    },
+    {
+      title: 'Rozwiązywanie problemów',
+      href: '/pl/manage/troubleshooting/',
+      text: 'Co zazwyczaj idzie nie tak i gdzie najpierw szukać przyczyny.',
+    },
+  ]}
+/>
+
+<Split title="Darmowe, otwarte i twoje">
+
+Wszystko tutaj to darmowe oprogramowanie o otwartym kodzie źródłowym na liberalnych licencjach, bez konta, bez usługi w chmurze i bez subskrypcji. Tworzy je użytkownik Home Assistant, który chciał, żeby panele ścienne działały tak, jak sprzęt zawsze obiecywał, i udostępnia je, żeby twoje też mogły.
+
+Ma należeć do społeczności, która z niego korzysta i go ulepsza. Wkład jest scalany pod nazwiskami autorów i im przypisywany, nigdy po cichu przepisywany, przez AI ani przez kogokolwiek innego, żeby podać czyjąś pracę za dzieło projektu.
+
+</Split>
+
+<div class="not-content pa-legal">
+  Ikona zawiera znak Home Assistant, który pozostaje własnością projektu Home Assistant i nie jest
+  objęty licencją tego projektu. Panel Assistant to niezależny projekt i nie jest powiązany z Home
+  Assistant ani z Open Home Foundation, ani przez nie popierany. Wszystkie nazwy produktów, znaki
+  towarowe i zastrzeżone znaki towarowe są własnością ich odpowiednich właścicieli.
+</div>

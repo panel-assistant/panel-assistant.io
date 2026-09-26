@@ -1,0 +1,38 @@
+---
+title: De integratie installeren
+description: Panel Assistant toevoegen aan Home Assistant via HACS, want daar begint alles.
+sourceCommit: c6d46a0cef54b402bad5b57775822f407335c1a5
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+Panel Assistant is een aangepaste integratie, die je toevoegt via [HACS](https://hacs.xyz/). Je hebt Home Assistant 2026.8.3 of nieuwer nodig, en HACS.
+
+<LinkButton
+  href="https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration"
+  icon="external"
+>
+  Openen in HACS
+</LinkButton>
+
+Die knop opent de repository in HACS op je eigen Home Assistant, klaar om te downloaden. Doe je het liever met de hand:
+
+1. Voeg in HACS `https://github.com/panel-assistant/ha-integration` toe als aangepaste repository met de categorie **Integratie**.
+2. Download **Panel Assistant** en herstart daarna Home Assistant.
+3. Ga naar **Instellingen**, **Apparaten en diensten**, **Integratie toevoegen** en kies **Panel Assistant**.
+
+HACS biedt de nieuwste release aan. Wil je nieuwe versies uitproberen voordat ze uitkomen, zet dan in HACS **Show beta versions** aan voor Panel Assistant.
+
+## Wat je krijgt
+
+- **Het installatieprogramma.** Een paneel toevoegen is een begeleide procedure binnen Home Assistant. Die controleert het paneel, installeert de paneel-app via het netwerk of [via USB](/nl/install/install-over-usb/), start hem en maakt pas daarna het apparaat aan. Een paneel waarop de app al draait, wordt overgenomen in plaats van opnieuw geïnstalleerd.
+- **Eén apparaat per paneel.** Elk paneel verschijnt onder Apparaten en diensten met een statussensor en downloadbare diagnostische gegevens, waaruit gevoelige gegevens zijn weggelaten, zodat je ze kunt delen als je om hulp vraagt.
+- **Al je panelen op één pagina.** Een item Panel Assistant in de zijbalk toont elk paneel, met of het bereikbaar is, welke versie erop draait en alles wat aandacht nodig heeft.
+
+## Wat er nog gaat komen
+
+Panel Assistant is nieuw en ontwikkelt zich snel. Een paneel dat al geïnstalleerd is, wordt bijgewerkt via zijn update-entiteit in Home Assistant, zoals beschreven in [Updates en herstel](/nl/manage/updates-and-recovery/). Het USB-installatieprogramma is het nieuwste onderdeel; je kunt het veilig opnieuw proberen, maar reken op wat ruwe randjes. Feedback is welkom in de [issues](https://github.com/panel-assistant/ha-integration/issues) en op [Discord](https://panel-assistant.io/go/discord).
+
+## Als je de eerdere 0.1.0-integratie hebt gebruikt
+
+Verwijder de oude integratie onder Apparaten en diensten en verwijder daarna de download ervan uit HACS. Voeg deze repository toe, download Panel Assistant, herstart Home Assistant en voeg de integratie daarna opnieuw toe met de hostnaam of het adres van je paneel. Op het paneel zelf verandert niets.

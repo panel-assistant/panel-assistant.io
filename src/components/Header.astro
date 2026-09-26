@@ -1,23 +1,28 @@
 ---
 // One header for the homepage and every documentation page: the site title, the three areas of
-// the site, search, the Discord and GitHub links, the theme toggle and a way into the docs.
+// the site, search, the language picker, the Discord and GitHub links, the theme toggle and a way
+// into the docs. Paths are read and written inside the current language.
+import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
 import Search from '@astrojs/starlight/components/Search.astro';
 import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
 import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
 import ThemeSelect from './ThemeSelect.astro';
 
-const path = Astro.url.pathname;
-const inArea = (prefix: string) => path.startsWith(prefix);
+const { locale } = Astro.locals.starlightRoute;
+const t = Astro.locals.t;
+const prefix = locale ? `/${locale}` : '';
+const path = Astro.url.pathname.slice(prefix.length) || '/';
+const inArea = (area: string) => path.startsWith(area);
 const onHome = path === '/';
 
 const areas = [
   {
-    label: 'Documentation',
-    href: '/start/getting-started/',
+    label: t('header.documentation'),
+    href: `${prefix}/start/getting-started/`,
     current: !onHome && !inArea('/hardware/') && !inArea('/reference/'),
   },
-  { label: 'Hardware', href: '/hardware/', current: inArea('/hardware/') },
-  { label: 'Reference', href: '/reference/', current: inArea('/reference/') },
+  { label: t('header.hardware'), href: `${prefix}/hardware/`, current: inArea('/hardware/') },
+  { label: t('header.reference'), href: `${prefix}/reference/`, current: inArea('/reference/') },
 ];
 ---
 
@@ -25,7 +30,7 @@ const areas = [
   <div class="title-wrapper sl-flex">
     <SiteTitle />
   </div>
-  <nav class="areas" aria-label="Site">
+  <nav class="areas" aria-label={t('header.nav')}>
     {areas.map((a) => (
       <a href={a.href} aria-current={a.current ? 'true' : undefined}>
         {a.label}
@@ -39,9 +44,10 @@ const areas = [
     <div class="sl-flex social-icons">
       <SocialIcons />
     </div>
+    <LanguageSelect />
     <ThemeSelect />
-    <a class="get-started" href="/start/getting-started/">
-      Get started
+    <a class="get-started" href={`${prefix}/start/getting-started/`}>
+      {t('header.get_started')}
     </a>
   </div>
 </div>
@@ -117,9 +123,20 @@ const areas = [
   .get-started:hover {
     filter: brightness(1.08);
   }
-  /* The homepage has no mobile menu, so its header keeps the links and the theme toggle. */
+  /* The language picker shows its icon only: the header has no room for a language name. */
+  .right-group :global(starlight-lang-select select) {
+    width: 3.75rem;
+    color: transparent;
+  }
+  /* The homepage has no mobile menu, so its header keeps the language picker and the theme toggle;
+     at phone width the Discord and GitHub links give way to them (the page links both lower down). */
   :global(:root[data-has-hero]) .right-group {
     display: flex;
+  }
+  @media (max-width: 49.99rem) {
+    :global(:root[data-has-hero]) .social-icons {
+      display: none;
+    }
   }
   @media (min-width: 50rem) {
     .right-group {
@@ -127,7 +144,21 @@ const areas = [
     }
   }
   @media (min-width: 64rem) {
-    .areas,
+    .areas {
+      display: flex;
+    }
+  }
+  /* Tighter area links until the header has room, so longer translations still fit. */
+  @media (min-width: 64rem) and (max-width: 79.99rem) {
+    .areas {
+      gap: 0;
+    }
+    .areas a {
+      padding-inline: 0.45rem;
+    }
+  }
+  /* The Documentation link above does the same job until there is room for both. */
+  @media (min-width: 80rem) {
     .get-started {
       display: flex;
     }

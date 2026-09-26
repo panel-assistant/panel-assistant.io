@@ -2,9 +2,17 @@
 // A single light/dark toggle in place of Starlight's three-way select. Until a visitor presses it,
 // the site follows their browser's preference; pressing it stores an explicit choice under
 // Starlight's own key, so its theme provider applies that choice before the page paints.
+const t = Astro.locals.t;
 ---
 
-<button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme">
+<button
+  type="button"
+  class="theme-toggle"
+  data-theme-toggle
+  aria-label={t('theme.switch')}
+  data-to-dark={t('theme.to_dark')}
+  data-to-light={t('theme.to_light')}
+>
   <svg class="moon" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path>
   </svg>
@@ -29,7 +37,9 @@
   function label() {
     const next = root.dataset.theme === 'light' ? 'dark' : 'light';
     document.querySelectorAll('[data-theme-toggle]').forEach((b) => {
-      b.setAttribute('aria-label', `Switch to ${next} theme`);
+      const text =
+        next === 'light' ? (b as HTMLElement).dataset.toLight : (b as HTMLElement).dataset.toDark;
+      if (text) b.setAttribute('aria-label', text);
     });
   }
 

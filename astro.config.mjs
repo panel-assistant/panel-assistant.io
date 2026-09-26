@@ -4,6 +4,23 @@ import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import { satteri } from '@astrojs/markdown-satteri';
 import { assetUrls, ASSET_BASE } from './src/plugins/asset-urls.mjs';
+import en from './src/content/i18n/en.json' with { type: 'json' };
+import nl from './src/content/i18n/nl.json' with { type: 'json' };
+import pl from './src/content/i18n/pl.json' with { type: 'json' };
+import uk from './src/content/i18n/uk.json' with { type: 'json' };
+
+// A sidebar label and its translations, from the same files as the rest of the site's own text.
+/** @type {Record<string, Record<string, string>>} */
+const others = { nl, pl, uk };
+/** @param {keyof typeof en} key */
+const label = (key) => ({
+  label: en[key],
+  translations: Object.fromEntries(
+    Object.entries(others)
+      .filter(([, strings]) => strings[key])
+      .map(([lang, strings]) => [lang, strings[key]]),
+  ),
+});
 
 const integrationRepo = 'https://github.com/panel-assistant/ha-integration';
 
@@ -25,6 +42,15 @@ export default defineConfig({
         alt: '',
       },
       favicon: '/favicon.svg',
+      // English is the source and lives at the root. A page not yet translated is served at its
+      // localized path in English, with Starlight's notice saying so.
+      defaultLocale: 'root',
+      locales: {
+        root: { label: 'English', lang: 'en' },
+        nl: { label: 'Nederlands', lang: 'nl' },
+        pl: { label: 'Polski', lang: 'pl' },
+        uk: { label: 'Українська', lang: 'uk' },
+      },
       social: [
         {
           icon: 'discord',
@@ -49,41 +75,48 @@ export default defineConfig({
       },
       // Panel pages link to their entry in the page editor at /admin/.
       routeMiddleware: './src/editor/route-data.ts',
-      plugins: [starlightLinksValidator()],
+      // Untranslated pages are served as English fallbacks, and a translated page must link inside
+      // its own language.
+      plugins: [
+        starlightLinksValidator({ errorOnFallbackPages: false, errorOnInconsistentLocale: true }),
+      ],
       credits: false,
       lastUpdated: true,
       sidebar: [
         {
-          label: 'Documentation',
+          ...label('sidebar.documentation'),
           items: [
             {
-              label: 'Start here',
+              ...label('sidebar.start'),
               items: [
-                { label: 'Getting started', slug: 'start/getting-started' },
-                { label: 'How it works', slug: 'start/what-it-is' },
-                { label: 'Community', slug: 'start/community' },
+                { ...label('sidebar.getting_started'), slug: 'start/getting-started' },
+                { ...label('sidebar.how_it_works'), slug: 'start/what-it-is' },
+                { ...label('sidebar.community'), slug: 'start/community' },
               ],
             },
             {
-              label: 'Install',
+              ...label('sidebar.install'),
               items: [
-                { label: 'Choose a panel', slug: 'install/supported-panels' },
-                { label: 'Prepare the panel', slug: 'install/prepare-a-panel' },
-                { label: 'Add a panel', slug: 'install/installing-ha-paneld' },
-                { label: 'Install over USB', slug: 'install/install-over-usb' },
+                { ...label('sidebar.choose_panel'), slug: 'install/supported-panels' },
+                { ...label('sidebar.prepare_panel'), slug: 'install/prepare-a-panel' },
+                { ...label('sidebar.add_panel'), slug: 'install/installing-ha-paneld' },
+                { ...label('sidebar.install_usb'), slug: 'install/install-over-usb' },
                 { label: 'How installs stay safe', slug: 'manage/install-safety' },
               ],
             },
             {
               label: 'Home Assistant',
               items: [
-                { label: 'Install the integration', slug: 'home-assistant/custom-integration' },
-                { label: 'Connect a panel', slug: 'home-assistant/connect-a-panel' },
-                { label: 'Move a panel from MQTT', slug: 'home-assistant/move-from-mqtt' },
+                {
+                  ...label('sidebar.install_integration'),
+                  slug: 'home-assistant/custom-integration',
+                },
+                { ...label('sidebar.connect_panel'), slug: 'home-assistant/connect-a-panel' },
+                { ...label('sidebar.move_from_mqtt'), slug: 'home-assistant/move-from-mqtt' },
               ],
             },
             {
-              label: 'Features',
+              ...label('sidebar.features'),
               items: [
                 { label: 'Built-in renderer', slug: 'manage/built-in-renderer' },
                 { label: 'Adaptive brightness', slug: 'manage/adaptive-brightness' },
@@ -95,7 +128,7 @@ export default defineConfig({
               ],
             },
             {
-              label: 'Keep it running',
+              ...label('sidebar.keep_running'),
               items: [
                 { label: 'Updates and recovery', slug: 'manage/updates-and-recovery' },
                 { label: 'Performance', slug: 'manage/performance' },
@@ -106,7 +139,7 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Hardware',
+          ...label('sidebar.hardware'),
           items: [
             { label: 'Overview', slug: 'hardware' },
             {
@@ -137,7 +170,7 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Reference',
+          ...label('sidebar.reference'),
           items: [
             { label: 'Overview', slug: 'reference' },
             { label: 'API', slug: 'reference/api' },

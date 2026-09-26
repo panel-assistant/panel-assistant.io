@@ -1,0 +1,38 @@
+---
+title: Instalacja integracji
+description: Dodawanie Panel Assistant do Home Assistant przez HACS, od którego wszystko się zaczyna.
+sourceCommit: c6d46a0cef54b402bad5b57775822f407335c1a5
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+Panel Assistant to niestandardowa integracja, dodawana przez [HACS](https://hacs.xyz/). Potrzebujesz Home Assistant w wersji 2026.8.3 lub nowszej oraz HACS.
+
+<LinkButton
+  href="https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration"
+  icon="external"
+>
+  Otwórz w HACS
+</LinkButton>
+
+Ten przycisk otwiera repozytorium w HACS w twoim własnym Home Assistant, gotowe do pobrania. Jeśli wolisz zrobić to ręcznie:
+
+1. W HACS dodaj `https://github.com/panel-assistant/ha-integration` jako niestandardowe repozytorium z kategorią **Integracja**.
+2. Pobierz **Panel Assistant**, a następnie uruchom ponownie Home Assistant.
+3. Przejdź do **Ustawienia**, **Urządzenia oraz usługi**, **Dodaj integrację** i wybierz **Panel Assistant**.
+
+HACS oferuje najnowsze wydanie. Aby wypróbować nowe wersje, zanim zostaną wydane, włącz **Pokaż wersje beta** dla Panel Assistant w HACS.
+
+## Co otrzymujesz
+
+- **Instalator.** Dodawanie panelu to proces z przewodnikiem w Home Assistant. Sprawdza on panel, instaluje aplikację panelu przez sieć lub [przez USB](/pl/install/install-over-usb/), uruchamia ją i dopiero wtedy tworzy urządzenie. Panel, na którym aplikacja już działa, zostaje przejęty, a nie instalowany od nowa.
+- **Jedno urządzenie na panel.** Każdy panel pojawia się w Urządzenia oraz usługi z czujnikiem stanu i danymi diagnostycznymi do pobrania, zanonimizowanymi, żeby można je było udostępnić, gdy prosisz o pomoc.
+- **Wszystkie panele na jednej stronie.** Pozycja Panel Assistant na pasku bocznym pokazuje każdy panel wraz z informacją, czy jest osiągalny, jaką wersję uruchamia i co wymaga uwagi.
+
+## Co jeszcze przed nami
+
+Panel Assistant jest nowy i szybko się rozwija. Już zainstalowany panel aktualizuje się przez swoją encję aktualizacji w Home Assistant, jak opisano w [Aktualizacje i odzyskiwanie](/pl/manage/updates-and-recovery/). Instalator USB to najnowsza część; można go bezpiecznie uruchomić ponownie, ale spodziewaj się niedociągnięć. Opinie są mile widziane w [zgłoszeniach](https://github.com/panel-assistant/ha-integration/issues) i na [Discordzie](https://panel-assistant.io/go/discord).
+
+## Jeśli używałeś wcześniejszej integracji 0.1.0
+
+Usuń stary wpis integracji w Urządzenia oraz usługi, a następnie usuń jej pobraną kopię z HACS. Dodaj to repozytorium, pobierz Panel Assistant, uruchom ponownie Home Assistant, a potem dodaj integrację jeszcze raz, podając nazwę hosta lub adres panelu. Na samym panelu nic się nie zmienia.

@@ -1,0 +1,205 @@
+---
+title: Panel Assistant
+description: Home Assistant aan de muur, en dan goed. Panel Assistant maakt van Android-wandpanelen snelle, betrouwbare plekken voor je dashboards van Home Assistant, geïnstalleerd en beheerd vanuit Home Assistant zelf.
+template: splash
+# Starlight renders "<page title> | <site title>", which on this page is the same
+# string twice. This sets the tag outright.
+head:
+  - tag: title
+    content: Panel Assistant
+hero:
+  title: Home Assistant aan de muur, <span>en dan goed.</span>
+  tagline: Panel Assistant maakt van een Android-wandpaneel een snelle, betrouwbare plek voor je dashboards van Home Assistant. Je installeert en beheert elk paneel vanuit Home Assistant zelf.
+  actions:
+    - text: Aan de slag
+      link: /nl/start/getting-started/
+    - text: Openen in HACS
+      link: https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration
+      variant: secondary
+    - text: Wordt mijn paneel ondersteund?
+      link: /nl/install/supported-panels/
+      variant: secondary
+sourceCommit: 7f826badb62e49226db782fd204fd5fea2e2ee00
+---
+
+import Features from '../../../components/home/Features.astro';
+import Split from '../../../components/home/Split.astro';
+import Spotlight from '../../../components/home/Spotlight.astro';
+import Tiles from '../../../components/home/Tiles.astro';
+
+<Split title="Prima hardware, in de steek gelaten door de software">
+
+Android-wandpanelen zijn echt goede hardware, verpakt in echt slechte software. Het dashboard hapert, tikken verdwijnen, de eigen app van de fabrikant wringt zich op het scherm, en elke fabrikant eist een andere app en een ander ritueel om het in te stellen. De meeste mensen nemen het gewoon voor lief, want een paneel zonder knoppen en zonder betrouwbare reset is een duur ding om kapot te maken.
+
+Panel Assistant is het gratis en open-source medicijn. Het doet één ding: je dashboards van Home Assistant snel en zonder gedoe aan de muur draaien. Elk paneel dat je hebt, wordt op dezelfde manier ingesteld en beheerd, vanuit Home Assistant, zonder dat je iets met de hand hoeft te vertroetelen, af te stellen of bij te schaven.
+
+</Split>
+
+<Features
+  items={[
+    {
+      icon: 'gauge',
+      title: 'Prestaties die je echt voelt',
+      text: 'Je bestaande dashboards, gevoed met alleen de gegevens die ze echt gebruiken, zodat het paneel reageert op het moment dat je het aanraakt.',
+    },
+    {
+      icon: 'screen',
+      title: 'Ingesteld vanuit Home Assistant',
+      text: 'Voeg een paneel toe zoals je elk ander apparaat toevoegt: via Instellingen, in je browser, zonder een opdrachtregel in zicht.',
+    },
+    {
+      icon: 'shield',
+      title: 'Veilig te installeren',
+      text: 'Alles wordt gecontroleerd voordat er iets verandert, het weigert te overschrijven wat niet overschreven mag worden, en gaat verder waar het gebleven was als het wordt onderbroken.',
+    },
+    {
+      icon: 'chip',
+      title: 'De hardware van het paneel, in Home Assistant',
+      text: 'Scherm, leds, knoppen, relais, licht- en nabijheidssensoren verschijnen automatisch als entiteiten en worden rechtstreeks aangestuurd, zonder bibliotheken van de fabrikant ertussen.',
+    },
+    {
+      icon: 'wave',
+      title: 'Paneel en huis, samen aan het werk',
+      text: 'Dimt mee met de kamer en wordt wakker als je dichterbij komt. Waar het paneel een sensor mist, stuurt Home Assistant het scherm aan.',
+    },
+    {
+      icon: 'grid',
+      title: 'Elk paneel, één systeem',
+      text: 'Verschillende merken en modellen zien er in Home Assistant hetzelfde uit en gedragen zich hetzelfde. Een extra paneel sluit aan bij dezelfde opstelling, niet bij een tweede app.',
+    },
+    {
+      icon: 'wall',
+      title: 'Gemaakt voor de muur',
+      text: 'Gebouwd voor vaste panelen op netstroom die zich gedragen als onderdeel van het huis, niet als een tablet die je moet opladen en in de gaten moet houden.',
+    },
+    {
+      icon: 'search',
+      title: 'Weet het voordat je koopt',
+      text: 'De hardwarepagina’s vertellen wat er op elk model werkt, hoe ver dat gaat en wat je kunt verwachten, voordat je er het geld of de avonden aan kwijt bent.',
+    },
+  ]}
+/>
+
+<Spotlight
+  title="Alleen de entiteiten die je dashboard gebruikt"
+  figure="10–100×"
+  caption="minder statusverkeer van Home Assistant dat het paneel bereikt, gemeten in echte huizen"
+>
+
+Een dashboard op een wandpaneel ontvangt normaal gesproken elke statuswijziging in huis, of het die entiteit nu toont of niet. Bij een grote installatie is een zuinig paneel de hele tijd bezig met het decoderen van duizenden entiteiten die het nooit toont, en dat is meestal waarom het hapert.
+
+Het entiteitsfilter van Panel Assistant leert van welke entiteiten je dashboard echt afhankelijk is, door de configuratie te lezen en het dashboard te volgen terwijl het draait, en vraagt Home Assistant daarna om alleen die te sturen. Home Assistant filtert voordat er iets wordt verstuurd, dus de rest bereikt het paneel nooit.
+
+Het is het verschil tussen een paneel dat hapert en een paneel dat reageert op het moment dat je het aanraakt. [Bekijk hoe het werkt en hoe je het inschakelt](/nl/manage/performance/).
+
+</Spotlight>
+
+<Split title="Een paneel aan de praat krijgen, in welke staat de firmware ook is">
+
+De meeste panelen komen van een buitenlandse marktplaats met een dunne handleiding en geen enkele belofte dat er ooit iets anders op zal draaien dan de eigen app van de fabrikant. Pas als het geld en de avonden op zijn, ontdek je of het werkt. Panel Assistant wil die onzekerheid wegnemen: [controleer je model](/nl/install/supported-panels/) voordat je koopt, en weet dat er, zodra het binnen is, een geteste, herhaalbare manier is om het aan de praat te krijgen.
+
+Het lastigste aan elk paneel is het eerste uur. Panel Assistant doet dat uur voor je, vanuit Home Assistant. Zit het paneel al op je netwerk, geef de integratie dan het adres en die doet de rest. Zit het nog in de doos, sluit het dan met een USB-kabel aan op je laptop en installeer rechtstreeks vanuit je browser, nog voordat het aan de muur hangt. Hoe dan ook keur je één melding op het paneel goed en kijk je hoe het verder loopt.
+
+</Split>
+
+<Split title="Staat je paneel niet op de lijst? Beschrijf het, en dan wel">
+
+Hardware-ondersteuning in Panel Assistant is data, geen code. Elk model wordt beschreven door een profiel: hoe je het paneel herkent, welke hardware het heeft en welke routes veilig zijn om het scherm, de leds, relais en sensoren aan te sturen. Profielen zijn platte tekst, die je in je browser bewerkt en valideert, zonder ontwikkeltools en zonder iets opnieuw te bouwen. Een paneel dat het project nog nooit heeft gezien, krijgt toch de basis van het voorzichtige generieke profiel, en jij kunt het de rest leren en het resultaat delen.
+
+</Split>
+
+<Split title="Prestaties die je kunt meten">
+
+Goedkope panelen zijn niet zonder reden traag, en Panel Assistant laat je die redenen zien. De statuspagina van het paneel meet de tikvertraging, de tijd tot interactief, blokkering van de hoofdthread, onverwachte herlaadbeurten, statusupdates per seconde en de drie entiteiten die voor de meeste daarvan verantwoordelijk zijn, naast CPU, geheugen en temperatuur. Een rij met de waarschijnlijke oorzaak leest dat allemaal en vertelt je wat het paneel ophoudt.
+
+</Split>
+
+<Split title="Ophangen en vergeten">
+
+Een wandpaneel hoort zich te gedragen als een lichtschakelaar: altijd aanwezig, nooit afhankelijk van jou. Panel Assistant leert het normale licht in de kamer kennen en dimt mee, leert zijn nabijheidssensor kennen zodat een zwaai het scherm wekt en een langslopende kat niet, geeft ’s nachts geheugen vrij terwijl het scherm uit is, en opent na een herstart vanzelf weer het laatste goed werkende dashboard.
+
+</Split>
+
+<Split title="Software van de fabrikant, getemd">
+
+Panel Assistant neemt het startscherm over en geeft een paneel zonder knoppen een manier om op het scherm te navigeren. Het houdt beproefde browserengines achter de hand voor panelen die er een uitleveren die jaren te oud is, en voorkomt dat de bedieningswidget van een fabrikant over je dashboard heen tekent, terwijl het bewust weigert iets aan te raken wat het paneel nodig heeft om in leven te blijven.
+
+</Split>
+
+<Tiles
+  boxed
+  title="Nieuw, en het gaat snel"
+  links={[
+    {
+      title: 'Geef het project een sterretje op GitHub',
+      href: 'https://github.com/panel-assistant/ha-integration',
+      text: 'De makkelijkste manier om andere Home Assistant-gebruikers te laten weten dat dit bestaat.',
+    },
+    {
+      title: 'Meld je paneel',
+      href: 'https://github.com/panel-assistant/ha-integration/issues',
+      text: 'Modelnaam en wat er werkte, of deel het profiel dat je het hebt geleerd.',
+    },
+    {
+      title: 'Chat op Discord',
+      href: 'https://panel-assistant.io/go/discord',
+      text: 'Vragen, panelen in het wild, en wat we hierna bouwen.',
+    },
+  ]}
+>
+
+Panel Assistant is nieuw en ontwikkelt zich snel. Drie paneelfamilies hebben vandaag volledige hardware-ondersteuning, eigenaren hebben er nog drie bevestigd, één Shelly Wall Display X2i is getest en de rest van de Shelly Wall Display-familie is gedocumenteerd. Om elk Android-wandpaneel dat het ophangen waard is op die lijst te krijgen, is echte hardware in echte huizen nodig, en daar kom jij in beeld.
+
+</Tiles>
+
+<Tiles
+  title="Verder lezen"
+  links={[
+    {
+      title: 'Aan de slag',
+      href: '/nl/start/getting-started/',
+      text: 'Vier stappen van een leeg paneel naar je dashboard aan de muur.',
+    },
+    {
+      title: 'Hoe het werkt',
+      href: '/nl/start/what-it-is/',
+      text: 'Wat er op het paneel komt, en wat in Home Assistant blijft.',
+    },
+    {
+      title: 'Hardware',
+      href: '/nl/hardware/',
+      text: 'Elk gedocumenteerd paneel, de firmware en de eigenaardigheden.',
+    },
+    {
+      title: 'De integratie installeren',
+      href: '/nl/home-assistant/custom-integration/',
+      text: 'Voeg Panel Assistant toe via HACS.',
+    },
+    {
+      title: 'Installeren via USB',
+      href: '/nl/install/install-over-usb/',
+      text: 'Een nieuw paneel, een kabel en je browser.',
+    },
+    {
+      title: 'Problemen oplossen',
+      href: '/nl/manage/troubleshooting/',
+      text: 'Wat er meestal misgaat, en waar je eerst moet kijken.',
+    },
+  ]}
+/>
+
+<Split title="Gratis, open en helemaal van jou">
+
+Alles hier is gratis en open-source software onder ruime licenties, zonder account, zonder clouddienst en zonder abonnement. Het is gemaakt door een gebruiker van Home Assistant die wilde dat wandpanelen zouden werken zoals de hardware altijd beloofde, en het wordt gedeeld zodat die van jou dat ook kunnen.
+
+Het is bedoeld om toe te behoren aan de community die het gebruikt en verbetert. Bijdragen worden samengevoegd onder de naam van hun auteurs en aan hen toegeschreven, en nooit stilletjes herschreven, door AI of wie dan ook, om andermans werk als eigen werk van het project te laten doorgaan.
+
+</Split>
+
+<div class="not-content pa-legal">
+  Het pictogram bevat het merkteken van Home Assistant, dat eigendom blijft van het Home Assistant
+  project en niet onder de licentie van dit project valt. Panel Assistant is een onafhankelijk
+  project en is niet gelieerd aan of goedgekeurd door Home Assistant of de Open Home Foundation.
+  Alle productnamen, handelsmerken en geregistreerde handelsmerken zijn eigendom van hun
+  respectievelijke eigenaren.
+</div>
