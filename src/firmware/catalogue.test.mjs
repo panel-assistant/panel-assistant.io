@@ -42,11 +42,14 @@ test('built catalogue exposes every source build under each documented model', (
   const catalogue = read(join(dist, 'index.html'));
   let pages = 0;
   for (const [model, versions] of models) {
-    assert.ok(existsSync(join(dist, model, 'index.html')), `${model} page missing`);
+    const modelPage = join(dist, model, 'index.html');
+    assert.ok(existsSync(modelPage), `${model} page missing`);
+    const modelHtml = read(modelPage);
     assert.match(catalogue, new RegExp(`/hardware/firmware/builds/${model}/`));
     for (const [version, objects] of versions) {
       const target = join(dist, model, slug(version), 'index.html');
       assert.ok(existsSync(target), `${model} ${version} page missing`);
+      assert.ok(modelHtml.includes(`/hardware/firmware/builds/${model}/${slug(version)}/`));
       const page = read(target);
       assert.equal(
         (page.match(/Vendor download/g) ?? []).length,
