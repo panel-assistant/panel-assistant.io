@@ -165,7 +165,14 @@ export default defineConfig({
                 { slug: 'hardware/panels/zx-smt156' },
               ],
             },
-            { label: 'Firmware', items: [{ autogenerate: { directory: 'hardware/firmware' } }] },
+            {
+              label: 'Firmware',
+              items: [
+                { label: 'Overview', slug: 'hardware/firmware' },
+                { label: 'Browse builds', slug: 'hardware/firmware/builds' },
+                { label: 'NSPanel Pro guide', slug: 'hardware/firmware/nspanel-pro' },
+              ],
+            },
             { label: 'Guides', items: [{ autogenerate: { directory: 'hardware/guides' } }] },
             { label: 'Third-party tools', slug: 'hardware/tools' },
           ],

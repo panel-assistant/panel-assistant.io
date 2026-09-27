@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -31,6 +32,21 @@ jobs:
           # which a shallow clone would collapse onto the CI run.
           fetch-depth: 0
 
+      - name: Restore firmware history and archive state
+        run: |
+          git fetch --no-tags origin \
+            +refs/heads/firmware-status:refs/remotes/origin/firmware-status \
+            +refs/heads/wayback-state:refs/remotes/origin/wayback-state
+          git update-ref refs/heads/firmware-status refs/remotes/origin/firmware-status
+          git update-ref refs/heads/wayback-state refs/remotes/origin/wayback-state
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+
+      - name: Test firmware monitors
+        run: python -m unittest discover -s tools/firmware-index -p 'test_*.py'
+
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 22
@@ -57,7 +73,7 @@ jobs:
       # The deploy job publishes this exact directory, so what goes live is the
       # output these checks passed over rather than a second, unverified build.
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
         with:
           name: site
           path: dist/
@@ -67,7 +83,7 @@ jobs:
   deploy:
     name: Publish to Cloudflare
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     # Holds CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID. Keeping them on a
     # protected environment rather than in repository secrets means the checks
@@ -97,18 +113,22 @@ jobs:
           # projects. The name and the assets directory come from worker/wrangler.jsonc.
           command: deploy --config worker/wrangler.jsonc
 
-      # The live site names the commit it was built from, so this is the proof
-      # that the publish landed rather than an assumption from the step above.
+      # A data-branch rebuild keeps the same main SHA, so verify both data refs
+      # as well as the code commit before calling the daily publish complete.
       - name: Verify the live build
         run: |
-          expected="${GITHUB_SHA:0:7}"
+          expected=$(node -p 'JSON.stringify(((b) => [b.sha, b.firmwareStatus, b.waybackState])(require("./dist/build.json")))')
+          if [[ "$expected" == *null* ]]; then
+            echo "::error::The built site lacks a firmware history or archive ref."
+            exit 1
+          fi
           for attempt in 1 2 3 4 5 6; do
-            live=$(curl -fsS --max-time 20 "https://panel-assistant.io/build.json?attempt=${attempt}" | node -pe 'JSON.parse(require("fs").readFileSync(0,"utf8")).sha') || live=""
+            live=$(curl -fsS --max-time 20 "https://panel-assistant.io/build.json?attempt=${attempt}" | node -e 'const b=JSON.parse(require("fs").readFileSync(0,"utf8")); process.stdout.write(JSON.stringify([b.sha,b.firmwareStatus,b.waybackState]))') || live=""
             if [ "$live" = "$expected" ]; then
-              echo "live site reports build sha $live"
+              echo "live site reports the built code and firmware data refs"
               exit 0
             fi
-            echo "attempt $attempt: live site reports '$live', expected $expected"
+            echo "attempt $attempt: live code or firmware data refs have not changed yet"
             sleep 10
           done
           exit 1

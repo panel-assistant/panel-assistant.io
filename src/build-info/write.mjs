@@ -32,6 +32,8 @@ const info = {
   sha: sha ?? null,
   date: date ?? null,
   channel: branch,
+  firmwareStatus: git('rev-parse', 'refs/heads/firmware-status'),
+  waybackState: git('rev-parse', 'refs/heads/wayback-state'),
 };
 
 const here = fileURLToPath(new URL('.', import.meta.url));

@@ -1,4 +1,5 @@
 node_modules/
+__pycache__/
 dist/
 .astro/
 *.log
@@ -13,3 +14,5 @@ src/build-info/build.json
 public/build.json
 # copied from node_modules by src/editor/copy-bundle.mjs before every build
 public/admin/
+# Generated from firmware .dat files and the two data branches before each build.
+src/content/docs/hardware/firmware/builds/

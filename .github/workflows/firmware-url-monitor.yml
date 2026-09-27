@@ -1,0 +1,174 @@
+name: Firmware URL monitor
+run-name: Firmware URL monitor · ${{ github.event_name }}
+
+# Probe every indexed firmware URL daily. History lives on firmware-status.
+# Retry a Sonoff outage after one hour, then rebuild from the preserved sample.
+
+on:
+  schedule:
+    - cron: '23 8 * * *' # daily at 08:23 UTC, off the hour to dodge congestion
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firmware-url-monitor
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write # push firmware-status
+      actions: write # request a site rebuild
+    outputs:
+      has_failures: ${{ steps.probe.outcome == 'failure' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+
+      # Pull the previous 7-day window from the data branch. Absent on first run.
+      - name: Restore history
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          repo_url="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$repo_url" firmware-status >/dev/null 2>&1; then
+            git fetch -q "$repo_url" firmware-status
+            git show FETCH_HEAD:history.json > history.json
+          else
+            echo '{"samples":[]}' > history.json
+          fi
+
+      - name: Probe firmware URLs
+        id: probe
+        continue-on-error: true
+        run: python tools/firmware-index/firmware_index.py probe --history history.json
+
+      # Append the new sample to the data branch. Never force-pushes: it commits
+      # onto the existing tip (or creates the branch on first run).
+      - name: Persist history
+        id: persist
+        if: always() && steps.probe.outputs.sample_written == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          repo_url="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          work="$(mktemp -d)"
+          if git ls-remote --exit-code --heads "$repo_url" firmware-status >/dev/null 2>&1; then
+            git clone -q --depth 1 --branch firmware-status "$repo_url" "$work"
+          else
+            git init -q "$work"
+          fi
+          git -C "$work" config user.name "github-actions[bot]"
+          git -C "$work" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp history.json "$work/history.json"
+          git -C "$work" add history.json
+          git -C "$work" commit -q -m "data: firmware URL availability $(date -u +%FT%TZ)" || { echo "no change"; exit 0; }
+          git -C "$work" push -q "$repo_url" HEAD:firmware-status
+
+      - name: Rebuild site after daily monitor
+        if: steps.probe.outcome == 'success' && steps.persist.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run ci.yml --ref main
+
+      - name: Report initial failures
+        if: always()
+        env:
+          PERSIST_OUTCOME: ${{ steps.persist.outcome }}
+        run: |
+          if [ "$PERSIST_OUTCOME" = "failure" ]; then
+            echo "::error::The firmware availability sample could not be preserved."
+            exit 1
+          fi
+
+  # If any Sonoff URLs were unreachable, wait 1 hour and re-probe. This distinguishes a
+  # transient CDN blip (back up on retry) from a real outage (still down). The
+  # retry becomes that UTC day's final availability point.
+  retry:
+    needs: check
+    if: always() && needs.check.outputs.has_failures == 'true'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write # push the retry sample
+      actions: write # request a site rebuild
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+
+      - name: Wait 1 hour before retry
+        run: sleep 3600
+
+      - name: Restore history
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          repo_url="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$repo_url" firmware-status >/dev/null 2>&1; then
+            git fetch -q "$repo_url" firmware-status
+            git show FETCH_HEAD:history.json > history.json
+          else
+            echo '{"samples":[]}' > history.json
+          fi
+
+      - name: Probe firmware URLs (retry)
+        id: retry_probe
+        continue-on-error: true
+        run: python tools/firmware-index/firmware_index.py probe --history history.json
+
+      - name: Persist history
+        id: retry_persist
+        if: always() && steps.retry_probe.outputs.sample_written == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          repo_url="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          work="$(mktemp -d)"
+          if git ls-remote --exit-code --heads "$repo_url" firmware-status >/dev/null 2>&1; then
+            git clone -q --depth 1 --branch firmware-status "$repo_url" "$work"
+          else
+            git init -q "$work"
+          fi
+          git -C "$work" config user.name "github-actions[bot]"
+          git -C "$work" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp history.json "$work/history.json"
+          git -C "$work" add history.json
+          git -C "$work" commit -q -m "data: firmware URL availability $(date -u +%FT%TZ) (retry)" || { echo "no change"; exit 0; }
+          git -C "$work" push -q "$repo_url" HEAD:firmware-status
+
+      - name: Rebuild site after retry
+        if: steps.retry_persist.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run ci.yml --ref main
+
+      - name: Report retry failures
+        if: always()
+        env:
+          PROBE_OUTCOME: ${{ steps.retry_probe.outcome }}
+          PERSIST_OUTCOME: ${{ steps.retry_persist.outcome }}
+        run: |
+          failed=0
+          if [ "$PROBE_OUTCOME" != "success" ]; then
+            echo "::error::One or more firmware URLs remained unavailable after the one-hour retry."
+            failed=1
+          fi
+          if [ "$PERSIST_OUTCOME" != "success" ]; then
+            echo "::error::The retry availability sample could not be preserved."
+            failed=1
+          fi
+          exit "$failed"

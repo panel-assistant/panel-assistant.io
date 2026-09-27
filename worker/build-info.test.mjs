@@ -12,6 +12,11 @@ test('the published build.json names the commit the site was built from', () => 
   assert.ok(['main', 'preview'].includes(built.channel));
 });
 
+test('the published build.json identifies both firmware data histories', () => {
+  assert.equal(built.firmwareStatus, git('rev-parse', 'refs/heads/firmware-status'));
+  assert.equal(built.waybackState, git('rev-parse', 'refs/heads/wayback-state'));
+});
+
 test('every page carries the build line', () => {
   for (const page of ['/', '/start/getting-started/']) {
     const html = readFileSync(new URL('../dist' + page + 'index.html', import.meta.url), 'utf8');
