@@ -16,6 +16,8 @@
   "updates": "/manage/updates-and-recovery/",
   "support-report": "/home-assistant/support-report/",
   "report-issue": "https://github.com/panel-assistant/ha-integration/issues/new",
+  "voice-assistant": "/manage/voice-assistant/",
+  "custom-wake-words": "/manage/custom-wake-words/",
   "firmware": {
     "all": "/hardware/firmware/",
     "shelly": "/hardware/firmware/builds/#shelly-wall-display",

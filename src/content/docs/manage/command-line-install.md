@@ -86,7 +86,7 @@ curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/script
 
 For an interactive installation, leave out `--builtin` and the Home Assistant credentials. The installer prints the address of the step the panel is waiting for, usually `http://<panel>:8888/setup`. Continue there from a computer or phone, or tap **Set up** on the panel; both follow the same guided setup.
 
-To use a separate dashboard app instead, select it as the Dashboard app on the Configure tab. The built-in renderer does not provide Assist voice control or notifications, so keep a separate app where those matter.
+To use a separate dashboard app instead, select it as the Dashboard app on the Configure tab. The built-in renderer does not provide native notifications, so keep a separate app where those matter. Assist voice control is separate from either dashboard app: it comes from the panel's own [voice assistant](/manage/voice-assistant/) on a panel with a microphone.
 
 ### Choose the dashboard and entity filter
 

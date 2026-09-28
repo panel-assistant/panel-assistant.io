@@ -7,6 +7,10 @@ Any Home Assistant text-to-speech voice, such as Piper or Home Assistant Cloud, 
 
 Voices rendered by Home Assistant are far better than the text-to-speech built into older panels.
 
+## Play an announcement with the voice assistant on
+
+If the panel has a microphone and its [voice assistant](/manage/voice-assistant/) is turned on, you do not need any of the setup below: `assist_satellite.announce` speaks a message on the panel directly, with no REST commands, secrets or scripts to configure. The rest of this page is for panels without a microphone, or without the voice assistant enabled.
+
 :::note
 `/play` accepts the bare URL as the request body (or `{"url":"…"}`), **not** a form field. The [API reference](/reference/api/) describes the endpoint.
 :::

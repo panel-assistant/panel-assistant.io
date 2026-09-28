@@ -7,7 +7,7 @@ The panel app draws your Home Assistant dashboard in its own WebView instead of 
 
 Once the dashboard is running, the panel app can detect a stalled connection, release accumulated WebView memory and contain renderer crashes. The built-in connection is also what makes dashboard entity filtering possible. The panel stays a single-app appliance, with one app to install and update.
 
-The built-in renderer is by far the preferred way to show your dashboard, and the one guided setup chooses. A separate dashboard app is still supported as an option, for example when a panel needs more than one Home Assistant server, Assist voice control or native notifications (see [Limits](#limits)).
+The built-in renderer is by far the preferred way to show your dashboard, and the one guided setup chooses. A separate dashboard app is still supported as an option, for example when a panel needs more than one Home Assistant server or native notifications (see [Limits](#limits)). Assist voice control does not depend on either dashboard app: on a panel with a microphone, the panel's own [voice assistant](/manage/voice-assistant/) provides it regardless of which one is running.
 
 ## Startup and recovery
 
@@ -191,7 +191,7 @@ If a panel needs one of the capabilities listed under [Limits](#limits), open th
 
 ## Limits
 
-- **No support for more than one Home Assistant server, Assist voice control or native notifications.** Keep a separate dashboard app on the panel where those matter.
+- **No support for more than one Home Assistant server or native notifications.** Keep a separate dashboard app on the panel where those matter. Assist voice control is not on this list: it comes from the panel's own [voice assistant](/manage/voice-assistant/) on a panel with a microphone, whichever dashboard app is active.
 - **No full-screen media extras**, such as a file chooser or casting-style playback. These are out of scope.
 - A **current system WebView** is still needed to render the Home Assistant frontend. The panel app can install a known-good WebView on supported rooted panels, and an obsolete WebView raises a health warning in the web interface.
 - Browser sign-in and the advanced non-interactive install both work without root.

@@ -125,6 +125,8 @@ export default defineConfig({
                 { label: 'Adaptive proximity', slug: 'manage/adaptive-proximity' },
                 { label: 'Display sizing', slug: 'manage/display-sizing' },
                 { label: 'Text-to-speech', slug: 'manage/text-to-speech' },
+                { label: 'Voice assistant', slug: 'manage/voice-assistant' },
+                { label: 'Custom wake words', slug: 'manage/custom-wake-words' },
                 { label: 'Vendor packages', slug: 'manage/vendor-packages' },
                 { label: 'Panel account and network security', slug: 'manage/panel-security' },
                 { label: 'Security mode', slug: 'manage/security-mode' },
