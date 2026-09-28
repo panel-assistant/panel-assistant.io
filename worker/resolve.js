@@ -7,11 +7,11 @@
 import { pageMissKey } from './misses.js';
 
 const PREFIX = '/go/';
-// The only topic whose destination is parameter-driven rather than fixed: it
-// takes `page=<old ha-paneld docs/ path>` and resolves it through the nested
+// The docs topic takes `page=<old ha-paneld docs/ path>` and resolves it through the nested
 // map at topics.docs, so an old link can be re-pointed with a one-line change
 // there instead of a code change here.
 const DOCS_TOPIC = 'docs';
+const FIRMWARE_TOPIC = 'firmware';
 
 // Old paths arrive as e.g. "docs/hardware/nspanel-pro.md", "hardware/nspanel-pro",
 // or "Hardware/NSPanel-Pro.md" — all of these must land on the same map entry.
@@ -53,6 +53,20 @@ export function resolve(requestUrl, topics) {
   const topic = decodeURIComponent(url.pathname.slice(PREFIX.length)).replace(/\/+$/, '');
   if (topic === DOCS_TOPIC && typeof topics[DOCS_TOPIC] === 'object' && topics[DOCS_TOPIC]) {
     return resolveDocsTopic(url, topics[DOCS_TOPIC]);
+  }
+  if (topic === FIRMWARE_TOPIC && typeof topics[FIRMWARE_TOPIC] === 'object') {
+    const device = url.searchParams.get('device');
+    const known = !device || Object.prototype.hasOwnProperty.call(topics.firmware, device);
+    const target = new URL(topics.firmware[known ? device || 'all' : 'all'], url.origin);
+    for (const [key, value] of url.searchParams) {
+      if (key !== 'device') target.searchParams.append(key, value);
+    }
+    return {
+      location: target.toString(),
+      known,
+      topic,
+      missKey: known ? undefined : `firmware-${device}`,
+    };
   }
   const known = Object.prototype.hasOwnProperty.call(topics, topic) && !topic.startsWith('$');
   const target = new URL(known ? topics[topic] : '/', url.origin);

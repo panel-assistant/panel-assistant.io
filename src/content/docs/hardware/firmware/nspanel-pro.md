@@ -21,6 +21,16 @@ Two physically distinct models each have their **own** CDN channel. Do not cross
 
 See the [Sonoff NSPanel Pro](/hardware/panels/sonoff-nspanel-pro/) page for how to tell the variants apart and for per-version firmware quirks.
 
+## Choosing a build for a Home Assistant panel
+
+The [build catalogue](https://panel-assistant.io/go/firmware?device=sonoff) records packages and availability, not a claim that the newest release is the best choice for every panel. Sonoff's release notes focus on eWeLink and Zigbee-hub features; the [firmware quirks by version](/hardware/panels/sonoff-nspanel-pro/#firmware-quirks-by-version) interpret those changes for a dashboard installation.
+
+- A late **3.x** build is a lean kiosk choice: it retains the Web Shortcut web-app and does not bundle Termux. Its stock WebView may still need updating to render a modern Home Assistant dashboard.
+- **4.0.12** is the conservative full-ROM checkpoint for a panel that needs the newer app model. It can be pinned with **Settings → About → Block Firmware Updates**. Versions after it have not been flash-verified here beyond 4.4.0.
+- A newer build may be useful for vendor features, but first review its per-model inbound diffs and the reported problems below. Test it on one recoverable panel before a wider rollout.
+
+Across the 4.x line, 4.0.0 added direct app installation and phased out Web Shortcut; 4.1.0 introduced vendor MQTT exposure to Home Assistant; 4.2.0 added a Home App choice; 4.3.0 exposed more panel capabilities over MQTT; 4.4.0 added wake-on-proximity and audio features; and 4.6.0 added a local Web Portal. The vendor MQTT bridge can publish unfiltered Zigbee values, which is unnecessary for a dashboard-only panel. The 86P has graded proximity, while the 120P reports near/far; do not infer that difference from the release number. For source links, version-specific cautions, and later releases with missing notes, see the [hardware page's version table](/hardware/panels/sonoff-nspanel-pro/#firmware-quirks-by-version) and [Sonoff's public changelog](https://sonoff.tech/en-us/blogs/news/sonoff-nspanel-pro-version-update-information-and-faq).
+
 ## CDN URL scheme
 
 The host is `global-otadl2bsy.coolkit.cc`, the CoolKit OTA CDN.

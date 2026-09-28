@@ -82,14 +82,24 @@ test('a known topic redirects to its page and keeps every parameter', () => {
   );
 });
 
-test('firmware topics land at their vendor sections through the public router', () => {
+test('the firmware topic selects a vendor section by device and consumes that parameter', () => {
   assert.equal(
-    go('/go/sonoff-firmware').location,
+    go('/go/firmware?device=sonoff').location,
     'https://panel-assistant.io/hardware/firmware/builds/#sonoff-nspanel-pro-86p',
   );
   assert.equal(
-    go('/go/shelly-firmware').location,
+    go('/go/firmware?device=shelly').location,
     'https://panel-assistant.io/hardware/firmware/builds/#shelly-wall-display',
+  );
+  assert.equal(
+    go('/go/firmware?device=sonoff&v=4.8.0').location,
+    'https://panel-assistant.io/hardware/firmware/builds/?v=4.8.0#sonoff-nspanel-pro-86p',
+  );
+  assert.equal(go('/go/firmware').location, 'https://panel-assistant.io/hardware/firmware/');
+  assert.equal(go('/go/firmware?device=unknown').known, false);
+  assert.equal(
+    go('/go/firmware?device=unknown').location,
+    'https://panel-assistant.io/hardware/firmware/',
   );
 });
 

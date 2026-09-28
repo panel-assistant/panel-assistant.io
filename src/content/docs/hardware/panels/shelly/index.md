@@ -140,6 +140,14 @@ One [X2i](/hardware/panels/shelly/wall-display-x2i/) has been examined on a benc
 
 ## Firmware OTA mechanism
 
+### Choosing and installing a build
+
+Use the version offered for the device's exact OTA track, and check the [official Wall Display changelog](https://github.com/ShellyGroup/Wall-Display-Changelog) before changing it. The [firmware catalogue](https://panel-assistant.io/go/firmware?device=shelly) records discovered packages and their availability; it does not establish that a release is suitable for every model or installation. `WallDisplay` and `WallDisplayV2` packages are incompatible, even when their version numbers match. Identify the live device's update track before applying a ZIP.
+
+For a normal update without a computer, open the Shelly app, select the Wall Display, then choose **Settings → Device Information → Firmware → Update**. Alternatively, open its local WebUI at `http://<device-ip>` and choose **Settings → Firmware → Update**. Shelly rolls updates out gradually, so a newly released version may not appear on every device immediately. To apply a specific version, download the ZIP for the device's track from the catalogue and use **Firmware → Custom firmware** in the WebUI (`http://<device-ip>/#/settings/firmware` on WallDisplayV2 devices).
+
+Shelly's current-build CDN link stops working when a newer version replaces it. For an older build, use the catalogue's Wayback link **only where a capture is recorded**; an uncaptured release may no longer be recoverable.
+
 ### What the firmware is
 
 Wall Display firmware is an **Android APK** (the Stargate launcher app) packaged as a signed Android OTA ZIP. It is nothing like Shelly Gen1 firmware (ESP8266 `.zip`) or Gen2 switch firmware (EFR32 `.gbl`): it is an Android application update applied by Shelly's in-app OTA downloader, not a partition-level flash.
@@ -181,7 +189,7 @@ Covers Blake, Jenna, Cally, Maverick and Dayna. The OTA updater script reads `ro
 The response has the same version and build ID as Track 1 (`2.7.1` in the example above), compiled for arm64-v8a. Both tracks share version numbers and build IDs: they are compiled together from the same codebase for different ABIs.
 
 :::note
-**The CDN URL is content-addressed**: a SHA-256 filename with no version in the path. It rotates with every release and cannot be inferred for older versions, and once a newer release ships the previous URL returns 404. Archival to the Wayback Machine is therefore **attempted** for each release as it is discovered, and is **confirmed** only once a capture timestamp is written beside that release's CDN URL in [`tools/firmware-index/fw-shelly-walldisplay.dat`](https://github.com/panel-assistant/android/blob/main/tools/firmware-index/fw-shelly-walldisplay.dat). An empty timestamp means archival is pending or has not succeeded; it does not mean the files are safe. Read which releases are confirmed from the index itself. A release that is never captured while it is current is unrecoverable.
+**The CDN URL is content-addressed**: a SHA-256 filename with no version in the path. It rotates with every release and cannot be inferred for older versions, and once a newer release ships the previous URL returns 404. Archival to the Wayback Machine is therefore **attempted** for each release as it is discovered, and is **confirmed** only once a capture timestamp is written beside that release's CDN URL in [`tools/firmware-index/fw-shelly-walldisplay.dat`](https://github.com/panel-assistant/panel-assistant.io/blob/main/tools/firmware-index/fw-shelly-walldisplay.dat). An empty timestamp means archival is pending or has not succeeded; it does not mean the files are safe. Read which releases are confirmed from the index itself. A release that is never captured while it is current is unrecoverable.
 :::
 
 #### Static legacy CDN (SAWD-0A1XX10EU1 only)

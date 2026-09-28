@@ -14,8 +14,11 @@
   "panel-unreachable": "/manage/troubleshooting/#the-installer-cannot-reach-the-panel",
   "troubleshooting": "/manage/troubleshooting/",
   "updates": "/manage/updates-and-recovery/",
-  "shelly-firmware": "/hardware/firmware/builds/#shelly-wall-display",
-  "sonoff-firmware": "/hardware/firmware/builds/#sonoff-nspanel-pro-86p",
+  "firmware": {
+    "all": "/hardware/firmware/",
+    "shelly": "/hardware/firmware/builds/#shelly-wall-display",
+    "sonoff": "/hardware/firmware/builds/#sonoff-nspanel-pro-86p"
+  },
   "issues": "https://github.com/panel-assistant/ha-integration/issues",
   "discord": "https://discord.gg/qey8RQkSW",
   "docs": {
