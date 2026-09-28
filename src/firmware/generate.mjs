@@ -146,7 +146,13 @@ function availabilityHistory() {
 
 function status(history, url) {
   const checks = history.filter(([, results]) => Object.hasOwn(results, url));
-  if (!checks.length) return { summary: 'No checks recorded', full: 'No checks recorded yet.' };
+  if (!checks.length)
+    return {
+      summary: 'No checks recorded',
+      full: 'No checks recorded yet.',
+      first: '—',
+      last: '—',
+    };
   const latestDay = new Map();
   for (const [time, results] of checks)
     latestDay.set(new Date(time * 1000).toISOString().slice(0, 10), Boolean(results[url]));
@@ -158,9 +164,12 @@ function status(history, url) {
   }
   const [lastTime, results] = checks.at(-1);
   const last = new Date(lastTime * 1000).toISOString().slice(0, 10);
+  const available = checks.filter(([, results]) => results[url]);
   return {
     summary: `${results[url] ? 'Available' : 'Unavailable'} on ${last}; ${checks.length} checks since ${new Date(checks[0][0] * 1000).toISOString().slice(0, 10)}`,
     full: [...months].map(([month, days]) => `${month}: ${days.join(' ')}`).join('\n'),
+    first: available.length ? new Date(available[0][0] * 1000).toISOString().slice(0, 10) : '—',
+    last: available.length ? new Date(available.at(-1)[0] * 1000).toISOString().slice(0, 10) : '—',
   };
 }
 
@@ -188,9 +197,13 @@ const catalogue = [
   'description: Browse the complete indexed Sonoff and Shelly firmware histories by model and version.',
   '---',
   '',
+  '<style>.sl-markdown-content table th, .sl-markdown-content table td { white-space: nowrap; }</style>',
+  '',
   'Browse every indexed build by model and version. Availability is measured by the daily URL monitor. A Wayback link appears only when a capture is recorded.',
   '',
   'The index is generated from [the source data files](https://github.com/panel-assistant/panel-assistant.io/tree/main/tools/firmware-index). A missing version means it has not been found; it does not prove that the vendor never released it.',
+  '',
+  'First and last seen are dates when our monitor successfully fetched that download, not release or removal dates. A dash means no successful check is recorded. Sizes are from the source index; open a version for exact bytes, downloads and archives. On a phone, swipe a table sideways to see every column.',
   '',
 ];
 let versionPages = 0;
@@ -204,6 +217,8 @@ for (const model of models) {
     '',
     `${versions.length} indexed versions${model.track ? ` on the shared ${model.track} OTA track` : ''}.`,
     '',
+    '| Version | Download | Size | First seen | Last seen |',
+    '| --- | --- | ---: | --- | --- |',
   );
   const modelPage = [
     '---',
@@ -211,20 +226,28 @@ for (const model of models) {
     `description: Every indexed firmware version for ${model.name}.`,
     '---',
     '',
+    '<style>.sl-markdown-content table th, .sl-markdown-content table td { white-space: nowrap; }</style>',
+    '',
     model.track
       ? `This model uses Shelly’s shared **${model.track}** OTA track. The same package is also listed under the other models on that track.`
       : 'These URLs belong to this model’s own Sonoff CDN channel.',
     '',
     'The list records found builds, not an installation recommendation. [Read the firmware guide](/hardware/firmware/) before updating a panel.',
     '',
-    '| Version | Indexed objects |',
-    '| --- | ---: |',
+    'First and last seen are successful monitor checks, not release or removal dates. A dash means no successful check is recorded.',
+    '',
+    '| Version | Download | Size | First seen | Last seen |',
+    '| --- | --- | ---: | --- | --- |',
   ];
   for (const version of versions) {
     const artifacts = records.get(version);
     artifactCount += artifacts.length;
-    catalogue.push(`- [${version}](${pathFor(model.slug, version)})`);
-    modelPage.push(`| [${version}](${pathFor(model.slug, version)}) | ${artifacts.length} |`);
+    for (const artifact of artifacts) {
+      const observed = status(history, artifact.url);
+      const row = `| [${version}](${pathFor(model.slug, version)}) | ${clean(artifact.type)} | ${(artifact.bytes / 1048576).toFixed(1)} MiB | ${observed.first} | ${observed.last} |`;
+      catalogue.push(row);
+      modelPage.push(row);
+    }
     const page = [
       '---',
       `title: ${model.name} ${version}`,

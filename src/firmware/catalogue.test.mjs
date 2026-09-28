@@ -29,16 +29,17 @@ function shellyVersions(track) {
   return versions;
 }
 
+const models = [
+  ['sonoff-nspanel-pro-86p', sonoffVersions('fw-86p.dat')],
+  ['sonoff-nspanel-pro-120p', sonoffVersions('fw-120p.dat')],
+  ['shelly-wall-display', shellyVersions('WallDisplay')],
+  ['shelly-wall-display-x2', shellyVersions('WallDisplay')],
+  ['shelly-wall-display-x1i', shellyVersions('WallDisplayV2')],
+  ['shelly-wall-display-x2i', shellyVersions('WallDisplayV2')],
+  ['shelly-wall-display-xl', shellyVersions('WallDisplayV2')],
+];
+
 test('built catalogue exposes every source build under each documented model', () => {
-  const models = [
-    ['sonoff-nspanel-pro-86p', sonoffVersions('fw-86p.dat')],
-    ['sonoff-nspanel-pro-120p', sonoffVersions('fw-120p.dat')],
-    ['shelly-wall-display', shellyVersions('WallDisplay')],
-    ['shelly-wall-display-x2', shellyVersions('WallDisplay')],
-    ['shelly-wall-display-x1i', shellyVersions('WallDisplayV2')],
-    ['shelly-wall-display-x2i', shellyVersions('WallDisplayV2')],
-    ['shelly-wall-display-xl', shellyVersions('WallDisplayV2')],
-  ];
   const catalogue = read(join(dist, 'index.html'));
   let pages = 0;
   for (const [model, versions] of models) {
@@ -81,4 +82,26 @@ test('built version pages carry the source downloads, capture links and older ch
   const older = read(join(dist, 'sonoff-nspanel-pro-86p/v4-8-0/index.html'));
   assert.match(older, /2026-08:/);
   assert.match(older, /2026-09:/);
+});
+
+test('built catalogue compares download sizes and observed availability dates', () => {
+  const catalogue = read(join(dist, 'index.html'));
+  assert.equal((catalogue.match(/<table>/g) ?? []).length, models.length);
+  const downloads = models.reduce(
+    (sum, [, versions]) => sum + [...versions.values()].reduce((count, value) => count + value, 0),
+    0,
+  );
+  assert.equal((catalogue.match(/<tr>/g) ?? []).length, downloads + models.length);
+  assert.match(catalogue, /<th[^>]*>Size<\/th>/);
+  assert.match(catalogue, /<th[^>]*>First seen<\/th>/);
+  assert.match(catalogue, /<th[^>]*>Last seen<\/th>/);
+  assert.ok(
+    /v4-8-0\/[^<]*<\/a><\/td>\s*<td>Diff from 4\.0\.12<\/td>\s*<td[^>]*>223\.5 MiB<\/td>\s*<td>2026-08-20<\/td>\s*<td>\d{4}-\d\d-\d\d<\/td>/.test(
+      catalogue,
+    ),
+    '86P diff row lost its size or successful-check dates',
+  );
+  const model = read(join(dist, 'sonoff-nspanel-pro-86p/index.html'));
+  assert.match(model, /<th[^>]*>First seen<\/th>/);
+  assert.match(model, /<th[^>]*>Last seen<\/th>/);
 });
