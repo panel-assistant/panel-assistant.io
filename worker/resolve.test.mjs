@@ -82,6 +82,17 @@ test('a known topic redirects to its page and keeps every parameter', () => {
   );
 });
 
+test('firmware topics land at their vendor sections through the public router', () => {
+  assert.equal(
+    go('/go/sonoff-firmware').location,
+    'https://panel-assistant.io/hardware/firmware/builds/#sonoff-nspanel-pro-86p',
+  );
+  assert.equal(
+    go('/go/shelly-firmware').location,
+    'https://panel-assistant.io/hardware/firmware/builds/#shelly-wall-display',
+  );
+});
+
 test('an off-site topic redirects to the absolute URL and forwards no parameters', () => {
   const hit = go('/go/issues?v=1.0.0b1&build=37&model=tpa10');
   assert.equal(hit.location, 'https://github.com/panel-assistant/ha-integration/issues');
