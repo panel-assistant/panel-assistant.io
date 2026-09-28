@@ -105,3 +105,19 @@ test('built catalogue compares download sizes and observed availability dates', 
   assert.match(model, /<th[^>]*>First seen<\/th>/);
   assert.match(model, /<th[^>]*>Last seen<\/th>/);
 });
+
+test('built catalogue presents Shelly models before the longer Sonoff histories', () => {
+  const catalogue = read(join(dist, 'index.html'));
+  const headings = [...catalogue.matchAll(/<h2 id="(shelly-[^"]+|sonoff-[^"]+)"/g)].map(
+    ([, slug]) => slug,
+  );
+  assert.deepEqual(headings, [
+    'shelly-wall-display',
+    'shelly-wall-display-x2',
+    'shelly-wall-display-x1i',
+    'shelly-wall-display-x2i',
+    'shelly-wall-display-xl',
+    'sonoff-nspanel-pro-86p',
+    'sonoff-nspanel-pro-120p',
+  ]);
+});

@@ -10,13 +10,13 @@ const data = join(root, 'tools/firmware-index');
 const output = join(root, 'src/content/docs/hardware/firmware/builds');
 const sonoffHost = 'https://global-otadl2bsy.coolkit.cc';
 const models = [
-  { slug: 'sonoff-nspanel-pro-86p', name: 'Sonoff NSPanel Pro 86P', source: 'fw-86p.dat' },
-  { slug: 'sonoff-nspanel-pro-120p', name: 'Sonoff NSPanel Pro 120P', source: 'fw-120p.dat' },
   { slug: 'shelly-wall-display', name: 'Shelly Wall Display', track: 'WallDisplay' },
   { slug: 'shelly-wall-display-x2', name: 'Shelly Wall Display X2', track: 'WallDisplay' },
   { slug: 'shelly-wall-display-x1i', name: 'Shelly Wall Display X1i', track: 'WallDisplayV2' },
   { slug: 'shelly-wall-display-x2i', name: 'Shelly Wall Display X2i', track: 'WallDisplayV2' },
   { slug: 'shelly-wall-display-xl', name: 'Shelly Wall Display XL', track: 'WallDisplayV2' },
+  { slug: 'sonoff-nspanel-pro-86p', name: 'Sonoff NSPanel Pro 86P', source: 'fw-86p.dat' },
+  { slug: 'sonoff-nspanel-pro-120p', name: 'Sonoff NSPanel Pro 120P', source: 'fw-120p.dat' },
 ];
 const versionPattern = /^\d+(?:\.\d+){1,3}(?:-[A-Za-z0-9]+)?$/;
 const clean = (value) =>
