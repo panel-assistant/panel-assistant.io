@@ -210,12 +210,17 @@ let versionPages = 0;
 let artifactCount = 0;
 for (const model of models) {
   const records = model.track ? shelly.get(model.track) : parseSonoff(model.source);
+  const guide = model.track
+    ? '/hardware/panels/shelly/#choosing-and-installing-a-build'
+    : '/hardware/firmware/nspanel-pro/#choosing-a-build-for-a-home-assistant-panel';
   const versions = [...records.keys()].sort(versionOrder);
   if (!versions.length) throw new Error(`No builds for ${model.name}`);
   catalogue.push(
     `## [${model.name}](${pathFor(model.slug, '')})`,
     '',
     `${versions.length} indexed versions${model.track ? ` on the shared ${model.track} OTA track` : ''}.`,
+    '',
+    `[Choosing and installing a build](${guide}).`,
     '',
     '| Version | Download | Size | First seen | Last seen |',
     '| --- | --- | ---: | --- | --- |',
@@ -232,7 +237,7 @@ for (const model of models) {
       ? `This model uses Shelly’s shared **${model.track}** OTA track. The same package is also listed under the other models on that track.`
       : 'These URLs belong to this model’s own Sonoff CDN channel.',
     '',
-    'The list records found builds, not an installation recommendation. [Read the firmware guide](/hardware/firmware/) before updating a panel.',
+    `The list records found builds, not an installation recommendation. [Read the firmware guide](${guide}) before updating a panel.`,
     '',
     'First and last seen are successful monitor checks, not release or removal dates. A dash means no successful check is recorded.',
     '',
@@ -254,7 +259,7 @@ for (const model of models) {
       `description: Download objects, availability history and archive links for ${model.name} firmware ${version}.`,
       '---',
       '',
-      `[All ${model.name} versions](${pathFor(model.slug, '')}) · [Firmware guide](/hardware/firmware/)`,
+      `[All ${model.name} versions](${pathFor(model.slug, '')}) · [Firmware guide](${guide})`,
       '',
       model.track
         ? `This is a **${model.track}** OTA package shared with other models on that track. Shelly replaces old CDN objects when a new version ships; use the archive link for an older build.`
