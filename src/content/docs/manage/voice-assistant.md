@@ -6,7 +6,7 @@ description: Turning a panel's microphone into a Home Assistant Assist satellite
 A panel with a microphone can act as a Home Assistant [Assist satellite](https://www.home-assistant.io/voice_control/). It listens for a wake word, streams your command to Home Assistant, and speaks the answer back through the panel's speaker. There is no separate device to add: the satellite is an `assist_satellite.<panel>` entity on the panel's existing Home Assistant device, and the audio travels over the same connection the panel already uses.
 
 :::note
-Only a panel whose device profile declares a microphone offers this. Today that means the Sonoff NSPanel Pro (86 and 120) and the Electron WF1589T. Other panels do not show a Voice card on the Configure page.
+It needs ha-paneld 0.9.9 or later on the panel and the Panel Assistant integration 0.7.0 or later in Home Assistant. Only a panel whose device profile declares a microphone offers it. Today that means the Sonoff NSPanel Pro (86 and 120) and the Electron WF1589T. Other panels do not show a Voice card on the Configure page.
 :::
 
 ## Turn it on
@@ -33,7 +33,7 @@ Want a wake word that is not in this list? See [custom wake words](/manage/custo
 
 ## What the panel shows
 
-A short chime and a ripple mark the moment the panel hears a wake word. While it is listening, thinking or answering, the screen edges take on a gentle, slowly pulsing tint. The colour identifies which pipeline answered: the panel gives every pipeline one colour the first time any panel uses it, and keeps that pairing, so the same pipeline looks the same on every panel in the house. There is nothing to configure here.
+A short chime and a ripple mark the moment the panel hears a wake word. While it is listening, thinking or answering, the screen edges take on a gentle, slowly pulsing tint. The colour identifies which pipeline is answering: Panel Assistant gives every pipeline one colour the first time any panel uses it and keeps that pairing, so the same pipeline looks the same on every panel in the house. There is nothing to configure here.
 
 If the pipeline's conversation agent asks a follow-up question, the panel starts listening again on its own, without needing the wake word repeated.
 
@@ -59,4 +59,4 @@ The Voice card has a few tuning options beyond the wake word list:
 
 **It wakes but does not understand the command.** Raise **Microphone gain (dB)** a little and try again; this only affects the audio sent for transcription, so it will not make the panel wake more easily by itself. If you are training your own wake word, the panel's log also records near misses with the score they reached, which is the most direct way to see whether a missed wake word was close or nowhere near — see [custom wake words](/manage/custom-wake-words/#testing-and-tuning).
 
-**The satellite entity shows unavailable.** This means the voice assistant is off, or the panel's device profile does not declare a microphone. Turning it on from the panel's Configure page is the only way to bring the entity back; it cannot be re-enabled from Home Assistant alone.
+**The satellite entity shows unavailable.** The voice assistant is off, or the panel is not connected to Home Assistant through Panel Assistant. Turn the voice assistant on from the panel's Configure page; it cannot be switched on from Home Assistant.

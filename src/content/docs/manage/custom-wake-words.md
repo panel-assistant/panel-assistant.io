@@ -62,7 +62,7 @@ Start from the values your model's own documentation or notebook run suggests, i
 
 On the **Voice** card, the wake words picker has an **import** control. Choose the model's `.json` manifest and its `.tflite` file, then press **Import trained wake word**. The panel validates the model with its own wake word engine before accepting it; if it refuses a model, nothing is installed, and if a model of the same name was already imported, that earlier model is left in place. Manifests are limited to 16 KB and models to 2 MB.
 
-The wake word's id is derived from the manifest file's name, lower-cased and reduced to letters, digits and underscores (it must start with a letter). It cannot reuse the id of a bundled wake word, and importing a manifest under a name you have already used replaces that earlier model.
+The wake word's id is derived from the `.tflite` file's name, lower-cased and reduced to letters, digits and underscores (it must start with a letter). It cannot reuse the id of a bundled wake word, and importing a model under a name you have already used replaces that earlier model.
 
 Once it is imported, tick it under **Wake words**, choose its pipeline under **Wake word pipelines**, and **Save**. It also appears in Home Assistant's own wake word selector for that panel from then on.
 
@@ -87,25 +87,27 @@ set -euo pipefail
 
 manifest_file="my_wake_word.json"
 model_file="my_wake_word.tflite"
-panels=(kitchen-panel.local landing-panel.local office-panel.local)
+panels=(panel-1.local panel-2.local panel-3.local)
 
-body=$(jq -n \
+body=$(mktemp)
+jq -n \
   --arg name "my_wake_word" \
   --rawfile manifest "$manifest_file" \
-  --arg model "$(base64 -w0 "$model_file")" \
-  '{name: $name, manifest: $manifest, model: $model}')
+  --rawfile model <(base64 -w0 "$model_file") \
+  '{name: $name, manifest: $manifest, model: $model}' > "$body"
 
 for panel in "${panels[@]}"; do
   echo "Importing onto $panel..."
   curl -fsS -X POST "http://$panel:8888/api/v1/voice/wake-words" \
     -H 'content-type: application/json' \
-    -d "$body"
+    --data-binary @"$body"
   echo
 done
+rm -f "$body"
 ```
 
-`base64 -w0` avoids line-wrapping the encoded model (use `base64 -b 0` in place of `-w0` on macOS/BSD). `jq -n --rawfile manifest ... --arg model ...` embeds the manifest's exact text and the base64 model safely as JSON strings, so neither needs manual escaping.
+`base64 -w0` avoids line-wrapping the encoded model (use `base64 -b 0` in place of `-w0` on macOS/BSD). `jq --rawfile` reads the manifest and the encoded model from files and embeds them as JSON strings, so neither needs escaping, and the request body goes to `curl` from a file because a model's encoded text can be longer than a single command-line argument may be.
 
 ## Testing and tuning
 
-Use **Test a wake word** on the Voice card, or just say it, and watch the panel's own log (`/logs` on the panel, or `GET /api/v1/diag`). A wake word that was heard but did not quite trigger still shows up there as a near miss, together with the highest score it reached. If those near-miss scores sit just under your `probability_cutoff`, lowering the cutoff slightly, or raising **Wake sensitivity** on the Voice card, is usually enough; if the phrase never shows up as a near miss at all, the model itself is not recognising it, and retraining with more or more varied samples is the more useful next step.
+Say the wake word and watch the panel's log on its **Logs** page (`http://<panel>:8888/logs`). A wake word that was heard but did not quite trigger shows up there as a near miss, as a line such as `wake word my_wake_word heard at 0.86, short of its cutoff`, with the highest score that attempt reached. If those near-miss scores sit just under your `probability_cutoff`, lowering the cutoff slightly, or raising **Wake sensitivity** on the Voice card, is usually enough; if the phrase never shows up as a near miss at all, the model itself is not recognising it, and retraining with more or more varied samples is the more useful next step.
