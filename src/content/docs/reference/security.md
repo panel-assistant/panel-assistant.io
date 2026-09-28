@@ -11,7 +11,7 @@ Using your usual account is fine, especially if your Home Assistant installation
 
 ### Change the panel's sign-in
 
-In Home Assistant, open **Panel Assistant**, select the panel, then open its **Configure** tab. Under **Browser sign-in**, choose **Reconnect** and **Copy link**. Open that link in a private browser window, sign in to Home Assistant as the existing user you want the panel to use, and let the browser return to the panel. A private window helps when your usual browser is already signed in as the administrator. You can also open **Configure** directly on the panel and start browser sign-in there.
+In Home Assistant, open **Panel Assistant**, select the panel, then open its **Configure** tab. Under **Browser sign-in**, choose **Reconnect** and **Copy link**. Open that link in a private browser window, sign in to Home Assistant as the existing user you want the panel to use, and let the browser return to the panel. A private window helps when your usual browser is already signed in as the administrator. You can also open **Configure** directly on the panel and start browser sign-in there. If Home Assistant then reports a panel user mismatch under **Settings → Repairs**, confirm that the named new user is the one you chose.
 
 The browser must be able to reach both Home Assistant and the panel's local address to finish sign-in. The panel must be able to reach Home Assistant too. If you opened Configure remotely through Home Assistant but your browser cannot reach the panel's local address, complete sign-in while connected to the panel's network or directly on the panel.
 
