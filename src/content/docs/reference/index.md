@@ -1,17 +1,17 @@
 ---
 title: Reference
-description: Technical reference for the panel app, covering its API, device profiles, security posture and how to build it.
+description: The panel app's API and device profiles, plus account and network security guidance.
 sidebar:
   label: Overview
   order: 0
 ---
 
-These pages document how the panel app works underneath: the interfaces it exposes, the profile format that describes each model of panel, and the security decisions behind both. You do not need any of them to install or use Panel Assistant.
+These pages document how the panel app works underneath: the interfaces it exposes and the profile format that describes each model of panel. The security guide explains the account and network access your panel uses.
 
 ## Interfaces
 
 - [Control API and Home Assistant reference](/reference/api/): the entities, browser pages and HTTP API on port 8888.
-- [Security posture](/reference/security/): the trust model, attack surface and the decisions taken.
+- [Panel security](/reference/security/): the panel's Home Assistant account, changing its sign-in and network separation.
 
 ## Device profiles
 
