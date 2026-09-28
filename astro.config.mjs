@@ -125,6 +125,7 @@ export default defineConfig({
                 { label: 'Display sizing', slug: 'manage/display-sizing' },
                 { label: 'Text-to-speech', slug: 'manage/text-to-speech' },
                 { label: 'Vendor packages', slug: 'manage/vendor-packages' },
+                { label: 'Panel account and network security', slug: 'manage/panel-security' },
                 { label: 'Security mode', slug: 'manage/security-mode' },
               ],
             },
