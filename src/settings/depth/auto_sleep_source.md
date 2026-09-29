@@ -4,6 +4,11 @@ related:
   - /manage/adaptive-proximity/
 ---
 
-**Panel** uses the panel's own proximity sensor, after it has learned that sensor on the panel. **Home Assistant** instead watches the presence devices in the Home Assistant Area this panel is assigned to, and the Configure page lists those devices so you can include or leave out each one. It checks that assignment and shows the Area it found; until the panel has an Area, [Auto sleep](#auto_sleep) cannot be switched on with this source.
+| Choice                                    | What watches for people                                                                                                                           | When to pick it                                                                            |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Panel** (default for new installations) | The panel's own proximity sensor, once the panel has learned it                                                                                   | The panel has a usable proximity sensor and faces the people who use it                    |
+| **Home Assistant**                        | The presence devices in the Home Assistant Area this panel is assigned to; the Configure page lists them so you can include or leave out each one | The room already has a better presence sensor, or the panel has no usable proximity sensor |
 
-Choose Home Assistant when the room already has a better presence sensor than the panel, or when the panel has no usable proximity sensor. New installations start on Panel. An installation that already had auto sleep configured before this choice existed keeps the Home Assistant behaviour it had. A change takes effect straight away and restarts the auto sleep decision with the new source.
+With **Home Assistant**, the panel checks its Area assignment and shows the Area it found. Until the panel has an Area, [Auto sleep](#auto_sleep) cannot be switched on with this source.
+
+An installation that already had auto sleep configured before this choice existed keeps the Home Assistant behaviour it had. A change takes effect straight away and restarts the auto sleep decision with the new source.
