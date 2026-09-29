@@ -52,7 +52,7 @@ function page(version, groups, latest, order) {
         '',
         `\`${s.key}\`${s.advanced ? ' · Advanced' : ''}`,
       );
-      if (s.help) lines.push('', escape(s.help));
+      if (s.help) lines.push('', `<p>${escape(s.help)}</p>`);
     }
   }
   return lines.join('\n') + '\n';
