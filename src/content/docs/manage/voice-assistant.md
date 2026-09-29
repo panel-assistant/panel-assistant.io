@@ -49,14 +49,14 @@ If two satellites on the same Home Assistant instance hear the same wake word ph
 
 The Voice card has a few tuning options beyond the wake word list:
 
-- **Wake sensitivity** — Low, Normal or High. High lowers the wake word model's threshold, so the panel wakes more readily but is also more likely to wake on a false match; Low asks for a clearer match before waking.
-- **Microphone gain (dB)** — amplifies only the audio sent to Home Assistant for transcription, never the audio the wake word listener itself analyses. Raise it if the wake word reliably triggers but commands spoken from across the room are missed or misheard.
-- **Audio source** — the Android audio source used to capture the microphone. Leave this at its default (`voice_recognition`) unless you have been told otherwise.
+- **Wake sensitivity:** Low, Normal or High. High lowers the wake word model's threshold, so the panel wakes more readily but is also more likely to wake on a false match; Low asks for a clearer match before waking.
+- **Microphone gain (dB):** amplifies only the audio sent to Home Assistant for transcription, never the audio the wake word listener itself analyses. Raise it if the wake word reliably triggers but commands spoken from across the room are missed or misheard.
+- **Audio source:** the Android audio source used to capture the microphone. Leave this at its default (`voice_recognition`) unless you have been told otherwise.
 
 ## Troubleshooting
 
 **The panel never wakes.** Confirm **Voice assistant** is on and the wake word you are saying is ticked under **Wake words**. Try **Wake sensitivity: High**, and speak from where you normally would use the panel, not right next to the microphone.
 
-**It wakes but does not understand the command.** Raise **Microphone gain (dB)** a little and try again; this only affects the audio sent for transcription, so it will not make the panel wake more easily by itself. If you are training your own wake word, the panel's log also records near misses with the score they reached, which is the most direct way to see whether a missed wake word was close or nowhere near — see [custom wake words](/manage/custom-wake-words/#testing-and-tuning).
+**It wakes but does not understand the command.** Raise **Microphone gain (dB)** a little and try again; this only affects the audio sent for transcription, so it will not make the panel wake more easily by itself. If you are training your own wake word, the panel's log also records near misses with the score they reached, which is the most direct way to see whether a missed wake word was close or nowhere near. See [custom wake words](/manage/custom-wake-words/#testing-and-tuning).
 
 **The satellite entity shows unavailable.** The voice assistant is off, or the panel is not connected to Home Assistant through Panel Assistant. Turn the voice assistant on from the panel's Configure page; it cannot be switched on from Home Assistant.

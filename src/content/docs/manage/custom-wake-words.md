@@ -10,15 +10,15 @@ The four bundled wake words are [microWakeWord](https://github.com/kahrendt/micr
 microWakeWord is a separate, Apache-2.0-licensed open-source project by Kevin Ahrendt; its [training notebook](https://github.com/kahrendt/microWakeWord/blob/main/notebooks/basic_training_notebook.ipynb) walks through the whole process and is the canonical reference. In outline:
 
 1. **Pick a phrase and generate synthetic samples.** You set the target phrase, and the notebook uses [piper-sample-generator](https://github.com/rhasspy/piper-sample-generator) to synthesize thousands of spoken examples of it in different voices.
-2. **Augment the samples.** The notebook layers effects onto the synthetic audio — equalization, distortion, pitch shifting, room-impulse convolution, and mixing in background noise and music from public audio datasets — so the model does not just learn to recognise one clean recording.
+2. **Augment the samples.** The notebook layers effects onto the synthetic audio (equalization, distortion, pitch shifting, room-impulse convolution, and mixing in background noise and music from public audio datasets), so the model does not just learn to recognise one clean recording.
 3. **Train.** The model trains for a configurable number of steps, then converts from a non-streaming model into the streaming form the panel actually runs. The notebook itself says training in Google Colab is workable but noticeably slower than a local GPU.
-4. **Export.** The trained model is exported as a quantised, streaming TensorFlow Lite file — this is the `.tflite` file you will import.
+4. **Export.** The trained model is exported as a quantised, streaming TensorFlow Lite file. This is the `.tflite` file you will import.
 
 You do not need any of this if a ready-made model already covers your phrase: the [`esphome/micro-wake-word-models`](https://github.com/esphome/micro-wake-word-models) repository (also Apache-2.0) publishes trained models by filename under `models/v2/`, and one of those imports exactly the way a model you trained yourself would.
 
 ## Writing the manifest
 
-Each wake word needs a small JSON manifest alongside its `.tflite` file, in microWakeWord's version 2 format — the same format ESPHome's `micro_wake_word` component and the `esphome/micro-wake-word-models` repository use, so a manifest from either source works unchanged. Required fields:
+Each wake word needs a small JSON manifest alongside its `.tflite` file, in microWakeWord's version 2 format. It is the same format ESPHome's `micro_wake_word` component and the `esphome/micro-wake-word-models` repository use, so a manifest from either source works unchanged. Required fields:
 
 - `"type"`: always `"micro"`.
 - `"model"`: the `.tflite` file's name (no slashes).
@@ -68,7 +68,7 @@ Once it is imported, tick it under **Wake words**, choose its pipeline under **W
 
 ### With the HTTP API
 
-An imported model lives on the one panel it was imported to. To use the same wake word on several panels, import it on each one — either through each panel's Configure page, or with the API:
+An imported model lives on the one panel it was imported to. To use the same wake word on several panels, import it on each one, either through each panel's Configure page, or with the API:
 
 ```
 POST http://<panel>:8888/api/v1/voice/wake-words
