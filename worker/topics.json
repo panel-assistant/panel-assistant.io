@@ -18,6 +18,7 @@
   "report-issue": "https://github.com/panel-assistant/ha-integration/issues/new",
   "voice-assistant": "/manage/voice-assistant/",
   "custom-wake-words": "/manage/custom-wake-words/",
+  "settings": "/reference/settings/",
   "firmware": {
     "all": "/hardware/firmware/",
     "shelly": "/hardware/firmware/builds/#shelly-wall-display",

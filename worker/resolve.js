@@ -5,6 +5,7 @@
 // receives none of them, because a third party has no use for them and the
 // reader's version is not theirs to collect.
 import { pageMissKey } from './misses.js';
+import { compareVersions, parseVersion } from '../src/settings/extract.mjs';
 
 const PREFIX = '/go/';
 // The docs topic takes `page=<old ha-paneld docs/ path>` and resolves it through the nested
@@ -12,6 +13,36 @@ const PREFIX = '/go/';
 // there instead of a code change here.
 const DOCS_TOPIC = 'docs';
 const FIRMWARE_TOPIC = 'firmware';
+// The settings topic takes `v=<app version>`, `lang` and `section=<setting key>` and lands on the
+// reference page for the nearest published version, at that setting. The app never learns page
+// paths; the published versions come from the build's settings-versions.json.
+const SETTINGS_TOPIC = 'settings';
+
+// The newest published version at or below the reader's, else the oldest one; a version the
+// router cannot read gets the newest. Every page is English, so `lang` needs no lookup yet.
+function nearestVersion(requested, published) {
+  const ordered = Object.keys(published).sort(compareVersions);
+  if (!parseVersion(requested)) return ordered.at(-1);
+  return ordered.filter((v) => compareVersions(v, requested) <= 0).at(-1) ?? ordered[0];
+}
+
+function resolveSettingsTopic(url, base, settings) {
+  const published = settings?.versions ?? {};
+  const version = nearestVersion(url.searchParams.get('v'), published);
+  const section = url.searchParams.get('section');
+  const target = new URL(version ? published[version].path : base, url.origin);
+  for (const [key, value] of url.searchParams) {
+    if (key !== 'section') target.searchParams.append(key, value);
+  }
+  const known = !section || Boolean(version && published[version].keys.includes(section));
+  if (section && known) target.hash = section;
+  return {
+    location: target.toString(),
+    known,
+    topic: SETTINGS_TOPIC,
+    missKey: known ? undefined : pageMissKey(section, 'settings-'),
+  };
+}
 
 // Old paths arrive as e.g. "docs/hardware/nspanel-pro.md", "hardware/nspanel-pro",
 // or "Hardware/NSPanel-Pro.md" — all of these must land on the same map entry.
@@ -47,12 +78,15 @@ function resolveDocsTopic(url, docsMap) {
   };
 }
 
-export function resolve(requestUrl, topics) {
+export function resolve(requestUrl, topics, settings) {
   const url = new URL(requestUrl);
   if (url.pathname !== '/go' && !url.pathname.startsWith(PREFIX)) return null;
   const topic = decodeURIComponent(url.pathname.slice(PREFIX.length)).replace(/\/+$/, '');
   if (topic === DOCS_TOPIC && typeof topics[DOCS_TOPIC] === 'object' && topics[DOCS_TOPIC]) {
     return resolveDocsTopic(url, topics[DOCS_TOPIC]);
+  }
+  if (topic === SETTINGS_TOPIC && typeof topics[SETTINGS_TOPIC] === 'string') {
+    return resolveSettingsTopic(url, topics[SETTINGS_TOPIC], settings);
   }
   if (topic === FIRMWARE_TOPIC && typeof topics[FIRMWARE_TOPIC] === 'object') {
     const device = url.searchParams.get('device');

@@ -20,15 +20,15 @@ export function missKey(topic) {
   return key;
 }
 
-export function pageMissKey(page) {
+export function pageMissKey(page, prefix = DOCS_MISS_PREFIX) {
   const slug = String(page ?? '')
     .trim()
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
-    .slice(0, MAX_KEY - DOCS_MISS_PREFIX.length);
+    .slice(0, MAX_KEY - prefix.length);
 
-  return slug ? DOCS_MISS_PREFIX + slug : `${DOCS_MISS_PREFIX}malformed`;
+  return slug ? prefix + slug : `${prefix}malformed`;
 }
 
 export function recordMiss(sink, topic) {

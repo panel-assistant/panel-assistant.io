@@ -16,3 +16,6 @@ public/build.json
 public/admin/
 # Generated from firmware .dat files and the two data branches before each build.
 src/content/docs/hardware/firmware/builds/
+# Generated from the Android app's published tags before each build.
+src/content/docs/reference/settings/
+public/settings-versions.json

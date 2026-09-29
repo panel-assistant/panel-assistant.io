@@ -10,6 +10,7 @@ import editorConfig from './editor.json' with { type: 'json' };
 // The build facts come from the published directory, which is what the deploy
 // job has in hand; the source copy is not part of a checkout.
 import build from '../dist/build.json' with { type: 'json' };
+import settings from '../dist/settings-versions.json' with { type: 'json' };
 
 export default {
   async fetch(request, env) {
@@ -24,7 +25,7 @@ export default {
       return handleEditorAuth(request, env, editorConfig);
     }
 
-    const hit = resolve(request.url, topics);
+    const hit = resolve(request.url, topics, settings);
     if (!hit) return env.ASSETS.fetch(request);
 
     if (!hit.known && hit.topic) recordMiss(env.GO_MISSES, hit.missKey ?? hit.topic);
