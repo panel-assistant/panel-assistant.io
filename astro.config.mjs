@@ -186,7 +186,10 @@ export default defineConfig({
           items: [
             { label: 'Overview', slug: 'reference' },
             { label: 'API', slug: 'reference/api' },
-            { label: 'Settings', slug: 'reference/settings' },
+            {
+              label: 'Settings',
+              items: [{ autogenerate: { directory: 'reference/settings' } }],
+            },
             {
               label: 'Profiles',
               items: [

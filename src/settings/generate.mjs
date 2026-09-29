@@ -28,13 +28,14 @@ export const versionSlug = (version) => `v${version.replaceAll('.', '-')}`;
 const escape = (value) =>
   String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
-function page(version, groups, latest) {
+function page(version, groups, latest, order) {
   const lines = [
     '---',
     `title: Settings in ${version}`,
     `description: Every setting on the Configure page of Panel Assistant ${version}, grouped as the app shows them.`,
     'sidebar:',
-    '  hidden: true',
+    `  label: "${version}"`,
+    `  order: ${order}`,
     'pagefind: ' + (version === latest),
     '---',
     '',
@@ -61,6 +62,9 @@ function index(versions) {
   return [
     '---',
     'title: Settings reference',
+    'sidebar:',
+    '  label: All versions',
+    '  order: 0',
     'description: The settings on the Configure page, for each released version of Panel Assistant.',
     '---',
     '',
@@ -89,7 +93,10 @@ for (const version of versions) {
     git('show', `${tag}:${registry}`),
     git('show', `${tag}:${strings}`),
   );
-  writeFileSync(join(output, `${versionSlug(version)}.md`), page(version, groups, versions[0]));
+  writeFileSync(
+    join(output, `${versionSlug(version)}.md`),
+    page(version, groups, versions[0], versions.indexOf(version) + 1),
+  );
   published[version] = {
     path: `/reference/settings/${versionSlug(version)}/`,
     keys: groups.flatMap((g) => g.settings.map((s) => s.key)),
