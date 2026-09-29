@@ -237,3 +237,10 @@ h1#_top {
   font-weight: 700;
   font-size: var(--sl-text-xs);
 }
+
+/* The generated settings reference: one quiet line of facts under each setting's name. */
+.sl-markdown-content .setting-facts {
+  margin-top: 0.25rem;
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-3);
+}

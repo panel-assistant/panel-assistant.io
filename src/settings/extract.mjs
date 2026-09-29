@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+
 // Pure pieces of the settings reference: which app versions get a page, and what a version's
 // settings are, read from that version's own settings registry and English strings.
 
@@ -55,6 +57,33 @@ function specBlocks(source) {
   return blocks;
 }
 
+// A short fingerprint of one spec as written, so an explanation written against it can tell
+// when the setting has changed under it.
+export function specHash(block) {
+  return createHash('sha256').update(block.replace(/\s+/g, ' ').trim()).digest('hex').slice(0, 12);
+}
+
+// Only facts that read well without explanation: an on/off default, a plain number or range,
+// and the kind of Home Assistant entity. Codes and blank defaults are left to the prose.
+function facts(block, constants) {
+  const out = [];
+  const def = /\bdefault = (?:"([^"]*)"|(\w+))/.exec(block);
+  const value = def?.[1] ?? constants[def?.[2]];
+  const type = /\btype = SettingType\.(\w+)/.exec(block)?.[1];
+  if (type === 'BOOL' && (value === 'true' || value === 'false'))
+    out.push(`Default ${value === 'true' ? 'on' : 'off'}`);
+  else if (/^-?\d+(\.\d+)?$/.test(value ?? '')) out.push(`Default ${value}`);
+  const bound = (name) => {
+    const m = new RegExp(`\\b${name} = (-?[\\d.]+)`).exec(block);
+    return m ? String(Number(m[1])) : null;
+  };
+  const [min, max] = [bound('min'), bound('max')];
+  if (min !== null && max !== null) out.push(`${min} to ${max}`);
+  const entity = /\bha = haEntity\("(\w+)"/.exec(block)?.[1];
+  if (entity) out.push(`Home Assistant ${entity.replaceAll('_', ' ')}`);
+  return out;
+}
+
 // The settings the app's Configure page shows (SettingsRegistry.schemaVisibleSpecs: a read-only
 // spec always carries an HA entity, so only `hidden` removes one), in the app's order, grouped
 // by card, with the English label and help from en.json.
@@ -81,6 +110,8 @@ export function extractSettings(registrySource, enJson) {
       label,
       help: text(`settings.${key}.help`) ?? '',
       advanced: !/\btier = Tier\.BASIC\b/.test(block),
+      facts: facts(block, constants),
+      spec: specHash(block),
     });
   }
   const known = new Set(groups.flatMap((g) => g.settings.map((s) => s.key)));

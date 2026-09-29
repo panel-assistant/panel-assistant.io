@@ -9,6 +9,7 @@ import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { extractSettings, publishedVersions } from './extract.mjs';
+import { index, page, pageTitle, readDepth, versionSlug } from './render.mjs';
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
 const source = process.env.SETTINGS_SOURCE ?? 'https://github.com/panel-assistant/android.git';
@@ -24,57 +25,6 @@ const git = (...args) =>
     stdio: ['ignore', 'pipe', 'inherit'],
   });
 
-export const versionSlug = (version) => `v${version.replaceAll('.', '-')}`;
-const escape = (value) =>
-  String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
-
-function page(version, groups, latest, order) {
-  const lines = [
-    '---',
-    `title: Settings in ${version}`,
-    `description: Every setting on the Configure page of Panel Assistant ${version}, grouped as the app shows them.`,
-    'sidebar:',
-    `  label: "${version}"`,
-    `  order: ${order}`,
-    'pagefind: ' + (version === latest),
-    '---',
-    '',
-    `These are the settings on the Configure page of version ${version}, in the order the app shows them. Settings marked Advanced are hidden while the page is set to Basic.`,
-    '',
-    '[Other versions](/reference/settings/)',
-  ];
-  for (const group of groups) {
-    lines.push('', `## ${group.name}`);
-    for (const s of group.settings) {
-      lines.push(
-        '',
-        `<h3 id="${s.key}">${escape(s.label)}</h3>`,
-        '',
-        `\`${s.key}\`${s.advanced ? ' · Advanced' : ''}`,
-      );
-      if (s.help) lines.push('', `<p>${escape(s.help)}</p>`);
-    }
-  }
-  return lines.join('\n') + '\n';
-}
-
-function index(versions) {
-  return [
-    '---',
-    'title: Settings reference',
-    'sidebar:',
-    '  label: All versions',
-    '  order: 0',
-    'description: The settings on the Configure page, for each released version of Panel Assistant.',
-    '---',
-    '',
-    'Each release has its own list of settings, generated from that release. While a release candidate is being tested it has a list too, until the release replaces it.',
-    '',
-    ...versions.map((v) => `- [${v}](/reference/settings/${versionSlug(v)}/)`),
-    '',
-  ].join('\n');
-}
-
 if (!existsSync(cache)) execFileSync('git', ['init', '--quiet', '--bare', cache]);
 const tags = git('ls-remote', '--tags', '--refs', source)
   .split('\n')
@@ -83,6 +33,8 @@ const tags = git('ls-remote', '--tags', '--refs', source)
 const versions = publishedVersions(tags);
 if (!versions.length) throw new Error(`No published app versions found at ${source}`);
 
+const depth = readDepth(join(root, 'src/settings/depth'));
+const titleOf = (path) => pageTitle(join(root, 'src/content/docs'), path);
 rmSync(output, { recursive: true, force: true });
 mkdirSync(output, { recursive: true });
 const published = {};
@@ -95,13 +47,25 @@ for (const version of versions) {
   );
   writeFileSync(
     join(output, `${versionSlug(version)}.md`),
-    page(version, groups, versions[0], versions.indexOf(version) + 1),
+    page(version, groups, versions[0], versions.indexOf(version) + 1, depth, titleOf),
   );
+  if (version === versions[0]) {
+    const stale = groups
+      .flatMap((g) => g.settings)
+      .filter((st) => depth[st.key] && depth[st.key].spec !== st.spec)
+      .map((st) => st.key);
+    if (stale.length)
+      console.log(`settings reference: explanation out of date for ${stale.join(', ')}`);
+  }
   published[version] = {
     path: `/reference/settings/${versionSlug(version)}/`,
     keys: groups.flatMap((g) => g.settings.map((s) => s.key)),
   };
 }
+const newest = published[versions[0]].keys;
+const unexplained = newest.filter((key) => !depth[key]);
+if (unexplained.length)
+  console.log(`settings reference: no explanation yet for ${unexplained.join(', ')}`);
 writeFileSync(join(output, 'index.md'), index(versions));
 writeFileSync(manifest, JSON.stringify({ versions: published }, null, 2) + '\n');
 console.log(`settings reference: ${versions.join(', ')}`);

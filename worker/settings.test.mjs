@@ -1,8 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { resolve } from './resolve.js';
 import { extractSettings, publishedVersions } from '../src/settings/extract.mjs';
+import { page, readDepth } from '../src/settings/render.mjs';
 
 const topics = JSON.parse(readFileSync(new URL('./topics.json', import.meta.url), 'utf8'));
 const settings = {
@@ -86,7 +89,11 @@ test('a version lists the visible settings in app order by card, with English te
         SettingSpec(key = "panel_id", group = "Identity", tier = Tier.BASIC, help = "a ) b"),
         SettingSpec(key = "token", group = "Identity", hidden = true),
         SettingSpec(key = WAKE_KEY, group = "Voice", validate = { raw -> check(raw) }),`);
-  assert.deepEqual(extractSettings(source, en(['panel_id', 'token', 'wake'])), [
+  const groups = extractSettings(source, en(['panel_id', 'token', 'wake'])).map((g) => ({
+    name: g.name,
+    settings: g.settings.map(({ key, label, help, advanced }) => ({ key, label, help, advanced })),
+  }));
+  assert.deepEqual(groups, [
     {
       name: 'Identity',
       settings: [
@@ -98,6 +105,31 @@ test('a version lists the visible settings in app order by card, with English te
       settings: [{ key: 'wake', label: 'Label wake', help: 'Help (for wake)', advanced: true }],
     },
   ]);
+});
+
+test('the facts line keeps only values that read well, and the fingerprint follows the spec', () => {
+  const read = (spec) =>
+    extractSettings(kotlin(`        SettingSpec(${spec}),`), en(['s']))[0].settings[0];
+  const toggle = read(
+    'key = "s", group = "G", type = SettingType.BOOL, default = "false", ha = haEntity("switch", "s", "S") {}',
+  );
+  assert.deepEqual(toggle.facts, ['Default off', 'Home Assistant switch']);
+  const number = read(
+    'key = "s", group = "G", type = SettingType.INT, default = "30", min = 5.0, max = 300.0',
+  );
+  assert.deepEqual(number.facts, ['Default 30', '5 to 300']);
+  assert.deepEqual(
+    read('key = "s", group = "G", type = SettingType.ENUM, default = "panel"').facts,
+    [],
+  );
+  assert.equal(
+    read('key = "s", group = "G", default = "1"').spec,
+    read('key = "s",  group = "G", default = "1"').spec,
+  );
+  assert.notEqual(
+    read('key = "s", group = "G", default = "1"').spec,
+    read('key = "s", group = "G", default = "2"').spec,
+  );
 });
 
 test('a tag whose strings and registry disagree fails the build', () => {
@@ -116,4 +148,58 @@ test('every published version has its page, and every setting its anchor, in the
     assert.ok(keys.length > 0, `${version} lists no settings`);
     for (const key of keys) assert.ok(html.includes(`id="${key}"`), `${version} has no #${key}`);
   }
+});
+
+const setting = (spec) => ({
+  key: 'auto_sleep',
+  label: 'Auto sleep',
+  help: 'Short help.',
+  advanced: false,
+  facts: ['Default off'],
+  spec,
+});
+const render = (spec, depth) =>
+  page(
+    '0.9.8',
+    [{ name: 'Behaviour', settings: [setting(spec)] }],
+    '0.9.8',
+    1,
+    depth,
+    (path) => `Title of ${path}`,
+  );
+const explained = {
+  auto_sleep: {
+    spec: 'aaaaaaaaaaaa',
+    related: ['/manage/adaptive-proximity/'],
+    body: 'The longer story.',
+  },
+};
+
+test('a setting shows its explanation and related pages when written against its spec', () => {
+  const md = render('aaaaaaaaaaaa', explained);
+  assert.match(md, /Short help\.[\s\S]*The longer story\./);
+  assert.match(
+    md,
+    /Related: \[Title of \/manage\/adaptive-proximity\/\]\(\/manage\/adaptive-proximity\/\)/,
+  );
+  assert.match(md, /class="setting-facts">Basic · Default off · <code>auto_sleep<\/code>/);
+});
+
+test('an explanation written against a different spec is left out, not shown stale', () => {
+  const md = render('bbbbbbbbbbbb', explained);
+  assert.doesNotMatch(md, /The longer story|Related:/);
+  assert.match(md, /Short help\./);
+});
+
+test('explanation files need a spec fingerprint and read their related pages', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'depth-'));
+  writeFileSync(
+    join(dir, 'auto_sleep.md'),
+    '---\nspec: 0123456789ab\nrelated:\n  - /manage/adaptive-proximity/\n---\nBody.\n',
+  );
+  assert.deepEqual(readDepth(dir), {
+    auto_sleep: { spec: '0123456789ab', related: ['/manage/adaptive-proximity/'], body: 'Body.' },
+  });
+  writeFileSync(join(dir, 'broken.md'), '---\nrelated:\n---\nBody.\n');
+  assert.throws(() => readDepth(dir), /broken\.md: missing spec fingerprint/);
 });
