@@ -14,6 +14,8 @@
   "panel-unreachable": "/manage/troubleshooting/#the-installer-cannot-reach-the-panel",
   "troubleshooting": "/manage/troubleshooting/",
   "updates": "/manage/updates-and-recovery/",
+  "support-report": "/home-assistant/support-report/",
+  "report-issue": "https://github.com/panel-assistant/ha-integration/issues/new",
   "firmware": {
     "all": "/hardware/firmware/",
     "shelly": "/hardware/firmware/builds/#shelly-wall-display",

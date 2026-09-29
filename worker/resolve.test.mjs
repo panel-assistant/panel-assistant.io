@@ -110,6 +110,17 @@ test('an off-site topic redirects to the absolute URL and forwards no parameters
   assert.ok(!new URL(discord.location).search, `discord received ${discord.location}`);
 });
 
+test('support report links reach the guide and a new integration issue without forwarding details', () => {
+  assert.equal(
+    go('/go/support-report?v=0.2.0&build=245').location,
+    'https://panel-assistant.io/home-assistant/support-report/?v=0.2.0&build=245',
+  );
+  assert.equal(
+    go('/go/report-issue?v=0.2.0&build=245&panel=Kitchen').location,
+    'https://github.com/panel-assistant/ha-integration/issues/new',
+  );
+});
+
 test('an unknown topic lands on the homepage, named, with its parameters', () => {
   const hit = go('/go/no-such-topic?v=1.0.0b1&build=37');
   assert.equal(hit.known, false);
