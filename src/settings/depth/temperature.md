@@ -1,5 +1,6 @@
 ---
-spec: 88f0d78f17e8
+spec: ['88f0d78f17e8', '1254bfafb6c0', 'eec40ad6905d']
+help: "Environmental temperature reported by Android's panel sensor."
 ---
 
 This row has no value to edit. Its switch decides whether the reading from Android's ambient temperature sensor is reported to Home Assistant in °C, which is on by default. It appears only on a panel that has such a sensor. Values are rounded to one decimal place, and changes smaller than `0.1` °C are not published.

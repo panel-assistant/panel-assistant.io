@@ -1,5 +1,6 @@
 ---
-spec: d7df8cc804fa
+spec: ['d7df8cc804fa', '6beaf5759391', 'f1a2064b2f2b']
+help: 'Self-heal the dashboard app: relaunch if it dies, return if backgrounded too long.'
 ---
 
 When the watchdog is on, Panel Assistant checks the dashboard app every 30 seconds and acts on two situations. It never acts while the dashboard is in front.

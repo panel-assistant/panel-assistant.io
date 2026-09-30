@@ -1,5 +1,6 @@
 ---
-spec: 9ebce0d42320
+spec: ['9ebce0d42320', '55345c0f8928', 'c85551df0e3a']
+help: 'Blank auto-discovers HA over mDNS.'
 related:
   - /home-assistant/move-from-mqtt/
 ---

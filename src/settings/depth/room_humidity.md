@@ -1,5 +1,6 @@
 ---
-spec: 86383c4568cf
+spec: ['86383c4568cf', 'a7d59a60b2e8', 'e8a39a9ffeb4']
+help: "Relative humidity from the panel's supported climate sensor."
 related:
   - /hardware/panels/tuya-tpa10/
 ---

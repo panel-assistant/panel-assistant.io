@@ -1,5 +1,6 @@
 ---
-spec: 22db4869919f
+spec: ['22db4869919f', 'd424bb5a08ae', 'dd868637ca92']
+help: 'Run the on-board Zigbee gateway as a router/repeater (NSPanel Pro).'
 related:
   - /manage/performance/
   - /hardware/panels/sonoff-nspanel-pro/

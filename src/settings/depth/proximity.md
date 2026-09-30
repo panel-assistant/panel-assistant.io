@@ -1,5 +1,6 @@
 ---
-spec: d781004cfef2
+spec: ['d781004cfef2', 'cca2796bb854', '94ebaa4e5d37']
+help: 'Learned near/far occupancy from a supported proximity source.'
 related:
   - /manage/adaptive-proximity/
 ---

@@ -1,5 +1,6 @@
 ---
-spec: df533c46d294
+spec: ['df533c46d294', 'fc09b3d9a4c3', 'fd3046640bd7']
+help: 'Keep the network and background services running while the screen is off.'
 related:
   - /manage/security-mode/
 ---

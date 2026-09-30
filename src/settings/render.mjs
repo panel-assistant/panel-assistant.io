@@ -6,6 +6,8 @@ import { join } from 'node:path';
 // Explanations written from the code and documents that delivered each setting, one file per
 // setting key. Each names the spec fingerprint it was written against; a version whose spec
 // differs shows the setting without it rather than an explanation that may no longer be true.
+// A spec list accepts known presentation-only revisions. Optional quoted help preserves full
+// English help removed from the app, shown only when the matching version has no help of its own.
 export function readDepth(dir) {
   const depth = {};
   for (const file of existsSync(dir) ? readdirSync(dir) : []) {
@@ -13,13 +15,31 @@ export function readDepth(dir) {
     const text = readFileSync(join(dir, file), 'utf8');
     const m = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(text);
     if (!m) throw new Error(`${file}: missing front matter`);
-    const spec = /^spec: ([0-9a-f]{12})$/m.exec(m[1])?.[1];
-    if (!spec) throw new Error(`${file}: missing spec fingerprint`);
+    const written = /^spec: (.+)$/m.exec(m[1])?.[1];
+    const spec = written?.startsWith('[') ? JSON.parse(written.replaceAll("'", '"')) : written;
+    if (
+      !spec ||
+      (Array.isArray(spec) && !spec.length) ||
+      ![].concat(spec).every((hash) => /^[0-9a-f]{12}$/.test(hash))
+    )
+      throw new Error(`${file}: missing spec fingerprint`);
+    const help = /^help: (".*"|'.*')$/m.exec(m[1])?.[1];
     const related = [...m[1].matchAll(/^ {2}- (\/[^\s#]*\/(?:#[\w-]+)?)$/gm)].map((r) => r[1]);
-    depth[file.slice(0, -3)] = { spec, related, body: m[2].trim() };
+    depth[file.slice(0, -3)] = {
+      spec,
+      related,
+      body: m[2].trim(),
+      ...(help
+        ? {
+            help: help.startsWith("'") ? help.slice(1, -1).replaceAll("''", "'") : JSON.parse(help),
+          }
+        : {}),
+    };
   }
   return depth;
 }
+
+export const depthMatches = (depth, spec) => [].concat(depth?.spec ?? []).includes(spec);
 
 // A related page is named by its own title, so a renamed page never leaves a stale link text.
 export function pageTitle(docs, path) {
@@ -67,8 +87,9 @@ export function page(version, groups, latest, order, depth, titleOf) {
           .map(escape)
           .join(' · ')} · <code>${s.key}</code></p>`,
       );
-      if (s.help) lines.push('', `<p>${escape(s.help)}</p>`);
-      const more = depth[s.key]?.spec === s.spec ? depth[s.key] : null;
+      const more = depthMatches(depth[s.key], s.spec) ? depth[s.key] : null;
+      const help = s.help || more?.help;
+      if (help) lines.push('', `<p>${escape(help)}</p>`);
       if (more?.body) lines.push('', more.body);
       if (more?.related.length)
         lines.push(

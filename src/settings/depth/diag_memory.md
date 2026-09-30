@@ -1,5 +1,6 @@
 ---
-spec: 06d8feb9d89f
+spec: ['06d8feb9d89f', '7c3ccbcebd40', '44105566f1ad']
+help: 'Used RAM as a percentage.'
 related:
   - /manage/performance/
 ---

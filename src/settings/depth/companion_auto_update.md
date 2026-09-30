@@ -1,5 +1,6 @@
 ---
-spec: d43d8611b5c1
+spec: ['d43d8611b5c1', '5ae4cfa2eefb', '3b53f0452cc2']
+help: 'Install/update the minimal HA Companion over root when missing or out of date.'
 related:
   - /manage/security-mode/
 ---

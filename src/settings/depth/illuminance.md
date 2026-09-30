@@ -1,5 +1,6 @@
 ---
-spec: 1cf61f9795c5
+spec: ['1cf61f9795c5', 'bd545358b872', 'a33d042744a4']
+help: 'Ambient illuminance measured by the panel light sensor.'
 related:
   - /manage/adaptive-brightness/
 ---

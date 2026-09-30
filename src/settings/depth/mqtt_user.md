@@ -1,5 +1,6 @@
 ---
-spec: 9e588f29fd59
+spec: ['9e588f29fd59', 'f264721d9847', 'b4c65908afa8']
+help: 'Credential for this panel.'
 related:
   - /home-assistant/move-from-mqtt/
 ---

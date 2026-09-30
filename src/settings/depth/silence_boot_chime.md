@@ -1,5 +1,6 @@
 ---
-spec: 08aa6138caa8
+spec: ['08aa6138caa8', 'd6f88f996a8e', '038afe909b3c']
+help: 'Mute the firmware startup chime.'
 ---
 
 Some panel firmware plays a chime at startup through the ring and notification volumes. Turning this on records those volumes, then silences them, so the panel restarts quietly. It is on by default. Turning it off restores exactly the volumes recorded when it was turned on. If there is no recorded volume, for example after upgrading from an older version that did not record one, the panel stays silent rather than guessing a level.

@@ -1,5 +1,6 @@
 ---
-spec: 27465b2bff3d
+spec: ['27465b2bff3d', 'c7e9120ef5a4', 'f7d5a24f015c']
+help: "App used for the dashboard. Blank uses ha-paneld's built-in renderer."
 related:
   - /manage/built-in-renderer/
 ---

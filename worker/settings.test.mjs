@@ -191,6 +191,31 @@ test('an explanation written against a different spec is left out, not shown sta
   assert.match(md, /Short help\./);
 });
 
+test('published and presentation-only specs retain depth and removed help without duplication', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'depth-'));
+  writeFileSync(
+    join(dir, 'auto_sleep.md'),
+    "---\nspec: ['aaaaaaaaaaaa', 'bbbbbbbbbbbb']\nhelp: 'Panel''s original help.'\n---\nThe longer story.\n",
+  );
+  const depth = readDepth(dir);
+  const renderSetting = (spec, help) =>
+    page(
+      '0.9.9',
+      [{ name: 'Behaviour', settings: [{ ...setting(spec), help }] }],
+      '0.9.9',
+      1,
+      depth,
+      () => '',
+    );
+  const published = renderSetting('aaaaaaaaaaaa', "Panel's original help.");
+  const candidate = renderSetting('bbbbbbbbbbbb', '');
+  for (const md of [published, candidate]) {
+    assert.equal(md.match(/Panel's original help\./g)?.length, 1);
+    assert.match(md, /The longer story\./);
+  }
+  assert.doesNotMatch(renderSetting('cccccccccccc', ''), /Panel's original help|The longer story/);
+});
+
 test('explanation files need a spec fingerprint and read their related pages', () => {
   const dir = mkdtempSync(join(tmpdir(), 'depth-'));
   writeFileSync(

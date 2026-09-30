@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { extractSettings, publishedVersions } from './extract.mjs';
-import { index, page, pageTitle, readDepth, versionSlug } from './render.mjs';
+import { depthMatches, index, page, pageTitle, readDepth, versionSlug } from './render.mjs';
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
 const source = process.env.SETTINGS_SOURCE ?? 'https://github.com/panel-assistant/android.git';
@@ -52,7 +52,7 @@ for (const version of versions) {
   if (version === versions[0]) {
     const stale = groups
       .flatMap((g) => g.settings)
-      .filter((st) => depth[st.key] && depth[st.key].spec !== st.spec)
+      .filter((st) => depth[st.key] && !depthMatches(depth[st.key], st.spec))
       .map((st) => st.key);
     if (stale.length)
       console.log(`settings reference: explanation out of date for ${stale.join(', ')}`);

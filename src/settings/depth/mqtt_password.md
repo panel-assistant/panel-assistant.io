@@ -1,5 +1,6 @@
 ---
-spec: c731944bbecd
+spec: ['c731944bbecd', '2d4c64bd7651', '61ef737fe480']
+help: 'Blank on save keeps the current password.'
 related:
   - /home-assistant/move-from-mqtt/
 ---

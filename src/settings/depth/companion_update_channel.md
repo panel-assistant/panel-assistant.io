@@ -1,5 +1,6 @@
 ---
-spec: 181223543998
+spec: ['181223543998', 'eb212bc36cf5', '23b5d5c0acfd']
+help: 'Release channel the Companion auto-updater follows.'
 related:
   - /manage/security-mode/
 ---

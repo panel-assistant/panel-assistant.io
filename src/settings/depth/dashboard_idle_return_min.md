@@ -1,5 +1,6 @@
 ---
-spec: 4bb8745b1513
+spec: ['4bb8745b1513', '24c1c863f5dd', '203c160f2da8']
+help: 'Built-in renderer: return to Home dashboard after this many idle minutes. 0 = off.'
 related:
   - /manage/built-in-renderer/
 ---

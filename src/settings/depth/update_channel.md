@@ -1,5 +1,6 @@
 ---
-spec: 8e70df5ca2d1
+spec: ['8e70df5ca2d1', 'ab56f0339f1e', '5466ac907c74']
+help: 'Release channel the self-updater follows.'
 related:
   - /manage/updates-and-recovery/
   - /manage/security-mode/

@@ -1,5 +1,6 @@
 ---
-spec: 61fdd9aabf48
+spec: ['61fdd9aabf48', '48de57abedb1', 'fe8957b41854']
+help: 'HA device display name.'
 ---
 
 This is the name shown:

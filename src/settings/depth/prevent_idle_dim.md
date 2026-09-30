@@ -1,5 +1,6 @@
 ---
-spec: 115926667786
+spec: ['115926667786', '965840fbf836', '9ce330b761e2']
+help: 'Stop the vendor firmware dimming the backlight at the screen-off timeout.'
 related:
   - /manage/security-mode/
 ---
