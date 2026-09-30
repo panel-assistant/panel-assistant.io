@@ -237,3 +237,72 @@ h1#_top {
   font-weight: 700;
   font-size: var(--sl-text-xs);
 }
+
+/* The generated settings reference: one quiet line of facts under each setting's name. */
+.sl-markdown-content .setting-facts {
+  margin-top: 0.25rem;
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-3);
+}
+
+/* Illustrations in the settings reference: inline SVG drawn only with these classes, so every
+   figure follows the light and dark themes without its own colours. */
+.sl-markdown-content .setting-figure {
+  margin: 1rem 0;
+}
+.sl-markdown-content .setting-figure svg {
+  display: block;
+  width: 100%;
+  max-width: 36rem;
+  height: auto;
+  color: var(--sl-color-gray-2);
+  font-family: var(--sl-font);
+}
+.sl-markdown-content .setting-figure figcaption {
+  margin-top: 0.4rem;
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-3);
+}
+.setting-figure .ink {
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+}
+.setting-figure .faint {
+  stroke: var(--sl-color-gray-5);
+  fill: none;
+  stroke-width: 1;
+}
+.setting-figure .accent {
+  stroke: var(--sl-color-accent);
+  fill: none;
+  stroke-width: 2.5;
+}
+.setting-figure .accent-fill {
+  fill: var(--sl-color-accent);
+  stroke: none;
+}
+.setting-figure .soft {
+  fill: var(--sl-color-accent-low);
+  stroke: none;
+}
+.setting-figure .panel {
+  fill: var(--sl-color-gray-6);
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.setting-figure .dash {
+  stroke-dasharray: 4 4;
+}
+.setting-figure text {
+  fill: currentColor;
+  font-size: 13px;
+}
+.setting-figure text.small {
+  font-size: 11px;
+  fill: var(--sl-color-gray-3);
+}
+.setting-figure text.strong {
+  font-weight: 600;
+  fill: var(--sl-color-white);
+}
