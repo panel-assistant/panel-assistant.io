@@ -5,9 +5,13 @@ description: Keeping the app on a panel current, and what can be recovered when 
 
 ## Updating a panel
 
-**From Home Assistant.** Each panel has an update entity. When a newer version is published the entity offers it, and installing is a button press; Home Assistant asks the panel to update itself and then confirms it came back healthy. This is the route to use.
+**From Home Assistant.** Each panel has an update entity. When a newer version is published the entity offers it, and installing is a button press; Panel Assistant installs the update and confirms the panel came back healthy. This is the route to use.
 
 **From a computer.** The [command-line installer](/manage/command-line-install/) run against the panel's address fetches the current release and installs it over the top, leaving the panel's setup in place. The same tool can update several panels in one run, which is why it is still the better option for a large change across many panels.
+
+### Panels that need ADB
+
+When you install an update from Home Assistant, Panel Assistant uses ADB automatically for panels that cannot install the update themselves. If the panel accepts the connection without an on-screen tap, your original consent to install Panel Assistant also covers creating and storing an ADB key for future updates. If the panel requires approval on its screen, Home Assistant raises a Repair that names the panel and starts authorization. Follow the Repair to approve the prompt on that panel.
 
 ## What an update protects
 
