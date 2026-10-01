@@ -49,7 +49,7 @@ Profiles written from firmware research, ready for the first owner to confirm on
 
 - **Android 8.0 or newer.**
 - **Developer options.** The installer uses Android's debugging interface, which almost every panel lets you turn on.
-- **Any system WebView.** Vendors often ship a browser engine years out of date. Panel Assistant checks it, and where the panel allows, installs a known-good version for you. [Preparing the panel](/install/prepare-a-panel/) covers the rest.
+- **Any system WebView.** Vendors often ship a browser engine years out of date. The panel app checks compatibility; update WebView through the Play Store, vendor firmware or a manual installation as appropriate for your panel. [Preparing the panel](/install/prepare-a-panel/) covers the rest.
 - **A hardware profile, only if you want the extras.** Everything above is enough for the Generic profile. A model's own profile is what reaches the LEDs, buttons, relays and model-specific sensors, as [Generic support](#generic-support-every-other-android-panel) describes.
 - **Root, for a few extras.** A few capabilities on some models need root. Each hardware page says which ones, and the path to get it.
 

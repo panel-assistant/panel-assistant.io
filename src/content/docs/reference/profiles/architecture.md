@@ -89,7 +89,7 @@ The profile's own content version is independent of the document schema. Install
 
 ## Risks highlighted before import
 
-Validation identifies unusually consequential behaviour separately from ordinary metadata. The preview calls out root-controlled paths, relay or GPIO writes, evdev reads and grabs, recommended package-disable intents, WebView installation recommendations, and a local profile that overrides a bundled match. These are review prompts, not permissions; activation still requires an exact confirmed revision and every driver still enforces its own parameter validation and live checks.
+Validation identifies unusually consequential behaviour separately from ordinary metadata. The preview calls out root-controlled paths, relay or GPIO writes, evdev reads and grabs, recommended package-disable intents, legacy WebView artifact metadata, and a local profile that overrides a bundled match. These are review prompts, not permissions; activation still requires an exact confirmed revision and every driver still enforces its own parameter validation and live checks.
 
 :::note
 For the runtime trust boundaries around profile import, the root helper, `su`, Shizuku and the LAN HTTP surface, see the [security posture](/reference/security/).

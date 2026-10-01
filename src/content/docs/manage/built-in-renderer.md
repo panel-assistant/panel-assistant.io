@@ -36,12 +36,7 @@ Most people only need a current Android System WebView. The panel app checks for
 
 If the panel shows **Home Assistant upgrade required**, upgrade Home Assistant and select **Retry**. Nothing on the panel can substitute for that.
 
-If it shows **This panel's web viewer is too old**, the screen tells you what this particular panel can do about it, because that differs by model and by how the panel is set up:
-
-- **The panel can repair itself.** When the hardware profile pins a known-good Android System WebView and the panel app is permitted to install it, the screen offers **Update the web viewer**. Select it and the panel downloads and installs that version, then the app restarts once to use it. If the screen comes back afterwards, the pinned version did not fix the fault and the manual routes still apply.
-- **The panel cannot, and the screen says why.** Once the app has confirmed that automatic repair is unavailable, it names one of three reasons, and the update has to be done by hand before you select **Retry**: a known-good version is pinned but the app is not permitted to install it; no known-good version is pinned for this panel; or the panel takes its Android System WebView from an app store, which will replace it more safely than the panel app would. Reinstalling the same version repairs a damaged one.
-
-How the WebView is updated by hand depends on the panel: some take it from Google Play, others only from a vendor firmware update or a manually installed build. See [updating the WebView](/hardware/guides/update-the-webview/).
+If it shows **This panel's web viewer is too old**, update Android System WebView using the method for your panel, then select **Retry**. Some panels take it from Google Play, others from a vendor firmware update or a manually installed build. The panel app does not install or repair WebView. See [updating the WebView](/hardware/guides/update-the-webview/).
 
 The built-in renderer never falls back to a less isolated bridge. Another renderer may help when Home Assistant itself cannot be upgraded, but any dashboard app on the panel uses the same system WebView, so none can get around an obsolete one.
 
@@ -193,5 +188,5 @@ If a panel needs one of the capabilities listed under [Limits](#limits), open th
 
 - **No support for more than one Home Assistant server or native notifications.** Keep a separate dashboard app on the panel where those matter. Assist voice control is not on this list: it comes from the panel's own [voice assistant](/manage/voice-assistant/) on a panel with a microphone, whichever dashboard app is active.
 - **No full-screen media extras**, such as a file chooser or casting-style playback. These are out of scope.
-- A **current system WebView** is still needed to render the Home Assistant frontend. The panel app can install a known-good WebView on supported rooted panels, and an obsolete WebView raises a health warning in the web interface.
+- A **current system WebView** is still needed to render the Home Assistant frontend. An obsolete WebView raises a health warning in the web interface; update it using the [method for your panel](/hardware/guides/update-the-webview/).
 - Browser sign-in and the advanced non-interactive install both work without root.

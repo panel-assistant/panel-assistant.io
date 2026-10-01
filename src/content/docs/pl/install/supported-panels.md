@@ -50,7 +50,7 @@ Profile napisane na podstawie analizy oprogramowania układowego, gotowe na potw
 
 - **Android 8.0 lub nowszy.**
 - **Opcje programisty.** Instalator korzysta z interfejsu debugowania Androida, który prawie każdy panel pozwala włączyć.
-- **Dowolny systemowy WebView.** Producenci często dostarczają silnik przeglądarki przestarzały o kilka lat. Panel Assistant go sprawdza i tam, gdzie panel na to pozwala, instaluje za ciebie sprawdzoną wersję. Resztę opisuje [przygotowanie panelu](/pl/install/prepare-a-panel/).
+- **Dowolny systemowy WebView.** Producenci często dostarczają silnik przeglądarki przestarzały o kilka lat. Aplikacja panelu sprawdza zgodność; zaktualizuj WebView przez Sklep Play, oprogramowanie producenta lub ręczną instalację, zależnie od panelu. Resztę opisuje [przygotowanie panelu](/pl/install/prepare-a-panel/).
 - **Profil sprzętowy, tylko jeśli chcesz dodatków.** Wszystko powyżej wystarcza do profilu ogólnego. Dopiero profil konkretnego modelu obsługuje diody LED, przyciski, przekaźniki i czujniki właściwe dla modelu, jak opisuje [obsługa ogólna](#obsługa-ogólna-każdy-inny-panel-z-androidem).
 - **Root, dla kilku dodatków.** Kilka funkcji na niektórych modelach wymaga roota. Każda strona sprzętu mówi, których to dotyczy i jak go uzyskać.
 

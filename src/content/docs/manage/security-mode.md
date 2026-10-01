@@ -9,7 +9,7 @@ For a panel on a network shared with less trusted devices, the optional **Harden
 
 **In Hardened mode, protected high-impact remote actions need physical access to the panel. They cannot go ahead until someone approves them on the panel's screen, and they cannot be approved remotely.**
 
-The web interface marks affected actions with a small shield in both modes, so you can see which workflows cross the approval boundary before you turn Hardened mode on. Update-policy settings carry the same mark, because enabling installation or changing an active update channel can need approval; ordinary changes saved with the same button do not.
+The web interface marks affected actions with a small shield in both modes, so you can see which workflows cross the approval boundary before you turn Hardened mode on.
 
 ## Turn on Hardened mode
 
@@ -54,7 +54,7 @@ Requests over loopback from software already running on the panel do not need ne
 
 In Hardened mode, a network client needs approval at the panel before it can:
 
-- install an uploaded app, or a managed copy of the panel app, a separate dashboard app or the Android System WebView; turn on an automatic update policy; or change an update channel when that would start an update straight away;
+- install an uploaded app, or a managed copy of the panel app or a separate dashboard app;
 - uninstall an app, or change whether a vendor package is enabled, running or allowed to draw over the screen;
 - export a full backup, or a configuration bundle that contains secrets;
 - import a configuration, restore a stored configuration revision or restore a panel backup;
@@ -71,13 +71,13 @@ In Hardened mode, a network client needs approval at the panel before it can:
 
 Turning on the panel's camera is approved the same way, and is the one item on this list that also applies in Relaxed mode.
 
-A remote Configure save in Hardened mode must save a power safety reduction separately from vendor package or software installation policy changes, because those need different kinds of approval. Combined saves in Relaxed mode, or over loopback, go through directly.
+A remote Configure save in Hardened mode must save a power safety reduction separately from vendor package changes, because those need different kinds of approval. Combined saves in Relaxed mode, or over loopback, go through directly.
 
 Hardened mode rejects tap injection from anywhere other than loopback, so a request cannot approve itself. It also refuses to turn on network ADB, Android's wireless debugging or the WebView developer tools relay. Switch the panel back to Relaxed mode at the panel before using any of those.
 
 The approval boundary does not make the rest of the API on port 8888 authenticated. Diagnostic and status reads and routine controls keep their normal trusted-network behaviour. Keep the panel's API away from untrusted networks even with Hardened mode on; the [security reference](/reference/security/) describes the full posture.
 
-An automatic update setting that was already on when Hardened mode was chosen stays in force as the panel's policy, so its scheduled checks can install an authenticated update without a new prompt. A network client needs approval at the panel to turn that policy on, or to widen it with a channel change that starts an update straight away. Turning automatic updates off always goes through directly.
+Updates start when you install through Panel Assistant or choose an installation yourself. The panel app has no scheduled installation policy or saved update channel. Owner-started installations from the **Install** tab remain available, with approval at the panel for protected remote requests in Hardened mode.
 
 ## Changing the Home Assistant or broker address
 

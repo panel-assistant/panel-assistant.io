@@ -7,6 +7,10 @@ description: Keeping the app on a panel current, and what can be recovered when 
 
 **From Home Assistant.** Each panel has an update entity. When a newer version is published the entity offers it, and installing is a button press; Panel Assistant installs the update and confirms the panel came back healthy. This is the route to use.
 
+An update starts when Panel Assistant or you explicitly request it. The panel app does not install scheduled updates. Its web interface's **Install** tab also lets you choose and install a panel-app version or a separate Home Assistant app version, including a pre-release. That choice applies to the installation you start; there is no saved update channel.
+
+Android System WebView is maintained separately, through the Play Store, vendor firmware or a manual installation as appropriate for your panel. See [updating the system WebView](/hardware/guides/update-the-webview/).
+
 ### Panels that need ADB
 
 When you install an update from Home Assistant, Panel Assistant uses ADB automatically for panels that cannot install the update themselves. If the panel accepts the connection without an on-screen tap, your original consent to install Panel Assistant also covers creating and storing an ADB key for future updates. If the panel requires approval on its screen, Home Assistant raises a Repair that names the panel and starts authorization. Follow the Repair to approve the prompt on that panel.

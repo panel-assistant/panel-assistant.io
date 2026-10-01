@@ -112,7 +112,7 @@ https://github.com/panel-assistant/android/releases/download/webview-mirror/line
 
 The WebView is packaged as `com.android.webview`, so it must **replace** the system provider, and both obvious routes fail on this Android 11 panel:
 
-- `adb install -r` is rejected with `INSTALL_FAILED_UPDATE_INCOMPATIBLE: signatures do not match`. Android only lets you update `com.android.webview` with an APK signed by the **same key** as the installed one, and each WebView vendor uses a different key. For the same reason, **the panel app's built-in WebView update cannot do this first swap**: it installs through `pm install`, which the panel blocks. The swap below is a **one-time** manual step. Once LineageOS is in place, the panel app can apply later LineageOS updates itself, because they share a signer.
+- `adb install -r` is rejected with `INSTALL_FAILED_UPDATE_INCOMPATIBLE: signatures do not match`. Android only lets you update `com.android.webview` with an APK signed by the **same key** as the installed one, and each WebView vendor uses a different key. For the same reason, **a plain sideload cannot do this first swap**: it installs through `pm install`, which the panel blocks. The swap below is a **one-time** manual step. Once LineageOS is in place, later LineageOS versions can be sideloaded with `adb install -r`, because they share a signer.
 - The ROM's allowlist accepts only `com.android.webview`, not the `com.google.android.webview` variant, so a Google build installs but is never selected.
 
 ### Working method with root: replace the file and clear the signature lock

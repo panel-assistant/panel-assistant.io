@@ -12,7 +12,7 @@ This page is the practical authoring guide. See the [format and compatibility re
 
 The profiles bundled with the app live in the ha-paneld repository under [`app/src/main/assets/device-profiles`](https://github.com/panel-assistant/android/tree/main/app/src/main/assets/device-profiles).
 
-![The panel's Profile page showing a bundled revision's YAML in the editor, with review badges for package-disable recommendations, root paths and WebView installation, and the observed device facts below](asset:ui-profile-dark.png)
+![The panel's Profile page showing a bundled revision's YAML in the editor, with review badges for package-disable recommendations, root paths and WebView artifact metadata, and the observed device facts below](asset:ui-profile-dark.png)
 
 ## What a profile can do
 

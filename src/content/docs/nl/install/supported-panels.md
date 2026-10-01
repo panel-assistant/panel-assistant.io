@@ -50,7 +50,7 @@ Profielen opgesteld op basis van firmware-onderzoek, klaar om door de eerste eig
 
 - **Android 8.0 of nieuwer.**
 - **Ontwikkelaarsopties.** Het installatieprogramma gebruikt de foutopsporingsinterface van Android, die je op bijna elk paneel kunt inschakelen.
-- **Elke systeem-WebView.** Fabrikanten leveren vaak een browser-engine die jaren verouderd is. Panel Assistant controleert die en installeert, waar het paneel dat toestaat, een versie waarvan bekend is dat die goed werkt. [Het paneel voorbereiden](/nl/install/prepare-a-panel/) behandelt de rest.
+- **Elke systeem-WebView.** Fabrikanten leveren vaak een browser-engine die jaren verouderd is. De paneelapp controleert de compatibiliteit; werk WebView bij via de Play Store, de firmware van de fabrikant of een handmatige installatie, afhankelijk van je paneel. [Het paneel voorbereiden](/nl/install/prepare-a-panel/) behandelt de rest.
 - **Een hardwareprofiel, alleen als je de extra's wilt.** Alles hierboven is genoeg voor het generieke profiel. Het eigen profiel van een model is wat de leds, knoppen, relais en modelspecifieke sensoren bereikt, zoals [Generieke ondersteuning](#generieke-ondersteuning-elk-ander-android-paneel) beschrijft.
 - **Root, voor een paar extra's.** Een paar functies op sommige modellen hebben root nodig. Op elke hardwarepagina staat welke, en hoe je root krijgt.
 

@@ -67,7 +67,7 @@ Recovery snapshots are owned by root, authenticated by their recorded digest, an
 
 The installer prefers an init service on a writable `/system` when it can verify there is enough space. If `/system` is read-only, it uses a verified Magisk, KernelSU or APatch runner in `/data/adb/service.d`. A panel whose `/system` is writable but crowded can keep the helper and recovery files under `/data/adb/hapaneld` and put only the startup service in `/vendor/etc/init`, and later updates keep that verified layout. The installer stops before replacing the app when it cannot establish storage capacity, who owns startup, or the state of an existing transaction.
 
-The app carries the matching helper as a fallback. If a panel with a direct `su` installation updates from the Install tab, the Home Assistant update entity or the automatic update setting before it has been through the installer again, the app's first start checks the helper protocol it needs and can launch a root-owned copy from `/data/local`. A rooted panel that sandboxes root cannot safely let an old helper replace itself, so it fails closed and asks for the authenticated installer to be run from a computer.
+The app carries the matching helper as a fallback. If a panel with a direct `su` installation updates from the Install tab or the Home Assistant update entity before it has been through the installer again, the app's first start checks the helper protocol it needs and can launch a root-owned copy from `/data/local`. A rooted panel that sandboxes root cannot safely let an old helper replace itself, so it fails closed and asks for the authenticated installer to be run from a computer.
 
 ## Updating several panels
 

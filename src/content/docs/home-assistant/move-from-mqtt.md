@@ -14,7 +14,7 @@ The move is new. Try it on one panel first, and tell us how it went on [Discord]
 ## Before you start
 
 - **Panel Assistant 0.3.0 or newer** in Home Assistant, installed through HACS as described in [Install the integration](/home-assistant/custom-integration/).
-- **ha-paneld 0.9.8-rc1 or newer** on the panel. This is a pre-release: on the panel's status page, set **ha-paneld auto-update channel** to `prerelease`, then install the update from the panel's update entity in Home Assistant.
+- **ha-paneld 0.9.8-rc1 or newer** on the panel. Install an offered update from the panel's Panel Assistant update entity in Home Assistant. If you need a pre-release that is not offered there, select it in the panel web interface's **Install** tab and start the installation yourself.
 - **The panel is signed in to Home Assistant**, which it is if it shows your dashboard.
 - **Leave your MQTT setup as it is.** The panel still uses the broker while you move, and nothing needs to change on it.
 
@@ -51,7 +51,7 @@ From now on, changing a setting or pressing a button on the panel's entities goe
 
 ### What does not move
 
-Two MQTT buttons have no Panel Assistant equivalent, **Update ha-paneld** and **Update Companion app**, so they are removed, along with any leftover MQTT update entity for ha-paneld. The panel's Panel Assistant update entity does their job.
+Two MQTT buttons have no Panel Assistant equivalent, **Update ha-paneld** and **Update Companion app**, so they are removed, along with any leftover MQTT update entity for ha-paneld. Use the panel's Panel Assistant update entity to update the panel app, and the panel web interface's **Install** tab to update the separate Home Assistant app.
 
 If you gave one of those a name, icon or area of your own, or hid or disabled it, Panel Assistant will not remove it for you. A repair lists it instead, and the panel keeps its MQTT entities until you delete that entity or clear those settings.
 
