@@ -38,9 +38,20 @@ const titleOf = (path) => pageTitle(join(root, 'src/content/docs'), path);
 rmSync(output, { recursive: true, force: true });
 mkdirSync(output, { recursive: true });
 const published = {};
+// One fetch for every tag rather than one per version. Each shallow fetch
+// rewrites the repository's shallow bookkeeping, and doing that N times in a row
+// is what produced "fatal: shallow file has changed since we read it" on the
+// runner, on a different tag each run, while never reproducing locally.
+git(
+  'fetch',
+  '--quiet',
+  '--depth=1',
+  '--no-tags',
+  source,
+  ...versions.map((version) => `+refs/tags/v${version}:refs/tags/v${version}`),
+);
 for (const version of versions) {
   const tag = `v${version}`;
-  git('fetch', '--quiet', '--depth=1', '--no-tags', source, `+refs/tags/${tag}:refs/tags/${tag}`);
   const groups = extractSettings(
     git('show', `${tag}:${registry}`),
     git('show', `${tag}:${strings}`),
