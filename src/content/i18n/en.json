@@ -79,5 +79,10 @@
   "sidebar.keep_running": "Keep it running",
   "sidebar.hardware": "Hardware",
   "sidebar.reference": "Reference",
-  "page.translation_note": "This page is machine-translated and checked against the <a>English original</a>, which takes precedence where they differ."
+  "page.translation_note": "This page is machine-translated and checked against the <a>English original</a>, which takes precedence where they differ.",
+  "error.pickles.title": "Pickles has escaped!",
+  "error.pickles.story": "Our panda is causing havoc. We’re trying to get him under control, but he’s slow and stubborn.",
+  "error.not_found": "404 — This page could not be found.",
+  "error.home": "Go to the homepage",
+  "error.pickles.alt": "Pickles the panda"
 }
