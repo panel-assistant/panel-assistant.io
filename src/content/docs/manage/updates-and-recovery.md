@@ -15,6 +15,14 @@ Android System WebView is maintained separately, through the Play Store, vendor 
 
 When you install an update from Home Assistant, Panel Assistant uses ADB automatically for panels that cannot install the update themselves. If the panel accepts the connection without an on-screen tap, your original consent to install Panel Assistant also covers creating and storing an ADB key for future updates. If the panel requires approval on its screen, Home Assistant raises a Repair that names the panel and starts authorization. Follow the Repair to approve the prompt on that panel.
 
+### A panel that cannot be updated
+
+Some panels can only be updated over ADB, because they have no way to install an app themselves. On those, ADB is not a convenience: it is the whole update path, and if it stops working the panel keeps running normally while quietly staying on the version it has. Home Assistant shows a Repair naming the panel when this happens.
+
+The usual cause is a change made on the panel rather than in Home Assistant. A vendor firmware update, a factory reset, or a vendor option that restores the shipped software can all switch Android's developer options back off, and that takes ADB with it. Nothing warns you at the time, because from the panel's point of view nothing is wrong.
+
+Turning developer options and USB debugging back on restores the update path, and the steps are the same ones used when first preparing that panel: see [prepare a panel](/install/prepare-a-panel/#1-developer-options-and-debugging-are-on). Panels differ in how those settings are reached, and some vendors hide them behind a sequence of taps on an About screen.
+
 ## What an update protects
 
 The installer takes a snapshot of the panel's data before it changes anything, refuses to proceed in conditions it cannot recover from, and leaves your setup in place. [Install safety](/manage/install-safety/) describes exactly what is protected and when it stops.
