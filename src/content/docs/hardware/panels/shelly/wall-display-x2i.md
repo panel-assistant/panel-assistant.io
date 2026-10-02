@@ -46,11 +46,13 @@ Shelly Wall Display X2i, firmware codename Jenna.
 
 ## Unlocking developer mode
 
-Shelly does not advertise it, but the X2i has the usual hidden developer-mode unlock. Open **Settings → General → About Device**, find the cards for hardware information and software information, and tap this sequence across the firmware and hardware lines:
+Shelly does not advertise it, but the X2i has the usual hidden developer-mode unlock. Open **Settings → General → About Device** and tap two specific labels in this order:
 
-> firmware, hardware, firmware, firmware, hardware, firmware, hardware, hardware
+> **FW Version:**, **Hardware Revision:**, **FW Version:**, **FW Version:**, **Hardware Revision:**, **FW Version:**, **Hardware Revision:**, **Hardware Revision:**
 
-**Tap the line's title, not the value beside it.** Tapping the value does nothing, which is the most likely reason the sequence is reported as unreliable elsewhere.
+**Tap those two labels themselves.** Not the values to their right, and **not the card headings** "Hardware Information" and "Software Information", which look like the obvious targets and do nothing. That distinction is the difference between the unlock working and appearing not to exist, and it is the most likely reason the sequence is reported as unreliable elsewhere.
+
+The screen returns to the home view after a few seconds of inactivity, so tap at a steady pace rather than pausing to check between taps.
 
 Developer options and USB debugging then appear in Settings as on any Android device. Connect a USB-A to USB-C cable and the panel enumerates for adb. There is **no authorisation prompt to accept on the screen**, because this firmware does not require adb authorisation.
 
