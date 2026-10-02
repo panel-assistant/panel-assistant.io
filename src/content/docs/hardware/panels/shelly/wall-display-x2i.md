@@ -50,7 +50,9 @@ Shelly does not advertise it, but the X2i has the usual hidden developer-mode un
 
 > **FW Version:**, **Hardware Revision:**, **FW Version:**, **FW Version:**, **Hardware Revision:**, **FW Version:**, **Hardware Revision:**, **Hardware Revision:**
 
-**Tap those two labels themselves.** Not the values to their right, and **not the card headings** "Hardware Information" and "Software Information", which look like the obvious targets and do nothing. That distinction is the difference between the unlock working and appearing not to exist, and it is the most likely reason the sequence is reported as unreliable elsewhere.
+![The X2i's About Device screen. A Hardware Information card lists serial number, device ID, numeric device ID and hardware revision; a Software Information card below it lists firmware version, firmware date and WebView version. Two row labels are outlined: Hardware Revision in the upper card and FW Version in the lower one. Below the cards sit a crash reports switch and a Check for update button.](../../../../../assets/shelly-x2i-about-device.png)
+
+**Tap the two outlined labels themselves.** Not the values to their right, and **not the card headings** "Hardware Information" and "Software Information", which look like the obvious targets and do nothing. That distinction is the difference between the unlock working and appearing not to exist, and it is the most likely reason the sequence is reported as unreliable elsewhere.
 
 The screen returns to the home view after a few seconds of inactivity, so tap at a steady pace rather than pausing to check between taps.
 
