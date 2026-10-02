@@ -80,5 +80,10 @@
   "sidebar.hardware": "Hardware",
   "sidebar.reference": "Naslag",
   "heading.anchorLabel": "Sectie met de titel “{{title}}”",
-  "page.translation_note": "Deze pagina is automatisch vertaald en gecontroleerd aan de hand van het <a>Engelse origineel</a>; bij verschillen geldt het Engelse origineel."
+  "page.translation_note": "Deze pagina is automatisch vertaald en gecontroleerd aan de hand van het <a>Engelse origineel</a>; bij verschillen geldt het Engelse origineel.",
+  "error.pickles.title": "Pickles is ontsnapt!",
+  "error.pickles.story": "Onze panda zorgt voor chaos. We proberen hem onder controle te krijgen, maar hij is traag en koppig.",
+  "error.not_found": "404 — Deze pagina kon niet worden gevonden.",
+  "error.home": "Ga naar de homepage",
+  "error.pickles.alt": "Pickles de panda"
 }

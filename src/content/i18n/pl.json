@@ -81,5 +81,10 @@
   "sidebar.keep_running": "Utrzymanie działania",
   "sidebar.hardware": "Sprzęt",
   "sidebar.reference": "Informacje techniczne",
-  "page.translation_note": "Ta strona została przetłumaczona maszynowo i sprawdzona względem <a>angielskiego oryginału</a>, który ma pierwszeństwo w razie rozbieżności."
+  "page.translation_note": "Ta strona została przetłumaczona maszynowo i sprawdzona względem <a>angielskiego oryginału</a>, który ma pierwszeństwo w razie rozbieżności.",
+  "error.pickles.title": "Pickles uciekł!",
+  "error.pickles.story": "Nasza panda sieje zamęt. Próbujemy ją opanować, ale jest powolna i uparta.",
+  "error.not_found": "404 — Nie znaleziono tej strony.",
+  "error.home": "Przejdź do strony głównej",
+  "error.pickles.alt": "Panda Pickles"
 }

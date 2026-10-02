@@ -57,123 +57,156 @@ const lastCards = [
 ];
 ---
 
-<div class="hero not-content">
-  <div class="words">
-    <p class="eyebrow">
-      {eyebrow[0]}
-      <svg viewBox="0 0 24 24" role="img" aria-label={t('hero.love')}>
-        <path d={heart} />
-      </svg>
-      {eyebrow[1]}
-    </p>
-    <h1 id="_top" data-page-title set:html={title} />
-    <p class="sub" set:html={t('hero.sub')} />
-    {tagline && <p class="lede" set:html={tagline} />}
-    <div class="actions">
-      <div class="actions-row">
-        {actions.map(({ text, link, variant = 'primary' }) => (
-          <a class:list={['action', variant]} href={link}>
-            {text}
-            {variant === 'primary' && (
-              <svg viewBox="0 0 16 16" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" />
-              </svg>
-            )}
-          </a>
-        ))}
+{Astro.locals.starlightRoute.entry.id === '404' ? (
+  <section class="pickles-error not-content">
+    <h1 id="_top" data-page-title>
+      {t('error.pickles.title')}
+    </h1>
+    <img src="/pickles.svg" alt={t('error.pickles.alt')} width="265" height="293" />
+    <p>{t('error.pickles.story')}</p>
+    <p class="error-detail">{t('error.not_found')}</p>
+    <a href={Astro.locals.starlightRoute.siteTitleHref}>{t('error.home')}</a>
+  </section>
+) : (
+  <div class="hero not-content">
+    <div class="words">
+      <p class="eyebrow">
+        {eyebrow[0]}
+        <svg viewBox="0 0 24 24" role="img" aria-label={t('hero.love')}>
+          <path d={heart} />
+        </svg>
+        {eyebrow[1]}
+      </p>
+      <h1 id="_top" data-page-title set:html={title} />
+      <p class="sub" set:html={t('hero.sub')} />
+      {tagline && <p class="lede" set:html={tagline} />}
+      <div class="actions">
+        <div class="actions-row">
+          {actions.map(({ text, link, variant = 'primary' }) => (
+            <a class:list={['action', variant]} href={link}>
+              {text}
+              {variant === 'primary' && (
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" />
+                </svg>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+      <div class="facts-wrap">
+        <ul class="facts">
+          {facts.map((f) => (
+            <li>{f}</li>
+          ))}
+        </ul>
       </div>
     </div>
-    <div class="facts-wrap">
-      <ul class="facts">
-        {facts.map((f) => (
-          <li>{f}</li>
-        ))}
-      </ul>
-    </div>
-  </div>
 
-  <figure class="scene">
-    <div class="panel" role="img" aria-label={t('hero.panel')}>
-      <div class="ha">
-        <div class="ha-bar">
-          <span class="on">{t('hero.tab.home')}</span>
-          <span>{t('hero.tab.lights')}</span>
-          <span>{t('hero.tab.climate')}</span>
-          <span>{t('hero.tab.security')}</span>
-          <em>18:42</em>
-        </div>
-        <div class="ha-grid">
-          {cards.slice(0, 1).map((c) => (
-            <div class:list={['card', c.tone]}>
-              <div class="ico">
-                <svg viewBox="0 0 24 24">
-                  <path d={c.icon} />
-                </svg>
-              </div>
-              <div>
-                <b>{c.name}</b>
-                <small>{c.state}</small>
-              </div>
-            </div>
-          ))}
-          <div class="card tall">
-            <div class="dial">
-              <svg viewBox="0 0 100 100">
-                <circle class="track" cx="50" cy="50" r="40" stroke-dasharray="188 64"></circle>
-                <circle class="heat" cx="50" cy="50" r="40" stroke-dasharray="118 134"></circle>
-              </svg>
-              <strong>21.5°</strong>
-            </div>
-            <div>
-              <b>{t('hero.card.living_room')}</b>
-              <small>{t('hero.card.living_room.state')}</small>
-            </div>
+    <figure class="scene">
+      <div class="panel" role="img" aria-label={t('hero.panel')}>
+        <div class="ha">
+          <div class="ha-bar">
+            <span class="on">{t('hero.tab.home')}</span>
+            <span>{t('hero.tab.lights')}</span>
+            <span>{t('hero.tab.climate')}</span>
+            <span>{t('hero.tab.security')}</span>
+            <em>18:42</em>
           </div>
-          {cards.slice(1).map((c) => (
-            <div class:list={['card', c.tone]}>
+          <div class="ha-grid">
+            {cards.slice(0, 1).map((c) => (
+              <div class:list={['card', c.tone]}>
+                <div class="ico">
+                  <svg viewBox="0 0 24 24">
+                    <path d={c.icon} />
+                  </svg>
+                </div>
+                <div>
+                  <b>{c.name}</b>
+                  <small>{c.state}</small>
+                </div>
+              </div>
+            ))}
+            <div class="card tall">
+              <div class="dial">
+                <svg viewBox="0 0 100 100">
+                  <circle class="track" cx="50" cy="50" r="40" stroke-dasharray="188 64"></circle>
+                  <circle class="heat" cx="50" cy="50" r="40" stroke-dasharray="118 134"></circle>
+                </svg>
+                <strong>21.5°</strong>
+              </div>
+              <div>
+                <b>{t('hero.card.living_room')}</b>
+                <small>{t('hero.card.living_room.state')}</small>
+              </div>
+            </div>
+            {cards.slice(1).map((c) => (
+              <div class:list={['card', c.tone]}>
+                <div class="ico">
+                  <svg viewBox="0 0 24 24">
+                    <path d={c.icon} />
+                  </svg>
+                </div>
+                <div>
+                  <b>{c.name}</b>
+                  <small>{c.state}</small>
+                </div>
+              </div>
+            ))}
+            <div class="card wide blue">
               <div class="ico">
                 <svg viewBox="0 0 24 24">
-                  <path d={c.icon} />
+                  <path d="M7 19a5 5 0 0 1-.6-9.96A6.5 6.5 0 0 1 19 10.5 4.25 4.25 0 0 1 18 19z"></path>
                 </svg>
               </div>
               <div>
-                <b>{c.name}</b>
-                <small>{c.state}</small>
+                <b>{t('hero.card.weather')}</b>
+                <small>{t('hero.card.weather.state')}</small>
               </div>
             </div>
-          ))}
-          <div class="card wide blue">
-            <div class="ico">
-              <svg viewBox="0 0 24 24">
-                <path d="M7 19a5 5 0 0 1-.6-9.96A6.5 6.5 0 0 1 19 10.5 4.25 4.25 0 0 1 18 19z"></path>
-              </svg>
-            </div>
-            <div>
-              <b>{t('hero.card.weather')}</b>
-              <small>{t('hero.card.weather.state')}</small>
-            </div>
+            {lastCards.map((c) => (
+              <div class:list={['card', c.tone]}>
+                <div class="ico">
+                  <svg viewBox="0 0 24 24">
+                    <path d={c.icon} />
+                  </svg>
+                </div>
+                <div>
+                  <b>{c.name}</b>
+                  <small>{c.state}</small>
+                </div>
+              </div>
+            ))}
           </div>
-          {lastCards.map((c) => (
-            <div class:list={['card', c.tone]}>
-              <div class="ico">
-                <svg viewBox="0 0 24 24">
-                  <path d={c.icon} />
-                </svg>
-              </div>
-              <div>
-                <b>{c.name}</b>
-                <small>{c.state}</small>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
-    </div>
-    <figcaption>{t('hero.caption')}</figcaption>
-  </figure>
-</div>
+      <figcaption>{t('hero.caption')}</figcaption>
+    </figure>
+  </div>
+)}
 
 <style>
+  .pickles-error {
+    max-width: 36rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .pickles-error h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+  .pickles-error img {
+    display: block;
+    width: 8rem;
+    height: auto;
+    margin: 1rem auto;
+  }
+  .pickles-error p {
+    margin: 0.75rem 0;
+  }
+  .pickles-error .error-detail {
+    font-weight: 600;
+  }
+
   .hero {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
