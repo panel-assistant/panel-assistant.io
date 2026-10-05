@@ -1,9 +1,9 @@
 ---
 title: Install safety
-description: The checks behind the command-line installer, what it backs up before changing a panel, and when it stops.
+description: The checks behind the retired command-line installer, what it backed up before changing a panel, and when it stopped.
 ---
 
-This page records the checks and recovery limits behind the [command-line installer](/manage/command-line-install/), including its updates across several panels. Most people only need the commands on that page. The detail here is for anyone deciding whether an unattended update is safe enough for their panels, or working out why the installer stopped.
+This page describes the checks made by the retired [command-line installer](/manage/command-line-install/), which installed panels before ha-paneld v0.9.9. Panel Assistant now installs and updates panels: it checks a panel before changing anything and backs up its settings before each update, as described in [updates and recovery](/manage/updates-and-recovery/).
 
 ## Trust and credential boundaries
 
@@ -63,19 +63,11 @@ Published releases include sealed `armeabi-v7a` and `arm64-v8a` helper binaries.
 
 The previous root-owned helper and its service stay available until the app installation succeeds. A failure to install or start the helper, or a wrong identity or capability, restores the previous working pair before the app is replaced. If the ADB connection drops while Android is installing the app, the installer keeps its recovery journal. Running the same command again authenticates the installed app and the running helper, then completes or rolls back the interrupted upgrade.
 
-Recovery snapshots are owned by root, authenticated by their recorded digest, and synced to storage before the live files are retired. The standalone `helper/install-daemon.sh` keeps a separate journal for the helper alone. Each installer refuses to overwrite the other's unfinished transaction and names the command that has to be run again.
+Recovery snapshots are owned by root, authenticated by their recorded digest, and synced to storage before the live files are retired. The installer refuses to start while an unfinished helper transaction exists and names the command that has to be run again.
 
 The installer prefers an init service on a writable `/system` when it can verify there is enough space. If `/system` is read-only, it uses a verified Magisk, KernelSU or APatch runner in `/data/adb/service.d`. A panel whose `/system` is writable but crowded can keep the helper and recovery files under `/data/adb/hapaneld` and put only the startup service in `/vendor/etc/init`, and later updates keep that verified layout. The installer stops before replacing the app when it cannot establish storage capacity, who owns startup, or the state of an existing transaction.
 
 The app carries the matching helper as a fallback. If a panel with a direct `su` installation updates from the Install tab or the Home Assistant update entity before it has been through the installer again, the app's first start checks the helper protocol it needs and can launch a root-owned copy from `/data/local`. A rooted panel that sandboxes root cannot safely let an old helper replace itself, so it fails closed and asks for the authenticated installer to be run from a computer.
-
-## Updating several panels
-
-`update-fleet.sh` downloads or accepts one app, verifies its package and signer and records its SHA-256 digest before starting any worker. It passes that file to each worker, and each panel's installer runs its own checks again before changing the panel. A release downloaded into the script's private temporary directory stays tied to its signed checksum. If you supply a local app file, do not replace it while the script is running. The number of panels handled at once is between one and 32.
-
-Options that describe a single panel are rejected before any worker starts: `--reset-config`, `--export FILE`, `--id` and the device-specific `--restore FILE`. `--restore-fleet FILE` is allowed because it imports only portable settings that are not secret. Each panel keeps its own identity. Credentials also stay as they are unless you pass shared ones on the command line; install panels one at a time when their credentials differ.
-
-Hardware profile recommendations stay advisory. The script never disables packages, persists ADB, installs optional privileged software or changes display settings just because a profile recommends it.
 
 ## What can stop a run
 

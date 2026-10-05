@@ -7,6 +7,7 @@
   "panel-access": "/install/prepare-a-panel/#1-developer-options-and-debugging-are-on",
   "add-a-panel": "/install/installing-ha-paneld/",
   "usb-install": "/install/install-over-usb/",
+  "uninstall": "/manage/command-line-install/#removing-ha-paneld-from-a-panel",
   "install-integration": "/home-assistant/custom-integration/",
   "connect-a-panel": "/home-assistant/connect-a-panel/",
   "move-from-mqtt": "/home-assistant/move-from-mqtt/",

@@ -87,20 +87,3 @@ Hardened mode stops a saved credential from quietly following a changed address:
 - changing the **Home Assistant URL** without entering new credentials in the same save clears the previous access token, refresh token and the session identity that goes with them.
 
 Enter the credentials for the new destination in the same **Save changes**. This applies only when the address changes in Hardened mode; ordinary edits, and all edits in Relaxed mode, keep the usual rule that a blank field keeps the stored value.
-
-## Installing official and local builds
-
-The [command-line installer](/manage/command-line-install/) authenticates the helper binaries in official releases automatically, with no extra acknowledgement.
-
-A locally built app is controlled by whoever built it rather than authenticated as a published release. If installing that app also needs to install the root helper embedded in it, acknowledge the locally built privileged binaries explicitly:
-
-```sh
-./helper/build.sh
-scripts/provision.sh <panel-ip:5555> \
-  --apk app/build/outputs/apk/debug/app-debug.apk \
-  --allow-unsigned-helper
-```
-
-The flag applies only to the helper embedded in a local build. A local build needs it whenever the panel has a usable root or helper route, including the first helper installation. A panel that is genuinely unrooted skips the helper. The flag does not weaken verification of official release downloads.
-
-Installing a local build, or updating several panels at once, also authenticates the app separately from its embedded helper. Android SDK Build-Tools must provide `apksigner` and either `aapt` or `aapt2`, and the installer requires the ha-paneld package with exactly one valid signer before an upgrade begins. A self-built app may use the builder's own consistent signing key. `--require-release-signer` additionally pins the official ha-paneld release certificate, and should be used only when that is the signer you expect; it does not turn a self-built app into an official release.

@@ -138,7 +138,7 @@ export default defineConfig({
                 { label: 'Updates and recovery', slug: 'manage/updates-and-recovery' },
                 { label: 'Performance', slug: 'manage/performance' },
                 { label: 'Troubleshooting', slug: 'manage/troubleshooting' },
-                { label: 'Command-line install', slug: 'manage/command-line-install' },
+                { label: 'Install script (retired)', slug: 'manage/command-line-install' },
               ],
             },
           ],

@@ -25,9 +25,9 @@ Turning developer options and USB debugging back on restores the update path, an
 
 ## What an update protects
 
-The installer takes a snapshot of the panel's data before it changes anything, refuses to proceed in conditions it cannot recover from, and leaves your setup in place. [Install safety](/manage/install-safety/) describes exactly what is protected and when it stops.
+Panel Assistant checks the panel before it changes anything and backs up the panel's settings before each update, keeping the last five backups for each panel.
 
-Before a change you are unsure about, export the panel's configuration. The installer can write it to a file you can restore later, as described in [command-line install](/manage/command-line-install/#check-or-export-an-existing-installation).
+Before a change you are unsure about, make a backup yourself: on the panel's web interface, open **Install**, then **Backup**, and keep the downloaded `.hpb` file.
 
 ## Recovery
 

@@ -46,19 +46,6 @@ On a new or reset panel, open `http://<panel>:8888/setup` from a laptop or phone
 
 On a panel that is already set up, open the **Configure** page on port 8888. Under **Home Assistant connection**, enter the Home Assistant URL and choose **Browser sign-in**, then select **Built-in renderer** as the Dashboard app.
 
-For unattended setup from a computer, replace the example panel address and Home Assistant details in this command, which needs no checkout of the repository:
-
-```bash
-# First create an owner-only password file as shown in the linked provisioning guide.
-curl -fsSL https://raw.githubusercontent.com/panel-assistant/android/main/scripts/install.sh | \
-  bash -s -- --provision 192.168.1.50:5555 --builtin \
-  --ha-url https://homeassistant.example.com --ha-user your-user --ha-pass-file ha-password.txt
-```
-
-The password never reaches the panel, because the login happens on your computer and the panel receives a revocable refresh token. A long-lived access token works too: use `--ha-token-file ha-token.txt` instead of `--ha-user` and `--ha-pass-file`. The [command-line install](/manage/command-line-install/) page describes creating credential files safely, and the limits of the trusted network connection to the panel. The literal `--ha-pass` and `--ha-token` options also work, but they expose the value in the shell command and the process list.
-
-A token or username and password is an advanced route for automated installs. Interactive installations should use Browser sign-in.
-
 ## Dashboard appearance and the Android lock
 
 Advanced settings on the Configure page include three independent controls, each affecting a different layer:

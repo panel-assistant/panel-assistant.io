@@ -26,7 +26,3 @@ The panel appears as a device with a status sensor and diagnostics, and on the P
 ![The panel's standing screen before setup, showing its configuration address, a QR code, and Configure and Dashboard buttons](asset:standing-screen.png)
 
 Continue with [Connect a panel](/home-assistant/connect-a-panel/).
-
-## Other ways in
-
-There is also a [command-line installer](/manage/command-line-install/) for people who prefer one, and it is what the project used before the integration existed. You do not need it.

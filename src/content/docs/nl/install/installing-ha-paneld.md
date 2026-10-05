@@ -27,7 +27,3 @@ Het paneel verschijnt als apparaat met een statussensor en diagnostiek, en op de
 ![Het wachtscherm van het paneel vóór de installatie, met het configuratieadres, een QR-code en de knoppen Configureren en Dashboard](asset:standing-screen.png)
 
 Ga verder met [Een paneel verbinden](/nl/home-assistant/connect-a-panel/).
-
-## Andere manieren
-
-Er is ook een [installatieprogramma voor de opdrachtregel](/nl/manage/command-line-install/) voor wie daar de voorkeur aan geeft, en dat gebruikte het project voordat de integratie bestond. Je hebt het niet nodig.

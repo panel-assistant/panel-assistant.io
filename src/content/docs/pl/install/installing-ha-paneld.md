@@ -27,7 +27,3 @@ Panel pojawia się jako urządzenie z czujnikiem stanu i diagnostyką, a także 
 ![Ekran oczekiwania panelu przed konfiguracją, z adresem konfiguracji, kodem QR oraz przyciskami Konfiguracja i Pulpit nawigacyjny](asset:standing-screen.png)
 
 Przejdź dalej do [Podłączanie panelu](/pl/home-assistant/connect-a-panel/).
-
-## Inne sposoby
-
-Jest też [instalator z wiersza poleceń](/pl/manage/command-line-install/) dla osób, które wolą takie narzędzie; to z niego korzystał projekt, zanim powstała integracja. Nie jest ci potrzebny.
