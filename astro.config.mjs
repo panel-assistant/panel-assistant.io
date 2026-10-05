@@ -138,6 +138,7 @@ export default defineConfig({
                 { label: 'Updates and recovery', slug: 'manage/updates-and-recovery' },
                 { label: 'Performance', slug: 'manage/performance' },
                 { label: 'Troubleshooting', slug: 'manage/troubleshooting' },
+                { label: 'Before you remove ha-paneld', slug: 'manage/removal-risks' },
                 { label: 'Install script (retired)', slug: 'manage/command-line-install' },
               ],
             },
