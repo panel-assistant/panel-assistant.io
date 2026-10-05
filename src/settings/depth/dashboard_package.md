@@ -5,13 +5,13 @@ related:
   - /manage/built-in-renderer/
 ---
 
-This chooses which app draws the dashboard on the panel. The list always starts with **Auto** and **Built-in renderer**, followed by any supported Home Assistant Companion app installed on the panel. Other launchable apps are not offered. If the panel is already set to an app the list does not recognise, that choice stays in the list rather than being dropped silently.
+This chooses which app draws the dashboard on the panel. The list always starts with **Auto** and **Built-in renderer**, followed by any supported Home Assistant Companion app installed on the panel. Using the Companion app as the dashboard is retired: it is listed only so a panel already set up that way keeps working, and Panel Assistant never removes it for you. Other launchable apps are not offered. If the panel is already set to an app the list does not recognise, that choice stays in the list rather than being dropped silently.
 
-| Choice                | Stored value             | What happens                                           | When to pick it                                                                                                                         |
-| --------------------- | ------------------------ | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| **Auto**              | blank                    | Uses Panel Assistant's own renderer.                   | The usual choice.                                                                                                                       |
-| **Built-in renderer** | `builtin`                | Uses Panel Assistant's own renderer, named explicitly. | When you want the choice spelled out in a backup or script.                                                                             |
-| A Companion app       | its Android package name | Hands the dashboard to that app.                       | Only when you need something the built-in renderer does not offer, such as more than one Home Assistant server or native notifications. |
+| Choice                | Stored value             | What happens                                           | When to pick it                                                                                                                                           |
+| --------------------- | ------------------------ | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Auto**              | blank                    | Uses Panel Assistant's own renderer.                   | The usual choice.                                                                                                                                         |
+| **Built-in renderer** | `builtin`                | Uses Panel Assistant's own renderer, named explicitly. | When you want the choice spelled out in a backup or script.                                                                                               |
+| A Companion app       | its Android package name | Hands the dashboard to that app.                       | Retired as a panel dashboard. A panel already using it keeps working; switch to **Auto** once the panel is in [Panel Assistant](/start/getting-started/). |
 
 A change takes effect immediately: the panel launches the newly selected app as soon as the setting is saved. Selecting the built-in renderer needs a working Home Assistant connection first, so connect with Browser sign-in before choosing it.
 

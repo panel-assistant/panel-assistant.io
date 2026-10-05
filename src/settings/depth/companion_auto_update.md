@@ -14,4 +14,4 @@ Panels have no Play Store, so a minimal Home Assistant Companion app installed o
 | Minimal Companion up to date                      | Nothing                                                           |
 | Full Companion from the Play Store                | Left alone                                                        |
 
-Some panel profiles set a highest safe Companion version; the automatic update never goes past it and never downgrades. The setting needs root, appears only where a Companion app is installed, and matters only if you use the Companion as the dashboard app. In Hardened mode, turning it on needs approval at the panel.
+Some panel profiles set a highest safe Companion version; the automatic update never goes past it and never downgrades. The setting needs root, appears only where a Companion app is installed, and matters only if you use the Companion as the dashboard app, which is retired in favour of [Panel Assistant](/start/getting-started/) and the built-in renderer. In Hardened mode, turning it on needs approval at the panel.
