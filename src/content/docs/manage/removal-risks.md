@@ -34,7 +34,7 @@ That only matters if the panel's own home screen has no way into Android Setting
 The eWeLink home screen has no way into Android Settings, so the firmware version decides how hard it is to get debugging back.
 
 - **Firmware 4.0.0 and later:** Sonoff added an F-Droid entry to the panel's menu, and apps installed from it open from that menu. Before removing ha-paneld, install an app launcher from F-Droid, which lists Android Settings among the panel's apps, so you can switch debugging back on later.
-- **Firmware below 4.0.0:** there is no app store and no way into Android Settings from the panel. Debugging is switched back on from the eWeLink phone app: with the panel linked to an eWeLink account, tap _Device ID_ in its device settings until _Developer mode_ appears, then turn on ADB there. Without an eWeLink account the panel can be linked to, the remaining route is a recovery boot with a computer connected by USB: see [Gaining adb and root access](/hardware/panels/sonoff-nspanel-pro/#gaining-adb-and-root-access). If you can, update the panel to 4.0.0 or later in the eWeLink app before removing ha-paneld.
+- **Firmware below 4.0.0:** there is no app store and no way into Android Settings from the panel. If the panel is already linked to an eWeLink account, debugging is switched back on from the eWeLink phone app: tap _Device ID_ in the panel's device settings until _Developer mode_ appears, then turn on ADB there. Linking a panel to an account later may not work: on one panel the pairing code stayed greyed out, waiting. Without a linked account, the remaining route is a recovery boot with a computer connected by USB: see [Gaining adb and root access](/hardware/panels/sonoff-nspanel-pro/#gaining-adb-and-root-access). If the panel is linked to eWeLink, update it there to 4.0.0 or later before removing ha-paneld.
 
 The firmware number to compare is the one the eWeLink app and Panel Assistant show, such as 4.0.12, not the internal `ro.product.version`. See [firmware quirks by version](/hardware/panels/sonoff-nspanel-pro/#firmware-quirks-by-version).
 
@@ -94,7 +94,7 @@ If the panel's own home screen can open Android Settings, removal leaves it as i
       verdict =
         major >= 4
           ? 'This firmware has F-Droid in its menu: install an app launcher from it before you remove ha-paneld.'
-          : 'This firmware has no way into Android Settings from the panel. Getting debugging back needs the eWeLink phone app and an account, or a recovery boot with a computer. Update it to 4.0.0 or later first if you can.';
+          : 'This firmware has no way into Android Settings from the panel. Getting debugging back needs the eWeLink phone app with the panel already linked to an account, or a recovery boot with a computer. If it is linked, update it to 4.0.0 or later first.';
     }
     document.getElementById('removal-this-panel-verdict').textContent = verdict;
     box.hidden = false;
