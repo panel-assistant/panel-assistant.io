@@ -56,6 +56,9 @@ for (const version of versions) {
     git('show', `${tag}:${registry}`),
     git('show', `${tag}:${strings}`),
   );
+  // Retired settings stay out of the reference, including pages for older releases.
+  for (const group of groups)
+    group.settings = group.settings.filter((setting) => setting.key !== 'kiosk_companion_packages');
   writeFileSync(
     join(output, `${versionSlug(version)}.md`),
     page(version, groups, versions[0], versions.indexOf(version) + 1, depth, titleOf),

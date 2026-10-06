@@ -8,8 +8,7 @@ The lock is meant to stop someone passing by from wandering off the dashboard, n
 
 - the Android status and navigation bars are hidden;
 - every three seconds the panel checks which app is in front and brings the dashboard back if it is not;
-- Panel Assistant's own screens are left alone, so the release options stay reachable;
-- apps listed in [Apps the lock allows](#kiosk_companion_packages) may stay in front.
+- Panel Assistant's own screens are left alone, so the release options stay reachable.
 
 It does not use Android device-owner policies, so it cannot leave the panel unusable. Ways to release it:
 
