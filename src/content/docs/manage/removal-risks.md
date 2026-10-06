@@ -8,7 +8,7 @@ description: What removing ha-paneld from a panel does, which panels and firmwar
 <p id="removal-this-panel-verdict"></p>
 </div>
 
-Panel Assistant removes ha-paneld in one step, from the panel's **Remove ha-paneld from this panel** option in Home Assistant. On most panels that is all there is to it. On some, removal leaves the panel with no way back to Android Settings or to network debugging, and then nothing can install an app on it again, Panel Assistant included, until you take the vendor's own route back. On some firmware that route means signing in to a vendor account or opening the case.
+Panel Assistant removes ha-paneld in one step, from the panel's **Remove ha-paneld from this panel** option in Home Assistant. On most panels that is all there is to it. On some, removal leaves the panel with no way back to Android Settings or to network debugging, and then nothing can install an app on it again, Panel Assistant included, until you take the vendor's own route back. On some firmware that route means signing in to a vendor account, or connecting a computer by USB.
 
 Read the section for your panel before you confirm.
 
@@ -23,7 +23,7 @@ If removal stops part way, run it again: it picks up where it stopped.
 
 ## Why a panel can get stuck
 
-While ha-paneld is installed it keeps network debugging switched on, because some firmware switches it off again every time the panel restarts. Once ha-paneld is gone, nothing does that. Network debugging stays on until the panel next restarts, and after that it may not come back.
+While ha-paneld is installed it keeps network debugging switched on, because some firmware switches it off again when the panel restarts. Once ha-paneld is gone, nothing does that. Network debugging stays on until the panel next restarts, and after that it may be off.
 
 That only matters if the panel's own home screen has no way into Android Settings, where debugging is switched back on. Several vendor home screens have none.
 
@@ -33,8 +33,8 @@ That only matters if the panel's own home screen has no way into Android Setting
 
 The eWeLink home screen has no way into Android Settings, so the firmware version decides how hard it is to get debugging back.
 
-- **Firmware 4.0.0 and later:** the stock firmware includes the F-Droid app store and lets you install apps directly on the panel. Before removing ha-paneld, install a launcher from F-Droid that can open Android Settings, so you can switch debugging back on later.
-- **Firmware below 4.0.0:** there is no app store and no way into Android Settings from the panel. From firmware 1.3.2 debugging is switched on from the eWeLink app, which needs a Sonoff account. From 1.4 that option is gone, and the way back is a recovery boot with a computer: see [Gaining adb and root access](/hardware/panels/sonoff-nspanel-pro/#gaining-adb-and-root-access). If you can, update the panel to 4.0.0 or later in the eWeLink app before removing ha-paneld.
+- **Firmware 4.0.0 and later:** Sonoff added an F-Droid entry to the panel's menu, and apps installed from it open from that menu. Before removing ha-paneld, install an app launcher from F-Droid, which lists Android Settings among the panel's apps, so you can switch debugging back on later.
+- **Firmware below 4.0.0:** there is no app store and no way into Android Settings from the panel. Debugging is switched back on from the eWeLink phone app: with the panel linked to an eWeLink account, tap _Device ID_ in its device settings until _Developer mode_ appears, then turn on ADB there. Without an eWeLink account the panel can be linked to, the remaining route is a recovery boot with a computer connected by USB: see [Gaining adb and root access](/hardware/panels/sonoff-nspanel-pro/#gaining-adb-and-root-access). If you can, update the panel to 4.0.0 or later in the eWeLink app before removing ha-paneld.
 
 The firmware number to compare is the one the eWeLink app and Panel Assistant show, such as 4.0.12, not the internal `ro.product.version`. See [firmware quirks by version](/hardware/panels/sonoff-nspanel-pro/#firmware-quirks-by-version).
 
@@ -93,8 +93,8 @@ If the panel's own home screen can open Android Settings, removal leaves it as i
       const major = Number(fw.split('.')[0]);
       verdict =
         major >= 4
-          ? 'This firmware includes F-Droid: install a launcher that opens Android Settings before you remove ha-paneld.'
-          : 'This firmware has no way back to Android Settings from the panel. Update it to 4.0.0 or later first if you can, or be ready to take the recovery route below.';
+          ? 'This firmware has F-Droid in its menu: install an app launcher from it before you remove ha-paneld.'
+          : 'This firmware has no way into Android Settings from the panel. Getting debugging back needs the eWeLink phone app and an account, or a recovery boot with a computer. Update it to 4.0.0 or later first if you can.';
     }
     document.getElementById('removal-this-panel-verdict').textContent = verdict;
     box.hidden = false;
