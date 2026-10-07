@@ -16,7 +16,11 @@ const source = process.env.SETTINGS_SOURCE ?? 'https://github.com/panel-assistan
 const cache = join(root, 'node_modules/.cache/settings-reference.git');
 const output = join(root, 'src/content/docs/reference/settings');
 const manifest = join(root, 'public/settings-versions.json');
-const registry = 'app/src/main/kotlin/io/github/maxlyth/hapaneld/config/SettingsRegistry.kt';
+// The registry moved package with the app's rename at v0.9.10; older tags keep the old path.
+const registries = [
+  'app/src/main/kotlin/io/panelassistant/android/config/SettingsRegistry.kt',
+  'app/src/main/kotlin/io/github/maxlyth/hapaneld/config/SettingsRegistry.kt',
+];
 const strings = 'app/src/main/assets/i18n/en.json';
 const git = (...args) =>
   execFileSync('git', ['--git-dir', cache, ...args], {
@@ -24,6 +28,15 @@ const git = (...args) =>
     maxBuffer: 64 * 1024 * 1024,
     stdio: ['ignore', 'pipe', 'inherit'],
   });
+
+const exists = (object) => {
+  try {
+    execFileSync('git', ['--git-dir', cache, 'cat-file', '-e', object], { stdio: 'ignore' });
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 if (!existsSync(cache)) execFileSync('git', ['init', '--quiet', '--bare', cache]);
 const tags = git('ls-remote', '--tags', '--refs', source)
@@ -52,6 +65,8 @@ git(
 );
 for (const version of versions) {
   const tag = `v${version}`;
+  const registry = registries.find((path) => exists(`${tag}:${path}`));
+  if (!registry) throw new Error(`${tag} has no settings registry at a known path`);
   const groups = extractSettings(
     git('show', `${tag}:${registry}`),
     git('show', `${tag}:${strings}`),
