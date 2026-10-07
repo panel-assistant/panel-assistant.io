@@ -206,6 +206,7 @@ export default defineConfig({
               ],
             },
             { label: 'Security', slug: 'reference/security' },
+            { label: 'Brand assets', slug: 'brand' },
             { label: 'Development environment', slug: 'reference/development-environment' },
             {
               label: 'Code tour on DeepWiki',

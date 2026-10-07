@@ -14,6 +14,8 @@ src/build-info/build.json
 public/build.json
 # copied from node_modules by src/editor/copy-bundle.mjs before every build
 public/admin/
+# Built from the masters in src/brand/ by src/brand/generate.mjs before every build.
+public/brand/
 # Generated from firmware .dat files and the two data branches before each build.
 src/content/docs/hardware/firmware/builds/
 # Generated from the Android app's published tags before each build.

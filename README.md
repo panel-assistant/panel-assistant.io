@@ -19,6 +19,10 @@ Software that ships a link to this site never links to a page path, because a li
 
 Every page ends with a build line, and the same facts are published at [/build.json](https://panel-assistant.io/build.json). The number is the count of commits reachable from the built commit, so it climbs by one for every commit that lands on `main`, is the same on a laptop and in CI, and needs no counter kept anywhere else; the short SHA beside it makes any build traceable. A build of anything other than `main` is marked `preview`. After publishing, CI fetches the live `/build.json` and fails if it does not name the commit just published, so a green deploy run means the site really changed.
 
+## Brand assets
+
+The wordmark and icon are served at `/brand/` as a fixed set of files: SVG, PNG and WEBP with transparency, and JPEG on white and on dark, at every usual size, with the icon at three margins. `src/brand/generate.mjs` builds the set before every build from the two masters beside it, `icon.svg` and `name.svg`, and holds the one definition of the lock-up: beside a mark `H` high, the name is `0.71 H` high, the gap is `0.18 H`, and the mark hangs `0.233 H` below the baseline, so the baseline sits on the bottom edge of the house. The page at [/brand/](https://panel-assistant.io/brand/) lists the files and states the same rule. `npm test` renders the wordmark and checks that the bottom pixel row of the house is the bottom pixel row of the P.
+
 ## Local preview
 
 Node.js 22.12 or newer.
@@ -47,6 +51,7 @@ npm test               # the /go redirect table against the pages the build prod
 | ------------------- | ------------------------------------------------------------------------------------- |
 | `src/content/docs/` | Every page, as Markdown. The homepage is `index.mdx`.                                 |
 | `src/assets/`       | Images processed at build time.                                                       |
+| `src/brand/`        | The icon and wordmark masters, and the build step that writes `/brand/`; see below.   |
 | `public/`           | Files served as they are, such as the favicon.                                        |
 | `astro.config.mjs`  | Site configuration and the sidebar.                                                   |
 | `worker/`           | The `/go/<topic>` redirect router, its topic table, and the Cloudflare configuration. |
