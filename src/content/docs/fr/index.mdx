@@ -1,0 +1,205 @@
+---
+title: Panel Assistant
+description: Home Assistant au mur, comme il se doit. Panel Assistant transforme les panneaux muraux Android en supports rapides et fiables pour vos tableaux de bord Home Assistant, installés et gérés directement depuis Home Assistant.
+template: splash
+# Starlight renders "<page title> | <site title>", which on this page is the same
+# string twice. This sets the tag outright.
+head:
+  - tag: title
+    content: Panel Assistant
+hero:
+  title: Home Assistant au mur, <span>comme il se doit.</span>
+  tagline: Panel Assistant transforme un panneau mural Android en un support rapide et fiable pour vos tableaux de bord Home Assistant. Vous installez et gérez chaque panneau directement depuis Home Assistant.
+  actions:
+    - text: Premiers pas
+      link: /fr/start/getting-started/
+    - text: Ouvrir dans HACS
+      link: https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration
+      variant: secondary
+    - text: Mon panneau est-il pris en charge ?
+      link: /fr/install/supported-panels/
+      variant: secondary
+sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
+---
+
+import Features from '../../../components/home/Features.astro';
+import Split from '../../../components/home/Split.astro';
+import Spotlight from '../../../components/home/Spotlight.astro';
+import Tiles from '../../../components/home/Tiles.astro';
+
+<Split title="Un matériel capable, desservi par son logiciel">
+
+Les panneaux muraux Android associent un très bon matériel à un très mauvais logiciel. Le tableau de bord ralentit, les pressions ne sont pas prises en compte, l’application du fabricant s’impose à l’écran, et chaque fabricant exige une application et un rituel de configuration différents. La plupart des gens s’en accommodent, car rendre inutilisable un panneau sans boutons ni moyen fiable de réinitialisation coûte cher.
+
+Panel Assistant est la solution gratuite et open source. Il fait une seule chose : afficher vos tableaux de bord Home Assistant au mur, rapidement et sans complication. Tous vos panneaux se configurent et se gèrent de la même façon, depuis Home Assistant, sans entretien, réglage ou ajustement manuel.
+
+</Split>
+
+<Features
+  items={[
+    {
+      icon: 'gauge',
+      title: 'Une rapidité qui se ressent',
+      text: 'Vos tableaux de bord existants ne reçoivent que les données qu’ils utilisent vraiment : le panneau répond dès que vous le touchez.',
+    },
+    {
+      icon: 'screen',
+      title: 'Configuration depuis Home Assistant',
+      text: 'Ajoutez un panneau comme n’importe quel autre appareil : depuis les paramètres, dans votre navigateur, sans ligne de commande.',
+    },
+    {
+      icon: 'shield',
+      title: 'Une installation sûre',
+      text: 'Vérifie avant de modifier quoi que ce soit, refuse d’écraser ce qui doit être préservé et reprend là où l’installation s’est arrêtée en cas d’interruption.',
+    },
+    {
+      icon: 'chip',
+      title: 'Le matériel du panneau, dans Home Assistant',
+      text: 'L’écran, les LED, les boutons, les relais et les capteurs de luminosité et de proximité apparaissent automatiquement comme des entités, pilotées directement sans bibliothèques du fabricant pour s’interposer.',
+    },
+    {
+      icon: 'wave',
+      title: 'Le panneau et la maison travaillent ensemble',
+      text: 'Réduit la luminosité avec celle de la pièce et se réveille à votre approche. Si le panneau n’a pas de capteur, Home Assistant pilote l’écran à sa place.',
+    },
+    {
+      icon: 'grid',
+      title: 'Tous les panneaux, un seul système',
+      text: 'Les différentes marques et modèles ont la même apparence et le même comportement dans Home Assistant. Un autre panneau rejoint la même configuration, sans deuxième application.',
+    },
+    {
+      icon: 'wall',
+      title: 'Conçu pour le mur',
+      text: 'Pensé pour des panneaux dédiés, alimentés sur secteur, qui font partie de la maison, plutôt que pour une tablette à recharger et à surveiller.',
+    },
+    {
+      icon: 'search',
+      title: 'Savoir avant d’acheter',
+      text: 'Les pages consacrées au matériel indiquent ce qui fonctionne sur chaque modèle, jusqu’où va la prise en charge et à quoi vous attendre, avant d’y consacrer votre argent ou vos soirées.',
+    },
+  ]}
+/>
+
+<Spotlight
+  title="Seulement les entités utilisées par votre tableau de bord"
+  figure="10–100×"
+  caption="moins de données d’état Home Assistant parviennent au panneau, mesure effectuée dans de vrais foyers"
+>
+
+Un tableau de bord sur un panneau mural reçoit normalement chaque changement d’état de la maison, qu’il affiche ou non l’entité concernée. Dans une grande installation, un panneau peu puissant passe son temps à décoder des milliers d’entités qu’il n’affiche jamais, et c’est généralement ce qui le ralentit.
+
+Le filtre d’entités de Panel Assistant détermine de quelles entités votre tableau de bord dépend vraiment en lisant sa configuration et en l’observant pendant son fonctionnement. Il demande ensuite à Home Assistant de n’envoyer que celles-ci. Home Assistant filtre avant d’envoyer quoi que ce soit : le reste ne parvient donc jamais au panneau.
+
+C’est ce qui fait la différence entre un panneau lent et un panneau qui répond dès que vous le touchez. [Découvrez le fonctionnement et comment l’activer](/fr/manage/performance/).
+
+</Spotlight>
+
+<Split title="Mettre un panneau en service, quel que soit l’état de son firmware">
+
+La plupart des panneaux arrivent d’une place de marché à l’étranger avec un manuel succinct et sans garantie de pouvoir exécuter autre chose que l’application du fabricant. Vous découvrez si cela fonctionne une fois votre argent et vos soirées dépensés. Panel Assistant vise à lever cette incertitude : [vérifiez votre modèle](/fr/install/supported-panels/) avant d’acheter, en sachant qu’à son arrivée vous disposerez d’une méthode testée et reproductible pour le mettre en service.
+
+La première heure est la plus difficile avec un panneau. Panel Assistant s’en charge pour vous, depuis Home Assistant. Si le panneau est déjà sur votre réseau, indiquez son adresse à l’intégration, qui fait le reste. S’il est encore dans sa boîte, branchez-le à votre ordinateur portable avec un câble USB et installez directement depuis votre navigateur, avant même de le fixer au mur. Dans les deux cas, vous acceptez une demande sur le panneau et suivez le déroulement.
+
+</Split>
+
+<Split title="Votre panneau n’est pas dans la liste ? Décrivez-le, il y sera">
+
+La prise en charge du matériel dans Panel Assistant repose sur des données, pas sur du code. Chaque modèle est décrit par un profil : comment reconnaître le panneau, quel matériel il possède et quelles méthodes permettent de piloter son écran, ses LED, ses relais et ses capteurs en toute sécurité. Les profils sont du texte brut, modifié et validé dans votre navigateur, sans outils de développement ni recompilation. Un panneau que le projet n’a jamais rencontré bénéficie tout de même des fonctions essentielles grâce au profil générique prudent. Vous pouvez lui apprendre le reste et partager le résultat.
+
+</Split>
+
+<Split title="Une rapidité que vous pouvez mesurer">
+
+Les panneaux bon marché sont lents pour des raisons précises, et Panel Assistant vous les montre. La page d’état du panneau mesure la latence des pressions, le temps avant de pouvoir interagir, les blocages du thread principal, les rechargements inattendus, les mises à jour d’état par seconde et les trois entités responsables de la plupart d’entre elles, ainsi que le processeur, la mémoire et la température. Une ligne consacrée à la cause probable analyse le tout et vous indique ce qui freine le panneau.
+
+</Split>
+
+<Split title="Installez-le, puis oubliez-le">
+
+Un panneau mural devrait se comporter comme un interrupteur : toujours là, sans demander votre attention. Panel Assistant apprend la luminosité habituelle de la pièce et ajuste celle de l’écran en conséquence. Il apprend le comportement de son capteur de proximité pour qu’un geste réveille l’écran, mais pas un chat qui passe. Il libère de la mémoire la nuit lorsque l’écran est éteint et rouvre de lui-même le dernier tableau de bord fonctionnel après un redémarrage.
+
+</Split>
+
+<Split title="Le logiciel du fabricant, maîtrisé">
+
+Panel Assistant prend le contrôle de l’écran d’accueil et donne aux panneaux sans boutons un moyen de naviguer à l’écran. Il garde à disposition des moteurs de navigateur éprouvés pour les panneaux dont le moteur fourni a plusieurs années de retard, et empêche le widget de commande du fabricant de recouvrir votre tableau de bord. Il refuse par conception de toucher à ce dont le panneau a besoin pour continuer à fonctionner.
+
+</Split>
+
+<Tiles
+  boxed
+  title="Nouveau, et en pleine évolution"
+  links={[
+    {
+      title: 'Donnez une étoile au projet sur GitHub',
+      href: 'https://github.com/panel-assistant/ha-integration',
+      text: 'La façon la plus simple de faire connaître le projet aux autres utilisateurs de Home Assistant.',
+    },
+    {
+      title: 'Parlez-nous de votre panneau',
+      href: 'https://github.com/panel-assistant/ha-integration/issues',
+      text: 'Indiquez le modèle et ce qui a fonctionné, ou partagez le profil que vous lui avez appris.',
+    },
+    {
+      title: 'Échangez sur Discord',
+      href: 'https://panel-assistant.io/go/discord',
+      text: 'Des questions, des panneaux au quotidien et les prochaines idées à réaliser.',
+    },
+  ]}
+>
+
+Panel Assistant est nouveau et évolue rapidement. Trois familles de panneaux bénéficient aujourd’hui d’une prise en charge matérielle complète, les propriétaires en ont confirmé trois autres, un Shelly Wall Display X2i a été testé et le reste de la famille Shelly Wall Display est documenté. Pour ajouter à cette liste chaque panneau mural Android qui mérite d’être installé, il faut du vrai matériel dans de vraies maisons : c’est là que vous intervenez.
+
+</Tiles>
+
+<Tiles
+  title="Pour aller plus loin"
+  links={[
+    {
+      title: 'Premiers pas',
+      href: '/fr/start/getting-started/',
+      text: 'Quatre étapes pour passer d’un panneau non configuré à votre tableau de bord au mur.',
+    },
+    {
+      title: 'Fonctionnement',
+      href: '/fr/start/what-it-is/',
+      text: 'Ce qui est installé sur le panneau et ce qui reste dans Home Assistant.',
+    },
+    {
+      title: 'Matériel',
+      href: '/fr/hardware/',
+      text: 'Tous les panneaux documentés, leur firmware et leurs particularités.',
+    },
+    {
+      title: 'Installer l’intégration',
+      href: '/fr/home-assistant/custom-integration/',
+      text: 'Ajoutez Panel Assistant via HACS.',
+    },
+    {
+      title: 'Installer par USB',
+      href: '/fr/install/install-over-usb/',
+      text: 'Un nouveau panneau, un câble et votre navigateur.',
+    },
+    {
+      title: 'Dépannage',
+      href: '/fr/manage/troubleshooting/',
+      text: 'Les problèmes courants et où chercher en premier.',
+    },
+  ]}
+/>
+
+<Split title="Gratuit, ouvert et à vous">
+
+Tout ce qui est proposé ici est un logiciel gratuit et open source sous licences permissives, sans compte, service cloud ni abonnement. Le projet est créé par un utilisateur de Home Assistant qui souhaitait que les panneaux muraux tiennent enfin les promesses de leur matériel. Il est partagé pour que les vôtres en fassent autant.
+
+Le projet est destiné à appartenir à la communauté qui l’utilise et l’améliore. Les contributions sont intégrées sous le nom de leurs auteurs et leur sont attribuées. Elles ne sont jamais discrètement réécrites, par une IA ou qui que ce soit, pour présenter le travail d’autrui comme celui du projet.
+
+</Split>
+
+<div class="not-content pa-legal">
+  L’icône comprend la marque Home Assistant, qui reste la propriété du projet Home Assistant et
+  n’est pas couverte par la licence de ce projet. Panel Assistant est un projet indépendant qui
+  n’est ni affilié à Home Assistant ou à l’Open Home Foundation, ni approuvé par ces organisations.
+  Tous les noms de produits, marques et marques déposées appartiennent à leurs propriétaires
+  respectifs.
+</div>

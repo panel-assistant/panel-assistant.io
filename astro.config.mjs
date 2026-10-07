@@ -8,10 +8,15 @@ import en from './src/content/i18n/en.json' with { type: 'json' };
 import nl from './src/content/i18n/nl.json' with { type: 'json' };
 import pl from './src/content/i18n/pl.json' with { type: 'json' };
 import uk from './src/content/i18n/uk.json' with { type: 'json' };
+import de from './src/content/i18n/de.json' with { type: 'json' };
+import es from './src/content/i18n/es.json' with { type: 'json' };
+import fr from './src/content/i18n/fr.json' with { type: 'json' };
+import it from './src/content/i18n/it.json' with { type: 'json' };
+import zhHans from './src/content/i18n/zh-CN.json' with { type: 'json' };
 
 // A sidebar label and its translations, from the same files as the rest of the site's own text.
 /** @type {Record<string, Record<string, string>>} */
-const others = { nl, pl, uk };
+const others = { nl, pl, uk, de, es, fr, it, 'zh-CN': zhHans };
 /** @param {keyof typeof en} key */
 const label = (key) => ({
   label: en[key],
@@ -50,6 +55,11 @@ export default defineConfig({
         nl: { label: 'Nederlands', lang: 'nl' },
         pl: { label: 'Polski', lang: 'pl' },
         uk: { label: 'Українська', lang: 'uk' },
+        de: { label: 'Deutsch', lang: 'de' },
+        es: { label: 'Español', lang: 'es' },
+        fr: { label: 'Français', lang: 'fr' },
+        it: { label: 'Italiano', lang: 'it' },
+        'zh-hans': { label: '简体中文', lang: 'zh-CN' },
       },
       social: [
         {

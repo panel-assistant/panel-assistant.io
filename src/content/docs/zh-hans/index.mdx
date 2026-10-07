@@ -1,0 +1,203 @@
+---
+title: Panel Assistant
+description: Home Assistant 搬上墙，就该这么好用。Panel Assistant 将 Android 墙面面板变成快速、可靠的 Home Assistant 仪表盘载体，直接从 Home Assistant 安装和管理。
+template: splash
+# Starlight renders "<page title> | <site title>", which on this page is the same
+# string twice. This sets the tag outright.
+head:
+  - tag: title
+    content: Panel Assistant
+hero:
+  title: Home Assistant 搬上墙，<span>就该这么好用。</span>
+  tagline: Panel Assistant 将 Android 墙面面板变成快速、可靠的 Home Assistant 仪表盘载体。每一块面板都直接从 Home Assistant 安装和管理。
+  actions:
+    - text: 开始使用
+      link: /zh-hans/start/getting-started/
+    - text: 在 HACS 中打开
+      link: https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration
+      variant: secondary
+    - text: 我的面板受支持吗？
+      link: /zh-hans/install/supported-panels/
+      variant: secondary
+sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
+---
+
+import Features from '../../../components/home/Features.astro';
+import Split from '../../../components/home/Split.astro';
+import Spotlight from '../../../components/home/Spotlight.astro';
+import Tiles from '../../../components/home/Tiles.astro';
+
+<Split title="好硬件，却被软件拖了后腿">
+
+Android 墙面面板的硬件确实不错，配套软件却确实糟糕。仪表盘卡顿，点击没反应，厂商自带应用抢占屏幕，而且每家厂商都要求使用不同的应用、按不同的步骤设置。大多数人只能忍受，因为一块没有按钮、也无法可靠重置的面板，一旦弄坏，代价不小。
+
+Panel Assistant 是免费且开源的解决办法。它只做一件事：让 Home Assistant 仪表盘在墙上快速运行，省心好用。你拥有的每一块面板，都能以相同的方式从 Home Assistant 设置和管理，无需手动维护、调校或微调。
+
+</Split>
+
+<Features
+  items={[
+    {
+      icon: 'gauge',
+      title: '感受得到的性能',
+      text: '沿用现有仪表盘，只接收它真正用到的数据，让面板在你触碰的瞬间就响应。',
+    },
+    {
+      icon: 'screen',
+      title: '从 Home Assistant 设置',
+      text: '像添加其他设备一样添加面板：在浏览器中打开“设置”即可，全程无需命令行。',
+    },
+    {
+      icon: 'shield',
+      title: '安心安装',
+      text: '在任何更改之前先检查，拒绝覆盖不该覆盖的内容；即使中途打断，也能从断点继续。',
+    },
+    {
+      icon: 'chip',
+      title: '面板硬件，尽在 Home Assistant',
+      text: '屏幕、LED、按钮、继电器、光线和接近传感器会自动以实体形式出现，由系统直接驱动，不受厂商库阻碍。',
+    },
+    {
+      icon: 'wave',
+      title: '面板与家，协同工作',
+      text: '随室内光线调暗，靠近时唤醒。如果面板缺少传感器，则由 Home Assistant 控制屏幕。',
+    },
+    {
+      icon: 'grid',
+      title: '所有面板，同一个系统',
+      text: '不同品牌和型号在 Home Assistant 中有相同的外观和行为。再添一块面板，加入的还是同一套系统，无需第二个应用。',
+    },
+    {
+      icon: 'wall',
+      title: '为墙面而生',
+      text: '专为使用市电的专用面板打造，让它像房屋的一部分一样工作，而非需要充电和照看的平板电脑。',
+    },
+    {
+      icon: 'search',
+      title: '买之前，先了解',
+      text: '硬件页面会在你花钱、投入夜晚的时间之前，说明各型号有哪些功能可用、支持到什么程度，以及可以期待什么。',
+    },
+  ]}
+/>
+
+<Spotlight
+  title="只接收仪表盘用到的实体"
+  figure="10–100×"
+  caption="到达面板的 Home Assistant 状态数据流量降幅，测量来自真实家庭"
+>
+
+墙面面板上的仪表盘通常会接收家中每一次状态变化，无论是否显示对应实体。在规模较大的系统中，性能较弱的面板会花时间解析数千个从不显示的实体，这通常就是卡顿的原因。
+
+Panel Assistant 的实体筛选器会读取仪表盘配置，并观察运行中的仪表盘，了解它真正依赖哪些实体，然后要求 Home Assistant 只发送这些实体。Home Assistant 会在发送数据之前完成筛选，其余数据根本不会到达面板。
+
+这就决定了面板是迟迟没有反应，还是一触即应。[了解工作原理及启用方法](/zh-hans/manage/performance/)。
+
+</Spotlight>
+
+<Split title="无论固件状况如何，都让面板运行起来">
+
+大多数面板从海外电商平台寄来时，只附有简薄的说明书，厂商也不保证它能运行自带应用以外的软件。等你花了钱、搭上几个夜晚，才知道能不能用。Panel Assistant 希望消除这种不确定性：购买前先 [检查你的型号](/zh-hans/install/supported-panels/)，这样到货后就有经过测试、可重复的方式让它运行起来。
+
+任何面板最难的都是最初那一小时。Panel Assistant 在 Home Assistant 内替你完成这部分工作。如果面板已经连上网络，向集成提供地址，剩下的交给它。如果面板还在盒子里，用 USB 线连接笔记本电脑，在上墙之前直接从浏览器安装。两种方式都只需在面板上批准一次提示，然后看着安装完成。
+
+</Split>
+
+<Split title="面板不在列表中？描述它，就能加入">
+
+Panel Assistant 的硬件支持靠数据，而非代码。每个型号都由配置文件描述：如何识别面板、它有哪些硬件，以及通过哪些安全途径驱动屏幕、LED、继电器和传感器。配置文件是纯文本，在浏览器中即可编辑和验证，无需开发工具，也无需重新构建。即使项目从未见过的面板，也能通过保守的通用配置文件获得基本功能；你可以继续补充它的能力，并分享成果。
+
+</Split>
+
+<Split title="测量得出的性能">
+
+廉价面板运行缓慢有其原因，Panel Assistant 会把原因展示出来。面板状态页面会测量点击延迟、达到可交互状态所需时间、主线程阻塞、意外重新加载、每秒状态更新次数，以及造成最多更新的三个实体，同时显示 CPU、内存和温度。“可能原因”一行会综合这些数据，告诉你是什么拖慢了面板。
+
+</Split>
+
+<Split title="装好，就放心用">
+
+墙面面板应像电灯开关一样：一直可用，无需照看。Panel Assistant 会学习房间的正常光线并随之调暗，学习接近传感器，让挥手能唤醒屏幕而路过的猫不会；夜间屏幕关闭时释放内存，并在重启后自动重新打开上次正常运行的仪表盘。
+
+</Split>
+
+<Split title="让厂商软件服帖">
+
+Panel Assistant 接管主屏幕，为没有按钮的面板提供屏幕上的导航方式。对于出厂浏览器引擎老旧多年的面板，它保留已知可靠的引擎，同时防止厂商控制小部件覆盖你的仪表盘；设计上则拒绝触碰任何维持面板正常运行所必需的组件。
+
+</Split>
+
+<Tiles
+  boxed
+  title="刚起步，发展很快"
+  links={[
+    {
+      title: '在 GitHub 上为项目加星',
+      href: 'https://github.com/panel-assistant/ha-integration',
+      text: '这是让其他 Home Assistant 用户知道本项目存在的最简单方式。',
+    },
+    {
+      title: '报告你的面板情况',
+      href: 'https://github.com/panel-assistant/ha-integration/issues',
+      text: '告诉我们型号和哪些功能可用，或分享你为它编写的配置文件。',
+    },
+    {
+      title: '在 Discord 上交流',
+      href: 'https://panel-assistant.io/go/discord',
+      text: '提问、分享实际使用中的面板，讨论接下来开发什么。',
+    },
+  ]}
+>
+
+Panel Assistant 刚起步，正在快速发展。目前三个面板系列拥有完整硬件支持，用户已确认另外三个系列可用，一块 Shelly Wall Display X2i 已经过测试，Shelly Wall Display 系列的其余型号也已记录在文档中。要把所有值得上墙的 Android 面板纳入列表，需要真实家庭中的真实硬件，这正是你能参与的地方。
+
+</Tiles>
+
+<Tiles
+  title="深入了解"
+  links={[
+    {
+      title: '入门',
+      href: '/zh-hans/start/getting-started/',
+      text: '四步，把尚未配置的面板变成墙上的仪表盘。',
+    },
+    {
+      title: '工作原理',
+      href: '/zh-hans/start/what-it-is/',
+      text: '哪些东西运行在面板上，哪些保留在 Home Assistant 中。',
+    },
+    {
+      title: '硬件',
+      href: '/zh-hans/hardware/',
+      text: '每一款已记录的面板、它的固件及其特殊之处。',
+    },
+    {
+      title: '安装集成',
+      href: '/zh-hans/home-assistant/custom-integration/',
+      text: '通过 HACS 添加 Panel Assistant。',
+    },
+    {
+      title: '通过 USB 安装',
+      href: '/zh-hans/install/install-over-usb/',
+      text: '一块新面板、一根线，再加上你的浏览器。',
+    },
+    {
+      title: '故障排查',
+      href: '/zh-hans/manage/troubleshooting/',
+      text: '常见问题，以及首先该检查哪里。',
+    },
+  ]}
+/>
+
+<Split title="免费、开放，由你掌握">
+
+这里的一切都是采用宽松许可证的免费开源软件，没有账号、云服务或订阅。它的作者是一位 Home Assistant 用户，希望墙面面板能实现硬件一直以来承诺的体验；如今分享出来，让你的面板也能做到。
+
+它应属于使用并改进它的社区。贡献会以作者的名义合并，并明确归功于作者，绝不会由人工智能或任何其他人悄悄改写，把他人的工作冒充成项目自己的成果。
+
+</Split>
+
+<div class="not-content pa-legal">
+  图标包含 Home Assistant 标志，该标志仍属于 Home Assistant 项目，不在本项目的许可证范围内。Panel
+  Assistant 是独立项目， 与 Home Assistant 或 Open Home Foundation
+  没有关联，也未获得它们的背书。所有产品 名称、商标和注册商标均为各自所有者的财产。
+</div>

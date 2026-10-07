@@ -1,0 +1,205 @@
+---
+title: Panel Assistant
+description: Home Assistant en la pared, como debe ser. Panel Assistant convierte los paneles de pared Android en un lugar rápido y fiable para tus paneles de control de Home Assistant, instalados y gestionados desde el propio Home Assistant.
+template: splash
+# Starlight renders "<page title> | <site title>", which on this page is the same
+# string twice. This sets the tag outright.
+head:
+  - tag: title
+    content: Panel Assistant
+hero:
+  title: Home Assistant en la pared, <span>como debe ser.</span>
+  tagline: Panel Assistant convierte un panel de pared Android en un lugar rápido y fiable para tus paneles de control de Home Assistant. Instalas y gestionas cada panel desde el propio Home Assistant.
+  actions:
+    - text: Primeros pasos
+      link: /es/start/getting-started/
+    - text: Abrir en HACS
+      link: https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration
+      variant: secondary
+    - text: ¿Es compatible mi panel?
+      link: /es/install/supported-panels/
+      variant: secondary
+sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
+---
+
+import Features from '../../../components/home/Features.astro';
+import Split from '../../../components/home/Split.astro';
+import Spotlight from '../../../components/home/Spotlight.astro';
+import Tiles from '../../../components/home/Tiles.astro';
+
+<Split title="Buen hardware, lastrado por su software">
+
+Los paneles de pared Android tienen un hardware muy bueno envuelto en un software muy malo. El panel de control va lento, las pulsaciones se pierden, la app del fabricante se cuela en la pantalla y cada fabricante exige una app distinta y su propio ritual de configuración. La mayoría de la gente lo soporta, porque estropear un panel sin botones ni una forma fiable de restablecerlo sale caro.
+
+Panel Assistant es la solución gratuita y de código abierto. Hace una sola cosa: mostrar tus paneles de control de Home Assistant en la pared, rápido y sin complicaciones. Todos tus paneles se configuran y gestionan de la misma forma, desde Home Assistant, sin nada que vigilar, ajustar o retocar a mano.
+
+</Split>
+
+<Features
+  items={[
+    {
+      icon: 'gauge',
+      title: 'Una rapidez que se nota',
+      text: 'Tus paneles de control de siempre, alimentados solo con los datos que realmente usan, para que el panel responda en cuanto lo toques.',
+    },
+    {
+      icon: 'screen',
+      title: 'Configuración desde Home Assistant',
+      text: 'Añade un panel como cualquier otro dispositivo: desde Ajustes, en tu navegador, sin tener que usar la línea de comandos.',
+    },
+    {
+      icon: 'shield',
+      title: 'Instalación segura',
+      text: 'Comprueba todo antes de cambiar nada, se niega a sobrescribir lo que no debe y, si se interrumpe, continúa donde lo dejó.',
+    },
+    {
+      icon: 'chip',
+      title: 'El hardware del panel, en Home Assistant',
+      text: 'La pantalla, los LED, los botones, los relés y los sensores de luz y proximidad aparecen automáticamente como entidades, controlados directamente sin bibliotecas del fabricante de por medio.',
+    },
+    {
+      icon: 'wave',
+      title: 'El panel y la casa, juntos',
+      text: 'Atenúa la pantalla según la luz de la habitación y la activa cuando te acercas. Si el panel no tiene un sensor, Home Assistant se encarga de controlar la pantalla.',
+    },
+    {
+      icon: 'grid',
+      title: 'Todos los paneles, un solo sistema',
+      text: 'Las distintas marcas y modelos tienen el mismo aspecto y comportamiento en Home Assistant. Cada nuevo panel se une a la misma configuración, sin otra app.',
+    },
+    {
+      icon: 'wall',
+      title: 'Hecho para la pared',
+      text: 'Diseñado para paneles dedicados, conectados a la corriente y que se comportan como parte de la casa, sin tener que cargarlos y vigilarlos como una tableta.',
+    },
+    {
+      icon: 'search',
+      title: 'Infórmate antes de comprar',
+      text: 'Las páginas de hardware explican qué funciona en cada modelo, hasta dónde llega y qué puedes esperar, antes de que inviertas dinero o tardes enteras.',
+    },
+  ]}
+/>
+
+<Spotlight
+  title="Solo las entidades que usa tu panel de control"
+  figure="10–100×"
+  caption="menos tráfico de estados de Home Assistant llega al panel, medido en viviendas reales"
+>
+
+Normalmente, un panel de control en un panel de pared recibe todos los cambios de estado de la casa, muestre o no esas entidades. En una instalación grande, un panel de poca potencia dedica su tiempo a decodificar miles de entidades que nunca muestra, y eso suele explicar su lentitud.
+
+El filtro de entidades de Panel Assistant aprende de qué entidades depende realmente tu panel de control, leyendo su configuración y observándolo mientras funciona, y después pide a Home Assistant que envíe solo esas. Home Assistant filtra antes de enviar nada, por lo que el resto nunca llega al panel.
+
+Es la diferencia entre un panel que va lento y uno que responde en cuanto lo tocas. [Descubre cómo funciona y cómo activarlo](/es/manage/performance/).
+
+</Spotlight>
+
+<Split title="Poner un panel en marcha, esté como esté su firmware">
+
+La mayoría de los paneles llega de una tienda en línea del extranjero con un manual escueto y sin garantías de que puedan ejecutar algo más que la app del fabricante. Descubres si funciona cuando ya has invertido el dinero y las tardes. Panel Assistant quiere quitarte esa incertidumbre: [comprueba tu modelo](/es/install/supported-panels/) antes de comprar y ten la certeza de que, cuando llegue, habrá un procedimiento probado y repetible para ponerlo en marcha.
+
+Lo difícil de cualquier panel es la primera hora. Panel Assistant se encarga de esa hora por ti, desde Home Assistant. Si el panel ya está en tu red, dale su dirección a la integración y ella hace el resto. Si aún está en la caja, conéctalo a tu portátil con un cable USB e instálalo directamente desde el navegador, antes de ponerlo en la pared. En ambos casos, aceptas un aviso en el panel y ves cómo termina.
+
+</Split>
+
+<Split title="¿Tu panel no está en la lista? Descríbelo y lo estará">
+
+La compatibilidad de hardware en Panel Assistant se define con datos, no con código. Cada modelo tiene un perfil que describe cómo reconocerlo, qué hardware lleva y qué vías son seguras para controlar su pantalla, LED, relés y sensores. Los perfiles son texto plano que editas y validas en el navegador, sin herramientas de desarrollo ni recompilar nada. Un panel que el proyecto nunca ha visto también recibe lo esencial del prudente perfil Genérico, y puedes enseñarle el resto y compartir el resultado.
+
+</Split>
+
+<Split title="Un rendimiento que puedes medir">
+
+Los paneles baratos van lentos por razones concretas, y Panel Assistant te las muestra. La página de estado del panel mide la latencia de las pulsaciones, el tiempo hasta poder interactuar, el bloqueo del hilo principal, las recargas inesperadas, las actualizaciones de estado por segundo y las tres entidades responsables de la mayoría de ellas, junto con la CPU, la memoria y la temperatura. Una fila de causa probable analiza todo esto y te dice qué está frenando al panel.
+
+</Split>
+
+<Split title="Instálalo y olvídate">
+
+Un panel de pared debería comportarse como un interruptor de luz: siempre ahí, sin necesitarte nunca. Panel Assistant aprende la luz habitual de la habitación y atenúa la pantalla en consecuencia, aprende a interpretar su sensor de proximidad para que un gesto active la pantalla y un gato que pasa no lo haga, libera memoria por la noche mientras la pantalla está apagada y vuelve a abrir por sí solo el último panel de control que funcionaba tras un reinicio.
+
+</Split>
+
+<Split title="El software del fabricante, bajo control">
+
+Panel Assistant toma el control de la pantalla de inicio y da a los paneles sin botones una forma de moverse por la pantalla. Mantiene motores de navegador de funcionamiento probado para los paneles que traen uno con años de retraso e impide que el widget de control del fabricante se dibuje sobre tu panel de control, mientras que, por diseño, se niega a tocar cualquier cosa que el panel necesite para seguir funcionando.
+
+</Split>
+
+<Tiles
+  boxed
+  title="Nuevo y avanzando deprisa"
+  links={[
+    {
+      title: 'Dale una estrella al proyecto en GitHub',
+      href: 'https://github.com/panel-assistant/ha-integration',
+      text: 'La forma más sencilla de que otros usuarios de Home Assistant sepan que existe.',
+    },
+    {
+      title: 'Cuéntanos cómo funciona tu panel',
+      href: 'https://github.com/panel-assistant/ha-integration/issues',
+      text: 'El nombre del modelo y qué ha funcionado, o comparte el perfil que le has enseñado.',
+    },
+    {
+      title: 'Habla con nosotros en Discord',
+      href: 'https://panel-assistant.io/go/discord',
+      text: 'Preguntas, paneles en uso y qué desarrollar después.',
+    },
+  ]}
+>
+
+Panel Assistant es nuevo y evoluciona deprisa. Hoy, tres familias de paneles tienen compatibilidad de hardware completa, sus propietarios han confirmado otras tres, se ha probado un Shelly Wall Display X2i y el resto de la familia Shelly Wall Display está documentado. Incluir en esa lista todos los paneles de pared Android que merecen la pena requiere hardware real en casas reales, y ahí es donde entras tú.
+
+</Tiles>
+
+<Tiles
+  title="Más detalles"
+  links={[
+    {
+      title: 'Primeros pasos',
+      href: '/es/start/getting-started/',
+      text: 'Cuatro pasos desde un panel sin configurar hasta tu panel de control en la pared.',
+    },
+    {
+      title: 'Cómo funciona',
+      href: '/es/start/what-it-is/',
+      text: 'Qué va en el panel y qué se queda en Home Assistant.',
+    },
+    {
+      title: 'Hardware',
+      href: '/es/hardware/',
+      text: 'Todos los paneles documentados, su firmware y sus peculiaridades.',
+    },
+    {
+      title: 'Instalar la integración',
+      href: '/es/home-assistant/custom-integration/',
+      text: 'Añade Panel Assistant mediante HACS.',
+    },
+    {
+      title: 'Instalar por USB',
+      href: '/es/install/install-over-usb/',
+      text: 'Un panel nuevo, un cable y tu navegador.',
+    },
+    {
+      title: 'Resolución de problemas',
+      href: '/es/manage/troubleshooting/',
+      text: 'Qué suele fallar y dónde mirar primero.',
+    },
+  ]}
+/>
+
+<Split title="Gratis, abierto y tuyo">
+
+Todo lo que hay aquí es software gratuito y de código abierto con licencias permisivas, sin cuenta, sin servicio en la nube y sin suscripción. Lo ha creado un usuario de Home Assistant que quería que los paneles de pared funcionaran como su hardware siempre prometía, y lo comparte para que los tuyos también puedan hacerlo.
+
+La intención es que pertenezca a la comunidad que lo usa y mejora. Las contribuciones se integran con los nombres de sus autores y se les reconoce su trabajo; nunca se reescriben a escondidas, ni por IA ni por nadie más, para presentar el trabajo de otra persona como propio del proyecto.
+
+</Split>
+
+<div class="not-content pa-legal">
+  El icono incluye la marca de Home Assistant, que sigue siendo propiedad del proyecto Home
+  Assistant y no está cubierta por la licencia de este proyecto. Panel Assistant es un proyecto
+  independiente y no está afiliado a Home Assistant ni a Open Home Foundation ni cuenta con su
+  respaldo. Todos los nombres de productos, marcas y marcas registradas son propiedad de sus
+  respectivos titulares.
+</div>
