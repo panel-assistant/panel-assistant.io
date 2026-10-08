@@ -53,7 +53,7 @@ From now on, changing a setting or pressing a button on the panel's entities goe
 
 ### What does not move
 
-Two MQTT buttons have no Panel Assistant equivalent, **Update ha-paneld** and **Update Companion app**, so they are removed, along with any leftover MQTT update entity for ha-paneld. Use the panel's Panel Assistant update entity to update the panel app, and the panel web interface's **Install** tab to update the separate Home Assistant app.
+Two MQTT buttons have no Panel Assistant equivalent, **Update ha-paneld** and **Update Companion app**, so they are removed, along with any leftover MQTT update entity for ha-paneld. Use the panel's Panel Assistant update entity to update the panel app.
 
 If you gave one of those a name, icon or area of your own, or hid or disabled it, Panel Assistant will not remove it for you. A repair lists it instead, and the panel keeps its MQTT entities until you delete that entity or clear those settings.
 

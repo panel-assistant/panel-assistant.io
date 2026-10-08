@@ -172,7 +172,7 @@ Switching role is **not a reflash**: there is no `.gbl` or bootloader step, it o
 The host stack is the **manufacturer's own** eWeLink and Sonoff gateway, versioned to match the panel firmware (for example `sonoff-v3.5.4`). Zigbee **router mode** arrived in **NSPanel Pro firmware 2.2.0** (2023; eWeLink app, _Device Settings, Pilot Features, Zigbee Mode_), and local host-stack repeater support in gateway package 1.1.9. In practice:
 
 - **Gateway present** (firmware 2.2.0 or later, or side-loaded): the panel app detects it and publishes `switch.<panel>_zigbee_router`. Turn it on and the panel joins your coordinator as a router.
-- **No gateway** (very old firmware, never provisioned): the switch **does not appear**, because it depends on the gateway's launch script existing. Update the firmware to 2.2.0 or later, or side-load the gateway package as described under [Existing gateway installations](#migrating-from-nspaneltools).
+- **No gateway** (very old firmware, never provisioned): the switch **does not appear**, because it depends on the gateway's launch script existing. Update the firmware to 2.2.0 or later.
 
 The panel app **drives** the gateway; it does not ship or install it, because it is eWeLink's binary. Firmware 4.x adds a Matter bridge and can export Zigbee devices to Home Assistant through MQTT Discovery, as alternatives to the router role.
 
@@ -194,14 +194,7 @@ The health attributes include firmware and product version, gateway layout and p
 
 ### Migrating from NSPanelTools
 
-[NSPanelTools](https://github.com/seaky/nspanel_pro_tools_apk) side-loads the official Sonoff gateway package onto firmware that did not ship it, and many panels run a gateway installed that way. Panel Assistant now covers almost everything NSPanelTools does, so most panels no longer need it. The panel app coexists with it and can take the gateway over:
-
-- **Side by side is fine.** The router control is idempotent: it **defers** to whatever already runs the gateway and will not start a second copy or fight it. Adaptive brightness is off until you turn it on. Nothing conflicts by default.
-- **Handing the gateway to the panel app.** The host stack lives in `/vendor` and **survives uninstalling NSPanelTools** (verified; a persistent hook even keeps starting it at boot). Remove NSPanelTools and the panel app keeps driving the gateway. If the boot hook is removed too, the panel app starts the gateway at boot when the switch was left on.
-
-:::note
-NSPanelTools also uses the screen and sensors. Running both is harmless by default, but enabling overlapping features in both, such as waking the screen on a hand gesture, can cause duplicate actions. Remove NSPanelTools once the panel app covers what you need.
-:::
+If NSPanelTools installed the Sonoff gateway on an older panel, the host stack in `/vendor` survives removing NSPanelTools. Remove NSPanelTools before enabling Panel Assistant's screen and sensor controls to avoid duplicate actions. Panel Assistant can drive the existing gateway; when the Zigbee router switch is left on, it starts the gateway at boot even if the previous boot hook has been removed.
 
 ### EZSP host stack internals
 

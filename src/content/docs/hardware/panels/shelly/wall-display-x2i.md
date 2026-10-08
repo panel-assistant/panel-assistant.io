@@ -94,7 +94,7 @@ Until then, drive the relays through Home Assistant's own Shelly integration.
 
 - **No Recents at all.** The firmware ignores the Recents key, and Android's accessibility Recents action does nothing either, each tested with an ordinary app and with Settings in front. The reason is below both of them: the system logs that the recents task directory does not exist, so no route can produce a task switcher. Panel Assistant still offers a Recents control here, because the bundled profile declares this panel has one, and that control cannot work.
 - **No camera.** The firmware declares camera features that no hardware backs, and Android enumerates no camera. Nothing declares a camera in the profile either, so Panel Assistant correctly offers none here.
-- **No root.** There is no `su` and no way to become root from the shell. Setting the panel up and using it day to day does not need it, but a set of features does stay unavailable: screenshots, tap-and-capture remote control, verified app and Companion updates, display density and text size, and rebooting or switching back to the vendor launcher. The onboard relays are a separate matter, covered above.
+- **No root.** There is no `su` and no way to become root from the shell. Setting the panel up and using it day to day does not need it, but a set of features does stay unavailable: screenshots, tap-and-capture remote control, verified app updates, display density and text size, and rebooting or switching back to the vendor launcher. The onboard relays are a separate matter, covered above.
 
 ## Firmware, and why the shipped version matters
 
