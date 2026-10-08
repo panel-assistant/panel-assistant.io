@@ -24,6 +24,6 @@ Obie ścieżki sprawdzają panel, zanim cokolwiek zmienią, i odmawiają instala
 
 Panel pojawia się jako urządzenie z czujnikiem stanu i diagnostyką, a także na stronie Panel Assistant na pasku bocznym. Panel udostępnia też w twojej sieci własną stronę stanu na porcie 8888 i to tam wskazujesz mu pulpit nawigacyjny. Do tego czasu ekran panelu pokazuje ten adres wraz z kodem QR i przyciskami do konfiguracji lub otwarcia pulpitu nawigacyjnego.
 
-![Ekran oczekiwania panelu przed konfiguracją, z adresem konfiguracji, kodem QR oraz przyciskami Konfiguracja i Pulpit nawigacyjny](asset:standing-screen.png)
+![Ekran oczekiwania panelu przed konfiguracją, z adresem konfiguracji, kodem QR oraz przyciskami Konfiguracja i Pulpit nawigacyjny](/screenshots/standing-screen.png)
 
 Przejdź dalej do [Podłączanie panelu](/pl/home-assistant/connect-a-panel/).

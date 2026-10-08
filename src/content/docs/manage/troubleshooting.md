@@ -7,7 +7,7 @@ Start with the panel's device in Home Assistant, which has a status sensor and a
 
 When you need to see what the panel is doing as it happens, the **Logs** tab on that page streams the panel app's own log live, with tokens and passwords redacted.
 
-![The Logs tab of the panel's web interface, streaming the panel app's live log with a filter box and Follow and Pause controls](asset:ui-logs-dark.png)
+![The Logs tab of the panel's web interface, streaming the panel app's live log with a filter box and Follow and Pause controls](/screenshots/ui-logs-dark.png)
 
 ## The dashboard is blank, half-drawn, or full of script errors
 

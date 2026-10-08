@@ -5,7 +5,7 @@ description: Let the panel learn the light in its room and set its own screen br
 
 Adaptive brightness is an optional controller on the panel that learns the normal ambient-light pattern around it and adjusts the screen without a Home Assistant automation. It is off by default, and ordinary manual or Home Assistant brightness control is available whether it is on or off.
 
-![The Configure tab of the panel's web interface, with the Display card showing the ambient light source, Auto-brightness, Minimum level, Sensitivity and the daily ambient learning chart](asset:ui-configure-dark.png)
+![The Configure tab of the panel's web interface, with the Display card showing the ambient light source, Auto-brightness, Minimum level, Sensitivity and the daily ambient learning chart](/screenshots/ui-configure-dark.png)
 
 ## Choose the light source
 

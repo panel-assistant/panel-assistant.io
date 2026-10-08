@@ -5,7 +5,7 @@ description: How the panel learns its proximity sensor, what it reports to Home 
 
 Proximity sensors on Android wall panels do not share one useful scale. Some report a distance, some report only two values, the polarity can be reversed, and idle readings can drift between units and firmware versions. The panel app learns the connected sensor's clear baseline, its near reference, its polarity and how it reports, instead of relying on thresholds set per model.
 
-![The panel's guided proximity setup, at step 3 of 7, asking you to walk towards the panel as you normally would while it counts down](asset:proximity-setup-screen-480.gif)
+![The panel's guided proximity setup, at step 3 of 7, asking you to walk towards the panel as you normally would while it counts down](/screenshots/proximity-setup-screen-480.gif)
 
 ## Learning and teaching
 

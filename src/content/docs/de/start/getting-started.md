@@ -27,33 +27,33 @@ Ein neues Panel kannst du einrichten, bevor es an die Wand kommt. Schließe es m
 <div class="pa-steps" role="region" aria-label="Über USB installieren, Schritt für Schritt" tabindex="0">
 <figure>
 <figcaption><span>1</span> Wähle Über USB installieren</figcaption>
-<img class="light:sl-hidden" src="asset:ha-menu-dark.png" width="580" height="314" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
-<img class="dark:sl-hidden" src="asset:ha-menu-light.png" width="580" height="314" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
 </figure>
 <figure>
 <figcaption><span>2</span> Schließe das Panel an</figcaption>
-<img class="light:sl-hidden" src="asset:usb-connect-dark.png" width="520" height="349" alt="Das USB-Installationsprogramm fordert dich auf, das Panel anzuschließen und Mein Panel finden zu drücken">
-<img class="dark:sl-hidden" src="asset:usb-connect-light.png" width="520" height="349" alt="Das USB-Installationsprogramm fordert dich auf, das Panel anzuschließen und Mein Panel finden zu drücken">
+<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="349" alt="Das USB-Installationsprogramm fordert dich auf, das Panel anzuschließen und Mein Panel finden zu drücken">
+<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="349" alt="Das USB-Installationsprogramm fordert dich auf, das Panel anzuschließen und Mein Panel finden zu drücken">
 </figure>
 <figure>
 <figcaption><span>3</span> Tippe auf dem Panel auf Zulassen</figcaption>
-<img class="light:sl-hidden" src="asset:usb-allow-dark.png" width="520" height="318" alt="Das USB-Installationsprogramm wartet, während du auf dem Bildschirm des Panels auf Zulassen tippst">
-<img class="dark:sl-hidden" src="asset:usb-allow-light.png" width="520" height="318" alt="Das USB-Installationsprogramm wartet, während du auf dem Bildschirm des Panels auf Zulassen tippst">
+<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="318" alt="Das USB-Installationsprogramm wartet, während du auf dem Bildschirm des Panels auf Zulassen tippst">
+<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="318" alt="Das USB-Installationsprogramm wartet, während du auf dem Bildschirm des Panels auf Zulassen tippst">
 </figure>
 <figure>
 <figcaption><span>4</span> Drücke Installieren</figcaption>
-<img class="light:sl-hidden" src="asset:usb-confirm-dark.png" width="520" height="349" alt="Das USB-Installationsprogramm ist bereit zur Installation und zeigt eine einzelne Schaltfläche Installieren">
-<img class="dark:sl-hidden" src="asset:usb-confirm-light.png" width="520" height="349" alt="Das USB-Installationsprogramm ist bereit zur Installation und zeigt eine einzelne Schaltfläche Installieren">
+<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="349" alt="Das USB-Installationsprogramm ist bereit zur Installation und zeigt eine einzelne Schaltfläche Installieren">
+<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="349" alt="Das USB-Installationsprogramm ist bereit zur Installation und zeigt eine einzelne Schaltfläche Installieren">
 </figure>
 <figure>
 <figcaption><span>5</span> Verfolge die Installation</figcaption>
-<img class="light:sl-hidden" src="asset:usb-progress-dark.png" width="520" height="319" alt="Der Fortschrittsbalken des USB-Installationsprogramms während der Installation der App">
-<img class="dark:sl-hidden" src="asset:usb-progress-light.png" width="520" height="319" alt="Der Fortschrittsbalken des USB-Installationsprogramms während der Installation der App">
+<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="319" alt="Der Fortschrittsbalken des USB-Installationsprogramms während der Installation der App">
+<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="319" alt="Der Fortschrittsbalken des USB-Installationsprogramms während der Installation der App">
 </figure>
 <figure>
 <figcaption><span>6</span> Fertig</figcaption>
-<img class="light:sl-hidden" src="asset:usb-done-dark.png" width="520" height="262" alt="Das USB-Installationsprogramm bestätigt die Installation und öffnet die Einrichtung des Panels">
-<img class="dark:sl-hidden" src="asset:usb-done-light.png" width="520" height="262" alt="Das USB-Installationsprogramm bestätigt die Installation und öffnet die Einrichtung des Panels">
+<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="262" alt="Das USB-Installationsprogramm bestätigt die Installation und öffnet die Einrichtung des Panels">
+<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="262" alt="Das USB-Installationsprogramm bestätigt die Installation und öffnet die Einrichtung des Panels">
 </figure>
 </div>
 
@@ -64,23 +64,23 @@ Wenn das Panel schon an der Wand hängt, braucht Home Assistant nur seine Adress
 <div class="pa-steps" role="region" aria-label="Ein Panel im Netzwerk hinzufügen, Schritt für Schritt" tabindex="0">
 <figure>
 <figcaption><span>1</span> Wähle Panel im Netzwerk hinzufügen</figcaption>
-<img class="light:sl-hidden" src="asset:ha-menu-dark.png" width="580" height="314" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
-<img class="dark:sl-hidden" src="asset:ha-menu-light.png" width="580" height="314" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
 </figure>
 <figure>
 <figcaption><span>2</span> Gib die Adresse des Panels an</figcaption>
-<img class="light:sl-hidden" src="asset:ha-address-dark.png" width="580" height="378" alt="Der Schritt Panel hinzufügen mit eingetragener IP-Adresse des Panels">
-<img class="dark:sl-hidden" src="asset:ha-address-light.png" width="580" height="378" alt="Der Schritt Panel hinzufügen mit eingetragener IP-Adresse des Panels">
+<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="378" alt="Der Schritt Panel hinzufügen mit eingetragener IP-Adresse des Panels">
+<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="378" alt="Der Schritt Panel hinzufügen mit eingetragener IP-Adresse des Panels">
 </figure>
 <figure>
 <figcaption><span>3</span> Wähle eine Version</figcaption>
-<img class="light:sl-hidden" src="asset:ha-version-dark.png" width="580" height="305" alt="Der Schritt Version wählen mit der empfohlenen Version oben in der Liste">
-<img class="dark:sl-hidden" src="asset:ha-version-light.png" width="580" height="305" alt="Der Schritt Version wählen mit der empfohlenen Version oben in der Liste">
+<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="305" alt="Der Schritt Version wählen mit der empfohlenen Version oben in der Liste">
+<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="Der Schritt Version wählen mit der empfohlenen Version oben in der Liste">
 </figure>
 <figure>
 <figcaption><span>4</span> Tippe auf dem Panel auf Zulassen, dann wird es hinzugefügt</figcaption>
-<img class="light:sl-hidden" src="asset:ha-done-dark.png" width="580" height="210" alt="Der Schritt Erfolg bestätigt, dass das Panel zu Home Assistant hinzugefügt wurde">
-<img class="dark:sl-hidden" src="asset:ha-done-light.png" width="580" height="210" alt="Der Schritt Erfolg bestätigt, dass das Panel zu Home Assistant hinzugefügt wurde">
+<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="Der Schritt Erfolg bestätigt, dass das Panel zu Home Assistant hinzugefügt wurde">
+<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="Der Schritt Erfolg bestätigt, dass das Panel zu Home Assistant hinzugefügt wurde">
 </figure>
 </div>
 
@@ -93,28 +93,28 @@ Home Assistant öffnet anschließend den Einrichtungsassistenten des Panels. Er 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="Der Einrichtungsassistent des Panels, Schritt für Schritt" tabindex="0">
 <figure>
 <figcaption><span>1</span> Gib dem Panel einen Namen</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-name-dark.png" width="524" height="702" alt="Der Einrichtungsassistent des Panels fragt nach Panel-ID und Anzeigename und zeigt eine Vorschau der Entitätsnamen, die Home Assistant verwenden wird">
-<img class="dark:sl-hidden" src="asset:panel-setup-name-light.png" width="524" height="702" alt="Der Einrichtungsassistent des Panels fragt nach Panel-ID und Anzeigename und zeigt eine Vorschau der Entitätsnamen, die Home Assistant verwenden wird">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-name-dark.png" width="524" height="702" alt="Der Einrichtungsassistent des Panels fragt nach Panel-ID und Anzeigename und zeigt eine Vorschau der Entitätsnamen, die Home Assistant verwenden wird">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-name-light.png" width="524" height="702" alt="Der Einrichtungsassistent des Panels fragt nach Panel-ID und Anzeigename und zeigt eine Vorschau der Entitätsnamen, die Home Assistant verwenden wird">
 </figure>
 <figure>
 <figcaption><span>2</span> Wähle Dashboard und Bereich</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-dashboard-dark.png" width="524" height="485" alt="Der Assistent mit einem für das Panel ausgewählten Dashboard und einem Home Assistant-Bereich">
-<img class="dark:sl-hidden" src="asset:panel-setup-dashboard-light.png" width="524" height="485" alt="Der Assistent mit einem für das Panel ausgewählten Dashboard und einem Home Assistant-Bereich">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-dashboard-dark.png" width="524" height="485" alt="Der Assistent mit einem für das Panel ausgewählten Dashboard und einem Home Assistant-Bereich">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-dashboard-light.png" width="524" height="485" alt="Der Assistent mit einem für das Panel ausgewählten Dashboard und einem Home Assistant-Bereich">
 </figure>
 <figure>
 <figcaption><span>3</span> Schalte den Entitätenfilter ein</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-filter-dark.png" width="524" height="629" alt="Der Assistent empfiehlt den Entitätenfilter für dieses Panel und zeigt die Anzahl der Home Assistant-Entitäten">
-<img class="dark:sl-hidden" src="asset:panel-setup-filter-light.png" width="524" height="629" alt="Der Assistent empfiehlt den Entitätenfilter für dieses Panel und zeigt die Anzahl der Home Assistant-Entitäten">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="629" alt="Der Assistent empfiehlt den Entitätenfilter für dieses Panel und zeigt die Anzahl der Home Assistant-Entitäten">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="629" alt="Der Assistent empfiehlt den Entitätenfilter für dieses Panel und zeigt die Anzahl der Home Assistant-Entitäten">
 </figure>
 <figure>
 <figcaption><span>4</span> Fast geschafft</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-almost-there-dark.png" width="524" height="339" alt="Der Assistent wartet, während das Panel seine gefilterte Entitätsauswahl zusammenstellt und das Dashboard lädt">
-<img class="dark:sl-hidden" src="asset:panel-setup-almost-there-light.png" width="524" height="339" alt="Der Assistent wartet, während das Panel seine gefilterte Entitätsauswahl zusammenstellt und das Dashboard lädt">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-almost-there-dark.png" width="524" height="339" alt="Der Assistent wartet, während das Panel seine gefilterte Entitätsauswahl zusammenstellt und das Dashboard lädt">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-almost-there-light.png" width="524" height="339" alt="Der Assistent wartet, während das Panel seine gefilterte Entitätsauswahl zusammenstellt und das Dashboard lädt">
 </figure>
 <figure>
 <figcaption><span>5</span> Alles bereit</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-done-dark.png" width="524" height="526" alt="Der Assistent bestätigt, dass das Panel eingerichtet ist, und zeigt das Dashboard">
-<img class="dark:sl-hidden" src="asset:panel-setup-done-light.png" width="524" height="526" alt="Der Assistent bestätigt, dass das Panel eingerichtet ist, und zeigt das Dashboard">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-done-dark.png" width="524" height="526" alt="Der Assistent bestätigt, dass das Panel eingerichtet ist, und zeigt das Dashboard">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-done-light.png" width="524" height="526" alt="Der Assistent bestätigt, dass das Panel eingerichtet ist, und zeigt das Dashboard">
 </figure>
 </div>
 

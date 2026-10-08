@@ -23,6 +23,6 @@ Both routes check the panel before changing anything and refuse to install over 
 
 The panel appears as a device with a status sensor and diagnostics, and on the Panel Assistant page in the sidebar. The panel also serves its own status page on your network on port 8888, which is where you point it at a dashboard. Until then, the panel's own screen shows that address, with a QR code and buttons to configure it or open the dashboard.
 
-![The panel's standing screen before setup, showing its configuration address, a QR code, and Configure and Dashboard buttons](asset:standing-screen.png)
+![The panel's standing screen before setup, showing its configuration address, a QR code, and Configure and Dashboard buttons](/screenshots/standing-screen.png)
 
 Continue with [Connect a panel](/home-assistant/connect-a-panel/).

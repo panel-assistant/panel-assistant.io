@@ -74,7 +74,7 @@ The filter applies only to the built-in renderer. It changes the frontend's subs
 4. Review the current, suggested and excluded lists. Pin entities that custom cards or templates use indirectly, and resolve any entity-filter checks shown above the tables.
 5. Select **Apply policy set** when the candidate is ready. The panel shows the old and new entity counts before asking you to confirm, then reloads the dashboard with the filtered subscription.
 
-![The Entities tab of the panel's web interface, showing the entity subscription filter, the currently subscribed entities and the suggested entities](asset:ui-entities-dark.png)
+![The Entities tab of the panel's web interface, showing the entity subscription filter, the currently subscribed entities and the suggested entities](/screenshots/ui-entities-dark.png)
 
 The Entities page explains why each entity was found, records your manual pins and exclusions, and keeps broad or dynamic rules it recognises visible until you fix them or choose explicitly how to proceed. Behaviour it does not recognise can still exist, so test every dashboard tab after turning the filter on. If anything is missing, turn off **Entity filtering** on the Configure page and reload before revising the candidate.
 

@@ -21,3 +21,5 @@ src/content/docs/hardware/firmware/builds/
 # Generated from the Android app's published tags before each build.
 src/content/docs/reference/settings/
 public/settings-versions.json
+# Normalized from tracked screenshot sources before build and dev.
+public/screenshots/

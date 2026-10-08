@@ -27,33 +27,33 @@ sourceCommit: 50fccda5c7e05cce0edbd2b4b37e006c473ca5df
 <div class="pa-steps" role="region" aria-label="Покрокова інструкція з встановлення через USB" tabindex="0">
 <figure>
 <figcaption><span>1</span> Виберіть «Встановити за допомогою USB»</figcaption>
-<img class="light:sl-hidden" src="asset:ha-menu-dark.png" width="580" height="314" alt="Крок «Налаштувати панель» у Home Assistant з варіантами «Додати панель у вашій мережі» або «Встановити за допомогою USB на цьому комп’ютері»">
-<img class="dark:sl-hidden" src="asset:ha-menu-light.png" width="580" height="314" alt="Крок «Налаштувати панель» у Home Assistant з варіантами «Додати панель у вашій мережі» або «Встановити за допомогою USB на цьому комп’ютері»">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="Крок «Налаштувати панель» у Home Assistant з варіантами «Додати панель у вашій мережі» або «Встановити за допомогою USB на цьому комп’ютері»">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="Крок «Налаштувати панель» у Home Assistant з варіантами «Додати панель у вашій мережі» або «Встановити за допомогою USB на цьому комп’ютері»">
 </figure>
 <figure>
 <figcaption><span>2</span> Підключіть панель</figcaption>
-<img class="light:sl-hidden" src="asset:usb-connect-dark.png" width="520" height="349" alt="USB-інсталятор просить підключити панель і натиснути Find my panel">
-<img class="dark:sl-hidden" src="asset:usb-connect-light.png" width="520" height="349" alt="USB-інсталятор просить підключити панель і натиснути Find my panel">
+<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="349" alt="USB-інсталятор просить підключити панель і натиснути Find my panel">
+<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="349" alt="USB-інсталятор просить підключити панель і натиснути Find my panel">
 </figure>
 <figure>
 <figcaption><span>3</span> Натисніть «Дозволити» на панелі</figcaption>
-<img class="light:sl-hidden" src="asset:usb-allow-dark.png" width="520" height="318" alt="USB-інсталятор чекає, поки ви натиснете «Дозволити» на екрані панелі">
-<img class="dark:sl-hidden" src="asset:usb-allow-light.png" width="520" height="318" alt="USB-інсталятор чекає, поки ви натиснете «Дозволити» на екрані панелі">
+<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="318" alt="USB-інсталятор чекає, поки ви натиснете «Дозволити» на екрані панелі">
+<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="318" alt="USB-інсталятор чекає, поки ви натиснете «Дозволити» на екрані панелі">
 </figure>
 <figure>
 <figcaption><span>4</span> Натисніть Install</figcaption>
-<img class="light:sl-hidden" src="asset:usb-confirm-dark.png" width="520" height="349" alt="USB-інсталятор готовий до встановлення, з єдиною кнопкою Install">
-<img class="dark:sl-hidden" src="asset:usb-confirm-light.png" width="520" height="349" alt="USB-інсталятор готовий до встановлення, з єдиною кнопкою Install">
+<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="349" alt="USB-інсталятор готовий до встановлення, з єдиною кнопкою Install">
+<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="349" alt="USB-інсталятор готовий до встановлення, з єдиною кнопкою Install">
 </figure>
 <figure>
 <figcaption><span>5</span> Спостерігайте за встановленням</figcaption>
-<img class="light:sl-hidden" src="asset:usb-progress-dark.png" width="520" height="319" alt="Індикатор перебігу USB-інсталятора під час встановлення застосунку">
-<img class="dark:sl-hidden" src="asset:usb-progress-light.png" width="520" height="319" alt="Індикатор перебігу USB-інсталятора під час встановлення застосунку">
+<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="319" alt="Індикатор перебігу USB-інсталятора під час встановлення застосунку">
+<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="319" alt="Індикатор перебігу USB-інсталятора під час встановлення застосунку">
 </figure>
 <figure>
 <figcaption><span>6</span> Готово</figcaption>
-<img class="light:sl-hidden" src="asset:usb-done-dark.png" width="520" height="262" alt="USB-інсталятор підтверджує встановлення й відкриває налаштування панелі">
-<img class="dark:sl-hidden" src="asset:usb-done-light.png" width="520" height="262" alt="USB-інсталятор підтверджує встановлення й відкриває налаштування панелі">
+<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="262" alt="USB-інсталятор підтверджує встановлення й відкриває налаштування панелі">
+<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="262" alt="USB-інсталятор підтверджує встановлення й відкриває налаштування панелі">
 </figure>
 </div>
 
@@ -64,23 +64,23 @@ sourceCommit: 50fccda5c7e05cce0edbd2b4b37e006c473ca5df
 <div class="pa-steps" role="region" aria-label="Додавання панелі у вашій мережі, крок за кроком" tabindex="0">
 <figure>
 <figcaption><span>1</span> Виберіть «Додати панель у вашій мережі»</figcaption>
-<img class="light:sl-hidden" src="asset:ha-menu-dark.png" width="580" height="314" alt="Крок «Налаштувати панель» у Home Assistant з варіантами «Додати панель у вашій мережі» або «Встановити за допомогою USB на цьому комп’ютері»">
-<img class="dark:sl-hidden" src="asset:ha-menu-light.png" width="580" height="314" alt="Крок «Налаштувати панель» у Home Assistant з варіантами «Додати панель у вашій мережі» або «Встановити за допомогою USB на цьому комп’ютері»">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="Крок «Налаштувати панель» у Home Assistant з варіантами «Додати панель у вашій мережі» або «Встановити за допомогою USB на цьому комп’ютері»">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="Крок «Налаштувати панель» у Home Assistant з варіантами «Додати панель у вашій мережі» або «Встановити за допомогою USB на цьому комп’ютері»">
 </figure>
 <figure>
 <figcaption><span>2</span> Вкажіть адресу панелі</figcaption>
-<img class="light:sl-hidden" src="asset:ha-address-dark.png" width="580" height="378" alt="Крок «Додати панель» із введеною IP-адресою панелі">
-<img class="dark:sl-hidden" src="asset:ha-address-light.png" width="580" height="378" alt="Крок «Додати панель» із введеною IP-адресою панелі">
+<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="378" alt="Крок «Додати панель» із введеною IP-адресою панелі">
+<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="378" alt="Крок «Додати панель» із введеною IP-адресою панелі">
 </figure>
 <figure>
 <figcaption><span>3</span> Виберіть версію</figcaption>
-<img class="light:sl-hidden" src="asset:ha-version-dark.png" width="580" height="305" alt="Крок «Виберіть версію» з рекомендованим випуском угорі списку">
-<img class="dark:sl-hidden" src="asset:ha-version-light.png" width="580" height="305" alt="Крок «Виберіть версію» з рекомендованим випуском угорі списку">
+<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="305" alt="Крок «Виберіть версію» з рекомендованим випуском угорі списку">
+<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="Крок «Виберіть версію» з рекомендованим випуском угорі списку">
 </figure>
 <figure>
 <figcaption><span>4</span> Натисніть «Дозволити» на панелі, і її буде додано</figcaption>
-<img class="light:sl-hidden" src="asset:ha-done-dark.png" width="580" height="210" alt="Крок «Успішно», що підтверджує додавання панелі до Home Assistant">
-<img class="dark:sl-hidden" src="asset:ha-done-light.png" width="580" height="210" alt="Крок «Успішно», що підтверджує додавання панелі до Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="Крок «Успішно», що підтверджує додавання панелі до Home Assistant">
+<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="Крок «Успішно», що підтверджує додавання панелі до Home Assistant">
 </figure>
 </div>
 
@@ -93,28 +93,28 @@ sourceCommit: 50fccda5c7e05cce0edbd2b4b37e006c473ca5df
 <div class="pa-steps pa-steps--panel" role="region" aria-label="Майстер налаштування панелі, крок за кроком" tabindex="0">
 <figure>
 <figcaption><span>1</span> Назвіть панель</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-name-dark.png" width="524" height="702" alt="Майстер налаштування панелі запитує ідентифікатор панелі та зрозумілу назву й показує, які імена сутностей використовуватиме Home Assistant">
-<img class="dark:sl-hidden" src="asset:panel-setup-name-light.png" width="524" height="702" alt="Майстер налаштування панелі запитує ідентифікатор панелі та зрозумілу назву й показує, які імена сутностей використовуватиме Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-name-dark.png" width="524" height="702" alt="Майстер налаштування панелі запитує ідентифікатор панелі та зрозумілу назву й показує, які імена сутностей використовуватиме Home Assistant">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-name-light.png" width="524" height="702" alt="Майстер налаштування панелі запитує ідентифікатор панелі та зрозумілу назву й показує, які імена сутностей використовуватиме Home Assistant">
 </figure>
 <figure>
 <figcaption><span>2</span> Виберіть інформаційну панель і приміщення</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-dashboard-dark.png" width="524" height="485" alt="Майстер із вибраними для панелі інформаційною панеллю та приміщенням Home Assistant">
-<img class="dark:sl-hidden" src="asset:panel-setup-dashboard-light.png" width="524" height="485" alt="Майстер із вибраними для панелі інформаційною панеллю та приміщенням Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-dashboard-dark.png" width="524" height="485" alt="Майстер із вибраними для панелі інформаційною панеллю та приміщенням Home Assistant">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-dashboard-light.png" width="524" height="485" alt="Майстер із вибраними для панелі інформаційною панеллю та приміщенням Home Assistant">
 </figure>
 <figure>
 <figcaption><span>3</span> Увімкніть фільтр сутностей</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-filter-dark.png" width="524" height="629" alt="Майстер рекомендує фільтр сутностей для цієї панелі й показує кількість сутностей у Home Assistant">
-<img class="dark:sl-hidden" src="asset:panel-setup-filter-light.png" width="524" height="629" alt="Майстер рекомендує фільтр сутностей для цієї панелі й показує кількість сутностей у Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="629" alt="Майстер рекомендує фільтр сутностей для цієї панелі й показує кількість сутностей у Home Assistant">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="629" alt="Майстер рекомендує фільтр сутностей для цієї панелі й показує кількість сутностей у Home Assistant">
 </figure>
 <figure>
 <figcaption><span>4</span> Майже готово</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-almost-there-dark.png" width="524" height="339" alt="Майстер чекає, поки панель сформує відфільтрований набір сутностей і завантажить інформаційну панель">
-<img class="dark:sl-hidden" src="asset:panel-setup-almost-there-light.png" width="524" height="339" alt="Майстер чекає, поки панель сформує відфільтрований набір сутностей і завантажить інформаційну панель">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-almost-there-dark.png" width="524" height="339" alt="Майстер чекає, поки панель сформує відфільтрований набір сутностей і завантажить інформаційну панель">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-almost-there-light.png" width="524" height="339" alt="Майстер чекає, поки панель сформує відфільтрований набір сутностей і завантажить інформаційну панель">
 </figure>
 <figure>
 <figcaption><span>5</span> Все готово</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-done-dark.png" width="524" height="526" alt="Майстер підтверджує, що панель налаштовано, і показує інформаційну панель">
-<img class="dark:sl-hidden" src="asset:panel-setup-done-light.png" width="524" height="526" alt="Майстер підтверджує, що панель налаштовано, і показує інформаційну панель">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-done-dark.png" width="524" height="526" alt="Майстер підтверджує, що панель налаштовано, і показує інформаційну панель">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-done-light.png" width="524" height="526" alt="Майстер підтверджує, що панель налаштовано, і показує інформаційну панель">
 </figure>
 </div>
 

@@ -27,33 +27,33 @@ Puoi configurare un pannello nuovo prima ancora di montarlo sulla parete. Colleg
 <div class="pa-steps" role="region" aria-label="Installazione tramite USB, passo dopo passo" tabindex="0">
 <figure>
 <figcaption><span>1</span> Scegli Installa tramite USB</figcaption>
-<img class="light:sl-hidden" src="asset:ha-menu-dark.png" width="580" height="314" alt="Il passaggio Configura un pannello in Home Assistant, con le opzioni Aggiungi un pannello della tua rete o Installa tramite USB su questo computer">
-<img class="dark:sl-hidden" src="asset:ha-menu-light.png" width="580" height="314" alt="Il passaggio Configura un pannello in Home Assistant, con le opzioni Aggiungi un pannello della tua rete o Installa tramite USB su questo computer">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="Il passaggio Configura un pannello in Home Assistant, con le opzioni Aggiungi un pannello della tua rete o Installa tramite USB su questo computer">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="Il passaggio Configura un pannello in Home Assistant, con le opzioni Aggiungi un pannello della tua rete o Installa tramite USB su questo computer">
 </figure>
 <figure>
 <figcaption><span>2</span> Collega il pannello</figcaption>
-<img class="light:sl-hidden" src="asset:usb-connect-dark.png" width="520" height="349" alt="Il programma di installazione USB chiede di collegare il pannello e premere Trova il mio pannello">
-<img class="dark:sl-hidden" src="asset:usb-connect-light.png" width="520" height="349" alt="Il programma di installazione USB chiede di collegare il pannello e premere Trova il mio pannello">
+<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="349" alt="Il programma di installazione USB chiede di collegare il pannello e premere Trova il mio pannello">
+<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="349" alt="Il programma di installazione USB chiede di collegare il pannello e premere Trova il mio pannello">
 </figure>
 <figure>
 <figcaption><span>3</span> Tocca Consenti sul pannello</figcaption>
-<img class="light:sl-hidden" src="asset:usb-allow-dark.png" width="520" height="318" alt="Il programma di installazione USB attende mentre tocchi Consenti sullo schermo del pannello">
-<img class="dark:sl-hidden" src="asset:usb-allow-light.png" width="520" height="318" alt="Il programma di installazione USB attende mentre tocchi Consenti sullo schermo del pannello">
+<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="318" alt="Il programma di installazione USB attende mentre tocchi Consenti sullo schermo del pannello">
+<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="318" alt="Il programma di installazione USB attende mentre tocchi Consenti sullo schermo del pannello">
 </figure>
 <figure>
 <figcaption><span>4</span> Premi Installa</figcaption>
-<img class="light:sl-hidden" src="asset:usb-confirm-dark.png" width="520" height="349" alt="Il programma di installazione USB è pronto a installare, con un unico pulsante Installa">
-<img class="dark:sl-hidden" src="asset:usb-confirm-light.png" width="520" height="349" alt="Il programma di installazione USB è pronto a installare, con un unico pulsante Installa">
+<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="349" alt="Il programma di installazione USB è pronto a installare, con un unico pulsante Installa">
+<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="349" alt="Il programma di installazione USB è pronto a installare, con un unico pulsante Installa">
 </figure>
 <figure>
 <figcaption><span>5</span> Segui l’installazione</figcaption>
-<img class="light:sl-hidden" src="asset:usb-progress-dark.png" width="520" height="319" alt="La barra di avanzamento del programma di installazione USB mentre l’app viene installata">
-<img class="dark:sl-hidden" src="asset:usb-progress-light.png" width="520" height="319" alt="La barra di avanzamento del programma di installazione USB mentre l’app viene installata">
+<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="319" alt="La barra di avanzamento del programma di installazione USB mentre l’app viene installata">
+<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="319" alt="La barra di avanzamento del programma di installazione USB mentre l’app viene installata">
 </figure>
 <figure>
 <figcaption><span>6</span> Fatto</figcaption>
-<img class="light:sl-hidden" src="asset:usb-done-dark.png" width="520" height="262" alt="Il programma di installazione USB conferma l’installazione e apre la configurazione del pannello">
-<img class="dark:sl-hidden" src="asset:usb-done-light.png" width="520" height="262" alt="Il programma di installazione USB conferma l’installazione e apre la configurazione del pannello">
+<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="262" alt="Il programma di installazione USB conferma l’installazione e apre la configurazione del pannello">
+<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="262" alt="Il programma di installazione USB conferma l’installazione e apre la configurazione del pannello">
 </figure>
 </div>
 
@@ -64,23 +64,23 @@ Se il pannello è già sulla parete, a Home Assistant basta il suo indirizzo.
 <div class="pa-steps" role="region" aria-label="Aggiunta di un pannello sulla tua rete, passo dopo passo" tabindex="0">
 <figure>
 <figcaption><span>1</span> Scegli Aggiungi un pannello della tua rete</figcaption>
-<img class="light:sl-hidden" src="asset:ha-menu-dark.png" width="580" height="314" alt="Il passaggio Configura un pannello in Home Assistant, con le opzioni Aggiungi un pannello della tua rete o Installa tramite USB su questo computer">
-<img class="dark:sl-hidden" src="asset:ha-menu-light.png" width="580" height="314" alt="Il passaggio Configura un pannello in Home Assistant, con le opzioni Aggiungi un pannello della tua rete o Installa tramite USB su questo computer">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="Il passaggio Configura un pannello in Home Assistant, con le opzioni Aggiungi un pannello della tua rete o Installa tramite USB su questo computer">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="Il passaggio Configura un pannello in Home Assistant, con le opzioni Aggiungi un pannello della tua rete o Installa tramite USB su questo computer">
 </figure>
 <figure>
 <figcaption><span>2</span> Inserisci l’indirizzo del pannello</figcaption>
-<img class="light:sl-hidden" src="asset:ha-address-dark.png" width="580" height="378" alt="Il passaggio Aggiungi un pannello, con l’indirizzo IP del pannello inserito">
-<img class="dark:sl-hidden" src="asset:ha-address-light.png" width="580" height="378" alt="Il passaggio Aggiungi un pannello, con l’indirizzo IP del pannello inserito">
+<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="378" alt="Il passaggio Aggiungi un pannello, con l’indirizzo IP del pannello inserito">
+<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="378" alt="Il passaggio Aggiungi un pannello, con l’indirizzo IP del pannello inserito">
 </figure>
 <figure>
 <figcaption><span>3</span> Scegli una versione</figcaption>
-<img class="light:sl-hidden" src="asset:ha-version-dark.png" width="580" height="305" alt="Il passaggio Scegli una versione, con la versione consigliata in cima all’elenco">
-<img class="dark:sl-hidden" src="asset:ha-version-light.png" width="580" height="305" alt="Il passaggio Scegli una versione, con la versione consigliata in cima all’elenco">
+<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="305" alt="Il passaggio Scegli una versione, con la versione consigliata in cima all’elenco">
+<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="Il passaggio Scegli una versione, con la versione consigliata in cima all’elenco">
 </figure>
 <figure>
 <figcaption><span>4</span> Tocca Consenti sul pannello, ed è aggiunto</figcaption>
-<img class="light:sl-hidden" src="asset:ha-done-dark.png" width="580" height="210" alt="Il passaggio di conferma del completamento, che conferma l’aggiunta del pannello a Home Assistant">
-<img class="dark:sl-hidden" src="asset:ha-done-light.png" width="580" height="210" alt="Il passaggio di conferma del completamento, che conferma l’aggiunta del pannello a Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="Il passaggio di conferma del completamento, che conferma l’aggiunta del pannello a Home Assistant">
+<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="Il passaggio di conferma del completamento, che conferma l’aggiunta del pannello a Home Assistant">
 </figure>
 </div>
 
@@ -93,28 +93,28 @@ Home Assistant apre poi la procedura guidata di configurazione del pannello, che
 <div class="pa-steps pa-steps--panel" role="region" aria-label="La procedura guidata di configurazione del pannello, passo dopo passo" tabindex="0">
 <figure>
 <figcaption><span>1</span> Dai un nome al pannello</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-name-dark.png" width="524" height="702" alt="La procedura guidata del pannello chiede un ID e un nome leggibile, con un’anteprima dei nomi delle entità che userà Home Assistant">
-<img class="dark:sl-hidden" src="asset:panel-setup-name-light.png" width="524" height="702" alt="La procedura guidata del pannello chiede un ID e un nome leggibile, con un’anteprima dei nomi delle entità che userà Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-name-dark.png" width="524" height="702" alt="La procedura guidata del pannello chiede un ID e un nome leggibile, con un’anteprima dei nomi delle entità che userà Home Assistant">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-name-light.png" width="524" height="702" alt="La procedura guidata del pannello chiede un ID e un nome leggibile, con un’anteprima dei nomi delle entità che userà Home Assistant">
 </figure>
 <figure>
 <figcaption><span>2</span> Scegli la dashboard e l’area</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-dashboard-dark.png" width="524" height="485" alt="La procedura guidata con una dashboard e un’area di Home Assistant selezionate per il pannello">
-<img class="dark:sl-hidden" src="asset:panel-setup-dashboard-light.png" width="524" height="485" alt="La procedura guidata con una dashboard e un’area di Home Assistant selezionate per il pannello">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-dashboard-dark.png" width="524" height="485" alt="La procedura guidata con una dashboard e un’area di Home Assistant selezionate per il pannello">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-dashboard-light.png" width="524" height="485" alt="La procedura guidata con una dashboard e un’area di Home Assistant selezionate per il pannello">
 </figure>
 <figure>
 <figcaption><span>3</span> Attiva il filtro delle entità</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-filter-dark.png" width="524" height="629" alt="La procedura guidata consiglia il filtro delle entità per questo pannello e mostra il numero di entità di Home Assistant">
-<img class="dark:sl-hidden" src="asset:panel-setup-filter-light.png" width="524" height="629" alt="La procedura guidata consiglia il filtro delle entità per questo pannello e mostra il numero di entità di Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="629" alt="La procedura guidata consiglia il filtro delle entità per questo pannello e mostra il numero di entità di Home Assistant">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="629" alt="La procedura guidata consiglia il filtro delle entità per questo pannello e mostra il numero di entità di Home Assistant">
 </figure>
 <figure>
 <figcaption><span>4</span> Ci siamo quasi</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-almost-there-dark.png" width="524" height="339" alt="La procedura guidata attende mentre il pannello prepara il suo insieme filtrato di entità e carica la dashboard">
-<img class="dark:sl-hidden" src="asset:panel-setup-almost-there-light.png" width="524" height="339" alt="La procedura guidata attende mentre il pannello prepara il suo insieme filtrato di entità e carica la dashboard">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-almost-there-dark.png" width="524" height="339" alt="La procedura guidata attende mentre il pannello prepara il suo insieme filtrato di entità e carica la dashboard">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-almost-there-light.png" width="524" height="339" alt="La procedura guidata attende mentre il pannello prepara il suo insieme filtrato di entità e carica la dashboard">
 </figure>
 <figure>
 <figcaption><span>5</span> Tutto pronto</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-done-dark.png" width="524" height="526" alt="La procedura guidata conferma che il pannello è configurato e mostra la dashboard">
-<img class="dark:sl-hidden" src="asset:panel-setup-done-light.png" width="524" height="526" alt="La procedura guidata conferma che il pannello è configurato e mostra la dashboard">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-done-dark.png" width="524" height="526" alt="La procedura guidata conferma che il pannello è configurato e mostra la dashboard">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-done-light.png" width="524" height="526" alt="La procedura guidata conferma che il pannello è configurato e mostra la dashboard">
 </figure>
 </div>
 

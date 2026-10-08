@@ -27,33 +27,33 @@ sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
 <div class="pa-steps" role="region" aria-label="通过 USB 安装的详细步骤" tabindex="0">
 <figure>
 <figcaption><span>1</span> 选择“使用 USB 安装”</figcaption>
-<img class="light:sl-hidden" src="asset:ha-menu-dark.png" width="580" height="314" alt="Home Assistant 的“设置面板”步骤，可选择“添加网络中的面板”或“在这台计算机上通过 USB 安装”">
-<img class="dark:sl-hidden" src="asset:ha-menu-light.png" width="580" height="314" alt="Home Assistant 的“设置面板”步骤，可选择“添加网络中的面板”或“在这台计算机上通过 USB 安装”">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="Home Assistant 的“设置面板”步骤，可选择“添加网络中的面板”或“在这台计算机上通过 USB 安装”">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="Home Assistant 的“设置面板”步骤，可选择“添加网络中的面板”或“在这台计算机上通过 USB 安装”">
 </figure>
 <figure>
 <figcaption><span>2</span> 连接面板</figcaption>
-<img class="light:sl-hidden" src="asset:usb-connect-dark.png" width="520" height="349" alt="USB 安装程序要求连接面板并按下 Find my panel">
-<img class="dark:sl-hidden" src="asset:usb-connect-light.png" width="520" height="349" alt="USB 安装程序要求连接面板并按下 Find my panel">
+<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="349" alt="USB 安装程序要求连接面板并按下 Find my panel">
+<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="349" alt="USB 安装程序要求连接面板并按下 Find my panel">
 </figure>
 <figure>
 <figcaption><span>3</span> 在面板上点按“允许”</figcaption>
-<img class="light:sl-hidden" src="asset:usb-allow-dark.png" width="520" height="318" alt="USB 安装程序等待你在面板屏幕上点按“允许”">
-<img class="dark:sl-hidden" src="asset:usb-allow-light.png" width="520" height="318" alt="USB 安装程序等待你在面板屏幕上点按“允许”">
+<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="318" alt="USB 安装程序等待你在面板屏幕上点按“允许”">
+<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="318" alt="USB 安装程序等待你在面板屏幕上点按“允许”">
 </figure>
 <figure>
 <figcaption><span>4</span> 按下“安装”</figcaption>
-<img class="light:sl-hidden" src="asset:usb-confirm-dark.png" width="520" height="349" alt="USB 安装程序已准备好安装，只有一个“安装”按钮">
-<img class="dark:sl-hidden" src="asset:usb-confirm-light.png" width="520" height="349" alt="USB 安装程序已准备好安装，只有一个“安装”按钮">
+<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="349" alt="USB 安装程序已准备好安装，只有一个“安装”按钮">
+<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="349" alt="USB 安装程序已准备好安装，只有一个“安装”按钮">
 </figure>
 <figure>
 <figcaption><span>5</span> 等待安装完成</figcaption>
-<img class="light:sl-hidden" src="asset:usb-progress-dark.png" width="520" height="319" alt="应用安装过程中，USB 安装程序显示进度条">
-<img class="dark:sl-hidden" src="asset:usb-progress-light.png" width="520" height="319" alt="应用安装过程中，USB 安装程序显示进度条">
+<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="319" alt="应用安装过程中，USB 安装程序显示进度条">
+<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="319" alt="应用安装过程中，USB 安装程序显示进度条">
 </figure>
 <figure>
 <figcaption><span>6</span> 完成</figcaption>
-<img class="light:sl-hidden" src="asset:usb-done-dark.png" width="520" height="262" alt="USB 安装程序确认安装完成，并打开面板设置">
-<img class="dark:sl-hidden" src="asset:usb-done-light.png" width="520" height="262" alt="USB 安装程序确认安装完成，并打开面板设置">
+<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="262" alt="USB 安装程序确认安装完成，并打开面板设置">
+<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="262" alt="USB 安装程序确认安装完成，并打开面板设置">
 </figure>
 </div>
 
@@ -64,23 +64,23 @@ sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
 <div class="pa-steps" role="region" aria-label="添加网络中的面板的详细步骤" tabindex="0">
 <figure>
 <figcaption><span>1</span> 选择“添加网络中的面板”</figcaption>
-<img class="light:sl-hidden" src="asset:ha-menu-dark.png" width="580" height="314" alt="Home Assistant 的“设置面板”步骤，可选择“添加网络中的面板”或“在这台计算机上通过 USB 安装”">
-<img class="dark:sl-hidden" src="asset:ha-menu-light.png" width="580" height="314" alt="Home Assistant 的“设置面板”步骤，可选择“添加网络中的面板”或“在这台计算机上通过 USB 安装”">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="Home Assistant 的“设置面板”步骤，可选择“添加网络中的面板”或“在这台计算机上通过 USB 安装”">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="Home Assistant 的“设置面板”步骤，可选择“添加网络中的面板”或“在这台计算机上通过 USB 安装”">
 </figure>
 <figure>
 <figcaption><span>2</span> 输入面板地址</figcaption>
-<img class="light:sl-hidden" src="asset:ha-address-dark.png" width="580" height="378" alt="“添加面板”步骤，已输入面板的 IP 地址">
-<img class="dark:sl-hidden" src="asset:ha-address-light.png" width="580" height="378" alt="“添加面板”步骤，已输入面板的 IP 地址">
+<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="378" alt="“添加面板”步骤，已输入面板的 IP 地址">
+<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="378" alt="“添加面板”步骤，已输入面板的 IP 地址">
 </figure>
 <figure>
 <figcaption><span>3</span> 选择版本</figcaption>
-<img class="light:sl-hidden" src="asset:ha-version-dark.png" width="580" height="305" alt="“选择版本”步骤，推荐版本位于列表顶部">
-<img class="dark:sl-hidden" src="asset:ha-version-light.png" width="580" height="305" alt="“选择版本”步骤，推荐版本位于列表顶部">
+<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="305" alt="“选择版本”步骤，推荐版本位于列表顶部">
+<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="“选择版本”步骤，推荐版本位于列表顶部">
 </figure>
 <figure>
 <figcaption><span>4</span> 在面板上点按“允许”，即可添加</figcaption>
-<img class="light:sl-hidden" src="asset:ha-done-dark.png" width="580" height="210" alt="“成功”步骤，确认面板已添加到 Home Assistant">
-<img class="dark:sl-hidden" src="asset:ha-done-light.png" width="580" height="210" alt="“成功”步骤，确认面板已添加到 Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="“成功”步骤，确认面板已添加到 Home Assistant">
+<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="“成功”步骤，确认面板已添加到 Home Assistant">
 </figure>
 </div>
 
@@ -93,28 +93,28 @@ sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
 <div class="pa-steps pa-steps--panel" role="region" aria-label="面板设置向导的详细步骤" tabindex="0">
 <figure>
 <figcaption><span>1</span> 为面板命名</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-name-dark.png" width="524" height="702" alt="面板设置向导要求输入面板 ID 和友好名称，并预览 Home Assistant 将使用的实体名称">
-<img class="dark:sl-hidden" src="asset:panel-setup-name-light.png" width="524" height="702" alt="面板设置向导要求输入面板 ID 和友好名称，并预览 Home Assistant 将使用的实体名称">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-name-dark.png" width="524" height="702" alt="面板设置向导要求输入面板 ID 和友好名称，并预览 Home Assistant 将使用的实体名称">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-name-light.png" width="524" height="702" alt="面板设置向导要求输入面板 ID 和友好名称，并预览 Home Assistant 将使用的实体名称">
 </figure>
 <figure>
 <figcaption><span>2</span> 选择仪表盘和区域</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-dashboard-dark.png" width="524" height="485" alt="向导中已为面板选择仪表盘和 Home Assistant 区域">
-<img class="dark:sl-hidden" src="asset:panel-setup-dashboard-light.png" width="524" height="485" alt="向导中已为面板选择仪表盘和 Home Assistant 区域">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-dashboard-dark.png" width="524" height="485" alt="向导中已为面板选择仪表盘和 Home Assistant 区域">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-dashboard-light.png" width="524" height="485" alt="向导中已为面板选择仪表盘和 Home Assistant 区域">
 </figure>
 <figure>
 <figcaption><span>3</span> 开启实体筛选器</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-filter-dark.png" width="524" height="629" alt="向导推荐为此面板开启实体筛选器，并显示 Home Assistant 实体数量">
-<img class="dark:sl-hidden" src="asset:panel-setup-filter-light.png" width="524" height="629" alt="向导推荐为此面板开启实体筛选器，并显示 Home Assistant 实体数量">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="629" alt="向导推荐为此面板开启实体筛选器，并显示 Home Assistant 实体数量">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="629" alt="向导推荐为此面板开启实体筛选器，并显示 Home Assistant 实体数量">
 </figure>
 <figure>
 <figcaption><span>4</span> 即将完成</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-almost-there-dark.png" width="524" height="339" alt="向导等待面板构建筛选后的实体集合并加载仪表盘">
-<img class="dark:sl-hidden" src="asset:panel-setup-almost-there-light.png" width="524" height="339" alt="向导等待面板构建筛选后的实体集合并加载仪表盘">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-almost-there-dark.png" width="524" height="339" alt="向导等待面板构建筛选后的实体集合并加载仪表盘">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-almost-there-light.png" width="524" height="339" alt="向导等待面板构建筛选后的实体集合并加载仪表盘">
 </figure>
 <figure>
 <figcaption><span>5</span> 全部就绪</figcaption>
-<img class="light:sl-hidden" src="asset:panel-setup-done-dark.png" width="524" height="526" alt="向导确认面板设置完成，并显示仪表盘">
-<img class="dark:sl-hidden" src="asset:panel-setup-done-light.png" width="524" height="526" alt="向导确认面板设置完成，并显示仪表盘">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-done-dark.png" width="524" height="526" alt="向导确认面板设置完成，并显示仪表盘">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-done-light.png" width="524" height="526" alt="向导确认面板设置完成，并显示仪表盘">
 </figure>
 </div>
 
