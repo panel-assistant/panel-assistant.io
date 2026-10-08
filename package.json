@@ -37,20 +37,20 @@
     ]
   },
   "dependencies": {
-    "@astrojs/markdown-satteri": "0.4.1",
-    "@astrojs/starlight": "^0.42.0",
+    "@astrojs/markdown-satteri": "0.4.2",
+    "@astrojs/starlight": "^0.42.5",
     "@fontsource-variable/manrope": "^5.3.0",
     "@fontsource-variable/source-sans-3": "^5.3.0",
-    "astro": "^7.3.2",
-    "sharp": "^0.35.4"
+    "astro": "^7.3.5",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "@sveltia/cms": "0.212.0",
-    "prettier": "^3.9.6",
-    "prettier-plugin-astro": "^1.0.0",
+    "@sveltia/cms": "0.227.2",
+    "prettier": "^3.9.9",
+    "prettier-plugin-astro": "^1.1.0",
     "satteri": "^0.10.5",
     "starlight-links-validator": "^0.26.0",
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   }
 }
