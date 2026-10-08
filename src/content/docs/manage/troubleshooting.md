@@ -25,7 +25,7 @@ Over the network: confirm the panel's address and that wireless debugging is sti
 
 ## The panel's hardware is missing from Home Assistant
 
-The panel's entities arrive through Home Assistant's MQTT integration, so check that the panel has the right broker details on its status page and that Home Assistant is using the same broker. If some entities appear and others do not, that is usually the hardware profile for the model rather than a connection problem. The [hardware pages](/hardware/) say what each panel exposes.
+If some entities appear and others do not, that is usually the hardware profile for the model rather than a connection problem. The [hardware pages](/hardware/) say what each panel exposes.
 
 ## Something else
 

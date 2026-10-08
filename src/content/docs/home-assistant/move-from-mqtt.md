@@ -5,6 +5,8 @@ description: Handing a panel's entities from Home Assistant's MQTT integration t
 
 Until now a panel's screen, LEDs, buttons and sensors have reached Home Assistant through the MQTT integration. Panel Assistant can now own those entities itself, talking to the panel over Home Assistant's own connection instead of a broker. MQTT support will be removed from ha-paneld before version 1.0, after which a panel needs no broker at all, and this page is how you move ahead of that.
 
+This guide is for Panel Assistant 0.8 and earlier. Panel Assistant 1.0 no longer has the **Control** choice it uses, so move every panel before you update Panel Assistant to 1.0.
+
 You move one panel at a time, and each move can be reversed. The panel's entities keep their entity IDs, their history, and any name, icon or area you gave them, so dashboards and automations that use them carry on working.
 
 :::caution[Early access]
@@ -13,7 +15,7 @@ The move is new. Try it on one panel first, and tell us how it went on [Discord]
 
 ## Before you start
 
-- **Panel Assistant 0.3.0 or newer** in Home Assistant, installed through HACS as described in [Install the integration](/home-assistant/custom-integration/).
+- **Panel Assistant 0.3.0 up to 0.8** in Home Assistant, installed through HACS as described in [Install the integration](/home-assistant/custom-integration/).
 - **ha-paneld 0.9.8-rc1 or newer** on the panel. Install an offered update from the panel's Panel Assistant update entity in Home Assistant. If you need a pre-release that is not offered there, select it in the panel web interface's **Install** tab and start the installation yourself.
 - **The panel is signed in to Home Assistant**, which it is if it shows your dashboard.
 - **Leave your MQTT setup as it is.** The panel still uses the broker while you move, and nothing needs to change on it.

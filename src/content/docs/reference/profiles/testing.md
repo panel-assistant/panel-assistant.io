@@ -99,7 +99,7 @@ Export any revision you still need, then delete obsolete inactive local revision
 
 ### Home Assistant still shows a removed entity
 
-Allow the restarted MQTT bridge to reconnect and publish discovery cleanup. If the panel is offline or cannot authenticate to the broker, cleanup cannot reach Home Assistant yet. Confirm the broker connection before deleting entities manually.
+Allow the restarted panel app to reconnect so the cleanup reaches Home Assistant. If the panel is offline, cleanup cannot reach Home Assistant yet. Confirm the panel is connected before deleting entities manually.
 
 ### The panel is dark or unresponsive
 

@@ -6,6 +6,8 @@ sourceCommit: fa1d23a12549f2afa3962f9797cd8c52a38db322
 
 Tot nu toe bereikten het scherm, de leds, knoppen en sensoren van een paneel Home Assistant via de MQTT-integratie. Panel Assistant kan die entiteiten nu zelf beheren en praat dan met het paneel via de eigen verbinding van Home Assistant in plaats van via een broker. MQTT-ondersteuning wordt vóór versie 1.0 uit ha-paneld verwijderd, waarna een paneel helemaal geen broker meer nodig heeft, en op deze pagina lees je hoe je daar alvast op vooruitloopt.
 
+Deze handleiding is voor Panel Assistant 0.8 en eerder. Panel Assistant 1.0 heeft de keuze **Besturing** die hier wordt gebruikt niet meer, dus verplaats elk paneel voordat je Panel Assistant bijwerkt naar 1.0.
+
 Je zet één paneel tegelijk over, en elke overstap kun je terugdraaien. De entiteiten van het paneel houden hun entiteits-ID’s, hun geschiedenis en elke naam, elk pictogram of elke ruimte die je ze hebt gegeven, zodat dashboards en automatiseringen die ze gebruiken gewoon blijven werken.
 
 :::caution[Vroege toegang]
@@ -14,7 +16,7 @@ Het overzetten is nieuw. Probeer het eerst op één paneel en laat ons op [Disco
 
 ## Voordat je begint
 
-- **Panel Assistant 0.3.0 of nieuwer** in Home Assistant, geïnstalleerd via HACS zoals beschreven in [De integratie installeren](/nl/home-assistant/custom-integration/).
+- **Panel Assistant 0.3.0 tot en met 0.8** in Home Assistant, geïnstalleerd via HACS zoals beschreven in [De integratie installeren](/nl/home-assistant/custom-integration/).
 - **ha-paneld 0.9.8-rc1 of nieuwer** op het paneel. Dit is een pre-release: zet op de statuspagina van het paneel **Kanaal voor automatische updates van ha-paneld** op `prerelease` en installeer daarna de update via de update-entiteit van het paneel in Home Assistant.
 - **Het paneel is aangemeld bij Home Assistant**; dat is zo als het je dashboard toont.
 - **Laat je MQTT-configuratie zoals hij is.** Het paneel blijft de broker gebruiken terwijl je overzet, en daar hoeft niets aan te veranderen.
