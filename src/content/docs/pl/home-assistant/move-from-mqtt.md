@@ -6,6 +6,8 @@ sourceCommit: fa1d23a12549f2afa3962f9797cd8c52a38db322
 
 Do tej pory ekran, diody LED, przyciski i czujniki panelu trafiały do Home Assistant przez integrację MQTT. Panel Assistant może teraz sam przejąć te encje i komunikować się z panelem przez własne połączenie Home Assistant zamiast przez brokera. Obsługa MQTT zostanie usunięta z ha-paneld przed wersją 1.0, po czym panel nie będzie w ogóle potrzebował brokera, a ta strona pokazuje, jak przejść na nowe rozwiązanie wcześniej.
 
+Ten przewodnik dotyczy Panel Assistant 0.8 i starszych. Panel Assistant 1.0 nie ma już opcji **Sterowanie**, z której tu korzystasz, więc przenieś każdy panel przed aktualizacją Panel Assistant do 1.0.
+
 Przenosisz jeden panel naraz i każde przeniesienie można cofnąć. Encje panelu zachowują swoje identyfikatory, historię oraz każdą nazwę, ikonę czy obszar, które im nadałeś, więc pulpity nawigacyjne i automatyzacje, które z nich korzystają, nadal działają.
 
 :::caution[Wczesny dostęp]
@@ -14,7 +16,7 @@ Przenoszenie to nowość. Wypróbuj je najpierw na jednym panelu i daj nam znać
 
 ## Zanim zaczniesz
 
-- **Panel Assistant 0.3.0 lub nowszy** w Home Assistant, zainstalowany przez HACS zgodnie z opisem w [Instalacja integracji](/pl/home-assistant/custom-integration/).
+- **Panel Assistant od 0.3.0 do 0.8** w Home Assistant, zainstalowany przez HACS zgodnie z opisem w [Instalacja integracji](/pl/home-assistant/custom-integration/).
 - **ha-paneld 0.9.8-rc1 lub nowszy** na panelu. To wersja przedpremierowa: na stronie stanu panelu ustaw **Kanał automatycznych aktualizacji ha-paneld** na `prerelease`, a następnie zainstaluj aktualizację z encji aktualizacji panelu w Home Assistant.
 - **Panel jest zalogowany do Home Assistant**, a jest, jeśli wyświetla twój pulpit nawigacyjny.
 - **Zostaw konfigurację MQTT bez zmian.** Panel nadal używa brokera podczas przenoszenia i nic nie trzeba w nim zmieniać.
