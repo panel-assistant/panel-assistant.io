@@ -16,4 +16,4 @@ Het scherm, de leds, knoppen, sensoren en relais die jouw model heeft, verschijn
 
 ## De statuspagina van het paneel
 
-Elk paneel biedt zijn eigen pagina aan op je lokale netwerk, op poort 8888. Daar kies je het dashboard, voer je de brokergegevens in, zie je wat het paneel doet en lees je zijn diagnoserapport. De pagina is bedoeld voor een vertrouwd thuisnetwerk, dus ga met toegang ertoe om zoals met toegang tot het paneel zelf. De [API-referentie](/nl/reference/api/) en de [beveiligingsmodus](/nl/manage/security-mode/) beschrijven wat de pagina biedt en het vertrouwensmodel.
+Elk paneel biedt zijn eigen pagina aan op je lokale netwerk, op poort 8888. Daar kies je het dashboard, zie je wat het paneel doet en lees je zijn diagnoserapport. De pagina is bedoeld voor een vertrouwd thuisnetwerk, dus ga met toegang ertoe om zoals met toegang tot het paneel zelf. De [API-referentie](/nl/reference/api/) en de [beveiligingsmodus](/nl/manage/security-mode/) beschrijven wat de pagina biedt en het vertrouwensmodel.

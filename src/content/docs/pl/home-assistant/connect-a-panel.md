@@ -16,4 +16,4 @@ Ekran, diody LED, przyciski, czujniki i przekaźniki, które ma twój model, poj
 
 ## Strona stanu panelu
 
-Każdy panel udostępnia własną stronę w twojej sieci lokalnej na porcie 8888. To na niej wybierasz pulpit nawigacyjny, wpisujesz dane brokera, sprawdzasz, co robi panel, i czytasz jego raport diagnostyczny. Jest przeznaczona dla zaufanej sieci domowej, więc traktuj dostęp do niej tak samo jak dostęp do samego panelu. [Dokumentacja API](/pl/reference/api/) i [tryb bezpieczeństwa](/pl/manage/security-mode/) opisują, co oferuje ta strona, oraz model zaufania.
+Każdy panel udostępnia własną stronę w twojej sieci lokalnej na porcie 8888. To na niej wybierasz pulpit nawigacyjny, sprawdzasz, co robi panel, i czytasz jego raport diagnostyczny. Jest przeznaczona dla zaufanej sieci domowej, więc traktuj dostęp do niej tak samo jak dostęp do samego panelu. [Dokumentacja API](/pl/reference/api/) i [tryb bezpieczeństwa](/pl/manage/security-mode/) opisują, co oferuje ta strona, oraz model zaufania.
