@@ -72,7 +72,7 @@ The [browser installer](/install/install-over-usb/) completed against a factory 
 
 - **It grants the one extra permission full screen-off needs.** Shelly's firmware keeps the screen on while the panel is powered, and the app needs permission to lift that while the screen is off and restore it afterwards. Panel Assistant grants it at setup and again after every update.
 - **It sets the display size and text size** that suit this screen, so the dashboard and the panel's own pages are the right scale from the first boot.
-- **It switches off Shelly's corner overlay**, the small Shelly control that the firmware otherwise draws over every app, so the dashboard is clean. Shelly's own interface stays one swipe away: open the navigation bar and pick it from the app list.
+- **It switches off Shelly's corner overlay**, the small Shelly control that the firmware otherwise draws over every app, so the dashboard is clean. Shelly's own interface stays reachable: the launcher button on Panel Assistant's navigation bar lists it with the panel's other apps.
 - **It walks you through proximity setup.** A few hand movements in front of the panel teach it what near and clear look like, which is what lets a wave wake the screen.
 
 Two limits are worth knowing before you start. Both belong to the installer rather than to this panel:
