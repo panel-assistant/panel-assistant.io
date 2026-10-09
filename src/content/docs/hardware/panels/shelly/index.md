@@ -136,6 +136,7 @@ One [X2i](/hardware/panels/shelly/wall-display-x2i/) has been examined on a benc
 - **Full screen-off without root.** The screen goes completely dark through Android's own screen timeout, with the same setup step that lifts the firmware's keep-the-screen-on setting while the panel sleeps.
 - **Back and Home only.** The firmware ignores the Recents key on every model, because it has no recents task directory, so no Recents control is offered.
 - **Panel Assistant as the home screen.** Shelly's launcher stays installed and cannot be disabled, but it does not take the home screen back.
+- **A clean dashboard.** Panel Assistant switches off the corner overlay Shelly's firmware draws over every app, while Shelly's own interface stays reachable from the navigation bar.
 
 What depends on each model's own hardware is checked on the panel when Panel Assistant starts, never assumed from the X2i:
 
