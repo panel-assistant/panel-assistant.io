@@ -44,6 +44,8 @@ Shelly Wall Display X1i, firmware codename Cally.
 | Root     | Not established on this model; the modern OTA declares no build type. On a [Wall Display X2i](/hardware/panels/shelly/wall-display-x2i/) tested on factory firmware 2.5.4, developer options and USB debugging unlock from the Settings app and adb then connects, still without root; whether the same applies to this model is untested. |
 | Released | About July 2026 (est.); Shelly announced the X1i on 15 July 2026 ([launch coverage, TechBuzz Ireland, July 2026](https://techbuzzireland.com/2026/07/15/shelly-expands-its-smart-home-portfolio-with-wall-display-x1i-and-blu-motion-zb/))                                                                                                 |
 
+From Panel Assistant 1.0 the X1i uses the shared Shelly profile, which carries what the [X2i](/hardware/panels/shelly/wall-display-x2i/) showed about this firmware: full screen-off without root, and Back and Home without Recents. Its own sensors are checked on the panel when Panel Assistant starts. No X1i has been confirmed yet, so a report from an owner is welcome; see [What the X2i means for the rest of the line](/hardware/panels/shelly/#what-the-x2i-means-for-the-rest-of-the-line).
+
 See the [Wall Display family page](/hardware/panels/shelly/) for the full access-model reasoning, the OTA update endpoints (`WallDisplayV2` track) and the firmware version history.
 
 ## Source

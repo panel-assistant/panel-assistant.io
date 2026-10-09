@@ -48,6 +48,8 @@ Shelly Wall Display XL, firmware codename Blake.
 The built-in Home Assistant browser on the XL had rendering and layout problems with Home Assistant frontend 2025.12 and a 2026.1 pre-release (tracked in [home-assistant/frontend#28755](https://github.com/home-assistant/frontend/issues/28755) and `#28746`; core compatibility in [home-assistant/core#162665](https://github.com/home-assistant/core/issues/162665)). An app using the system WebView on the same device rendered correctly, which shows the issue was specific to the built-in browser's WebView rather than the hardware.
 :::
 
+From Panel Assistant 1.0 the XL uses the shared Shelly profile, which carries what the [X2i](/hardware/panels/shelly/wall-display-x2i/) showed about this firmware: full screen-off without root, and Back and Home without Recents. Its own sensors are checked on the panel when Panel Assistant starts. No XL has been confirmed yet, so a report from an owner is welcome; see [What the X2i means for the rest of the line](/hardware/panels/shelly/#what-the-x2i-means-for-the-rest-of-the-line).
+
 See the [Wall Display family page](/hardware/panels/shelly/) for the full access-model reasoning, the OTA update endpoints (`WallDisplayV2` track) and the firmware version history.
 
 ## Source

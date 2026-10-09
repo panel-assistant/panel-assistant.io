@@ -9,7 +9,7 @@ sidebar:
 ---
 
 :::note
-**One model has been examined on hardware: the [X2i](/hardware/panels/shelly/wall-display-x2i/).** Its own page carries what was measured. Everything else on this page is research: product specifications come from Shelly's current product and knowledge base pages, and firmware behaviour from OTA analysis, including a device-tree parse of the modern partition image, plus the official [Wall Display changelog](https://github.com/ShellyGroup/Wall-Display-Changelog). The two bundled profiles still predate the current model-specific specifications and stay **speculative** until each model can be checked on hardware.
+**One model has been examined on hardware: the [X2i](/hardware/panels/shelly/wall-display-x2i/).** Its own page carries what was measured. Everything else on this page is research: product specifications come from Shelly's current product and knowledge base pages, and firmware behaviour from OTA analysis, including a device-tree parse of the modern partition image, plus the official [Wall Display changelog](https://github.com/ShellyGroup/Wall-Display-Changelog). From Panel Assistant 1.0 the X1i, XL and the later models on the same firmware share a profile built on what the X2i taught us about Shelly's firmware, as [the section below](#what-the-x2i-means-for-the-rest-of-the-line) describes; their own hardware is still checked on the panel rather than assumed.
 :::
 
 Shelly sells the Wall Display as five named models on two unrelated hardware platforms: the **original** and **X2** on an armeabi-v7a legacy track, and **X1i**, **X2i** and **XL** on an arm64-v8a modern track. Firmware, OTA mechanism, access model and security are shared within each track, and mostly shared across both, so this page covers them once; each model's own page carries only its clean specification, alias list and photo.
@@ -104,9 +104,9 @@ One qualification keeps the scope exact: an archived **partition** image, not pa
 **What the absence of root means for the panel app:**
 
 - The helper daemon (`hapaneld-helper`) needs a privileged path to `/system`, and without an adb foothold that carries root there is none, so every profile declares `platform.app_can_su: false`. Whether the legacy `userdebug` base build changes that is listed below as unknown.
-- Actions that genuinely need `su` or Shizuku are therefore unavailable. On the X2i the everyday ones are not among them: brightness goes through Android's own setting, the sensors are ordinary Android sensors, and the app installs and grants its own permissions over adb. What is lost is the privileged set, which on any panel without root means screenshots, tap-and-capture remote control, verified app updates, display density and text size, and rebooting or switching back to the vendor launcher.
+- Actions that genuinely need root are therefore unavailable. On the X2i the everyday ones are not among them: brightness goes through Android's own setting, the sensors are ordinary Android sensors, the screen switches fully off through Android's own timeout, and Panel Assistant installs, updates and configures the app over adb, including display size and text size. What is lost is a small privileged set: screenshots and tap-and-capture remote control from Panel Assistant, and rebooting or switching back to the vendor launcher from the panel.
 - The modern built-in AppStore shows that Shelly can distribute approved applications, but the panel app is not one of them. Installation is by sideload, on the X2i after the developer-mode unlock described above. Legacy devices still have no confirmed installation path.
-- **Device-owner behaviour depends on the firmware.** On the X2i's factory 2.5.4 there is no device owner and no device administrator at all, and the Stargate launcher can be disabled and re-enabled with ordinary package commands. The 2.7.3 update payload does carry the device-owner policy files, and the protected-package refusal is reported against 2.7.x by the [ShellyElevate](https://github.com/RapierXbox/ShellyElevate) project rather than observed here. Which release in between introduced it is unexamined. On that 2.5.4 unit, making Panel Assistant the home app worked without root and held, so the launcher chooser was not the obstacle it had been assumed to be there. What a device owner does to that on later firmware is untested. Wall Display updates are one-way, so a panel that has already updated behaves as the later firmware does.
+- **Device-owner behaviour depends on the firmware.** On the X2i's factory 2.5.4 there is no device owner and no device administrator at all. Updating it to 2.7.4 makes Shelly's launcher the device owner, and on that unit this took nothing from Panel Assistant: making it the home app worked without root on both firmwares and held, and the device owner imposes no restrictions on other apps. Shelly's launcher cannot be disabled on either firmware. Wall Display updates are one-way, so a panel that has already updated behaves as the later firmware does.
 
 ## Connecting a panel to a computer
 
@@ -129,14 +129,21 @@ Sensor and relay details vary by model. From firmware and product pages:
 
 Handle relay entities through Home Assistant's Shelly integration rather than assuming the panel app can control them directly. Outside the X2i, whether ordinary Android apps can see the sensors remains unverified.
 
-## What the X2i suggests about the rest of the line
+## What the X2i means for the rest of the line
 
-One [X2i](/hardware/panels/shelly/wall-display-x2i/) has been examined on a bench. The X1i, XL, Maverick and Dayna share its OTA track and its vendor, and the X1i shares its processor family, so some of what was measured may hold for them. **None of it has been checked on any other model.** Each point below is a thing to test, not a thing to rely on, and the findings themselves are on the X2i's page.
+One [X2i](/hardware/panels/shelly/wall-display-x2i/) has been examined on a bench. The X1i, XL, Maverick and Dayna run the same Shelly firmware on the same OTA track, and the X1i shares its processor family. **From Panel Assistant 1.0 they share one Shelly profile that carries what the X2i showed to be true of the firmware itself**, rather than of the X2i's board:
 
-- **Recents may not work on any of them.** The X2i ignores the Recents key and Android's accessibility Recents action alike, because that firmware has no recents task directory. That cause is an operating-system fact rather than a board one, so it is worth checking on any model rather than assuming the board decides it. Both bundled profiles currently declare that these panels have Recents, which is measurably wrong for the X2i and untested for the rest.
-- **Proximity may be better than binary.** Panel Assistant reads the X2i's proximity part as a ranged signal rather than a near or far flag. The X1i also documents proximity and may share the part. The XL is the likeliest to differ, since Shelly documents it as a motion sensor rather than proximity.
-- **The relays may be reachable in principle.** The X2i exposes them through a world-writable sysfs class. Panel Assistant does not use it, and two conditions travel with the finding: the relay terminals are inert on USB power, and the write succeeded only because that firmware runs SELinux permissive.
-- **A hidden developer-mode unlock is what makes any of this measurable**, and it is confirmed only on the X2i, whose [page carries the exact sequence](/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode) and the correction that you must tap the line's title rather than its value. Shelly does not advertise it there.
+- **Full screen-off without root.** The screen goes completely dark through Android's own screen timeout, with the same setup step that lifts the firmware's keep-the-screen-on setting while the panel sleeps.
+- **Back and Home only.** The firmware ignores the Recents key on every model, because it has no recents task directory, so no Recents control is offered.
+- **Panel Assistant as the home screen.** Shelly's launcher stays installed and cannot be disabled, but it does not take the home screen back.
+
+What depends on each model's own hardware is checked on the panel when Panel Assistant starts, never assumed from the X2i:
+
+- **Waking on a wave** needs a proximity sensor. The X1i documents one and may share the X2i's part. The XL is the likeliest to differ, since Shelly documents it as a motion sensor rather than proximity.
+- **Touch wake** from a fully dark screen was measured on the X2i only.
+- **The relays** on the X2i are reachable through a world-writable control in software, but Panel Assistant does not drive them on any Shelly model. Use Home Assistant's own Shelly integration for them.
+
+**None of this has been confirmed on another model yet.** If you have an X1i, XL, U1 or D1 running Panel Assistant, a report of what works is the quickest way to move it up [the supported panels list](/install/supported-panels/). A hidden developer-mode unlock is what makes any of it measurable, and it is confirmed only on the X2i, whose [page carries the exact sequence](/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode).
 
 ## Firmware OTA mechanism
 

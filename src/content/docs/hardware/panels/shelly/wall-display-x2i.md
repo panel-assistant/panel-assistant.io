@@ -6,7 +6,7 @@ model: Wall Display X2i
 soc: RK3326-S
 android: '11'
 screen: 6.9 in, 1440 × 720
-support: Preliminary
+support: Full
 root: 'No root; developer mode unlocks adb, and setup needs no more than that'
 webview: Chromium 131.0.6778.200 on 2.5.4
 released: '2025-12 (est.)'
@@ -22,12 +22,12 @@ sidebar:
 ---
 
 :::note
-**This is the one Shelly Wall Display that has been examined on real hardware.** The sections on developer mode, installing Panel Assistant, sensors, relays, what the firmware lacks, and lower-level access all come from a single retail unit on factory firmware 2.5.4. The specification table mixes those measurements with Shelly's own product data. Nothing on this page transfers to the [X1i](/hardware/panels/shelly/wall-display-x1i/), the [XL](/hardware/panels/shelly/wall-display-xl/) or any other model. See the [Wall Display family page](/hardware/panels/shelly/) for sourcing, the firmware OTA mechanism and the notes shared across the line.
+**This is the one Shelly Wall Display that has been examined on real hardware.** Everything measured on this page comes from a single retail unit, first on factory firmware 2.5.4 and then after updating it to 2.7.4. The specification table mixes those measurements with Shelly's own product data. What the X2i taught us about Shelly's firmware also shapes the [X1i](/hardware/panels/shelly/wall-display-x1i/) and [XL](/hardware/panels/shelly/wall-display-xl/) support, as the [family page](/hardware/panels/shelly/#what-the-x2i-means-for-the-rest-of-the-line) explains; the hardware details here belong to the X2i alone.
 :::
 
 The Wall Display X2i, firmware codename **Jenna**, is a 6.9 in 1440×720 panel on a Rockchip RK3326 (four Cortex-A35), Android 11, arm64-v8a. Shelly's specification names the RK3326-S variant; the chip itself reports only the RK3326 family, which is consistent with that. It is on the modern **WallDisplayV2** OTA track alongside the X1i, XL, Maverick and Dayna, and has access to the built-in AppStore.
 
-Panel Assistant runs on it as an ordinary Android app. **Everything needed to set it up and use it day to day works without root**: installing, granting its own permissions, the sensors, brightness and taking over the home screen. Root would still buy the privileged extras any panel needs it for, listed under [What this firmware does not have](#what-this-firmware-does-not-have). That makes the X2i the least restrictive Shelly Wall Display documented here and the only one with a confirmed installation path.
+Panel Assistant runs on it as an ordinary Android app. **Everything needed to set it up and use it day to day works without root**: installing, granting its own permissions, the sensors, brightness, taking over the home screen and, from Panel Assistant 1.0, switching the screen fully off and waking it again with a touch, a wave or from Home Assistant. Root would still buy a few privileged extras, listed under [What this firmware does not have](#what-this-firmware-does-not-have). That makes the X2i the least restrictive Shelly Wall Display documented here and the only one with a confirmed installation path.
 
 ## Also sold as
 
@@ -68,14 +68,32 @@ Note also that **the relay terminals are inert while the panel runs on USB power
 
 ## Installing Panel Assistant
 
-The [browser installer](/install/install-over-usb/) completed against a factory unit over USB with no root: it sideloaded the app and granted every permission it needs, including accessibility, write-settings and overlay access. Two limits are worth knowing before you start. Both belong to the installer rather than to this panel:
+The [browser installer](/install/install-over-usb/) completed against a factory unit over USB with no root: it sideloaded the app and granted every permission it needs, including accessibility, write-settings and overlay access. From there, Panel Assistant 1.0 finishes setting the X2i up for you:
+
+- **It grants the one extra permission full screen-off needs.** Shelly's firmware keeps the screen on while the panel is powered, and the app needs permission to lift that while the screen is off and restore it afterwards. Panel Assistant grants it at setup and again after every update.
+- **It sets the display size and text size** that suit this screen, so the dashboard and the panel's own pages are the right scale from the first boot.
+- **It walks you through proximity setup.** A few hand movements in front of the panel teach it what near and clear look like, which is what lets a wave wake the screen.
+
+Two limits are worth knowing before you start. Both belong to the installer rather than to this panel:
 
 - **It does not configure Wi-Fi.** A boxed panel has no network, and setup continues on the panel's own screen, which needs one. Join the panel to Wi-Fi in Settings before or after the install.
 - **It does not take over the home screen.** Until you set it as the home app, pressing home returns you to Shelly's launcher. Setting Panel Assistant as the home app works without root, and it holds home reliably afterwards. Shelly's return-to-home watchdog does not take it back.
 
+## Screen off and waking
+
+The X2i's backlight cannot be switched off directly without root, so earlier releases could only dim the screen. **From Panel Assistant 1.0 the screen goes fully dark without root**: when the panel sleeps, the app hands over to Android's own screen timeout, the display switches off completely, and the panel goes back to normal when it wakes.
+
+It wakes in three ways:
+
+- **Touch.** Any touch anywhere on the screen wakes it straight away. A single tap is enough; there is no double-tap to learn.
+- **A wave or an approach.** Move a hand towards the panel and it wakes. Android itself never wakes a panel on proximity, so Panel Assistant keeps watching the sensor while the screen is dark and wakes it when someone comes near. This needs proximity setup, which Panel Assistant's setup walks you through.
+- **Home Assistant.** Turning the panel's screen on from Home Assistant, by hand or from an automation, wakes it at once.
+
+While someone stays within about arm's length of the panel, it stays awake rather than going dark under them. The X2i has no physical button, and no lock screen to get past after it wakes.
+
 ## Sensors
 
-Proximity and ambient light are both exposed through the standard Android sensor API and need no permission. Panel Assistant reported reading proximity through its raw Sensortek route rather than the Android sensor, which its own diagnostics name as `driver_raw16`, and reports it as a ranged signal rather than a near or far flag. Either way it reads them as an ordinary app, with no privilege involved. The proximity sensor is registered as a wake-up sensor. Both parts are Sensortek STK3A5x devices on the same I²C address.
+Proximity and ambient light are both exposed through the standard Android sensor API and need no permission. Panel Assistant reported reading proximity through its raw Sensortek route rather than the Android sensor, which its own diagnostics name as `driver_raw16`, and reports it as a ranged signal rather than a near or far flag. Either way it reads them as an ordinary app, with no privilege involved. The proximity sensor is registered as a wake-up sensor, and it keeps reporting while the screen is fully off, which is what makes waking on a wave possible. Both parts are Sensortek STK3A5x devices on the same I²C address.
 
 The X2i has **no temperature or humidity sensor**, so no room-climate readings are available from the panel itself.
 
@@ -92,16 +110,16 @@ Until then, drive the relays through Home Assistant's own Shelly integration.
 
 ## What this firmware does not have
 
-- **No Recents at all.** The firmware ignores the Recents key, and Android's accessibility Recents action does nothing either, each tested with an ordinary app and with Settings in front. The reason is below both of them: the system logs that the recents task directory does not exist, so no route can produce a task switcher. Panel Assistant still offers a Recents control here, because the bundled profile declares this panel has one, and that control cannot work.
+- **No Recents at all.** The firmware ignores the Recents key, and Android's accessibility Recents action does nothing either, each tested with an ordinary app and with Settings in front. The reason is below both of them: the system logs that the recents task directory does not exist, so no route can produce a task switcher. Panel Assistant offers Back and Home on this panel, and no Recents control.
 - **No camera.** The firmware declares camera features that no hardware backs, and Android enumerates no camera. Nothing declares a camera in the profile either, so Panel Assistant correctly offers none here.
-- **No root.** There is no `su` and no way to become root from the shell. Setting the panel up and using it day to day does not need it, but a set of features does stay unavailable: screenshots, tap-and-capture remote control, verified app updates, display density and text size, and rebooting or switching back to the vendor launcher. The onboard relays are a separate matter, covered above.
+- **No root.** There is no `su` and no way to become root from the shell. Setting the panel up and using it day to day does not need it, and Panel Assistant installs and updates the app on this panel without it. A few features do stay unavailable: screenshots and tap-and-capture remote control from Panel Assistant, and rebooting or switching back to the vendor launcher from the panel. The onboard relays are a separate matter, covered above.
 
 ## Firmware, and why the shipped version matters
 
-The unit examined here was factory-fresh on **2.5.4**, had never reached Shelly's cloud and had never taken an update. That baseline is more permissive than later firmware in one way that matters:
+The unit examined here arrived factory-fresh on **2.5.4**, and was later updated to **2.7.4**. The update changes one thing that matters, and leaves Panel Assistant alone:
 
-- On 2.5.4 there is **no device owner and no device administrator at all**, and Shelly's launcher can be disabled and re-enabled with ordinary package commands.
-- The **2.7.3** update payload installs device-owner policy files, and the [ShellyElevate](https://github.com/RapierXbox/ShellyElevate) project reports that the launcher becomes a protected package there which refuses to be disabled. Neither was observed here, and which release in between introduced them is unexamined.
+- On 2.5.4 there is **no device owner and no device administrator at all**.
+- **2.7.4 installs Shelly's launcher as the device owner.** On the unit examined here that took nothing from Panel Assistant: it stayed the home screen, kept running and stayed online in Home Assistant, and the device owner imposes no restrictions on other apps. Shelly's launcher cannot be disabled on either firmware.
 
 Shelly Wall Display updates are one-way; there is no published downgrade path. A unit that has already updated will behave as the later firmware does.
 
