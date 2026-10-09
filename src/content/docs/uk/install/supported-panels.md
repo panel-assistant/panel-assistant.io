@@ -22,17 +22,17 @@ sourceCommit: cb91a53b7fe4ae129274b56dae846d3dcc4a9eff
 
 Протестовано на пристроях, що є в руках, з найповнішим охопленням обладнання: екран, світлодіоди, кнопки, датчики й реле, якщо вони є в моделі.
 
-- **[Sonoff NSPanel Pro](/uk/hardware/panels/sonoff-nspanel-pro/)** (зокрема варіанти 120 і 86)
-- **[Tuya TPA10](/uk/hardware/panels/tuya-tpa10/)**
-- **[Electron WF1589T](/uk/hardware/panels/electron-wf1589t/)**
+- **[Sonoff NSPanel Pro](/uk/hardware/panels/sonoff/)** (зокрема варіанти 120 і 86)
+- **[Tuya TPA10](/uk/hardware/panels/tuya/tpa10/)**
+- **[Electron WF1589T](/uk/hardware/panels/electron/wf1589t/)**
 
 ## Перевірено спільнотою
 
 Власники використовують Panel Assistant на цих моделях. Їхні профілі створено за звітами власників, і на кожній сторінці обладнання точно вказано, яке обладнання панелі потрапляє в Home Assistant.
 
-- **[ZHICAI SMT1019](/uk/hardware/panels/zhicai-smt1019/)**
-- **[ZX-SMT156 / RK3566_T](/uk/hardware/panels/zx-smt156/)**
-- **[Smatek S9E](/uk/hardware/panels/smatek-s9e/)**
+- **[ZHICAI SMT1019](/uk/hardware/panels/electron/wf2489t/)**
+- **[ZX-SMT156 / RK3566_T](/uk/hardware/panels/electron/smt156/)**
+- **[Smatek S9E](/uk/hardware/panels/smatek/s9e/)**
 
 ## Попередня підтримка
 

@@ -17,7 +17,7 @@ photos:
     alt: Shelly Wall Display X2i, mounted, showing a different dashboard layout
 photoCredit: 'Photo: Shelly'
 sidebar:
-  label: X2i
+  label: Wall Display X2i
   order: 4
 ---
 

@@ -22,17 +22,17 @@ Koop dus op basis van de vereisten hieronder in plaats van op basis van deze lij
 
 Getest op exemplaren die we in handen hebben, met de meest uitgebreide hardwaredekking: scherm, leds, knoppen, sensoren en relais, voor zover het model die heeft.
 
-- **[Sonoff NSPanel Pro](/nl/hardware/panels/sonoff-nspanel-pro/)** (inclusief de 120- en 86-varianten)
-- **[Tuya TPA10](/nl/hardware/panels/tuya-tpa10/)**
-- **[Electron WF1589T](/nl/hardware/panels/electron-wf1589t/)**
+- **[Sonoff NSPanel Pro](/nl/hardware/panels/sonoff/)** (inclusief de 120- en 86-varianten)
+- **[Tuya TPA10](/nl/hardware/panels/tuya/tpa10/)**
+- **[Electron WF1589T](/nl/hardware/panels/electron/wf1589t/)**
 
 ## Getest door de community
 
 Eigenaren draaien Panel Assistant op deze modellen. Hun profielen zijn samengesteld op basis van meldingen van eigenaren, en op elke hardwarepagina zie je precies welke hardware van het paneel in Home Assistant terechtkomt.
 
-- **[ZHICAI SMT1019](/nl/hardware/panels/zhicai-smt1019/)**
-- **[ZX-SMT156 / RK3566_T](/nl/hardware/panels/zx-smt156/)**
-- **[Smatek S9E](/nl/hardware/panels/smatek-s9e/)**
+- **[ZHICAI SMT1019](/nl/hardware/panels/electron/wf2489t/)**
+- **[ZX-SMT156 / RK3566_T](/nl/hardware/panels/electron/smt156/)**
+- **[Smatek S9E](/nl/hardware/panels/smatek/s9e/)**
 
 ## Voorlopig
 

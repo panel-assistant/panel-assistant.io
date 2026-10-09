@@ -82,7 +82,7 @@ test('every save is a pull request: open authoring, editorial workflow, public s
 test('the built editor configuration declares every front-matter key the panel pages use', () => {
   const built = JSON.parse(readFileSync(new URL('../../dist/admin/config.json', import.meta.url)));
   const dir = new URL(`../../${settings.panelsFolder}/`, import.meta.url);
-  const entries = readdirSync(dir)
+  const entries = readdirSync(dir, { recursive: true })
     .filter((f) => f.endsWith('.md'))
     .map((f) => {
       const front = readFileSync(new URL(f, dir), 'utf8').split(/^---$/m)[1];
@@ -98,8 +98,8 @@ test('the built editor configuration declares every front-matter key the panel p
 
 test('panel pages, and only panel pages, get an edit link to their editor entry', () => {
   assert.equal(
-    editUrlFor('hardware/panels/tuya-tpa10', settings),
-    'https://panel-assistant.io/admin/#/collections/panels/entries/tuya-tpa10',
+    editUrlFor('hardware/panels/tuya/tpa10', settings),
+    'https://panel-assistant.io/admin/#/collections/panels/entries/tuya/tpa10',
   );
   for (const id of [
     'start/getting-started',
@@ -107,7 +107,7 @@ test('panel pages, and only panel pages, get an edit link to their editor entry'
     'hardware/panels',
     'hardware/panels/',
     'hardware/firmware/nspanel-pro',
-    'hardware/panels/a/b',
+    'hardware/panels/a/b/c',
     undefined,
   ]) {
     assert.equal(editUrlFor(id, settings), null, String(id));
@@ -117,12 +117,13 @@ test('panel pages, and only panel pages, get an edit link to their editor entry'
 test('the built panel pages carry the edit link and other pages do not', () => {
   const page = (p) => readFileSync(new URL(`../../dist/${p}index.html`, import.meta.url), 'utf8');
   const dir = new URL(`../../${settings.panelsFolder}/`, import.meta.url);
-  const slugs = readdirSync(dir)
+  const slugs = readdirSync(dir, { recursive: true })
     .filter((f) => f.endsWith('.md'))
     .map((f) => f.slice(0, -3));
+  assert.ok(slugs.length > 0);
   for (const slug of slugs) {
     assert.ok(
-      page(`hardware/panels/${slug}/`).includes(
+      page(`hardware/panels/${slug.replace(/\/?index$/, '')}/`).includes(
         `href="https://panel-assistant.io/admin/#/collections/panels/entries/${slug}"`,
       ),
       `${slug} has no edit link`,

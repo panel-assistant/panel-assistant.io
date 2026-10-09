@@ -19,7 +19,7 @@ photos:
     alt: Shelly Wall Display XL, side profile, showing the mounting depth
 photoCredit: 'Photo: Shelly'
 sidebar:
-  label: XL
+  label: Wall Display XL
   order: 5
 ---
 

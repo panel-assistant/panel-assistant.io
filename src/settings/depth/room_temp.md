@@ -1,7 +1,7 @@
 ---
 spec: 014e0eb8664b
 related:
-  - /hardware/panels/tuya-tpa10/
+  - /hardware/panels/tuya/tpa10/
 ---
 
 This row has no value to edit. Its switch decides whether the room temperature from the panel's built-in climate sensor is reported to Home Assistant in °C, which is on by default. It appears only on panel models whose profile lists that sensor, such as the Tuya TPA10. It is a normal temperature sensor in Home Assistant, not a diagnostic one, so you can use it in climate automations.

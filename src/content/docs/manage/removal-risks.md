@@ -34,9 +34,9 @@ That only matters if the panel's own home screen has no way into Android Setting
 The eWeLink home screen has no way into Android Settings, so the firmware version decides how hard it is to get debugging back.
 
 - **Firmware 4.0.0 and later:** Sonoff added an F-Droid entry to the panel's menu, and apps installed from it open from that menu. Before removing ha-paneld, install an app launcher from F-Droid, which lists Android Settings among the panel's apps, so you can switch debugging back on later.
-- **Firmware below 4.0.0:** there is no app store and no way into Android Settings from the panel. If the panel is already linked to an eWeLink account, debugging is switched back on from the eWeLink phone app: tap _Device ID_ in the panel's device settings until _Developer mode_ appears, then turn on ADB there. Linking a panel to an account later may not work: on one panel the pairing code stayed greyed out, waiting. Without a linked account, the remaining route is a recovery boot with a computer connected by USB: see [Gaining adb and root access](/hardware/panels/sonoff-nspanel-pro/#gaining-adb-and-root-access). If the panel is linked to eWeLink, update it there to 4.0.0 or later before removing ha-paneld.
+- **Firmware below 4.0.0:** there is no app store and no way into Android Settings from the panel. If the panel is already linked to an eWeLink account, debugging is switched back on from the eWeLink phone app: tap _Device ID_ in the panel's device settings until _Developer mode_ appears, then turn on ADB there. Linking a panel to an account later may not work: on one panel the pairing code stayed greyed out, waiting. Without a linked account, the remaining route is a recovery boot with a computer connected by USB: see [Gaining adb and root access](/hardware/panels/sonoff/#gaining-adb-and-root-access). If the panel is linked to eWeLink, update it there to 4.0.0 or later before removing ha-paneld.
 
-The firmware number to compare is the one the eWeLink app and Panel Assistant show, such as 4.0.12, not the internal `ro.product.version`. See [firmware quirks by version](/hardware/panels/sonoff-nspanel-pro/#firmware-quirks-by-version).
+The firmware number to compare is the one the eWeLink app and Panel Assistant show, such as 4.0.12, not the internal `ro.product.version`. See [firmware quirks by version](/hardware/panels/sonoff/#firmware-quirks-by-version).
 
 </div>
 
@@ -52,7 +52,7 @@ The Shelly home screen has no way into Android Settings. On the X2i, developer o
 
 <div class="removal-make" data-make="tuya">
 
-Developer options open from the panel's Settings app (tap the version number seven times), and debugging over USB works through the diagnostics app: see [Gaining adb and root access](/hardware/panels/tuya-tpa10/#gaining-adb-and-root-access). Network debugging needs that USB step again if it was switched off.
+Developer options open from the panel's Settings app (tap the version number seven times), and debugging over USB works through the diagnostics app: see [Gaining adb and root access](/hardware/panels/tuya/tpa10/#gaining-adb-and-root-access). Network debugging needs that USB step again if it was switched off.
 
 </div>
 

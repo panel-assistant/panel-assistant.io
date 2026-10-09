@@ -69,6 +69,8 @@ export function editorConfig(entries, settings) {
         label: 'Panels',
         label_singular: 'Panel',
         folder: settings.panelsFolder,
+        // One folder per manufacturer (hardware/panels/<maker>/<model>.md).
+        nested: { depth: 2, subfolders: false },
         extension: 'md',
         format: 'frontmatter',
         create: true,
@@ -89,12 +91,14 @@ export function editorConfig(entries, settings) {
 
 /**
  * The editor entry for a docs page, or null when the editor does not handle that page. `entryId` is
- * the content id, such as `hardware/panels/tuya-tpa10`.
+ * the content id, such as `hardware/panels/tuya/tpa10`, or `hardware/panels/meta` for a
+ * manufacturer folder's own index page.
  */
 export function editUrlFor(entryId, settings) {
   const prefix = settings.panelsFolder.replace(/^src\/content\/docs\//, '') + '/';
   if (!entryId?.startsWith(prefix)) return null;
-  const slug = entryId.slice(prefix.length);
-  if (!/^[a-z0-9-]+$/.test(slug)) return null;
-  return `${settings.siteOrigin}/admin/#/collections/panels/entries/${slug}`;
+  const path = entryId.slice(prefix.length);
+  if (!/^[a-z0-9-]+(\/[a-z0-9-]+)?$/.test(path)) return null;
+  const subPath = path.includes('/') ? path : `${path}/index`;
+  return `${settings.siteOrigin}/admin/#/collections/panels/entries/${subPath}`;
 }

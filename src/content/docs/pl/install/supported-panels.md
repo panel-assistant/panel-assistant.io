@@ -22,17 +22,17 @@ Kupuj więc według poniższych wymagań, a nie według tej listy, a profil dla 
 
 Przetestowane na egzemplarzach, które mamy w rękach, z najpełniejszą obsługą sprzętu: ekranu, diod LED, przycisków, czujników i przekaźników, o ile model je ma.
 
-- **[Sonoff NSPanel Pro](/pl/hardware/panels/sonoff-nspanel-pro/)** (w tym wersje 120 i 86)
-- **[Tuya TPA10](/pl/hardware/panels/tuya-tpa10/)**
-- **[Electron WF1589T](/pl/hardware/panels/electron-wf1589t/)**
+- **[Sonoff NSPanel Pro](/pl/hardware/panels/sonoff/)** (w tym wersje 120 i 86)
+- **[Tuya TPA10](/pl/hardware/panels/tuya/tpa10/)**
+- **[Electron WF1589T](/pl/hardware/panels/electron/wf1589t/)**
 
 ## Sprawdzone przez społeczność
 
 Właściciele używają Panel Assistant na tych modelach. Ich profile powstały na podstawie zgłoszeń właścicieli, a każda strona sprzętu pokazuje dokładnie, który sprzęt panelu trafia do Home Assistant.
 
-- **[ZHICAI SMT1019](/pl/hardware/panels/zhicai-smt1019/)**
-- **[ZX-SMT156 / RK3566_T](/pl/hardware/panels/zx-smt156/)**
-- **[Smatek S9E](/pl/hardware/panels/smatek-s9e/)**
+- **[ZHICAI SMT1019](/pl/hardware/panels/electron/wf2489t/)**
+- **[ZX-SMT156 / RK3566_T](/pl/hardware/panels/electron/smt156/)**
+- **[Smatek S9E](/pl/hardware/panels/smatek/s9e/)**
 
 ## Wstępna obsługa
 

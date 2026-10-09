@@ -206,7 +206,7 @@ test('a known docs page forwards every other parameter but consumes page itself'
   const hit = go('/go/docs?page=hardware/nspanel-pro&v=1.0.0b1&build=37');
   assert.equal(
     hit.location,
-    'https://panel-assistant.io/hardware/panels/sonoff-nspanel-pro/?v=1.0.0b1&build=37',
+    'https://panel-assistant.io/hardware/panels/sonoff/?v=1.0.0b1&build=37',
   );
 });
 

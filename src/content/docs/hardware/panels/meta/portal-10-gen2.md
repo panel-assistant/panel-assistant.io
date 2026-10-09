@@ -11,12 +11,12 @@ root: No root; Meta's ADB switch is enough for setup
 webview: Meta's own Chromium 131 WebView
 released: '2020'
 sidebar:
-  label: 10" (2nd gen)
+  label: Portal 10" (2nd gen)
   order: 1
 ---
 
 :::note
-**Everything on this page was measured on one retail Portal 10" (2nd gen)** on Meta's firmware `QKQ1.210213.001.3051355900018050` (Android 10, security patch 2020-08-05), running Panel Assistant with no root. Portal support needs version 1.0 or later of the panel app. Nothing here has been checked on another Portal model; see the [Meta Portal family page](/hardware/panels/meta-portal/) for how the others are handled.
+**Everything on this page was measured on one retail Portal 10" (2nd gen)** on Meta's firmware `QKQ1.210213.001.3051355900018050` (Android 10, security patch 2020-08-05), running Panel Assistant with no root. Portal support needs version 1.0 or later of the panel app. Nothing here has been checked on another Portal model; see the [Meta Portal family page](/hardware/panels/meta/) for how the others are handled.
 :::
 
 The Portal 10" (2nd gen), model **WD50JM**, is a 10.1 in landscape smart display on a Qualcomm QCS605 with about 3 GB of RAM, a 13 MP camera with its own camera light, two microphones, a speaker and a physical privacy slider. Meta's [ADB switch](#enabling-adb) is all Panel Assistant needs: the panel app installs over USB, recognises the Portal and loads its own hardware profile, and the dashboard, camera, microphone, wake word, spoken replies, light sensor and a real screen-off all work without root.

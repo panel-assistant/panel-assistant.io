@@ -4,6 +4,7 @@
 import { getCollection } from 'astro:content';
 import { cellText, collectFields, fieldLabel, nearDuplicates } from '../hardware/fields.mjs';
 import { rewriteAssetUrl, ASSET_BASE } from '../plugins/asset-urls.mjs';
+import { soldAs } from '../hardware/catalogue.mjs';
 
 const panels = (
   await getCollection('docs', (e) => e.id.startsWith('hardware/panels/') && !e.data.panelIndex)
@@ -20,6 +21,10 @@ const rows = panels.map((p) => {
   return {
     href: `/${p.id}/`,
     title: p.data.title,
+    soldAs: soldAs(data)
+      .slice(1)
+      .map((n) => `${n.brand} ${n.name}`)
+      .join(', '),
     thumb: photo ? { src: rewriteAssetUrl(photo.src, ASSET_BASE), alt: photo.alt ?? '' } : null,
     cells: fields.map((f) => cellText(data[f])),
   };
@@ -51,6 +56,7 @@ const rows = panels.map((p) => {
           </td>
           <th scope="row">
             <a href={r.href}>{r.title}</a>
+            {r.soldAs && <span class="sold-as">Also sold as {r.soldAs}</span>}
           </th>
           {r.cells.map((c) => (
             <td>{c}</td>
@@ -72,6 +78,12 @@ const rows = panels.map((p) => {
   }
   .hardware-table th {
     white-space: nowrap;
+  }
+  .hardware-table .sold-as {
+    display: block;
+    font-weight: normal;
+    white-space: normal;
+    color: var(--sl-color-gray-3);
   }
   .hardware-table td {
     min-width: 7rem;

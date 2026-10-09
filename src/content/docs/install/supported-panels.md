@@ -21,30 +21,30 @@ So buy on the requirements below rather than on this list, and treat a named pro
 
 Tested on units in hand, with the fullest hardware coverage: screen, LEDs, buttons, sensors and relays where the model has them.
 
-- **[Sonoff NSPanel Pro](/hardware/panels/sonoff-nspanel-pro/)** (including the 120 and 86 variants)
-- **[Tuya TPA10](/hardware/panels/tuya-tpa10/)**
-- **[Electron WF1589T](/hardware/panels/electron-wf1589t/)**
+- **[Sonoff NSPanel Pro](/hardware/panels/sonoff/)** (including the 120 and 86 variants)
+- **[Tuya TPA10](/hardware/panels/tuya/tpa10/)**
+- **[Electron WF1589T](/hardware/panels/electron/wf1589t/)**
 - **[Shelly Wall Display X2i](/hardware/panels/shelly/wall-display-x2i/)**
 
 ## Community-tested
 
 Owners run Panel Assistant on these models. Their profiles were built from owners' reports, and each hardware page shows exactly which of the panel's hardware reaches Home Assistant.
 
-- **[ZHICAI SMT1019](/hardware/panels/zhicai-smt1019/)**
-- **[ZX-SMT156 / RK3566_T](/hardware/panels/zx-smt156/)**
-- **[Smatek S9E](/hardware/panels/smatek-s9e/)**
+- **[Electron WF2489T](/hardware/panels/electron/wf2489t/)**, also sold as the Apolosign WF2489T and ZHICAI SMT1019
+- **[SMT156 / RK3566_T](/hardware/panels/electron/smt156/)**
+- **[Smatek S9E](/hardware/panels/smatek/s9e/)**
 
 ## Preliminary
 
 Examined on one physical unit, with hardware coverage still being confirmed.
 
-- **[Meta Portal 10" (2nd gen)](/hardware/panels/meta-portal/portal-10-gen2/)**, model WD50JM. Runs without root, but needs a Facebook account kept signed in; read its page before buying
+- **[Meta Portal 10" (2nd gen)](/hardware/panels/meta/portal-10-gen2/)**, model WD50JM. Runs without root, but needs a Facebook account kept signed in; read its page before buying
 
 ## Documented
 
 Profiles written from firmware research, ready for the first owner to confirm on a unit. If you have one, a report is the quickest way to move it up this page.
 
-- [Meta Portal](/hardware/panels/meta-portal/) Mini and 1st-gen Portal and Portal+, through the Meta Portal family profile. The Portal+ (2nd gen) and Portal Go are expected to join them once one reports its device codename. The Portal TV has no screen and is not supported
+- [Meta Portal](/hardware/panels/meta/) Mini and 1st-gen Portal and Portal+, through the Meta Portal family profile. The Portal+ (2nd gen) and Portal Go are expected to join them once one reports its device codename. The Portal TV has no screen and is not supported
 - [Shelly Wall Display](/hardware/panels/shelly/) X2, X1i and XL (the X1i and XL share a profile built on the tested X2i)
 
 ## What makes a panel a good fit

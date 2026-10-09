@@ -19,7 +19,7 @@ photos:
     alt: Shelly Wall Display X1i, rear, showing the model label SAWD-6A1XX10EU0
 photoCredit: 'Photo: Shelly'
 sidebar:
-  label: X1i
+  label: Wall Display X1i
   order: 3
 ---
 

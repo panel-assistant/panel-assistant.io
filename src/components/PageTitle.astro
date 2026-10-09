@@ -7,15 +7,25 @@
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 import { rewriteAssetUrl, ASSET_BASE } from '../plugins/asset-urls.mjs';
 import TranslationNote from './TranslationNote.astro';
+import { soldAs } from '../hardware/catalogue.mjs';
 
 const { entry } = Astro.locals.starlightRoute;
 const isPanel = entry.id.startsWith('hardware/panels/');
 const photos = isPanel && Array.isArray(entry.data.photos) ? entry.data.photos : [];
 const credit = isPanel ? entry.data.photoCredit : undefined;
+// The brands and product names this board is sold under; every one of them links here.
+const names = isPanel ? soldAs(entry.data) : [];
+const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
 ---
 
 <Default />
 <TranslationNote />
+{names.length > 0 && (
+  <p id="sold-as" class="sold-as">
+    {brands > 1 ? 'The same hardware is sold by several brands: ' : 'Sold as: '}
+    {names.map((n: { brand: string; name: string }) => `${n.brand} ${n.name}`).join(', ')}.
+  </p>
+)}
 {photos.length > 0 && (
   <figure class="hardware-photos not-content">
     <ul>
@@ -72,6 +82,9 @@ const credit = isPanel ? entry.data.photoCredit : undefined;
 )}
 
 <style>
+  .sold-as {
+    margin: 0.75rem 0 0;
+  }
   .hardware-photos {
     margin: 1rem 0 1.5rem;
   }

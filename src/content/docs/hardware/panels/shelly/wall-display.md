@@ -16,8 +16,13 @@ photos:
   - src: 'asset:hardware-shelly-wall-display-rear-label.jpg'
     alt: Shelly Wall Display, rear, showing the model label and wall box
 photoCredit: 'Photo: Shelly'
+sold_as:
+  - brand: Shelly
+    name: 'Wall Display U1'
+  - brand: Shelly
+    name: 'Wall Display D1'
 sidebar:
-  label: Original
+  label: Wall Display (original)
   order: 1
 ---
 

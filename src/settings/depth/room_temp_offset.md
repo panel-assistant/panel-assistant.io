@@ -1,7 +1,7 @@
 ---
 spec: 28309fc114bf
 related:
-  - /hardware/panels/tuya-tpa10/
+  - /hardware/panels/tuya/tpa10/
 ---
 
 The offset is added to every [Room temperature](#room_temp) reading before it is reported, in steps of `0.1` °C between `-20` and `20` °C. The default of `0` reports the sensor as read. The panel profile can carry its own baseline correction, and this setting is added on top of it; the built-in profiles all use a baseline of `0`.

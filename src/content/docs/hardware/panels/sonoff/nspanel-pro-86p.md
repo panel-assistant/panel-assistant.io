@@ -19,11 +19,11 @@ photos:
     alt: Sonoff NSPanel Pro 86P, white finish, angled to show the mounting depth
 photoCredit: 'Photo: Sonoff'
 sidebar:
-  label: 86P
+  label: NSPanel Pro 86P
   order: 1
 ---
 
-The **86P** is the square variant of the [Sonoff NSPanel Pro](/hardware/panels/sonoff-nspanel-pro/) line, named for the EU 86 mm wall box. This page carries only its own specification and the facts that differ from the [120P](/hardware/panels/sonoff-nspanel-pro/120p/); everything else (root process, WebView update, LED, sensors, Zigbee gateway, firmware quirks) is documented once on the [family page](/hardware/panels/sonoff-nspanel-pro/), which this page's sections link back to.
+The **86P** is the square variant of the [Sonoff NSPanel Pro](/hardware/panels/sonoff/) line, named for the EU 86 mm wall box. This page carries only its own specification and the facts that differ from the [120P](/hardware/panels/sonoff/nspanel-pro-120p/); everything else (root process, WebView update, LED, sensors, Zigbee gateway, firmware quirks) is documented once on the [family page](/hardware/panels/sonoff/), which this page's sections link back to.
 
 ## Also sold as
 
@@ -39,10 +39,10 @@ NSPanel Pro 86, NSPanel Pro 86P, NSPanel120P (86P listings occasionally reuse th
 | Storage  | eMMC; `/data` about 3.5 GB                                                                                                                                                                                                                                                                  |
 | Android  | 8.1 (API 27)                                                                                                                                                                                                                                                                                |
 | ABI      | arm64-v8a                                                                                                                                                                                                                                                                                   |
-| Radios   | **Zigbee 3.0** (Silicon Labs EFR32 coordinator, see the [family page](/hardware/panels/sonoff-nspanel-pro/#zigbee-gateway)), Wi-Fi, Bluetooth. No NFC, IR, Ethernet or cellular.                                                                                                            |
+| Radios   | **Zigbee 3.0** (Silicon Labs EFR32 coordinator, see the [family page](/hardware/panels/sonoff/#zigbee-gateway)), Wi-Fi, Bluetooth. No NFC, IR, Ethernet or cellular.                                                                                                                        |
 | Released | About September 2022 (est.); pre-orders opened in August 2022 with shipping scheduled from 20 September 2022 ([pre-order coverage, CNX Software, August 2022](https://www.cnx-software.com/2022/08/12/sonoff-nspanel-pro-android-control-panel-doubles-as-wifi-zigbee-smart-home-gateway/)) |
 
-`ro.product.model` and `ro.product.device` both report `px30_evb`, a shared Rockchip board name and _not_ a reliable way to tell the 86P from the 120P; `ro.product.version` reports the 86P-specific `s6_android_x.y.z` form. OTA ships as a full ROM through **4.0.12**; later indexed releases ship as diffs or app-only updates (see the [firmware page](/hardware/firmware/nspanel-pro/)). The 86P's proximity firmware **restored ranged readings at 4.0.12** (the 120P stayed binary on 4.x); see [Sensors](/hardware/panels/sonoff-nspanel-pro/#sensors-light-and-proximity-are-app-direct) on the family page.
+`ro.product.model` and `ro.product.device` both report `px30_evb`, a shared Rockchip board name and _not_ a reliable way to tell the 86P from the 120P; `ro.product.version` reports the 86P-specific `s6_android_x.y.z` form. OTA ships as a full ROM through **4.0.12**; later indexed releases ship as diffs or app-only updates (see the [firmware page](/hardware/firmware/nspanel-pro/)). The 86P's proximity firmware **restored ranged readings at 4.0.12** (the 120P stayed binary on 4.x); see [Sensors](/hardware/panels/sonoff/#sensors-light-and-proximity-are-app-direct) on the family page.
 
 :::note
 The Cortex-A35 is an efficiency core with markedly lower per-clock throughput than the A55 (TPA10) or A72 (WF1589T). With 2 GB RAM, the NSPanel Pro line is the **entry-level performer** of the three fully supported panels; see the [performance comparison](/hardware/#performance-comparison).
