@@ -154,8 +154,7 @@ export function confidence(data) {
   // an inspected panel has already shown what its age means (maintainer, 2026-10-11).
   const android = parseFloat(String(data.android));
   const old = android < OLD_ANDROID;
-  if (old)
-    reasons.push(`runs Android ${data.android} and has not been inspected on a unit we run`);
+  if (old) reasons.push(`runs Android ${data.android} and has not been inspected on a unit we run`);
   return {
     score: Math.max(0, Math.min(7, RESEARCHED + sum(have)) - (old ? OLD_PENALTY : 0)),
     reasons,
