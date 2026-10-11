@@ -22,6 +22,7 @@ sold_as:
   - brand: Smatek
     name: 'S9PE-NZ'
     note: 'As the S9E-NZ, powered over Ethernet (PoE) or DC 9-24 V instead of mains'
+evidence: [firmware, documented, platform]
 sidebar:
   label: S9E
 ---

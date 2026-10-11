@@ -18,6 +18,7 @@ photos:
   - src: 'asset:hardware-shelly-wall-display-xl-profile-trim.jpg'
     alt: Shelly Wall Display XL, side profile, showing the mounting depth
 photoCredit: 'Photo: Shelly'
+evidence: [firmware, documented, platform, mostly-open]
 sidebar:
   label: Wall Display XL
   order: 5

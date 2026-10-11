@@ -116,3 +116,36 @@ export function panelsSidebar(dir = PANELS_DIR) {
     ),
   }));
 }
+
+/**
+ * What raises confidence that a panel runs well. A panel we have inspected on a unit of our own
+ * scores 8, and 9 or 10 as its maker's firmware is mostly or fully open to Panel Assistant
+ * (maintainer, 2026-10-11). Any other panel scores from the rest of the evidence, up to 7, so an
+ * inspected panel always ranks above one that is not. A panel we have not inspected starts at 4 for
+ * the research behind its page. Reweight here; every bar follows.
+ */
+export const EVIDENCE = {
+  bench: { points: 8, text: 'inspected on a unit we run' },
+  open: { points: 2, text: "the maker's firmware leaves the panel fully open" },
+  'mostly-open': { points: 1, text: "the maker's firmware leaves the panel mostly open" },
+  firmware: { points: 1, text: "the maker's firmware examined" },
+  documented: { points: 1, text: 'documented by the manufacturer or published specifications' },
+  // Where nothing shows a difference, a panel from the same release or platform as one we have
+  // inspected is trusted to behave like it (maintainer, 2026-10-11: err on the side of confidence).
+  platform: { points: 5, text: 'same platform as a panel we have inspected' },
+  owners: { points: 2, text: 'an owner reports it running Panel Assistant' },
+};
+const OPENNESS = ['open', 'mostly-open'];
+// Every panel with its own page has been actively researched to write it and its profile, which
+// counts for more than a passive report (maintainer, 2026-10-11).
+const RESEARCHED = 4;
+
+/** A panel's confidence, 0 to 10, and the evidence behind it, from its `evidence` front matter. */
+export function confidence(data) {
+  const have = (Array.isArray(data.evidence) ? data.evidence : []).filter((k) => EVIDENCE[k]);
+  const sum = (keys) => keys.reduce((n, k) => n + EVIDENCE[k].points, 0);
+  const score = have.includes('bench')
+    ? Math.min(10, 8 + sum(have.filter((k) => OPENNESS.includes(k))))
+    : Math.min(7, RESEARCHED + sum(have));
+  return { score, reasons: have.map((k) => EVIDENCE[k].text) };
+}

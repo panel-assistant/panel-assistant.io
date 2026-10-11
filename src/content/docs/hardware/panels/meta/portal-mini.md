@@ -10,6 +10,7 @@ support: Untested
 root: No root; Meta's ADB switch is expected to be enough
 webview: Meta's own WebView (expected)
 released: '2019'
+evidence: [documented, platform]
 sidebar:
   label: Portal Mini
   order: 2

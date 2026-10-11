@@ -10,6 +10,7 @@ support: Preliminary
 root: No root; Meta's ADB switch is enough for setup
 webview: Meta's own Chromium 131 WebView
 released: '2019'
+evidence: [bench, firmware, documented]
 sidebar:
   label: Portal 10" (2nd gen)
   order: 1

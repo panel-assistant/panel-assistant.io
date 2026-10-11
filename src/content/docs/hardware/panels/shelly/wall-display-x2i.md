@@ -16,6 +16,7 @@ photos:
   - src: 'asset:hardware-shelly-wall-display-x2i-on-wall.jpg'
     alt: Shelly Wall Display X2i, mounted, showing a different dashboard layout
 photoCredit: 'Photo: Shelly'
+evidence: [bench, mostly-open, firmware, documented]
 sidebar:
   label: Wall Display X2i
   order: 4

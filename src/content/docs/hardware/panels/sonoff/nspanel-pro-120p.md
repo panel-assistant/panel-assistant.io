@@ -14,6 +14,7 @@ photos:
   - src: 'asset:hardware-sonoff-nspanel-pro-120p-front.jpg'
     alt: Sonoff NSPanel Pro 120P, white and black finishes, front, wall-mounted
 photoCredit: 'Photo: Sonoff'
+evidence: [bench, open, firmware, documented, owners]
 sidebar:
   label: NSPanel Pro 120P
   order: 2

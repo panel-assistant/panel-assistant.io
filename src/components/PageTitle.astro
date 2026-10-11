@@ -7,7 +7,8 @@
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 import { rewriteAssetUrl, ASSET_BASE } from '../plugins/asset-urls.mjs';
 import TranslationNote from './TranslationNote.astro';
-import { soldAs } from '../hardware/catalogue.mjs';
+import { soldAs, confidence } from '../hardware/catalogue.mjs';
+import ConfidenceBar from './ConfidenceBar.astro';
 
 const { entry } = Astro.locals.starlightRoute;
 const isPanel = entry.id.startsWith('hardware/panels/');
@@ -15,11 +16,21 @@ const photos = isPanel && Array.isArray(entry.data.photos) ? entry.data.photos :
 const credit = isPanel ? entry.data.photoCredit : undefined;
 // Every brand and product name that leads to this page, with how each differs.
 const names = isPanel ? soldAs(entry.data) : [];
+const evidence =
+  isPanel && Array.isArray(entry.data.evidence) ? confidence(entry.data).reasons : null;
 const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
 ---
 
 <Default />
 <TranslationNote />
+{evidence && (
+  <p class="confidence-line">
+    <ConfidenceBar data={entry.data} wide />
+    <span>
+      {evidence.length ? `Confidence: ${evidence.join(', ')}.` : 'Confidence: not yet assessed.'}
+    </span>
+  </p>
+)}
 {names.length > 0 && (
   <div id="sold-as" class="sold-as">
     <p>
@@ -103,6 +114,15 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
 )}
 
 <style>
+  .confidence-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+    margin: 0.75rem 0 0;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-2);
+  }
   .sold-as {
     margin: 0.75rem 0 0;
   }

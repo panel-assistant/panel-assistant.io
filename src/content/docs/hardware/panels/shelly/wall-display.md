@@ -16,6 +16,7 @@ photos:
   - src: 'asset:hardware-shelly-wall-display-rear-label.jpg'
     alt: Shelly Wall Display, rear, showing the model label and wall box
 photoCredit: 'Photo: Shelly'
+evidence: [firmware, documented]
 sidebar:
   label: Wall Display (original)
   order: 1

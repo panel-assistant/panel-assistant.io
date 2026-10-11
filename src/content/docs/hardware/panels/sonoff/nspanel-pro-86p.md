@@ -18,6 +18,7 @@ photos:
   - src: 'asset:hardware-sonoff-nspanel-pro-86p-angle-white-trim.jpg'
     alt: Sonoff NSPanel Pro 86P, white finish, angled to show the mounting depth
 photoCredit: 'Photo: Sonoff'
+evidence: [bench, open, firmware, documented, owners]
 sidebar:
   label: NSPanel Pro 86P
   order: 1

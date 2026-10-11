@@ -3,7 +3,14 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { parse } from 'yaml';
-import { maker, OLD_PANEL_URLS, PANELS_DIR, panelRedirects } from './catalogue.mjs';
+import {
+  EVIDENCE,
+  confidence,
+  maker,
+  OLD_PANEL_URLS,
+  PANELS_DIR,
+  panelRedirects,
+} from './catalogue.mjs';
 
 const page = (path) => readFileSync(`dist${path}index.html`, 'utf8');
 const isRedirect = (html) => html.includes('http-equiv="refresh"');
@@ -116,5 +123,30 @@ test('the supported-panels page lists every brand and model that runs Panel Assi
     assert.ok(listed.includes(`${href}"`), `${slug} is missing`);
     for (const { brand } of data.sold_as ?? [])
       assert.ok(listed.includes(`>${brand}<`), `${brand} is missing`);
+  }
+});
+
+test('every panel records its evidence, and its confidence bar shows on its page and in the guide', () => {
+  const guide = page('/install/supported-panels/');
+  for (const { slug, data } of panels) {
+    if (data.panelIndex) continue;
+    assert.ok(Array.isArray(data.evidence), `${slug} has no evidence list`);
+    for (const k of data.evidence) assert.ok(EVIDENCE[k], `${slug}: unknown evidence "${k}"`);
+    // An inspected panel scores 8 to 10 and always ranks above one that is not.
+    const { score } = confidence(data);
+    if (data.evidence.includes('bench')) assert.ok(score >= 8 && score <= 10, `${slug}: ${score}`);
+    else assert.ok(score >= 4 && score <= 7, `${slug}: ${score}`);
+    assert.match(
+      page(slug),
+      /class="confidence[^"]*"[^>]*aria-label="Confidence: /,
+      `${slug} shows no bar`,
+    );
+    if (parseFloat(String(data.android)) >= 8) {
+      assert.match(
+        guide,
+        new RegExp(`href="${slug}"[\\s\\S]{0,400}?aria-label="Confidence: `),
+        `${slug} has no bar in the guide`,
+      );
+    }
   }
 });

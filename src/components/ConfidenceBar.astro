@@ -1,0 +1,37 @@
+---
+// A panel's confidence as a bar that fills and turns from grey to green, with the evidence behind
+// it as its text alternative. No number is shown: the score only orders and colours the bar.
+import { confidence } from '../hardware/catalogue.mjs';
+
+const { data, wide = false } = Astro.props as { data: Record<string, unknown>; wide?: boolean };
+const { score, reasons } = confidence(data);
+const label = `Confidence: ${reasons.length ? reasons.join(', ') : 'not yet assessed'}`;
+// Grey at 0, full green at 10: saturation and hue rise with the score.
+const fill = `hsl(${60 + score * 8} ${score * 7}% 42%)`;
+---
+
+<span class:list={['confidence', { wide }]} role="img" aria-label={label} title={label}>
+  <span class="fill" style={`width: ${score * 10}%; background: ${fill};`}></span>
+</span>
+
+<style>
+  .confidence {
+    display: inline-block;
+    flex: none;
+    width: 4.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--sl-color-gray-5);
+    overflow: hidden;
+    vertical-align: middle;
+  }
+  .confidence.wide {
+    width: 10rem;
+    height: 0.625rem;
+  }
+  .fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+  }
+</style>

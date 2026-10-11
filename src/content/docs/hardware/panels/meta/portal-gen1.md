@@ -14,6 +14,7 @@ sold_as_note: '10.1 in, 1280×800 landscape screen; two full-range speakers'
 covers:
   - name: 'Portal+ (1st gen)'
     note: '15.6 in, 1920×1080 screen that rotates between landscape and portrait; two tweeters and a 4 in woofer'
+evidence: [documented]
 sidebar:
   label: Portal (1st gen)
   order: 5

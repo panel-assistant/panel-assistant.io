@@ -23,6 +23,7 @@ sold_as:
   - brand: Tuya
     name: 'Control Panel MAX'
     note: 'Retail and FCC listing name'
+evidence: [bench, mostly-open, firmware, documented, owners]
 sidebar:
   label: TPA10
 ---

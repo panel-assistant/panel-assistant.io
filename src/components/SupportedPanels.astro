@@ -1,35 +1,33 @@
 ---
 // Every panel model with its own hardware page, grouped by brand exactly as the Hardware → Panels
-// menu groups them, with how far each has been tested. Read from the panel pages' front matter, so
+// menu groups them, with a bar showing how much evidence backs it. Read from the panel pages' front matter, so
 // a new page appears here with no edit. Family overviews are not models, and a panel below
 // Panel Assistant's minimum Android version is not listed as one that runs it.
 import { getCollection } from 'astro:content';
-import { catalogueGroups } from '../hardware/catalogue.mjs';
+import { catalogueGroups, confidence } from '../hardware/catalogue.mjs';
+import ConfidenceBar from './ConfidenceBar.astro';
 
-const STATUS: Record<string, string> = {
-  Full: 'Full support',
-  'Community-tested': 'Owner-tested',
-  Preliminary: 'Tested on one unit',
-  Research: 'Ready to try',
-  Untested: 'Ready to try',
-};
 const runs = (data: Record<string, unknown>) =>
   !data.panelIndex && !(parseFloat(String(data.android ?? '99')) < 8);
 
 const pages = (await getCollection('docs', (e) => e.id.startsWith('hardware/panels/'))).map(
   (e) => ({ slug: e.id, data: e.data as Record<string, unknown> }),
 );
-type Listed = { label: string; href: string; status: string };
+type Listed = { label: string; href: string; data: Record<string, unknown> };
 const groups: { brand: string; entries: Listed[] }[] = catalogueGroups(pages)
   .map(({ brand, entries }) => ({
     brand,
     entries: entries
       .filter((e: { data: Record<string, unknown> }) => runs(e.data))
+      .sort(
+        (a: { data: Record<string, unknown> }, b: { data: Record<string, unknown> }) =>
+          confidence(b.data).score - confidence(a.data).score,
+      )
       .map(
         (e: { label: string; slug: string; anchor?: string; data: Record<string, unknown> }) => ({
           label: e.label,
           href: `/${e.slug}/${e.anchor ? `#${e.anchor}` : ''}`,
-          status: STATUS[String(e.data.support)] ?? 'Ready to try',
+          data: e.data,
         }),
       ),
   }))
@@ -51,7 +49,7 @@ const models = groups.reduce((n: number, g: { entries: unknown[] }) => n + g.ent
         {g.entries.map((e) => (
           <li>
             <a href={e.href}>{e.label}</a>
-            <span class="status">{e.status}</span>
+            <ConfidenceBar data={e.data} />
           </li>
         ))}
       </ul>
@@ -85,13 +83,10 @@ const models = groups.reduce((n: number, g: { entries: unknown[] }) => n + g.ent
   }
   .brand li {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 0 0.5rem;
     padding: 0.25rem 0;
-  }
-  .status {
-    font-size: var(--sl-text-xs);
-    color: var(--sl-color-gray-3);
   }
 </style>

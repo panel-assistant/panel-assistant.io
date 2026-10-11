@@ -14,6 +14,7 @@ photos:
   - src: 'asset:hardware-shelly-wall-display-x2-front.jpg'
     alt: Shelly Wall Display X2, front
 photoCredit: 'Photo: Shelly'
+evidence: [firmware, documented]
 sidebar:
   label: Wall Display X2
   order: 2
