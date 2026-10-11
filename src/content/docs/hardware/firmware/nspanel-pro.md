@@ -19,17 +19,17 @@ Two physically distinct models each have their **own** CDN channel. Do not cross
 | NSPanel Pro **86P**  | PX30, 480×480      | `nspanel-pro`        | bare `CK_<from>_<to>-diff.zip`  |
 | NSPanel Pro **120P** | rk3326-S, 750×1334 | `nspanel-pro-ver120` | `CK_<from>_<to>V<apk>-diff.zip` |
 
-See the [Sonoff NSPanel Pro](/hardware/panels/sonoff-nspanel-pro/) page for how to tell the variants apart and for per-version firmware quirks.
+See the [Sonoff NSPanel Pro](/hardware/panels/sonoff/) page for how to tell the variants apart and for per-version firmware quirks.
 
 ## Choosing a build for a Home Assistant panel
 
-The [build catalogue](https://panel-assistant.io/go/firmware?device=sonoff) records packages and availability, not a claim that the newest release is the best choice for every panel. Sonoff's release notes focus on eWeLink and Zigbee-hub features; the [firmware quirks by version](/hardware/panels/sonoff-nspanel-pro/#firmware-quirks-by-version) interpret those changes for a dashboard installation.
+The [build catalogue](https://panel-assistant.io/go/firmware?device=sonoff) records packages and availability, not a claim that the newest release is the best choice for every panel. Sonoff's release notes focus on eWeLink and Zigbee-hub features; the [firmware quirks by version](/hardware/panels/sonoff/#firmware-quirks-by-version) interpret those changes for a dashboard installation.
 
 - A late **3.x** build is a lean kiosk choice: it retains the Web Shortcut web-app and does not bundle Termux. Its stock WebView may still need updating to render a modern Home Assistant dashboard.
 - **4.0.12** is the conservative full-ROM checkpoint for a panel that needs the newer app model. It can be pinned with **Settings → About → Block Firmware Updates**. Versions after it have not been flash-verified here beyond 4.4.0.
 - A newer build may be useful for vendor features, but first review its per-model inbound diffs and the reported problems below. Test it on one recoverable panel before a wider rollout.
 
-Across the 4.x line, 4.0.0 added direct app installation and phased out Web Shortcut; 4.1.0 introduced vendor MQTT exposure to Home Assistant; 4.2.0 added a Home App choice; 4.3.0 exposed more panel capabilities over MQTT; 4.4.0 added wake-on-proximity and audio features; and 4.6.0 added a local Web Portal. The vendor MQTT bridge can publish unfiltered Zigbee values, which is unnecessary for a dashboard-only panel. The 86P has graded proximity, while the 120P reports near/far; do not infer that difference from the release number. For source links, version-specific cautions, and later releases with missing notes, see the [hardware page's version table](/hardware/panels/sonoff-nspanel-pro/#firmware-quirks-by-version) and [Sonoff's public changelog](https://sonoff.tech/en-us/blogs/news/sonoff-nspanel-pro-version-update-information-and-faq).
+Across the 4.x line, 4.0.0 added direct app installation and phased out Web Shortcut; 4.1.0 introduced vendor MQTT exposure to Home Assistant; 4.2.0 added a Home App choice; 4.3.0 exposed more panel capabilities over MQTT; 4.4.0 added wake-on-proximity and audio features; and 4.6.0 added a local Web Portal. The vendor MQTT bridge can publish unfiltered Zigbee values, which is unnecessary for a dashboard-only panel. The 86P has graded proximity, while the 120P reports near/far; do not infer that difference from the release number. For source links, version-specific cautions, and later releases with missing notes, see the [hardware page's version table](/hardware/panels/sonoff/#firmware-quirks-by-version) and [Sonoff's public changelog](https://sonoff.tech/en-us/blogs/news/sonoff-nspanel-pro-version-update-information-and-faq).
 
 ### Earlier release context
 
@@ -44,7 +44,7 @@ This is release context for dashboard use, not a claim that every version was fl
 | [4.3.0](https://forum.ewelink.cc/t/nspanel-pro-v4-3-0-officially-released-new-features-enhancements/207281)                 | More panel controls exposed as Home Assistant entities through MQTT, including display, speaker and light level. | Community reports describe awkward tap behavior and heating schedules reset by configuration changes.                                              |
 | [4.4.0](https://forum.ewelink.cc/t/nspanel-pro-v4-4-0-officially-released-new-features-enhancements/207640)                 | Wake-on-proximity, microphone recording and speaker playback over MQTT.                                          | Community reports describe proximity ticking (turning off Touch Sounds or proximity may help) and heating not shutting off at setpoint.            |
 
-For 4.5.1 onward, the [hardware page's version table](/hardware/panels/sonoff-nspanel-pro/#firmware-quirks-by-version) records model differences and reported problems. [eWeLink's rolling thread](https://forum.ewelink.cc/t/rolling-with-new-releases-nspanel-pro-firmware-updates/207466) is another source for recent notes, but its opening post has lagged behind the CDN, so it is not a reliable discovery signal. No official release notes were found for 3.9.4, 4.0.10, 4.0.12 or 4.6.2 when this context was assembled; a missing note says nothing about the importance of an indexed package.
+For 4.5.1 onward, the [hardware page's version table](/hardware/panels/sonoff/#firmware-quirks-by-version) records model differences and reported problems. [eWeLink's rolling thread](https://forum.ewelink.cc/t/rolling-with-new-releases-nspanel-pro-firmware-updates/207466) is another source for recent notes, but its opening post has lagged behind the CDN, so it is not a reliable discovery signal. No official release notes were found for 3.9.4, 4.0.10, 4.0.12 or 4.6.2 when this context was assembled; a missing note says nothing about the importance of an indexed package.
 
 ## CDN URL scheme
 

@@ -14,6 +14,13 @@ photos:
   - src: 'asset:hardware-smatek-s9e-front.jpg'
     alt: Smatek S9E, front and rear, showing the relay and terminal wiring
 photoCredit: 'Photo: Smatek'
+sold_as:
+  - brand: Smatek
+    name: 'S9'
+  - brand: Smatek
+    name: 'S9PE'
+  - brand: Smatek
+    name: 'S9PE-NZ'
 sidebar:
   label: S9E
 ---

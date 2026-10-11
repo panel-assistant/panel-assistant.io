@@ -27,6 +27,10 @@ const PAGE_KEYS = new Set([
   // A vendor family page (one manufacturer, several models) rather than one panel: excluded from
   // the comparison table and the editor's discovered fields the same way.
   'panelIndex',
+  // Brand and model lists that build the manufacturer sidebar (catalogue.mjs); the table shows the
+  // brands under the panel's name instead of as a column.
+  'sold_as',
+  'covers',
 ]);
 
 /** Panel fields across all entries: most widely used first, then first appearance. */

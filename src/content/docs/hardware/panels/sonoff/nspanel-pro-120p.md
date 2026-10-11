@@ -15,11 +15,11 @@ photos:
     alt: Sonoff NSPanel Pro 120P, white and black finishes, front, wall-mounted
 photoCredit: 'Photo: Sonoff'
 sidebar:
-  label: 120P
+  label: NSPanel Pro 120P
   order: 2
 ---
 
-The **120P** is the tall variant of the [Sonoff NSPanel Pro](/hardware/panels/sonoff-nspanel-pro/) line, named for the EU 120 mm wall box. This page carries only its own specification and the facts that differ from the [86P](/hardware/panels/sonoff-nspanel-pro/86p/); everything else (root process, WebView update, LED, sensors, Zigbee gateway, firmware quirks) is documented once on the [family page](/hardware/panels/sonoff-nspanel-pro/), which this page's sections link back to.
+The **120P** is the tall variant of the [Sonoff NSPanel Pro](/hardware/panels/sonoff/) line, named for the EU 120 mm wall box. This page carries only its own specification and the facts that differ from the [86P](/hardware/panels/sonoff/nspanel-pro-86p/); everything else (root process, WebView update, LED, sensors, Zigbee gateway, firmware quirks) is documented once on the [family page](/hardware/panels/sonoff/), which this page's sections link back to.
 
 ## Also sold as
 
@@ -35,10 +35,10 @@ NSPanel Pro 120, NSPanel Pro 120P, NSPanel120P, NSPanel Pro Gen1, SN_3326S, nspa
 | Storage  | eMMC; `/data` about 3.5 GB                                                                                                                                                                                   |
 | Android  | 8.1 (API 27)                                                                                                                                                                                                 |
 | ABI      | arm64-v8a                                                                                                                                                                                                    |
-| Radios   | **Zigbee 3.0** (Silicon Labs EFR32 coordinator, see the [family page](/hardware/panels/sonoff-nspanel-pro/#zigbee-gateway)), Wi-Fi, Bluetooth. No NFC, IR, Ethernet or cellular.                             |
+| Radios   | **Zigbee 3.0** (Silicon Labs EFR32 coordinator, see the [family page](/hardware/panels/sonoff/#zigbee-gateway)), Wi-Fi, Bluetooth. No NFC, IR, Ethernet or cellular.                                         |
 | Released | About August 2024 (est.); went on sale on Sonoff's site around 14 August 2024 ([launch coverage, haade.fr, August 2024](https://haade.fr/en/blog/special-discount-new-sonoff-nspanel-pro-120-on-itead-site)) |
 
-`ro.product.model` and `ro.product.device` both report `px30_evb`, a shared Rockchip board name and _not_ a reliable way to tell the 120P from the 86P; `ro.product.version` reports the 120P-specific `NSPanelXXXP_x.y.z` form (OTA channel `nspanel-pro-ver120`, full ROM `SN_3326S_750X1334_…`). OTA form otherwise follows the 86P (see the [firmware page](/hardware/firmware/nspanel-pro/)). The 120P's proximity firmware **stayed binary on 4.x** (the 86P restored ranged readings at 4.0.12; the kernels diverge per model); see [Sensors](/hardware/panels/sonoff-nspanel-pro/#sensors-light-and-proximity-are-app-direct) on the family page. Verified live on a 120P (firmware `NSPanel120P_3.7.1`): `wm size` 750×1334, density 240, `ro.board.platform=rk3326`.
+`ro.product.model` and `ro.product.device` both report `px30_evb`, a shared Rockchip board name and _not_ a reliable way to tell the 120P from the 86P; `ro.product.version` reports the 120P-specific `NSPanelXXXP_x.y.z` form (OTA channel `nspanel-pro-ver120`, full ROM `SN_3326S_750X1334_…`). OTA form otherwise follows the 86P (see the [firmware page](/hardware/firmware/nspanel-pro/)). The 120P's proximity firmware **stayed binary on 4.x** (the 86P restored ranged readings at 4.0.12; the kernels diverge per model); see [Sensors](/hardware/panels/sonoff/#sensors-light-and-proximity-are-app-direct) on the family page. Verified live on a 120P (firmware `NSPanel120P_3.7.1`): `wm size` 750×1334, density 240, `ro.board.platform=rk3326`.
 
 :::note
 The Cortex-A35 is an efficiency core with markedly lower per-clock throughput than the A55 (TPA10) or A72 (WF1589T). With 2 GB RAM, the NSPanel Pro line is the **entry-level performer** of the three fully supported panels; see the [performance comparison](/hardware/#performance-comparison).

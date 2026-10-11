@@ -3,7 +3,7 @@ spec: ['22db4869919f', 'd424bb5a08ae', 'dd868637ca92']
 help: 'Run the on-board Zigbee gateway as a router/repeater (NSPanel Pro).'
 related:
   - /manage/performance/
-  - /hardware/panels/sonoff-nspanel-pro/
+  - /hardware/panels/sonoff/
 ---
 
 This setting appears only on a panel with a built-in Zigbee gateway, such as the Sonoff NSPanel Pro. Turning it on starts the vendor gateway if it is not already running and switches it to the Repeater role, so the panel can extend an existing Zigbee network run by your own coordinator. To join it to that network:

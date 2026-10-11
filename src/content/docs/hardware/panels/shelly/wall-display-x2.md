@@ -15,7 +15,7 @@ photos:
     alt: Shelly Wall Display X2, front
 photoCredit: 'Photo: Shelly'
 sidebar:
-  label: X2
+  label: Wall Display X2
   order: 2
 ---
 
