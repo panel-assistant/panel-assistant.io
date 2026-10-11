@@ -70,6 +70,118 @@ class ShellyFirmwareValidationTest(unittest.TestCase):
             result = shelly.cmd_probe(self.args)
         return result, head
 
+    def manifests_with_beta(self):
+        manifests = {}
+        for track in shelly.MANIFESTS:
+            manifest = self.manifest(track=track)
+            manifest["beta"] = {
+                "version": "2.9.0-beta1",
+                "build_id": "20261011-120000/2.9.0-beta1-deadbeef",
+                "url": f"https://fwcdn.shelly.cloud/gen2-ntest/{track}/" + "b" * 64,
+            }
+            manifests[track] = manifest
+        return manifests
+
+    def test_probe_preserves_stable_and_beta_for_both_tracks(self):
+        manifests = self.manifests_with_beta()
+        result, head = self.run_probe(manifests)
+
+        self.assertEqual(0, result)
+        rows = shelly.load_dat(self.dat)
+        expected = {
+            (track, release["version"], release["build_id"], release["url"])
+            for track, manifest in manifests.items()
+            for release in manifest.values()
+        }
+        self.assertEqual(expected, {
+            (row["track"], row["version"], row["build_id"], row["cdn_url"])
+            for row in rows
+        })
+        self.assertEqual(4, head.call_count)
+        self.assertTrue(all(row["bytes"] == 123 and row["wayback_ts"] == "" for row in rows))
+        self.assertIn("has_pending=true", self.output.read_text().splitlines())
+        self.assertIn("new_versions=" + " ".join(
+            f"{track}/{release['version']}"
+            for track, manifest in manifests.items()
+            for release in manifest.values()
+        ), self.output.read_text().splitlines())
+
+        result, head = self.run_probe(manifests)
+        self.assertEqual(0, result)
+        head.assert_not_called()
+        self.assertEqual(rows, shelly.load_dat(self.dat))
+
+    def test_probe_accepts_absent_or_null_optional_beta(self):
+        manifests = {track: self.manifest(track=track) for track in shelly.MANIFESTS}
+        manifests["WallDisplayV2"]["beta"] = None
+
+        result, head = self.run_probe(manifests)
+
+        self.assertEqual(0, result)
+        self.assertEqual(2, head.call_count)
+        self.assertEqual(2, len(shelly.load_dat(self.dat)))
+
+    def test_invalid_beta_leaves_existing_history_and_outputs_unchanged(self):
+        invalid = ({}, "2.9.0-beta1", {"version": "2.9.0-beta1"}, {
+            "version": "2.9.0-beta1", "url": "https://evil.example/firmware",
+        }, {"version": "2.9.0-beta1\nforged=true"})
+        for track in shelly.MANIFESTS:
+            for beta in invalid:
+                with self.subTest(track=track, beta=beta):
+                    self.dat.write_text("# existing history\n")
+                    self.output.write_text("existing=value\n")
+                    manifests = self.manifests_with_beta()
+                    manifests[track]["beta"] = beta
+
+                    result, head = self.run_probe(manifests)
+
+                    self.assertEqual(1, result)
+                    head.assert_not_called()
+                    self.assertEqual("# existing history\n", self.dat.read_text())
+                    self.assertEqual("existing=value\n", self.output.read_text())
+
+    def test_verify_checks_stable_and_beta_for_both_tracks(self):
+        manifests = self.manifests_with_beta()
+        with mock.patch.object(shelly, "fetch_manifest", side_effect=manifests.values()), \
+                mock.patch.object(shelly, "head_size", return_value=123) as head:
+            result = shelly.cmd_verify(SimpleNamespace())
+
+        self.assertEqual(0, result)
+        self.assertEqual({
+            (track, release["url"])
+            for track, manifest in manifests.items()
+            for release in manifest.values()
+        }, {call.args for call in head.call_args_list})
+        self.assertEqual(4, head.call_count)
+        self.assertFalse(self.dat.exists())
+        self.assertFalse(self.output.exists())
+
+    def test_verify_beta_cdn_failure_returns_nonzero(self):
+        manifests = self.manifests_with_beta()
+
+        def head_result(track, url):
+            if url == manifests[track]["beta"]["url"]:
+                raise OSError("beta CDN TLS failure")
+            return 123
+
+        with mock.patch.object(shelly, "fetch_manifest", side_effect=manifests.values()), \
+                mock.patch.object(shelly, "head_size", side_effect=head_result):
+            result = shelly.cmd_verify(SimpleNamespace())
+
+        self.assertEqual(1, result)
+        self.assertFalse(self.dat.exists())
+        self.assertFalse(self.output.exists())
+
+    def test_verify_invalid_beta_fails_before_any_cdn_requests(self):
+        manifests = self.manifests_with_beta()
+        manifests["WallDisplayV2"]["beta"] = {}
+        with mock.patch.object(shelly, "fetch_manifest", side_effect=manifests.values()), \
+                mock.patch.object(shelly, "head_size", return_value=123) as head:
+            result = shelly.cmd_verify(SimpleNamespace())
+
+        self.assertEqual(1, result)
+        head.assert_not_called()
+
     def test_valid_manifest_is_persisted_and_outputs_are_single_line(self):
         result, head = self.run_probe({})
         self.assertEqual(0, result)

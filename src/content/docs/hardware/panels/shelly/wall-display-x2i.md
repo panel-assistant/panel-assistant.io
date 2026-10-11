@@ -117,12 +117,14 @@ Until then, drive the relays through Home Assistant's own Shelly integration.
 
 ## Firmware, and why the shipped version matters
 
-The unit examined here arrived factory-fresh on **2.5.4**, and was later updated to **2.7.4**. The update changes one thing that matters, and leaves Panel Assistant alone:
+The unit examined here arrived factory-fresh on **2.5.4**, and was later updated to **2.7.4**. The observed 2.7.4 update changed device ownership without interrupting Panel Assistant:
 
 - On 2.5.4 there is **no device owner and no device administrator at all**.
 - **2.7.4 installs Shelly's launcher as the device owner.** On the unit examined here that took nothing from Panel Assistant: it stayed the home screen, kept running and stayed online in Home Assistant, and the device owner imposes no restrictions on other apps. Shelly's launcher cannot be disabled on either firmware.
 
-Shelly Wall Display updates are one-way; there is no published downgrade path. A unit that has already updated will behave as the later firmware does.
+As checked on **2026-10-11**, the modern track offers **stable 2.8.2**, build `20261008-101206/2.8.2-7bb488885`. The setup, sensor and screen-wake measurements above do not establish full compatibility with 2.8.2: physical testing on that firmware remains outstanding. Include your firmware version when reporting a problem after an update.
+
+Since **2.8.0**, modern models offer **Uninstall all updates** to return to their shipped vendor-app version. This unit's shipped 2.5.4 is older than 2.6.2, so Shelly says that operation also resets factory defaults. Keep separate Panel Assistant and Shelly settings backups first; neither is a complete Android restore image. Preservation of Panel Assistant through the operation has not been verified. See the [family recovery notes](/hardware/panels/shelly/#returning-to-the-shipped-version) for the exact limits.
 
 See the [Wall Display family page](/hardware/panels/shelly/) for the OTA endpoints on the `WallDisplayV2` track and the firmware version history.
 

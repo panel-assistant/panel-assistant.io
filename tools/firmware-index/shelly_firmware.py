@@ -91,19 +91,27 @@ def validate_cdn_url(track, value):
     return value
 
 
-def validate_release(track, stable):
+def validate_release(track, release):
     """Validate untrusted manifest fields before network requests, files, outputs, or Markdown."""
-    if not isinstance(stable, dict):
-        raise ValueError("stable release must be an object")
-    version = stable.get("version", "")
-    build_id = stable.get("build_id", "")
-    cdn_url = stable.get("url", "")
+    if not isinstance(release, dict):
+        raise ValueError("release must be an object")
+    version = release.get("version", "")
+    build_id = release.get("build_id", "")
+    cdn_url = release.get("url", "")
     if not isinstance(version, str) or not _VERSION_RE.fullmatch(version):
         raise ValueError("version has an invalid format")
     if not isinstance(build_id, str) or not _BUILD_ID_RE.fullmatch(build_id):
         raise ValueError("build_id has an invalid format")
     validate_cdn_url(track, cdn_url)
     return version, build_id, cdn_url
+
+
+def validate_manifest(track, data):
+    releases = [validate_release(track, data.get("stable"))]
+    beta = data.get("beta")
+    if beta is not None:
+        releases.append(validate_release(track, beta))
+    return [(track, *release) for release in releases]
 
 
 def validate_entry(entry):
@@ -215,13 +223,22 @@ def head_size(track, url):
 def cmd_verify(_args):
     """Strictly exercise both vendor TLS hosts for every configured OTA track."""
     failed = False
+    releases = []
     for track, manifest_url in MANIFESTS.items():
         try:
             data = fetch_manifest(manifest_url)
-            version, _build_id, cdn_url = validate_release(track, data.get("stable"))
-            size = head_size(track, cdn_url)
+            releases.extend(validate_manifest(track, data))
         except Exception as exc:
             print(f"ERROR: could not verify {track}: {exc}", file=sys.stderr)
+            failed = True
+            continue
+    if failed:
+        return 1
+    for track, version, _build_id, cdn_url in releases:
+        try:
+            size = head_size(track, cdn_url)
+        except Exception as exc:
+            print(f"ERROR: could not verify {track} {version}: {exc}", file=sys.stderr)
             failed = True
             continue
         print(f"verified: {track} {version} ({size / 1e6:.1f} MB)")
@@ -244,12 +261,11 @@ def cmd_probe(args):
             fetch_failed = True
             continue
         try:
-            version, build_id, cdn_url = validate_release(track, data.get("stable"))
+            releases.extend(validate_manifest(track, data))
         except (AttributeError, TypeError, ValueError) as exc:
             print(f"ERROR: rejected invalid {track} manifest: {exc}", file=sys.stderr)
             invalid_manifest = True
             continue
-        releases.append((track, version, build_id, cdn_url))
 
     # Do not make CDN requests or partially persist another track unless every expected manifest
     # was fetched and passed the fixed schema. Network and vendor format changes must fail closed.
