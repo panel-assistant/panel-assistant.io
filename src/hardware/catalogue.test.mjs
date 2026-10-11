@@ -102,3 +102,19 @@ test('the panel menu carries no badges', () => {
   assert.ok(sidebar.includes('Electron'));
   assert.doesNotMatch(sidebar, /sl-badge/);
 });
+
+test('the supported-panels page lists every brand and model that runs Panel Assistant', () => {
+  const html = page('/install/supported-panels/');
+  const listed = html.match(/<div class="brands[\s\S]*?<\/div>/)?.[0] ?? '';
+  for (const { slug, data } of panels) {
+    const href = `href="${slug}`;
+    if (data.panelIndex) continue;
+    if (parseFloat(String(data.android)) < 8) {
+      assert.ok(!listed.includes(`${href}"`), `${slug} is below Android 8 but listed`);
+      continue;
+    }
+    assert.ok(listed.includes(`${href}"`), `${slug} is missing`);
+    for (const { brand } of data.sold_as ?? [])
+      assert.ok(listed.includes(`>${brand}<`), `${brand} is missing`);
+  }
+});

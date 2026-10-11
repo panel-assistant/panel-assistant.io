@@ -65,28 +65,33 @@ function readPages(dir) {
   return pages;
 }
 
-/** Sidebar items for Hardware → Panels: one group per brand, alphabetical. */
-export function panelsSidebar(dir = PANELS_DIR) {
+/**
+ * The catalogue grouped by brand, alphabetical: each panel page under its maker, the other
+ * models a page covers, and another brand's name for the same hardware under that brand. Each
+ * entry is `{ label, slug, anchor, data }`, `data` being the front matter of the page it leads to.
+ * The menu and the supported-panels page both list the catalogue from this.
+ */
+export function catalogueGroups(pages) {
   const groups = new Map();
-  const add = (brand, item, rank) => {
+  const add = (brand, entry, rank) => {
     if (!groups.has(brand)) groups.set(brand, []);
-    groups.get(brand).push({ item, rank });
+    groups.get(brand).push({ entry, rank });
   };
-  for (const { slug, data } of readPages(dir)) {
+  for (const { slug, data } of pages) {
     const order = data.sidebar?.order ?? 50;
     const label = data.sidebar?.label ?? data.title;
-    // Status (untested, maker unconfirmed) is stated on the page, never as a sidebar badge.
-    add(maker(data.vendor), { label, slug }, [0, order, label]);
+    // Status (untested, maker unconfirmed) is stated on the page, never as a menu badge.
+    add(maker(data.vendor), { label, slug, data }, [0, order, label]);
     // Other models a page covers: own entries, landing on the page's table of differences.
     for (const { name } of data.covers ?? []) {
-      add(maker(data.vendor), { label: name, link: `/${slug}/#sold-as` }, [1, 0, name]);
+      add(maker(data.vendor), { label: name, slug, anchor: 'sold-as', data }, [1, 0, name]);
     }
     // Another brand's name for the same hardware gets an entry under that brand. The maker's own
     // alternative names are listed on the page only. The anchor keeps an alias from being taken
-    // for the page itself, so the sidebar opens the page's own manufacturer.
+    // for the page itself, so the menu opens the page's own manufacturer.
     for (const { brand, name } of data.sold_as ?? []) {
       if (brand === maker(data.vendor)) continue;
-      add(brand, { label: name, link: `/${slug}/#sold-as` }, [2, 0, name]);
+      add(brand, { label: name, slug, anchor: 'sold-as', data }, [2, 0, name]);
     }
   }
   const byRank = (a, b) =>
@@ -94,10 +99,20 @@ export function panelsSidebar(dir = PANELS_DIR) {
   return [...groups.keys()]
     .sort((a, b) => a.localeCompare(b))
     .map((brand) => ({
-      label: brand,
-      items: groups
+      brand,
+      entries: groups
         .get(brand)
         .sort(byRank)
-        .map((e) => e.item),
+        .map((e) => e.entry),
     }));
+}
+
+/** Sidebar items for Hardware → Panels: one group per brand, alphabetical. */
+export function panelsSidebar(dir = PANELS_DIR) {
+  return catalogueGroups(readPages(dir)).map(({ brand, entries }) => ({
+    label: brand,
+    items: entries.map(({ label, slug, anchor }) =>
+      anchor ? { label, link: `/${slug}/#${anchor}` } : { label, slug },
+    ),
+  }));
 }

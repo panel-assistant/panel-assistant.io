@@ -1,0 +1,97 @@
+---
+// Every panel model with its own hardware page, grouped by brand exactly as the Hardware → Panels
+// menu groups them, with how far each has been tested. Read from the panel pages' front matter, so
+// a new page appears here with no edit. Family overviews are not models, and a panel below
+// Panel Assistant's minimum Android version is not listed as one that runs it.
+import { getCollection } from 'astro:content';
+import { catalogueGroups } from '../hardware/catalogue.mjs';
+
+const STATUS: Record<string, string> = {
+  Full: 'Full support',
+  'Community-tested': 'Owner-tested',
+  Preliminary: 'Tested on one unit',
+  Research: 'Ready to try',
+  Untested: 'Ready to try',
+};
+const runs = (data: Record<string, unknown>) =>
+  !data.panelIndex && !(parseFloat(String(data.android ?? '99')) < 8);
+
+const pages = (await getCollection('docs', (e) => e.id.startsWith('hardware/panels/'))).map(
+  (e) => ({ slug: e.id, data: e.data as Record<string, unknown> }),
+);
+type Listed = { label: string; href: string; status: string };
+const groups: { brand: string; entries: Listed[] }[] = catalogueGroups(pages)
+  .map(({ brand, entries }) => ({
+    brand,
+    entries: entries
+      .filter((e: { data: Record<string, unknown> }) => runs(e.data))
+      .map(
+        (e: { label: string; slug: string; anchor?: string; data: Record<string, unknown> }) => ({
+          label: e.label,
+          href: `/${e.slug}/${e.anchor ? `#${e.anchor}` : ''}`,
+          status: STATUS[String(e.data.support)] ?? 'Ready to try',
+        }),
+      ),
+  }))
+  .filter((g: { entries: unknown[] }) => g.entries.length > 0);
+const models = groups.reduce((n: number, g: { entries: unknown[] }) => n + g.entries.length, 0);
+---
+
+<p class="coverage">
+  <strong>
+    {models} named panels from {groups.length} brands
+  </strong>{' '}
+  have their own hardware page, and every other Android panel runs on the Generic profile.
+</p>
+<div class="brands not-content" data-pagefind-ignore>
+  {groups.map((g) => (
+    <section class="brand">
+      <h3>{g.brand}</h3>
+      <ul>
+        {g.entries.map((e) => (
+          <li>
+            <a href={e.href}>{e.label}</a>
+            <span class="status">{e.status}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</div>
+
+<style>
+  .coverage {
+    font-size: var(--sl-text-lg);
+  }
+  .brands {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .brand {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+  }
+  .brand h3 {
+    margin: 0 0 0.5rem;
+    font-size: var(--sl-text-lg);
+  }
+  .brand ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .brand li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0 0.5rem;
+    padding: 0.25rem 0;
+  }
+  .status {
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+</style>

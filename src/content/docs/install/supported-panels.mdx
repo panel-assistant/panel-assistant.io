@@ -1,0 +1,35 @@
+---
+title: Choose a panel
+description: Panel Assistant runs on any Android wall panel from Android 8.0 up. See every brand and model with its own hardware support, from Sonoff, Shelly, Tuya, Meta, Electron and Smatek, and what a panel needs.
+---
+
+import SupportedPanels from '../../../components/SupportedPanels.astro';
+
+**Panel Assistant runs on any Android wall panel with Android 8.0 or newer.** You do not need to find your model on a list first: install it, and the Home Assistant dashboard, screen brightness and sleep, audio and the panel's standard sensors arrive in Home Assistant straight away.
+
+On the models below it goes further. Each has its own hardware profile that reaches what is special about that panel, such as its LEDs, buttons, relays, camera, microphones and climate sensors, and its own [hardware page](/hardware/) with the facts to check before you buy.
+
+## Panels with their own hardware support
+
+<SupportedPanels />
+
+**Full support** means tested on units in hand, with every piece of the panel's hardware covered. **Owner-tested** panels run Panel Assistant for their owners, whose reports built the profile. **Tested on one unit** is a panel examined on our bench, with its coverage still growing. **Ready to try** panels have a profile written from the manufacturer's firmware and published specifications, waiting for the first owner to confirm it.
+
+Several of these panels are the same hardware sold under different brands. Each brand's name is listed, and leads to the one page for that hardware.
+
+## Every other Android panel
+
+**A panel that is not named here is still a supported panel.** Panel Assistant does not need to recognise your hardware to run on it. Any panel that meets the requirements below starts on the Generic profile, which gives you the dashboard on the screen, brightness and sleep, audio, navigation, and the standard Android sensors such as light and proximity, all as entities on the panel's own device in Home Assistant.
+
+What a model's own profile adds is the hardware peculiar to that model. Plenty of panels have none, and plenty of owners never need it. For them, Generic is the whole feature set, not a lesser one.
+
+## What a panel needs
+
+- **Android 8.0 or newer.**
+- **Developer options.** The installer uses Android's debugging interface, which almost every panel lets you turn on.
+- **Any system WebView.** Vendors often ship an out-of-date browser engine. The panel app checks it, and [Preparing the panel](/install/prepare-a-panel/) shows how to update it on your panel.
+- **Root, only for a few extras.** Some capabilities on some models need root. Each hardware page says which, and how to get it.
+
+## Not on the list yet?
+
+Hardware support is data, not code, so adding a panel means writing a profile rather than a new version of the app. The quickest way to get your model its own profile is to tell us about it: say what the model is and what happened in the [issues](https://github.com/panel-assistant/android/issues). The [profile documentation](/reference/profiles/) describes what a profile contains, if you would like to write one. Every report, working or not, brings more panels onto this page.

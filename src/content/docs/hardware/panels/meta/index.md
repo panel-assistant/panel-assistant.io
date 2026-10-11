@@ -42,7 +42,7 @@ Once the panel app is installed, it identifies the Portal from what Android repo
 
 - A Portal reporting model **Portal** and device codename **`omni`** is treated as the 10" (2nd gen) and gets its [own profile](/hardware/panels/meta/portal-10-gen2/), with the camera, microphones and light sensor switched on as measured.
 - Any other Portal reporting **`omni`** (the Android 10 platform, which the Mini is reported to share) or **`aloha`** (the Android 9 platform of the 1st-gen Portal and Portal+) gets the **Meta Portal family profile**. That profile keeps the panel's real screen-off and Meta's launcher handling, but leaves the camera and microphone to the panel's own checks rather than assuming them, and claims no light sensor or screen density, because none of that has been measured on those models.
-- A Portal reporting anything else, including the Portal TV's `ripley`, runs on the [Generic profile](/install/supported-panels/#generic-support-every-other-android-panel).
+- A Portal reporting anything else, including the Portal TV's `ripley`, runs on the [Generic profile](/install/supported-panels/#every-other-android-panel).
 
 The panel app's diagnostics show which profile was chosen and why. If you own a Portal Mini, Portal+ or Portal Go, the device codename it reports is the single most useful thing you can [send in](https://github.com/panel-assistant/android/issues): it decides whether the family profile matches, and one report would move that model up the [panel list](/install/supported-panels/).
 
