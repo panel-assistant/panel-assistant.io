@@ -16,11 +16,6 @@ photos:
   - src: 'asset:hardware-shelly-wall-display-rear-label.jpg'
     alt: Shelly Wall Display, rear, showing the model label and wall box
 photoCredit: 'Photo: Shelly'
-sold_as:
-  - brand: Shelly
-    name: 'Wall Display U1'
-  - brand: Shelly
-    name: 'Wall Display D1'
 sidebar:
   label: Wall Display (original)
   order: 1
@@ -38,7 +33,7 @@ The original Wall Display, firmware codename **Stargate**, is the entry model of
 
 ## Also sold as
 
-Shelly Wall Display, Wall Display U1 (US), Wall Display D1, SAWD-0A1XX10EU1, firmware codename Stargate, device ID k400_mt6580_32_n.
+Shelly Wall Display, SAWD-0A1XX10EU1, firmware codename Stargate, device ID k400_mt6580_32_n.
 
 |          |                                                                                                                                                                                                                                                                                          |
 | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

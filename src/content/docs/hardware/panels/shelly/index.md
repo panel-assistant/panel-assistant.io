@@ -26,7 +26,7 @@ The **original Wall Display ships Android 7.0**, which is below the minimum Andr
 
 ## Also sold as
 
-Shelly Wall Display, Shelly Wall Display X2, Shelly Wall Display X1i, Shelly Wall Display X2i, Shelly Wall Display XL, Wall Display U1, Wall Display D1, SAWD-0A1XX10EU1, SAWD-2A1XX10EU1, firmware codenames Stargate, Pegasus, Cally, Jenna, Blake, Maverick, Dayna and Atlantis, OTA tracks WallDisplay and WallDisplayV2, device IDs k400_mt6580_32_n and e500_7731e_32u_o, launcher package cloud.shelly.stargate.
+Shelly Wall Display, Shelly Wall Display X2, Shelly Wall Display X1i, Shelly Wall Display X2i, Shelly Wall Display XL, SAWD-0A1XX10EU1, SAWD-2A1XX10EU1, firmware codenames Stargate, Pegasus, Cally, Jenna, Blake, Maverick, Dayna and Atlantis, OTA tracks WallDisplay and WallDisplayV2, device IDs k400_mt6580_32_n and e500_7731e_32u_o, launcher package cloud.shelly.stargate.
 
 ## Product family
 
@@ -39,11 +39,9 @@ Firmware codenames are useful when inspecting an OTA, but are not a substitute f
 | Cally             | [Wall Display X1i](/hardware/panels/shelly/wall-display-x1i/)    | 4 in, 720×720    | RK3326-S, Cortex-A35, Android 11                                                                | interchangeable base: 1 output as standard, optional 2-output base |
 | Jenna             | [Wall Display X2i](/hardware/panels/shelly/wall-display-x2i/)    | 6.9 in, 1440×720 | RK3326-S per Shelly's specification; the chip reports the RK3326 family, Cortex-A35, Android 11 | interchangeable base: 1 output as standard, optional 2-output base |
 | Blake             | [Wall Display XL](/hardware/panels/shelly/wall-display-xl/)      | 10.1 in          | RK3566, Cortex-A55, Android 11                                                                  | 1 output                                                           |
-| Maverick          | Wall Display U1 (US)                                             | not established  | not established                                                                                 | not established                                                    |
-| Dayna             | Wall Display D1                                                  | not established  | not established                                                                                 | not established                                                    |
 
 :::note
-A variant called **Atlantis** is reported by a community project but has not been matched to a current official product page. Treat it as undocumented until it can be identified from a live unit. Maverick and Dayna have no established specification and no page here yet.
+Shelly's firmware also names **Maverick**, **Dayna** and **Atlantis**, which match no product Shelly sells. Treat them as undocumented until one can be identified from a live unit.
 :::
 
 :::caution
@@ -144,7 +142,7 @@ What depends on each model's own hardware is checked on the panel when Panel Ass
 - **Touch wake** from a fully dark screen was measured on the X2i only.
 - **The relays** on the X2i are reachable through a world-writable control in software, but Panel Assistant does not drive them on any Shelly model. Use Home Assistant's own Shelly integration for them.
 
-**None of this has been confirmed on another model yet.** If you have an X1i, XL, U1 or D1 running Panel Assistant, a report of what works is the quickest way to move it up [the supported panels list](/install/supported-panels/). A hidden developer-mode unlock is what makes any of it measurable, and it is confirmed only on the X2i, whose [page carries the exact sequence](/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode).
+**None of this has been confirmed on another model yet.** If you have an X1i or XL running Panel Assistant, a report of what works is the quickest way to move it up [the supported panels list](/install/supported-panels/). A hidden developer-mode unlock is what makes any of it measurable, and it is confirmed only on the X2i, whose [page carries the exact sequence](/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode).
 
 ## Firmware OTA mechanism
 
