@@ -3,7 +3,7 @@ title: Understand a support report
 description: Read a Panel Assistant installation or update failure and share it when asking for help.
 ---
 
-When an installation or update fails, open its item under **Settings → Repairs** in Home Assistant and choose **Support report**. The report starts with the Panel Assistant integration version and build, the Home Assistant version, and the Repair ID. Each **Failure** section summarizes one saved event. The **Full details** block keeps the exact field names and values for diagnosis.
+When an installation or update fails, open its item under **Settings → Repairs** in Home Assistant and choose **Support report**. The report preserves the exact field names and values in a copyable text block. It starts with `panel_assistant.version` and `panel_assistant.build`, followed by `home_assistant.version` and the Repair ID in `repair.issue_id`. Saved events appear under `events[N]`, where `N` starts at 0.
 
 Read the report before sharing it. It may include a panel address, device identifiers, release details, and an exception trace. Remove anything you do not want to put in a public issue. Keep the failure reason and the surrounding details if you can; they help explain what happened.
 
@@ -11,7 +11,7 @@ For help with a failed installation or update, [open an issue for the Home Assis
 
 ## How to read the fields
 
-- **Failure N** lists saved events in order. A later event may describe a retry hold rather than the original failure.
+- `events[N]` lists saved events in order, starting at `events[0]`. A later event may describe a retry hold rather than the original failure.
 - `kind` says whether the event came from an `install`, `update`, or `retry_hold` attempt. `at`, when present, is the recorded time.
 - `panel` is the panel's display name or address; `address` is the network target Home Assistant used. `entry_id` identifies the Home Assistant integration entry. `job_id` identifies an installation attempt.
 - `reason` is the saved result or error message. For an installation, `receipt.result_code` is the broad outcome and `receipt.failure_stage` says which step was active when it failed. A `receipt.result_subcode`, if present, narrows the diagnosis; its value can change between releases.
@@ -24,7 +24,7 @@ An installation result of `authorization_failed` means Home Assistant could not 
 Copy this prompt, then paste your reviewed report after it. An assistant can explain the evidence and suggest checks, but it cannot see the current panel state from the report alone.
 
 ```text
-I need help understanding a Panel Assistant support report from Home Assistant Repairs. Panel Assistant is a Home Assistant integration that installs or updates an app on an Android wall panel. The report starts with integration and Home Assistant versions and a Repair ID. Each numbered Failure is a saved install, update, or retry-hold event. The Full details block uses dotted field names from the original event and installation receipt.
+I need help understanding a Panel Assistant support report from Home Assistant Repairs. Panel Assistant is a Home Assistant integration that installs or updates an app on an Android wall panel. The report is a copyable text block with exact dotted field names and values. It starts with panel_assistant.version and panel_assistant.build, followed by home_assistant.version and the Repair ID in repair.issue_id. Saved install, update, or retry-hold events appear under events[N], starting at events[0]. Each event preserves its original fields and installation receipt.
 
 Explain in plain language what happened, in time order. Identify the failure reason, the installation step if receipt.failure_stage is present, and the strongest evidence in the report. Treat receipt.result_subcode as diagnostic detail, not as a guaranteed public error code. Distinguish observed facts from guesses. Suggest safe checks I can make in Home Assistant or on the panel. If the panel's installed state is uncertain, do not suggest reinstalling, clearing data, or retrying until that state is checked. Tell me what information is missing and what to include in a GitHub issue. Do not repeat private addresses or identifiers in your answer.
 
