@@ -155,7 +155,7 @@ export function confidence(data) {
   const android = parseFloat(String(data.android));
   const old = android < OLD_ANDROID;
   if (old)
-    reasons.push(`but it runs Android ${data.android}, older than the panels we have inspected`);
+    reasons.push(`runs Android ${data.android} and has not been inspected on a unit we run`);
   return {
     score: Math.max(0, Math.min(7, RESEARCHED + sum(have)) - (old ? OLD_PENALTY : 0)),
     reasons,
