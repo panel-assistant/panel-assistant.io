@@ -104,7 +104,7 @@ One qualification keeps the scope exact: an archived **partition** image, not pa
 - The helper daemon (`hapaneld-helper`) needs a privileged path to `/system`, and without an adb foothold that carries root there is none, so every profile declares `platform.app_can_su: false`. Whether the legacy `userdebug` base build changes that is listed below as unknown.
 - Actions that genuinely need root are therefore unavailable. On the X2i the everyday ones are not among them: brightness goes through Android's own setting, the sensors are ordinary Android sensors, the screen switches fully off through Android's own timeout, and Panel Assistant installs, updates and configures the app over adb, including display size and text size. What is lost is a small privileged set: screenshots and tap-and-capture remote control from Panel Assistant, and rebooting or switching back to the vendor launcher from the panel.
 - The modern built-in AppStore shows that Shelly can distribute approved applications, but the panel app is not one of them. Installation is by sideload, on the X2i after the developer-mode unlock described above. Legacy devices still have no confirmed installation path.
-- **Device-owner behaviour depends on the firmware.** On the X2i's factory 2.5.4 there is no device owner and no device administrator at all. Updating it to 2.7.4 makes Shelly's launcher the device owner, and on that unit this took nothing from Panel Assistant: making it the home app worked without root on both firmwares and held, and the device owner imposes no restrictions on other apps. Shelly's launcher cannot be disabled on either firmware. Wall Display updates are one-way, so a panel that has already updated behaves as the later firmware does.
+- **Device-owner behaviour depends on the firmware.** On the X2i's factory 2.5.4 there is no device owner and no device administrator at all. Updating it to 2.7.4 makes Shelly's launcher the device owner, and on that unit this took nothing from Panel Assistant: making it the home app worked without root on both firmwares and held, and the device owner imposes no restrictions on other apps. Shelly's launcher cannot be disabled on either firmware. From firmware 2.8.0, modern models can return to their shipped app version; the [recovery limits](#returning-to-the-shipped-version) below matter before using that option.
 
 ## Connecting a panel to a computer
 
@@ -152,7 +152,23 @@ Use the version offered for the device's exact OTA track, and check the [officia
 
 For a normal update without a computer, open the Shelly app, select the Wall Display, then choose **Settings → Device Information → Firmware → Update**. Alternatively, open its local WebUI at `http://<device-ip>` and choose **Settings → Firmware → Update**. Shelly rolls updates out gradually, so a newly released version may not appear on every device immediately. To apply a specific version, download the ZIP for the device's track from the catalogue and use **Firmware → Custom firmware** in the WebUI (`http://<device-ip>/#/settings/firmware` on WallDisplayV2 devices).
 
-Shelly's current-build CDN link stops working when a newer version replaces it. For an older build, use the catalogue's Wayback link **only where a capture is recorded**; an uncaptured release may no longer be recoverable.
+Shelly's current-build CDN link can stop working when a newer version replaces it. For an older build, use the catalogue's Wayback link **only where a capture is recorded**; an uncaptured release may no longer be recoverable.
+
+### Current firmware and compatibility
+
+As checked on **2026-10-11**, Shelly offers **stable 2.8.2** on both OTA tracks, build `20261008-101206/2.8.2-7bb488885`, with no beta currently offered. The [official changelog](https://github.com/ShellyGroup/Wall-Display-Changelog) describes fixes to group controls and Shelly Cloud reconnection. Firmware 2.8.1 also fixes the vendor camera-talkback microphone remaining active when its button is not held.
+
+Panel Assistant's physical X2i evidence covers factory **2.5.4** and **2.7.4**. Firmware inspection of a newer package does not establish that setup, updating Panel Assistant, screen wake and Home Assistant connectivity all work on a panel running it. **2.8.2 has not yet completed that physical compatibility check.** The same OTA track does not establish that another Shelly model behaves identically.
+
+Record your model and firmware version when reporting a problem, especially one that starts after a vendor update. Keep a Panel Assistant backup and, separately, a Shelly configuration backup before updating. Neither settings backup is a full Android firmware image.
+
+### Returning to the shipped version
+
+Since **2.8.0**, modern models offer **Settings → Reset device → Uninstall all updates**, also exposed as `Shelly.UninstallAllUpdates`. Shelly says this returns the vendor app to the **one version the display shipped with**, which varies by manufacture date. It does not let you select any older version from the firmware catalogue.
+
+Shelly says devices, rooms and settings are normally retained, but Android can reset them. A display shipped with firmware **older than 2.6.2 is reset to factory defaults** as part of this operation. Read the confirmation and save both settings backups first. Panel Assistant has not verified preservation of its installation and settings through this operation.
+
+The signed OTA downloads update vendor applications and related files. They contain no complete Android partition image, so preserving an OTA is separate from proving a full firmware restore or retaining device-specific calibration. [Shelly's update and recovery notes](https://github.com/ShellyGroup/Wall-Display-Changelog#modern-devices-ota-updates) describe the shipped-version option; the operation has not been tested here.
 
 ### What the firmware is
 
@@ -168,7 +184,7 @@ Shelly.Update { "stage": "stable" }    // pull from the update manifest
 Shelly.Update { "url": "..." }         // install from a custom URL
 ```
 
-An hourly check (from 2.6.0) and a startup check run automatically. From 2.7.0 an OTA sanity check verifies that the downloaded update is built for the correct hardware before applying it.
+An hourly update check (from 2.6.0) and a startup check run automatically. Checking for an update is separate from installing it. From 2.7.0 an OTA sanity check verifies that the downloaded update is built for the correct hardware before applying it.
 
 ### Update manifest endpoints (verified)
 
@@ -195,7 +211,7 @@ Covers Blake, Jenna, Cally, Maverick and Dayna. The OTA updater script reads `ro
 The response has the same version and build ID as Track 1 (`2.7.1` in the example above), compiled for arm64-v8a. Both tracks share version numbers and build IDs: they are compiled together from the same codebase for different ABIs.
 
 :::note
-**The CDN URL is content-addressed**: a SHA-256 filename with no version in the path. It rotates with every release and cannot be inferred for older versions, and once a newer release ships the previous URL returns 404. Archival to the Wayback Machine is therefore **attempted** for each release as it is discovered, and is **confirmed** only once a capture timestamp is written beside that release's CDN URL in [`tools/firmware-index/fw-shelly-walldisplay.dat`](https://github.com/panel-assistant/panel-assistant.io/blob/main/tools/firmware-index/fw-shelly-walldisplay.dat). An empty timestamp means archival is pending or has not succeeded; it does not mean the files are safe. Read which releases are confirmed from the index itself. A release that is never captured while it is current is unrecoverable.
+**The CDN URL is content-addressed**: a SHA-256 filename with no version in the path. It changes with every release and cannot be inferred for older versions. Previous URLs can return 404 after a new release, so saving the original while it is available matters. Archival to the Wayback Machine is therefore **attempted** for each release as it is discovered, and is **confirmed** only once a capture timestamp is written beside that release's CDN URL in [`tools/firmware-index/fw-shelly-walldisplay.dat`](https://github.com/panel-assistant/panel-assistant.io/blob/main/tools/firmware-index/fw-shelly-walldisplay.dat). An empty timestamp means archival is pending or has not succeeded; it does not mean the files are safe. Read which releases are confirmed from the index itself. A release without a confirmed capture may no longer be downloadable from the catalogue.
 :::
 
 #### Static legacy CDN (SAWD-0A1XX10EU1 only)
@@ -240,11 +256,14 @@ Firmware 2.6.0 disclosed that RPC over BLE was open to any BLE connection withou
 
 ## Firmware versions that affect third-party apps
 
-Stable track, most recent first. The full product changelog is at [ShellyGroup/Wall-Display-Changelog](https://github.com/ShellyGroup/Wall-Display-Changelog), which covers 2.4.0 and later; earlier releases are on `community.shelly.cloud`, which needs a login.
+Stable track, most recent first. Dates for 2.8.1 and 2.8.2 are the vendor package build dates. The full product changelog is at [ShellyGroup/Wall-Display-Changelog](https://github.com/ShellyGroup/Wall-Display-Changelog), which covers 2.4.0 and later; earlier releases are on `community.shelly.cloud`, which needs a login.
 
 | Version | Date          | Relevant change                                                                                                                                      |
 | ------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2.7.3   | 2026-07-29    | Latest analysed release; the legacy OTA still declares the `userdebug` base build                                                                    |
+| 2.8.2   | 2026-10-08    | Current stable at the 2026-10-11 check; group-control and Shelly Cloud reconnection fixes; physical Panel Assistant qualification pending            |
+| 2.8.1   | 2026-10-06    | Vendor camera-talkback microphone records only while its button is held                                                                              |
+| 2.8.0   | See changelog | Modern models gain Matter features and a return to the shipped app version, with factory-reset limits                                                |
+| 2.7.3   | 2026-07-29    | Historical analysis: the legacy OTA declares a `userdebug` base build                                                                                |
 | 2.7.2   | 2026-07-16    | Third-party apps are uninstalled on factory reset                                                                                                    |
 | 2.7.0   | 2026-06-03    | Built-in Home Assistant browser supported again, with a cache clear option; OTA hardware sanity check; GATT non-connectable when RPC over BLE is off |
 | 2.6.0   | 2026-05-12    | AppStore (modern models only); hourly OTA check; BLE authentication dialog; built-in Home Assistant browser deprecated on AppStore models            |
