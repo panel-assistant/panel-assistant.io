@@ -58,21 +58,47 @@ test('a board sold under other names lists them on its page and under each brand
   assert.ok(oem.length >= 5);
   for (const { slug, data } of oem) {
     const html = page(slug);
-    const statement = html.match(/<p id="sold-as"[^>]*>([\s\S]*?)<\/p>/)?.[1] ?? '';
+    const statement = (html.match(/<div id="sold-as"[^>]*>([\s\S]*?)<\/table>/)?.[1] ?? '').replace(
+      /<[^>]+>/g,
+      ' ',
+    );
     for (const { brand, name } of data.sold_as) {
-      assert.ok(
-        statement.includes(`${brand} ${name}`),
+      assert.match(
+        statement,
+        new RegExp(`${brand}\\s+${name.replace(/[+()]/g, '\\$&')}\\s`),
         `${slug} does not say it is sold as ${brand} ${name}`,
       );
-      // The brand's group in the sidebar holds a link with this name to this page.
+      // Another brand's group in the sidebar holds a link with this name to this page; the
+      // maker's own other names are listed on the page only.
       const group =
         sidebar.match(new RegExp(`<summary[^>]*>[\\s\\S]*?>${brand}<[\\s\\S]*?</details>`))?.[0] ??
         '';
-      assert.match(
-        group,
-        new RegExp(`href="${slug}#sold-as"[^>]*>\\s*<span[^>]*>${name.replace(/[+()]/g, '\\$&')}<`),
-        `${brand} has no ${name} entry`,
+      const entry = new RegExp(
+        `href="${slug}#sold-as"[^>]*>\\s*<span[^>]*>${name.replace(/[+()]/g, '\\$&')}<`,
       );
+      if (brand === maker(data.vendor))
+        assert.doesNotMatch(group, entry, `${brand} lists its own alias ${name}`);
+      else assert.match(group, entry, `${brand} has no ${name} entry`);
     }
   }
+});
+
+test('a page that several menu entries lead to says how those models differ', () => {
+  const covering = panels.filter((p) => p.data.covers?.length);
+  assert.ok(covering.length >= 1);
+  for (const { slug, data } of covering) {
+    const table = (
+      page(slug).match(/<div id="sold-as"[^>]*>([\s\S]*?)<\/table>/)?.[1] ?? ''
+    ).replace(/<[^>]+>/g, ' ');
+    for (const { name, note } of data.covers) {
+      assert.ok(note, `${slug}: ${name} has no note saying how it differs`);
+      assert.ok(table.includes(name) && table.includes(note), `${slug} does not describe ${name}`);
+    }
+  }
+});
+
+test('the panel menu carries no badges', () => {
+  const sidebar = page('/hardware/').match(/<nav[^>]*aria-label="Main"[\s\S]*?<\/nav>/)?.[0] ?? '';
+  assert.ok(sidebar.includes('Electron'));
+  assert.doesNotMatch(sidebar, /sl-badge/);
 });

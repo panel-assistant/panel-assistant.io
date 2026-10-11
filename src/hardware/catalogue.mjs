@@ -32,17 +32,29 @@ export const panelRedirects = (prefixes) =>
 /** The manufacturer a `vendor` value names: "Electron (probable)" is grouped under Electron. */
 export const maker = (vendor) => String(vendor ?? '').replace(/\s*\(.*\)\s*$/, '');
 
-/** Every brand and product name a panel page is sold under, its own maker first. */
+/**
+ * Every name a panel page answers to, its own first: other names for the same hardware
+ * (`sold_as`) and other models the page covers (`covers`, the page's own maker). Each carries the
+ * `note` saying how it differs, if it does.
+ */
 export function soldAs(data) {
-  const extra = Array.isArray(data.sold_as) ? data.sold_as : [];
+  const own = maker(data.vendor);
+  const extra = [
+    ...(Array.isArray(data.sold_as) ? data.sold_as : []),
+    ...(Array.isArray(data.covers) ? data.covers : []).map((c) => ({ brand: own, ...c })),
+  ];
   if (extra.length === 0) return [];
-  return [{ brand: maker(data.vendor), name: data.sidebar?.label ?? data.model }, ...extra];
+  return [
+    { brand: own, name: data.sidebar?.label ?? data.model, note: data.sold_as_note },
+    ...extra,
+  ];
 }
 
 function readPages(dir) {
   const pages = [];
   for (const entry of readdirSync(dir, { withFileTypes: true, recursive: true })) {
-    if (!entry.isFile() || !/\.mdx?$/.test(entry.name)) continue;
+    // A leading underscore marks a shared partial, not a page.
+    if (!entry.isFile() || !/^[^_].*\.mdx?$/.test(entry.name)) continue;
     const file = join(entry.parentPath, entry.name);
     const data = parse(readFileSync(file, 'utf8').split(/^---$/m)[1]);
     const path = relative(join(dir, '..', '..'), file)
@@ -63,14 +75,17 @@ export function panelsSidebar(dir = PANELS_DIR) {
   for (const { slug, data } of readPages(dir)) {
     const order = data.sidebar?.order ?? 50;
     const label = data.sidebar?.label ?? data.title;
-    const badge = data.sidebar?.badge;
-    add(maker(data.vendor), { label, slug, ...(badge && { badge }) }, [0, order, label]);
-    for (const { name, badge } of data.covers ?? []) {
-      add(maker(data.vendor), { label: name, link: `/${slug}/`, badge }, [1, 0, name]);
+    // Status (untested, maker unconfirmed) is stated on the page, never as a sidebar badge.
+    add(maker(data.vendor), { label, slug }, [0, order, label]);
+    // Other models a page covers: own entries, landing on the page's table of differences.
+    for (const { name } of data.covers ?? []) {
+      add(maker(data.vendor), { label: name, link: `/${slug}/#sold-as` }, [1, 0, name]);
     }
-    // The anchor keeps an alias from being taken for the page itself, so the sidebar opens the
-    // page's own manufacturer, not whichever brand sorts first.
+    // Another brand's name for the same hardware gets an entry under that brand. The maker's own
+    // alternative names are listed on the page only. The anchor keeps an alias from being taken
+    // for the page itself, so the sidebar opens the page's own manufacturer.
     for (const { brand, name } of data.sold_as ?? []) {
+      if (brand === maker(data.vendor)) continue;
       add(brand, { label: name, link: `/${slug}/#sold-as` }, [2, 0, name]);
     }
   }

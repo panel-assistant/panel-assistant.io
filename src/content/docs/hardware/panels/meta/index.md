@@ -3,17 +3,6 @@ title: Meta Portal family
 description: Which Meta Portal models run Panel Assistant and how well, how the panel app recognises each one, and what to know before buying a used or unopened Portal as a Home Assistant wall panel.
 vendor: Meta
 panelIndex: true
-covers:
-  - name: 'Portal Mini'
-    badge: Untested
-  - name: 'Portal (1st gen)'
-    badge: Untested
-  - name: 'Portal+ (1st gen)'
-    badge: Untested
-  - name: 'Portal+ (2nd gen)'
-    badge: Untested
-  - name: 'Portal Go'
-    badge: Untested
 sidebar:
   label: Overview
   order: 0
@@ -33,15 +22,15 @@ Facebook Portal, Meta Portal, Portal (2nd gen), Portal 10", Portal Mini, Portal+
 
 ## Models and support
 
-| Model                | Released | Screen                        | Android | Device codename           | Status with Panel Assistant                                                                                         |
-| -------------------- | -------- | ----------------------------- | ------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Portal (2nd gen)** | 2020     | 10.1 in, 1280×800, landscape  | 10      | `omni` (measured)         | **[Preliminary](/hardware/panels/meta/portal-10-gen2/)**: one unit tested, with its own hardware profile            |
-| Portal Mini          | 2019     | 8 in                          | 10      | `omni` (one owner report) | Family profile; untested                                                                                            |
-| Portal+ (2nd gen)    | 2021     | 14 in                         | 10      | not yet reported          | Untested; the family profile applies only if it reports `omni` or `aloha`                                           |
-| Portal Go            | 2021     | 10.1 in, battery              | 10      | not yet reported          | Untested; the family profile applies only if it reports `omni` or `aloha`                                           |
-| Portal (1st gen)     | 2018     | 10.1 in                       | 9       | `aloha` (owner reports)   | Family profile; untested. An older platform with fewer sensors: reported to have ambient light but no motion sensor |
-| Portal+ (1st gen)    | 2018     | 15.6 in, rotating             | 9       | `aloha` (owner reports)   | Family profile; untested                                                                                            |
-| Portal TV            | 2019     | none; plugs into a television | 9       | `ripley` (owner reports)  | **Not supported**: it has no screen or touch input of its own                                                       |
+| Model                                                        | Released | Screen                        | Android | Device codename           | Status with Panel Assistant                                                                                         |
+| ------------------------------------------------------------ | -------- | ----------------------------- | ------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Portal (2nd gen)**                                         | 2019     | 10.1 in, 1280×800, landscape  | 10      | `omni` (measured)         | **[Preliminary](/hardware/panels/meta/portal-10-gen2/)**: one unit tested, with its own hardware profile            |
+| [Portal Mini](/hardware/panels/meta/portal-mini/)            | 2019     | 8 in, 1280×800                | 10      | `omni` (one owner report) | Family profile; untested                                                                                            |
+| [Portal+ (2nd gen)](/hardware/panels/meta/portal-plus-gen2/) | 2021     | 14 in, 2160×1440              | 10      | not yet reported          | Untested; the family profile applies only if it reports `omni` or `aloha`                                           |
+| [Portal Go](/hardware/panels/meta/portal-go/)                | 2021     | 10.1 in, 1280×800, battery    | 10      | not yet reported          | Untested; the family profile applies only if it reports `omni` or `aloha`                                           |
+| [Portal (1st gen)](/hardware/panels/meta/portal-gen1/)       | 2018     | 10.1 in, 1280×800             | 9       | `aloha` (owner reports)   | Family profile; untested. An older platform with fewer sensors: reported to have ambient light but no motion sensor |
+| [Portal+ (1st gen)](/hardware/panels/meta/portal-gen1/)      | 2018     | 15.6 in, 1920×1080, rotating  | 9       | `aloha` (owner reports)   | Family profile; untested                                                                                            |
+| Portal TV                                                    | 2019     | none; plugs into a television | 9       | `ripley` (owner reports)  | **Not supported**: it has no screen or touch input of its own                                                       |
 
 Android versions follow Meta's developer documentation, which lists the 2nd-gen family, Mini and Go on Android 10 and the 1st-gen models on Android 9. Both are above Panel Assistant's minimum of Android 8.0.
 

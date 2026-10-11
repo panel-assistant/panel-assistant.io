@@ -19,8 +19,10 @@ photoCredit: 'Photo: Tuya'
 sold_as:
   - brand: Tuya
     name: 'TPA10-M2'
+    note: "Tuya's catalogue name for it"
   - brand: Tuya
     name: 'Control Panel MAX'
+    note: 'Retail and FCC listing name'
 sidebar:
   label: TPA10
 ---

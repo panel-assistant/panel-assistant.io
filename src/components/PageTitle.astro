@@ -13,7 +13,7 @@ const { entry } = Astro.locals.starlightRoute;
 const isPanel = entry.id.startsWith('hardware/panels/');
 const photos = isPanel && Array.isArray(entry.data.photos) ? entry.data.photos : [];
 const credit = isPanel ? entry.data.photoCredit : undefined;
-// The brands and product names this board is sold under; every one of them links here.
+// Every brand and product name that leads to this page, with how each differs.
 const names = isPanel ? soldAs(entry.data) : [];
 const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
 ---
@@ -21,10 +21,31 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
 <Default />
 <TranslationNote />
 {names.length > 0 && (
-  <p id="sold-as" class="sold-as">
-    {brands > 1 ? 'The same hardware is sold by several brands: ' : 'Sold as: '}
-    {names.map((n: { brand: string; name: string }) => `${n.brand} ${n.name}`).join(', ')}.
-  </p>
+  <div id="sold-as" class="sold-as">
+    <p>
+      {brands > 1
+        ? 'This hardware is sold by several brands. This page covers every name below.'
+        : 'This page covers every name below.'}
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Brand</th>
+          <th scope="col">Name</th>
+          <th scope="col">How it differs</th>
+        </tr>
+      </thead>
+      <tbody>
+        {names.map((n: { brand: string; name: string; note?: string }, i: number) => (
+          <tr>
+            <td>{n.brand}</td>
+            <td class="name">{n.name}</td>
+            <td>{n.note ?? (i === 0 ? 'Main name' : 'Same hardware')}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 )}
 {photos.length > 0 && (
   <figure class="hardware-photos not-content">
@@ -84,6 +105,26 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
 <style>
   .sold-as {
     margin: 0.75rem 0 0;
+  }
+  .sold-as p {
+    margin: 0 0 0.5rem;
+  }
+  .sold-as table {
+    border-collapse: collapse;
+    font-size: var(--sl-text-sm);
+  }
+  .sold-as th,
+  .sold-as td {
+    padding: 0.375rem 0.75rem;
+    border-bottom: 1px solid var(--sl-color-hairline);
+    text-align: start;
+    vertical-align: top;
+  }
+  .sold-as .name {
+    white-space: nowrap;
+  }
+  .sold-as th {
+    background: var(--sl-color-gray-6);
   }
   .hardware-photos {
     margin: 1rem 0 1.5rem;

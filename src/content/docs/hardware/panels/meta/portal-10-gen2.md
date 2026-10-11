@@ -9,7 +9,7 @@ screen: 10.1 in, 1280 × 800
 support: Preliminary
 root: No root; Meta's ADB switch is enough for setup
 webview: Meta's own Chromium 131 WebView
-released: '2020'
+released: '2019'
 sidebar:
   label: Portal 10" (2nd gen)
   order: 1
@@ -47,7 +47,7 @@ Meta Portal, Facebook Portal, Portal (2nd gen), Portal 10", model WD50JM. Androi
 | Radios     | Wi-Fi, Bluetooth with **Bluetooth Low Energy**                                                                                            |
 | Connectors | **USB-C**, used for ADB                                                                                                                   |
 | Root       | None. No `su`, no known bootloader unlock. ADB comes from Meta's own Debug setting                                                        |
-| Released   | 2020                                                                                                                                      |
+| Released   | 2019 (announced September, on sale October)                                                                                               |
 
 ## Before you buy
 

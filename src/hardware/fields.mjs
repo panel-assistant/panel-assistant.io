@@ -31,6 +31,7 @@ const PAGE_KEYS = new Set([
   // brands under the panel's name instead of as a column.
   'sold_as',
   'covers',
+  'sold_as_note',
 ]);
 
 /** Panel fields across all entries: most widely used first, then first appearance. */

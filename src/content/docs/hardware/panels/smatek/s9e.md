@@ -14,13 +14,14 @@ photos:
   - src: 'asset:hardware-smatek-s9e-front.jpg'
     alt: Smatek S9E, front and rear, showing the relay and terminal wiring
 photoCredit: 'Photo: Smatek'
+sold_as_note: 'Zigbee (Tuya) version with two mains relays, AC 100-240 V'
 sold_as:
   - brand: Smatek
-    name: 'S9'
-  - brand: Smatek
-    name: 'S9PE'
+    name: 'S9E-NZ'
+    note: 'Android version without the Zigbee gateway: RS485, four buttons, AC 100-240 V'
   - brand: Smatek
     name: 'S9PE-NZ'
+    note: 'As the S9E-NZ, powered over Ethernet (PoE) or DC 9-24 V instead of mains'
 sidebar:
   label: S9E
 ---
