@@ -139,13 +139,25 @@ const OPENNESS = ['open', 'mostly-open'];
 // Every panel with its own page has been actively researched to write it and its profile, which
 // counts for more than a passive report (maintainer, 2026-10-11).
 const RESEARCHED = 4;
+const OLD_ANDROID = 10;
+const OLD_PENALTY = 2;
 
 /** A panel's confidence, 0 to 10, and the evidence behind it, from its `evidence` front matter. */
 export function confidence(data) {
   const have = (Array.isArray(data.evidence) ? data.evidence : []).filter((k) => EVIDENCE[k]);
   const sum = (keys) => keys.reduce((n, k) => n + EVIDENCE[k].points, 0);
-  const score = have.includes('bench')
-    ? Math.min(10, 8 + sum(have.filter((k) => OPENNESS.includes(k))))
-    : Math.min(7, RESEARCHED + sum(have));
-  return { score, reasons: have.map((k) => EVIDENCE[k].text) };
+  const reasons = have.map((k) => EVIDENCE[k].text);
+  if (have.includes('bench')) {
+    return { score: Math.min(10, 8 + sum(have.filter((k) => OPENNESS.includes(k)))), reasons };
+  }
+  // Old hardware running software we have not seen counts against a panel we have not inspected;
+  // an inspected panel has already shown what its age means (maintainer, 2026-10-11).
+  const android = parseFloat(String(data.android));
+  const old = android < OLD_ANDROID;
+  if (old)
+    reasons.push(`but it runs Android ${data.android}, older than the panels we have inspected`);
+  return {
+    score: Math.max(0, Math.min(7, RESEARCHED + sum(have)) - (old ? OLD_PENALTY : 0)),
+    reasons,
+  };
 }

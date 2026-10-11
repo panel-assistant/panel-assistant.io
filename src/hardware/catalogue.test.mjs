@@ -135,7 +135,7 @@ test('every panel records its evidence, and its confidence bar shows on its page
     // An inspected panel scores 8 to 10 and always ranks above one that is not.
     const { score } = confidence(data);
     if (data.evidence.includes('bench')) assert.ok(score >= 8 && score <= 10, `${slug}: ${score}`);
-    else assert.ok(score >= 4 && score <= 7, `${slug}: ${score}`);
+    else assert.ok(score >= 0 && score <= 7, `${slug}: ${score}`);
     assert.match(
       page(slug),
       /class="confidence[^"]*"[^>]*aria-label="Confidence: /,
