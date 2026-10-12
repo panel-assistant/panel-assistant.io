@@ -23,7 +23,7 @@ sidebar:
 ---
 
 :::note
-**This is the one Shelly Wall Display that has been examined on real hardware.** Everything measured on this page comes from a single retail unit, first on factory firmware 2.5.4 and then after updating it to 2.7.4. The specification table mixes those measurements with Shelly's own product data. What the X2i taught us about Shelly's firmware also shapes the [X1i](/hardware/panels/shelly/wall-display-x1i/) and [XL](/hardware/panels/shelly/wall-display-xl/) support, as the [family page](/hardware/panels/shelly/#what-the-x2i-means-for-the-rest-of-the-line) explains; the hardware details here belong to the X2i alone.
+**This is the one Shelly Wall Display that has been examined on real hardware.** Historical measurements come from a single retail unit on factory firmware 2.5.4 and then 2.7.4. Selected operations have since been checked on 2.8.2 in development testing for the forthcoming 1.0 release; the [firmware section](#firmware-and-why-the-shipped-version-matters) records their limits. The specification table mixes those measurements with Shelly's own product data. What the X2i taught us about Shelly's firmware also shapes the [X1i](/hardware/panels/shelly/wall-display-x1i/) and [XL](/hardware/panels/shelly/wall-display-xl/) support, as the [family page](/hardware/panels/shelly/#what-the-x2i-means-for-the-rest-of-the-line) explains; the hardware details here belong to the X2i alone.
 :::
 
 The Wall Display X2i, firmware codename **Jenna**, is a 6.9 in 1440×720 panel on a Rockchip RK3326 (four Cortex-A35), Android 11, arm64-v8a. Shelly's specification names the RK3326-S variant; the chip itself reports only the RK3326 family, which is consistent with that. It is on the modern **WallDisplayV2** OTA track alongside the X1i, XL, Maverick and Dayna, and has access to the built-in AppStore.
@@ -83,11 +83,17 @@ Two limits are worth knowing before you start. Both belong to the installer rath
 
 ## Screen off and waking
 
-The forthcoming Panel Assistant **1.0** release switches the X2i's backlight fully off through Shelly's local Stargate API without root, while Android stays awake. Earlier releases could only dim the screen. Development testing on firmware **2.8.2** confirmed API screen-off and software-injected wake, with brightness still correct after 5 and 30 seconds. The first injected gesture was consumed by wake rather than opening the dashboard menu beneath it; real-finger touch remains to be checked on this firmware.
+The forthcoming Panel Assistant **1.0** release switches the X2i's backlight fully off through Shelly's local Stargate API without root, while Android stays awake. The first wake gesture is consumed so it does not also operate the dashboard. Earlier releases could only dim the screen.
 
-**If Shelly's password protection is enabled**, its screen API requires Digest authentication. The current implementation falls back to Android's own screen timeout, and turning the screen on from Home Assistant was checked to recover it. Keep this distinction in mind when comparing screen behaviour between panels.
+**If Shelly's password protection is enabled**, its screen API requires Digest authentication. The current implementation falls back to Android's own screen timeout. Home Assistant can turn the screen on again through that fallback.
 
-Proximity wake needs calibration. It worked in the earlier measurements, but the 2.8.2 test unit still reported calibration required, so those tests do not establish waking on a wave or staying awake while someone remains nearby. The X2i has no physical button or lock screen to get past after waking.
+The wake controls are:
+
+- **Touch.** A single touch wakes the panel; no double-tap is needed.
+- **A wave or an approach.** Panel Assistant watches the proximity sensor and wakes the panel when someone comes near. This requires proximity calibration through setup.
+- **Home Assistant.** Turn the panel's screen on manually or from an automation.
+
+Proximity calibration also lets the panel stay awake while someone remains nearby. These capabilities were established in the earlier measurements; the [2.8.2 development checks](#firmware-and-why-the-shipped-version-matters) cover injected wake and Home Assistant recovery, with physical touch and proximity checks still outstanding. The X2i has no physical button or lock screen to get past after waking.
 
 ## Sensors
 
@@ -122,7 +128,7 @@ The unit examined here arrived factory-fresh on **2.5.4**, was later updated to 
 As checked on **2026-10-12**, both firmware tracks offer **stable 2.8.2**, build `20261008-101206/2.8.2-7bb488885`, with no beta offered. On an X2i running that exact firmware, signed development testing for the forthcoming Panel Assistant **1.0** release checked:
 
 - **Settings restore:** 84 supported settings restored, with boot-chime suppression and network ADB explicitly unavailable and skipped. No restore failure or rollback failure was reported.
-- **Startup and reboot brightness:** the requested brightness survived startup and reboot. After API screen-off and an injected wake, brightness held at 5 and 30 seconds; when brightness commands overlapped, the newest command won.
+- **Startup and reboot brightness:** the requested brightness survived startup and reboot. After API screen-off and an injected wake, brightness held at 5 and 30 seconds; when brightness commands overlapped, the newest command won. The first injected gesture was consumed rather than opening the dashboard menu beneath it.
 - **Screen control:** API screen-off worked with Shelly authentication disabled. With password protection enabled, Android sleep provided the fallback and Home Assistant screen-on recovered the panel.
 
 These tests cover those operations only, and the fixes belong to the forthcoming 1.0 release. They do not establish full compatibility with 2.8.2 or availability in the current public release. Real-finger touch, paired near/far proximity and ambient-light measurements, and the normal Panel Assistant update route remain to be qualified. The proximity driver was healthy, but still required calibration. Include your firmware version when reporting a problem after an update.
