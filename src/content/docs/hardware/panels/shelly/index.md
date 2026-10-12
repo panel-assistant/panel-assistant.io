@@ -156,9 +156,9 @@ Shelly's current-build CDN link can stop working when a newer version replaces i
 
 ### Current firmware and compatibility
 
-As checked on **2026-10-12**, Shelly offers **stable 2.8.2** on both OTA tracks, build `20261008-101206/2.8.2-7bb488885`, with no beta currently offered. The [official changelog](https://github.com/ShellyGroup/Wall-Display-Changelog) describes fixes to group controls and Shelly Cloud reconnection. Firmware 2.8.1 also fixes the vendor camera-talkback microphone remaining active when its button is not held.
+As checked on **2026-10-12**, Shelly offers **stable 2.8.3** on both OTA tracks, build `20261012-141904/2.8.3-48174502c`, with no beta currently offered. The [official changelog](https://github.com/ShellyGroup/Wall-Display-Changelog) describes fixes for slow-loading Home Assistant dashboards and repeated errors on modern models, and for missed software updates. It also adds the connected Wi-Fi network frequency to RPC status. Firmware 2.8.1 also fixes the vendor camera-talkback microphone remaining active when its button is not held.
 
-The X2i has now run **2.8.2** in development testing for the forthcoming Panel Assistant **1.0** release. Settings restore, an in-place update through Panel Assistant, startup brightness, API screen-off and software-injected wake have been checked; the [X2i page](/hardware/panels/shelly/wall-display-x2i/#firmware-and-why-the-shipped-version-matters) records the limits. **This is partial qualification, not a claim of full 2.8.2 compatibility.** Physical touch and paired proximity and light measurements remain unqualified on this firmware. These findings do not establish the behaviour of the X1i, XL or another Shelly model.
+The X2i has now run **2.8.2** in development testing for the forthcoming Panel Assistant **1.0** release. Settings restore, an in-place update through Panel Assistant, startup brightness, API screen-off and software-injected wake have been checked; the [X2i page](/hardware/panels/shelly/wall-display-x2i/#firmware-and-why-the-shipped-version-matters) records the limits. **This is partial qualification, not a claim of full 2.8.2 compatibility.** Physical touch and paired proximity and light measurements remain unqualified on this firmware. These findings do not establish behaviour on 2.8.3 or on the X1i, XL or another Shelly model.
 
 Record your model and firmware version when reporting a problem, especially one that starts after a vendor update. Keep a Panel Assistant backup and, separately, a Shelly configuration backup before updating. Neither settings backup is a full Android firmware image.
 
@@ -256,22 +256,23 @@ Firmware 2.6.0 disclosed that RPC over BLE was open to any BLE connection withou
 
 ## Firmware versions that affect third-party apps
 
-Stable track, most recent first. Dates for 2.8.1 and 2.8.2 are the vendor package build dates. The full product changelog is at [ShellyGroup/Wall-Display-Changelog](https://github.com/ShellyGroup/Wall-Display-Changelog), which covers 2.4.0 and later; earlier releases are on `community.shelly.cloud`, which needs a login.
+Stable track, most recent first. Dates for 2.8.1, 2.8.2 and 2.8.3 are the vendor package build dates. The full product changelog is at [ShellyGroup/Wall-Display-Changelog](https://github.com/ShellyGroup/Wall-Display-Changelog), which covers 2.4.0 and later; earlier releases are on `community.shelly.cloud`, which needs a login.
 
-| Version | Date          | Relevant change                                                                                                                                        |
-| ------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 2.8.2   | 2026-10-08    | Current stable at the 2026-10-12 check; group-control and Shelly Cloud reconnection fixes; partial X2i development testing; full qualification pending |
-| 2.8.1   | 2026-10-06    | Vendor camera-talkback microphone records only while its button is held                                                                                |
-| 2.8.0   | See changelog | Modern models gain Matter features and a return to the shipped app version, with factory-reset limits                                                  |
-| 2.7.3   | 2026-07-29    | Historical analysis: the legacy OTA declares a `userdebug` base build                                                                                  |
-| 2.7.2   | 2026-07-16    | Third-party apps are uninstalled on factory reset                                                                                                      |
-| 2.7.0   | 2026-06-03    | Built-in Home Assistant browser supported again, with a cache clear option; OTA hardware sanity check; GATT non-connectable when RPC over BLE is off   |
-| 2.6.0   | 2026-05-12    | AppStore (modern models only); hourly OTA check; BLE authentication dialog; built-in Home Assistant browser deprecated on AppStore models              |
-| 2.5.6   | 2026-02-04    | WebView paused in the background on heavy Home Assistant dashboards to avoid crashes, which also reloads WebRTC streams                                |
-| 2.5.3   | about 2025-10 | WebView version check on the old X1                                                                                                                    |
-| 2.5.1   | 2025-10-27    | Android Accessibility settings exposed                                                                                                                 |
-| 2.3.4   | 2025-02-23    | Emergency fix for an OTA update channel failure that left devices stuck on old firmware                                                                |
-| 1.2.1   | 2023-08-15    | Oldest confirmed downloadable version (static CDN)                                                                                                     |
+| Version | Date          | Relevant change                                                                                                                                      |
+| ------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2.8.3   | 2026-10-12    | Current stable at the 2026-10-12 check; modern-model Home Assistant dashboard and update-detection fixes; no Panel Assistant runtime qualification   |
+| 2.8.2   | 2026-10-08    | Group-control and Shelly Cloud reconnection fixes; partial X2i development testing; full qualification pending                                       |
+| 2.8.1   | 2026-10-06    | Vendor camera-talkback microphone records only while its button is held                                                                              |
+| 2.8.0   | See changelog | Modern models gain Matter features and a return to the shipped app version, with factory-reset limits                                                |
+| 2.7.3   | 2026-07-29    | Historical analysis: the legacy OTA declares a `userdebug` base build                                                                                |
+| 2.7.2   | 2026-07-16    | Third-party apps are uninstalled on factory reset                                                                                                    |
+| 2.7.0   | 2026-06-03    | Built-in Home Assistant browser supported again, with a cache clear option; OTA hardware sanity check; GATT non-connectable when RPC over BLE is off |
+| 2.6.0   | 2026-05-12    | AppStore (modern models only); hourly OTA check; BLE authentication dialog; built-in Home Assistant browser deprecated on AppStore models            |
+| 2.5.6   | 2026-02-04    | WebView paused in the background on heavy Home Assistant dashboards to avoid crashes, which also reloads WebRTC streams                              |
+| 2.5.3   | about 2025-10 | WebView version check on the old X1                                                                                                                  |
+| 2.5.1   | 2025-10-27    | Android Accessibility settings exposed                                                                                                               |
+| 2.3.4   | 2025-02-23    | Emergency fix for an OTA update channel failure that left devices stuck on old firmware                                                              |
+| 1.2.1   | 2023-08-15    | Oldest confirmed downloadable version (static CDN)                                                                                                   |
 
 ## Device profiles: known and unknown
 
