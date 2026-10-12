@@ -24,12 +24,10 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
 <Default />
 <TranslationNote />
 {evidence && (
-  <p class="confidence-line">
-    <ConfidenceBar data={entry.data} wide />
-    <span>
-      {evidence.length ? `Confidence: ${evidence.join(', ')}.` : 'Confidence: not yet assessed.'}
-    </span>
-  </p>
+  <div class="confidence-line">
+    <span class="confidence-heading">Confidence</span>
+    <ConfidenceBar data={entry.data} wide open />
+  </div>
 )}
 {names.length > 0 && (
   <div id="sold-as" class="sold-as">
@@ -114,11 +112,13 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
 )}
 
 <style>
+  .confidence-heading {
+    font-weight: 600;
+  }
   .confidence-line {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.25rem 0.75rem;
+    flex-direction: column;
+    gap: 0.375rem;
     margin: 0.75rem 0 0;
     font-size: var(--sl-text-sm);
     color: var(--sl-color-gray-2);

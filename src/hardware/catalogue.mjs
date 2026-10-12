@@ -160,3 +160,34 @@ export function confidence(data) {
     reasons,
   };
 }
+
+/**
+ * Every kind of evidence for a panel, each marked as held, partly held or missing, for the
+ * confidence bar's detail list. The same facts `confidence()` scores, in short labels.
+ */
+export function confidenceChecklist(data) {
+  const have = new Set(Array.isArray(data.evidence) ? data.evidence : []);
+  const item = (state, text) => ({ state, text });
+  const list = [item(have.has('bench') ? 'hit' : 'miss', 'Inspected on a unit we run')];
+  if (have.has('bench')) {
+    list.push(
+      have.has('open')
+        ? item('hit', "Maker's firmware fully open")
+        : have.has('mostly-open')
+          ? item('part', "Maker's firmware mostly open")
+          : item('miss', "Maker's firmware restricts access"),
+    );
+  }
+  list.push(
+    item(have.has('firmware') ? 'hit' : 'miss', "Maker's firmware examined"),
+    item(have.has('documented') ? 'hit' : 'miss', 'Documented by the maker or published specs'),
+  );
+  if (!have.has('bench')) {
+    list.push(item(have.has('platform') ? 'hit' : 'miss', 'Same platform as a panel we inspected'));
+  }
+  list.push(item(have.has('owners') ? 'hit' : 'miss', 'An owner runs Panel Assistant on one'));
+  if (!have.has('bench') && parseFloat(String(data.android)) < OLD_ANDROID) {
+    list.push(item('miss', `Android ${data.android}: older than 10, and not inspected`));
+  }
+  return list;
+}
