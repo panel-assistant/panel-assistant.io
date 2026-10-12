@@ -102,7 +102,7 @@ One qualification keeps the scope exact: an archived **partition** image, not pa
 **What the absence of root means for the panel app:**
 
 - The helper daemon (`hapaneld-helper`) needs a privileged path to `/system`, and without an adb foothold that carries root there is none, so every profile declares `platform.app_can_su: false`. Whether the legacy `userdebug` base build changes that is listed below as unknown.
-- Actions that genuinely need root are therefore unavailable. On the X2i the everyday ones are not among them: brightness goes through Android's own setting, the sensors are ordinary Android sensors, the screen switches fully off through Android's own timeout, and Panel Assistant installs, updates and configures the app over adb, including display size and text size. What is lost is a small privileged set: screenshots and tap-and-capture remote control from Panel Assistant, and rebooting or switching back to the vendor launcher from the panel.
+- Actions that genuinely need root are therefore unavailable. On the X2i the everyday ones are not among them: brightness goes through Android's own setting, the sensors are ordinary Android sensors, the forthcoming 1.0 release switches the screen fully off through Shelly's local API, with Android's timeout as a fallback, and Panel Assistant installs, updates and configures the app over adb, including display size and text size. What is lost is a small privileged set: screenshots and tap-and-capture remote control from Panel Assistant, and rebooting or switching back to the vendor launcher from the panel.
 - The modern built-in AppStore shows that Shelly can distribute approved applications, but the panel app is not one of them. Installation is by sideload, on the X2i after the developer-mode unlock described above. Legacy devices still have no confirmed installation path.
 - **Device-owner behaviour depends on the firmware.** On the X2i's factory 2.5.4 there is no device owner and no device administrator at all. Updating it to 2.7.4 makes Shelly's launcher the device owner, and on that unit this took nothing from Panel Assistant: making it the home app worked without root on both firmwares and held, and the device owner imposes no restrictions on other apps. Shelly's launcher cannot be disabled on either firmware. From firmware 2.8.0, modern models can return to their shipped app version; the [recovery limits](#returning-to-the-shipped-version) below matter before using that option.
 
@@ -131,7 +131,7 @@ Handle relay entities through Home Assistant's Shelly integration rather than as
 
 One [X2i](/hardware/panels/shelly/wall-display-x2i/) has been examined on a bench. The X1i, XL, Maverick and Dayna run the same Shelly firmware on the same OTA track, and the X1i shares its processor family. **From Panel Assistant 1.0 they share one Shelly profile that carries what the X2i showed to be true of the firmware itself**, rather than of the X2i's board:
 
-- **Full screen-off without root.** The screen goes completely dark through Android's own screen timeout, with the same setup step that lifts the firmware's keep-the-screen-on setting while the panel sleeps.
+- **Full screen-off without root.** The forthcoming 1.0 release uses Shelly's local API to switch the backlight off while Android stays awake. With a Shelly password enabled, the current implementation falls back to Android's screen timeout because the API requires Digest authentication. This has been tested on the X2i only.
 - **Back and Home only.** The firmware ignores the Recents key on every model, because it has no recents task directory, so no Recents control is offered.
 - **Panel Assistant as the home screen.** Shelly's launcher stays installed and cannot be disabled, but it does not take the home screen back.
 - **A clean dashboard.** Panel Assistant switches off the corner overlay Shelly's firmware draws over every app, while Shelly's own interface stays reachable from the navigation bar.
@@ -156,9 +156,9 @@ Shelly's current-build CDN link can stop working when a newer version replaces i
 
 ### Current firmware and compatibility
 
-As checked on **2026-10-11**, Shelly offers **stable 2.8.2** on both OTA tracks, build `20261008-101206/2.8.2-7bb488885`, with no beta currently offered. The [official changelog](https://github.com/ShellyGroup/Wall-Display-Changelog) describes fixes to group controls and Shelly Cloud reconnection. Firmware 2.8.1 also fixes the vendor camera-talkback microphone remaining active when its button is not held.
+As checked on **2026-10-12**, Shelly offers **stable 2.8.2** on both OTA tracks, build `20261008-101206/2.8.2-7bb488885`, with no beta currently offered. The [official changelog](https://github.com/ShellyGroup/Wall-Display-Changelog) describes fixes to group controls and Shelly Cloud reconnection. Firmware 2.8.1 also fixes the vendor camera-talkback microphone remaining active when its button is not held.
 
-Panel Assistant's physical X2i evidence covers factory **2.5.4** and **2.7.4**. Firmware inspection of a newer package does not establish that setup, updating Panel Assistant, screen wake and Home Assistant connectivity all work on a panel running it. **2.8.2 has not yet completed that physical compatibility check.** The same OTA track does not establish that another Shelly model behaves identically.
+The X2i has now run **2.8.2** in development testing for the forthcoming Panel Assistant **1.0** release. Settings restore, startup brightness, API screen-off and software-injected wake have been checked; the [X2i page](/hardware/panels/shelly/wall-display-x2i/#firmware-and-why-the-shipped-version-matters) records the limits. **This is partial qualification, not a claim of full 2.8.2 compatibility.** Physical touch, paired proximity and light measurements, and the normal Panel Assistant update route remain unqualified on this firmware. These findings do not establish the behaviour of the X1i, XL or another Shelly model.
 
 Record your model and firmware version when reporting a problem, especially one that starts after a vendor update. Keep a Panel Assistant backup and, separately, a Shelly configuration backup before updating. Neither settings backup is a full Android firmware image.
 
@@ -258,20 +258,20 @@ Firmware 2.6.0 disclosed that RPC over BLE was open to any BLE connection withou
 
 Stable track, most recent first. Dates for 2.8.1 and 2.8.2 are the vendor package build dates. The full product changelog is at [ShellyGroup/Wall-Display-Changelog](https://github.com/ShellyGroup/Wall-Display-Changelog), which covers 2.4.0 and later; earlier releases are on `community.shelly.cloud`, which needs a login.
 
-| Version | Date          | Relevant change                                                                                                                                      |
-| ------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2.8.2   | 2026-10-08    | Current stable at the 2026-10-11 check; group-control and Shelly Cloud reconnection fixes; physical Panel Assistant qualification pending            |
-| 2.8.1   | 2026-10-06    | Vendor camera-talkback microphone records only while its button is held                                                                              |
-| 2.8.0   | See changelog | Modern models gain Matter features and a return to the shipped app version, with factory-reset limits                                                |
-| 2.7.3   | 2026-07-29    | Historical analysis: the legacy OTA declares a `userdebug` base build                                                                                |
-| 2.7.2   | 2026-07-16    | Third-party apps are uninstalled on factory reset                                                                                                    |
-| 2.7.0   | 2026-06-03    | Built-in Home Assistant browser supported again, with a cache clear option; OTA hardware sanity check; GATT non-connectable when RPC over BLE is off |
-| 2.6.0   | 2026-05-12    | AppStore (modern models only); hourly OTA check; BLE authentication dialog; built-in Home Assistant browser deprecated on AppStore models            |
-| 2.5.6   | 2026-02-04    | WebView paused in the background on heavy Home Assistant dashboards to avoid crashes, which also reloads WebRTC streams                              |
-| 2.5.3   | about 2025-10 | WebView version check on the old X1                                                                                                                  |
-| 2.5.1   | 2025-10-27    | Android Accessibility settings exposed                                                                                                               |
-| 2.3.4   | 2025-02-23    | Emergency fix for an OTA update channel failure that left devices stuck on old firmware                                                              |
-| 1.2.1   | 2023-08-15    | Oldest confirmed downloadable version (static CDN)                                                                                                   |
+| Version | Date          | Relevant change                                                                                                                                        |
+| ------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 2.8.2   | 2026-10-08    | Current stable at the 2026-10-12 check; group-control and Shelly Cloud reconnection fixes; partial X2i development testing; full qualification pending |
+| 2.8.1   | 2026-10-06    | Vendor camera-talkback microphone records only while its button is held                                                                                |
+| 2.8.0   | See changelog | Modern models gain Matter features and a return to the shipped app version, with factory-reset limits                                                  |
+| 2.7.3   | 2026-07-29    | Historical analysis: the legacy OTA declares a `userdebug` base build                                                                                  |
+| 2.7.2   | 2026-07-16    | Third-party apps are uninstalled on factory reset                                                                                                      |
+| 2.7.0   | 2026-06-03    | Built-in Home Assistant browser supported again, with a cache clear option; OTA hardware sanity check; GATT non-connectable when RPC over BLE is off   |
+| 2.6.0   | 2026-05-12    | AppStore (modern models only); hourly OTA check; BLE authentication dialog; built-in Home Assistant browser deprecated on AppStore models              |
+| 2.5.6   | 2026-02-04    | WebView paused in the background on heavy Home Assistant dashboards to avoid crashes, which also reloads WebRTC streams                                |
+| 2.5.3   | about 2025-10 | WebView version check on the old X1                                                                                                                    |
+| 2.5.1   | 2025-10-27    | Android Accessibility settings exposed                                                                                                                 |
+| 2.3.4   | 2025-02-23    | Emergency fix for an OTA update channel failure that left devices stuck on old firmware                                                                |
+| 1.2.1   | 2023-08-15    | Oldest confirmed downloadable version (static CDN)                                                                                                     |
 
 ## Device profiles: known and unknown
 

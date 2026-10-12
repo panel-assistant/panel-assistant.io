@@ -28,7 +28,7 @@ sidebar:
 
 The Wall Display X2i, firmware codename **Jenna**, is a 6.9 in 1440×720 panel on a Rockchip RK3326 (four Cortex-A35), Android 11, arm64-v8a. Shelly's specification names the RK3326-S variant; the chip itself reports only the RK3326 family, which is consistent with that. It is on the modern **WallDisplayV2** OTA track alongside the X1i, XL, Maverick and Dayna, and has access to the built-in AppStore.
 
-Panel Assistant runs on it as an ordinary Android app. **Everything needed to set it up and use it day to day works without root**: installing, granting its own permissions, the sensors, brightness, taking over the home screen and, from Panel Assistant 1.0, switching the screen fully off and waking it again with a touch, a wave or from Home Assistant. Root would still buy a few privileged extras, listed under [What this firmware does not have](#what-this-firmware-does-not-have). That makes the X2i the least restrictive Shelly Wall Display documented here and the only one with a confirmed installation path.
+Panel Assistant runs on it as an ordinary Android app. **The measured setup and everyday controls work without root**: installing, granting its own permissions, the sensors, brightness, taking over the home screen and, in the forthcoming Panel Assistant 1.0 release, switching the screen fully off and waking it again. The [current-firmware tests](#firmware-and-why-the-shipped-version-matters) cover only the operations listed there. Root would still buy a few privileged extras, listed under [What this firmware does not have](#what-this-firmware-does-not-have). That makes the X2i the least restrictive Shelly Wall Display documented here and the only one with a confirmed installation path.
 
 ## Also sold as
 
@@ -83,15 +83,11 @@ Two limits are worth knowing before you start. Both belong to the installer rath
 
 ## Screen off and waking
 
-The X2i's backlight cannot be switched off directly without root, so earlier releases could only dim the screen. **From Panel Assistant 1.0 the screen goes fully dark without root**: when the panel sleeps, the app hands over to Android's own screen timeout, the display switches off completely, and the panel goes back to normal when it wakes.
+The forthcoming Panel Assistant **1.0** release switches the X2i's backlight fully off through Shelly's local Stargate API without root, while Android stays awake. Earlier releases could only dim the screen. Development testing on firmware **2.8.2** confirmed API screen-off and software-injected wake, with brightness still correct after 5 and 30 seconds. The first injected gesture was consumed by wake rather than opening the dashboard menu beneath it; real-finger touch remains to be checked on this firmware.
 
-It wakes in three ways:
+**If Shelly's password protection is enabled**, its screen API requires Digest authentication. The current implementation falls back to Android's own screen timeout, and turning the screen on from Home Assistant was checked to recover it. Keep this distinction in mind when comparing screen behaviour between panels.
 
-- **Touch.** Any touch anywhere on the screen wakes it straight away. A single tap is enough; there is no double-tap to learn.
-- **A wave or an approach.** Move a hand towards the panel and it wakes. Android itself never wakes a panel on proximity, so Panel Assistant keeps watching the sensor while the screen is dark and wakes it when someone comes near. This needs proximity setup, which Panel Assistant's setup walks you through.
-- **Home Assistant.** Turning the panel's screen on from Home Assistant, by hand or from an automation, wakes it at once.
-
-While someone stays within about arm's length of the panel, it stays awake rather than going dark under them. The X2i has no physical button, and no lock screen to get past after it wakes.
+Proximity wake needs calibration. It worked in the earlier measurements, but the 2.8.2 test unit still reported calibration required, so those tests do not establish waking on a wave or staying awake while someone remains nearby. The X2i has no physical button or lock screen to get past after waking.
 
 ## Sensors
 
@@ -118,12 +114,18 @@ Until then, drive the relays through Home Assistant's own Shelly integration.
 
 ## Firmware, and why the shipped version matters
 
-The unit examined here arrived factory-fresh on **2.5.4**, and was later updated to **2.7.4**. The observed 2.7.4 update changed device ownership without interrupting Panel Assistant:
+The unit examined here arrived factory-fresh on **2.5.4**, was later updated to **2.7.4**, and now runs **2.8.2**. The observed 2.7.4 update changed device ownership without interrupting Panel Assistant:
 
 - On 2.5.4 there is **no device owner and no device administrator at all**.
 - **2.7.4 installs Shelly's launcher as the device owner.** On the unit examined here that took nothing from Panel Assistant: it stayed the home screen, kept running and stayed online in Home Assistant, and the device owner imposes no restrictions on other apps. Shelly's launcher cannot be disabled on either firmware.
 
-As checked on **2026-10-11**, the modern track offers **stable 2.8.2**, build `20261008-101206/2.8.2-7bb488885`. The setup, sensor and screen-wake measurements above do not establish full compatibility with 2.8.2: physical testing on that firmware remains outstanding. Include your firmware version when reporting a problem after an update.
+As checked on **2026-10-12**, both firmware tracks offer **stable 2.8.2**, build `20261008-101206/2.8.2-7bb488885`, with no beta offered. On an X2i running that exact firmware, signed development testing for the forthcoming Panel Assistant **1.0** release checked:
+
+- **Settings restore:** 84 supported settings restored, with boot-chime suppression and network ADB explicitly unavailable and skipped. No restore failure or rollback failure was reported.
+- **Startup and reboot brightness:** the requested brightness survived startup and reboot. After API screen-off and an injected wake, brightness held at 5 and 30 seconds; when brightness commands overlapped, the newest command won.
+- **Screen control:** API screen-off worked with Shelly authentication disabled. With password protection enabled, Android sleep provided the fallback and Home Assistant screen-on recovered the panel.
+
+These tests cover those operations only, and the fixes belong to the forthcoming 1.0 release. They do not establish full compatibility with 2.8.2 or availability in the current public release. Real-finger touch, paired near/far proximity and ambient-light measurements, and the normal Panel Assistant update route remain to be qualified. The proximity driver was healthy, but still required calibration. Include your firmware version when reporting a problem after an update.
 
 Since **2.8.0**, modern models offer **Uninstall all updates** to return to their shipped vendor-app version. This unit's shipped 2.5.4 is older than 2.6.2, so Shelly says that operation also resets factory defaults. Keep separate Panel Assistant and Shelly settings backups first; neither is a complete Android restore image. Preservation of Panel Assistant through the operation has not been verified. See the [family recovery notes](/hardware/panels/shelly/#returning-to-the-shipped-version) for the exact limits.
 
