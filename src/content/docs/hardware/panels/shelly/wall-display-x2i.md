@@ -28,7 +28,7 @@ sidebar:
 
 The Wall Display X2i, firmware codename **Jenna**, is a 6.9 in 1440×720 panel on a Rockchip RK3326 (four Cortex-A35), Android 11, arm64-v8a. Shelly's specification names the RK3326-S variant; the chip itself reports only the RK3326 family, which is consistent with that. It is on the modern **WallDisplayV2** OTA track alongside the X1i, XL, Maverick and Dayna, and has access to the built-in AppStore.
 
-Panel Assistant runs on it as an ordinary Android app. **The measured setup and everyday controls work without root**: installing, granting its own permissions, the sensors, brightness, taking over the home screen and, in the forthcoming Panel Assistant 1.0 release, switching the screen fully off and waking it again. The [current-firmware tests](#firmware-and-why-the-shipped-version-matters) cover only the operations listed there. Root would still buy a few privileged extras, listed under [What this firmware does not have](#what-this-firmware-does-not-have). That makes the X2i the least restrictive Shelly Wall Display documented here and the only one with a confirmed installation path.
+Panel Assistant runs on it as an ordinary Android app. **The measured setup and everyday controls work without root**: installing, granting its own permissions, the sensors, brightness, taking over the home screen and, in the forthcoming Panel Assistant 1.0 release, switching the screen fully off and waking it again. The [2.8.2 development checks](#firmware-and-why-the-shipped-version-matters) cover only the operations listed there. Root would still buy a few privileged extras, listed under [What this firmware does not have](#what-this-firmware-does-not-have). That makes the X2i the least restrictive Shelly Wall Display documented here and the only one with a confirmed installation path.
 
 ## Also sold as
 
@@ -125,7 +125,7 @@ The unit examined here arrived factory-fresh on **2.5.4**, was later updated to 
 - On 2.5.4 there is **no device owner and no device administrator at all**.
 - **2.7.4 installs Shelly's launcher as the device owner.** On the unit examined here that took nothing from Panel Assistant: it stayed the home screen, kept running and stayed online in Home Assistant, and the device owner imposes no restrictions on other apps. Shelly's launcher cannot be disabled on either firmware.
 
-As checked on **2026-10-12**, both firmware tracks offer **stable 2.8.2**, build `20261008-101206/2.8.2-7bb488885`, with no beta offered. On an X2i running that exact firmware, signed development testing for the forthcoming Panel Assistant **1.0** release checked:
+As checked on **2026-10-12**, both firmware tracks offer **stable 2.8.3**, build `20261012-141904/2.8.3-48174502c`, with no beta offered. Panel Assistant has not been runtime-qualified on 2.8.3. On an X2i running **2.8.2**, build `20261008-101206/2.8.2-7bb488885`, signed development testing for the forthcoming Panel Assistant **1.0** release checked:
 
 - **Settings restore:** 84 supported settings restored, with boot-chime suppression and network ADB explicitly unavailable and skipped. No restore failure or rollback failure was reported. This was checked again after the in-place update below.
 - **Updating through Panel Assistant:** a normal in-place update completed through Home Assistant, with Android's Install confirmation accepted. The app kept its settings and remained the home screen, and Home Assistant reported it healthy afterwards. No reboot, reset or uninstall was needed.
