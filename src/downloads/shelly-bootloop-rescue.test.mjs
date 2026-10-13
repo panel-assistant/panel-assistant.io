@@ -17,7 +17,12 @@ import { join, resolve } from 'node:path';
 const script = resolve('public/downloads/shelly-bootloop-rescue.sh');
 const SERIAL = 'SAWD0000TEST';
 
-function bench({ inBootloader = false, bootloaderSerial = SERIAL, missedBoots = 0 } = {}) {
+function bench({
+  inBootloader = false,
+  bootloaderSerial = SERIAL,
+  missedBoots = 0,
+  adbLists = `${SERIAL}\tdevice`,
+} = {}) {
   const dir = mkdtempSync(join(tmpdir(), 'rescue-'));
   const bin = join(dir, 'bin');
   const log = join(dir, 'calls.log');
@@ -31,6 +36,7 @@ function bench({ inBootloader = false, bootloaderSerial = SERIAL, missedBoots = 
     `#!/usr/bin/env bash
 echo "adb $*" >> "${log}"
 case "$*" in
+  devices) printf 'List of devices attached\n%s\n' "${adbLists}";;
   *"shell"*) echo "== /sys/fs/pstore/console-ramoops-0"; echo "Kernel panic - not syncing";;
   *"reboot bootloader"*)
     m=$(cat "${misses}")
@@ -58,6 +64,7 @@ exit 0
         ANDROID_SERIAL: 'emulator-5554',
         RESCUE_ATTEMPTS: '3',
         RESCUE_FASTBOOT_WAIT: '1',
+        RESCUE_BOOT_WAIT: '1',
       },
     });
   const calls = () => (existsSync(log) ? readFileSync(log, 'utf8').trim().split('\n') : []);
@@ -81,7 +88,7 @@ test('catch reaches the bootloader, saves the crash record and changes nothing',
 test('every command names the serial, never the inherited ANDROID_SERIAL device', () => {
   const b = bench();
   b.run([SERIAL, 'catch']);
-  const adbCalls = b.calls().filter((c) => c.startsWith('adb '));
+  const adbCalls = b.calls().filter((c) => c.startsWith('adb ') && c !== 'adb devices');
   assert.ok(adbCalls.length > 0);
   assert.ok(
     adbCalls.every((c) => c.startsWith(`adb -s ${SERIAL} `)),
@@ -132,4 +139,47 @@ test('an unknown step prints usage and changes nothing', () => {
   assert.equal(r.status, 2);
   assert.match(r.stdout, /catch/);
   assert.deepEqual(b.calls(), []);
+});
+
+test('a mistyped serial gives up instead of waiting for ever', () => {
+  const b = bench({ adbLists: 'OTHERPANEL\tdevice' });
+  const r = b.run(['SAWD-TYPO', 'catch']);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /no device with serial SAWD-TYPO answered/);
+  assert.ok(
+    b.calls().every((c) => !/reboot|shell/.test(c)),
+    b.calls().join('\n'),
+  );
+});
+
+test('a panel that answers but is not ready is reported and never commanded', () => {
+  const b = bench({ adbLists: `${SERIAL}\tunauthorized` });
+  const r = b.run([SERIAL, 'catch']);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /answers as 'unauthorized'/);
+  assert.ok(b.calls().every((c) => !/reboot|shell/.test(c)));
+});
+
+test('every fastboot command except the device list names the serial, and none reads all variables', () => {
+  const b = bench({ inBootloader: true });
+  b.run([SERIAL, 'wipe'], `${SERIAL}\n`);
+  const fbCalls = b.calls().filter((c) => c.startsWith('fastboot ') && c !== 'fastboot devices');
+  assert.ok(fbCalls.length > 0);
+  assert.ok(
+    fbCalls.every((c) => c.startsWith(`fastboot -s ${SERIAL} `)),
+    fbCalls.join('\n'),
+  );
+  assert.ok(b.calls().every((c) => !/getvar/.test(c)));
+});
+
+test('reboot leaves the bootloader without writing, and refuses outside it', () => {
+  const inside = bench({ inBootloader: true });
+  assert.equal(inside.run([SERIAL, 'reboot']).status, 0);
+  assert.deepEqual(
+    inside.calls().filter((c) => c !== 'fastboot devices'),
+    [`fastboot -s ${SERIAL} reboot`],
+  );
+  const outside = bench();
+  assert.equal(outside.run([SERIAL, 'reboot']).status, 1);
+  assert.ok(outside.calls().every((c) => !/reboot/.test(c)));
 });
