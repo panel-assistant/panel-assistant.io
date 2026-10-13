@@ -271,7 +271,7 @@ for (const model of models) {
       page.push(
         `## ${clean(artifact.type)}`,
         '',
-        `- [Vendor download](${artifact.url})`,
+        `- [Original vendor URL](${artifact.url})`,
         `- Archive: ${archiveLink(artifact, wayback)}`,
         `- Size: ${artifact.bytes.toLocaleString('en-US')} bytes`,
         `- Availability: ${observed.summary}`,
