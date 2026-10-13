@@ -20,7 +20,7 @@ The split is a security and maintenance boundary. An imported profile can select
 
 ## One resolved profile per service lifetime
 
-The foreground service resolves a profile once during startup, then supplies the same immutable result to sensors, hardware controllers, the HTTP UI and MQTT discovery. Profile activation is therefore restart-bound: hot-swapping selected fields would leave long-lived controllers, evdev listeners and Home Assistant entities disagreeing about the panel.
+The foreground service resolves a profile once during startup, then supplies the same immutable result to sensors, hardware controllers, the HTTP UI and Panel Assistant entities. Profile activation is therefore restart-bound: hot-swapping selected fields would leave long-lived controllers, evdev listeners and Home Assistant entities disagreeing about the panel.
 
 The activation transaction is:
 
@@ -60,7 +60,7 @@ In order, the resolver:
 
 Every uncertain outcome resolves downward, to Generic and then to the emergency contract, rather than guessing at hardware.
 
-Named core-owned strategies can derive a small set of bounded values from those same facts, for example a product variant that changes the local model label or recommended density. The schema has no general scripting, arbitrary expressions or conditional patch section. Proximity polarity, ranges and firmware classifiers are deliberately not profile data; the runtime learner normalises live sensor behaviour across panels.
+Named core-owned strategies can derive a small set of bounded values from those same facts, for example a product variant that changes the local model label or recommended density. The schema has no general scripting, arbitrary expressions or conditional patch section. Profiles can carry measured proximity calibration, including clear and near observations and a validated wave pattern. The runtime still checks the live source before using it.
 
 ## The rule that keeps profiles from being brittle
 
@@ -71,7 +71,7 @@ Some facts cannot be discovered generically, so they remain explicit profile kno
 Consequences:
 
 - **Generic is conservative.** Standard Android sensors, available CPU governors and other safe routes can be observed; relays, evdev buttons, vendor radios, climate chips, update artifacts and privileged paths remain absent until a reviewed profile declares them.
-- **Declaration is not authority.** A root driver is unavailable when live `su`/helper checks fail. A Shizuku recommendation is author guidance and never installs the Manager, records consent or grants a permission.
+- **Declaration is not authority.** A root driver is unavailable when live `su`/helper checks fail.
 - **Capabilities degrade rather than inventing success.** The UI and diagnostics distinguish a declaration from live availability and a missing authority route.
 - **A profile never expands the helper protocol.** Root/helper commands remain compiled, authenticated, allowlisted and bounded independently of YAML.
 
@@ -92,5 +92,5 @@ The profile's own content version is independent of the document schema. Install
 Validation identifies unusually consequential behaviour separately from ordinary metadata. The preview calls out root-controlled paths, relay or GPIO writes, evdev reads and grabs, recommended package-disable intents, legacy WebView artifact metadata, and a local profile that overrides a bundled match. These are review prompts, not permissions; activation still requires an exact confirmed revision and every driver still enforces its own parameter validation and live checks.
 
 :::note
-For the runtime trust boundaries around profile import, the root helper, `su`, Shizuku and the LAN HTTP surface, see the [security posture](/reference/security/).
+For the runtime trust boundaries around profile import, the root helper, `su` and the LAN HTTP surface, see the [security posture](/reference/security/).
 :::

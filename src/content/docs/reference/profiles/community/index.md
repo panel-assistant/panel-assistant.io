@@ -35,9 +35,9 @@ Three things can still leave it absent, and the Camera card in **Configure** nam
 
 Declaring a camera the board does not expose is safe rather than harmful. A lightweight runtime probe reads Android's camera identifier list for capability reporting; a declared camera is still offered, and a board without one refuses an open with a classified `no_camera_id` fault whose action says the profile is wrong. It does not destabilise the panel.
 
-One requirement travels with the flag. Camera use fails closed unless the panel can show the room that it is open, and while the screen is off that means an off-display route. Declare `hardware.camera` alongside a working `led` block, and set `hardware.camera_lens_offset_px` so the on-screen indicator sits under the lens rather than beside it. Both camera-bearing bundled profiles do this, and it is the reason a camera flag on its own is not enough.
+One requirement travels with the flag. Camera use fails closed unless the panel can show the room that it is open, and while the screen is off that means an off-display route. For capture while the screen is off, provide a working LED indication route. While the screen is lit, the on-screen indicator can satisfy the requirement without an LED. Set `hardware.camera_lens_offset_px` so that indicator sits under the lens rather than beside it.
 
-Everything else about the camera is unchanged by the flag: it stays off until somebody turns it on at the panel, the switch is never a suggested default, and turning it on asks for approval on the panel's own screen in every security mode.
+Everything else about the camera is unchanged by the flag: it stays off until enabled, the switch is never a suggested default, and turning it on through the Home Assistant camera entity asks for approval on the panel's own screen in every security mode. The Camera setting in Configure is a separate owner configuration path.
 
 ## Catalogue
 

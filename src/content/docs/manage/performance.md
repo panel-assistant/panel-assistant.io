@@ -16,7 +16,7 @@ Open the panel's web interface at `http://<panel-ip>:8888/`, or use the **Visit*
 - **Dashboard responsiveness**: real interaction latency, the slowest interaction broken down into input, handler and presentation time, main-thread blocking, time to interactive, and unexpected renderer reloads.
 - **Home Assistant state stream**: state updates per second, the uncompressed JSON payload rate, the initial hydration size, the time until the main thread yields, and the three entities contributing most over the last hour, ranked by both update rate and payload volume.
 - **Performance** and **Top processes**: CPU, GPU, RAM, clock speed, temperature and the busiest processes.
-- **Camera stream**, only on a panel whose profile declares a camera: the subscribers holding the session open, the encoder in use, the requested frame rate beside the delivered one, and the delivered bitrate beside the encoder's cap. A rate well below the one requested is reported as such, with no cause attached: capture pacing in a dim room, the encode path and contention for the video hardware are all candidates, and the card does not guess between them. The request is never quietly reduced; when the session cannot give a stream the rate it asked for, the card shows the request beside the rate the encoder was given. The capture rate is set by whoever opens the camera, so a stream that joins a session opened by a snapshot is encoded at the configured default. The card deliberately quotes no CPU figure, because a hardware encode runs in the codec hardware and the compositor as well as in the app, and no single process is the camera's cost. Read the panel's whole load from Performance and Top processes.
+- **Camera stream**, on a panel with an offered camera: the subscribers holding the session open, the encoder in use, the requested frame rate beside the delivered one, and the delivered bitrate beside the encoder's cap. A rate well below the one requested is reported as such, with no cause attached: capture pacing in a dim room, the encode path and contention for the video hardware are all candidates, and the card does not guess between them. The request is never quietly reduced; when the session cannot give a stream the rate it asked for, the card shows the request beside the rate the encoder was given. The card deliberately quotes no CPU figure, because a hardware encode runs in the codec hardware and the compositor as well as in the app, and no single process is the camera's cost. Read the panel's whole load from Performance and Top processes.
 - **Entities page**: what the built-in renderer is currently subscribed to, what automatic learning found, and which dashboard rules still need a decision.
 - **Diagnostics report** (`/diag`): a report to copy into a bug report when the cause is still unclear.
 
@@ -35,17 +35,17 @@ If the unfiltered dashboard overloads its own WebView, the in-page figures may s
 The collector does not change your configuration. It never turns the entity filter on or off or rewrites it; its first request may create one private installation key in the panel app's internal state. Select the same dashboard view and workload for both runs, change the filter on the panel's web interface, wait for the dashboard to reload, then run one command from a checkout of the [ha-paneld repository](https://github.com/panel-assistant/android) for each state:
 
 ```bash
-python3 scripts/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect filtered --label filtered --output filtered.json
+python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect filtered --label filtered --output filtered.json
 ```
 
 ```bash
-python3 scripts/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect unfiltered --label unfiltered --pair-with filtered.json --output unfiltered.json
+python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect unfiltered --label unfiltered --pair-with filtered.json --output unfiltered.json
 ```
 
 Compare the two results:
 
 ```bash
-python3 scripts/measure-dashboard-performance.py compare filtered.json unfiltered.json --output comparison.json
+python3 tools/measure-dashboard-performance.py compare filtered.json unfiltered.json --output comparison.json
 ```
 
 Each run defaults to three minutes, with a 30-second warm-up and polling every 10 seconds. `--pair-with` reuses an opaque comparison ID from the first result, so the comparison can reject a different physical panel, a different configured Home Assistant or dashboard, or a changed setting that affects the measurement, without recording those private values. It cannot detect a different view chosen by hand within the same dashboard, so keep the visible view and workload the same.
@@ -114,7 +114,7 @@ PX30 and RK3566 panels can run a focused dashboard well, but they still have lim
 
 ## Checklist
 
-- [ ] The built-in renderer is selected wherever Assist voice control and native notifications are not needed
+- [ ] The built-in renderer is selected wherever native notifications are not needed
 - [ ] Automatic entity filtering is on, scanned, reviewed and explicitly applied
 - [ ] Every dashboard tab, pop-up and conditional path was used during learning
 - [ ] Custom-card and template dependencies are pinned or otherwise accounted for

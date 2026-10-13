@@ -1,11 +1,11 @@
 ---
 title: Choose a panel
-description: Panel Assistant runs on any Android wall panel from Android 8.0 up. See every brand and model with its own hardware support, from Sonoff, Shelly, Tuya, Meta, Electron and Smatek, and what a panel needs.
+description: Panel Assistant runs on ARM Android wall panels from Android 8.0 up. See every brand and model with its own hardware support, from Sonoff, Shelly, Tuya, Meta, Electron and Smatek, and what a panel needs.
 ---
 
 import SupportedPanels from '../../../components/SupportedPanels.astro';
 
-**Panel Assistant runs on any Android wall panel with Android 8.0 or newer.** You do not need to find your model on a list first: install it, and the Home Assistant dashboard, screen brightness and sleep, audio and the panel's standard sensors arrive in Home Assistant straight away.
+**Panel Assistant runs on ARM Android wall panels with Android 8.0 or newer and debugging access.** You do not need to find your model on a list first: install it, and the Home Assistant dashboard, screen brightness and sleep, audio and the panel's standard sensors arrive in Home Assistant straight away.
 
 The models below each have their own [hardware page](/hardware/) with the facts to check before you buy. Where a model or family profile is available, it reaches what is special about that panel, such as its LEDs, buttons, relays, camera, microphones and climate sensors.
 
@@ -25,7 +25,7 @@ What a model's own profile adds is the hardware peculiar to that model. Plenty o
 
 ## What a panel needs
 
-- **Android 8.0 or newer.**
+- **Android 8.0 or newer on ARM.** Released builds support `arm64-v8a` and `armeabi-v7a`.
 - **Developer options.** The installer uses Android's debugging interface, which almost every panel lets you turn on.
 - **Any system WebView.** Vendors often ship an out-of-date browser engine. The panel app checks it, and [Preparing the panel](/install/prepare-a-panel/) shows how to update it on your panel.
 - **Root, only for a few extras.** Some capabilities on some models need root. Each hardware page says which, and how to get it.

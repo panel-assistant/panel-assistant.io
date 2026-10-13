@@ -22,11 +22,13 @@ When a Home Assistant illuminance entity is the source, the panel can seed its l
 
 Turn on **Auto-brightness** in the same Display card. The controller keeps up to seven days of ambient history on the panel and learns the normal pattern for each time of day. A short rise above that pattern, such as a room light being switched on, can raise the proposed level above the baseline.
 
-**Minimum level** sets the lowest level automatic control will propose, and rescales the learned range from that floor up to full brightness. It ranges from 4% to 99%. The 4% floor is where the backlight's own minimum sits (it never blanks), so anything lower would move the control without changing the screen. It does not limit manual brightness, which can still be set lower.
+**Minimum level** sets the lowest level automatic control will propose, and rescales the learned range between **Minimum level** and **Maximum level**. It ranges from 4% to 99%. The 4% floor is where the backlight's own minimum sits (it never blanks), so anything lower would move the control without changing the screen. It does not limit manual brightness, which can still be set lower.
+
+**Maximum level** caps automatic brightness, from 5% to 100%, above the selected minimum. It does not limit manual brightness.
 
 **Sensitivity** is how much of a difference from the learned pattern is applied to the screen, once the controller has decided the difference is real. At 0% it ignores the difference and uses the learned pattern alone. Lower values give a steadier response, and the default of 50% leaves equal room to tune either way. It is not a raw follow-the-light control: a brief brightening is acted on only once it has lasted, or risen sharply enough to count, and while the daily pattern is still being learned the screen follows the measured light whatever this is set to.
 
-The seven-day chart previews the observed range, the learned baseline and the proposed level, before or while the controller is active. Unsaved changes to Minimum level and Sensitivity show in the preview without rewriting the stored history.
+The seven-day chart previews the observed range, the learned baseline and the proposed level, before or while the controller is active. Unsaved changes to Minimum level, Maximum level and Sensitivity show in the preview without rewriting the stored history.
 
 The history belongs to the selected source and to a coarse room and time context taken from the Home Assistant location and time zone. A material change of location, time zone or source starts a separate history, rather than quietly applying what was learned in another context.
 

@@ -77,7 +77,7 @@ Content-Type: application/json
 {"name": "<name>", "manifest": "<the .json file's text>", "model": "<the .tflite file, base64-encoded>"}
 ```
 
-It answers `200` with `{"id", "wake_word"}` on success, `422` with `{"error"}` if the panel's wake word engine refuses the model, and `413` if the manifest or model is too large. `GET /api/v1/voice/wake-words` lists both the bundled and the imported wake words on a panel.
+It answers `200` with `{"id", "wake_word"}` on success, `422` with `{"error"}` if the panel's wake word engine refuses the import, including a manifest over 16 KiB or a model over 2 MiB, and `413` if the whole request exceeds 4 MiB. `GET /api/v1/voice/wake-words` lists both the bundled and the imported wake words on a panel.
 
 This imports one model into a list of panel addresses from a shell:
 

@@ -9,7 +9,7 @@ The site is a static build made with [Astro](https://astro.build/) and [Starligh
 Panel Assistant has two parts. This repository is only the website.
 
 - [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration) is the Home Assistant integration: the installer, the per-panel devices and the page that shows all of your panels. It is installed through HACS.
-- [panel-assistant/android](https://github.com/panel-assistant/android) is the app the integration puts on each panel, and the reference documentation lives there.
+- [panel-assistant/android](https://github.com/panel-assistant/android) is the app the integration puts on each panel.
 
 ## Help links: `/go/<topic>`
 

@@ -5,7 +5,7 @@ description: From a bare Android wall panel to your Home Assistant dashboard in 
 
 If you have set up a wall panel or kiosk before, you probably remember how it went: sideloading apps, hunting for a browser engine that could draw a dashboard, guessing at settings, and never quite trusting the next reboot. Setting up a panel with Panel Assistant will come as a pleasant shock. You can be done in minutes, and even with the panel on the wall you won't have to get up from your chair. OK, maybe once ;-)
 
-The hard part of any panel is the first hour. Panel Assistant does that hour for you, from inside Home Assistant. If the panel is already on your network, give the integration its address and it does the rest. If it is still in the box, plug it into your laptop with a USB cable and install straight from your browser, before it ever goes on the wall. Either way you approve one prompt on the panel and watch it through.
+The hard part of any panel is the first hour. Panel Assistant does that hour for you, from inside Home Assistant. If the panel is already on your network, give the integration its address and it does the rest. If it is still in the box, plug it into your laptop with a USB cable and install straight from your browser, before it ever goes on the wall. If the panel asks you to authorise debugging, accept the prompt on its screen, then watch the installation through.
 
 ## 1. Install the integration
 
@@ -13,7 +13,7 @@ Add Panel Assistant through HACS and restart Home Assistant. This is the only th
 
 ## 2. Switch on debugging on the panel
 
-Open developer options on the panel and turn on wireless debugging, or USB debugging if you are plugging the panel in. That is what lets Home Assistant do the installing for you. The [hardware pages](/hardware/) show where the switch is on each model, and [Prepare the panel](/install/prepare-a-panel/) has the details.
+Open developer options on the panel and turn on network ADB on TCP port 5555, or USB debugging if you are plugging the panel in. That is what lets Home Assistant do the installing for you. The [hardware pages](/hardware/) show where the switch is on each model, and [Prepare the panel](/install/prepare-a-panel/) has the details.
 
 ## 3. Add the panel
 
@@ -87,7 +87,7 @@ Either way, the wizard takes care of the messy part. It checks what is already o
 
 ## 4. Finish on the panel's own wizard
 
-Home Assistant then opens the panel's own setup wizard, which asks a few quick questions, including a name for the panel and the dashboard for the wall. The panel loads only the entities that dashboard shows, which is what keeps it fast. See [Connect a panel](/home-assistant/connect-a-panel/).
+Home Assistant then opens the panel's own setup wizard, which asks a few quick questions, including a name for the panel and the dashboard for the wall. With entity filtering enabled, the panel loads only the entities that dashboard uses, which is what keeps it fast. See [Connect a panel](/home-assistant/connect-a-panel/).
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="The panel setup wizard, step by step" tabindex="0">
 <figure>
@@ -120,7 +120,7 @@ Home Assistant then opens the panel's own setup wizard, which asks a few quick q
 ## What you need
 
 - Home Assistant 2026.8.3 or newer, with HACS.
-- A wall panel running Android 8.0 or newer. Most panels work with the generic hardware profile, and [Choose a panel](/install/supported-panels/) lists the models with full hardware support.
+- An ARM wall panel running Android 8.0 or newer, with debugging access. Most panels work with the generic hardware profile, and [Choose a panel](/install/supported-panels/) lists the models with full hardware support.
 - For the USB option, a Chromium-based browser such as Chrome or Edge.
 
 ## Where the detail lives

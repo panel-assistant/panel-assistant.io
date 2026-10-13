@@ -3,7 +3,9 @@ title: Understand a support report
 description: Read a Panel Assistant installation or update failure and share it when asking for help.
 ---
 
-When an installation or update fails, open its item under **Settings → Repairs** in Home Assistant and choose **Support report**. The report preserves the exact field names and values in a copyable text block. It starts with `panel_assistant.version` and `panel_assistant.build`, followed by `home_assistant.version` and the Repair ID in `repair.issue_id`. Saved events appear under `events[N]`, where `N` starts at 0.
+When a network installation or panel-app update fails, open its item under **Settings → Repairs** in Home Assistant and choose **Support report**. The report preserves the exact field names and values in a copyable text block. It starts with `panel_assistant.version` and `panel_assistant.build`, followed by `home_assistant.version` and the Repair ID in `repair.issue_id`. Saved events appear under `events[N]`, where `N` starts at 0.
+
+For a failed [USB installation](/install/install-over-usb/), open the installer's support details instead.
 
 Read the report before sharing it. It may include a panel address, device identifiers, release details, and an exception trace. Remove anything you do not want to put in a public issue. Keep the failure reason and the surrounding details if you can; they help explain what happened.
 

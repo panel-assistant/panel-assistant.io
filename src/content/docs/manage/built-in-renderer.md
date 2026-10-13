@@ -159,6 +159,7 @@ Like the rest of the panel's control API, this endpoint is unauthenticated and m
 **Dashboard theme** (Configure, then Built-in renderer) decides who chooses between light and dark:
 
 - **Follow Home Assistant** (the default) leaves the choice to Home Assistant. The panel supplies only a starting point: on Android 13 and newer that tracks the system setting live, on Android 10 to 12 it follows the system setting when the dashboard loads, and on Android 9 and older the **Dark mode** toggle (Configure, then Display) sets it. A theme picked inside Home Assistant wins over that starting point.
+- **Ambient** chooses light or dark from the room model used by Auto-brightness. Auto-brightness must be enabled; before usable readings arrive it follows Home Assistant. A change needs a full minute of sustained light or darkness.
 - **Dark** and **Light** make the panel choose. This is for a kiosk dashboard with the sidebar hidden, where the Home Assistant profile page cannot be reached from the panel at all.
 
 Forcing a theme changes only the light or dark part of the choice. A named theme and its colours stay exactly as they are, and switching back to Follow Home Assistant returns the light or dark part to what it was before, or to Auto if nothing was set. The panel never changes the theme stored against your Home Assistant account, so a panel set to Dark cannot darken your phone.

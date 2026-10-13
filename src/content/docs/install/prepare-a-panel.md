@@ -7,9 +7,9 @@ Two things need to be true before you add a panel, and a third decides whether t
 
 ## 1. Developer options and debugging are on
 
-The installer talks to the panel through Android's debugging interface, which every Android device has but ships turned off. Turning it on means opening developer options on the panel and enabling debugging: **USB debugging** for the [USB route](/install/install-over-usb/), or **wireless debugging**, sometimes called network ADB, for the network route. The exact sequence differs per model and is covered in the [hardware pages](/hardware/).
+The installer talks to the panel through Android's debugging interface, which every Android device has but ships turned off. Turning it on means opening developer options on the panel and enabling debugging: **USB debugging** for the [USB route](/install/install-over-usb/), or **network ADB on TCP port 5555** for the network route. Android's paired Wireless debugging feature is a different connection method and is not supported by this installer. The exact sequence differs per model and is covered in the [hardware pages](/hardware/).
 
-The first time the installer connects, the panel shows an authorisation prompt on its own screen. Someone has to accept it there; it cannot be accepted remotely.
+If the panel asks you to authorise the connection, someone has to accept that prompt on the panel's own screen; it cannot be accepted remotely.
 
 ## 2. The panel has a fixed address
 

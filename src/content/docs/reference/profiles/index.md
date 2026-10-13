@@ -102,11 +102,7 @@ Profiles describe candidate mechanisms; live probes decide whether the running p
 
 ### Standard Android
 
-Start here. Dashboard rendering, MQTT pairing and ordinary Android sensors, brightness, audio, navigation and the local web UI do not require root. A new profile should prove its identity and standard-Android behaviour before adding a privileged driver.
-
-### Exceptional shell fallback
-
-Omit `provisioning.access.shizuku` unless the profile selects a concrete compiled capability whose authority contract explicitly supports that alternate route. Generic conveniences do not justify a profile recommendation. The declaration is guidance only and never installs or approves anything; the narrow setup and security boundary are documented in the Shizuku fallback section of the [command-line install guide](/manage/command-line-install/).
+Start here. Dashboard rendering, Panel Assistant pairing and ordinary Android sensors, brightness, audio, navigation and the local web UI do not require root. A new profile should prove its identity and standard-Android behaviour before adding a privileged driver.
 
 ### Vendor root or the ha-paneld helper
 

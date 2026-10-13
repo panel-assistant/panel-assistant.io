@@ -76,10 +76,10 @@ The [browser installer](/install/install-over-usb/) completed against a factory 
 - **It switches off Shelly's corner overlay**, the small Shelly control that the firmware otherwise draws over every app, so the dashboard is clean. Shelly's own interface stays reachable: the launcher button on Panel Assistant's navigation bar lists it with the panel's other apps.
 - **It walks you through proximity setup.** A few hand movements in front of the panel teach it what near and clear look like, which is what lets a wave wake the screen.
 
-Two limits are worth knowing before you start. Both belong to the installer rather than to this panel:
+Two setup details are worth knowing before you start:
 
 - **It does not configure Wi-Fi.** A boxed panel has no network, and setup continues on the panel's own screen, which needs one. Join the panel to Wi-Fi in Settings before or after the install.
-- **It does not take over the home screen.** Until you set it as the home app, pressing home returns you to Shelly's launcher. Setting Panel Assistant as the home app works without root, and it holds home reliably afterwards. Shelly's return-to-home watchdog does not take it back.
+- **Setup tries to make Panel Assistant the home app and checks the result.** Follow any remaining chooser instruction if needed. Setting it as the home app works without root, and it holds home reliably afterwards. Shelly's return-to-home watchdog does not take it back.
 
 ## Screen off and waking
 
@@ -116,7 +116,7 @@ Until then, drive the relays through Home Assistant's own Shelly integration.
 
 - **No Recents at all.** The firmware ignores the Recents key, and Android's accessibility Recents action does nothing either, each tested with an ordinary app and with Settings in front. The reason is below both of them: the system logs that the recents task directory does not exist, so no route can produce a task switcher. Panel Assistant offers Back and Home on this panel, and no Recents control.
 - **No camera.** The firmware declares camera features that no hardware backs, and Android enumerates no camera. Nothing declares a camera in the profile either, so Panel Assistant correctly offers none here.
-- **No root.** There is no `su` and no way to become root from the shell. Setting the panel up and using it day to day does not need it, and Panel Assistant installs and updates the app on this panel without it. A few features do stay unavailable: screenshots and tap-and-capture remote control from Panel Assistant, and rebooting or switching back to the vendor launcher from the panel. The onboard relays are a separate matter, covered above.
+- **No root.** There is no `su` and no way to become root from the shell. Setting the panel up and using it day to day does not need it, and Panel Assistant installs and updates the app on this panel without it. A few features do stay unavailable: rebooting or switching back to the vendor launcher from the panel. Android 11 or newer can also provide screenshots and taps through the enabled Accessibility service without root; remote taps remain subject to security settings. The onboard relays are a separate matter, covered above.
 
 ## Firmware, and why the shipped version matters
 

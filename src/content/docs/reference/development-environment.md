@@ -33,11 +33,11 @@ If you run the script from inside a container that talks to an outer Docker daem
 
 ## The root helper
 
-When you install a local build on a rooted panel, run [`helper/build.sh`](https://github.com/panel-assistant/android/blob/main/helper/build.sh) first. The app and both ABI-specific helpers embed the same identity, derived from every helper source file, header and command definition. The installer verifies that identity before replacing the APK, so a local app build cannot silently depend on stale privileged code.
+Gradle builds and verifies both ABI-specific root helpers automatically before building the app. The app and helpers embed the same identity, derived from every helper source file, header and command definition, so a local app build cannot silently depend on stale privileged code.
 
 ## Signing
 
-You do not need to configure signing to build and run ha-paneld. Debug builds use the committed `debug.keystore` and install directly. Official releases are signed with the project's private release key, which is never in the repository.
+You do not need to configure signing to build and run ha-paneld. A checkout without signing configuration uses the committed `debug.keystore` for debug builds. If `keystore.properties` supplies signing configuration, debug builds use that key instead. Official releases are signed with the project's private release key, which is never in the repository.
 
 Android refuses to update an installed app with an APK signed by a different key. Moving a panel between an official release, your own release key and a debug build therefore means uninstalling first. Before you do, make a full encrypted `.hpb` backup from **Install → Backup** and check the file was saved; uninstalling otherwise removes profiles, learned state and history. Install the other build, then restore the backup from **Install → Restore**. See [Updates and recovery](/manage/updates-and-recovery/).
 

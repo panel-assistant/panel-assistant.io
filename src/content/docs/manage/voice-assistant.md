@@ -6,12 +6,12 @@ description: Turning a panel's microphone into a Home Assistant Assist satellite
 A panel with a microphone can act as a Home Assistant [Assist satellite](https://www.home-assistant.io/voice_control/). It listens for a wake word, streams your command to Home Assistant, and speaks the answer back through the panel's speaker. There is no separate device to add: the satellite is an `assist_satellite.<panel>` entity on the panel's existing Home Assistant device, and the audio travels over the same connection the panel already uses.
 
 :::note
-It needs ha-paneld 0.9.9 or later on the panel and the Panel Assistant integration 0.7.0 or later in Home Assistant. Only a panel whose device profile declares a microphone offers it. Today that means the Sonoff NSPanel Pro (86 and 120) and the Electron WF1589T. Other panels do not show a Voice card on the Configure page.
+It needs ha-paneld 0.9.9 or later on the panel and the Panel Assistant integration 0.7.0 or later in Home Assistant. The Voice card is offered when the device profile declares a microphone, or when Android reports a built-in microphone on a panel whose profile leaves it unspecified. An unverified microphone must pass the panel's capture check before listening starts. A profile that explicitly declares no microphone does not offer Voice.
 :::
 
 ## Turn it on
 
-It is off by default, so the microphone stays released until you enable it.
+It is off by default, so the voice assistant does not hold the microphone until you enable it.
 
 1. Open `http://<panel>:8888/`, then **Configure**.
 2. On the **Voice** card, turn on **Voice assistant**.
@@ -19,7 +19,7 @@ It is off by default, so the microphone stays released until you enable it.
 4. Under **Wake word pipelines**, choose which Assist pipeline each ticked wake word should use.
 5. **Save**.
 
-With the voice assistant off, the microphone is released entirely and the satellite entity shows unavailable in Home Assistant.
+With the voice assistant off, its microphone leases are released and the satellite entity shows unavailable in Home Assistant. Another enabled feature, such as camera room audio, may still use the microphone.
 
 ## Wake words and pipelines
 

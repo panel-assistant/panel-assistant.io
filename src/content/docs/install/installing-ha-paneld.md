@@ -9,15 +9,15 @@ Whichever you take, work through [Prepare the panel](/install/prepare-a-panel/) 
 
 ## Over the network
 
-For a panel that is already on your network. Go to **Settings**, **Devices and services**, add **Panel Assistant**, and give it the panel's address. The integration checks what is on the panel, asks you to approve a debugging prompt on the panel's own screen the first time, installs the panel app, starts it, and only then creates the device. If the panel is already running the app, it adopts it instead, which is quicker.
+For a panel that is already on your network. Go to **Settings**, **Devices and services**, add **Panel Assistant**, and give it the panel's address. The integration checks what is on the panel, asks you to approve a debugging prompt on the panel's own screen if required, installs the panel app, starts it, and only then creates the device. If the panel is already running the app, it adopts it instead, which is quicker.
 
 ## Over USB
 
-For a panel that is still in the box, or whose vendor software makes network access awkward. Plug it into your laptop and install from your browser, with nothing crossing your network. It is started from the Panel Assistant page in the sidebar and needs a Chromium-based browser. See [Install over USB](/install/install-over-usb/).
+For a panel that is still in the box, or whose vendor software makes network access awkward. Plug it into your laptop and install from your browser over the USB cable. Your browser stays connected to Home Assistant, which supplies the verified release; the panel does not need network ADB. It is started from the Panel Assistant page in the sidebar and needs a Chromium-based browser. See [Install over USB](/install/install-over-usb/).
 
 ## What the installer protects
 
-Both routes check the panel before changing anything and refuse to install over an existing installation rather than risk what is on it. The network route takes a snapshot of the panel's data before it makes a change. If an install is interrupted it can be run again and will check any half-finished step before carrying on. The [install safety notes](/manage/install-safety/) describe exactly what is protected and when the installer stops.
+Both routes check the panel before changing anything. The network route adopts an existing app rather than reinstalling it. USB does not overwrite a different existing installation; if the exact selected build is already installed, it finishes that build's setup. An interrupted USB install can be retried with the same release, checking what completed before carrying on. For backups before an app update, see [Updates and recovery](/manage/updates-and-recovery/).
 
 ## After it is installed
 

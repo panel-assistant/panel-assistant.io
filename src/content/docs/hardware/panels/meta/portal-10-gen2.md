@@ -119,7 +119,7 @@ A Portal remains a Meta device with Meta's software on it, and the panel app doe
 
 **Meta's camera analysis does not light the green light.** Meta's own motion and presence detection watches the room through a separate, reduced camera stream that runs continuously without switching the camera light on. The green light reports only the camera stream that other apps use. The panel app cannot open Meta's analysis stream, so whenever the panel app uses the camera, the green light is on.
 
-**The privacy slider works for the panel app.** With the slider at the camera position, Android reports the camera as unavailable and the panel app's camera stops delivering images. At the microphone-off position the panel app's voice assistant heard nothing. Android does not tell apps that the microphones are off, so the panel app cannot show that state itself.
+**The privacy slider works for the panel app.** With the slider at the camera position, Android reports the camera as unavailable and the panel app's camera stops delivering images. At the microphone-off position the panel app's voice assistant heard nothing. In 1.0 the panel app follows Meta's privacy event alongside Android's mute state and can show microphone mute. Physical slider transitions and startup with the microphone on have not yet been qualified for that reporting path.
 
 **The panel app.** The panel app sends camera, microphone and sensor data only to your own Home Assistant. The camera is off until you turn it on, and video leaves the panel only if you do.
 

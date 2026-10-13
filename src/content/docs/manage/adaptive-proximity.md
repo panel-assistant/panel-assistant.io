@@ -3,20 +3,15 @@ title: Adaptive proximity and wake on wave
 description: How the panel learns its proximity sensor, what it reports to Home Assistant, and how a wave wakes the screen.
 ---
 
-Proximity sensors on Android wall panels do not share one useful scale. Some report a distance, some report only two values, the polarity can be reversed, and idle readings can drift between units and firmware versions. The panel app learns the connected sensor's clear baseline, its near reference, its polarity and how it reports, instead of relying on thresholds set per model.
+Proximity sensors on Android wall panels do not share one useful scale. Some report a distance, some report only two values, the polarity can be reversed, and idle readings can drift between units and firmware versions. The panel app uses the active sensor profile's calibrated model, or a model you save through guided setup, to interpret its baseline, near reference and polarity.
 
 ![The panel's guided proximity setup, at step 3 of 7, asking you to walk towards the panel as you normally would while it counts down](/screenshots/proximity-setup-screen-480.gif)
 
-## Learning and teaching
+## Guided setup
 
-Open **Configure**, then **Presence & wake**, to see the current phase. Learning runs on the panel and normally needs no setup:
+Open **Configure**, then **Presence & wake**, to see whether the active sensor profile has a usable model. Where setup is offered, start the guided proximity setup there and follow the instructions on the panel's own screen. It measures the clear signal and deliberate hand movements; review the result and save it on the panel.
 
-1. Keep clear of the panel while it identifies the idle signal and the room's baseline.
-2. Use the panel normally, so deliberate approaches and retreats can be told apart from idle jitter.
-3. For a faster start, select **Teach a wave** and make three deliberate waves when prompted.
-4. Once it is ready, **Test a wave** checks one gesture without waking the display.
-
-Touch to wake works throughout learning. **Forget learned proximity** deletes what was learned for that sensor and starts learning again; use it after moving the panel, changing its firmware or changing how the sensor is reached.
+**Restore profile defaults** replaces your saved calibration with the sensor profile's defaults, where available. A sensor without a usable model needs guided setup before proximity waking is ready. Touch to wake remains available on panels with a validated touch-wake route.
 
 ## Home Assistant entities
 
@@ -29,6 +24,6 @@ Both entities stay unavailable while there is not enough evidence or the sensor 
 
 ## Wake on wave
 
-**Wake on wave** recognises one bounded movement: far, then near, then far again. Someone standing near the panel, teaching, testing and short idle jitter do not wake the display, so a person lingering nearby or a noisy sensor does not turn into a stream of wake requests.
+**Wake on wave** uses the hand approach or wave pattern validated by the sensor profile or guided setup. A single-hand pattern triggers as the hand approaches; a double-wave pattern checks the paired movements before waking. Setup and short idle jitter do not generate wake requests.
 
 It needs a live proximity source and a learned model that is ready. The source can be an ordinary Android sensor or a route chosen by the hardware profile. The panel's web interface and diagnostics show the route actually in use and whether it is ready; a profile declaring a sensor does not by itself make one available.

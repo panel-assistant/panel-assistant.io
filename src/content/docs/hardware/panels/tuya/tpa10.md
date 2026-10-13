@@ -97,7 +97,7 @@ The panel must be on Wi-Fi for the network route. From then on, `adb connect <pa
 :::
 
 :::danger
-Disable the vendor `com.smartos.xinch.*` packages only as the **very last step**, after confirming adb is solid _and_ you have a replacement for the hardware buttons. Disabling the hardware or settings apps before adb is reliable can lock you out. The panel app's remote navigation actions (Back, Recents) and its button backlight and LED entities replace the vendor app's functions.
+Disable the vendor `com.smartos.xinch.*` packages only as the **very last step**, after confirming adb is solid _and_ you have a replacement for the hardware buttons. Disabling the hardware or settings apps before adb is reliable can lock you out. The panel app's remote navigation actions (Back, Home) and its button backlight and LED entities replace the vendor app's functions.
 :::
 
 :::note
@@ -214,7 +214,7 @@ Proximity is app-direct through `SensorManager`. Temperature, humidity and ambie
 The CHT8305 makes this panel a usable **room temperature and humidity sensor** for Home Assistant. The helper daemon reads it with its `CHT8305` verb, an `EVIOCGABS` point read of the driver's `ABS_THROTTLE` input axis that matches the `temperature` and `humidity` input devices by name. The panel app then offers two optional **Room temperature** and **Room humidity** sensors in Home Assistant (Configure, Diagnostics; off by default). An advanced **Room temperature offset** setting, or the profile's `sensors.room_temp_offset_c`, corrects for the panel's own warmth.
 :::
 
-The TPA10's time-of-flight sensor means proximity is genuinely distance-based, but the Android HAL quantises it. The panel app learns the live sensor's endpoints and direction, then reports the same normalised proximity scale used on every supported panel rather than relying on a fixed device-specific cutoff.
+The TPA10's time-of-flight sensor means proximity is genuinely distance-based, but the Android HAL quantises it. Guided on-panel proximity setup captures and saves the live sensor's clear and near endpoints and direction, then the panel reports the same normalised scale used on every supported panel rather than relying on a fixed device-specific cutoff.
 
 ### Sensor chips and access paths
 
@@ -236,7 +236,7 @@ The TPA10 has **three classes** of physical button, confirmed on the device with
 
 **1. The four side buttons are `adc-keys` and send standard KeyEvents.** They sit on the rk3566 **SARADC** (`fe720000.saradc`), device `adc-keys1` (`/dev/input/event7`), scancodes `59` to `62`. The stock `Generic.kl` maps them to **`F1` to `F4`**, which become Android `KEYCODE_F1` to `KEYCODE_F4`; the panel app captures them through its accessibility key filter. On a unit with `su` they can be remapped by editing `/system/usr/keylayout/Generic.kl` (for example to `BRIGHTNESS_*` or `VOLUME_*`).
 
-**2. The fifth (orange) button is a switch, not a key.** On `gpio-keys` (`/dev/input/event8`) it reports **`EV_SW` `SW_MUTE_DEVICE`** (switch code `14`), a _latching_ event, **not** an `EV_KEY`. That is why no keylayout entry exists for it and Android accessibility never sees it, so the stock firmware leaves it dead. The panel app reads it through the root helper daemon's evdev reader (`WATCH /dev/input/event8`, `sw=true`) and sends a Home Assistant event (`KEYCODE_MUTE`) on each toggle, validated end to end. This is **stock** behaviour, undocumented elsewhere at the time of writing.
+**2. The fifth (orange) button is a switch, not a key.** On `gpio-keys` (`/dev/input/event8`) it reports **`EV_SW` `SW_MUTE_DEVICE`** (switch code `14`), a _latching_ event, **not** an `EV_KEY`. That is why no keylayout entry exists for it and Android accessibility never sees it. It physically mutes the microphones, independently of accessibility key delivery. The panel app reads it through the root helper daemon's evdev reader (`WATCH /dev/input/event8`, `sw=true`) and sends a Home Assistant event (`KEYCODE_MUTE`) on each toggle, validated end to end. This is **stock** behaviour, undocumented elsewhere at the time of writing.
 
 **3. The pin-hole button (recessed, beside the USB-C port) is not an Android input.** It is absent from `getevent`, `gpio-keys` and `dmesg`, so Home Assistant cannot use it. Its electrical role has not been safely confirmed. Its placement and the rk3566 platform suggest a reset or boot-mode function, but there is no verified hold duration, factory-reset behaviour or Maskrom entry procedure. Do not press or hold it on the assumption that it provides a recoverable reflash path. Use the verified software-entered Loader route while Android still boots, and follow the limits in [Firmware backup and restore](/hardware/guides/firmware-backup-and-restore/).
 
@@ -248,7 +248,7 @@ GalaxyCore **GC05A2 / GC5035**, a 2592×1944 sensor. Android reports one camera 
 The firmware's own feature flags are wrong about it: the panel declares `android.hardware.camera.front` while the HAL reports `Facing: Back`. Decide on the device profile and on what `CameraManager` actually enumerates, never on `hasSystemFeature`.
 :::
 
-1280×720 is offered in all three formats, `IMPLEMENTATION_DEFINED`, `YUV_420_888` and `BLOB`, so both preview and still-capture formats are available. The HAL advertises a one-frame stall for a 720p `BLOB` capture at 30 fps, but the panel app captures `YUV_420_888` and compresses JPEG in software, so that figure does not measure the app's snapshot cost. `android.control.aeAvailableTargetFpsRanges` offers only `[15 30]` and `[30 30]`: there is no locked 15 fps sensor mode, so a 15 fps stream comes from pacing the encoder, not from the sensor.
+1280×720 is offered in all three formats, `IMPLEMENTATION_DEFINED`, `YUV_420_888` and `BLOB`, so both preview and still-capture formats are available. The HAL advertises a one-frame stall for a 720p `BLOB` capture at 30 fps. That vendor still-capture figure does not measure the panel app's H.264 stream cost. `android.control.aeAvailableTargetFpsRanges` offers only `[15 30]` and `[30 30]`: there is no locked 15 fps sensor mode, so a 15 fps stream comes from pacing the encoder, not from the sensor.
 
 The only hardware H.264 encoder is `OMX.rk.video_encoder.avc`, served by the OMX IL HAL (this panel has a `media.codec` process and no Codec2 vendor service). It declares `176x144` to `1920x1088` at `16x8` alignment, a bitrate range reported as 1 bps to 10 Mbps, and four concurrent instances. There is **no hardware HEVC encoder**; the only HEVC entry is the software `c2.android.hevc.encoder`, shipped `enabled="false"`.
 
@@ -258,7 +258,7 @@ Treat the vendor's `media_codecs_performance.xml` figures as boilerplate, not me
 
 A panel showing camera cards is not idle. On a measured dashboard the panel app held two live `OMX.rk.video_decoder.avc` instances, so an encode session competes with existing decode work on the same Rockchip VPU.
 
-The panel app can serve this camera as an **experimental feature that is off by default**. The **Camera** switch on the Camera card in Configure turns it on, with **Resolution**, **Frame rate** and **Bitrate** defaults (720p, 15 fps, 2000 kbps) and an **Exposure** bias. It then serves a video-only H.264 stream at `rtsp://<panel>:8554/live` and a still at `GET /api/v1/camera/snapshot.jpg`. Whenever the camera is open, the panel shows a red indicator that page content cannot cover. See the [API reference](/reference/api/) for the stream and status details.
+The panel app can serve this camera as a feature that is **off by default**. The **Camera** switch on the Camera card in Configure turns it on, with **Resolution**, **Frame rate** and **Bitrate** defaults (720p, 15 fps, 2000 kbps) and an **Exposure** bias. It serves an H.264 stream at `rtsp://<panel>:8554/live`, with room audio where microphone access is available and permitted. Home Assistant obtains still images through the panel's camera entity from that stream. Whenever the camera is open, the panel shows a red indicator that page content cannot cover. See the [API reference](/reference/api/) for the stream and status details.
 
 :::caution
 Do not put a Home Assistant camera card for **this** panel on **this** panel's own dashboard. The panel would decode its own encode in a loop, on the same video engine, for no benefit.
@@ -266,7 +266,7 @@ Do not put a Home Assistant camera card for **this** panel on **this** panel's o
 
 ## Other silicon
 
-Camera GalaxyCore **GC05A2 / GC5035**; audio codec **ES7202** (a capture ADC; a usable microphone has not been verified); Goodix touch; `rk808` and `rk860` PMIC.
+Camera GalaxyCore **GC05A2 / GC5035**; audio codec **ES7202** (a capture ADC; close-panel speech and Assist have been verified through Android capture after unmuting with the orange hardware button; far-field pickup and background-music performance remain unqualified); Goodix touch; `rk808` and `rk860` PMIC.
 
 ## Access model summary
 

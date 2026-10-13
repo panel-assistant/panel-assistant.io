@@ -7,7 +7,7 @@ A panel that has been added to Home Assistant connects to it in two ways. One pu
 
 ## The dashboard on the screen
 
-Open the panel's status page in your browser, at its address on port 8888, and choose the dashboard you want on the wall. The panel loads that dashboard itself, works out which entities it shows, and asks Home Assistant for only those, which is what keeps it fast. Details of how the dashboard is loaded and what the panel does if it fails to load are in the [built-in renderer](/manage/built-in-renderer/) page.
+Open the panel's status page in your browser, at its address on port 8888, and choose the dashboard you want on the wall. The panel loads that dashboard itself. With [entity filtering enabled](/manage/performance/), it learns which entities the dashboard uses and asks Home Assistant for only those. Details of how the dashboard is loaded and what the panel does if it fails to load are in the [built-in renderer](/manage/built-in-renderer/) page.
 
 ## The panel's hardware in Home Assistant
 

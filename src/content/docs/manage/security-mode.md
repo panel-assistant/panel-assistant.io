@@ -3,11 +3,13 @@ title: Security mode
 description: The panel's default trusted-network behaviour, and Hardened mode, which requires someone at the panel to approve high-impact remote actions.
 ---
 
-The panel's web interface, its API and its Home Assistant controls are designed for a trusted home network. **Relaxed mode** is the default: automations, installer tools and browser actions work without an extra prompt. One action is deliberately outside that rule. Turning the camera on from Home Assistant asks for approval at the panel in every mode, including Relaxed, so no remote message on its own can put a camera into service. Turning it off never asks.
+The panel's web interface, its API and its Home Assistant controls are designed for a trusted home network. **Relaxed mode** is the default: automations, installer tools and browser actions work without an extra prompt. One action is deliberately outside that rule. Turning the camera on through its Home Assistant entity asks for approval at the panel in every mode, including Relaxed. The Camera setting in Configure is a separate owner configuration path. Turning it off never asks.
 
 For a panel on a network shared with less trusted devices, the optional **Hardened mode** adds approval in person to selected high-impact network operations. It is an extra safety boundary, not a replacement for a separate network or a firewall, and not general authentication for the API. Read-only endpoints and routine panel controls stay available under the normal trusted-network model.
 
-**In Hardened mode, protected high-impact remote actions need physical access to the panel. They cannot go ahead until someone approves them on the panel's screen, and they cannot be approved remotely.**
+**In Hardened mode, protected direct LAN requests need physical access to the panel. They cannot go ahead until someone approves them on the panel's screen, and that approval cannot be given remotely.**
+
+Administrators using the authenticated Panel Assistant sidebar can perform selected routine management actions without the physical prompt: display and power configuration, power-safety acknowledgement, profile activation, media playback, vendor-package taming and dashboard reload. Installation, uninstall, backups, restores, reboot and other protected operations still require approval on the panel. Direct LAN requests do not receive this exception.
 
 The web interface marks affected actions with a small shield in both modes, so you can see which workflows cross the approval boundary before you turn Hardened mode on.
 
@@ -46,13 +48,13 @@ To complete the operation:
 
 An approval is bound to the operation, the requesting device and the protected content of the request, and it can be used once. Changing the request, sending it from another address, waiting more than ten minutes or restarting the panel app needs a new approval. Only the matching retry consumes an approval; it is not a temporary general bypass.
 
-Commands that come from Home Assistant carry no trustworthy identity for the sender, so their approvals are bound to the exact command rather than to whoever sent it. Keep the ability to send commands to the panel restricted to Home Assistant, as described in the [security reference](/reference/security/); Hardened mode is not a substitute for that.
+Native Home Assistant entity and automation commands carry Panel Assistant's transport origin rather than the individual user's identity. Their approvals are bound to that origin and the exact command. This differs from the authenticated administrator sidebar exception above.
 
 Requests over loopback from software already running on the panel do not need network approval. Hardened mode treats local Android apps as trusted and does not isolate one app on the panel from another, so keep untrusted apps off the panel.
 
 ## Protected operations
 
-In Hardened mode, a network client needs approval at the panel before it can:
+In Hardened mode, a direct network client needs approval at the panel before it can:
 
 - install an uploaded app, or a managed copy of the panel app or a separate dashboard app;
 - uninstall an app, or change whether a vendor package is enabled, running or allowed to draw over the screen;
@@ -69,7 +71,7 @@ In Hardened mode, a network client needs approval at the panel before it can:
 - repair the panel's power safety settings; or
 - hide one exact, unchanged caution about a power safety setting that can only be fixed by hand. This changes only what is shown; the underlying assessment, the diagnostics and the installer result stay the same.
 
-Turning on the panel's camera is approved the same way, and is the one item on this list that also applies in Relaxed mode.
+Turning on the panel's camera through its Home Assistant entity requires approval on the panel in both modes. Turning it on from Configure remains a separate owner setting; Android camera permission and a working camera-in-use indicator are still required.
 
 A remote Configure save in Hardened mode must save a power safety reduction separately from vendor package changes, because those need different kinds of approval. Combined saves in Relaxed mode, or over loopback, go through directly.
 
@@ -79,11 +81,6 @@ The approval boundary does not make the rest of the API on port 8888 authenticat
 
 Updates start when you install through Panel Assistant or choose an installation yourself. The panel app has no scheduled installation policy or saved update channel. Owner-started installations from the **Install** tab remain available, with approval at the panel for protected remote requests in Hardened mode.
 
-## Changing the Home Assistant or broker address
+## Changing the Home Assistant address
 
-Hardened mode stops a saved credential from quietly following a changed address:
-
-- changing the **broker** address without entering a password in the same save clears the previous broker password;
-- changing the **Home Assistant URL** without entering new credentials in the same save clears the previous access token, refresh token and the session identity that goes with them.
-
-Enter the credentials for the new destination in the same **Save changes**. This applies only when the address changes in Hardened mode; ordinary edits, and all edits in Relaxed mode, keep the usual rule that a blank field keeps the stored value.
+Changing the **Home Assistant URL** clears the previous sign-in credentials unless new credentials are supplied in the same save. This applies in both security modes. Ordinary saves that keep the same address retain stored secret values when those fields are left blank.

@@ -23,7 +23,7 @@ If removal stops part way, run it again: it picks up where it stopped.
 
 ## Why a panel can get stuck
 
-While ha-paneld is installed it keeps network debugging switched on, because some firmware switches it off again when the panel restarts. Once ha-paneld is gone, nothing does that. Network debugging stays on until the panel next restarts, and after that it may be off.
+If Network ADB persistence is enabled and supported, ha-paneld can restore it after a restart. After removal that support is gone, and the vendor firmware may turn debugging off, including after a restart.
 
 That only matters if the panel's own home screen has no way into Android Settings, where debugging is switched back on. Several vendor home screens have none.
 

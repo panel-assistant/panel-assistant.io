@@ -134,14 +134,14 @@ The real signal is a **root GPIO read at GPIO 18**. The kernel registers a phant
 cat /sys/class/gpio/gpio18/value   # 1 = near, 0 = far  (no export needed — reporter-confirmed)
 ```
 
-The S9E profile therefore declares `sensors.proximity_gpio: 18` instead of using the dead `SensorManager` source. The root helper holds the value descriptor open and streams changes immediately where the kernel supports GPIO edges; otherwise it rechecks the same descriptor twice a second. Losing the descriptor is reported explicitly, so Home Assistant shows the sensor as unavailable until the recovered helper stream supplies its current value. The signal then feeds the same self-learning presence detection and hand-gesture detection as Android sensors, normalised across all your panels. A reporter confirmed that gpio18 reads **0 far, 1 near**, but the learning does not rely on that polarity. Ambient light, temperature and humidity surface through `SensorManager` as expected.
+The S9E profile therefore declares `sensors.proximity_gpio: 18` instead of using the dead `SensorManager` source. The root helper holds the value descriptor open and streams changes immediately where the kernel supports GPIO edges; otherwise it rechecks the same descriptor twice a second. Losing the descriptor is reported explicitly, so Home Assistant shows the sensor as unavailable until the recovered helper stream supplies its current value. The signal uses the same guided setup and saved calibration as Android sensors; calibrated presence and gesture output become available after setup succeeds. A reporter confirmed that gpio18 reads **0 far, 1 near**, and guided setup measures the endpoints rather than relying on a guessed polarity. Ambient light, temperature and humidity surface through `SensorManager` as expected.
 
 ## Access model summary
 
 - **Relays:** `switch.<panel>_relay1` and `switch.<panel>_relay2` through the relay sysfs class (root); both `strelay` and `st_relay` are probed.
 - **Buttons:** `event.<panel>_button` (`KEYCODE_F1` to `KEYCODE_F4`), app-direct through accessibility.
 - **Button LEDs:** `light.<panel>_button_led1` to `light.<panel>_button_led4` through `su` (GPIO 147 to 150, exported on demand).
-- **Proximity:** a learned `binary_sensor.<panel>_proximity` and a normalised `sensor.<panel>_proximity_level` from the root helper's held `gpio18` event stream. The `SensorManager` proximity sensor registers but never fires, so it is bypassed.
+- **Proximity:** a calibrated `binary_sensor.<panel>_proximity` and a normalised `sensor.<panel>_proximity_level` from the root helper's held `gpio18` event stream. The `SensorManager` proximity sensor registers but never fires, so it is bypassed.
 - **Light:** `sensor.<panel>_illuminance` through `SensorManager`, which **works**.
 
 ## Sources
