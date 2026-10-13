@@ -36,6 +36,11 @@ updates:
       site-dependencies:
         patterns:
           - '*'
+    # @astrojs/check declares typescript ^5 || ^6 as a peer; a major typescript bump fails npm ci
+    # (ERESOLVE) until it widens that range.
+    ignore:
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major']
     open-pull-requests-limit: 5
     commit-message:
       prefix: chore
