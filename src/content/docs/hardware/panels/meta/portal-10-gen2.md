@@ -121,7 +121,7 @@ A Portal remains a Meta device with Meta's software on it, and the panel app doe
 
 **The privacy slider works for the panel app.** With the slider at the camera position, Android reports the camera as unavailable and the panel app's camera stops delivering images. At the microphone-off position the panel app's voice assistant heard nothing. In 1.0 the panel app follows Meta's privacy event alongside Android's mute state and can show microphone mute. Physical slider transitions and startup with the microphone on have not yet been qualified for that reporting path.
 
-**The panel app.** The panel app sends camera, microphone and sensor data only to your own Home Assistant. The camera is off until you turn it on, and video leaves the panel only if you do.
+**The panel app.** The camera is off until enabled. While enabled, its stream is available to clients on your local network, with room audio where microphone access is permitted. Assist and the Home Assistant entities use your own Home Assistant connection.
 
 ## Recovery: factory reset
 
