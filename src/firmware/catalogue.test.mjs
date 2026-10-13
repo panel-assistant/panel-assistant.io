@@ -53,7 +53,7 @@ test('built catalogue exposes every source build under each documented model', (
       assert.ok(modelHtml.includes(`/hardware/firmware/builds/${model}/${slug(version)}/`));
       const page = read(target);
       assert.equal(
-        (page.match(/Vendor download/g) ?? []).length,
+        (page.match(/<h2 id="(?!starlight__|comments-heading)[^"]+"/g) ?? []).length,
         objects,
         `${model} ${version} lost objects`,
       );

@@ -45,5 +45,5 @@ On first start the panel app picks the profile from what the Portal reports abou
 
 ## Sources
 
-- [QVC, Portal+ listing](https://www.qvc.com/p/Facebook-Portal-Plus---Smart-Video-Calling-with-14%22-Touchscreen/E241037) and [Stuff review](https://www.stuff.tv/review/facebook-portal-review-brilliant-at-the-basics): screen, camera, privacy controls and radios.
+- [Reviewed hands-on review](https://www.reviewed.com/smarthome/content/facebook-portal-plus-review) and [Stuff review](https://www.stuff.tv/review/facebook-portal-review-brilliant-at-the-basics): screen, camera, privacy controls and radios.
 - [Meta for Developers: Portal setup for Android apps](https://developers.meta.com/horizon/documentation/android-apps/portal-setup/): Android version and the ADB procedure.
