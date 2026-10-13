@@ -114,6 +114,54 @@ One qualification keeps the scope exact: an archived **partition** image, not pa
 
 The [X2i](/hardware/panels/shelly/wall-display-x2i/) additionally needs a USB-A to USB-C cable rather than USB-C to USB-C, and its page explains why. Whether the other models share that constraint is untested here.
 
+## Recovering a panel that reboots in a loop
+
+A Wall Display that shows the Shelly logo, restarts every 15 to 20 seconds and never reaches its home screen is in a boot loop. The panel has no buttons, so there is no recovery menu to reach, but if **USB debugging was already on** before the loop started, a computer can still stop it. If USB debugging was off, this method cannot reach the panel.
+
+This was worked out on one [X2i](/hardware/panels/shelly/wall-display-x2i/). Whether the other models' bootloaders behave the same way is untested.
+
+### What causes it
+
+On the X2i the loop came from the kernel crashing about 17 seconds into every start, before any app ran. The crash record named the cause: a leftover from an app installed with ADB's incremental install, which this panel's kernel cannot handle. Recent versions of ADB install incrementally by default where the panel supports it, so **always install on these panels with `adb install --no-incremental`**. Other causes are possible; the rescue script saves the crash record so you can see which one you have.
+
+### What you need
+
+- **A computer with bash.** macOS and Linux have it. On Windows, install [Git for Windows](https://gitforwindows.org/) and use its Git Bash window, with the Windows versions of the Android tools.
+- **Android platform-tools** (`adb` and `fastboot`), on your `PATH`.
+- **A USB-A to USB-C cable that carries data.** See [Connecting a panel to a computer](#connecting-a-panel-to-a-computer).
+- **The rescue script**: [shelly-bootloop-rescue.sh](/downloads/shelly-bootloop-rescue.sh). Read it before you run it.
+- **The panel's serial number.** Run `adb devices` while the panel is starting; it appears for a few seconds on each boot. Every command names it, so a second panel or an emulator on the same computer is never touched.
+
+This is a command-line procedure, and the last step erases the panel. Read each step before running it.
+
+### Step 1: stop the loop
+
+```bash
+bash shelly-bootloop-rescue.sh SERIAL catch
+```
+
+The panel answers over USB for a few seconds on each boot. The script waits for that window, saves the kernel's crash record from the panel to a file next to the script, and sends the panel to its bootloader, which stops the loop. It keeps trying for up to 40 boots, because a single attempt can miss the window. **This step changes nothing on the panel.**
+
+Open the saved crash record and look near the end for `Kernel panic` or `Unable to handle`. The lines just before it name what crashed.
+
+### Step 2: wipe the data partitions
+
+```bash
+bash shelly-bootloop-rescue.sh SERIAL wipe
+```
+
+:::danger
+**This erases everything on the panel**: every app, its settings and the Wi-Fi network. It also takes Shelly's own software back to the version the panel was made with, because Shelly's updates are stored on the same data partition. The firmware and the bootloader are not touched. The script asks you to type the serial before it changes anything.
+:::
+
+The script formats the two data partitions, `metadata` and `userdata`, and restarts the panel. Two warnings that the partition type is U-Boot are expected. If you would rather not wipe, `bash shelly-bootloop-rescue.sh SERIAL reboot` leaves the bootloader, and the loop starts again.
+
+If you run the commands by hand instead, two things on the X2i are worth knowing. **Format, do not just erase**: erasing the partitions left the panel stuck at the boot logo, and formatting them brought it back. And **do not run `fastboot getvar all`**: on the X2i it left the bootloader's USB connection unusable until the panel was restarted.
+
+### Step 3: set the panel up again
+
+The first start after the wipe takes a few minutes. Shelly's setup then asks the panel to provision itself: it looks for a 2.4 GHz Wi-Fi network named `ShellyProvisioning` with the password `ShellyShelly` and internet access. A phone hotspot with that name and password does it. After that the panel is back to a freshly set-up Wall Display: [unlock developer mode](/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode), turn USB debugging on, and install Panel Assistant again.
+
 ## Built-in sensors and relay
 
 Sensor and relay details vary by model. From firmware and product pages:

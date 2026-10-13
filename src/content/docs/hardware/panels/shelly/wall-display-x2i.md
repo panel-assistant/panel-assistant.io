@@ -138,6 +138,10 @@ Since **2.8.0**, modern models offer **Uninstall all updates** to return to thei
 
 See the [Wall Display family page](/hardware/panels/shelly/) for the OTA endpoints on the `WallDisplayV2` track and the firmware version history.
 
+## A panel that reboots in a loop
+
+If the X2i shows the Shelly logo and restarts every few seconds, see [Recovering a panel that reboots in a loop](/hardware/panels/shelly/#recovering-a-panel-that-reboots-in-a-loop) on the family page. It was worked out on this model.
+
 ## Lower-level access
 
 For completeness, and not because Panel Assistant needs any of it:
