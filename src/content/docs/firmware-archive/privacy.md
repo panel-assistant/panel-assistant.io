@@ -40,7 +40,7 @@ You can stop future Google access by removing Panel Firmware Archive from your [
 
 ## Visiting these pages
 
-This website is delivered through Cloudflare, which receives normal web request information such as an IP address and browser details. These policy pages do not receive Google OAuth credentials or Google Drive file contents. Comments are disabled on the archive homepage and these policy pages.
+This website is delivered through Cloudflare, which receives normal web request information such as an IP address and browser details. These policy pages do not receive Google OAuth credentials or Google Drive file contents. Comments are disabled on these policy pages.
 
 ## Questions and changes
 
@@ -48,4 +48,4 @@ For privacy questions or deletion requests, email the project at [privacy@panel-
 
 Changes to this policy will be published on this page with a revised effective date. A new use of Google data beyond the purposes described here requires appropriate notice and consent.
 
-See the [Terms of service](/firmware-archive/terms/) and [Panel Firmware Archive homepage](/firmware-archive/).
+See the [Terms of service](/firmware-archive/terms/).
