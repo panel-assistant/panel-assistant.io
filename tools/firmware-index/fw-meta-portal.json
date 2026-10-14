@@ -1,0 +1,84 @@
+{
+  "checked": "2026-10-14",
+  "source": "https://graph.facebook.com/mobile_release_updates",
+  "note": "Retail model sharing follows the original firmware publisher and package metadata; cross-model installation is untested. No durable public download URL or confirmed Internet Archive capture is recorded.",
+  "models": [
+    {
+      "slug": "meta-portal-10-gen1",
+      "name": "Meta Portal 10 (1st gen)",
+      "family": "aloha_prod"
+    },
+    {
+      "slug": "meta-portal-plus-gen1",
+      "name": "Meta Portal+ (1st gen)",
+      "family": "aloha_prod"
+    },
+    {
+      "slug": "meta-portal-10-gen2",
+      "name": "Meta Portal 10 (2nd gen)",
+      "family": "omni_prod"
+    },
+    {
+      "slug": "meta-portal-mini-8",
+      "name": "Meta Portal Mini 8",
+      "family": "omni_prod"
+    },
+    {
+      "slug": "meta-portal-tv",
+      "name": "Meta Portal TV",
+      "family": "ripley"
+    },
+    {
+      "slug": "meta-portal-go",
+      "name": "Meta Portal Go",
+      "family": "terry_prod"
+    },
+    {
+      "slug": "meta-portal-plus-gen2",
+      "name": "Meta Portal+ (2nd gen)",
+      "family": "cipher_prod"
+    }
+  ],
+  "families": {
+    "aloha_prod": {
+      "version": "1041515800015050",
+      "bytes": 1282501712,
+      "sha256": "0287084025af63af4063afe2022e81a9bba52d4bd32f011614a441da5ca4297c",
+      "android": "9",
+      "sdk": 28,
+      "securityPatch": "2019-08-01"
+    },
+    "omni_prod": {
+      "version": "3051355900018050",
+      "bytes": 1243273978,
+      "sha256": "25942f7a18216e5881c875168d820b648f972762c57952e6e801bc1def52dfc5",
+      "android": "10",
+      "sdk": 29,
+      "securityPatch": "2020-08-05"
+    },
+    "ripley": {
+      "version": "2041515800015050",
+      "bytes": 1296331187,
+      "sha256": "34b4020215b66d78ecc53a3b603f3ab61435557bf6d634b01c2e3f7892be86ae",
+      "android": "9",
+      "sdk": 28,
+      "securityPatch": "2019-08-01"
+    },
+    "terry_prod": {
+      "version": "5051355900018050",
+      "bytes": 1216232994,
+      "sha256": "5039c12141a913d7801078389490ad1f86e11b328e2b614bf9571102875500ad",
+      "android": "10",
+      "sdk": 29,
+      "securityPatch": "2020-08-05"
+    },
+    "cipher_prod": {
+      "version": "4051355900018050",
+      "bytes": 1216856452,
+      "sha256": "2467033331298297376741ee5b9c609f4166610cafa0eafe98792361322823d4",
+      "android": "10",
+      "sdk": 29,
+      "securityPatch": "2020-08-05"
+    }
+  }
+}

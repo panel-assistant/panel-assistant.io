@@ -86,12 +86,12 @@ test('built version pages carry the source downloads, capture links and older ch
 
 test('built catalogue compares download sizes and observed availability dates', () => {
   const catalogue = read(join(dist, 'index.html'));
-  assert.equal((catalogue.match(/<table>/g) ?? []).length, models.length);
+  assert.equal((catalogue.match(/<table>/g) ?? []).length, models.length + 7);
   const downloads = models.reduce(
     (sum, [, versions]) => sum + [...versions.values()].reduce((count, value) => count + value, 0),
     0,
   );
-  assert.equal((catalogue.match(/<tr>/g) ?? []).length, downloads + models.length);
+  assert.equal((catalogue.match(/<tr>/g) ?? []).length, downloads + models.length + 14);
   assert.match(catalogue, /<th[^>]*>Size<\/th>/);
   assert.match(catalogue, /<th[^>]*>First seen<\/th>/);
   assert.match(catalogue, /<th[^>]*>Last seen<\/th>/);
@@ -120,4 +120,32 @@ test('built catalogue presents Shelly models before the longer Sonoff histories'
     'sonoff-nspanel-pro-86p',
     'sonoff-nspanel-pro-120p',
   ]);
+});
+
+test('Meta retail models expose verified build metadata without private download links', () => {
+  const catalogue = read(join(dist, 'index.html'));
+  const expected = [
+    ['meta-portal-10-gen1', '1041515800015050', '1,282,501,712', '9', 28],
+    ['meta-portal-plus-gen1', '1041515800015050', '1,282,501,712', '9', 28],
+    ['meta-portal-10-gen2', '3051355900018050', '1,243,273,978', '10', 29],
+    ['meta-portal-mini-8', '3051355900018050', '1,243,273,978', '10', 29],
+    ['meta-portal-tv', '2041515800015050', '1,296,331,187', '9', 28],
+    ['meta-portal-go', '5051355900018050', '1,216,232,994', '10', 29],
+    ['meta-portal-plus-gen2', '4051355900018050', '1,216,856,452', '10', 29],
+  ];
+  for (const [model, version, bytes, android, sdk] of expected) {
+    assert.ok(catalogue.includes(`/hardware/firmware/builds/${model}/`));
+    const modelPage = read(join(dist, model, 'index.html'));
+    assert.ok(modelPage.includes(`/hardware/firmware/builds/${model}/${slug(version)}/`));
+    const page = read(join(dist, model, slug(version), 'index.html'));
+    assert.ok(page.includes(`${bytes} bytes`));
+    assert.ok(page.includes(`Android: ${android} (SDK ${sdk})`));
+    assert.match(page, /SHA-256: <code[^>]*>[a-f0-9]{64}<\/code>/);
+    assert.match(page, /No public download URL or confirmed Internet Archive capture is recorded/);
+    assert.match(page, /not a cross-model installation test/);
+    assert.doesNotMatch(
+      page,
+      /drive\.google|gdrive:|fbcdn|access_token|Original vendor URL|web\.archive\.org/,
+    );
+  }
 });
