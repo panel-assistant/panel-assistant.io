@@ -1,4 +1,4 @@
-// Build the public catalogue from the three source .dat files and the preserved data branches.
+// Build the public catalogue from the source indexes and preserved data branches.
 // Generated Markdown is ignored by Git; no page is edited by hand.
 import { execFileSync } from 'node:child_process';
 import { readFileSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
@@ -194,7 +194,7 @@ mkdirSync(output, { recursive: true });
 const catalogue = [
   '---',
   'title: Firmware builds',
-  'description: Browse the complete indexed Sonoff and Shelly firmware histories by model and version.',
+  'description: Browse the indexed Sonoff, Shelly and Meta Portal firmware histories by model and version.',
   '---',
   '',
   '<style>.sl-markdown-content table th, .sl-markdown-content table td { white-space: nowrap; }</style>',
@@ -299,7 +299,83 @@ for (const model of models) {
   catalogue.push('');
   write(`${model.slug}/index.md`, modelPage.join('\n') + '\n');
 }
+// Meta update responses use expiring signed URLs. Publish verified package metadata
+// without turning a private acquisition URL into a public download promise.
+const meta = JSON.parse(readFileSync(join(data, 'fw-meta-portal.json'), 'utf8'));
+for (const model of meta.models) {
+  const artifact = meta.families[model.family];
+  if (
+    !/^meta-[a-z0-9-]+$/.test(model.slug) ||
+    !artifact ||
+    !/^\d{16}$/.test(artifact.version) ||
+    !Number.isSafeInteger(artifact.bytes) ||
+    artifact.bytes <= 0 ||
+    !/^[a-f0-9]{64}$/.test(artifact.sha256) ||
+    !/^\d+$/.test(artifact.android) ||
+    !Number.isInteger(artifact.sdk) ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(artifact.securityPatch)
+  )
+    throw new Error(`Invalid Meta entry: ${model.slug}`);
+  const version = artifact.version;
+  const notice =
+    'No public download URL or confirmed Internet Archive capture is recorded for this build.';
+  const summary = [
+    '| Version | Download | Size | First seen | Last seen |',
+    '| --- | --- | ---: | --- | --- |',
+    `| [${version}](${pathFor(model.slug, version)}) | No public download recorded | ${(artifact.bytes / 1048576).toFixed(1)} MiB | — | — |`,
+    '',
+  ];
+  catalogue.push(`## [${model.name}](${pathFor(model.slug, '')})`, '', notice, '', ...summary);
+  const context = `Production OTA family: **${model.family}**. Retail models can share one package; this mapping is not a cross-model installation test.`;
+  write(
+    `${model.slug}/index.md`,
+    [
+      '---',
+      `title: ${model.name} firmware`,
+      `description: Indexed firmware package metadata for ${model.name}.`,
+      '---',
+      '',
+      context,
+      '',
+      notice,
+      '',
+      ...summary,
+    ].join('\n'),
+  );
+  write(
+    `${model.slug}/${versionSlug(version)}.md`,
+    [
+      '---',
+      `title: ${model.name} ${version}`,
+      `description: Verified package metadata for ${model.name} firmware ${version}.`,
+      '---',
+      '',
+      `[All ${model.name} versions](${pathFor(model.slug, '')})`,
+      '',
+      context,
+      '',
+      notice,
+      '',
+      '## Full OTA package',
+      '',
+      `- Build: \`${version}\``,
+      `- Size: ${artifact.bytes.toLocaleString('en-US')} bytes`,
+      `- SHA-256: \`${artifact.sha256}\``,
+      `- Android: ${artifact.android} (SDK ${artifact.sdk})`,
+      `- Security patch: ${artifact.securityPatch}`,
+      `- Metadata checked: ${meta.checked}`,
+      '- Format: full A/B OTA ZIP',
+      '',
+      'Size and SHA-256 were checked against the vendor update response and the complete original ZIP. Android and security patch values come from the package metadata. OEM signature validation and installation were not tested.',
+      '',
+      'These are observed builds, not a complete release history.',
+      '',
+    ].join('\n'),
+  );
+  versionPages++;
+  artifactCount++;
+}
 write('index.md', catalogue.join('\n') + '\n');
 console.log(
-  `Generated ${models.length} model pages, ${versionPages} version pages and ${artifactCount} model artifact rows from .dat and data branches`,
+  `Generated ${models.length + meta.models.length} model pages, ${versionPages} version pages and ${artifactCount} model artifact rows from .dat and data branches`,
 );
