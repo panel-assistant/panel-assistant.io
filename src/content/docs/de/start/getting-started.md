@@ -1,12 +1,12 @@
 ---
 title: Erste Schritte
 description: In wenigen Minuten vom uneingerichteten Android-Wandpanel zum Home Assistant-Dashboard, mit Home Assistant als Begleiter bei jedem Schritt.
-sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
 Wenn du schon einmal ein Wandpanel oder einen Kiosk eingerichtet hast, erinnerst du dich wahrscheinlich an den Ablauf: Apps manuell installieren, nach einer Browser-Engine suchen, die ein Dashboard darstellen kann, Einstellungen erraten und dem nächsten Neustart nie ganz trauen. Die Einrichtung mit Panel Assistant wird dich angenehm überraschen. Du kannst in wenigen Minuten fertig sein, und selbst wenn das Panel schon an der Wand hängt, musst du nicht von deinem Stuhl aufstehen. Na gut, vielleicht einmal ;-)
 
-Die erste Stunde ist bei jedem Panel die schwierigste. Panel Assistant übernimmt sie für dich, direkt aus Home Assistant. Ist das Panel schon in deinem Netzwerk, gibst du der Integration seine Adresse, und sie erledigt den Rest. Ist es noch im Karton, schließt du es mit einem USB-Kabel an deinen Laptop an und installierst direkt aus dem Browser, bevor es an die Wand kommt. In beiden Fällen bestätigst du eine Abfrage auf dem Panel und verfolgst den Ablauf.
+Bei jedem Panel ist die erste Stunde der schwierige Teil. Panel Assistant übernimmt diese Stunde für dich, direkt aus Home Assistant heraus. Wenn das Panel bereits in deinem Netzwerk ist, gib der Integration seine Adresse, und sie erledigt den Rest. Wenn es noch in der Verpackung liegt, schließe es mit einem USB-Kabel an deinen Laptop an und installiere direkt aus deinem Browser, bevor es überhaupt an die Wand kommt. Wenn das Panel dich auffordert, das Debugging zu autorisieren, bestätige die Aufforderung auf seinem Bildschirm und verfolge anschließend die Installation bis zum Ende.
 
 ## 1. Die Integration installieren
 
@@ -14,7 +14,7 @@ Füge Panel Assistant über HACS hinzu und starte Home Assistant neu. Das ist da
 
 ## 2. Debugging auf dem Panel einschalten
 
-Öffne die Entwickleroptionen auf dem Panel und aktiviere drahtloses Debugging oder USB-Debugging, wenn du das Panel per Kabel anschließt. Dadurch kann Home Assistant die Installation für dich erledigen. Die [Hardware-Seiten](/de/hardware/) zeigen, wo der Schalter bei jedem Modell zu finden ist. [Das Panel vorbereiten](/de/install/prepare-a-panel/) erklärt die Details.
+Öffne die Entwickleroptionen auf dem Panel und aktiviere Netzwerk-ADB auf TCP-Port 5555 oder USB-Debugging, wenn du das Panel per Kabel anschließt. So kann Home Assistant die Installation für dich übernehmen. Die [Hardwareseiten](/de/hardware/) zeigen, wo sich der Schalter bei jedem Modell befindet, und [Panel vorbereiten](/de/install/prepare-a-panel/) enthält die Einzelheiten.
 
 ## 3. Das Panel hinzufügen
 
@@ -88,7 +88,7 @@ In beiden Fällen übernimmt der Assistent den komplizierten Teil. Er prüft, wa
 
 ## 4. Im Einrichtungsassistenten des Panels abschließen
 
-Home Assistant öffnet anschließend den Einrichtungsassistenten des Panels. Er stellt dir ein paar kurze Fragen, unter anderem nach einem Namen für das Panel und dem Dashboard für die Wand. Das Panel lädt nur die Entitäten, die dieses Dashboard anzeigt. So bleibt es schnell. Siehe [Ein Panel verbinden](/de/home-assistant/connect-a-panel/).
+Home Assistant öffnet anschließend den eigenen Einrichtungsassistenten des Panels, der ein paar kurze Fragen stellt, unter anderem nach einem Namen für das Panel und dem Dashboard für die Wand. Bei aktiviertem Entitätenfilter lädt das Panel nur die Entitäten, die dieses Dashboard verwendet. Dadurch bleibt es schnell. Siehe [Panel verbinden](/de/home-assistant/connect-a-panel/).
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="Der Einrichtungsassistent des Panels, Schritt für Schritt" tabindex="0">
 <figure>
@@ -121,7 +121,7 @@ Home Assistant öffnet anschließend den Einrichtungsassistenten des Panels. Er 
 ## Was du brauchst
 
 - Home Assistant 2026.8.3 oder neuer, mit HACS.
-- Ein Wandpanel mit Android 8.0 oder neuer. Die meisten Panels funktionieren mit dem generischen Hardware-Profil. [Ein Panel auswählen](/de/install/supported-panels/) listet die Modelle mit voller Hardware-Unterstützung auf.
+- Ein ARM-Wandpanel mit Android 8.0 oder neuer und Debugging-Zugang. Die meisten Panels funktionieren mit dem generischen Hardwareprofil. [Panel auswählen](/de/install/supported-panels/) listet die Modelle mit vollständiger Hardwareunterstützung auf.
 - Für die USB-Option einen Chromium-basierten Browser wie Chrome oder Edge.
 
 ## Wo du die Details findest
