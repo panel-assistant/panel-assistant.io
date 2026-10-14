@@ -7,8 +7,9 @@ import build from '../build-info/build.json';
 import Comments from './Comments.astro';
 import TranslationNote from './TranslationNote.astro';
 
-const { entry, lang, lastUpdated } = Astro.locals.starlightRoute;
+const { entry, lang, lastUpdated, locale } = Astro.locals.starlightRoute;
 const isDoc = entry.data.template !== 'splash';
+const prefix = locale ? `/${locale}` : '';
 
 // The thanks line is one sentence per language, with the heart and the two links in its places.
 const heart =
@@ -30,7 +31,7 @@ const label =
     : `Build ${build.number} · ${build.sha}${build.channel === 'main' ? '' : ' · ' + build.channel}`;
 ---
 
-{isDoc && <Comments />}
+{isDoc && entry.data.comments !== false && <Comments />}
 {!isDoc && <TranslationNote />}
 <Default />
 <div class="site-foot">
@@ -46,6 +47,11 @@ const label =
   <p class="build-info">
     <a href="/build.json">{label}</a>
   </p>
+  <nav class="archive-policies" aria-label="Panel Firmware Archive">
+    <a href={`${prefix}/firmware-archive/`}>Panel Firmware Archive</a>
+    <a href={`${prefix}/firmware-archive/privacy/`}>Privacy policy</a>
+    <a href={`${prefix}/firmware-archive/terms/`}>Terms of service</a>
+  </nav>
 </div>
 
 <style>
@@ -62,6 +68,12 @@ const label =
   }
   .site-foot p {
     margin: 0;
+  }
+  .archive-policies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    grid-column: 1 / -1;
   }
   /* On the homepage the trademark note directly above is part of the footer. */
   :global(:root[data-has-hero]) .site-foot {
