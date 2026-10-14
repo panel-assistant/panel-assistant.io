@@ -14,4 +14,4 @@ Read the [Privacy policy](/firmware-archive/privacy/) and [Terms of service](/fi
 
 See the [firmware guide](/hardware/firmware/) for information about panel firmware.
 
-Contact the project at [ml@panel-assistant.io](mailto:ml@panel-assistant.io).
+Contact the project at [privacy@panel-assistant.io](mailto:privacy@panel-assistant.io).

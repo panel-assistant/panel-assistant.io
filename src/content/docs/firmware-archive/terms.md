@@ -30,6 +30,6 @@ Nothing in these terms removes rights that cannot lawfully be excluded.
 
 ## Contact and changes
 
-For questions about these terms, email the project at [ml@panel-assistant.io](mailto:ml@panel-assistant.io). Changes will be published here with a revised effective date.
+For questions about these terms, email the project at [privacy@panel-assistant.io](mailto:privacy@panel-assistant.io). Changes will be published here with a revised effective date.
 
 Return to the [Panel Firmware Archive homepage](/firmware-archive/).

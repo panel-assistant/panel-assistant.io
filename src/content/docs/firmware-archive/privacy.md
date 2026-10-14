@@ -42,7 +42,7 @@ This website is delivered through Cloudflare, which receives normal web request 
 
 ## Questions and changes
 
-For privacy questions or deletion requests, email the project at [ml@panel-assistant.io](mailto:ml@panel-assistant.io). Do not include account credentials in your message.
+For privacy questions or deletion requests, email the project at [privacy@panel-assistant.io](mailto:privacy@panel-assistant.io). Do not include account credentials in your message.
 
 Changes to this policy will be published on this page with a revised effective date. A new use of Google data beyond the purposes described here requires appropriate notice and consent.
 
