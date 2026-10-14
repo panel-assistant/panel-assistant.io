@@ -19,6 +19,15 @@ on:
       - tools/firmware-index/fw-120p.dat
       - tools/firmware-index/fw-86p.dat
   workflow_dispatch:
+    inputs:
+      urls_json:
+        description: 'Optional JSON array of public Meta CDN asset URLs (maximum 10)'
+        type: string
+        required: false
+      rebuild_site:
+        description: 'Rebuild the site when archive state changes'
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -58,9 +67,14 @@ jobs:
       - name: Submit to the Wayback Machine
         env:
           WAYBACK_S3: ${{ secrets.WAYBACK_S3 }}
+          MANUAL_URLS_JSON: ${{ inputs.urls_json }}
         run: |
+          args=()
+          if [[ -n "$MANUAL_URLS_JSON" ]]; then
+            args+=(--urls-json "$MANUAL_URLS_JSON")
+          fi
           python tools/firmware-index/wayback_archive.py \
-            --state wayback.json
+            --state wayback.json "${args[@]}"
 
       # Append the updated state to the data branch (never force-pushes).
       - name: Persist archive state
@@ -84,7 +98,7 @@ jobs:
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
       - name: Rebuild site with new archive state
-        if: steps.persist.outputs.changed == 'true'
+        if: steps.persist.outputs.changed == 'true' && (github.event_name != 'workflow_dispatch' || inputs.rebuild_site)
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run ci.yml --ref main

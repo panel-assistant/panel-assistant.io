@@ -23,11 +23,14 @@ https://archive.org/account/s3.php). Without it the script skips cleanly.
 Usage:
   python wayback_archive.py --state wayback.json [--max N]
                             [--wave-size N] [--drain-wait S] [--workers N]
+                            [--urls-json JSON]  # bounded manual public Meta CDN URLs
 """
 
 import argparse
+import datetime
 import json
 import os
+import re
 import sys
 import threading
 import time
@@ -90,8 +93,18 @@ def available(url):
             d = json.load(r)
     except Exception:  # noqa: BLE001
         return None
-    snap = d.get("archived_snapshots", {}).get("closest")
-    return snap.get("timestamp") if snap else None
+    snapshots = d.get("archived_snapshots") if isinstance(d, dict) else None
+    snap = snapshots.get("closest") if isinstance(snapshots, dict) else None
+    if not isinstance(snap, dict) or snap.get("available") is not True or str(snap.get("status")) != "200":
+        return None
+    timestamp = snap.get("timestamp")
+    if not isinstance(timestamp, str) or not re.fullmatch(r"[0-9]{14}", timestamp):
+        return None
+    try:
+        datetime.datetime.strptime(timestamp, "%Y%m%d%H%M%S")
+    except ValueError:
+        return None
+    return timestamp
 
 
 def load_state(path):
@@ -146,6 +159,39 @@ def priority_urls(devices):
     return res
 
 
+def manual_urls(value):
+    """Validate a bounded manual public Meta CDN capture list, preserving order."""
+    try:
+        urls = json.loads(value)
+    except (ValueError, TypeError):
+        raise argparse.ArgumentTypeError("manual URLs must be a JSON array") from None
+    if not isinstance(urls, list) or not 1 <= len(urls) <= 10:
+        raise argparse.ArgumentTypeError("manual URLs must contain 1 to 10 URLs")
+    forbidden = {
+        "access_token", "refresh_token", "id_token", "bearer_token", "token",
+        "authorization", "auth", "api_key", "apikey", "client_secret",
+        "client_id", "password", "passwd", "credential", "credentials",
+    }
+    for url in urls:
+        try:
+            if not isinstance(url, str) or any(c.isspace() or ord(c) < 32 or ord(c) == 127 for c in url):
+                raise ValueError
+            parsed = urllib.parse.urlsplit(url)
+            host = parsed.hostname or ""
+            keys = [key.lower() for key, _ in urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)]
+            if (parsed.scheme != "https" or not host.endswith(".fbcdn.net")
+                    or not re.fullmatch(r"[a-z0-9.-]+", host)
+                    or any(not label or label.startswith("-") or label.endswith("-") for label in host.split("."))
+                    or parsed.username is not None or parsed.password is not None
+                    or parsed.port not in (None, 443) or parsed.fragment
+                    or any(key in forbidden or "oauth" in key for key in keys)):
+                raise ValueError
+        except (ValueError, TypeError):
+            # Do not echo rejected input: it may contain credentials.
+            raise argparse.ArgumentTypeError("manual URLs must be public HTTPS fbcdn.net assets without credentials") from None
+    return list(dict.fromkeys(urls))
+
+
 def archive_progress(urls, files):
     """Return current-index archived and pending counts, ignoring stale state entries."""
     archived = sum(1 for url in urls if url in files)
@@ -155,6 +201,7 @@ def archive_progress(urls, files):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--state", required=True)
+    ap.add_argument("--urls-json", type=manual_urls, help="manually capture only these public Meta CDN URLs (JSON array, maximum 10)")
     ap.add_argument("--max", type=int, default=0, help="cap captures submitted per run (0 = all)")
     ap.add_argument("--workers", type=int, default=6, help="concurrent submissions within a wave")
     ap.add_argument("--wave-size", type=int, default=WAVE_SIZE)
@@ -172,7 +219,7 @@ def main():
 
     state = load_state(args.state)
     files = state["files"]
-    urls = priority_urls(load_devices())
+    urls = args.urls_json if args.urls_json is not None else priority_urls(load_devices())
 
     # Pass A — confirm anything already archived (catches prior runs' async completions).
     got = confirm_batch(state, args.state, [u for u in urls if u not in files])
