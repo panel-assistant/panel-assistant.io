@@ -199,7 +199,7 @@ const catalogue = [
   '',
   '<style>.sl-markdown-content table th, .sl-markdown-content table td { white-space: nowrap; }</style>',
   '',
-  'Browse every indexed build by model and version. Availability is measured by the daily URL monitor. A Wayback link appears only when a capture is recorded.',
+  'Browse every indexed build by model and version. Sonoff and Shelly availability is measured by the daily URL monitor. Meta Portal package metadata is checked manually. A Wayback link appears only when a capture is recorded.',
   '',
   'The index is generated from [the source data files](https://github.com/panel-assistant/panel-assistant.io/tree/main/tools/firmware-index). A missing version means it has not been found; it does not prove that the vendor never released it.',
   '',
@@ -313,7 +313,8 @@ for (const model of meta.models) {
     !/^[a-f0-9]{64}$/.test(artifact.sha256) ||
     !/^\d+$/.test(artifact.android) ||
     !Number.isInteger(artifact.sdk) ||
-    !/^\d{4}-\d{2}-\d{2}$/.test(artifact.securityPatch)
+    !/^\d{4}-\d{2}-\d{2}$/.test(artifact.securityPatch) ||
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(artifact.buildDateUtc)
   )
     throw new Error(`Invalid Meta entry: ${model.slug}`);
   const version = artifact.version;
@@ -359,6 +360,7 @@ for (const model of meta.models) {
       '## Full OTA package',
       '',
       `- Build: \`${version}\``,
+      `- Build date (UTC): ${artifact.buildDateUtc.replace('T', ' ').replace('Z', '')}`,
       `- Size: ${artifact.bytes.toLocaleString('en-US')} bytes`,
       `- SHA-256: \`${artifact.sha256}\``,
       `- Android: ${artifact.android} (SDK ${artifact.sdk})`,
@@ -366,7 +368,7 @@ for (const model of meta.models) {
       `- Metadata checked: ${meta.checked}`,
       '- Format: full A/B OTA ZIP',
       '',
-      'Size and SHA-256 were checked against the vendor update response and the complete original ZIP. Android and security patch values come from the package metadata. OEM signature validation and installation were not tested.',
+      'Size and SHA-256 were checked against the vendor update response and the complete original ZIP. Android, security patch and build date values come from the package metadata. The build date is the OTA build timestamp; the release date is not established. OEM signature validation and installation were not tested.',
       '',
       'These are observed builds, not a complete release history.',
       '',
