@@ -133,11 +133,21 @@ test('Meta retail models expose verified build metadata without private download
     ['meta-portal-go', '5051355900018050', '1,216,232,994', '10', 29],
     ['meta-portal-plus-gen2', '4051355900018050', '1,216,856,452', '10', 29],
   ];
+  assert.match(catalogue, /Meta Portal package metadata is checked manually/);
+  const buildTimes = {
+    1041515800015050: '18:27:50',
+    3051355900018050: '18:27:46',
+    2041515800015050: '18:26:17',
+    5051355900018050: '18:29:24',
+    4051355900018050: '18:27:28',
+  };
   for (const [model, version, bytes, android, sdk] of expected) {
     assert.ok(catalogue.includes(`/hardware/firmware/builds/${model}/`));
     const modelPage = read(join(dist, model, 'index.html'));
     assert.ok(modelPage.includes(`/hardware/firmware/builds/${model}/${slug(version)}/`));
     const page = read(join(dist, model, slug(version), 'index.html'));
+    assert.ok(page.includes(`Build date (UTC): 2025-10-14 ${buildTimes[version]}`));
+    assert.match(page, /the release date is not established/);
     assert.ok(page.includes(`${bytes} bytes`));
     assert.ok(page.includes(`Android: ${android} (SDK ${sdk})`));
     assert.match(page, /SHA-256: <code[^>]*>[a-f0-9]{64}<\/code>/);

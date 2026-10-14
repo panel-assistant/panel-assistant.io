@@ -46,7 +46,8 @@
       "sha256": "0287084025af63af4063afe2022e81a9bba52d4bd32f011614a441da5ca4297c",
       "android": "9",
       "sdk": 28,
-      "securityPatch": "2019-08-01"
+      "securityPatch": "2019-08-01",
+      "buildDateUtc": "2025-10-14T18:27:50Z"
     },
     "omni_prod": {
       "version": "3051355900018050",
@@ -54,7 +55,8 @@
       "sha256": "25942f7a18216e5881c875168d820b648f972762c57952e6e801bc1def52dfc5",
       "android": "10",
       "sdk": 29,
-      "securityPatch": "2020-08-05"
+      "securityPatch": "2020-08-05",
+      "buildDateUtc": "2025-10-14T18:27:46Z"
     },
     "ripley": {
       "version": "2041515800015050",
@@ -62,7 +64,8 @@
       "sha256": "34b4020215b66d78ecc53a3b603f3ab61435557bf6d634b01c2e3f7892be86ae",
       "android": "9",
       "sdk": 28,
-      "securityPatch": "2019-08-01"
+      "securityPatch": "2019-08-01",
+      "buildDateUtc": "2025-10-14T18:26:17Z"
     },
     "terry_prod": {
       "version": "5051355900018050",
@@ -70,7 +73,8 @@
       "sha256": "5039c12141a913d7801078389490ad1f86e11b328e2b614bf9571102875500ad",
       "android": "10",
       "sdk": 29,
-      "securityPatch": "2020-08-05"
+      "securityPatch": "2020-08-05",
+      "buildDateUtc": "2025-10-14T18:29:24Z"
     },
     "cipher_prod": {
       "version": "4051355900018050",
@@ -78,7 +82,8 @@
       "sha256": "2467033331298297376741ee5b9c609f4166610cafa0eafe98792361322823d4",
       "android": "10",
       "sdk": 29,
-      "securityPatch": "2020-08-05"
+      "securityPatch": "2020-08-05",
+      "buildDateUtc": "2025-10-14T18:27:28Z"
     }
   }
 }
