@@ -1,12 +1,12 @@
 ---
 title: Premiers pas
 description: En quelques minutes, passez d’un panneau mural Android non configuré à votre tableau de bord Home Assistant, avec Home Assistant pour vous guider à chaque étape.
-sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
 Si vous avez déjà configuré un panneau mural ou un kiosque, vous vous souvenez sans doute du déroulement : installer des applications manuellement, chercher un moteur de navigateur capable d’afficher un tableau de bord, tâtonner dans les réglages et ne jamais vraiment faire confiance au prochain redémarrage. Configurer un panneau avec Panel Assistant sera une agréable surprise. Vous pouvez terminer en quelques minutes et, même si le panneau est au mur, vous n’aurez pas à vous lever de votre chaise. Bon, peut-être une fois ;-)
 
-La première heure est la plus difficile avec un panneau. Panel Assistant s’en charge pour vous, depuis Home Assistant. Si le panneau est déjà sur votre réseau, indiquez son adresse à l’intégration, qui fait le reste. S’il est encore dans sa boîte, branchez-le à votre ordinateur portable avec un câble USB et installez directement depuis votre navigateur, avant même de le fixer au mur. Dans les deux cas, vous acceptez une demande sur le panneau et suivez le déroulement.
+La première heure est la partie difficile de la mise en route de tout panneau. Panel Assistant s’en charge pour vous, depuis Home Assistant. Si le panneau est déjà sur votre réseau, donnez son adresse à l’intégration et elle fait le reste. S’il est encore dans sa boîte, branchez-le à votre ordinateur portable avec un câble USB et installez l’application directement depuis votre navigateur, avant même de le fixer au mur. Si le panneau vous demande d’autoriser le débogage, acceptez la demande sur son écran, puis suivez l’installation jusqu’à la fin.
 
 ## 1. Installer l’intégration
 
@@ -14,7 +14,7 @@ Ajoutez Panel Assistant via HACS et redémarrez Home Assistant. C’est la seule
 
 ## 2. Activer le débogage sur le panneau
 
-Ouvrez les options pour les développeurs sur le panneau et activez le débogage sans fil, ou le débogage USB si vous branchez le panneau par câble. C’est ce qui permet à Home Assistant de faire l’installation pour vous. Les [pages consacrées au matériel](/fr/hardware/) indiquent où se trouve le réglage sur chaque modèle, et [Préparer le panneau](/fr/install/prepare-a-panel/) donne les détails.
+Ouvrez les options pour les développeurs sur le panneau et activez ADB sur le réseau, sur le port TCP 5555, ou le débogage USB si vous branchez le panneau par câble. C’est ce qui permet à Home Assistant de procéder à l’installation pour vous. Les [pages consacrées au matériel](/fr/hardware/) indiquent où se trouve l’option sur chaque modèle, et [Préparer le panneau](/fr/install/prepare-a-panel/) fournit les détails.
 
 ## 3. Ajouter le panneau
 
@@ -88,7 +88,7 @@ Dans les deux cas, l’assistant se charge de la partie compliquée. Il vérifie
 
 ## 4. Terminer dans l’assistant de configuration du panneau
 
-Home Assistant ouvre ensuite l’assistant de configuration du panneau, qui pose quelques questions rapides, notamment le nom du panneau et le tableau de bord à afficher au mur. Le panneau ne charge que les entités affichées par ce tableau de bord, ce qui le garde rapide. Voir [Connecter un panneau](/fr/home-assistant/connect-a-panel/).
+Home Assistant ouvre ensuite l’assistant de configuration du panneau, qui pose quelques questions rapides, notamment sur le nom du panneau et le tableau de bord à afficher au mur. Lorsque le filtrage des entités est activé, le panneau ne charge que les entités utilisées par ce tableau de bord, ce qui lui permet de rester rapide. Voir [Connecter un panneau](/fr/home-assistant/connect-a-panel/).
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="L’assistant de configuration du panneau, étape par étape" tabindex="0">
 <figure>
@@ -121,7 +121,7 @@ Home Assistant ouvre ensuite l’assistant de configuration du panneau, qui pose
 ## Ce qu’il vous faut
 
 - Home Assistant 2026.8.3 ou plus récent, avec HACS.
-- Un panneau mural sous Android 8.0 ou plus récent. La plupart des panneaux fonctionnent avec le profil matériel générique, et [Choisir un panneau](/fr/install/supported-panels/) répertorie les modèles bénéficiant d’une prise en charge matérielle complète.
+- Un panneau mural ARM sous Android 8.0 ou une version plus récente, avec un accès au débogage. La plupart des panneaux fonctionnent avec le profil matériel générique, et [Choisir un panneau](/fr/install/supported-panels/) répertorie les modèles dont le matériel est entièrement pris en charge.
 - Pour l’option USB, un navigateur basé sur Chromium, comme Chrome ou Edge.
 
 ## Où trouver les détails

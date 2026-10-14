@@ -1,14 +1,14 @@
 ---
 title: So funktioniert es
 description: Was Panel Assistant auf das Panel bringt, was in Home Assistant bleibt und warum es vollständig Open Source sein kann.
-sourceCommit: f84c3d3fbf79006c96fdb0539ba346aaa9ff6435
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
 Panel Assistant besteht aus zwei Teilen. Einer läuft in Home Assistant und ist das, was du siehst und benutzt. Der andere läuft auf jedem Panel und macht das Panel schnell.
 
 ## In Home Assistant: die Integration
 
-Die Integration installierst du über HACS. Hier fügst du ein Panel hinzu, hier erscheint jedes Panel als Gerät mit eigenem Status und eigenen Diagnosedaten, und hier zeigt eine Panel Assistant-Seite in der Seitenleiste alle deine Panels zusammen an: ob sie jeweils erreichbar sind, welche Version sie ausführen und ob etwas deine Aufmerksamkeit braucht.
+Die Integration installierst du über HACS. Dort werden Panels hinzugefügt, dort erscheint jedes Panel als Gerät mit eigenem Status und eigener Diagnose, und dort können Administratoren ein Panel in der Panel Assistant-Seitenleiste auswählen und dessen eigene Weboberfläche innerhalb von Home Assistant nutzen.
 
 Sie ist auch das Installationsprogramm. Gib ihr die Adresse eines neuen Panels oder schließe ein neues Panel an deinen Laptop an. Sie prüft, was bereits vorhanden ist, installiert die Panel-App, startet sie und erstellt erst dann das Gerät. Wenn auf einem Panel die App bereits läuft, übernimmt sie es stattdessen.
 
@@ -16,8 +16,8 @@ Sie ist auch das Installationsprogramm. Gib ihr die Adresse eines neuen Panels o
 
 Ein Wandpanel ist ein kleiner Android-Computer. Dass sich die meisten langsam anfühlen, liegt an der mitgelieferten Software. Panel Assistant ersetzt den entscheidenden Teil dieser Software durch seine eigene App, die drei Dinge tut.
 
-- **Zeigt dein Dashboard an.** Die App lädt dein bestehendes Home Assistant-Dashboard selbst, ermittelt, welche Entitäten dieses Dashboard tatsächlich anzeigt, und fragt nur diese bei Home Assistant ab. Auf einem günstigen Panel macht das den größten Teil des Unterschieds zwischen einer verzögerten und einer verzögerungsfreien Bedienung aus.
-- **Steuert die Hardware des Panels.** Der Bildschirm, seine Helligkeit und sein Ruhezustand, LEDs, Tasten, Relais, Näherungs- und Lichtsensoren und alles Weitere, was das Modell hat, werden direkt angesteuert und erscheinen in Home Assistant als Entitäten am Gerät des Panels. Jedes Modell wird durch ein Hardware-Profil beschrieben: Klartext, den du in deinem Browser auf dem Panel lesen, bearbeiten und validieren kannst, ohne Entwicklungswerkzeuge. Ein Panel, das dem Projekt noch unbekannt ist, startet mit dem zurückhaltenden Generic-Profil. Es bietet das Dashboard, Sensoren, Helligkeit, Audio und Navigation, die jedes Android-Gerät bereitstellen kann, und der Rest kommt hinzu, wenn sein Profil vervollständigt wird. Das laufende Panel prüft jede deklarierte Fähigkeit, bevor es sie nutzt. Eine fehlende Funktion wird daher als gesperrt angezeigt und erklärt, statt defekt zu bleiben, und ein Profil, das beim Start scheitert, wird auf das letzte funktionierende Profil zurückgesetzt.
+- **Stellt dein Dashboard dar.** Die App lädt dein bestehendes Home Assistant-Dashboard selbst. Bei aktiviertem Entitätenfilter ermittelt sie, welche Entitäten das Dashboard verwendet, und fordert von Home Assistant nur diese an. Auf einem günstigen Panel macht das den größten Teil des Unterschieds zwischen einer verzögerten und einer flüssigen Reaktion aus.
+- **Steuert die Hardware des Panels.** Der Bildschirm mit seiner Helligkeit und seinem Ruhezustand, die LEDs, Tasten, Relais, Näherungs- und Lichtsensoren sowie alles Weitere, was das Modell bietet, werden direkt angesteuert und erscheinen in Home Assistant als Entitäten am Gerät des Panels. Jedes Modell wird durch ein Hardwareprofil beschrieben: Klartext, den du im Browser auf dem Panel lesen, bearbeiten und validieren kannst, ohne Entwicklungswerkzeuge. Ein kompatibles ARM-Panel mit Android, das dem Projekt noch unbekannt ist, startet mit dem vorsichtigen Generic-Profil. Damit erhält es das Dashboard, die Sensoren, Helligkeit, Audio und Navigation, die jedes Android-Gerät bereitstellen kann, und bekommt den Rest, sobald sein Profil ergänzt wird. Das laufende Panel prüft jede deklarierte Fähigkeit, bevor es sie nutzt. Eine fehlende Funktion wird deshalb gesperrt angezeigt und erklärt, statt einfach defekt zu bleiben. Ein Profil, das beim Start fehlschlägt, wird auf das letzte funktionierende Profil zurückgesetzt.
 - **Verhält sich wie ein Haushaltsgerät.** Die App ersetzt den Launcher des Herstellers, bietet einem Panel ohne Tasten eine Navigation auf dem Bildschirm, stellt eine eigene Statusseite in deinem Netzwerk bereit und erholt sich selbstständig, wenn etwas schiefgeht. So kannst du ein Panel einmal montieren und es danach sich selbst überlassen.
 
 Diese App heißt ha-paneld. Der Name stammt aus ihrer Zeit als Hintergrundhelfer, auf den andere Dashboard-Software angewiesen war. Seitdem ist daraus die gesamte Panel-Seite des Produkts geworden. Der Name begegnet dir in der Referenzdokumentation und auf der eigenen Statusseite des Panels. Es lohnt sich, ihn zu kennen, damit dich nichts überrascht, aber du musst ihn nie eingeben oder dich damit beschäftigen, um Panel Assistant zu nutzen.

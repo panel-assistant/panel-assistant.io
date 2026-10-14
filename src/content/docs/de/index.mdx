@@ -19,7 +19,7 @@ hero:
     - text: Wird mein Panel unterstützt?
       link: /de/install/supported-panels/
       variant: secondary
-sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
 import Features from '../../../components/home/Features.astro';
@@ -98,7 +98,7 @@ Das macht den Unterschied zwischen einem trägen Panel und einem, das sofort auf
 
 Die meisten Panels kommen von einem Marktplatz im Ausland, mit einer knappen Anleitung und ohne Zusage, dass jemals etwas anderes als die Hersteller-App darauf laufen wird. Ob es funktioniert, erfährst du erst, wenn Geld und Abende schon investiert sind. Panel Assistant soll diese Unsicherheit beseitigen: [Prüfe dein Modell](/de/install/supported-panels/), bevor du es kaufst. Dann weißt du, dass es nach der Lieferung einen getesteten, wiederholbaren Weg gibt, es zum Laufen zu bringen.
 
-Die erste Stunde ist bei jedem Panel die schwierigste. Panel Assistant übernimmt sie für dich, direkt aus Home Assistant. Ist das Panel schon in deinem Netzwerk, gibst du der Integration seine Adresse, und sie erledigt den Rest. Ist es noch im Karton, schließt du es mit einem USB-Kabel an deinen Laptop an und installierst direkt aus dem Browser, bevor es an die Wand kommt. In beiden Fällen bestätigst du eine Abfrage auf dem Panel und verfolgst den Ablauf.
+Bei jedem Panel ist die erste Stunde der schwierige Teil. Panel Assistant übernimmt diese Stunde für dich, direkt aus Home Assistant heraus. Wenn das Panel bereits in deinem Netzwerk ist, gib der Integration seine Adresse, und sie erledigt den Rest. Wenn es noch in der Verpackung liegt, schließe es mit einem USB-Kabel an deinen Laptop an und installiere direkt aus deinem Browser, bevor es überhaupt an die Wand kommt. Wenn das Panel dich auffordert, das Debugging zu autorisieren, bestätige die Aufforderung auf seinem Bildschirm und verfolge anschließend die Installation bis zum Ende.
 
 </Split>
 
@@ -116,13 +116,13 @@ Günstige Panels sind aus bestimmten Gründen langsam, und Panel Assistant zeigt
 
 <Split title="Anbringen und vergessen">
 
-Ein Wandpanel sollte sich wie ein Lichtschalter verhalten: immer da, ohne deine Aufmerksamkeit zu brauchen. Panel Assistant lernt die üblichen Lichtverhältnisse im Raum kennen und dimmt passend dazu. Es lernt seinen Näherungssensor kennen, damit eine Handbewegung den Bildschirm weckt, eine vorbeilaufende Katze aber nicht. Über Nacht gibt es bei ausgeschaltetem Bildschirm Speicher frei und öffnet nach einem Neustart selbstständig das letzte funktionierende Dashboard.
+Ein Wandpanel sollte sich wie ein Lichtschalter verhalten: immer da, ohne dich zu brauchen. Panel Assistant lernt die normale Beleuchtung im Raum und dimmt entsprechend, nutzt eine kalibrierte Näherungserkennung, damit die ausgewählte Handgeste den Bildschirm aufweckt, gibt über Nacht bei ausgeschaltetem Bildschirm Arbeitsspeicher frei und öffnet nach einem Neustart selbstständig das letzte funktionierende Dashboard wieder.
 
 </Split>
 
 <Split title="Hersteller-Software im Griff">
 
-Panel Assistant übernimmt den Startbildschirm und gibt einem Panel ohne Tasten eine Bedienmöglichkeit auf dem Bildschirm. Es hält bewährte Browser-Engines für Panels bereit, deren mitgelieferte Engine Jahre zu alt ist, und verhindert, dass das Steuerungs-Widget des Herstellers dein Dashboard überlagert. Dabei ist es so ausgelegt, dass es nichts anfasst, was das Panel zum Weiterlaufen braucht.
+Panel Assistant übernimmt den Startbildschirm und ermöglicht die Navigation auf einem Panel ohne Tasten über den Bildschirm. Es verhindert, dass das Steuerungswidget eines Herstellers dein Dashboard überlagert, und weigert sich dabei bewusst, irgendetwas anzutasten, das das Panel zum Weiterbetrieb braucht.
 
 </Split>
 

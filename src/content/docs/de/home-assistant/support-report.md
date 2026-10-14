@@ -1,10 +1,12 @@
 ---
 title: Einen Supportbericht verstehen
 description: Einen Fehler bei der Installation oder Aktualisierung mit Panel Assistant nachvollziehen und den Bericht teilen, wenn Sie Hilfe benötigen.
-sourceCommit: ddee491d1892568fda8e9bb47f003b2333e3b666
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
-Wenn eine Installation oder Aktualisierung fehlschlägt, öffnen Sie den zugehörigen Eintrag unter **Einstellungen → Reparaturen** in Home Assistant und wählen Sie **Supportbericht**. Der Bericht enthält die genauen Feldnamen und Werte in einem kopierbaren Textblock. Er beginnt mit `panel_assistant.version` und `panel_assistant.build`, gefolgt von `home_assistant.version` und der Repair ID in `repair.issue_id`. Gespeicherte Ereignisse erscheinen unter `events[N]`, wobei `N` bei 0 beginnt.
+Wenn eine Netzwerkinstallation oder ein Update der Panel-App fehlschlägt, öffne den zugehörigen Eintrag unter **Einstellungen → Reparaturen** in Home Assistant und wähle **Supportbericht**. Der Bericht bewahrt die genauen Feldnamen und Werte in einem kopierbaren Textblock. Er beginnt mit `panel_assistant.version` und `panel_assistant.build`, gefolgt von `home_assistant.version` und der Repair ID in `repair.issue_id`. Gespeicherte Ereignisse stehen unter `events[N]`, wobei `N` bei 0 beginnt.
+
+Wenn eine [USB-Installation](/de/install/install-over-usb/) fehlgeschlagen ist, öffne stattdessen die Supportdetails des Installationsprogramms.
 
 Lesen Sie den Bericht, bevor Sie ihn teilen. Er kann eine Panel-Adresse, Gerätekennungen, Details zur Veröffentlichung und eine Ausnahme-Trace enthalten. Entfernen Sie alles, was Sie nicht in einem öffentlichen Issue veröffentlichen möchten. Behalten Sie nach Möglichkeit den Fehlergrund und die zugehörigen Details bei; sie helfen zu erklären, was passiert ist.
 

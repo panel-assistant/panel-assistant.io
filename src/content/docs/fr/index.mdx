@@ -19,7 +19,7 @@ hero:
     - text: Mon panneau est-il pris en charge ?
       link: /fr/install/supported-panels/
       variant: secondary
-sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
 import Features from '../../../components/home/Features.astro';
@@ -98,7 +98,7 @@ C’est ce qui fait la différence entre un panneau lent et un panneau qui répo
 
 La plupart des panneaux arrivent d’une place de marché à l’étranger avec un manuel succinct et sans garantie de pouvoir exécuter autre chose que l’application du fabricant. Vous découvrez si cela fonctionne une fois votre argent et vos soirées dépensés. Panel Assistant vise à lever cette incertitude : [vérifiez votre modèle](/fr/install/supported-panels/) avant d’acheter, en sachant qu’à son arrivée vous disposerez d’une méthode testée et reproductible pour le mettre en service.
 
-La première heure est la plus difficile avec un panneau. Panel Assistant s’en charge pour vous, depuis Home Assistant. Si le panneau est déjà sur votre réseau, indiquez son adresse à l’intégration, qui fait le reste. S’il est encore dans sa boîte, branchez-le à votre ordinateur portable avec un câble USB et installez directement depuis votre navigateur, avant même de le fixer au mur. Dans les deux cas, vous acceptez une demande sur le panneau et suivez le déroulement.
+La première heure est la partie difficile de la mise en route de tout panneau. Panel Assistant s’en charge pour vous, depuis Home Assistant. Si le panneau est déjà sur votre réseau, donnez son adresse à l’intégration et elle fait le reste. S’il est encore dans sa boîte, branchez-le à votre ordinateur portable avec un câble USB et installez l’application directement depuis votre navigateur, avant même de le fixer au mur. Si le panneau vous demande d’autoriser le débogage, acceptez la demande sur son écran, puis suivez l’installation jusqu’à la fin.
 
 </Split>
 
@@ -116,13 +116,13 @@ Les panneaux bon marché sont lents pour des raisons précises, et Panel Assista
 
 <Split title="Installez-le, puis oubliez-le">
 
-Un panneau mural devrait se comporter comme un interrupteur : toujours là, sans demander votre attention. Panel Assistant apprend la luminosité habituelle de la pièce et ajuste celle de l’écran en conséquence. Il apprend le comportement de son capteur de proximité pour qu’un geste réveille l’écran, mais pas un chat qui passe. Il libère de la mémoire la nuit lorsque l’écran est éteint et rouvre de lui-même le dernier tableau de bord fonctionnel après un redémarrage.
+Un panneau mural devrait se comporter comme un interrupteur : toujours disponible, sans jamais avoir besoin de votre intervention. Panel Assistant apprend la luminosité habituelle de la pièce et atténue l’écran en conséquence, utilise un capteur de proximité étalonné pour que le geste de la main choisi réveille l’écran, libère de la mémoire pendant la nuit lorsque l’écran est éteint et rouvre tout seul le dernier tableau de bord qui fonctionnait après un redémarrage.
 
 </Split>
 
 <Split title="Le logiciel du fabricant, maîtrisé">
 
-Panel Assistant prend le contrôle de l’écran d’accueil et donne aux panneaux sans boutons un moyen de naviguer à l’écran. Il garde à disposition des moteurs de navigateur éprouvés pour les panneaux dont le moteur fourni a plusieurs années de retard, et empêche le widget de commande du fabricant de recouvrir votre tableau de bord. Il refuse par conception de toucher à ce dont le panneau a besoin pour continuer à fonctionner.
+Panel Assistant prend le contrôle de l’écran d’accueil et fournit une navigation à l’écran aux panneaux sans boutons. Il empêche le widget de commande du fabricant de se superposer à votre tableau de bord, tout en refusant, par conception, de toucher à tout ce dont le panneau a besoin pour continuer à fonctionner.
 
 </Split>
 

@@ -1,10 +1,12 @@
 ---
 title: Comprendre un rapport d'assistance
 description: Comprendre un échec d'installation ou de mise à jour de Panel Assistant et partager le rapport lorsque vous demandez de l'aide.
-sourceCommit: ddee491d1892568fda8e9bb47f003b2333e3b666
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
-Lorsqu'une installation ou une mise à jour échoue, ouvrez l'élément correspondant dans **Paramètres → Réparations** de Home Assistant et choisissez **Rapport d'assistance**. Le rapport conserve les noms et les valeurs exacts des champs dans un bloc de texte que vous pouvez copier. Il commence par `panel_assistant.version` et `panel_assistant.build`, suivis de `home_assistant.version` et du Repair ID dans `repair.issue_id`. Les événements enregistrés figurent sous `events[N]`, où `N` commence à 0.
+Lorsqu’une installation réseau ou une mise à jour de l’application du panneau échoue, ouvrez l’élément correspondant sous **Paramètres → Réparations** dans Home Assistant et choisissez **Rapport d’assistance**. Le rapport conserve les noms et valeurs exacts des champs dans un bloc de texte que vous pouvez copier. Il commence par `panel_assistant.version` et `panel_assistant.build`, suivis de `home_assistant.version` et de Repair ID dans `repair.issue_id`. Les événements enregistrés apparaissent sous `events[N]`, où `N` commence à 0.
+
+En cas d’échec d’une [installation par USB](/fr/install/install-over-usb/), ouvrez plutôt les détails d’assistance de l’installateur.
 
 Lisez le rapport avant de le partager. Il peut contenir l'adresse d'un panneau, des identifiants d'appareils, des détails sur la version publiée et une trace d'exception. Supprimez tout ce que vous ne souhaitez pas publier dans un ticket public. Si possible, conservez le motif de l'échec et les détails associés ; ils aident à expliquer ce qui s'est passé.
 
