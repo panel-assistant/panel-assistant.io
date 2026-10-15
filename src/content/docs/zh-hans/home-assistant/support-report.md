@@ -1,10 +1,12 @@
 ---
 title: 读懂支持报告
 description: 了解 Panel Assistant 安装或更新失败的情况，并在求助时分享报告。
-sourceCommit: ddee491d1892568fda8e9bb47f003b2333e3b666
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
-安装或更新失败时，在 Home Assistant 的**设置 → 修复**中打开对应条目，然后选择**支持报告**。报告在可复制的文本块中保留准确的字段名和值。开头依次列出 `panel_assistant.version`、`panel_assistant.build`、`home_assistant.version`，以及 `repair.issue_id` 中的 Repair ID。已保存的事件列在 `events[N]` 下，其中 `N` 从 0 开始。
+如果网络安装或面板应用更新失败，请在 Home Assistant 的**设置 → 修复**中打开对应条目，并选择**支持报告**。报告会在可复制的文本块中保留准确的字段名和值。开头是 `panel_assistant.version` 和 `panel_assistant.build`，接着是 `home_assistant.version`，以及 `repair.issue_id` 中的 Repair ID。保存的事件列在 `events[N]` 下，其中 `N` 从 0 开始。
+
+如果 [USB 安装](/zh-hans/install/install-over-usb/)失败，请改为打开安装程序的支持详情。
 
 分享前请先阅读报告。它可能包含面板地址、设备标识符、发布版本详情和异常追踪信息。删除你不想在公开问题中发布的内容。尽可能保留失败原因和相关详情，它们有助于解释发生了什么。
 

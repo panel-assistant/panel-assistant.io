@@ -1,12 +1,12 @@
 ---
 title: 入门
 description: 只需几分钟，就能让尚未配置的 Android 墙面面板显示 Home Assistant 仪表盘，每一步都有 Home Assistant 引导。
-sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
 如果你以前设置过墙面面板或自助终端，大概还记得那套过程：侧载应用、寻找能绘制仪表盘的浏览器引擎、猜测设置项的作用，还总担心下次重启会出问题。用 Panel Assistant 设置面板，会给你一个惊喜。几分钟就能完成，即使面板已经挂在墙上，你也不用离开椅子。好吧，也许需要一次 ;-)
 
-任何面板最难的都是最初那一小时。Panel Assistant 在 Home Assistant 内替你完成这部分工作。如果面板已经连上网络，向集成提供地址，剩下的交给它。如果面板还在盒子里，用 USB 线连接笔记本电脑，在上墙之前直接从浏览器安装。两种方式都只需在面板上批准一次提示，然后看着安装完成。
+任何面板最难的都是最初一小时的设置。Panel Assistant 在 Home Assistant 内替你完成这一步。如果面板已接入你的网络，只需向集成提供面板地址，剩下的交给它。如果面板还未拆箱安装，用 USB 线将它接到笔记本电脑，即可在上墙之前直接从浏览器安装。如果面板要求授权调试，请在面板屏幕上接受提示，然后等待安装完成。
 
 ## 1. 安装集成
 
@@ -14,7 +14,7 @@ sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
 
 ## 2. 在面板上开启调试
 
-在面板上打开开发者选项，开启无线调试；如果通过线缆连接面板，则开启 USB 调试。这样 Home Assistant 才能替你安装。[硬件页面](/zh-hans/hardware/)会说明各型号的开关在哪里，[准备面板](/zh-hans/install/prepare-a-panel/)中有详细步骤。
+打开面板的开发者选项，启用 TCP 端口 5555 上的网络 ADB；如果通过线缆连接面板，则启用 USB 调试。这样 Home Assistant 才能替你安装。[硬件页面](/zh-hans/hardware/)说明了各型号的开关位置，[准备面板](/zh-hans/install/prepare-a-panel/)提供了详细步骤。
 
 ## 3. 添加面板
 
@@ -88,7 +88,7 @@ sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
 
 ## 4. 在面板自身的向导中完成设置
 
-随后，Home Assistant 会打开面板自身的设置向导，询问几个简单问题，包括面板名称和要在墙上显示的仪表盘。面板只加载该仪表盘显示的实体，这正是它保持快速运行的原因。参见 [连接面板](/zh-hans/home-assistant/connect-a-panel/)。
+随后，Home Assistant 会打开面板自身的设置向导，让你回答几个简单的问题，包括面板名称和要显示在墙上的仪表盘。启用实体筛选后，面板只加载该仪表盘使用的实体，从而保持快速响应。请参阅 [连接面板](/zh-hans/home-assistant/connect-a-panel/)。
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="面板设置向导的详细步骤" tabindex="0">
 <figure>
@@ -121,7 +121,7 @@ sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
 ## 所需条件
 
 - Home Assistant 2026.8.3 或更新版本，并安装 HACS。
-- 运行 Android 8.0 或更新版本的墙面面板。大多数面板都能使用通用硬件配置文件，[选择面板](/zh-hans/install/supported-panels/)列出了具有完整硬件支持的型号。
+- 一台运行 Android 8.0 或更新版本、可进行调试访问的 ARM 壁挂面板。大多数面板可使用通用硬件配置文件，[选择面板](/zh-hans/install/supported-panels/)列出了获得完整硬件支持的型号。
 - 使用 USB 方式时，需要基于 Chromium 的浏览器，例如 Chrome 或 Edge。
 
 ## 在哪里查看详细说明

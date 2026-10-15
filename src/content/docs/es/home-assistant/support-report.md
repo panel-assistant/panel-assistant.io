@@ -1,10 +1,12 @@
 ---
 title: Entender un informe de soporte
 description: Interpreta un fallo de instalación o actualización de Panel Assistant y comparte el informe al pedir ayuda.
-sourceCommit: ddee491d1892568fda8e9bb47f003b2333e3b666
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
-Cuando falle una instalación o actualización, abre su elemento en **Configuración → Reparaciones** de Home Assistant y elige **Informe de soporte**. El informe conserva los nombres y valores exactos de los campos en un bloque de texto que se puede copiar. Comienza con `panel_assistant.version` y `panel_assistant.build`, seguidos de `home_assistant.version` y el Repair ID en `repair.issue_id`. Los eventos guardados aparecen bajo `events[N]`, donde `N` empieza en 0.
+Cuando falle una instalación por red o una actualización de la aplicación del panel, abre su elemento en **Configuración → Reparaciones** de Home Assistant y elige **Informe de soporte**. El informe conserva los nombres y valores exactos de los campos en un bloque de texto que puedes copiar. Empieza con `panel_assistant.version` y `panel_assistant.build`, seguidos de `home_assistant.version` y el identificador de reparación (Repair ID) en `repair.issue_id`. Los eventos guardados aparecen en `events[N]`, donde `N` empieza en 0.
+
+Si ha fallado una [instalación por USB](/es/install/install-over-usb/), abre en su lugar los detalles de soporte del instalador.
 
 Lee el informe antes de compartirlo. Puede incluir la dirección de un panel, identificadores de dispositivos, detalles de la versión publicada y una traza de excepción. Elimina cualquier dato que no quieras publicar en una incidencia pública. Si puedes, conserva el motivo del fallo y los detalles relacionados; ayudan a explicar lo que ocurrió.
 
