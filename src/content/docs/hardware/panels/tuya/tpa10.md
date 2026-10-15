@@ -175,7 +175,7 @@ adb -s $IP reboot
 **The reported WebView version is wrong after this method, so do not trust it.** `Settings, WebView` and `adb shell dumpsys webviewupdate` still show **`83.0.4103.120`**, because a sideloaded SystemWebView **stamps the OEM stock `versionName` and `versionCode`** to clear the panel's minimum-version gate and get selected. The _actual_ engine is 150. Verify it by:
 
 - **User-Agent:** open any "what's my user agent" page on the panel; the UA contains `Chrome/150.0.7871.63`.
-- **The panel app:** the `:8888` status page and `/api/v1/diag` show `engine Chromium 150.0.7871.63`, because they read the UA, not the stamped package version.
+- **The panel app:** the `:8888` status page and `/diag` show `engine Chromium 150.0.7871.63`, because they read the UA, not the stamped package version.
 
 A plain adb sideload does **not** work on this signature-locked panel. Cromite 147 remains in the mirror as a fallback, using the same procedure with a different APK.
 :::
@@ -258,7 +258,7 @@ Treat the vendor's `media_codecs_performance.xml` figures as boilerplate, not me
 
 A panel showing camera cards is not idle. On a measured dashboard the panel app held two live `OMX.rk.video_decoder.avc` instances, so an encode session competes with existing decode work on the same Rockchip VPU.
 
-The panel app can serve this camera as a feature that is **off by default**. The **Camera** switch on the Camera card in Configure turns it on, with **Resolution**, **Frame rate** and **Bitrate** defaults (720p, 15 fps, 2000 kbps) and an **Exposure** bias. It serves an H.264 stream at `rtsp://<panel>:8554/live`, with room audio where microphone access is available and permitted. Home Assistant obtains still images through the panel's camera entity from that stream. Whenever the camera is open, the panel shows a red indicator that page content cannot cover. See the [API reference](/reference/api/) for the stream and status details.
+The panel app can serve this camera as a feature that is **off by default**. The **Camera** switch on the Camera card in Configure turns it on, with **Resolution**, **Frame rate** and **Bitrate** defaults (720p, 15 fps, 2000 kbps) and an **Exposure** bias. It serves an H.264 stream at `rtsp://<panel>:8554/live`, with room audio where microphone access is available and permitted. Home Assistant obtains still images through the panel's camera entity from that stream. Whenever the camera is open, the panel shows a red indicator that page content cannot cover. See the [control reference](/reference/api/) for the camera entity.
 
 :::caution
 Do not put a Home Assistant camera card for **this** panel on **this** panel's own dashboard. The panel would decode its own encode in a loop, on the same video engine, for no benefit.

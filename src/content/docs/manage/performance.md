@@ -30,7 +30,7 @@ The **Likely cause** row applies these rules conservatively and reports its conf
 
 ### Comparing filtered and unfiltered from outside the panel
 
-If the unfiltered dashboard overloads its own WebView, the in-page figures may stop changing. A collector script run from a computer polls the panel app's own performance API instead, so whole-panel CPU stays observable and, where root or the helper is available, so does a native probe of the Chromium renderer thread. It also records how old the last batch of browser measurements is; anything over 15 seconds is reported as stalled rather than treated as current.
+If the unfiltered dashboard overloads its own WebView, the in-page figures may stop changing. A collector script run from a computer polls the panel app's own performance interface instead, which belongs to the deprecated REST API (see the [control reference](/reference/api/#the-rest-api-is-deprecated)), so whole-panel CPU stays observable and, where root or the helper is available, so does a native probe of the Chromium renderer thread. It also records how old the last batch of browser measurements is; anything over 15 seconds is reported as stalled rather than treated as current.
 
 The collector does not change your configuration. It never turns the entity filter on or off or rewrites it; its first request may create one private installation key in the panel app's internal state. Select the same dashboard view and workload for both runs, change the filter on the panel's web interface, wait for the dashboard to reload, then run one command from a checkout of the [ha-paneld repository](https://github.com/panel-assistant/android) for each state:
 
@@ -92,8 +92,6 @@ The entity filter applies only to the built-in renderer. Guided setup asks wheth
 Automatic learning cannot prove every dependency of a custom card or dynamic template. A missing entity can leave a card stale or unavailable, so review the result on a panel you do not depend on first, and keep filtering off until the candidate is credible. The unfiltered subscription stays available as the way back: turn off **Entity filtering** and reload the dashboard.
 
 If old learned evidence or manual choices no longer describe the dashboard, use **Reset learned data** on the Entities page. After you confirm, it clears learned membership, pins, exclusions and ignored safety decisions, keeps the known-good active filter and starts a new scan. The filter stays in place as the fallback while the candidate is rebuilt.
-
-Advanced users can supply and inspect an exact list through the API. The workflow, the list format, the runtime status and the commands to undo it are in [the built-in renderer](/manage/built-in-renderer/#entity-filter).
 
 ### 2. Lighten the dashboard itself
 

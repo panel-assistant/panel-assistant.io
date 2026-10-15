@@ -186,7 +186,7 @@ Turning the Zigbee router switch on explicitly requests Repeater mode even when 
 
 The Configure tab shows a **Request join** action directly beneath the Zigbee router switch; the switch remains the only on and off control. Enable permit-join in ZHA or Zigbee2MQTT, then request joining and confirm that permit-join is open. The action reasserts Repeater mode, starts a fresh 15-minute grace period and polls the health status; it does not reboot or restart the panel. The button is unavailable while the router is disabled, already joined, or cooling down after a recent request.
 
-After the grace period, an enabled gateway that is still unjoined produces a persistent warning on the dashboard, the Install tab and the status API, linked to that Configure action. Do not leave it in that state, because repeated join attempts can consume substantial CPU. Either join the panel as a router or turn the Zigbee router switch off.
+After the grace period, an enabled gateway that is still unjoined produces a persistent warning on the dashboard and the Install tab, linked to that Configure action. Do not leave it in that state, because repeated join attempts can consume substantial CPU. Either join the panel as a router or turn the Zigbee router switch off.
 
 If a configured legacy gateway meets a runaway rule, the panel app turns the router switch off persistently and attempts one bounded containment. Vendor-native containment can target only the Sonoff guard, `zgateway` and the matching local broker. If a process cannot be stopped, the respawner is removed where possible and surviving gateway work is demoted to nice 19 and Android's background cpuset. Turning the router switch on later starts one fresh grace period and attempt.
 

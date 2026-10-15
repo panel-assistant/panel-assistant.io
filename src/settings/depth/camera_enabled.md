@@ -11,7 +11,7 @@ Turning it on from Home Assistant asks for approval at the panel first, in every
 
 <figure class="setting-figure">
 <svg viewBox="0 0 480 170" role="img" aria-labelledby="fig-camera_enabled">
-<title id="fig-camera_enabled">The first client opens one camera session and later stream viewers and snapshots share it</title>
+<title id="fig-camera_enabled">The first client opens one camera session and later viewers share it</title>
 <rect class="panel" x="170" y="50" width="140" height="60" rx="6"/>
 <text class="strong" x="240" y="76" text-anchor="middle">one session</text>
 <text class="small" x="240" y="94" text-anchor="middle">indicator on</text>
@@ -23,10 +23,7 @@ Turning it on from Home Assistant asks for approval at the panel first, in every
 <line class="ink dash" x1="130" y1="123" x2="170" y2="92"/>
 <rect class="soft" x="350" y="20" width="110" height="34" rx="4"/>
 <text class="small" x="405" y="41" text-anchor="middle">RTSP :8554</text>
-<rect class="soft" x="350" y="106" width="110" height="34" rx="4"/>
-<text class="small" x="405" y="127" text-anchor="middle">JPEG snapshot</text>
 <line class="ink" x1="310" y1="70" x2="350" y2="37"/>
-<line class="ink" x1="310" y1="92" x2="350" y2="123"/>
 <text class="small" x="240" y="160" text-anchor="middle">Closes when nobody is watching</text>
 </svg>
 <figcaption>The first client opens the camera and sets its parameters; later viewers join the same session.</figcaption>
@@ -35,9 +32,8 @@ Turning it on from Home Assistant asks for approval at the panel first, in every
 | Where                 | Address or entity                                                      |
 | --------------------- | ---------------------------------------------------------------------- |
 | Video stream          | `rtsp://<panel>:8554/live`, for example `rtsp://192.168.x.x:8554/live` |
-| Still image           | `http://<panel>:8888/api/v1/camera/snapshot.jpg`                       |
 | Home Assistant switch | `switch.<panel>_camera_enabled`                                        |
-| Home Assistant still  | `image.<panel>_camera_snapshot`, fetched only when the card is viewed  |
+| Home Assistant camera | `camera.<panel>_camera`, live view and still images from the stream    |
 
 :::caution
 Do not put a panel's own camera on that same panel's dashboard. The panel cannot afford to capture, encode and display the same picture at once, and the stream yields to the dashboard.

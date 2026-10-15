@@ -20,4 +20,4 @@ To set it:
 The warmth depends on how and where the panel is mounted, so the offset belongs to this panel only and is not copied when settings are pushed to other panels.
 :::
 
-It has no Home Assistant entity; change it on the Configure page or through the local API.
+It has no Home Assistant entity; change it on the Configure page.

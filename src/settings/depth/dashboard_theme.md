@@ -44,7 +44,7 @@ If [auto-brightness](/manage/adaptive-brightness/) is off, or the panel has no l
 :::
 
 :::caution
-If the Home Assistant user has explicitly chosen Light or Dark, that still wins over **Dark**, **Light** and **Ambient**. The panel reports this on the **Runtime diagnostics** card and as `theme_overridden: true` in `GET /api/v1/status`. Set that user's theme to Auto, or give the panel its own Home Assistant user.
+If the Home Assistant user has explicitly chosen Light or Dark, that still wins over **Dark**, **Light** and **Ambient**. The panel reports this on the **Runtime diagnostics** card and as `theme_overridden=true` on the `[renderer]` line of the `/diag` report. Set that user's theme to Auto, or give the panel its own Home Assistant user.
 :::
 
 The panel's own web interface on port 8888 always follows the browser viewing it.

@@ -3,7 +3,7 @@ title: Profile format and compatibility
 description: An annotated overview of schema-2 panel profiles, with the validation, matching and compatibility rules the panel app enforces.
 ---
 
-Runtime panel profiles are YAML documents with a closed, versioned schema. A machine-readable authoring descriptor and driver catalogue are available from the Profile page on a profile-capable panel; this page is an annotated overview. For the complete fields and driver vocabulary of your installed build, fetch `/api/v1/profiles/schema` and `/api/v1/profiles/drivers`. It explains the document model and compatibility rules but does not replace validation by the target ha-paneld version.
+Runtime panel profiles are YAML documents with a closed, versioned schema. A machine-readable authoring descriptor and driver catalogue are available from the Profile page on a profile-capable panel; this page is an annotated overview. For the complete fields and driver vocabulary of your installed build, use the Profile page. It explains the document model and compatibility rules but does not replace validation by the target ha-paneld version.
 
 ## Document model
 
