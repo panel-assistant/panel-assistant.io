@@ -43,6 +43,10 @@ Everything below was measured on the [Portal 10" (2nd gen)](/hardware/panels/met
 
 On first start the panel app picks the profile from what the Portal reports about itself; see [how the panel app recognises a Portal](/hardware/panels/meta/#how-to-tell-which-model-you-have). The device codename this model reports is the most useful thing an owner can [send in](https://github.com/panel-assistant/android/issues).
 
+## Firmware
+
+See the [Portal Go firmware catalogue](/hardware/firmware/builds/meta-portal-go/) for indexed builds, original Meta download URLs and Internet Archive copies.
+
 ## Sources
 
 - [Tech Advisor, Portal Go](https://www.techadvisor.com/article/744754/portal-go-everything-you-need-to-know-about-the-portable-portal.html) and [Meta, Portal Go tech specs](https://www.meta.com/gb/portal/products/portal-go/tech-specs/): screen, camera, audio and battery.

@@ -43,6 +43,10 @@ Everything below was measured on the [Portal 10" (2nd gen)](/hardware/panels/met
 
 On first start the panel app picks the profile from what the Portal reports about itself; see [how the panel app recognises a Portal](/hardware/panels/meta/#how-to-tell-which-model-you-have). The device codename this model reports is the most useful thing an owner can [send in](https://github.com/panel-assistant/android/issues).
 
+## Firmware
+
+See the [Portal Mini firmware catalogue](/hardware/firmware/builds/meta-portal-mini-8/) for indexed builds, original Meta download URLs and Internet Archive copies.
+
 ## Sources
 
 - [TechInsights, Facebook Portal Mini DT90GB teardown](https://www.techinsights.com/products/ddt-2007-804): the QCS605 processor.

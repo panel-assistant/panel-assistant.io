@@ -50,6 +50,13 @@ Facebook launched the Portal and the Portal+ together in October 2018 as its fir
 
 If you own one, the device codename and Android version it reports, from the panel app's diagnostics, are the most useful things to [send in](https://github.com/panel-assistant/android/issues).
 
+## Firmware
+
+Each model has a firmware catalogue with indexed builds, original Meta download URLs and Internet Archive copies:
+
+- [Portal (1st gen) firmware](/hardware/firmware/builds/meta-portal-10-gen1/).
+- [Portal+ (1st gen) firmware](/hardware/firmware/builds/meta-portal-plus-gen1/).
+
 ## Sources
 
 - [TechCrunch, October 2018](https://techcrunch.com/2018/10/08/facebook-portal/): launch, prices, camera, microphones, the Portal+ rotating screen and woofer, the privacy button and cover, and the Android base.
