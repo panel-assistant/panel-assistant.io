@@ -1,6 +1,6 @@
 ---
 title: Reference
-description: Technical reference for the panel app, covering its Home Assistant entities, local WebSocket, device profiles, security posture and how to build it.
+description: Technical reference for the panel app, covering its Home Assistant entities, device profiles, security posture and how to build it.
 sidebar:
   label: Overview
   order: 0
@@ -10,7 +10,7 @@ These pages document how the panel app works underneath: the interfaces it expos
 
 ## Interfaces
 
-- [Control and Home Assistant reference](/reference/api/): the entities, the panel's pages and endpoints on port 8888, and the WebSocket for scripts on your network.
+- [Control and Home Assistant reference](/reference/api/): the entities and services that automate a panel, and the panel's pages and endpoints on port 8888.
 - [Security posture](/reference/security/): the trust model, attack surface and the decisions taken.
 
 ## Device profiles

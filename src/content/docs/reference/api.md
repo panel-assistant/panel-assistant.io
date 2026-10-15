@@ -1,9 +1,9 @@
 ---
 title: Control and Home Assistant reference
-description: The Home Assistant entities, the panel's own pages and the local WebSocket that script a panel, and the deprecation of the REST API.
+description: The Home Assistant entities and services that automate a panel, the panel's own pages, and the deprecation of the REST API.
 ---
 
-Home Assistant is the way to automate and monitor a panel. Panel Assistant publishes each panel as a device with entities and services, and everything an automation or a dashboard needs is there. For a script that runs on your local network, the panel also answers on a WebSocket on port `8888`. This page lists the entities, the panel's own pages and endpoints, the socket's messages and the status of the REST API.
+Home Assistant is the way to automate and monitor a panel. Panel Assistant publishes each panel as a device with entities and services, and everything an automation or a dashboard needs is there. This page lists the entities, the panel's own pages and endpoints, and the status of the REST API.
 
 ## Home Assistant entities
 
@@ -72,8 +72,7 @@ Each panel serves a small, fixed set of paths on port `8888`. Nothing else is do
 | `/logs`                        | Redacted live application logs.                                                                                                 |
 | `/health` and `/api/v1/health` | The one-line health report described below.                                                                                     |
 | `/diag` and `/api/v1/diag`     | The plain-text diagnostics report. Review it before sharing it.                                                                 |
-| `/ui`                          | The WebSocket described below.                                                                                                  |
-| `/blob/<token>`                | One-use transfer of a large body for the socket.                                                                                |
+| `/ui`                          | The socket the panel's own pages use. It is not a scripting interface and can change between releases.                          |
 
 The pages also load their scripts, styles and icons from the panel.
 
@@ -89,68 +88,9 @@ The Configure page can start Home Assistant's normal browser sign-in. The link i
 
 The service intentionally uses a trusted-LAN model rather than general authentication. It rejects non-LAN peers, invalid Host headers and browser requests with a mismatched Origin or Referer before routing. Keep port `8888` on a trusted network and do not expose it directly to the internet. Optional [Hardened mode](/manage/security-mode/) requires physical access for protected direct LAN requests; the [security reference](/reference/security/) describes the full posture.
 
-## Scripting a panel on the local network
-
-Open a WebSocket to `ws://<panel>:8888/ui` and send one JSON object per text frame. The panel answers with one text frame per request. The socket is the way to read or change anything a person can on the panel's pages from a script on the same network. A browser page that opens it must be on the panel's own origin, and the panel refuses a connection whose `Origin` does not match its `Host`. In Hardened mode the socket accepts only software on the panel itself.
-
-### Requests
-
-Every request carries a `command_id` that you choose. A manage request whose `command_id` the same address already used returns the recorded answer without running again.
-
-A **manage request** reads or changes panel state by operation name, with its arguments in `args`:
-
-```json
-{ "kind": "manage", "command_id": "r42", "op": "perf", "args": {} }
-```
-
-A **channel command** sets one of the panel's channels, the same keys Home Assistant uses for the panel's entities. `deadline_ms` is how long the panel may take to start it, ten seconds when omitted:
-
-```json
-{ "kind": "command", "command_id": "c7", "channel": "volume", "value": 40, "deadline_ms": 10000 }
-```
-
-The panel takes the caller's address as the origin of every request on the socket and ignores any origin a frame names, so one script cannot use another's approval.
-
-### Answers
-
-```json
-{ "command_id": "r42", "outcome": "applied", "result": { "…": "the operation's JSON body" } }
-```
-
-`outcome` is `applied`, `refused`, `failed`, `superseded` or `pending_approval`. A refusal or failure carries a `code`, such as `unknown_command`, `unknown_channel`, `invalid_value`, `not_commandable`, `refused_hardened`, `hardware_unavailable`, `expired`, `approval_denied`, `approval_timeout` or `failed`. When the operation did not succeed, `status` is the HTTP-style status it ended with, and `headers` carries the few response headers a caller needs, such as a download's file name. A frame that is not valid JSON, or has no `command_id`, is refused with `invalid_format`.
-
-An operation that needs approval at the panel answers first with `outcome: pending_approval`, `interim: true` and the `approval_id` in `result`. Approve it on the panel and the same `command_id` receives its final answer; do not send it again. A denied or timed-out approval ends in a `refused` answer.
-
-### Operation names
-
-An unknown `op` answers `refused` with `unknown_command`, so a script can try a name and fall back. Names are lower-case letters, digits, underscores and dots, up to 64 characters. They are formed from the panel's former REST routes by one rule: take the route's path after the `/api/v1/` prefix, write each `/` as `.` and each `-` as `_`, and leave out path parameters, which move into `args`. A write that shares its path with a read adds `.set`. A route `some-feature/some-read` therefore becomes the operation `some_feature.some_read`. Query parameters and request bodies move into `args` too. The reads that the subscription families below poll are examples of names the panel serves: `perf`, `sensors`, `camera.status`, `radio`, `setup`, `install.status` and `proximity`. A body that is large or binary does not fit in a frame, so it moves as a blob (see Large bodies).
-
-### Subscriptions
-
-Instead of polling, subscribe to a family and the panel sends its current value, then each change:
-
-```json
-{ "kind": "manage", "command_id": "s1", "op": "subscribe", "args": { "family": "perf" } }
-```
-
-The answer is `applied` with `result: {"subscription": "s1"}`. Updates then arrive as frames of the form:
-
-```json
-{
-  "subscription": "s1",
-  "observations": [{ "channel": "perf", "state": "known", "value": { "…": "the family's value" } }]
-}
-```
-
-`state` is `unavailable`, with a null `value`, while the family cannot be read. End one with `op: "unsubscribe"` and `args: {"subscription": "s1"}`; closing the socket ends them all. A connection may hold up to eight subscriptions. The families are `perf`, `sensors`, `camera`, `health`, `entities`, `proximity`, `microphone`, `radio`, `install`, `setup` and `logs`. Each family sends no more often than its own interval, between one and five seconds, and a newer value replaces one not yet sent. `logs` is the one family that appends: its value is an array of new lines, starting with the recent backlog.
-
-### Large bodies
-
-A frame into the panel is at most 2 MiB. To send a larger body, such as a backup to restore, ask for an upload with `op: "blob.upload"` and `args: {"type": "…", "size": 123}`. The answer's `result.url` is a `/blob/<token>` path on the panel: `PUT` the bytes there, and the panel answers with a reference (`url`, `size`, `sha256`, `type`). Name that reference in the `args.blob` of the request that uses it. The panel checks the size and SHA-256 before it uses the bytes. A large or binary result comes back the same way, as a `blob` reference to `GET`. Each token works once and expires after ten minutes.
-
 ## The REST API is deprecated
 
-The REST API under `/api/v1` is deprecated, and its OpenAPI reference is no longer published. A panel that no longer serves a path answers it with `410` and `{"error": "gone"}`. The REST API stops answering on a panel once Panel Assistant no longer needs it. Use Home Assistant for automations and monitoring, and the socket above for scripts on the local network.
+The REST API under `/api/v1` is deprecated, and its OpenAPI reference is no longer published. A panel that no longer serves a path answers it with `410` and `{"error": "gone"}`. The REST API stops answering on a panel once Panel Assistant no longer needs it. Use Home Assistant for automations and monitoring.
 
 ## Pairing and discovery
 
