@@ -122,8 +122,9 @@ test('built catalogue presents Shelly models before the longer Sonoff histories'
   ]);
 });
 
-test('Meta retail models expose verified build metadata without private download links', () => {
+test('Meta retail models expose build metadata and archived vendor downloads', () => {
   const catalogue = read(join(dist, 'index.html'));
+  const metadata = JSON.parse(read(join(source, 'fw-meta-portal.json')));
   const expected = [
     ['meta-portal-10-gen1', '1041515800015050', '1,282,501,712', '9', 28],
     ['meta-portal-plus-gen1', '1041515800015050', '1,282,501,712', '9', 28],
@@ -151,11 +152,16 @@ test('Meta retail models expose verified build metadata without private download
     assert.ok(page.includes(`${bytes} bytes`));
     assert.ok(page.includes(`Android: ${android} (SDK ${sdk})`));
     assert.match(page, /SHA-256: <code[^>]*>[a-f0-9]{64}<\/code>/);
-    assert.match(page, /No public download URL or confirmed Internet Archive capture is recorded/);
+    const family = metadata.models.find((item) => item.slug === model).family;
+    const archive = metadata.families[family].archiveUrl;
+    const href = `href="${archive.replaceAll('&', '&amp;')}"`;
+    assert.ok(page.includes(href), `${model} build lost its archive download`);
+    assert.ok(modelPage.includes(href), `${model} index lost its archive download`);
+    assert.ok(catalogue.includes(href), `${model} catalogue lost its archive download`);
+    assert.match(page, /Download the original vendor package from Internet Archive/);
+    assert.doesNotMatch(page, /No public download URL or confirmed Internet Archive capture/);
     assert.match(page, /not a cross-model installation test/);
-    assert.doesNotMatch(
-      page,
-      /drive\.google|gdrive:|fbcdn|access_token|Original vendor URL|web\.archive\.org/,
-    );
+    assert.doesNotMatch(page, /drive\.google|gdrive:|access_token|Original vendor URL/);
+    assert.doesNotMatch(page, /href="https:\/\/[^"/]+\.fbcdn\.net\//);
   }
 });
