@@ -122,7 +122,7 @@ test('built catalogue presents Shelly models before the longer Sonoff histories'
   ]);
 });
 
-test('Meta retail models expose build metadata and archived vendor downloads', () => {
+test('Meta retail models expose build metadata, original vendor URLs and archive copies', () => {
   const catalogue = read(join(dist, 'index.html'));
   const metadata = JSON.parse(read(join(source, 'fw-meta-portal.json')));
   const expected = [
@@ -158,10 +158,22 @@ test('Meta retail models expose build metadata and archived vendor downloads', (
     assert.ok(page.includes(href), `${model} build lost its archive download`);
     assert.ok(modelPage.includes(href), `${model} index lost its archive download`);
     assert.ok(catalogue.includes(href), `${model} catalogue lost its archive download`);
-    assert.match(page, /Download the original vendor package from Internet Archive/);
+    const original = archive.slice(archive.indexOf('https://', 1));
+    const originalHref = `href="${original.replaceAll('&', '&amp;')}"`;
+    for (const [surface, html] of [
+      ['build', page],
+      ['index', modelPage],
+      ['catalogue', catalogue],
+    ]) {
+      assert.ok(html.includes(originalHref), `${model} ${surface} lost its original vendor URL`);
+      assert.ok(
+        html.indexOf(originalHref) < html.indexOf(href),
+        `${model} ${surface} must show the vendor before its archive`,
+      );
+    }
+    assert.match(page, /Original Meta download URLs are signed CDN links and can expire/);
     assert.doesNotMatch(page, /No public download URL or confirmed Internet Archive capture/);
     assert.match(page, /not a cross-model installation test/);
-    assert.doesNotMatch(page, /drive\.google|gdrive:|access_token|Original vendor URL/);
-    assert.doesNotMatch(page, /href="https:\/\/[^"/]+\.fbcdn\.net\//);
+    assert.doesNotMatch(page, /drive\.google|gdrive:|access_token/);
   }
 });

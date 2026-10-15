@@ -299,7 +299,7 @@ for (const model of models) {
   catalogue.push('');
   write(`${model.slug}/index.md`, modelPage.join('\n') + '\n');
 }
-// Meta downloads point to archived vendor originals, not expiring live CDN links.
+// Retain the exact vendor URL alongside its archived copy, including signed query fields.
 const meta = JSON.parse(readFileSync(join(data, 'fw-meta-portal.json'), 'utf8'));
 for (const model of meta.models) {
   const artifact = meta.families[model.family];
@@ -320,8 +320,15 @@ for (const model of meta.models) {
   )
     throw new Error(`Invalid Meta entry: ${model.slug}`);
   const version = artifact.version;
-  const notice = 'Download the original vendor package from Internet Archive.';
-  const download = `[Internet Archive](${artifact.archiveUrl})`;
+  const originalUrl = artifact.archiveUrl.replace(
+    /^https:\/\/web\.archive\.org\/web\/\d{14}\//,
+    '',
+  );
+  const notice =
+    'Original Meta download URLs are signed CDN links and can expire. Internet Archive preserves copies of the vendor packages.';
+  const original = `[Original vendor URL](${originalUrl})`;
+  const archive = `[Internet Archive](${artifact.archiveUrl})`;
+  const download = `${original} · ${archive}`;
   const summary = [
     '| Version | Download | Size | First seen | Last seen |',
     '| --- | --- | ---: | --- | --- |',
@@ -361,7 +368,8 @@ for (const model of meta.models) {
       '',
       '## Full OTA package',
       '',
-      `- Download: ${download}`,
+      `- ${original}`,
+      `- Archive: ${archive}`,
       `- Build: \`${version}\``,
       `- Build date (UTC): ${artifact.buildDateUtc.replace('T', ' ').replace('Z', '')}`,
       `- Size: ${artifact.bytes.toLocaleString('en-US')} bytes`,

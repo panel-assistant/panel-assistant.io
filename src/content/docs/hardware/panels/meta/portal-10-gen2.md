@@ -136,6 +136,10 @@ The reset erases everything, including the panel app and its settings. Afterward
 **With a USB cable to a computer attached, the same button combination does not reset the Portal.** It starts Qualcomm's emergency download mode instead, which appears on the computer as a Qualcomm USB device. Nothing is changed in that mode. Unplug power to leave it, disconnect the USB cable, and try again.
 :::
 
+## Firmware
+
+See the [Portal 10" (2nd gen) firmware catalogue](/hardware/firmware/builds/meta-portal-10-gen2/) for indexed builds, original Meta download URLs and Internet Archive copies.
+
 ## Source
 
 [Meta for Developers: Portal setup for Android apps](https://developers.meta.com/horizon/documentation/android-apps/portal-setup/): the ADB procedure and the supported model list.

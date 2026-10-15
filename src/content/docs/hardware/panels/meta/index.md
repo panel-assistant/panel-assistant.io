@@ -56,6 +56,18 @@ These points come from Meta's documentation or are properties of Meta's shared s
 - **Meta's own WebView.** The tested Portal renders web content with Meta's own build of the Chromium WebView (131), which is current enough for Home Assistant dashboards with no update. Meta's software keeps its own packages up to date in the background.
 - **Meta is winding Portal down.** Meta stopped selling Portals in 2022 and has withdrawn features since. Expect more of Meta's own services, and possibly sign-in methods, to stop working over time. The panel app does not depend on any of them, but the Meta account and the ADB switch it gates are outside anyone's control but Meta's.
 
+## Firmware
+
+These catalogues list indexed builds, original Meta download URLs and Internet Archive copies. The original URLs are signed CDN links and can expire.
+
+- [Portal (1st gen)](/hardware/firmware/builds/meta-portal-10-gen1/).
+- [Portal+ (1st gen)](/hardware/firmware/builds/meta-portal-plus-gen1/).
+- [Portal 10" (2nd gen)](/hardware/firmware/builds/meta-portal-10-gen2/).
+- [Portal Mini](/hardware/firmware/builds/meta-portal-mini-8/).
+- [Portal+ (2nd gen)](/hardware/firmware/builds/meta-portal-plus-gen2/).
+- [Portal Go](/hardware/firmware/builds/meta-portal-go/).
+- [Portal TV](/hardware/firmware/builds/meta-portal-tv/), which is not supported as a Panel Assistant panel.
+
 ## Sources
 
 - [Meta for Developers: Portal setup for Android apps](https://developers.meta.com/horizon/documentation/android-apps/portal-setup/): the **Settings › Debug › ADB Enabled** procedure, the supported model list and each model's Android level.

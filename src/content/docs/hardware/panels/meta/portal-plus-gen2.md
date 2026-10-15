@@ -43,6 +43,10 @@ Everything below was measured on the [Portal 10" (2nd gen)](/hardware/panels/met
 
 On first start the panel app picks the profile from what the Portal reports about itself; see [how the panel app recognises a Portal](/hardware/panels/meta/#how-to-tell-which-model-you-have). The device codename this model reports is the most useful thing an owner can [send in](https://github.com/panel-assistant/android/issues).
 
+## Firmware
+
+See the [Portal+ (2nd gen) firmware catalogue](/hardware/firmware/builds/meta-portal-plus-gen2/) for indexed builds, original Meta download URLs and Internet Archive copies.
+
 ## Sources
 
 - [Reviewed hands-on review](https://www.reviewed.com/smarthome/content/facebook-portal-plus-review) and [Stuff review](https://www.stuff.tv/review/facebook-portal-review-brilliant-at-the-basics): screen, camera, privacy controls and radios.
