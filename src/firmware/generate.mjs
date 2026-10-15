@@ -299,8 +299,7 @@ for (const model of models) {
   catalogue.push('');
   write(`${model.slug}/index.md`, modelPage.join('\n') + '\n');
 }
-// Meta update responses use expiring signed URLs. Publish verified package metadata
-// without turning a private acquisition URL into a public download promise.
+// Meta downloads point to archived vendor originals, not expiring live CDN links.
 const meta = JSON.parse(readFileSync(join(data, 'fw-meta-portal.json'), 'utf8'));
 for (const model of meta.models) {
   const artifact = meta.families[model.family];
@@ -314,16 +313,19 @@ for (const model of meta.models) {
     !/^\d+$/.test(artifact.android) ||
     !Number.isInteger(artifact.sdk) ||
     !/^\d{4}-\d{2}-\d{2}$/.test(artifact.securityPatch) ||
-    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(artifact.buildDateUtc)
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(artifact.buildDateUtc) ||
+    !/^https:\/\/web\.archive\.org\/web\/\d{14}\/https:\/\/[a-z0-9.-]+\.fbcdn\.net\/[^\s#]+\.zip\?[^\s#]+$/.test(
+      artifact.archiveUrl,
+    )
   )
     throw new Error(`Invalid Meta entry: ${model.slug}`);
   const version = artifact.version;
-  const notice =
-    'No public download URL or confirmed Internet Archive capture is recorded for this build.';
+  const notice = 'Download the original vendor package from Internet Archive.';
+  const download = `[Internet Archive](${artifact.archiveUrl})`;
   const summary = [
     '| Version | Download | Size | First seen | Last seen |',
     '| --- | --- | ---: | --- | --- |',
-    `| [${version}](${pathFor(model.slug, version)}) | No public download recorded | ${(artifact.bytes / 1048576).toFixed(1)} MiB | — | — |`,
+    `| [${version}](${pathFor(model.slug, version)}) | ${download} | ${(artifact.bytes / 1048576).toFixed(1)} MiB | — | — |`,
     '',
   ];
   catalogue.push(`## [${model.name}](${pathFor(model.slug, '')})`, '', notice, '', ...summary);
@@ -359,6 +361,7 @@ for (const model of meta.models) {
       '',
       '## Full OTA package',
       '',
+      `- Download: ${download}`,
       `- Build: \`${version}\``,
       `- Build date (UTC): ${artifact.buildDateUtc.replace('T', ' ').replace('Z', '')}`,
       `- Size: ${artifact.bytes.toLocaleString('en-US')} bytes`,

@@ -1,7 +1,7 @@
 {
-  "checked": "2026-10-14",
+  "checked": "2026-10-15",
   "source": "https://graph.facebook.com/mobile_release_updates",
-  "note": "Retail model sharing follows the original firmware publisher and package metadata; cross-model installation is untested. No durable public download URL or confirmed Internet Archive capture is recorded.",
+  "note": "Retail model sharing follows the original firmware publisher and package metadata; cross-model installation is untested. Download links point to original vendor packages preserved by Internet Archive.",
   "models": [
     {
       "slug": "meta-portal-10-gen1",
@@ -47,7 +47,8 @@
       "android": "9",
       "sdk": 28,
       "securityPatch": "2019-08-01",
-      "buildDateUtc": "2025-10-14T18:27:50Z"
+      "buildDateUtc": "2025-10-14T18:27:50Z",
+      "archiveUrl": "https://web.archive.org/web/20261014195712/https://scontent-lhr11-1.xx.fbcdn.net/m1/v/t0.47927-6/AQNDuCr0UR7VRe5vgZTkEIdyKg5GAw-4SD937nG9THeMVIvGQlKzYKVuWeGD3N3Zn_kUvMgFOP1Nbcyl-fuIT9Y0uRqwl2s0bUdrAOjpkClUEumwKu8bla5hz8ee9UjrOjPWrmIss18E2atv8MxW.zip?_nc_gid=Jmg2RHT278JbjcOCbdjzgw&_nc_oc=AdrP8VcZYqr7vBiNAgdyGwY5L0Z6wEDaJq_mzKMzil51v-3vgzqokQXnT23ihmUsmoY&strext=1&ccb=10-5&oh=00_AQPvDl1KrvRAh8DzyLSth9l0auou4teE4GItyKIPOGfxcw&oe=6AF70D34&_nc_sid=a999e8"
     },
     "omni_prod": {
       "version": "3051355900018050",
@@ -56,7 +57,8 @@
       "android": "10",
       "sdk": 29,
       "securityPatch": "2020-08-05",
-      "buildDateUtc": "2025-10-14T18:27:46Z"
+      "buildDateUtc": "2025-10-14T18:27:46Z",
+      "archiveUrl": "https://web.archive.org/web/20261014195712/https://scontent-lhr11-1.xx.fbcdn.net/m1/v/t0.47927-6/AQMt8PxE4T9-u_2AdtzQ1Ok9ooLA-IItHorcm4Y-mL3tgK_ZnWy5N-JX-KxLCTmEya5uhsJMw5qw30AuIuWN8Msw8luxe72Y-WlfhSbL2eSUCvf8fL59b7kDTGyRXoeO_Vi4toc3OR24D48C8q6n.zip?_nc_gid=Ba4BixFhGxYZZoyeBF0IJw&_nc_oc=AdqUjPByT1MOC-pZY2f1NTvHfmQDMaSlkWAzXWezSczsUua8lmuwW3VGMfx-IyIUYTc&strext=1&ccb=10-5&oh=00_AQPHvrJy-9u7wsJTG50KlrFrYKYSgYpmtbtDCbm3-8L7KA&oe=6AF6FDD6&_nc_sid=a999e8"
     },
     "ripley": {
       "version": "2041515800015050",
@@ -65,7 +67,8 @@
       "android": "9",
       "sdk": 28,
       "securityPatch": "2019-08-01",
-      "buildDateUtc": "2025-10-14T18:26:17Z"
+      "buildDateUtc": "2025-10-14T18:26:17Z",
+      "archiveUrl": "https://web.archive.org/web/20261015155208/https://scontent-lhr11-1.xx.fbcdn.net/m1/v/t0.47927-6/AQOoYQowNKJyJfTweJ60tkaQfLZTIo0KQH-CbQhuaL72FKPCak6nV3alQYnyPjgUwj3v_vuCmBpNXo-UOt_YI8ah6c_9ASCKi3hGCeO2eTM5JTKPhIendi9h57ZzwoSCw4Mr67mDZc-Bl_zHDgZb.zip?_nc_gid=k8xYnyl62bcBJLGba5wTIw&_nc_oc=Adqs6IWYd8CEZ76_hy8Qe5TRrZeK8YK7yat-uLdGGICke64nX2llRIAvaJmsfch60sE&strext=1&ccb=10-5&oh=00_AQMu-14kojJ6kpcyGEIBy54udFv4EnB6PPjhoGEy4LeuPA&oe=6AF7232D&_nc_sid=a999e8"
     },
     "terry_prod": {
       "version": "5051355900018050",
@@ -74,7 +77,8 @@
       "android": "10",
       "sdk": 29,
       "securityPatch": "2020-08-05",
-      "buildDateUtc": "2025-10-14T18:29:24Z"
+      "buildDateUtc": "2025-10-14T18:29:24Z",
+      "archiveUrl": "https://web.archive.org/web/20261014195714/https://scontent-lhr11-1.xx.fbcdn.net/m1/v/t0.47927-6/AQOPJhWCr5R4DGDVffMud1EpNs_DgF5HsY7BsMtEytIz623C02t3fOqq9gUWJAJn1TPHHUg2hibuh_r-sSwMBrpx1-J--GttZtyqwTLk5U-tq1FtB5WbTieex7zsdOwUq9wekYaQRtlKT3e1BGVH.zip?_nc_gid=B40zWC_G6qU06eERfAweDQ&_nc_oc=Adrw4WfoGkCWNlwt02kIDlUoiborEM63ENar2gYQFrqlnVbmSM_mX4ZYLqTBGFGA67Y&strext=1&ccb=10-5&oh=00_AQNiztwSWQ6SiR5Dtq3yg-sOplnCdROxXZy7YdHdd_4mGw&oe=6AF711EE&_nc_sid=a999e8"
     },
     "cipher_prod": {
       "version": "4051355900018050",
@@ -83,7 +87,8 @@
       "android": "10",
       "sdk": 29,
       "securityPatch": "2020-08-05",
-      "buildDateUtc": "2025-10-14T18:27:28Z"
+      "buildDateUtc": "2025-10-14T18:27:28Z",
+      "archiveUrl": "https://web.archive.org/web/20261014195736/https://scontent-lhr11-1.xx.fbcdn.net/m1/v/t0.47927-6/AQPIqRnyHF5YMBZTeviIqoFHYrnn4b8T4e0wTAPqzygC6zXjonJXC2j3jtuDRE3f9EAbA54BuRJaUTiMdAZgAE8bMMAuzTWYHM76Fj6gX4rRRpx4j8e121mEuH-50McbBeTLArJMRMmke0jnoovJ.zip?_nc_gid=7f7kZtZuguno7qp7aSCJnQ&_nc_oc=AdocsTTZ0o0EeKLT_xpuptFayu-NsfHgVS3eEOEIlJssSVmNONuKf6RorTURSPefn-A&strext=1&ccb=10-5&oh=00_AQN2fGWNwpYEAfFHh0s-JKBL-QEa3-Nb8EMyn84m6C3C-w&oe=6AF72039&_nc_sid=a999e8"
     }
   }
 }
