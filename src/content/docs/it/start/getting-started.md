@@ -1,12 +1,12 @@
 ---
 title: Primi passi
 description: Da un pannello Android a parete non configurato alla tua plancia di Home Assistant in pochi minuti, con Home Assistant che ti guida a ogni passaggio.
-sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
 Se hai già configurato un pannello a parete o un kiosk, probabilmente ricordi com’è andata: installare app manualmente, cercare un motore del browser capace di mostrare una plancia, andare a tentativi con le impostazioni e non fidarti mai del tutto del prossimo riavvio. Configurare un pannello con Panel Assistant sarà una piacevole sorpresa. Puoi finire in pochi minuti e, anche se il pannello è già sulla parete, non dovrai alzarti dalla sedia. Va bene, forse una volta ;-)
 
-La parte difficile di qualsiasi pannello è la prima ora. Panel Assistant se ne occupa per te, direttamente da Home Assistant. Se il pannello è già sulla tua rete, dai il suo indirizzo all’integrazione e farà il resto. Se è ancora nella scatola, collegalo al portatile con un cavo USB e installa direttamente dal browser, prima ancora di montarlo sulla parete. In entrambi i casi approvi una richiesta sul pannello e segui l’avanzamento.
+La parte difficile di qualsiasi pannello è la prima ora. Panel Assistant se ne occupa per te, dall'interno di Home Assistant. Se il pannello è già sulla tua rete, fornisci il suo indirizzo all'integrazione e questa fa il resto. Se è ancora nella scatola, collegalo al portatile con un cavo USB e installa direttamente dal browser, prima ancora di montarlo sulla parete. Se il pannello chiede di autorizzare il debug, accetta la richiesta sul suo schermo, poi segui l'installazione fino alla fine.
 
 ## 1. Installa l’integrazione
 
@@ -14,7 +14,7 @@ Aggiungi Panel Assistant tramite HACS e riavvia Home Assistant. È l’unica cos
 
 ## 2. Attiva il debug sul pannello
 
-Apri le opzioni sviluppatore sul pannello e attiva il debug wireless, oppure il debug USB se lo colleghi con un cavo. È questo che permette a Home Assistant di installare per te. Le [pagine hardware](/it/hardware/) mostrano dove si trova l’interruttore su ogni modello e [Prepara il pannello](/it/install/prepare-a-panel/) contiene i dettagli.
+Apri le opzioni sviluppatore sul pannello e attiva ADB di rete sulla porta TCP 5555, oppure il debug USB se colleghi il pannello via cavo. È questo che consente a Home Assistant di eseguire l'installazione per te. Le [pagine hardware](/it/hardware/) mostrano dove si trova l'interruttore su ciascun modello e [Prepara il pannello](/it/install/prepare-a-panel/) fornisce i dettagli.
 
 ## 3. Aggiungi il pannello
 
@@ -88,7 +88,7 @@ In entrambi i casi, la procedura guidata si occupa della parte complicata. Contr
 
 ## 4. Completa la procedura guidata del pannello
 
-Home Assistant apre poi la procedura guidata di configurazione del pannello, che fa poche domande rapide, tra cui il nome del pannello e la dashboard da mostrare sulla parete. Il pannello carica solo le entità mostrate da quella dashboard, ed è questo a mantenerlo veloce. Vedi [Collega un pannello](/it/home-assistant/connect-a-panel/).
+Home Assistant apre quindi la procedura guidata di configurazione del pannello, che pone alcune brevi domande, tra cui il nome del pannello e la plancia da usare sulla parete. Con il filtro delle entità abilitato, il pannello carica solo le entità usate da quella plancia, ed è questo che lo mantiene veloce. Vedi [Connetti un pannello](/it/home-assistant/connect-a-panel/).
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="La procedura guidata di configurazione del pannello, passo dopo passo" tabindex="0">
 <figure>
@@ -121,7 +121,7 @@ Home Assistant apre poi la procedura guidata di configurazione del pannello, che
 ## Cosa ti serve
 
 - Home Assistant 2026.8.3 o successivo, con HACS.
-- Un pannello a parete con Android 8.0 o successivo. La maggior parte dei pannelli funziona con il profilo hardware generico; [Scegli un pannello](/it/install/supported-panels/) elenca i modelli con supporto hardware completo.
+- Un pannello a parete ARM con Android 8.0 o successivo e accesso al debug. La maggior parte dei pannelli funziona con il profilo hardware generico e [Scegli un pannello](/it/install/supported-panels/) elenca i modelli con supporto hardware completo.
 - Per l’opzione USB, un browser basato su Chromium come Chrome o Edge.
 
 ## Dove trovi i dettagli

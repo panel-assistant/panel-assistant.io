@@ -1,14 +1,14 @@
 ---
 title: Cómo funciona
 description: Qué pone Panel Assistant en un panel, qué se queda en Home Assistant y por qué puede ser completamente de código abierto.
-sourceCommit: f84c3d3fbf79006c96fdb0539ba346aaa9ff6435
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
 Panel Assistant tiene dos partes. Una está en Home Assistant y es lo que ves y usas. La otra está en cada panel y es lo que hace que el panel sea rápido.
 
 ## En Home Assistant: la integración
 
-La integración es lo que instalas mediante HACS. Es donde se añade un panel, donde cada panel aparece como un dispositivo con su propio estado y diagnóstico, y donde una página de Panel Assistant en la barra lateral muestra todos tus paneles juntos, indicando si cada uno está accesible, qué versión ejecuta y si algo necesita atención.
+La integración es lo que instalas a través de HACS. En ella se añaden los paneles, cada panel aparece como un dispositivo con su propio estado y diagnóstico, y los administradores pueden elegir un panel en la barra lateral de Panel Assistant y utilizar su propia interfaz web dentro de Home Assistant.
 
 También es el instalador. Dale la dirección de un panel nuevo, o conecta un panel nuevo a tu portátil, y comprueba qué hay, instala la app del panel, la inicia y solo entonces crea el dispositivo. Si un panel ya está ejecutando la app, lo adopta en su lugar.
 
@@ -16,8 +16,8 @@ También es el instalador. Dale la dirección de un panel nuevo, o conecta un pa
 
 Un panel de pared es un pequeño ordenador Android, y la razón por la que la mayoría parecen lentos es el software que traían. Panel Assistant sustituye la parte de ese software que importa por su propia app, que hace tres cosas.
 
-- **Muestra tu panel de control.** La app carga por sí misma tu panel de control de Home Assistant existente, determina qué entidades muestra realmente y pide a Home Assistant solo esas. En un panel barato, eso supone la mayor parte de la diferencia entre tener retraso y no tenerlo.
-- **Controla el hardware del panel.** La pantalla, su brillo y su suspensión, los LED, botones, relés, sensores de proximidad y de luz y cualquier otro componente que tenga el modelo se controlan directamente y aparecen en Home Assistant como entidades del dispositivo del panel. Cada modelo se describe mediante un perfil de hardware: texto sin formato que puedes leer, editar y validar en tu navegador en el panel, sin herramientas de desarrollo. Un panel que el proyecto nunca ha visto empieza con el perfil conservador Generic, que le proporciona el panel de control, los sensores, el brillo, el audio y la navegación que cualquier dispositivo Android puede ofrecer, y va adquiriendo el resto a medida que se completa su perfil. El panel en ejecución comprueba cada capacidad declarada antes de usarla, así que una función que falta se muestra bloqueada y con una explicación, en lugar de quedar averiada, y un perfil que falla al arrancar se revierte al último que funcionaba.
+- **Muestra tu panel de control.** La aplicación carga por sí misma tu panel de control existente de Home Assistant. Con el filtrado de entidades habilitado, aprende qué entidades utiliza el panel de control y solicita a Home Assistant solo esas. En un panel económico, eso marca gran parte de la diferencia entre tener retrasos y no tenerlos.
+- **Controla el hardware del panel.** La pantalla, su brillo y suspensión, los LED, botones, relés, sensores de proximidad y luz y cualquier otro elemento del modelo se controlan directamente y aparecen en Home Assistant como entidades del dispositivo del panel. Cada modelo se describe mediante un perfil de hardware: texto sin formato que puedes leer, editar y validar en tu navegador, en el panel, sin herramientas de desarrollo. Un panel ARM Android compatible que el proyecto nunca haya encontrado empieza con el perfil conservador Generic, que le proporciona el panel de control, los sensores, el brillo, el audio y la navegación que puede ofrecer cualquier dispositivo Android, y obtiene el resto a medida que se completa su perfil. El panel en funcionamiento comprueba cada capacidad declarada antes de utilizarla, por lo que una función ausente se muestra bloqueada y con una explicación, en lugar de quedar averiada; si un perfil falla al iniciar, se vuelve al último que funcionó.
 - **Se comporta como un electrodoméstico.** La app sustituye el lanzador del fabricante, ofrece navegación en pantalla a un panel sin botones, sirve su propia página de estado en tu red y se recupera por sí sola cuando algo va mal, de modo que puedes instalar un panel una vez y dejarlo funcionando sin intervenir.
 
 Esa app se denomina ha-paneld. El nombre viene de su historia como un asistente en segundo plano del que dependía otro software de paneles de control, y desde entonces ha crecido hasta abarcar toda la parte del producto que se ejecuta en el panel. Encontrarás el nombre en la documentación de referencia y en la propia página de estado del panel, y conviene conocerlo para que nada te sorprenda, pero nunca tienes que escribirlo ni pensar en él para usar Panel Assistant.

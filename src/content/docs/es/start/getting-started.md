@@ -1,12 +1,12 @@
 ---
 title: Primeros pasos
 description: De un panel de pared Android sin configurar a tu panel de control de Home Assistant en minutos, con Home Assistant guiándote en cada paso.
-sourceCommit: a0f4f4fce9c24d9c344dbb001c39a8eef9bdd679
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
 Si alguna vez has configurado un panel de pared o un quiosco, probablemente recuerdes cómo fue: instalar apps por tu cuenta, buscar un motor de navegador capaz de mostrar un panel de control, probar ajustes a ciegas y no acabar de fiarte del siguiente reinicio. Configurar un panel con Panel Assistant será una sorpresa agradable. Puedes terminar en minutos y, aunque el panel esté en la pared, no tendrás que levantarte de la silla. Bueno, quizá una vez ;-)
 
-Lo difícil de cualquier panel es la primera hora. Panel Assistant se encarga de esa hora por ti, desde Home Assistant. Si el panel ya está en tu red, dale su dirección a la integración y ella hace el resto. Si aún está en la caja, conéctalo a tu portátil con un cable USB e instálalo directamente desde el navegador, antes de ponerlo en la pared. En ambos casos, aceptas un aviso en el panel y ves cómo termina.
+La parte difícil de cualquier panel es la primera hora. Panel Assistant se encarga de esa hora por ti, desde Home Assistant. Si el panel ya está en tu red, indica su dirección a la integración y ella se encarga del resto. Si aún está en la caja, conéctalo a tu portátil con un cable USB e instala directamente desde el navegador, antes de colocarlo en la pared. Si el panel te pide que autorices la depuración, acepta la solicitud en su pantalla y sigue la instalación hasta que termine.
 
 ## 1. Instala la integración
 
@@ -14,7 +14,7 @@ Añade Panel Assistant mediante HACS y reinicia Home Assistant. Es lo único que
 
 ## 2. Activa la depuración en el panel
 
-Abre las opciones de desarrollador del panel y activa la depuración inalámbrica, o la depuración USB si vas a conectarlo por cable. Así Home Assistant puede hacer la instalación por ti. Las [páginas de hardware](/es/hardware/) muestran dónde está el interruptor en cada modelo, y [Preparar el panel](/es/install/prepare-a-panel/) explica los detalles.
+Abre las opciones para desarrolladores del panel y habilita ADB por red en el puerto TCP 5555, o la depuración USB si vas a conectar el panel por cable. Eso permite que Home Assistant se encargue de la instalación por ti. Las [páginas de hardware](/es/hardware/) muestran dónde está el interruptor en cada modelo, y [Preparar el panel](/es/install/prepare-a-panel/) explica los detalles.
 
 ## 3. Añade el panel
 
@@ -88,7 +88,7 @@ En ambos casos, el asistente se encarga de la parte complicada. Comprueba qué h
 
 ## 4. Termina en el asistente del propio panel
 
-Home Assistant abre entonces el asistente de configuración del propio panel, que hace unas pocas preguntas rápidas, como el nombre del panel y el panel de control que mostrará en la pared. El panel solo carga las entidades que muestra ese panel de control, lo que mantiene su rapidez. Consulta [Conectar un panel](/es/home-assistant/connect-a-panel/).
+Home Assistant abre entonces el asistente de configuración del propio panel, que hace unas pocas preguntas rápidas, entre ellas el nombre del panel y el panel de control que quieres en la pared. Con el filtrado de entidades habilitado, el panel carga solo las entidades que utiliza ese panel de control, lo que lo mantiene ágil. Consulta [Conectar un panel](/es/home-assistant/connect-a-panel/).
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="El asistente de configuración del panel, paso a paso" tabindex="0">
 <figure>
@@ -121,7 +121,7 @@ Home Assistant abre entonces el asistente de configuración del propio panel, qu
 ## Qué necesitas
 
 - Home Assistant 2026.8.3 o posterior, con HACS.
-- Un panel de pared con Android 8.0 o posterior. La mayoría de los paneles funciona con el perfil de hardware genérico, y [Elegir un panel](/es/install/supported-panels/) enumera los modelos con compatibilidad de hardware completa.
+- Un panel de pared ARM con Android 8.0 o posterior y acceso de depuración. La mayoría de los paneles funcionan con el perfil de hardware genérico, y [Elegir un panel](/es/install/supported-panels/) enumera los modelos con compatibilidad completa con el hardware.
 - Para la opción USB, un navegador basado en Chromium, como Chrome o Edge.
 
 ## Dónde encontrar los detalles

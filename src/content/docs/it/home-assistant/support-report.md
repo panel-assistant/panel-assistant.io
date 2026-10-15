@@ -1,10 +1,12 @@
 ---
 title: Capire un rapporto di assistenza
 description: Leggi un errore di installazione o aggiornamento di Panel Assistant e condividi il rapporto quando chiedi aiuto.
-sourceCommit: ddee491d1892568fda8e9bb47f003b2333e3b666
+sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ---
 
-Quando un'installazione o un aggiornamento non riesce, apri la relativa voce in **Impostazioni → Riparazioni** di Home Assistant e scegli **Rapporto di assistenza**. Il rapporto conserva i nomi e i valori esatti dei campi in un blocco di testo che puoi copiare. Inizia con `panel_assistant.version` e `panel_assistant.build`, seguiti da `home_assistant.version` e dal Repair ID in `repair.issue_id`. Gli eventi salvati compaiono sotto `events[N]`, dove `N` parte da 0.
+Quando un'installazione di rete o un aggiornamento dell'app del pannello non riesce, apri la relativa voce in **Impostazioni → Riparazioni** in Home Assistant e scegli **Rapporto di supporto**. Il rapporto conserva i nomi e i valori esatti dei campi in un blocco di testo copiabile. Inizia con `panel_assistant.version` e `panel_assistant.build`, seguiti da `home_assistant.version` e dal Repair ID in `repair.issue_id`. Gli eventi salvati appaiono sotto `events[N]`, dove `N` parte da 0.
+
+Per un'[installazione USB](/it/install/install-over-usb/) non riuscita, apri invece i dettagli di supporto del programma di installazione.
 
 Leggi il rapporto prima di condividerlo. Può contenere l'indirizzo di un pannello, identificatori dei dispositivi, dettagli sulla versione rilasciata e una traccia dell'eccezione. Rimuovi tutto ciò che non vuoi pubblicare in una segnalazione pubblica. Se puoi, mantieni il motivo dell'errore e i dettagli correlati: aiutano a spiegare cosa è successo.
 
