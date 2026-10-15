@@ -124,6 +124,7 @@ The unit examined here arrived factory-fresh on **2.5.4**, was later updated to 
 
 - On 2.5.4 there is **no device owner and no device administrator at all**.
 - **2.7.4 installs Shelly's launcher as the device owner.** On the unit examined here that took nothing from Panel Assistant: it stayed the home screen, kept running and stayed online in Home Assistant, and the device owner imposes no restrictions on other apps. Shelly's launcher cannot be disabled on either firmware.
+- **2.8.3 keeps the same device owner, still with no restrictions.** Its ownership files are unchanged from 2.7.4, and Shelly's launcher does not stop other apps from being installed, using adb or running an accessibility service. On **2026-10-15** a fresh install of a Panel Assistant 1.0 preview build through Home Assistant's network route completed on 2.8.3, and the panel went on to show its Home Assistant dashboard.
 
 As checked on **2026-10-12**, both firmware tracks offer **stable 2.8.3**, build `20261012-141904/2.8.3-48174502c`, with no beta offered. On **2026-10-13**, one X2i running **2.8.3**, build `20261012-141904/2.8.3-48174502c`, was checked with a signed development build for the forthcoming Panel Assistant **1.0** release. The vendor firmware update preserved the app settings, home-screen selection and Home Assistant connection. The measured operations below were also checked on 2.8.2, build `20261008-101206/2.8.2-7bb488885`:
 
