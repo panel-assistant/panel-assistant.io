@@ -8,7 +8,7 @@ L'installazione via USB è pensata per un pannello ancora nella scatola o il cui
 
 ## Si comincia dentro Home Assistant
 
-Un amministratore apre l'installatore USB dalla pagina di Panel Assistant nella barra laterale di Home Assistant. Home Assistant verifica la versione rilasciata e la passa all'installatore, che si apre in una propria finestra sicura. Per questo non c'è un pulsante di installazione su questo sito: la pagina che esegue l'installazione accetta soltanto una versione rilasciata proveniente dal tuo Home Assistant, quindi sul pannello non arriva nulla che Home Assistant non abbia verificato.
+Home Assistant verifica la versione rilasciata e la passa all'installatore, che si apre in una propria finestra sicura. Per questo non c'è un pulsante di installazione su questo sito: la pagina che esegue l'installazione accetta soltanto una versione rilasciata proveniente dal tuo Home Assistant, quindi sul pannello non arriva nulla che Home Assistant non abbia verificato.
 
 ## Cosa serve
 
@@ -19,14 +19,14 @@ Un amministratore apre l'installatore USB dalla pagina di Panel Assistant nella 
 
 ## Come funziona
 
-1. Scegli una versione nella pagina di Panel Assistant. Home Assistant offre le versioni compatibili più recenti che riesce a verificare. Le versioni di prova sono contrassegnate e vengono offerte quando l'integrazione in esecuzione le consente.
+1. Scegli una versione. Home Assistant offre le versioni compatibili più recenti che riesce a verificare. Le versioni di prova sono contrassegnate e vengono offerte quando l'integrazione in esecuzione le consente.
 2. La finestra dell'installatore verifica la versione rilasciata e ti chiede di selezionare il pannello nella finestra di selezione USB del browser.
 3. Approva la richiesta di debug USB sullo schermo del pannello.
 4. Conferma. Nulla cambia sul pannello finché non lo fai. Il programma di installazione si rifiuta di sovrascrivere un'installazione esistente diversa; se la build esatta selezionata è già installata, ne completa la configurazione.
-5. Mantieni il cavo collegato e la scheda connessa fino a quando l'installatore segnala il completamento, poi termina la configurazione guidata sul pannello stesso.
+5. Mantieni il cavo collegato e la scheda connessa fino a quando l'installatore segnala il completamento.
 
-Se il cavo si scollega o la finestra si chiude durante l'operazione, ricollega il cavo, trasferisci di nuovo la stessa versione rilasciata da Home Assistant e riconnetti lo stesso pannello. L'installatore conserva i progressi nel browser, controlla ogni passaggio interrotto prima di fare qualsiasi altra cosa e riprende da lì invece di ricominciare da capo.
+Se il cavo si scollega o la finestra si chiude durante l'operazione, ricollega il cavo e riconnetti lo stesso pannello. L'installatore conserva i progressi nel browser, controlla ogni passaggio interrotto prima di fare qualsiasi altra cosa e riprende da lì invece di ricominciare da capo.
 
 ## Dopo l'installazione
 
-Il pannello sta eseguendo l'app e il programma di installazione prova ad aggiungerlo automaticamente a Home Assistant. Se Home Assistant non è riuscito a raggiungerlo, aggiungilo quando il pannello sarà sulla rete di Home Assistant. Il programma di installazione USB non aggiorna un pannello su cui l'app è già presente; per questo, vedi [Aggiornamenti e ripristino](/it/manage/updates-and-recovery/).
+Il pannello sta eseguendo l'app. Se Home Assistant non è riuscito a raggiungerlo, aggiungilo quando il pannello sarà sulla rete di Home Assistant. Il programma di installazione USB non aggiorna un pannello su cui l'app è già presente; per questo, vedi [Aggiornamenti e ripristino](/it/manage/updates-and-recovery/).

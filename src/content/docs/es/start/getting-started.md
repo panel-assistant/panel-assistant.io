@@ -78,7 +78,7 @@ Si el panel ya está en la pared, Home Assistant solo necesita su dirección.
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="El paso Elige una versión, con la versión recomendada al principio de la lista">
 </figure>
 <figure>
-<figcaption><span>4</span> Toca Permitir en el panel y quedará añadido</figcaption>
+<figcaption><span>4</span> Añadido</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="El paso de confirmación que indica que el panel se ha añadido a Home Assistant">
 <img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="El paso de confirmación que indica que el panel se ha añadido a Home Assistant">
 </figure>

@@ -9,11 +9,11 @@ Whichever you take, work through [Prepare the panel](/install/prepare-a-panel/) 
 
 ## Over the network
 
-For a panel that is already on your network. Go to **Settings**, **Devices and services**, add **Panel Assistant**, and give it the panel's address. The integration checks what is on the panel, asks you to approve a debugging prompt on the panel's own screen if required, installs the panel app, starts it, and only then creates the device. If the panel is already running the app, it adopts it instead, which is quicker.
+For a panel that is already on your network. Go to **Settings**, **Devices and services**, add **Panel Assistant**, and give it the panel's address. The integration checks what is on the panel, asks you to approve a debugging prompt on the panel's own screen if required, asks you to confirm the install, installs the panel app, starts it, and only then creates the device. If the panel is already running the app, it adopts it instead, which is quicker.
 
 ## Over USB
 
-For a panel that is still in the box, or whose vendor software makes network access awkward. Plug it into your laptop and install from your browser over the USB cable. Your browser stays connected to Home Assistant, which supplies the verified release; the panel does not need network ADB. It is started from the Panel Assistant page in the sidebar and needs a Chromium-based browser. See [Install over USB](/install/install-over-usb/).
+For a panel that is still in the box, or whose vendor software makes network access awkward. Plug it into your laptop and install from your browser over the USB cable. Your browser stays connected to Home Assistant, which supplies the verified release; the panel does not need network ADB. Start it from **Settings**, **Devices and services**, **Add integration**, **Panel Assistant**, **Install using USB on this computer**; it needs a Chromium-based browser. See [Install over USB](/install/install-over-usb/).
 
 ## What the installer protects
 
@@ -21,7 +21,7 @@ Both routes check the panel before changing anything. The network route adopts a
 
 ## After it is installed
 
-The panel appears as a device with a status sensor and diagnostics, and on the Panel Assistant page in the sidebar. The panel also serves its own status page on your network on port 8888, which is where you point it at a dashboard. Until then, the panel's own screen shows that address, with a QR code and buttons to configure it or open the dashboard.
+The panel appears as a device with a status sensor and diagnostics, and on the Panel Assistant page in the sidebar. Next you finish in the panel's own setup wizard, where you name the panel and choose its dashboard. Until setup is finished, the panel's own screen shows a QR code and a **Set up** button, so you can also finish from a phone or on the panel itself. To change the dashboard later, open the panel's status page in your browser, at its address on port 8888.
 
 ![The panel's standing screen before setup, showing its configuration address, a QR code, and Configure and Dashboard buttons](/screenshots/standing-screen.png)
 

@@ -8,7 +8,7 @@ Der USB-Weg ist für ein Panel gedacht, das noch in der Verpackung liegt, oder d
 
 ## Der Ausgangspunkt ist Home Assistant
 
-Ein Administrator öffnet den USB-Installer über die Panel Assistant-Seite in der Seitenleiste von Home Assistant. Home Assistant prüft die Veröffentlichung und übergibt sie an den Installer, der sich in einem eigenen sicheren Fenster öffnet. Deshalb gibt es auf dieser Website keine Schaltfläche zum Installieren: Die Seite, die die Installation ausführt, akzeptiert nur eine Veröffentlichung aus Ihrem eigenen Home Assistant. So gelangt nichts auf Ihr Panel, das Home Assistant nicht überprüft hat.
+Home Assistant prüft die Veröffentlichung und übergibt sie an den Installer, der sich in einem eigenen sicheren Fenster öffnet. Deshalb gibt es auf dieser Website keine Schaltfläche zum Installieren: Die Seite, die die Installation ausführt, akzeptiert nur eine Veröffentlichung aus Ihrem eigenen Home Assistant. So gelangt nichts auf Ihr Panel, das Home Assistant nicht überprüft hat.
 
 ## Was Sie benötigen
 
@@ -19,14 +19,14 @@ Ein Administrator öffnet den USB-Installer über die Panel Assistant-Seite in d
 
 ## So läuft es ab
 
-1. Wähle eine Version auf der Panel Assistant-Seite. Home Assistant bietet die neuesten kompatiblen Versionen an, die es verifizieren kann. Testversionen sind gekennzeichnet und werden angeboten, wenn die laufende Integration sie zulässt.
+1. Wähle eine Version. Home Assistant bietet die neuesten kompatiblen Versionen an, die es verifizieren kann. Testversionen sind gekennzeichnet und werden angeboten, wenn die laufende Integration sie zulässt.
 2. Das Installer-Fenster überprüft die Veröffentlichung und fordert Sie auf, das Panel im USB-Auswahldialog des Browsers auszuwählen.
 3. Bestätigen Sie die USB-Debugging-Anfrage auf dem Bildschirm des Panels.
 4. Bestätige. Bis dahin ändert sich auf dem Panel nichts. Das Installationsprogramm weigert sich, eine andere vorhandene Installation zu überschreiben. Wenn genau der ausgewählte Build bereits installiert ist, schließt es die Einrichtung dieses Builds ab.
-5. Lassen Sie das Kabel angeschlossen und den Tab verbunden, bis der Installer den Abschluss meldet. Schließen Sie anschließend die geführte Einrichtung direkt auf dem Panel ab.
+5. Lassen Sie das Kabel angeschlossen und den Tab verbunden, bis der Installer den Abschluss meldet.
 
-Wenn sich das Kabel löst oder das Fenster während des Vorgangs geschlossen wird, schließen Sie das Kabel wieder an, übertragen Sie dieselbe Veröffentlichung erneut aus Home Assistant und verbinden Sie dasselbe Panel wieder. Der Installer speichert den Fortschritt in Ihrem Browser, überprüft zuerst jeden unterbrochenen Schritt und setzt dann dort fort, statt von vorn zu beginnen.
+Wenn sich das Kabel löst oder das Fenster während des Vorgangs geschlossen wird, schließen Sie das Kabel wieder an, verbinden Sie dasselbe Panel wieder. Der Installer speichert den Fortschritt in Ihrem Browser, überprüft zuerst jeden unterbrochenen Schritt und setzt dann dort fort, statt von vorn zu beginnen.
 
 ## Danach
 
-Auf dem Panel läuft nun die App, und das Installationsprogramm versucht, es automatisch zu Home Assistant hinzuzufügen. Falls Home Assistant es nicht erreichen konnte, füge es hinzu, sobald sich das Panel im Netzwerk von Home Assistant befindet. Das USB-Installationsprogramm aktualisiert kein Panel, auf dem die App bereits vorhanden ist. Siehe dazu [Updates und Wiederherstellung](/de/manage/updates-and-recovery/).
+Auf dem Panel läuft nun die App. Falls Home Assistant es nicht erreichen konnte, füge es hinzu, sobald sich das Panel im Netzwerk von Home Assistant befindet. Das USB-Installationsprogramm aktualisiert kein Panel, auf dem die App bereits vorhanden ist. Siehe dazu [Updates und Wiederherstellung](/de/manage/updates-and-recovery/).

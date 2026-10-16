@@ -14,7 +14,7 @@ Voor een paneel dat al op je netwerk zit. Ga naar **Instellingen**, **Apparaten 
 
 ## Via USB
 
-Voor een paneel dat nog in de doos zit, of waarvan de software van de fabrikant netwerktoegang lastig maakt. Sluit het aan op je laptop en installeer vanuit je browser, zonder dat er iets over je netwerk gaat. Je start het vanaf de pagina Panel Assistant in de zijbalk, en je hebt een op Chromium gebaseerde browser nodig. Zie [Installeren via USB](/nl/install/install-over-usb/).
+Voor een paneel dat nog in de doos zit, of waarvan de software van de fabrikant netwerktoegang lastig maakt. Sluit het aan op je laptop en installeer vanuit je browser, zonder dat er iets over je netwerk gaat. Je hebt een op Chromium gebaseerde browser nodig. Zie [Installeren via USB](/nl/install/install-over-usb/).
 
 ## Wat het installatieprogramma beschermt
 

@@ -78,7 +78,7 @@ Als het paneel al aan de muur hangt, heeft Home Assistant alleen het adres nodig
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="De stap Kies een versie, met de aanbevolen release bovenaan de lijst">
 </figure>
 <figure>
-<figcaption><span>4</span> Tik op Toestaan op het paneel, en het is toegevoegd</figcaption>
+<figcaption><span>4</span> Het is toegevoegd</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="De stap Succes, die bevestigt dat het paneel aan Home Assistant is toegevoegd">
 <img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="De stap Succes, die bevestigt dat het paneel aan Home Assistant is toegevoegd">
 </figure>

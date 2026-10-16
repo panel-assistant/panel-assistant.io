@@ -78,7 +78,7 @@ Si le panneau est déjà au mur, Home Assistant n’a besoin que de son adresse.
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="L’étape Choisir une version, avec la version recommandée en tête de liste">
 </figure>
 <figure>
-<figcaption><span>4</span> Appuyez sur Autoriser sur le panneau, et il est ajouté</figcaption>
+<figcaption><span>4</span> Il est ajouté</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="L’étape Réussite confirme que le panneau a été ajouté à Home Assistant">
 <img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="L’étape Réussite confirme que le panneau a été ajouté à Home Assistant">
 </figure>

@@ -14,7 +14,7 @@ Dla panelu, który jest już w twojej sieci. Przejdź do **Ustawienia**, **Urzą
 
 ## Przez USB
 
-Dla panelu, który wciąż leży w pudełku albo którego oprogramowanie producenta utrudnia dostęp przez sieć. Podłącz go do laptopa i zainstaluj z przeglądarki, a nic nie przechodzi przez twoją sieć. Uruchamia się to ze strony Panel Assistant na pasku bocznym i wymaga przeglądarki opartej na Chromium. Zobacz [Instalacja przez USB](/pl/install/install-over-usb/).
+Dla panelu, który wciąż leży w pudełku albo którego oprogramowanie producenta utrudnia dostęp przez sieć. Podłącz go do laptopa i zainstaluj z przeglądarki, a nic nie przechodzi przez twoją sieć. Zobacz [Instalacja przez USB](/pl/install/install-over-usb/).
 
 ## Przed czym chroni instalator
 

@@ -78,7 +78,7 @@ Se il pannello è già sulla parete, a Home Assistant basta il suo indirizzo.
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="Il passaggio Scegli una versione, con la versione consigliata in cima all’elenco">
 </figure>
 <figure>
-<figcaption><span>4</span> Tocca Consenti sul pannello, ed è aggiunto</figcaption>
+<figcaption><span>4</span> È aggiunto</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="Il passaggio di conferma del completamento, che conferma l’aggiunta del pannello a Home Assistant">
 <img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="Il passaggio di conferma del completamento, che conferma l’aggiunta del pannello a Home Assistant">
 </figure>
