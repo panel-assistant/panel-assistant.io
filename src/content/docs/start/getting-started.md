@@ -13,7 +13,7 @@ Add Panel Assistant through HACS and restart Home Assistant. This is the only th
 
 ## 2. Switch on debugging on the panel
 
-Open developer options on the panel and turn on network ADB on TCP port 5555, or USB debugging if you are plugging the panel in. That is what lets Home Assistant do the installing for you. The [hardware pages](/hardware/) show where the switch is on each model, and [Prepare the panel](/install/prepare-a-panel/) has the details.
+Open developer options on the panel: on most panels, open **Settings**, then **About**, and tap **Build number** seven times. Then turn on **USB debugging** if you are plugging the panel in, or **network ADB on TCP port 5555** for the network route. Not every panel has a network ADB switch; each [hardware page](/hardware/) says whether yours does and where it is, and if it has none, use the USB route. [Prepare the panel](/install/prepare-a-panel/) has the details.
 
 ## 3. Add the panel
 
@@ -21,7 +21,7 @@ In Home Assistant, go to **Settings**, **Devices and services**, **Add integrati
 
 ### Plugged into your computer
 
-A brand-new panel can be set up before it ever goes on the wall. Plug it into your computer with a USB cable and install straight from your browser. You need Chrome or Edge for this.
+A brand-new panel can be set up before it ever goes on the wall. Plug it into your computer with a USB cable and install straight from your browser. You need Chrome or Edge for this. After you choose **Install using USB on this computer**, select **Open the USB installer**, keep the recommended version and press **Continue**; the installer opens in a new window. The panel still needs Wi-Fi to finish setting up, so join it to your network in its own Settings app, before or after the install.
 
 <div class="pa-steps" role="region" aria-label="Installing over USB, step by step" tabindex="0">
 <figure>
@@ -30,12 +30,12 @@ A brand-new panel can be set up before it ever goes on the wall. Plug it into yo
 <img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="The Set up a panel step in Home Assistant, offering Add a panel on your network or Install using USB on this computer">
 </figure>
 <figure>
-<figcaption><span>2</span> Plug the panel in</figcaption>
+<figcaption><span>2</span> Plug the panel in, press Find my panel and choose the panel in your browser's list</figcaption>
 <img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="349" alt="The USB installer asking you to plug the panel in and press Find my panel">
 <img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="349" alt="The USB installer asking you to plug the panel in and press Find my panel">
 </figure>
 <figure>
-<figcaption><span>3</span> Tap Allow on the panel</figcaption>
+<figcaption><span>3</span> Tap Allow on the panel if it asks</figcaption>
 <img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="318" alt="The USB installer waiting while you tap Allow on the panel's screen">
 <img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="318" alt="The USB installer waiting while you tap Allow on the panel's screen">
 </figure>
@@ -77,17 +77,21 @@ If the panel is already on the wall, all Home Assistant needs is its address.
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="The Choose a version step, with the recommended release at the top of the list">
 </figure>
 <figure>
-<figcaption><span>4</span> Tap Allow on the panel, and it's added</figcaption>
+<figcaption><span>4</span> Confirm the install, and it's added</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="The Success step, confirming the panel was added to Home Assistant">
 <img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="The Success step, confirming the panel was added to Home Assistant">
 </figure>
 </div>
 
+If the panel has not yet allowed Home Assistant to use debugging, Home Assistant first shows an **Authorize** step: press **Submit**, tap **Allow** on the panel, then press **Submit** again. Then confirm the install.
+
 Either way, the wizard takes care of the messy part. It checks what is already on the panel, installs the current release of the panel app, starts it and confirms it is healthy. A panel that already runs the app is adopted, not reinstalled. The panel recognises its own model and loads the matching hardware profile, so its screen, buttons, LEDs and sensors arrive in Home Assistant ready to use. See [Add a panel](/install/installing-ha-paneld/).
 
-## 4. Finish on the panel's own wizard
+## 4. Finish in the panel's setup wizard
 
-Home Assistant then opens the panel's own setup wizard, which asks a few quick questions, including a name for the panel and the dashboard for the wall. With entity filtering enabled, the panel loads only the entities that dashboard uses, which is what keeps it fast. See [Connect a panel](/home-assistant/connect-a-panel/).
+Next comes the panel's own setup wizard. It is served by the panel and opens in your browser on the computer, not on the panel's screen. After a network install, Home Assistant shows a short menu: choose **Continue setup** and open the website it offers. The other items, such as **Allow updates**, can wait; Home Assistant raises a Repair if a panel needs one. After a USB install, the installer window moves straight on to the wizard. Because the panel serves it, it only loads in a browser on the same network as the panel.
+
+The wizard asks for a name for the panel, signs the panel in to Home Assistant, and asks which dashboard to show and which area the panel is in. The panel connects as whichever Home Assistant account you sign in with, so if your browser is signed in as you, the panel connects as you; to keep the panel on its own account, sign in as that account instead. With entity filtering on, the panel loads only the entities that dashboard uses, which is what keeps it fast. See [Connect a panel](/home-assistant/connect-a-panel/).
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="The panel setup wizard, step by step" tabindex="0">
 <figure>
@@ -101,7 +105,7 @@ Home Assistant then opens the panel's own setup wizard, which asks a few quick q
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-dashboard-light.png" width="524" height="485" alt="The wizard with a dashboard and a Home Assistant area selected for the panel">
 </figure>
 <figure>
-<figcaption><span>3</span> Turn on the entity filter</figcaption>
+<figcaption><span>3</span> Turn on the entity filter, if asked</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="629" alt="The wizard recommending the entity filter for this panel, with the Home Assistant entity count">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="629" alt="The wizard recommending the entity filter for this panel, with the Home Assistant entity count">
 </figure>

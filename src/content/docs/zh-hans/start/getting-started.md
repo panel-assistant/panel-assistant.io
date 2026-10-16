@@ -78,7 +78,7 @@ sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="“选择版本”步骤，推荐版本位于列表顶部">
 </figure>
 <figure>
-<figcaption><span>4</span> 在面板上点按“允许”，即可添加</figcaption>
+<figcaption><span>4</span> 添加</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="“成功”步骤，确认面板已添加到 Home Assistant">
 <img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="“成功”步骤，确认面板已添加到 Home Assistant">
 </figure>

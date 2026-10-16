@@ -8,7 +8,7 @@ De USB-route is voor een paneel dat nog in de doos zit, of een paneel waarvan de
 
 ## Het begint in Home Assistant
 
-Het USB-installatieprogramma wordt door een beheerder geopend vanaf de pagina Panel Assistant in de zijbalk van Home Assistant. Home Assistant controleert de release en geeft die aan het installatieprogramma, dat in een eigen beveiligd venster opent. Daarom staat er op deze site geen installatieknop: de pagina die het werk doet, accepteert alleen een release van je eigen Home Assistant, zodat er niets op je paneel komt dat Home Assistant niet heeft geverifieerd.
+Home Assistant controleert de release en geeft die aan het installatieprogramma, dat in een eigen beveiligd venster opent. Daarom staat er op deze site geen installatieknop: de pagina die het werk doet, accepteert alleen een release van je eigen Home Assistant, zodat er niets op je paneel komt dat Home Assistant niet heeft geverifieerd.
 
 ## Wat je nodig hebt
 
@@ -19,13 +19,13 @@ Het USB-installatieprogramma wordt door een beheerder geopend vanaf de pagina Pa
 
 ## Wat er gebeurt
 
-1. Kies een versie op de pagina Panel Assistant. Alleen releases van ha-paneld die Home Assistant voor installatie kan verifiëren staan erin: de nieuwste stabiele release, plus eventuele recente releasekandidaten, die als testversie zijn gemarkeerd.
+1. Kies een versie. Alleen releases van ha-paneld die Home Assistant voor installatie kan verifiëren staan erin: de nieuwste stabiele release, plus eventuele recente releasekandidaten, die als testversie zijn gemarkeerd.
 2. Het installatievenster verifieert de release en vraagt je het paneel te kiezen in de USB-vraag van de browser.
 3. Keur de vraag voor USB-foutopsporing goed op het scherm van het paneel.
 4. Bevestig. Er verandert niets op het paneel totdat je dat doet, en het installatieprogramma controleert eerst of het paneel echt schoon is: het weigert over een bestaande installatie heen te installeren in plaats van de gegevens van het paneel te riskeren.
-5. Houd de kabel en het tabblad verbonden totdat het meldt dat het klaar is, en rond daarna de begeleide installatie op het paneel zelf af.
+5. Houd de kabel en het tabblad verbonden totdat het meldt dat het klaar is.
 
-Als de kabel eruit gaat of het venster halverwege sluit, sluit hem weer aan, zet dezelfde release opnieuw over vanuit Home Assistant en verbind hetzelfde paneel opnieuw. Het installatieprogramma bewaart zijn voortgang in je browser, controleert eerst de stap waarbij het werd onderbroken voordat het iets anders doet, en gaat vanaf daar verder in plaats van opnieuw te beginnen.
+Als de kabel eruit gaat of het venster halverwege sluit, sluit hem weer aan en verbind hetzelfde paneel opnieuw. Het installatieprogramma bewaart zijn voortgang in je browser, controleert eerst de stap waarbij het werd onderbroken voordat het iets anders doet, en gaat vanaf daar verder in plaats van opnieuw te beginnen.
 
 ## Daarna
 

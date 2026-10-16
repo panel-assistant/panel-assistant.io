@@ -8,7 +8,7 @@ sourceCommit: e3bcf608109626496dd34c3ae14d144c5f355917
 
 ## Zaczyna się w Home Assistant
 
-Instalator USB otwiera administrator ze strony Panel Assistant na pasku bocznym Home Assistant. Home Assistant sprawdza wydanie i przekazuje je instalatorowi, który otwiera się we własnym, bezpiecznym oknie. Dlatego na tej stronie nie ma przycisku instalacji: strona, która wykonuje pracę, przyjmuje wydanie tylko od twojego własnego Home Assistant, więc na panel nie trafi nic, czego Home Assistant nie zweryfikował.
+Home Assistant sprawdza wydanie i przekazuje je instalatorowi, który otwiera się we własnym, bezpiecznym oknie. Dlatego na tej stronie nie ma przycisku instalacji: strona, która wykonuje pracę, przyjmuje wydanie tylko od twojego własnego Home Assistant, więc na panel nie trafi nic, czego Home Assistant nie zweryfikował.
 
 ## Czego potrzebujesz
 
@@ -19,13 +19,13 @@ Instalator USB otwiera administrator ze strony Panel Assistant na pasku bocznym 
 
 ## Co się dzieje
 
-1. Wybierz wersję na stronie Panel Assistant. Na liście są tylko te wydania ha-paneld, które Home Assistant może zweryfikować do instalacji: najnowsze stabilne wydanie oraz ewentualne niedawne wersje kandydujące, oznaczone jako wersje testowe.
+1. Wybierz wersję. Na liście są tylko te wydania ha-paneld, które Home Assistant może zweryfikować do instalacji: najnowsze stabilne wydanie oraz ewentualne niedawne wersje kandydujące, oznaczone jako wersje testowe.
 2. Okno instalatora weryfikuje wydanie i prosi o wybranie panelu w oknie wyboru USB przeglądarki.
 3. Zatwierdź prośbę o debugowanie USB na ekranie panelu.
 4. Potwierdź. Nic na panelu się nie zmieni, dopóki tego nie zrobisz, a instalator najpierw sprawdza, czy panel jest naprawdę czysty: odmawia instalacji na istniejącej instalacji, zamiast ryzykować dane panelu.
-5. Nie odłączaj kabla i nie zamykaj karty, dopóki instalator nie zgłosi zakończenia, a potem dokończ konfigurację z przewodnikiem na samym panelu.
+5. Nie odłączaj kabla i nie zamykaj karty, dopóki instalator nie zgłosi zakończenia.
 
-Jeśli kabel wypadnie albo okno zamknie się w trakcie, podłącz go ponownie, jeszcze raz przekaż to samo wydanie z Home Assistant i ponownie połącz ten sam panel. Instalator przechowuje postęp w twojej przeglądarce, przed czymkolwiek innym sprawdza krok, na którym został przerwany, i kontynuuje od tego miejsca, zamiast zaczynać od nowa.
+Jeśli kabel wypadnie albo okno zamknie się w trakcie, podłącz go ponownie i ponownie połącz ten sam panel. Instalator przechowuje postęp w twojej przeglądarce, przed czymkolwiek innym sprawdza krok, na którym został przerwany, i kontynuuje od tego miejsca, zamiast zaczynać od nowa.
 
 ## Potem
 

@@ -59,6 +59,8 @@ The screen returns to the home view after a few seconds of inactivity, so tap at
 
 Developer options and USB debugging then appear in Settings as on any Android device. Connect a USB-A to USB-C cable and the panel enumerates for adb. There is **no authorisation prompt to accept on the screen**, because this firmware does not require adb authorisation.
 
+There is no known way to turn on network ADB on the X2i without a computer, so install it over USB with the [browser installer](/install/install-over-usb/).
+
 :::caution
 A USB-C to USB-C cable does **not** power or enumerate the panel. The USB port is wired for legacy host power, so a USB-C source never raises its supply. Use a USB-A to USB-C cable, as Shelly's own documentation specifies.
 

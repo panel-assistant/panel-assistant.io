@@ -78,7 +78,7 @@ sourceCommit: 50fccda5c7e05cce0edbd2b4b37e006c473ca5df
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="Крок «Виберіть версію» з рекомендованим випуском угорі списку">
 </figure>
 <figure>
-<figcaption><span>4</span> Натисніть «Дозволити» на панелі, і її буде додано</figcaption>
+<figcaption><span>4</span> Її буде додано</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="Крок «Успішно», що підтверджує додавання панелі до Home Assistant">
 <img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="Крок «Успішно», що підтверджує додавання панелі до Home Assistant">
 </figure>

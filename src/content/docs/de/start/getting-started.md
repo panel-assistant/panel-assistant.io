@@ -78,7 +78,7 @@ Wenn das Panel schon an der Wand hängt, braucht Home Assistant nur seine Adress
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="Der Schritt Version wählen mit der empfohlenen Version oben in der Liste">
 </figure>
 <figure>
-<figcaption><span>4</span> Tippe auf dem Panel auf Zulassen, dann wird es hinzugefügt</figcaption>
+<figcaption><span>4</span> Hinzugefügt</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="Der Schritt Erfolg bestätigt, dass das Panel zu Home Assistant hinzugefügt wurde">
 <img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="Der Schritt Erfolg bestätigt, dass das Panel zu Home Assistant hinzugefügt wurde">
 </figure>

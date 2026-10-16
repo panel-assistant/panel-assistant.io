@@ -78,7 +78,7 @@ Jeśli panel wisi już na ścianie, Home Assistant potrzebuje tylko jego adresu.
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="Krok Wybierz wersję z zalecanym wydaniem na górze listy">
 </figure>
 <figure>
-<figcaption><span>4</span> Dotknij Zezwól na panelu i panel jest dodany</figcaption>
+<figcaption><span>4</span> Panel jest dodany</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="Krok zakończenia potwierdzający, że panel został dodany do Home Assistant">
 <img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="Krok zakończenia potwierdzający, że panel został dodany do Home Assistant">
 </figure>
