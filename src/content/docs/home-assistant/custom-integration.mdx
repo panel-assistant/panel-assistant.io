@@ -34,6 +34,8 @@ Panel Assistant is new and evolving quickly. A panel that is already installed i
 
 ## If you used the earlier 0.1.0 integration
 
-Remove the old integration entry under Devices and services, then remove its download from HACS. Add this repository, download Panel Assistant, restart Home Assistant, then add the integration again using your panel's hostname or address.
+Remove the old integration entry under Devices and services, then remove its download from HACS. Add this repository and download Panel Assistant **0.9.0** in HACS before the first restart (choose **Redownload** and pick version 0.9.0). Restart Home Assistant, then add the integration again using your panel's hostname or address.
+
+If you have already installed Panel Assistant 1.0, follow [if a move was not finished](/manage/upgrade-to-1-0/#if-a-move-was-not-finished) before changing versions.
 
 A panel from that time still runs the old ha-paneld app. Panel Assistant 1.0 cannot move it to the new app: install Panel Assistant 0.9.0 first (in HACS, open Panel Assistant, choose **Redownload** and pick version 0.9.0), add the panel and move it with its Repair, then update to 1.0.
