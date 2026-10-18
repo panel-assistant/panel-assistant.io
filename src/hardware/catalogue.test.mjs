@@ -167,7 +167,7 @@ test('each panel page lists its evidence with every hit and miss marked', () => 
 
 test('the hardware overview defines every support label its table shows', () => {
   const html = page('/hardware/');
-  const terms = html.match(/column uses these terms:([\s\S]*?)<\/p>/)?.[1] ?? '';
+  const terms = html.match(/column uses ([\s\S]*?)<\/p>/)?.[1] ?? '';
   for (const { slug, data } of panels) {
     if (data.panelIndex) continue;
     const label = String(data.support).toLowerCase();
