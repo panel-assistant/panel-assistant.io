@@ -6,7 +6,7 @@ model: Wall Display XL
 soc: RK3566
 android: '11'
 screen: 10.1 in
-support: Research
+support: Untested
 root: Not established on this model
 webview: 'Not established (WallDisplayV2 track carries no OTA WebView package)'
 released: '2025-09 (est.)'
@@ -18,14 +18,14 @@ photos:
   - src: 'asset:hardware-shelly-wall-display-xl-profile-trim.jpg'
     alt: Shelly Wall Display XL, side profile, showing the mounting depth
 photoCredit: 'Photo: Shelly'
-evidence: [firmware, documented, platform, mostly-open]
+evidence: [firmware, documented, platform]
 sidebar:
   label: Wall Display XL
   order: 5
 ---
 
 :::note
-**Research only: no unit of this model has been tested.** See the [Wall Display family page](/hardware/panels/shelly/) for sourcing, the firmware OTA mechanism, access model and security notes shared across the whole line.
+**No unit of this model has been tested.** See the [Wall Display family page](/hardware/panels/shelly/) for sourcing, the firmware OTA mechanism, access model and security notes shared across the whole line.
 :::
 
 The Wall Display XL, firmware codename **Blake**, is a 10.1 in panel on a Rockchip RK3566 (Cortex-A55), Android 11 — the largest and most capable model in the [Shelly Wall Display family](/hardware/panels/shelly/). It is on the modern **WallDisplayV2** (arm64-v8a) OTA track, alongside the [X1i](/hardware/panels/shelly/wall-display-x1i/), [X2i](/hardware/panels/shelly/wall-display-x2i/), Maverick and Dayna, and has access to the built-in AppStore.

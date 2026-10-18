@@ -164,3 +164,16 @@ test('each panel page lists its evidence with every hit and miss marked', () => 
     assert.deepEqual(shown.slice(0, expected.length), expected, slug);
   }
 });
+
+test('the hardware overview defines every support label its table shows', () => {
+  const html = page('/hardware/');
+  const terms = html.match(/column uses these terms:([\s\S]*?)<\/p>/)?.[1] ?? '';
+  for (const { slug, data } of panels) {
+    if (data.panelIndex) continue;
+    const label = String(data.support).toLowerCase();
+    assert.ok(
+      terms.includes(`${label} (`),
+      `${slug}: "${data.support}" is not defined on /hardware/`,
+    );
+  }
+});

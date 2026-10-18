@@ -80,7 +80,7 @@ Install the panel app from Home Assistant with the [USB installer](/install/inst
 
 For a Portal, Panel Assistant also prepares the panel during installation: it makes the panel app the home screen, grants the microphone permission, and turns off Meta's screensaver and Meta's swipe-up bar, none of which can be changed from Meta's own Settings app. The camera permission is asked for on the Portal's screen the first time you turn the camera on.
 
-One setting is yours to choose: **dashboard zoom**. At the Portal's native density the dashboard draws larger than on other landscape panels. Setting the panel's **Zoom (%)** to **87** in the [built-in renderer](/manage/built-in-renderer/) settings gives it the same scale as a 1920×1200 panel while keeping Android's own screens sharp.
+One setting is yours to choose: **dashboard zoom**. At the Portal's native density the dashboard draws larger than on other landscape panels. The panel's profile sets **Zoom (%)** to **85** by default, which keeps Android's own screens sharp; change it in the [built-in renderer](/manage/built-in-renderer/) settings if you prefer another size.
 
 Then [add the panel](/install/installing-ha-paneld/) in Panel Assistant as usual.
 

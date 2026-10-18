@@ -6,7 +6,7 @@ model: Wall Display X1i
 soc: RK3326-S
 android: '11'
 screen: 4 in, 720 × 720
-support: Research
+support: Untested
 root: Not established on this model
 webview: 'Not established (WallDisplayV2 track carries no OTA WebView package)'
 released: '2026-07 (est.)'
@@ -18,14 +18,14 @@ photos:
   - src: 'asset:hardware-shelly-wall-display-x1i-rear-label.jpg'
     alt: Shelly Wall Display X1i, rear, showing the model label SAWD-6A1XX10EU0
 photoCredit: 'Photo: Shelly'
-evidence: [firmware, documented, platform, mostly-open]
+evidence: [firmware, documented, platform]
 sidebar:
   label: Wall Display X1i
   order: 3
 ---
 
 :::note
-**Research only: no unit of this model has been tested.** See the [Wall Display family page](/hardware/panels/shelly/) for sourcing, the firmware OTA mechanism, access model and security notes shared across the whole line.
+**No unit of this model has been tested.** See the [Wall Display family page](/hardware/panels/shelly/) for sourcing, the firmware OTA mechanism, access model and security notes shared across the whole line.
 :::
 
 The Wall Display X1i, firmware codename **Cally**, is a 4 in 720×720 panel on a Rockchip RK3326-S (Cortex-A35), Android 11. It is on the modern **WallDisplayV2** (arm64-v8a) OTA track, alongside the [X2i](/hardware/panels/shelly/wall-display-x2i/), [XL](/hardware/panels/shelly/wall-display-xl/), Maverick and Dayna, and has access to the built-in AppStore.

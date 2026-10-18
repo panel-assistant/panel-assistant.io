@@ -16,7 +16,7 @@ If your panel is not listed, start with [device profiles](/reference/profiles/),
 
 <HardwareTable />
 
-The `support` column uses the same terms as [Choose a panel](/install/supported-panels/): full support, community-tested (reporter evidence, no local unit), preliminary (a profile built from one diagnostic report), experimental (implemented from reported control paths, untested on hardware) and research (firmware and documentation analysis only).
+The `support` column uses these terms: full (inspected on a unit we run, with a verified profile of its own), preliminary (inspected on a unit we run, with its profile still experimental), community-tested (owners run Panel Assistant on it, with no unit of our own), untested (a bundled profile matches it, or is expected to, but no unit has run Panel Assistant yet) and research (firmware and documentation analysis only).
 
 :::tip
 Before modifying firmware on a rooted Tuya TPA10 or Electron WF1589T, read [Firmware backup and restore](/hardware/guides/firmware-backup-and-restore/). Those Rockchip panels use `adb reboot loader` and `rkdeveloptool` rather than the usual Android button combination. The guide does not apply to the Shelly family, an unrooted panel or uncharacterised hardware, and it does not yet document a write-ready Maskrom recovery path.
@@ -43,7 +43,7 @@ The `Native` navbar mode is enabled per profile, not tied to one manufacturer. T
 
 ## Performance comparison
 
-The three fully supported panels form a clear ladder: the **Sonoff NSPanel Pro (PX30)** is entry level, the **Tuya TPA10 (rk3566)** is mid-range and the **Electron WF1589T (rk3576)** is the most capable. Screen geometry is the first design constraint, and on the 2 GB panels RAM is the binding one. Figures come from the panel app's own performance report and the device specifications.
+Three of the fully supported panels form a clear ladder: the **Sonoff NSPanel Pro (PX30)** is entry level, the **Tuya TPA10 (rk3566)** is mid-range and the **Electron WF1589T (rk3576)** is the most capable. Screen geometry is the first design constraint, and on the 2 GB panels RAM is the binding one. Figures come from the panel app's own performance report and the device specifications.
 
 ### Specification ladder
 

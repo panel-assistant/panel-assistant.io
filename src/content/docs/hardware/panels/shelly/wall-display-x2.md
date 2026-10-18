@@ -6,7 +6,7 @@ model: Wall Display X2
 soc: SC7731E
 android: '8.1'
 screen: 6.9 in, 1440 × 720
-support: Research
+support: Untested
 root: Not established on this model
 webview: 'Not established (WallDisplay track carries no OTA WebView package for this model)'
 released: '2025-01 (est.)'
@@ -21,7 +21,7 @@ sidebar:
 ---
 
 :::note
-**Research only: no unit of this model has been tested.** See the [Wall Display family page](/hardware/panels/shelly/) for sourcing, the firmware OTA mechanism, access model and security notes shared across the whole line.
+**No unit of this model has been tested.** Panel Assistant matches it to the bundled legacy Shelly profile, which no X2 has run yet. See the [Wall Display family page](/hardware/panels/shelly/) for sourcing, the firmware OTA mechanism, access model and security notes shared across the whole line.
 :::
 
 The Wall Display X2, firmware codename **Pegasus**, is a 6.9 in 1440×720 panel on a Spreadtrum/UNISOC SC7731E (Cortex-A7), Android 8.1. It is on the legacy **WallDisplay** (armeabi-v7a) OTA track, alongside the [original](/hardware/panels/shelly/wall-display/).

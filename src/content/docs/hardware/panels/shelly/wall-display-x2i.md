@@ -34,16 +34,17 @@ Panel Assistant runs on it as an ordinary Android app. **The measured setup and 
 
 Shelly Wall Display X2i, firmware codename Jenna.
 
-|          |                                                                                                                                                                                                                                                          |
-| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SoC      | RK3326-S per Shelly's specification; the chip reports the RK3326 family, four Cortex-A35                                                                                                                                                                 |
-| Display  | **1440×720**, 6.9 in, 240 dpi                                                                                                                                                                                                                            |
-| Android  | 11 (API 30), arm64-v8a, `user` build                                                                                                                                                                                                                     |
-| WebView  | Chromium **131.0.6778.200** as shipped, well above Panel Assistant's minimum, so no WebView work is needed                                                                                                                                               |
-| Sensors  | Proximity and ambient light, both ordinary Android sensors needing no permission; **no temperature or humidity sensor**                                                                                                                                  |
-| Relay    | Interchangeable base: 1 output as standard, optional 2-output base. Present in software and confirmed switching, but not exposed by Panel Assistant; see [Relays](#relays)                                                                               |
-| Root     | None. Developer mode unlocks adb, which is all setup needs; the privileged features below stay unavailable                                                                                                                                               |
-| Released | About December 2025 (est.); Shelly quietly released the X2i in Europe around 22 December 2025 ([launch coverage, Notebookcheck, December 2025](https://www.notebookcheck.net/Shelly-quietly-launches-new-Wall-Display-XL-smart-home-hub.1190942.0.html)) |
+|            |                                                                                                                                                                                                                                                          |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SoC        | RK3326-S per Shelly's specification; the chip reports the RK3326 family, four Cortex-A35                                                                                                                                                                 |
+| Display    | **1440×720**, 6.9 in, 240 dpi                                                                                                                                                                                                                            |
+| Android    | 11 (API 30), arm64-v8a, `user` build                                                                                                                                                                                                                     |
+| WebView    | Chromium **131.0.6778.200** as shipped, well above Panel Assistant's minimum, so no WebView work is needed                                                                                                                                               |
+| Sensors    | Proximity and ambient light, both ordinary Android sensors needing no permission; **no temperature or humidity sensor**                                                                                                                                  |
+| Microphone | Built in; the wake word and voice commands work close to the panel, and pickup across a room is weak                                                                                                                                                     |
+| Relay      | Interchangeable base: 1 output as standard, optional 2-output base. Present in software and confirmed switching, but not exposed by Panel Assistant; see [Relays](#relays)                                                                               |
+| Root       | None. Developer mode unlocks adb, which is all setup needs; the privileged features below stay unavailable                                                                                                                                               |
+| Released   | About December 2025 (est.); Shelly quietly released the X2i in Europe around 22 December 2025 ([launch coverage, Notebookcheck, December 2025](https://www.notebookcheck.net/Shelly-quietly-launches-new-Wall-Display-XL-smart-home-hub.1190942.0.html)) |
 
 ## Unlocking developer mode
 
@@ -105,7 +106,7 @@ The X2i has **no temperature or humidity sensor**, so no room-climate readings a
 
 ## Relays
 
-The X2i's power base carries relays, and they are genuinely reachable from software: the panel exposes them as a world-writable sysfs class, and writing to it audibly switches the contacts with no root at all. **Panel Assistant nevertheless does not offer relay controls on this panel.** Its relay support activates only for a panel whose profile names a relay class, and neither Shelly profile does, so the controller stays inert and never looks. Root on its own would not change that.
+The X2i's power base carries relays, and they are genuinely reachable from software: the panel exposes them as a world-writable sysfs class, and writing to it audibly switches the contacts with no root at all. **Panel Assistant nevertheless does not offer relay controls on this panel.** Its relay support activates only for a panel whose profile names a relay class, and no Shelly profile does, so the controller stays inert and never looks. Root on its own would not change that.
 
 Two conditions would travel with any future support, and both are easy to trip over in testing:
 

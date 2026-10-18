@@ -7,7 +7,7 @@ soc: Rockchip RK3566
 android: '11'
 screen: 10.1 in, 1920 × 1200
 support: Community-tested
-root: Relays, button LEDs, proximity (unconfirmed su)
+root: Relays, button LEDs, proximity (app su reported working)
 webview: Chromium 83 on 2024-07; 131 on 2025-12
 released: 'not before 2021 (est., RK3566 SoC)'
 photos:
@@ -22,23 +22,23 @@ sold_as:
   - brand: Smatek
     name: 'S9PE-NZ'
     note: 'As the S9E-NZ, powered over Ethernet (PoE) or DC 9-24 V instead of mains'
-evidence: [firmware, documented, platform]
+evidence: [firmware, documented, platform, owners]
 sidebar:
   label: S9E
 ---
 
 :::note
-Unlike the fully supported panels, the S9E has **not** been reverse-engineered on a unit in hand. Specifications come from Smatek's listing, and control paths come from [seaky/nspanel_pro_tools_apk issue 98](https://github.com/seaky/nspanel_pro_tools_apk/issues/98), the Home Assistant community thread and reporters. Relay and button support is implemented but untested on hardware, so treat control-path details as unconfirmed until validated.
+Unlike the fully supported panels, the S9E has **not** been reverse-engineered on a unit in hand. Specifications come from Smatek's listing, and control paths come from [seaky/nspanel_pro_tools_apk issue 98](https://github.com/seaky/nspanel_pro_tools_apk/issues/98), the Home Assistant community thread and reporters. An owner has switched the relays and button LEDs from Home Assistant on 1.1.0 firmware ([issue 93](https://github.com/panel-assistant/android/issues/93)); treat other control-path details as unconfirmed until validated.
 :::
 
 A 10.1 in **1920×1200** RK3566 in-wall panel, the same SoC family as the TPA10, with **two on-board mains relays**, four LED-backlit buttons, a radar proximity sensor, and **Zigbee, Ethernet and RS485**.
 
 ## Also sold as
 
-Smatek S9E, Smatek S9, S9PE, S9PE-NZ (PoE variant), `Build.MODEL` S9, `Build.DEVICE` rk3566_r, `ro.product.version` S9_Android_1.0.2 and S9_Android_1.1.0.
+Smatek S9E, Smatek S9, S9E-NZ (without the Zigbee gateway), S9PE, S9PE-NZ (PoE variant), `Build.MODEL` S9, `Build.DEVICE` rk3566_r, `ro.product.version` S9_Android_1.0.2 and S9_Android_1.1.0.
 
 :::tip
-The most-needed facts: it shares the TPA10's **RK3566** platform, so app-side features probably work without S9E-specific code. The **relays switch mains loads** (root sysfs, implemented but untested). The buttons emit **`F1` to `F4`** KeyEvents (app-direct, no root). Check the WebView first: the 2024-07 firmware ships **Chromium 83**.
+The most-needed facts: it shares the TPA10's **RK3566** platform, so app-side features probably work without S9E-specific code. The **relays switch mains loads** (root sysfs, reported working by an owner on 1.1.0). The buttons emit **`F1` to `F4`** KeyEvents (app-direct, no root). Check the WebView first: the 2024-07 firmware ships **Chromium 83**.
 :::
 
 |                 |                                                                                                                                                                                                                                                                                                       |
@@ -51,11 +51,11 @@ The most-needed facts: it shares the TPA10's **RK3566** platform, so app-side fe
 | Sensors         | proximity **radar**, ambient **light**, **temperature and humidity**                                                                                                                                                                                                                                  |
 | Inputs          | **4 physical buttons** with individual LEDs                                                                                                                                                                                                                                                           |
 | Relays          | **2 on-board mains relays**                                                                                                                                                                                                                                                                           |
-| Root            | the vendor app uses `execRootCmd`, so root is available; some units ship with developer mode unlocked. Whether `su` is reachable from a normal app sandbox is **unconfirmed**, and it decides whether the panel app drives the sysfs nodes directly or needs the root helper daemon.                  |
+| Root            | the vendor app uses `execRootCmd`, so root is available; some units ship with developer mode unlocked. An owner's report shows `su` reachable from a normal app sandbox on 1.1.0; that decides whether the panel app drives the sysfs nodes directly or needs the root helper daemon.                 |
 | Released        | Not confidently dated; the RK3566 SoC family did not reach the market until around 2021, the best lower bound found for this panel ([RK3566 datasheet coverage, CNX Software, December 2020](https://www.cnx-software.com/2020/12/16/rockchip-rk3566-and-rk3568-datasheets-and-features-comparison/)) |
 
 :::danger
-The control surfaces below are **root sysfs** writes, and the relays switch **mains loads**. The support is implemented from the reported paths but is **untested on hardware**, so validate it on a real S9E before relying on it.
+The control surfaces below are **root sysfs** writes, and the relays switch **mains loads**. The support is implemented from the reported paths, and an owner reports the relays and button LEDs working on 1.1.0; the 1.0.2 `st_relay` path is **unconfirmed**, so validate it on your S9E before relying on it.
 :::
 
 :::tip

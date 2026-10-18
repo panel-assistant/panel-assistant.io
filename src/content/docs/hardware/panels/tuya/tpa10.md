@@ -208,7 +208,7 @@ There is **no app-accessible `/dev` node** for the LED (compare the [WF1589T](/h
 
 ## Sensors
 
-Proximity is app-direct through `SensorManager`. Temperature, humidity and ambient light are root-only (input subsystem and I²C) and need the helper daemon.
+Proximity and ambient light are app-direct through `SensorManager`. Temperature and humidity are root-only (input subsystem and I²C) and need the helper daemon.
 
 :::tip
 The CHT8305 makes this panel a usable **room temperature and humidity sensor** for Home Assistant. The helper daemon reads it with its `CHT8305` verb, an `EVIOCGABS` point read of the driver's `ABS_THROTTLE` input axis that matches the `temperature` and `humidity` input devices by name. The panel app then offers two optional **Room temperature** and **Room humidity** sensors in Home Assistant (Configure, Diagnostics; off by default). An advanced **Room temperature offset** setting, or the profile's `sensors.room_temp_offset_c`, corrects for the panel's own warmth.
@@ -222,7 +222,7 @@ The TPA10's time-of-flight sensor means proximity is genuinely distance-based, b
 | -------------------------- | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | Proximity (time of flight) | Vishay **VI5300** (i2c-3 `0x6c`, `proximity_vi5300`, 30 ms poll)              | Android `SensorManager` `TYPE_PROXIMITY`, no root. The raw distance in mm on the driver's I²C node (`…/i2c-3/3-006c`) needs root. |
 | Temperature and humidity   | **CHT8305** (`temperature_cht8305` at 3-0040, `humidity_cht8305` at 3-0040-1) | **Not** in `SensorManager`; reports through the **input subsystem** on I²C, root only.                                            |
-| Ambient light              | **CG5256** (`light_cg5256`)                                                   | Not in `SensorManager` (root).                                                                                                    |
+| Ambient light              | **CG5256** (`light_cg5256`)                                                   | Android `SensorManager` light sensor, no root.                                                                                    |
 
 ## Buttons
 
@@ -271,6 +271,6 @@ Camera GalaxyCore **GC05A2 / GC5035**; audio codec **ES7202** (a capture ADC; cl
 ## Access model summary
 
 - **LED and button backlight:** root only (`system:system` sysfs), through `hapaneld-helper`.
-- **Proximity:** app-direct (`SensorManager`).
-- **Temperature, humidity, light:** root only (input subsystem and I²C), through the helper daemon.
+- **Proximity and ambient light:** app-direct (`SensorManager`).
+- **Temperature, humidity:** root only (input subsystem and I²C), through the helper daemon.
 - **Buttons:** the four side buttons are app-direct (KeyEvents through accessibility); the fifth orange button is an `EV_SW` switch read through the `hapaneld-helper` evdev watch; the pin-hole button is not an input.
