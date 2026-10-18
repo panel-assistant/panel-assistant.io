@@ -128,3 +128,16 @@ test('the Dutch, Polish and Ukrainian setup pages no longer send readers to wire
     }
   }
 });
+
+test('the install-recovery topic Panel Assistant links from its install failures lands on a section for each way an install stops', () => {
+  const topics = JSON.parse(readFileSync('worker/topics.json', 'utf8'));
+  const [page, anchor] = topics['install-recovery'].split('#');
+  const section = content(page).split(`id="${anchor}"`)[1]?.split('<h2')[0];
+  assert.ok(section, `${page} has no #${anchor}`);
+  for (const id of [
+    'no-apk-was-installed',
+    'installed-but-not-started-or-checked',
+    'the-install-may-have-changed-the-panel',
+  ])
+    assert.ok(section.includes(`id="${id}"`), `#${anchor} has no #${id}`);
+});

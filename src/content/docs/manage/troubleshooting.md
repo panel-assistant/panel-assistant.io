@@ -23,6 +23,22 @@ Some of this is the panel and some of it is the dashboard. [Performance](/manage
 
 Over the network: confirm the panel's address and that network ADB on TCP port 5555 is still turned on, because some panels turn it off again after a reboot. If the panel raises an authorisation prompt, accept it on the panel's screen. Over USB: make sure you are using a Chromium-based browser, that the cable goes to the computer running the browser, and that USB debugging is on. How to reach developer options and turn debugging on differs per model and is covered in [Prepare the panel](/install/prepare-a-panel/) and the [hardware pages](/hardware/). If the panel simply will not accept a network connection, [install over USB](/install/install-over-usb/) instead: the panel does not need network ADB, while your browser stays connected to Home Assistant for the verified release.
 
+## A network install stopped partway
+
+When Home Assistant stops a network install, its message says how far the install got. Find the sentence that matches yours below. In every case, do not uninstall Panel Assistant, clear its data or reset the panel: the panel's state is what tells you where the install stopped.
+
+### No APK was installed
+
+If the message says that no APK was installed or that no panel change was made, the install stopped before it changed anything. Check that the panel is switched on and on your network at the same address, then add the Panel Assistant integration again and enter the same address. Home Assistant checks the panel again before it changes anything. If the install stops at the same place a second time, look at the panel and follow the next section if Panel Assistant is on it.
+
+### Installed but not started or checked
+
+If the message says the APK is installed but Panel Assistant did not start or did not pass its check, the app is on the panel and only the last step is missing. Open Panel Assistant from the panel's app list and wait for its setup screen. Then add the Panel Assistant integration again with the same address: when the app answers, Home Assistant offers to connect it ("Panel Assistant is installed but not connected") and installs nothing. If Home Assistant says the installed app is not the release you chose, choose the version that is installed, which the panel's Android Settings show under Apps › Panel Assistant. If Panel Assistant does not open, or its setup screen never appears, do not retry the automatic install: ask for help as the next section describes.
+
+### The install may have changed the panel
+
+If the message says the install may have changed the panel, or that Home Assistant could not verify the result or cannot prove it is safe to continue, Home Assistant could not tell how far the panel got, so it stops rather than guess. Do not retry the automatic install yet. Look at the panel first: if Panel Assistant's setup screen or dashboard is showing, or the app opens from the panel's app list, follow the section above to connect it. If Panel Assistant is not on the panel, ask in the [integration issues](https://github.com/panel-assistant/ha-integration/issues) and include the panel model, the version you chose, the full message and the Home Assistant log lines from the install (search the log for `panel_assistant`).
+
 ## The panel's hardware is missing from Home Assistant
 
 If some entities appear and others do not, that is usually the hardware profile for the model rather than a connection problem. The [hardware pages](/hardware/) say what each panel exposes.
