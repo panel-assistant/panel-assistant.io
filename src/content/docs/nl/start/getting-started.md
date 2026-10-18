@@ -14,7 +14,7 @@ Voeg Panel Assistant toe via HACS en start Home Assistant opnieuw op. Dit is het
 
 ## 2. Schakel foutopsporing in op het paneel
 
-De [hardwarepagina’s](/nl/hardware/) laten per model zien waar de schakelaar zit, en [Het paneel voorbereiden](/nl/install/prepare-a-panel/) geeft de details.
+Open de ontwikkelaarsopties op het paneel en schakel foutopsporing in. Daardoor kan Home Assistant het installeren voor je doen. De [hardwarepagina’s](/nl/hardware/) laten per model zien waar de schakelaar zit, en [Het paneel voorbereiden](/nl/install/prepare-a-panel/) geeft de details.
 
 ## 3. Voeg het paneel toe
 

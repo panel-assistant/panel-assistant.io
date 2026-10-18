@@ -8,7 +8,7 @@ Zanim dodasz panel, muszą być spełnione dwa warunki, a trzeci decyduje o tym,
 
 ## 1. Opcje programisty i debugowanie są włączone
 
-Instalator komunikuje się z panelem przez interfejs debugowania Androida, który ma każde urządzenie z Androidem, ale fabrycznie jest on wyłączony. Dokładna kolejność kroków różni się między modelami i jest opisana na [stronach sprzętu](/pl/hardware/).
+Instalator komunikuje się z panelem przez interfejs debugowania Androida, który ma każde urządzenie z Androidem, ale fabrycznie jest on wyłączony. Włączenie go oznacza otwarcie opcji programisty na panelu i włączenie debugowania: **debugowania USB** dla [ścieżki USB](/pl/install/install-over-usb/). Dokładna kolejność kroków różni się między modelami i jest opisana na [stronach sprzętu](/pl/hardware/).
 
 Gdy instalator połączy się po raz pierwszy, panel wyświetli na własnym ekranie prośbę o autoryzację. Ktoś musi ją zaakceptować przy panelu; nie da się tego zrobić zdalnie.
 

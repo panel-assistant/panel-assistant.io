@@ -8,7 +8,7 @@ Er moeten twee dingen kloppen voordat je een paneel toevoegt, en een derde bepaa
 
 ## 1. Ontwikkelaarsopties en foutopsporing staan aan
 
-Het installatieprogramma praat met het paneel via de foutopsporingsinterface van Android, die elk Android-apparaat heeft maar die standaard uit staat. De precieze stappen verschillen per model en staan op de [hardwarepagina's](/nl/hardware/).
+Het installatieprogramma praat met het paneel via de foutopsporingsinterface van Android, die elk Android-apparaat heeft maar die standaard uit staat. Om die aan te zetten open je de ontwikkelaarsopties op het paneel en schakel je foutopsporing in: **USB-foutopsporing** voor de [USB-route](/nl/install/install-over-usb/). De precieze stappen verschillen per model en staan op de [hardwarepagina's](/nl/hardware/).
 
 De eerste keer dat het installatieprogramma verbinding maakt, toont het paneel een autorisatievraag op zijn eigen scherm. Iemand moet die daar goedkeuren; dat kan niet op afstand.
 
