@@ -31,7 +31,7 @@ Before a change you are unsure about, make a backup yourself: on the panel's web
 
 ## Recovery
 
-A dashboard that will not load after an update is usually the system WebView or the dashboard itself, and the panel has its own [startup and recovery](/manage/built-in-renderer/#startup-and-recovery) behaviour for that. [Troubleshooting](/manage/troubleshooting/) covers the usual causes. Going back to an earlier release is not something the documentation currently describes, so treat a configuration export as your way back.
+A dashboard that will not load after an update is usually the system WebView or the dashboard itself, and the panel has its own [startup and recovery](/manage/built-in-renderer/#startup-and-recovery) behaviour for that. [Troubleshooting](/manage/troubleshooting/) covers the usual causes. A panel on the 1.0 panel app cannot go back to an earlier release; [upgrading to 1.0](/manage/upgrade-to-1-0/#going-back) explains what can.
 
 Recovery below the app is a different matter. Panel Assistant never touches a panel's firmware, but some rooted panels can have their firmware partitions backed up and restored by hand, and that is documented in [firmware backup and restore](/hardware/guides/firmware-backup-and-restore/).
 
