@@ -126,7 +126,7 @@ export default defineConfig({
                   ...label('sidebar.install_integration'),
                   slug: 'home-assistant/custom-integration',
                 },
-                { label: 'After the 0.9.8 update', slug: 'home-assistant/migration' },
+                { label: 'Panel Assistant is required', slug: 'home-assistant/migration' },
                 { ...label('sidebar.connect_panel'), slug: 'home-assistant/connect-a-panel' },
                 { label: 'Understand a support report', slug: 'home-assistant/support-report' },
                 { ...label('sidebar.move_from_mqtt'), slug: 'home-assistant/move-from-mqtt' },
