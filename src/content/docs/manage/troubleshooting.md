@@ -29,11 +29,11 @@ When Home Assistant stops a network install, its message says how far the instal
 
 ### No APK was installed
 
-If the message says that no APK was installed or that no panel change was made, the panel is as it was before. Check that the panel is switched on and on your network at the same address, then add the Panel Assistant integration again and enter the same address. Home Assistant checks the panel again before it changes anything. If the install stops at the same place a second time, look at the panel and follow the next section if Panel Assistant is on it.
+If the message says that no APK was installed or that no panel change was made, the install stopped before it changed anything. Check that the panel is switched on and on your network at the same address, then add the Panel Assistant integration again and enter the same address. Home Assistant checks the panel again before it changes anything. If the install stops at the same place a second time, look at the panel and follow the next section if Panel Assistant is on it.
 
 ### Installed but not started or checked
 
-If the message says the APK is installed but Panel Assistant did not start or did not pass its check, the app is on the panel and only the last step is missing. Open Panel Assistant from the panel's app list and wait for its setup screen. Then add the Panel Assistant integration again with the same address: when the app answers, Home Assistant offers to connect it ("Panel Assistant is installed but not connected") and installs nothing. If Home Assistant says the installed app is not the release you chose, choose the version that is installed, which the panel's Android Settings show under Apps › Panel Assistant.
+If the message says the APK is installed but Panel Assistant did not start or did not pass its check, the app is on the panel and only the last step is missing. Open Panel Assistant from the panel's app list and wait for its setup screen. Then add the Panel Assistant integration again with the same address: when the app answers, Home Assistant offers to connect it ("Panel Assistant is installed but not connected") and installs nothing. If Home Assistant says the installed app is not the release you chose, choose the version that is installed, which the panel's Android Settings show under Apps › Panel Assistant. If Panel Assistant does not open, or its setup screen never appears, do not retry the automatic install: ask for help as the next section describes.
 
 ### The install may have changed the panel
 
