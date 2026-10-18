@@ -27,7 +27,7 @@ After the restart, open **Settings**, **Repairs** again.
 
 ## 3. Update one panel, then the rest
 
-Each panel's update entity in Home Assistant offers the 1.0 panel app. Install it on one panel first and use that panel for a while before you install it on the others, because that panel cannot go back. Panel Assistant backs up the panel's settings, installs the update and confirms the panel came back healthy, as described in [updates and recovery](/manage/updates-and-recovery/). Settings carry over from any 0.9 panel app.
+Each panel's update entity in Home Assistant offers the 1.0 panel app. Install it on one panel first and use that panel for a while before you install it on the others, because that panel cannot go back. Panel Assistant backs up the panel's settings, installs the update and confirms the panel came back healthy, as described in [updates and recovery](/manage/updates-and-recovery/). Settings carry over from the 0.9 panel app.
 
 ## Going back
 
@@ -35,12 +35,12 @@ There are two halves, and they differ.
 
 **A panel on the 1.0 app stays on 1.0.** The panel app refuses to install an older version over itself, Panel Assistant never offers one, and a 0.9 integration cannot talk to it. If a 1.0 panel misbehaves, look in [troubleshooting](/manage/troubleshooting/), then report it with a [support report](/home-assistant/support-report/) so it can be fixed in the next preview.
 
-**The integration can go back while no panel runs 1.0.** Restore the Home Assistant backup you made before you started. Your panels are still on their 0.9 app and reconnect to 0.9.0. Once any panel runs the 1.0 app, restoring the backup leaves that panel out of reach from Home Assistant until the integration is on 1.0 again.
+**The integration can go back while no panel runs 1.0.** Restore the Home Assistant backup you made before you started. That also undoes any other change made in Home Assistant since you created it. Your panels are still on their 0.9 app and reconnect to 0.9.0. Once any panel runs the 1.0 app, restoring the backup leaves that panel out of reach from Home Assistant until the integration is on 1.0 again.
 
 Do not go back by downloading 0.9.0 again in HACS over 1.0. The 1.0 update removes a setting 0.9.0 relies on, and without it 0.9.0 hands panels that were already moved back to MQTT, where the 1.0 panel app no longer answers. Restore the backup instead.
 
 ## If a move was not finished
 
-If 1.0 tells you a panel was never moved off MQTT or still runs the old app, the Repair asks you to install 0.9.0, finish the move there, and then install 1.0 again. While none of your panels runs the 1.0 app yet, do that by restoring the Home Assistant backup you made before updating rather than by downloading 0.9.0 over 1.0, for the reason above. Then finish the move in 0.9.0 and start this page again. If other panels already run the 1.0 app, ask on [Discord](https://panel-assistant.io/go/discord) or in the [issues](https://github.com/panel-assistant/ha-integration/issues) before you change anything.
+If 1.0 tells you a panel was never moved off MQTT or still runs the old app, the Repair asks you to choose **Redownload** in HACS, pick 0.9.0, finish the move there, and then install 1.0 again. Do not redownload 0.9.0 over 1.0. While none of your panels runs the 1.0 app yet, return to 0.9.0 by restoring the Home Assistant backup you made before updating, for the reason above. Then finish the move in 0.9.0 and start this page again. If other panels already run the 1.0 app, or you have no backup from before the update, ask on [Discord](https://panel-assistant.io/go/discord) or in the [issues](https://github.com/panel-assistant/ha-integration/issues) before you change anything.
 
 For a panel still on MQTT, the Repair also offers starting fresh: delete the panel's device under the MQTT integration and add the panel again. That creates new entities and keeps none of its history.
