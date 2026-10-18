@@ -14,6 +14,7 @@
   "move-from-mqtt": "/home-assistant/move-from-mqtt/",
   "migration": "/home-assistant/migration/",
   "panel-unreachable": "/manage/troubleshooting/#the-installer-cannot-reach-the-panel",
+  "install-recovery": "/manage/troubleshooting/#a-network-install-stopped-partway",
   "panel-cannot-update": "/manage/updates-and-recovery/#a-panel-that-cannot-be-updated",
   "troubleshooting": "/manage/troubleshooting/",
   "updates": "/manage/updates-and-recovery/",
