@@ -151,6 +151,7 @@ export default defineConfig({
               ...label('sidebar.keep_running'),
               items: [
                 { label: 'Updates and recovery', slug: 'manage/updates-and-recovery' },
+                { label: 'Upgrading to 1.0', slug: 'manage/upgrade-to-1-0' },
                 { label: 'Performance', slug: 'manage/performance' },
                 { label: 'Troubleshooting', slug: 'manage/troubleshooting' },
                 { label: 'Before you remove ha-paneld', slug: 'manage/removal-risks' },
