@@ -20,9 +20,7 @@ adb connect 192.168.1.50:5555 # replace this address with the panel's address
 
 ## Removing ha-paneld from a panel
 
-1. Open the panel's web interface at `http://<panel>:8888`, go to **Install** and choose **Restore the home screen**. This turns the vendor apps that ha-paneld switched off back on and gives the panel its own home screen again. Do this first: without it the panel has no home screen once ha-paneld is gone. If [Hardened security mode](/manage/security-mode/) is on, approve the request on the panel.
-2. In Home Assistant, delete the panel's Panel Assistant entry under **Settings**, **Devices and services**.
-3. Uninstall **ha-paneld** from the panel's Android **Settings**, **Apps**.
+Choose the panel's **Remove Panel Assistant from this panel** option, under **Configure** in Home Assistant. It gives the panel its own home screen back, uninstalls the app and then asks whether Home Assistant should forget the panel. Read [Before you remove ha-paneld](/manage/removal-risks/) first.
 
 ## Access routes and security mode
 

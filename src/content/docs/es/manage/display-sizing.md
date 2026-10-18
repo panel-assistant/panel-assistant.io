@@ -18,7 +18,7 @@ La tarjeta **Tamaño de pantalla** de la pestaña **Instalar** del panel estable
 Esto requiere una vía con privilegios aprobada: normalmente el `su` del fabricante o el [asistente root](https://github.com/panel-assistant/android/blob/main/helper/README.md). Un panel compatible sin root cuyo acceso mejorado opcional ya se haya aprobado en el propio panel también puede realizar estos cambios exactos de pantalla. Si no hay ninguna vía compatible lista, la tarjeta sigue visible, pero bloqueada.
 :::
 
-Para ajustarlo, abre el mismo panel de control en un navegador de escritorio como referencia. Reduce la densidad hasta que el diseño coincida (cabrán más tarjetas) y luego ajusta ligeramente el tamaño del texto hasta que coincida. Los valores adecuados dependen de la instalación (la resolución del panel, la distancia a la que se sitúan las personas y el diseño del panel de control), más que del modelo, por lo que no se incluyen valores estándar.
+Para ajustarlo, abre el mismo panel de control en un navegador de escritorio como referencia. Reduce la densidad hasta que el diseño coincida (cabrán más tarjetas) y luego ajusta ligeramente el tamaño del texto hasta que coincida.
 
 ## Los dos controles
 

@@ -8,15 +8,11 @@ Er moeten twee dingen kloppen voordat je een paneel toevoegt, en een derde bepaa
 
 ## 1. Ontwikkelaarsopties en foutopsporing staan aan
 
-Het installatieprogramma praat met het paneel via de foutopsporingsinterface van Android, die elk Android-apparaat heeft maar die standaard uit staat. Om die aan te zetten open je de ontwikkelaarsopties op het paneel en schakel je foutopsporing in: **USB-foutopsporing** voor de [USB-route](/nl/install/install-over-usb/), of **draadloze foutopsporing**, soms netwerk-ADB genoemd, voor de netwerkroute. De precieze stappen verschillen per model en staan op de [hardwarepagina's](/nl/hardware/).
+Het installatieprogramma praat met het paneel via de foutopsporingsinterface van Android, die elk Android-apparaat heeft maar die standaard uit staat. De precieze stappen verschillen per model en staan op de [hardwarepagina's](/nl/hardware/).
 
 De eerste keer dat het installatieprogramma verbinding maakt, toont het paneel een autorisatievraag op zijn eigen scherm. Iemand moet die daar goedkeuren; dat kan niet op afstand.
 
-## 2. Het paneel heeft een vast adres
-
-Geef het paneel voor de netwerkroute een vast adres of een DHCP-reservering, zodat het niet van adres verandert. Dat adres gebruik je om het toe te voegen, en daarna voor de eigen statuspagina van het paneel op poort 8888. Een paneel dat via USB is geïnstalleerd, kun je achteraf een vast adres geven.
-
-## 3. De systeem-WebView is actueel
+## 2. De systeem-WebView is actueel
 
 Het dashboard wordt getekend door de systeem-WebView van het paneel, en panelen worden standaard geleverd met een die jaren verouderd is. Een oude WebView geeft een leeg scherm, een half getekend dashboard of scriptfouten die eruitzien als een fout in de paneel-app. Het is met afstand het meest voorkomende probleem bij de eerste keer opstarten.
 

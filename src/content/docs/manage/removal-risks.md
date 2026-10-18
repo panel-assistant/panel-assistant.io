@@ -8,7 +8,7 @@ description: What removing ha-paneld from a panel does, which panels and firmwar
 <p id="removal-this-panel-verdict"></p>
 </div>
 
-Panel Assistant removes ha-paneld in one step, from the panel's **Remove ha-paneld from this panel** option in Home Assistant. On most panels that is all there is to it. On some, removal leaves the panel with no way back to Android Settings or to network debugging, and then nothing can install an app on it again, Panel Assistant included, until you take the vendor's own route back. On some firmware that route means signing in to a vendor account, or connecting a computer by USB.
+Panel Assistant removes ha-paneld in one step, from the panel's **Remove Panel Assistant from this panel** option, under **Configure** in Home Assistant (Panel Assistant 0.9 calls it Remove ha-paneld from this panel). On most panels that is all there is to it. On some, removal leaves the panel with no way back to Android Settings or to network debugging, and then nothing can install an app on it again, Panel Assistant included, until you take the vendor's own route back. On some firmware that route means signing in to a vendor account, or connecting a computer by USB.
 
 Read the section for your panel before you confirm.
 

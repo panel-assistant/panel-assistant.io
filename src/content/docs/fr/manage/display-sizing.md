@@ -18,7 +18,7 @@ La carte **Dimensionnement de l’affichage** de l’onglet **Installer** du pan
 Cela nécessite un moyen d’accès privilégié approuvé : normalement le `su` du fabricant ou l’[assistant root](https://github.com/panel-assistant/android/blob/main/helper/README.md). Un panneau compatible sans accès root, dont l’accès renforcé facultatif a déjà été approuvé sur le panneau, peut également effectuer ces modifications précises de l’affichage. Lorsqu’aucun moyen pris en charge n’est prêt, la carte reste visible mais verrouillée.
 :::
 
-Pour régler l’affichage, ouvrez le même tableau de bord dans un navigateur d’ordinateur comme référence. Réduisez la densité jusqu’à ce que la disposition corresponde, avec davantage de cartes à l’écran, puis ajustez légèrement la taille du texte jusqu’à ce qu’il corresponde. Les bonnes valeurs dépendent de l’installation — résolution du panneau, distance à laquelle les personnes se tiennent, conception du tableau de bord — plutôt que du modèle, ce qui explique pourquoi aucune valeur standard n’est fournie.
+Pour régler l’affichage, ouvrez le même tableau de bord dans un navigateur d’ordinateur comme référence. Réduisez la densité jusqu’à ce que la disposition corresponde, avec davantage de cartes à l’écran, puis ajustez légèrement la taille du texte jusqu’à ce qu’il corresponde.
 
 ## Les deux réglages
 

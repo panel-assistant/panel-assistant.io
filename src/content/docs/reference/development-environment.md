@@ -39,7 +39,14 @@ Gradle builds and verifies both ABI-specific root helpers automatically before b
 
 You do not need to configure signing to build and run ha-paneld. A checkout without signing configuration uses the committed `debug.keystore` for debug builds. If `keystore.properties` supplies signing configuration, debug builds use that key instead. Official releases are signed with the project's private release key, which is never in the repository.
 
-Android refuses to update an installed app with an APK signed by a different key. Moving a panel between an official release, your own release key and a debug build therefore means uninstalling first. Before you do, make a full encrypted `.hpb` backup from **Install → Backup** and check the file was saved; uninstalling otherwise removes profiles, learned state and history. Install the other build, then restore the backup from **Install → Restore**. See [Updates and recovery](/manage/updates-and-recovery/).
+Android refuses to update an installed app with an APK signed by a different key. Moving a panel between an official release, your own release key and a debug build therefore means uninstalling first. Before you do, make a full encrypted `.hpb` backup from **Install → Backup** and check the file was saved; uninstalling otherwise removes profiles, learned state and history. Panel Assistant makes the panel app a device admin, and Android refuses to uninstall a device admin, so release it first. Either remove the app with the panel's **Remove Panel Assistant from this panel** option, under **Configure** in Home Assistant, or release the device admin and uninstall over ADB:
+
+```sh
+adb shell am broadcast --include-stopped-packages -n io.panelassistant.android/io.panelassistant.android.platform.ReleaseDeviceAdminReceiver
+adb shell pm uninstall io.panelassistant.android
+```
+
+If `pm uninstall` still answers `DELETE_FAILED_DEVICE_POLICY_MANAGER`, wait a second and run it again. Install the other build, then restore the backup from **Install → Restore**. See [Updates and recovery](/manage/updates-and-recovery/).
 
 To sign your own builds consistently, copy [`keystore.properties.example`](https://github.com/panel-assistant/android/blob/main/keystore.properties.example) to `keystore.properties` and fill it in; with the file present, `assembleRelease` is release-signed. A fork that publishes tagged releases through GitHub Actions supplies the same key as repository secrets instead.
 

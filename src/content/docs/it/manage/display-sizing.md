@@ -18,7 +18,7 @@ La scheda **Dimensionamento del display** nella scheda **Installa** del pannello
 Questo richiede un metodo di accesso privilegiato approvato: normalmente il `su` del produttore o l'[helper root](https://github.com/panel-assistant/android/blob/main/helper/README.md). Anche un pannello compatibile senza root, il cui accesso avanzato facoltativo sia già stato approvato sul pannello, può effettuare queste precise modifiche al display. Quando nessun metodo supportato è pronto, la scheda rimane visibile ma bloccata.
 :::
 
-Per regolarlo, apri la stessa plancia in un browser desktop come riferimento. Riduci la densità finché la disposizione corrisponde (entrano più schede), poi ritocca la dimensione del testo finché anche il testo corrisponde. I valori adatti dipendono dall'installazione (la risoluzione del pannello, la distanza a cui si trovano le persone, il modo in cui è progettata la plancia), anziché dal modello: per questo non vengono forniti valori standard.
+Per regolarlo, apri la stessa plancia in un browser desktop come riferimento. Riduci la densità finché la disposizione corrisponde (entrano più schede), poi ritocca la dimensione del testo finché anche il testo corrisponde.
 
 ## I due controlli
 

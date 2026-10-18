@@ -8,15 +8,11 @@ Zanim dodasz panel, muszą być spełnione dwa warunki, a trzeci decyduje o tym,
 
 ## 1. Opcje programisty i debugowanie są włączone
 
-Instalator komunikuje się z panelem przez interfejs debugowania Androida, który ma każde urządzenie z Androidem, ale fabrycznie jest on wyłączony. Włączenie go oznacza otwarcie opcji programisty na panelu i włączenie debugowania: **debugowania USB** dla [ścieżki USB](/pl/install/install-over-usb/) albo **debugowania bezprzewodowego**, nazywanego czasem sieciowym ADB, dla ścieżki sieciowej. Dokładna kolejność kroków różni się między modelami i jest opisana na [stronach sprzętu](/pl/hardware/).
+Instalator komunikuje się z panelem przez interfejs debugowania Androida, który ma każde urządzenie z Androidem, ale fabrycznie jest on wyłączony. Dokładna kolejność kroków różni się między modelami i jest opisana na [stronach sprzętu](/pl/hardware/).
 
 Gdy instalator połączy się po raz pierwszy, panel wyświetli na własnym ekranie prośbę o autoryzację. Ktoś musi ją zaakceptować przy panelu; nie da się tego zrobić zdalnie.
 
-## 2. Panel ma stały adres
-
-Przy ścieżce sieciowej nadaj panelowi stały adres albo rezerwację DHCP, żeby adres się nie zmieniał. Tego adresu używasz, żeby dodać panel, a potem, żeby otworzyć własną stronę stanu panelu na porcie 8888. Panelowi zainstalowanemu przez USB możesz nadać adres później.
-
-## 3. Systemowy WebView jest aktualny
+## 2. Systemowy WebView jest aktualny
 
 Pulpit nawigacyjny rysuje systemowy WebView panelu, a panele często trafiają do sprzedaży z wersją przestarzałą o kilka lat. Stary WebView daje pusty ekran, częściowo narysowany pulpit albo błędy skryptów, które wyglądają jak usterka aplikacji panelu. To zdecydowanie najczęstszy problem przy pierwszym uruchomieniu.
 

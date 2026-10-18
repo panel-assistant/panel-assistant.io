@@ -14,7 +14,7 @@ Dodaj Panel Assistant przez HACS i uruchom ponownie Home Assistant. To jedyna rz
 
 ## 2. Włącz debugowanie na panelu
 
-Otwórz na panelu opcje programisty i włącz debugowanie bezprzewodowe albo debugowanie USB, jeśli podłączasz panel kablem. To właśnie pozwala Home Assistant przeprowadzić instalację za ciebie. [Strony o sprzęcie](/pl/hardware/) pokazują, gdzie jest ten przełącznik w każdym modelu, a szczegóły znajdziesz w [Przygotowanie panelu](/pl/install/prepare-a-panel/).
+[Strony o sprzęcie](/pl/hardware/) pokazują, gdzie jest ten przełącznik w każdym modelu, a szczegóły znajdziesz w [Przygotowanie panelu](/pl/install/prepare-a-panel/).
 
 ## 3. Dodaj panel
 

@@ -18,7 +18,7 @@ Die Karte **Anzeigegröße** auf der Registerkarte **Installieren** des Panels l
 Dafür ist ein genehmigter privilegierter Zugangsweg erforderlich: normalerweise das `su` des Herstellers oder der [Root-Helfer](https://github.com/panel-assistant/android/blob/main/helper/README.md). Ein kompatibles, nicht gerootetes Panel, dessen optionaler erweiterter Zugriff bereits am Panel genehmigt wurde, kann ebenfalls genau diese Anzeigeänderungen vornehmen. Wenn kein unterstützter Zugangsweg bereitsteht, bleibt die Karte sichtbar, aber gesperrt.
 :::
 
-Öffne zum Abstimmen dasselbe Dashboard zum Vergleich in einem Desktop-Browser. Senke die Dichte, bis das Layout übereinstimmt und mehr Karten Platz haben. Passe dann die Textgröße in kleinen Schritten an, bis auch der Text übereinstimmt. Gute Werte hängen von der Installation ab: von der Auflösung des Panels, dem Abstand der Personen und der Gestaltung des Dashboards. Sie hängen also nicht vom Modell ab. Deshalb werden keine Standardwerte mitgeliefert.
+Öffne zum Abstimmen dasselbe Dashboard zum Vergleich in einem Desktop-Browser. Senke die Dichte, bis das Layout übereinstimmt und mehr Karten Platz haben. Passe dann die Textgröße in kleinen Schritten an, bis auch der Text übereinstimmt. Gute Werte hängen von der Installation ab: von der Auflösung des Panels, dem Abstand der Personen und der Gestaltung des Dashboards.
 
 ## Die beiden Regler
 
