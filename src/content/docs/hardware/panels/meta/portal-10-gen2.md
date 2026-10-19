@@ -109,7 +109,7 @@ Then [add the panel](/install/installing-ha-paneld/) in Panel Assistant as usual
 
 A Portal cannot install app updates by itself, because that needs root. Panel Assistant therefore updates it over network debugging, which the Portal switches off at every restart, including after a power cut. When that happens the panel keeps working on the version it has, and Home Assistant shows a Repair, as described in [Updates and recovery](/manage/updates-and-recovery/#a-panel-that-cannot-be-updated).
 
-To let Panel Assistant update it again, connect the Portal to a computer by USB, switch [ADB](#enabling-adb) on, and turn network debugging back on as described in [Getting ADB onto the network](/manage/command-line-install/#getting-adb-onto-the-network). After the update, check that the Portal still opens the dashboard as its [home screen](#installing-panel-assistant).
+To let Panel Assistant update it again, switch [ADB](#enabling-adb) on, plug the Portal into your computer by USB and start the USB installer from Home Assistant, as described in [a panel that cannot be updated](/manage/updates-and-recovery/#a-panel-that-cannot-be-updated). The installer installs nothing on a Portal that already has the app; it turns network debugging back on so Panel Assistant can update it. After the update, check that the Portal still opens the dashboard as its [home screen](#installing-panel-assistant).
 
 ## Privacy
 

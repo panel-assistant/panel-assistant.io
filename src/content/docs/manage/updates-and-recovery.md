@@ -21,7 +21,11 @@ Some panels can only be updated over ADB, because they have no way to install an
 
 The usual cause is a change made on the panel rather than in Home Assistant. A vendor firmware update, a factory reset, or a vendor option that restores the shipped software can all switch Android's developer options back off, and that takes ADB with it. Nothing warns you at the time, because from the panel's point of view nothing is wrong.
 
-Turning developer options and USB debugging back on restores the update path, and the steps are the same ones used when first preparing that panel: see [prepare a panel](/install/prepare-a-panel/#1-developer-options-and-debugging-are-on). Panels differ in how those settings are reached, and some vendors hide them behind a sequence of taps on an About screen.
+Turning developer options and USB debugging back on restores the update path on most panels, and the steps are the same ones used when first preparing that panel: see [prepare a panel](/install/prepare-a-panel/#1-developer-options-and-debugging-are-on). Panels differ in how those settings are reached, and some vendors hide them behind a sequence of taps on an About screen.
+
+If the Repair stays, or the panel switches network debugging off by itself, such as a Meta Portal after a restart or a Shelly Wall Display after a reset, plug the panel into your computer by USB and start the USB installer from Home Assistant, as in [install over USB](/install/install-over-usb/#it-starts-inside-home-assistant). Nothing has to be removed first: on a panel that already has the app the installer installs nothing. If the panel asks, tick **Always allow from this computer** and tap **Allow**; the installer then turns network debugging back on and says Panel Assistant can reach the panel again. Home Assistant offers the panel's update from there, and the update keeps its settings and history.
+
+If Home Assistant also shows **Allow updates on …** for the panel, it can be reached but has not accepted this Home Assistant yet. Open that Repair, or go to **Settings**, **Devices and services**, **Panel Assistant**, select **Configure** for the panel and choose **Allow updates**, then tap **Allow** on the panel when it asks.
 
 ## What an update protects
 

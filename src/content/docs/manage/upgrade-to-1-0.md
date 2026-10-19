@@ -22,12 +22,12 @@ Panel Assistant 1.0 and the 1.0 panel app move together. The 1.0 integration tal
 After the restart, open **Settings**, **Repairs** again.
 
 - **"… needs app 1.0.0-preview1"** is expected on every panel that still runs a 0.9 app. Until it updates, Home Assistant cannot see or control that panel and its entities show as unavailable. The panel itself keeps working, with its settings and history.
-- **"… cannot receive app updates"** means Panel Assistant has no way to install on that panel, usually after a change made on the panel itself, such as a firmware update or a reset. Reconnect the panel to Panel Assistant by USB, as the Repair's **Learn more** describes, and the update becomes available.
+- **"… cannot receive app updates"** means Panel Assistant has no way to install on that panel, usually after a change made on the panel itself, such as a firmware update or a reset. Reconnect the panel to Panel Assistant by USB, as the Repair's **Learn more** describes, and the update becomes available. Nothing is removed: on a panel that already has the app, the USB installer installs nothing and only lets Panel Assistant reach it again.
 - **"… was never moved off MQTT"** or **"… still runs the old app"** means a move was not finished in 0.9.0. See [if a move was not finished](#if-a-move-was-not-finished).
 
 ## 3. Update one panel, then the rest
 
-Each panel's update entity in Home Assistant offers the 1.0 panel app. Install it on one panel first and use that panel for a while before you install it on the others, because that panel cannot go back. Panel Assistant backs up the panel's settings, installs the update and confirms the panel came back healthy, as described in [updates and recovery](/manage/updates-and-recovery/). Settings carry over from the 0.9 panel app.
+Once the 1.0 panel app's release is published, each panel's update entity in Home Assistant offers it. Install it on one panel first and use that panel for a while before you install it on the others, because that panel cannot go back. Panel Assistant backs up the panel's settings, installs the update and confirms the panel came back healthy, as described in [updates and recovery](/manage/updates-and-recovery/). Settings carry over from the 0.9 panel app.
 
 ## Going back
 
