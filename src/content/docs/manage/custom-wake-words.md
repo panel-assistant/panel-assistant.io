@@ -64,7 +64,7 @@ On the **Voice** card, the wake words picker has an **import** control. Choose t
 
 The wake word's id is derived from the `.tflite` file's name, lower-cased and reduced to letters, digits and underscores (it must start with a letter). It cannot reuse the id of a bundled wake word, and importing a model under a name you have already used replaces that earlier model.
 
-Once it is imported, tick it under **Wake words**, choose its pipeline under **Wake word pipelines**, and **Save**. It also appears in Home Assistant's own wake word selector for that panel from then on.
+Once it is imported, tick it under **Wake words** and choose its pipeline under **Wake word pipelines**. It also appears in Home Assistant's own wake word selector for that panel from then on.
 
 ### On several panels
 

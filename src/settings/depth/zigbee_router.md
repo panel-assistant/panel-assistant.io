@@ -8,7 +8,7 @@ related:
 
 This setting appears only on a panel with a built-in Zigbee gateway, such as the Sonoff NSPanel Pro. Turning it on starts the vendor gateway if it is not already running and switches it to the Repeater role, so the panel can extend an existing Zigbee network run by your own coordinator. To join it to that network:
 
-1. Turn this switch on and save.
+1. Turn this switch on.
 2. Open permit-join on your coordinator.
 3. Use **Request join** in the Join Zigbee network row that appears under the switch. The button stays disabled once the router has joined.
 

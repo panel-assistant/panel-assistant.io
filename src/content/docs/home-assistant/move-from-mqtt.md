@@ -3,9 +3,9 @@ title: Move a panel from MQTT
 description: Handing a panel's entities from Home Assistant's MQTT integration to Panel Assistant, keeping their entity IDs, history and customisations.
 ---
 
-Panel Assistant 1.0 uses Home Assistant's native connection and has no MQTT support. If your panel's entities still use MQTT, run Panel Assistant **0.9.0** first so it can complete the move while keeping entity IDs, history and customisations. If you already updated to 1.0, follow its Repair to redownload 0.9.0 in HACS, finish the move, then return to 1.0.
+Panel Assistant 1.0 uses Home Assistant's native connection and has no MQTT support. If your panel's entities still use MQTT, run Panel Assistant **0.9.0** first so it can complete the move while keeping entity IDs, history and customisations. If you already updated to 1.0, follow [if a move was not finished](/manage/upgrade-to-1-0/#if-a-move-was-not-finished) before changing versions.
 
-The walkthrough below is historical guidance for Panel Assistant 0.3 through 0.8. Its **Control** choice is not present in 1.0; use the 0.9.0 recovery route above for a panel that still needs to move.
+The walkthrough below is historical guidance for Panel Assistant 0.3 through 0.8. Its **Control** choice is not present in 1.0.
 
 You move one panel at a time, and each move can be reversed. The panel's entities keep their entity IDs, their history, and any name, icon or area you gave them, so dashboards and automations that use them carry on working.
 

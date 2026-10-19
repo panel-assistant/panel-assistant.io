@@ -116,7 +116,7 @@ The panel's web interface on port 8888 is separate from all of this and always f
 
 ## Using a separate dashboard app instead
 
-If a panel needs one of the capabilities listed under [Limits](#limits), open the Configure page, select the other installed dashboard app under **Dashboard app** and save. The switch takes effect immediately. Do not choose **Auto** for this, because Auto uses the built-in renderer whenever it is ready.
+If a panel needs one of the capabilities listed under [Limits](#limits), open the Configure page and select the other installed dashboard app under **Dashboard app**. The switch takes effect immediately. Do not choose **Auto** for this, because Auto uses the built-in renderer whenever it is ready.
 
 ## Limits
 

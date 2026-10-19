@@ -17,7 +17,6 @@ It is off by default, so the voice assistant does not hold the microphone until 
 2. On the **Voice** card, turn on **Voice assistant**.
 3. Tick each wake word you want the panel to listen for under **Wake words**.
 4. Under **Wake word pipelines**, choose which Assist pipeline each ticked wake word should use.
-5. **Save**.
 
 With the voice assistant off, its microphone leases are released and the satellite entity shows unavailable in Home Assistant. Another enabled feature, such as camera room audio, may still use the microphone.
 

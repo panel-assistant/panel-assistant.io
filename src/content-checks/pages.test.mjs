@@ -21,8 +21,10 @@ const plain = (fragment) =>
 // The page's own content, without the navigation, which names every page.
 const content = (path) => html(path).split('<main')[1] ?? '';
 const text = (path) => plain(content(path));
-const elements = (path) =>
-  [...content(path).matchAll(/<(p|li)\b[^>]*>([\s\S]*?)<\/\1>/g)].map((m) => plain(m[2]));
+const elements = (path, tags = 'p|li') =>
+  [...content(path).matchAll(new RegExp(`<(${tags})\\b[^>]*>([\\s\\S]*?)<\\/\\1>`, 'g'))].map((m) =>
+    plain(m[2]),
+  );
 const localized = (path) =>
   ['', ...LOCALES.map((l) => `/${l}`)]
     .filter((p) => existsSync(`dist${p}${path}index.html`))
@@ -140,4 +142,63 @@ test('the install-recovery topic Panel Assistant links from its install failures
     'the-install-may-have-changed-the-panel',
   ])
     assert.ok(section.includes(`id="${id}"`), `#${anchor} has no #${id}`);
+});
+
+test('Move a panel from MQTT sends a reader already on 1.0 to the unfinished-move steps, not back to 0.9.0', () => {
+  // Downloading 0.9.0 again over 1.0 hands moved panels back to MQTT; the upgrade page restores the backup instead.
+  const pages = localized('/home-assistant/move-from-mqtt/');
+  assert.ok(pages.length > 1);
+  for (const path of pages)
+    assert.deepEqual(
+      elements(path).filter((e) => e.includes('0.9.0') && e.includes('HACS')),
+      [],
+      path,
+    );
+  assert.match(
+    content('/home-assistant/move-from-mqtt/'),
+    /href="\/manage\/upgrade-to-1-0\/#if-a-move-was-not-finished"/,
+  );
+  assert.match(html('/manage/upgrade-to-1-0/'), /id="if-a-move-was-not-finished"/);
+});
+
+test('the control reference offers the Volume number only on a panel without a speaker', () => {
+  // Panel Assistant 1.0 creates no number.<panel>_volume on a panel with a speaker, and removes an old one.
+  const rows = elements('/reference/api/', 'p|li|tr');
+  const volume = rows.filter((e) => /number\.&lt;panel&gt;_volume|Volume number/.test(e));
+  assert.ok(volume.length > 0);
+  for (const row of volume) assert.match(row, /without a speaker/, row);
+  const set = rows.find((e) => e.startsWith('Set the volume.'));
+  assert.match(
+    set ?? '',
+    /speaker[^.]*media_player\.volume_set|media_player\.volume_set[^.]*speaker/,
+  );
+});
+
+test('no instruction for a Configure page setting asks the reader to save', () => {
+  // The 1.0 Configure page sends each change as it is made and has no Save button. Settings reference
+  // pages exist only for 0.9 releases, which had one, so their Save steps stay, except the Zigbee
+  // router's: a preview reader follows the newest page, and the 0.9 app's own hint still says to save.
+  const step = /^save\b|\band save\b|\bbefore you save\b|\bsave any\b/i;
+  for (const path of [
+    '/manage/voice-assistant/',
+    '/manage/custom-wake-words/',
+    '/manage/built-in-renderer/',
+  ])
+    assert.deepEqual(
+      elements(path).filter((e) => step.test(e.trim())),
+      [],
+      path,
+    );
+  const settings = englishPages().filter((p) => p.startsWith('/reference/settings/v'));
+  const zigbee = settings.filter((p) => content(p).includes('<h3 id="zigbee_router"'));
+  assert.ok(zigbee.length > 0);
+  for (const path of zigbee) {
+    const section = content(path).split('<h3 id="zigbee_router"')[1].split('<h3 ')[0];
+    const steps = [...section.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)].map((m) => plain(m[1]));
+    assert.deepEqual(
+      steps.filter((e) => step.test(e.trim())),
+      [],
+      path,
+    );
+  }
 });
