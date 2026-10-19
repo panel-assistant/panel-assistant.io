@@ -27,33 +27,33 @@ Je kunt een gloednieuw paneel al instellen voordat je het aan de muur hangt. Slu
 <div class="pa-steps" role="region" aria-label="Stap voor stap installeren via USB" tabindex="0">
 <figure>
 <figcaption><span>1</span> Kies Installeer via USB</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="De stap Een paneel instellen in Home Assistant, met de keuze Voeg een paneel op je netwerk toe of Installeer via USB op deze computer">
-<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="De stap Een paneel instellen in Home Assistant, met de keuze Voeg een paneel op je netwerk toe of Installeer via USB op deze computer">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="330" alt="De stap Een paneel instellen in Home Assistant, met de keuze Voeg een paneel op je netwerk toe of Installeer via USB op deze computer">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="De stap Een paneel instellen in Home Assistant, met de keuze Voeg een paneel op je netwerk toe of Installeer via USB op deze computer">
 </figure>
 <figure>
 <figcaption><span>2</span> Sluit het paneel aan</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="349" alt="Het USB-installatieprogramma vraagt je het paneel aan te sluiten en op Find my panel te drukken">
-<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="349" alt="Het USB-installatieprogramma vraagt je het paneel aan te sluiten en op Find my panel te drukken">
+<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="375" alt="Het USB-installatieprogramma vraagt je het paneel aan te sluiten en op Find my panel te drukken">
+<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="375" alt="Het USB-installatieprogramma vraagt je het paneel aan te sluiten en op Find my panel te drukken">
 </figure>
 <figure>
 <figcaption><span>3</span> Tik op Toestaan op het paneel</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="318" alt="Het USB-installatieprogramma wacht terwijl je op het scherm van het paneel op Toestaan tikt">
-<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="318" alt="Het USB-installatieprogramma wacht terwijl je op het scherm van het paneel op Toestaan tikt">
+<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="263" alt="Het USB-installatieprogramma wacht terwijl je op het scherm van het paneel op Toestaan tikt">
+<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="263" alt="Het USB-installatieprogramma wacht terwijl je op het scherm van het paneel op Toestaan tikt">
 </figure>
 <figure>
 <figcaption><span>4</span> Druk op Install</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="349" alt="Het USB-installatieprogramma, klaar om te installeren, met één knop Install">
-<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="349" alt="Het USB-installatieprogramma, klaar om te installeren, met één knop Install">
+<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="323" alt="Het USB-installatieprogramma, klaar om te installeren, met één knop Install">
+<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="323" alt="Het USB-installatieprogramma, klaar om te installeren, met één knop Install">
 </figure>
 <figure>
 <figcaption><span>5</span> Kijk mee terwijl het installeert</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="319" alt="De voortgangsbalk van het USB-installatieprogramma tijdens het installeren van de app">
-<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="319" alt="De voortgangsbalk van het USB-installatieprogramma tijdens het installeren van de app">
+<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="309" alt="De voortgangsbalk van het USB-installatieprogramma tijdens het installeren van de app">
+<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="309" alt="De voortgangsbalk van het USB-installatieprogramma tijdens het installeren van de app">
 </figure>
 <figure>
 <figcaption><span>6</span> Klaar</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="262" alt="Het USB-installatieprogramma bevestigt de installatie en opent de installatiewizard van het paneel">
-<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="262" alt="Het USB-installatieprogramma bevestigt de installatie en opent de installatiewizard van het paneel">
+<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="308" alt="Het USB-installatieprogramma bevestigt de installatie en opent de installatiewizard van het paneel">
+<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="308" alt="Het USB-installatieprogramma bevestigt de installatie en opent de installatiewizard van het paneel">
 </figure>
 </div>
 
@@ -64,23 +64,23 @@ Als het paneel al aan de muur hangt, heeft Home Assistant alleen het adres nodig
 <div class="pa-steps" role="region" aria-label="Stap voor stap een paneel aan je netwerk toevoegen" tabindex="0">
 <figure>
 <figcaption><span>1</span> Kies Voeg een paneel op je netwerk toe</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="De stap Een paneel instellen in Home Assistant, met de keuze Voeg een paneel op je netwerk toe of Installeer via USB op deze computer">
-<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="De stap Een paneel instellen in Home Assistant, met de keuze Voeg een paneel op je netwerk toe of Installeer via USB op deze computer">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="330" alt="De stap Een paneel instellen in Home Assistant, met de keuze Voeg een paneel op je netwerk toe of Installeer via USB op deze computer">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="De stap Een paneel instellen in Home Assistant, met de keuze Voeg een paneel op je netwerk toe of Installeer via USB op deze computer">
 </figure>
 <figure>
 <figcaption><span>2</span> Geef het adres van het paneel op</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="378" alt="De stap Een paneel toevoegen, met het IP-adres van het paneel ingevuld">
-<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="378" alt="De stap Een paneel toevoegen, met het IP-adres van het paneel ingevuld">
+<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="377" alt="De stap Een paneel toevoegen, met het IP-adres van het paneel ingevuld">
+<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="De stap Een paneel toevoegen, met het IP-adres van het paneel ingevuld">
 </figure>
 <figure>
 <figcaption><span>3</span> Kies een versie</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="305" alt="De stap Kies een versie, met de aanbevolen release bovenaan de lijst">
-<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="De stap Kies een versie, met de aanbevolen release bovenaan de lijst">
+<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="De stap Kies een versie, met de aanbevolen release bovenaan de lijst">
+<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="De stap Kies een versie, met de aanbevolen release bovenaan de lijst">
 </figure>
 <figure>
 <figcaption><span>4</span> Het is toegevoegd</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="De stap Succes, die bevestigt dat het paneel aan Home Assistant is toegevoegd">
-<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="De stap Succes, die bevestigt dat het paneel aan Home Assistant is toegevoegd">
+<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="248" alt="Rond de installatie van dit paneel af">
+<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="248" alt="Rond de installatie van dit paneel af">
 </figure>
 </div>
 
@@ -103,8 +103,8 @@ Daarna opent Home Assistant de eigen installatiewizard van het paneel, die een p
 </figure>
 <figure>
 <figcaption><span>3</span> Schakel het entiteitsfilter in</figcaption>
-<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="629" alt="De wizard die het entiteitsfilter aanbeveelt voor dit paneel, met het aantal entiteiten in Home Assistant">
-<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="629" alt="De wizard die het entiteitsfilter aanbeveelt voor dit paneel, met het aantal entiteiten in Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="636" alt="De wizard die het entiteitsfilter aanbeveelt voor dit paneel, met het aantal entiteiten in Home Assistant">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="636" alt="De wizard die het entiteitsfilter aanbeveelt voor dit paneel, met het aantal entiteiten in Home Assistant">
 </figure>
 <figure>
 <figcaption><span>4</span> Bijna klaar</figcaption>

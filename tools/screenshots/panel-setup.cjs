@@ -3,7 +3,7 @@
 // Loads a real panel's /setup page and assets with GET only, swaps in setup.js from an Android ref, and answers
 // /api/v1/setup and every /api/v1/config helper from mock JSON, so each wizard step renders with a made-up panel.
 // Every non-GET request, unmocked /api/ path and other host is aborted; see the request log.
-// Usage: PANEL_URL=http://<panel>:8888 [ANDROID_REF=<ref>] node panel-setup.js [out-dir]
+// Usage: PANEL_URL=http://<panel>:8888 [ANDROID_REF=<ref>] node panel-setup.cjs [out-dir]
 // ANDROID_REPO and ANDROID_REF select the exact app source to capture.
 // PANEL_REWRITE="Real Name=Lounge panel,real_id=lounge_panel" rewrites identity in the served HTML.
 // STEPS=identity,dashboard,... limits the steps (default: all the journey offers).
@@ -29,7 +29,7 @@ const log = (s) => fs.appendFileSync(LOG, s + '\n');
 const ST = (stage, status, blocking, detail = '') => ({ stage, status, blocking, detail });
 const HA = 'http://homeassistant.local:8123';
 function journey(k) {
-  const order = ['identity', 'ha_url', 'signin', 'dashboard', 'mqtt', 'filter', 'proof', 'done'];
+  const order = ['identity', 'ha_url', 'signin', 'dashboard', 'filter', 'proof', 'done'];
   const i = order.indexOf(k);
   const at = (n) => i > order.indexOf(n);
   const pre = 'prerequisites_missing';
@@ -40,21 +40,18 @@ function journey(k) {
     ST('ha_url', at('ha_url') ? 'satisfied' : 'blocked', true, at('ha_url') ? HA : 'found'),
     ST('ha_credentials', signed ? 'satisfied' : 'blocked', true),
     ST('home_dashboard', !signed ? 'unknown' : at('dashboard') ? 'satisfied' : 'blocked', true, signed ? '' : pre),
-    ST('mqtt_broker', at('mqtt') ? 'satisfied' : 'blocked', false),
-    ST('mqtt_credentials', at('mqtt') ? 'satisfied' : 'blocked', false),
-    ST('mqtt_connection', at('mqtt') ? 'satisfied' : 'skipped', false, at('mqtt') ? 'connected' : 'disabled'),
     ST('entity_filter', !signed ? 'unknown' : at('filter') ? 'satisfied' : 'blocked', true, signed ? '' : pre),
     at('proof') ? ST('render_proof', 'satisfied', true, 'builtin_frontend_connected')
       : at('filter') ? ST('render_proof', 'in_flight', true, 'awaiting_frontend')
       : ST('render_proof', 'unknown', true, pre),
   ];
-  const nextOf = { identity: 'identity', ha_url: 'ha_url', signin: 'ha_credentials', dashboard: 'home_dashboard', mqtt: 'mqtt_broker', filter: 'entity_filter', proof: 'render_proof', done: null };
+  const nextOf = { identity: 'identity', ha_url: 'ha_url', signin: 'ha_credentials', dashboard: 'home_dashboard', filter: 'entity_filter', proof: 'render_proof', done: null };
   const filterOn = at('filter');
   return {
     complete: k === 'done', repair: false,
     entity_filter: { relevant: true, enabled: filterOn, answered: filterOn, count: 412, counting: false, tier: 'middling', tier_source: 'profile', level: 'amber', confidence: 'estimated', recommend_above: 300, struggle_above: 800, learning: { applied: false, scanned: -1, catalog: filterOn ? 412 : -1 } },
-    home_dashboard: { value: at('dashboard') ? '/lovelace' : '', answered: at('dashboard') },
-    renderer: { builtin: true, package: '' },
+    home_dashboard: { value: at('dashboard') ? '/home' : '', answered: at('dashboard') },
+    renderer: { builtin: true, package: 'builtin' },
     next: nextOf[k],
     panel: { id: 'lounge_panel', name: 'Lounge panel' },
     steps,
@@ -62,24 +59,24 @@ function journey(k) {
   };
 }
 const MOCK = {
-  '/api/v1/config/discovery': { mqtt_broker: 'tcp://core-mosquitto:1883', ha_url: HA },
+  '/api/v1/config/discovery': { ha_url: HA },
   '/api/v1/config/home-dashboards': { queried: true, items: [
-    { path: '/lovelace', title: 'Home', icon: 'mdi:home', group: 'panel' },
+    { path: '/home', title: 'home', icon: 'mdi:home', group: 'panel' },
     { path: '/map', title: 'Map', icon: 'mdi:map', group: 'panel' },
     { path: '/lounge', title: 'Lounge', icon: 'mdi:sofa', group: 'dashboard' },
-  ], default: { explicit: true, path: '/lovelace' } },
+  ], default: { explicit: true, path: '/home' } },
   '/api/v1/config/ha-area': { areas: [
     { area_id: 'dining_room', name: 'Dining room', icon: '' },
     { area_id: 'garden', name: 'Garden', icon: '' },
     { area_id: 'lounge', name: 'Lounge', icon: '' },
     { area_id: 'study', name: 'Study', icon: '' },
   ], device: { found: false, area_id: '', area_name: '' }, admin: true, queried: true, requested: 'Lounge', ha_username: 'panel' },
-  '/api/v1/config/probe-broker': { ok: true },
+  '/api/v1/ha/oauth/status': { phase: 'not_configured' },
   '/api/v1/peers': [],
   '/health': {},
 };
-const HEAD = { identity: 'Name this panel', ha_url: 'Where is Home Assistant?', signin: 'Sign in to Home Assistant', dashboard: 'Select the HA dashboard for this panel', mqtt: 'Connect to MQTT', filter: 'One thing before we load your dashboard', proof: 'Almost there', done: '✓ This panel is set up' };
-const FILE = { identity: 'name', ha_url: 'ha-url', signin: 'sign-in', dashboard: 'dashboard', mqtt: 'mqtt', filter: 'filter', proof: 'almost-there', done: 'done' };
+const HEAD = { identity: 'Name this panel', ha_url: 'Where is Home Assistant?', signin: 'Sign in to Home Assistant', dashboard: 'Select the HA dashboard for this panel', filter: 'One thing before we load your dashboard', proof: 'Almost there', done: '✓ This panel is set up' };
+const FILE = { identity: 'name', ha_url: 'ha-url', signin: 'sign-in', dashboard: 'dashboard', filter: 'filter', proof: 'almost-there', done: 'done' };
 
 (async () => {
   const browser = await chromium.launch(launchArgs);
@@ -87,6 +84,7 @@ const FILE = { identity: 'name', ha_url: 'ha-url', signin: 'sign-in', dashboard:
   for (const theme of ['light', 'dark']) for (const k of Object.keys(HEAD).filter((x) => !only.length || only.includes(x))) {
     const ctx = await browser.newContext({ viewport: { width: 560, height: 1400 }, deviceScaleFactor: 2, colorScheme: theme, reducedMotion: 'reduce', locale: 'en-GB' });
     const page = await ctx.newPage();
+    await page.routeWebSocket('**/*', (socket) => socket.close());
     // Safety net first (Playwright matches last-registered first).
     await page.route('**/*', async (r) => {
       const m = r.request().method(); const u = new URL(r.request().url()); const p = u.pathname;
@@ -96,6 +94,8 @@ const FILE = { identity: 'name', ha_url: 'ha-url', signin: 'sign-in', dashboard:
       if (p === '/assets/setup.js') { log(`FULFIL-BRANCH ${p}`); return r.fulfill({ contentType: 'application/javascript', body: SETUP_JS }); }
       if (p === '/setup') {
         const resp = await r.fetch(); let html = await resp.text();
+        // Select the production HTTP transport so all reads pass through the synthetic API routes.
+        html = html.replace(/ data-ui-socket="[^"]*"/g, '');
         for (const pair of (process.env.PANEL_REWRITE || '').split(',').filter(Boolean)) { const [from, to] = pair.split('='); html = html.split(from).join(to); }
         log(`CONTINUE-REWRITE GET ${p}`);
         return r.fulfill({ status: resp.status(), contentType: 'text/html; charset=utf-8', body: html });
@@ -117,9 +117,8 @@ const FILE = { identity: 'name', ha_url: 'ha-url', signin: 'sign-in', dashboard:
     await page.goto(PANEL + '/setup', { waitUntil: 'load' });
     await installRoboto(page);
     await page.waitForFunction((h) => { const e = document.querySelector('#wiz-step h2'); return e && e.textContent === h; }, HEAD[k], { timeout: 15000 });
-    if (k === 'ha_url' || k === 'mqtt') await page.waitForSelector('#wiz-step .setup.info');
+    if (k === 'ha_url') await page.waitForFunction(() => document.getElementById('wiz-ha_url').value === 'http://homeassistant.local:8123');
     if (k === 'dashboard') { await page.waitForSelector('#wiz-home_dashboard'); await page.waitForSelector('#wiz-ha_area'); }
-    if (k === 'mqtt') await page.waitForFunction(() => document.getElementById('wiz-mqtt_user').value === 'panel');
     if (k === 'filter') await page.waitForFunction(() => document.getElementById('ef-count').textContent === '412');
     await page.waitForTimeout(500);
     await page.evaluate(() => {
@@ -127,9 +126,10 @@ const FILE = { identity: 'name', ha_url: 'ha-url', signin: 'sign-in', dashboard:
       const a = document.activeElement; if (a && a.blur) a.blur();
     });
     const leak = await page.evaluate(() => ({
-      bars: ['halifebar', 'hanetbar', 'verbar'].map((id) => getComputedStyle(document.getElementById(id)).display),
+      bars: ['halifebar', 'hanetbar', 'verbar'].map((id) => { const bar = document.getElementById(id); return bar ? getComputedStyle(bar).display : 'absent'; }),
       text: document.documentElement.outerHTML,
     }));
+    if (await page.locator('#wiz').innerText().then((text) => /MQTT/.test(text))) throw new Error('Stale MQTT wording in the wizard.');
     const file = `${OUT}/panel-setup-${FILE[k]}-${theme}.png`;
     await page.locator('#wiz').screenshot({ path: file });
     const identities = (process.env.PANEL_REWRITE || '').split(',').filter(Boolean).map((pair) => pair.split('=')[0]);

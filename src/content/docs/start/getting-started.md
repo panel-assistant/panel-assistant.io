@@ -26,33 +26,33 @@ A brand-new panel can be set up before it ever goes on the wall. Plug it into yo
 <div class="pa-steps" role="region" aria-label="Installing over USB, step by step" tabindex="0">
 <figure>
 <figcaption><span>1</span> Choose Install using USB</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="The Set up a panel step in Home Assistant, offering Add a panel on your network or Install using USB on this computer">
-<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="The Set up a panel step in Home Assistant, offering Add a panel on your network or Install using USB on this computer">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="330" alt="The Set up a panel step in Home Assistant, offering Add a panel on your network or Install using USB on this computer">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="The Set up a panel step in Home Assistant, offering Add a panel on your network or Install using USB on this computer">
 </figure>
 <figure>
 <figcaption><span>2</span> Plug the panel in, press Find my panel and choose the panel in your browser's list</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="349" alt="The USB installer asking you to plug the panel in and press Find my panel">
-<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="349" alt="The USB installer asking you to plug the panel in and press Find my panel">
+<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="375" alt="The USB installer asking you to plug the panel in and press Find my panel">
+<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="375" alt="The USB installer asking you to plug the panel in and press Find my panel">
 </figure>
 <figure>
-<figcaption><span>3</span> Tap Allow on the panel if it asks</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="318" alt="The USB installer waiting while you tap Allow on the panel's screen">
-<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="318" alt="The USB installer waiting while you tap Allow on the panel's screen">
+<figcaption><span>3</span> Allow debugging on the panel if asked</figcaption>
+<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="263" alt="The USB installer waiting while you tap Allow on the panel's screen">
+<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="263" alt="The USB installer waiting while you tap Allow on the panel's screen">
 </figure>
 <figure>
 <figcaption><span>4</span> Press Install</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="349" alt="The USB installer ready to install, with a single Install button">
-<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="349" alt="The USB installer ready to install, with a single Install button">
+<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="323" alt="The USB installer ready to install, with a single Install button">
+<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="323" alt="The USB installer ready to install, with a single Install button">
 </figure>
 <figure>
 <figcaption><span>5</span> Watch it install</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="319" alt="The USB installer's progress bar while the app installs">
-<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="319" alt="The USB installer's progress bar while the app installs">
+<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="309" alt="The USB installer's progress bar while the app installs">
+<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="309" alt="The USB installer's progress bar while the app installs">
 </figure>
 <figure>
 <figcaption><span>6</span> Done</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="262" alt="The USB installer confirming the install and opening the panel's setup">
-<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="262" alt="The USB installer confirming the install and opening the panel's setup">
+<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="308" alt="The USB installer confirming the install and opening the panel's setup">
+<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="308" alt="The USB installer confirming the install and opening the panel's setup">
 </figure>
 </div>
 
@@ -63,35 +63,40 @@ If the panel is already on the wall, all Home Assistant needs is its address.
 <div class="pa-steps" role="region" aria-label="Adding a panel on your network, step by step" tabindex="0">
 <figure>
 <figcaption><span>1</span> Choose Add a panel on your network</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="The Set up a panel step in Home Assistant, offering Add a panel on your network or Install using USB on this computer">
-<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="The Set up a panel step in Home Assistant, offering Add a panel on your network or Install using USB on this computer">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="330" alt="The Set up a panel step in Home Assistant, offering Add a panel on your network or Install using USB on this computer">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="The Set up a panel step in Home Assistant, offering Add a panel on your network or Install using USB on this computer">
 </figure>
 <figure>
 <figcaption><span>2</span> Give it the panel's address</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="378" alt="The Add a panel step, with the panel's IP address entered">
-<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="378" alt="The Add a panel step, with the panel's IP address entered">
+<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="377" alt="The Add a panel step, with the panel's IP address entered">
+<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="The Add a panel step, with the panel's IP address entered">
 </figure>
 <figure>
 <figcaption><span>3</span> Pick a version</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="305" alt="The Choose a version step, with the recommended release at the top of the list">
-<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="The Choose a version step, with the recommended release at the top of the list">
+<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="The Choose a version step, with the recommended release at the top of the list">
+<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="The Choose a version step, with the recommended release at the top of the list">
 </figure>
 <figure>
-<figcaption><span>4</span> Confirm the install, and it's added</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="The Success step, confirming the panel was added to Home Assistant">
-<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="The Success step, confirming the panel was added to Home Assistant">
+<figcaption><span>4</span> Allow debugging on the panel if it asks</figcaption>
+<img class="light:sl-hidden" src="/screenshots/ha-authorize-dark.png" width="580" height="354" alt="Home Assistant waiting for you to tick Always allow from this computer and tap Allow on the panel; it carries on automatically">
+<img class="dark:sl-hidden" src="/screenshots/ha-authorize-light.png" width="580" height="354" alt="Home Assistant waiting for you to tick Always allow from this computer and tap Allow on the panel; it carries on automatically">
+</figure>
+<figure>
+<figcaption><span>5</span> Open the panel's setup page</figcaption>
+<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="248" alt="Home Assistant offering the panel’s setup page and asking you to return and select Done after finishing it">
+<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="248" alt="Home Assistant offering the panel’s setup page and asking you to return and select Done after finishing it">
 </figure>
 </div>
 
-If the panel has not yet allowed Home Assistant to use debugging, Home Assistant first shows an **Authorize** step: press **Submit**, tap **Allow** on the panel, then press **Submit** again. Then confirm the install.
+If the panel asks whether to allow debugging, tick **Always allow from this computer** and tap **Allow** on the panel; Home Assistant carries on by itself. Then confirm the install.
 
 Either way, the wizard takes care of the messy part. It checks what is already on the panel, installs the current release of the panel app, starts it and confirms it is healthy. A panel that already runs the app is adopted, not reinstalled. The panel recognises its own model and loads the matching hardware profile, so its screen, buttons, LEDs and sensors arrive in Home Assistant ready to use. See [Add a panel](/install/installing-ha-paneld/).
 
 ## 4. Finish in the panel's setup wizard
 
-Next comes the panel's own setup wizard. It is served by the panel and opens in your browser on the computer, not on the panel's screen. After a network install, Home Assistant shows a short menu: choose **Continue setup** and open the website it offers. The other items, such as **Allow updates**, can wait; Home Assistant raises a Repair if a panel needs one. After a USB install, the installer window moves straight on to the wizard. Because the panel serves it, it only loads in a browser on the same network as the panel.
+Next comes the panel's own setup wizard. It is served by the panel and opens in your browser on the computer, not on the panel's screen. After a network install, Home Assistant shows **Finish setting up this panel**: open the panel’s setup page, finish the steps there, then return to Home Assistant and select **Done**. After a USB install, the installer window moves straight on to the wizard. Because the panel serves it, it only loads in a browser on the same network as the panel.
 
-The wizard asks for a name for the panel, signs the panel in to Home Assistant, and asks which dashboard to show and which area the panel is in. The panel connects as whichever Home Assistant account you sign in with, so if your browser is signed in as you, the panel connects as you; to keep the panel on its own account, sign in as that account instead. With entity filtering on, the panel loads only the entities that dashboard uses, which is what keeps it fast. See [Connect a panel](/home-assistant/connect-a-panel/).
+The wizard asks for a name for the panel, signs the panel in to Home Assistant, and asks which dashboard to show and which area the panel is in. The panel connects as whichever Home Assistant account you sign in with, so if your browser is signed in as you, the panel may connect as you; to keep the panel on its own account, sign in as that account instead. With entity filtering on, the panel loads only the entities that dashboard uses, which is what keeps it fast. See [Connect a panel](/home-assistant/connect-a-panel/).
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="The panel setup wizard, step by step" tabindex="0">
 <figure>
@@ -100,22 +105,27 @@ The wizard asks for a name for the panel, signs the panel in to Home Assistant, 
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-name-light.png" width="524" height="702" alt="The panel's setup wizard asking for a panel ID and friendly name, with a preview of the entity names Home Assistant will use">
 </figure>
 <figure>
-<figcaption><span>2</span> Pick the dashboard and area</figcaption>
+<figcaption><span>2</span> Sign in to Home Assistant</figcaption>
+<img class="light:sl-hidden" src="/screenshots/panel-setup-sign-in-dark.png" width="524" height="688" alt="The wizard offering to sign in from this browser or on the panel, using the Home Assistant account the panel should connect as">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-sign-in-light.png" width="524" height="688" alt="The wizard offering to sign in from this browser or on the panel, using the Home Assistant account the panel should connect as">
+</figure>
+<figure>
+<figcaption><span>3</span> Pick the dashboard and area</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-dashboard-dark.png" width="524" height="485" alt="The wizard with a dashboard and a Home Assistant area selected for the panel">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-dashboard-light.png" width="524" height="485" alt="The wizard with a dashboard and a Home Assistant area selected for the panel">
 </figure>
 <figure>
-<figcaption><span>3</span> Turn on the entity filter, if asked</figcaption>
-<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="629" alt="The wizard recommending the entity filter for this panel, with the Home Assistant entity count">
-<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="629" alt="The wizard recommending the entity filter for this panel, with the Home Assistant entity count">
+<figcaption><span>4</span> Turn on the entity filter, if asked</figcaption>
+<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="636" alt="The wizard recommending the entity filter for this panel, with the Home Assistant entity count">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="636" alt="The wizard recommending the entity filter for this panel, with the Home Assistant entity count">
 </figure>
 <figure>
-<figcaption><span>4</span> Almost there</figcaption>
+<figcaption><span>5</span> Almost there</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-almost-there-dark.png" width="524" height="339" alt="The wizard waiting while the panel builds its filtered entity set and loads the dashboard">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-almost-there-light.png" width="524" height="339" alt="The wizard waiting while the panel builds its filtered entity set and loads the dashboard">
 </figure>
 <figure>
-<figcaption><span>5</span> All set</figcaption>
+<figcaption><span>6</span> All set</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-done-dark.png" width="524" height="526" alt="The wizard confirming the panel is set up and showing the dashboard">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-done-light.png" width="524" height="526" alt="The wizard confirming the panel is set up and showing the dashboard">
 </figure>

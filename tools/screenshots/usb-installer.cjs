@@ -2,7 +2,7 @@
 // Screens of the USB installer (install.panel-assistant.io) for the website's Getting started page.
 // Headless Chromium has no WebUSB, so the page is loaded with a stub navigator.usb and each screen is
 // shown by toggling the installer's own step sections, exactly as install-main.mjs does. No device,
-// no USB traffic, nothing is installed. Usage: node usb-installer.js [out-dir]
+// no USB traffic, nothing is installed. Usage: node usb-installer.cjs [out-dir]
 'use strict';
 const path = require('path');
 const { chromium, ROBOTO, launchArgs } = require('./common.cjs');
@@ -32,17 +32,27 @@ const SCREENS = {
       const page = await ctx.newPage();
       await page.goto(URL, { waitUntil: 'networkidle' });
       await ROBOTO(page, 'main.wiz, main.wiz *');
-      await page.evaluate(({ s, journey }) => {
+      await page.evaluate(({ s }) => {
         const el = (id) => document.getElementById(id);
-        const say = (key) => document.querySelector(`[data-screen-message="${key}"]`)?.textContent;
-        for (const n of ['preparing', 'connect', 'allow', 'confirm', 'progress', 'done', 'error']) el(`step-${n}`).hidden = n !== s.step;
+        for (const n of ['preparing', 'connect', 'checking', 'allow', 'confirm', 'progress', 'done', 'error']) el(`step-${n}`).hidden = n !== s.step;
         el('connect').disabled = false;
-        el('journey').innerHTML = journey.map((j, i) => i < s.stop ? `<li class="done">${j}</li>` : i === s.stop ? `<li class="current" aria-current="step">${j}</li>` : `<li>${j}</li>`).join('');
-        if (s.activity) { el('activity').textContent = ({ stepInstalling: 'Installing…' })[s.activity]; el('progress-fill').style.width = `${s.percent}%`; }
-        if (s.doneText) el('done-text').textContent = 'Taking you to your panel’s setup…';
+        [...el('journey').children].forEach((item, i) => {
+          item.className = i < s.stop ? 'done' : i === s.stop ? 'current' : '';
+          if (i === s.stop) item.setAttribute('aria-current', 'step');
+          else item.removeAttribute('aria-current');
+        });
+        if (s.activity) {
+          el('activity').textContent = ({ stepInstalling: 'Installing…' })[s.activity];
+          el('progress-fill').style.width = `${s.percent}%`;
+          el('step-progress').querySelector('.bar').setAttribute('aria-valuenow', String(s.percent));
+        }
+        if (s.doneText) {
+          el('done-text').textContent = 'Taking you to your panel’s setup…';
+          el('open-setup').href = 'http://192.168.1.42:8080/setup';
+          el('open-setup').hidden = false;
+        }
         document.querySelector('footer').hidden = true;
-        void say;
-      }, { s, journey: ['Version', 'Connect', 'Install', 'Set up'] });
+      }, { s });
       await page.waitForTimeout(300);
       const file = path.join(OUT, `usb-${name}-${theme}.png`);
       await page.locator('main.wiz').screenshot({ path: file });
