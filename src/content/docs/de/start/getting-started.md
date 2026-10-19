@@ -27,33 +27,33 @@ Ein neues Panel kannst du einrichten, bevor es an die Wand kommt. Schließe es m
 <div class="pa-steps" role="region" aria-label="Über USB installieren, Schritt für Schritt" tabindex="0">
 <figure>
 <figcaption><span>1</span> Wähle Über USB installieren</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
-<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="330" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
 </figure>
 <figure>
 <figcaption><span>2</span> Schließe das Panel an</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="349" alt="Das USB-Installationsprogramm fordert dich auf, das Panel anzuschließen und Mein Panel finden zu drücken">
-<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="349" alt="Das USB-Installationsprogramm fordert dich auf, das Panel anzuschließen und Mein Panel finden zu drücken">
+<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="375" alt="Das USB-Installationsprogramm fordert dich auf, das Panel anzuschließen und Mein Panel finden zu drücken">
+<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="375" alt="Das USB-Installationsprogramm fordert dich auf, das Panel anzuschließen und Mein Panel finden zu drücken">
 </figure>
 <figure>
 <figcaption><span>3</span> Tippe auf dem Panel auf Zulassen</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="318" alt="Das USB-Installationsprogramm wartet, während du auf dem Bildschirm des Panels auf Zulassen tippst">
-<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="318" alt="Das USB-Installationsprogramm wartet, während du auf dem Bildschirm des Panels auf Zulassen tippst">
+<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="263" alt="Das USB-Installationsprogramm wartet, während du auf dem Bildschirm des Panels auf Zulassen tippst">
+<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="263" alt="Das USB-Installationsprogramm wartet, während du auf dem Bildschirm des Panels auf Zulassen tippst">
 </figure>
 <figure>
 <figcaption><span>4</span> Drücke Installieren</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="349" alt="Das USB-Installationsprogramm ist bereit zur Installation und zeigt eine einzelne Schaltfläche Installieren">
-<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="349" alt="Das USB-Installationsprogramm ist bereit zur Installation und zeigt eine einzelne Schaltfläche Installieren">
+<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="323" alt="Das USB-Installationsprogramm ist bereit zur Installation und zeigt eine einzelne Schaltfläche Installieren">
+<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="323" alt="Das USB-Installationsprogramm ist bereit zur Installation und zeigt eine einzelne Schaltfläche Installieren">
 </figure>
 <figure>
 <figcaption><span>5</span> Verfolge die Installation</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="319" alt="Der Fortschrittsbalken des USB-Installationsprogramms während der Installation der App">
-<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="319" alt="Der Fortschrittsbalken des USB-Installationsprogramms während der Installation der App">
+<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="309" alt="Der Fortschrittsbalken des USB-Installationsprogramms während der Installation der App">
+<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="309" alt="Der Fortschrittsbalken des USB-Installationsprogramms während der Installation der App">
 </figure>
 <figure>
 <figcaption><span>6</span> Fertig</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="262" alt="Das USB-Installationsprogramm bestätigt die Installation und öffnet die Einrichtung des Panels">
-<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="262" alt="Das USB-Installationsprogramm bestätigt die Installation und öffnet die Einrichtung des Panels">
+<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="308" alt="Das USB-Installationsprogramm bestätigt die Installation und öffnet die Einrichtung des Panels">
+<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="308" alt="Das USB-Installationsprogramm bestätigt die Installation und öffnet die Einrichtung des Panels">
 </figure>
 </div>
 
@@ -64,23 +64,23 @@ Wenn das Panel schon an der Wand hängt, braucht Home Assistant nur seine Adress
 <div class="pa-steps" role="region" aria-label="Ein Panel im Netzwerk hinzufügen, Schritt für Schritt" tabindex="0">
 <figure>
 <figcaption><span>1</span> Wähle Panel im Netzwerk hinzufügen</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
-<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="330" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
 </figure>
 <figure>
 <figcaption><span>2</span> Gib die Adresse des Panels an</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="378" alt="Der Schritt Panel hinzufügen mit eingetragener IP-Adresse des Panels">
-<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="378" alt="Der Schritt Panel hinzufügen mit eingetragener IP-Adresse des Panels">
+<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="377" alt="Der Schritt Panel hinzufügen mit eingetragener IP-Adresse des Panels">
+<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="Der Schritt Panel hinzufügen mit eingetragener IP-Adresse des Panels">
 </figure>
 <figure>
 <figcaption><span>3</span> Wähle eine Version</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="305" alt="Der Schritt Version wählen mit der empfohlenen Version oben in der Liste">
-<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="Der Schritt Version wählen mit der empfohlenen Version oben in der Liste">
+<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="Der Schritt Version wählen mit der empfohlenen Version oben in der Liste">
+<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="Der Schritt Version wählen mit der empfohlenen Version oben in der Liste">
 </figure>
 <figure>
 <figcaption><span>4</span> Hinzugefügt</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="Der Schritt Erfolg bestätigt, dass das Panel zu Home Assistant hinzugefügt wurde">
-<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="Der Schritt Erfolg bestätigt, dass das Panel zu Home Assistant hinzugefügt wurde">
+<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="248" alt="Einrichtung dieses Panels abschließen">
+<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="248" alt="Einrichtung dieses Panels abschließen">
 </figure>
 </div>
 
@@ -103,8 +103,8 @@ Home Assistant öffnet anschließend den eigenen Einrichtungsassistenten des Pan
 </figure>
 <figure>
 <figcaption><span>3</span> Schalte den Entitätenfilter ein</figcaption>
-<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="629" alt="Der Assistent empfiehlt den Entitätenfilter für dieses Panel und zeigt die Anzahl der Home Assistant-Entitäten">
-<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="629" alt="Der Assistent empfiehlt den Entitätenfilter für dieses Panel und zeigt die Anzahl der Home Assistant-Entitäten">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="636" alt="Der Assistent empfiehlt den Entitätenfilter für dieses Panel und zeigt die Anzahl der Home Assistant-Entitäten">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="636" alt="Der Assistent empfiehlt den Entitätenfilter für dieses Panel und zeigt die Anzahl der Home Assistant-Entitäten">
 </figure>
 <figure>
 <figcaption><span>4</span> Fast geschafft</figcaption>

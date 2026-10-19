@@ -27,33 +27,33 @@ Puedes configurar un panel nuevo antes de ponerlo en la pared. Conéctalo a tu o
 <div class="pa-steps" role="region" aria-label="Instalación por USB, paso a paso" tabindex="0">
 <figure>
 <figcaption><span>1</span> Elige Instalar por USB</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="El paso Configurar un panel en Home Assistant, con las opciones Añadir un panel de tu red o Instalar por USB en este ordenador">
-<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="El paso Configurar un panel en Home Assistant, con las opciones Añadir un panel de tu red o Instalar por USB en este ordenador">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="330" alt="El paso Configurar un panel en Home Assistant, con las opciones Añadir un panel de tu red o Instalar por USB en este ordenador">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="El paso Configurar un panel en Home Assistant, con las opciones Añadir un panel de tu red o Instalar por USB en este ordenador">
 </figure>
 <figure>
 <figcaption><span>2</span> Conecta el panel</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="349" alt="El instalador por USB pide que conectes el panel y pulses Buscar mi panel">
-<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="349" alt="El instalador por USB pide que conectes el panel y pulses Buscar mi panel">
+<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="375" alt="El instalador por USB pide que conectes el panel y pulses Buscar mi panel">
+<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="375" alt="El instalador por USB pide que conectes el panel y pulses Buscar mi panel">
 </figure>
 <figure>
 <figcaption><span>3</span> Toca Permitir en el panel</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="318" alt="El instalador por USB espera mientras tocas Permitir en la pantalla del panel">
-<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="318" alt="El instalador por USB espera mientras tocas Permitir en la pantalla del panel">
+<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="263" alt="El instalador por USB espera mientras tocas Permitir en la pantalla del panel">
+<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="263" alt="El instalador por USB espera mientras tocas Permitir en la pantalla del panel">
 </figure>
 <figure>
 <figcaption><span>4</span> Pulsa Instalar</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="349" alt="El instalador por USB listo para instalar, con un único botón Instalar">
-<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="349" alt="El instalador por USB listo para instalar, con un único botón Instalar">
+<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="323" alt="El instalador por USB listo para instalar, con un único botón Instalar">
+<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="323" alt="El instalador por USB listo para instalar, con un único botón Instalar">
 </figure>
 <figure>
 <figcaption><span>5</span> Mira cómo se instala</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="319" alt="La barra de progreso del instalador por USB mientras se instala la app">
-<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="319" alt="La barra de progreso del instalador por USB mientras se instala la app">
+<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="309" alt="La barra de progreso del instalador por USB mientras se instala la app">
+<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="309" alt="La barra de progreso del instalador por USB mientras se instala la app">
 </figure>
 <figure>
 <figcaption><span>6</span> Listo</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="262" alt="El instalador por USB confirma la instalación y abre la configuración del panel">
-<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="262" alt="El instalador por USB confirma la instalación y abre la configuración del panel">
+<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="308" alt="El instalador por USB confirma la instalación y abre la configuración del panel">
+<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="308" alt="El instalador por USB confirma la instalación y abre la configuración del panel">
 </figure>
 </div>
 
@@ -64,23 +64,23 @@ Si el panel ya está en la pared, Home Assistant solo necesita su dirección.
 <div class="pa-steps" role="region" aria-label="Añadir un panel de tu red, paso a paso" tabindex="0">
 <figure>
 <figcaption><span>1</span> Elige Añadir un panel de tu red</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="El paso Configurar un panel en Home Assistant, con las opciones Añadir un panel de tu red o Instalar por USB en este ordenador">
-<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="El paso Configurar un panel en Home Assistant, con las opciones Añadir un panel de tu red o Instalar por USB en este ordenador">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="330" alt="El paso Configurar un panel en Home Assistant, con las opciones Añadir un panel de tu red o Instalar por USB en este ordenador">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="El paso Configurar un panel en Home Assistant, con las opciones Añadir un panel de tu red o Instalar por USB en este ordenador">
 </figure>
 <figure>
 <figcaption><span>2</span> Introduce la dirección del panel</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="378" alt="El paso Añadir un panel, con la dirección IP del panel introducida">
-<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="378" alt="El paso Añadir un panel, con la dirección IP del panel introducida">
+<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="377" alt="El paso Añadir un panel, con la dirección IP del panel introducida">
+<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="El paso Añadir un panel, con la dirección IP del panel introducida">
 </figure>
 <figure>
 <figcaption><span>3</span> Elige una versión</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="305" alt="El paso Elige una versión, con la versión recomendada al principio de la lista">
-<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="El paso Elige una versión, con la versión recomendada al principio de la lista">
+<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="El paso Elige una versión, con la versión recomendada al principio de la lista">
+<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="El paso Elige una versión, con la versión recomendada al principio de la lista">
 </figure>
 <figure>
 <figcaption><span>4</span> Añadido</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="El paso de confirmación que indica que el panel se ha añadido a Home Assistant">
-<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="El paso de confirmación que indica que el panel se ha añadido a Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="248" alt="Terminar de configurar este panel">
+<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="248" alt="Terminar de configurar este panel">
 </figure>
 </div>
 
@@ -103,8 +103,8 @@ Home Assistant abre entonces el asistente de configuración del propio panel, qu
 </figure>
 <figure>
 <figcaption><span>3</span> Activa el filtro de entidades</figcaption>
-<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="629" alt="El asistente recomienda el filtro de entidades para este panel y muestra el número de entidades de Home Assistant">
-<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="629" alt="El asistente recomienda el filtro de entidades para este panel y muestra el número de entidades de Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="636" alt="El asistente recomienda el filtro de entidades para este panel y muestra el número de entidades de Home Assistant">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="636" alt="El asistente recomienda el filtro de entidades para este panel y muestra el número de entidades de Home Assistant">
 </figure>
 <figure>
 <figcaption><span>4</span> Ya casi está</figcaption>

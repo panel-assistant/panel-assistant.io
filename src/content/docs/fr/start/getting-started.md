@@ -27,33 +27,33 @@ Un panneau neuf peut être configuré avant même d’être fixé au mur. Branch
 <div class="pa-steps" role="region" aria-label="Installer par USB, étape par étape" tabindex="0">
 <figure>
 <figcaption><span>1</span> Choisissez Installer par USB</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="L’étape Configurer un panneau dans Home Assistant propose Ajouter un panneau de votre réseau ou Installer par USB sur cet ordinateur">
-<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="L’étape Configurer un panneau dans Home Assistant propose Ajouter un panneau de votre réseau ou Installer par USB sur cet ordinateur">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="330" alt="L’étape Configurer un panneau dans Home Assistant propose Ajouter un panneau de votre réseau ou Installer par USB sur cet ordinateur">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="L’étape Configurer un panneau dans Home Assistant propose Ajouter un panneau de votre réseau ou Installer par USB sur cet ordinateur">
 </figure>
 <figure>
 <figcaption><span>2</span> Branchez le panneau</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="349" alt="L’installateur USB vous demande de brancher le panneau et d’appuyer sur Trouver mon panneau">
-<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="349" alt="L’installateur USB vous demande de brancher le panneau et d’appuyer sur Trouver mon panneau">
+<img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="375" alt="L’installateur USB vous demande de brancher le panneau et d’appuyer sur Trouver mon panneau">
+<img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="375" alt="L’installateur USB vous demande de brancher le panneau et d’appuyer sur Trouver mon panneau">
 </figure>
 <figure>
 <figcaption><span>3</span> Appuyez sur Autoriser sur le panneau</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="318" alt="L’installateur USB attend que vous appuyiez sur Autoriser sur l’écran du panneau">
-<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="318" alt="L’installateur USB attend que vous appuyiez sur Autoriser sur l’écran du panneau">
+<img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="263" alt="L’installateur USB attend que vous appuyiez sur Autoriser sur l’écran du panneau">
+<img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="263" alt="L’installateur USB attend que vous appuyiez sur Autoriser sur l’écran du panneau">
 </figure>
 <figure>
 <figcaption><span>4</span> Appuyez sur Installer</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="349" alt="L’installateur USB prêt à lancer l’installation, avec un seul bouton Installer">
-<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="349" alt="L’installateur USB prêt à lancer l’installation, avec un seul bouton Installer">
+<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="323" alt="L’installateur USB prêt à lancer l’installation, avec un seul bouton Installer">
+<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="323" alt="L’installateur USB prêt à lancer l’installation, avec un seul bouton Installer">
 </figure>
 <figure>
 <figcaption><span>5</span> Suivez l’installation</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="319" alt="La barre de progression de l’installateur USB pendant l’installation de l’application">
-<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="319" alt="La barre de progression de l’installateur USB pendant l’installation de l’application">
+<img class="light:sl-hidden" src="/screenshots/usb-progress-dark.png" width="520" height="309" alt="La barre de progression de l’installateur USB pendant l’installation de l’application">
+<img class="dark:sl-hidden" src="/screenshots/usb-progress-light.png" width="520" height="309" alt="La barre de progression de l’installateur USB pendant l’installation de l’application">
 </figure>
 <figure>
 <figcaption><span>6</span> Terminé</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="262" alt="L’installateur USB confirme l’installation et ouvre la configuration du panneau">
-<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="262" alt="L’installateur USB confirme l’installation et ouvre la configuration du panneau">
+<img class="light:sl-hidden" src="/screenshots/usb-done-dark.png" width="520" height="308" alt="L’installateur USB confirme l’installation et ouvre la configuration du panneau">
+<img class="dark:sl-hidden" src="/screenshots/usb-done-light.png" width="520" height="308" alt="L’installateur USB confirme l’installation et ouvre la configuration du panneau">
 </figure>
 </div>
 
@@ -64,23 +64,23 @@ Si le panneau est déjà au mur, Home Assistant n’a besoin que de son adresse.
 <div class="pa-steps" role="region" aria-label="Ajouter un panneau sur votre réseau, étape par étape" tabindex="0">
 <figure>
 <figcaption><span>1</span> Choisissez Ajouter un panneau de votre réseau</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="314" alt="L’étape Configurer un panneau dans Home Assistant propose Ajouter un panneau de votre réseau ou Installer par USB sur cet ordinateur">
-<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="314" alt="L’étape Configurer un panneau dans Home Assistant propose Ajouter un panneau de votre réseau ou Installer par USB sur cet ordinateur">
+<img class="light:sl-hidden" src="/screenshots/ha-menu-dark.png" width="580" height="330" alt="L’étape Configurer un panneau dans Home Assistant propose Ajouter un panneau de votre réseau ou Installer par USB sur cet ordinateur">
+<img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="L’étape Configurer un panneau dans Home Assistant propose Ajouter un panneau de votre réseau ou Installer par USB sur cet ordinateur">
 </figure>
 <figure>
 <figcaption><span>2</span> Indiquez l’adresse du panneau</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="378" alt="L’étape Ajouter un panneau, avec l’adresse IP du panneau renseignée">
-<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="378" alt="L’étape Ajouter un panneau, avec l’adresse IP du panneau renseignée">
+<img class="light:sl-hidden" src="/screenshots/ha-address-dark.png" width="580" height="377" alt="L’étape Ajouter un panneau, avec l’adresse IP du panneau renseignée">
+<img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="L’étape Ajouter un panneau, avec l’adresse IP du panneau renseignée">
 </figure>
 <figure>
 <figcaption><span>3</span> Choisissez une version</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="305" alt="L’étape Choisir une version, avec la version recommandée en tête de liste">
-<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="305" alt="L’étape Choisir une version, avec la version recommandée en tête de liste">
+<img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="L’étape Choisir une version, avec la version recommandée en tête de liste">
+<img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="L’étape Choisir une version, avec la version recommandée en tête de liste">
 </figure>
 <figure>
 <figcaption><span>4</span> Il est ajouté</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="210" alt="L’étape Réussite confirme que le panneau a été ajouté à Home Assistant">
-<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="210" alt="L’étape Réussite confirme que le panneau a été ajouté à Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="248" alt="Terminer la configuration de ce panneau">
+<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="248" alt="Terminer la configuration de ce panneau">
 </figure>
 </div>
 
@@ -103,8 +103,8 @@ Home Assistant ouvre ensuite l’assistant de configuration du panneau, qui pose
 </figure>
 <figure>
 <figcaption><span>3</span> Activez le filtre d’entités</figcaption>
-<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="629" alt="L’assistant recommande le filtre d’entités pour ce panneau et affiche le nombre d’entités Home Assistant">
-<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="629" alt="L’assistant recommande le filtre d’entités pour ce panneau et affiche le nombre d’entités Home Assistant">
+<img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="636" alt="L’assistant recommande le filtre d’entités pour ce panneau et affiche le nombre d’entités Home Assistant">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="636" alt="L’assistant recommande le filtre d’entités pour ce panneau et affiche le nombre d’entités Home Assistant">
 </figure>
 <figure>
 <figcaption><span>4</span> Presque terminé</figcaption>
