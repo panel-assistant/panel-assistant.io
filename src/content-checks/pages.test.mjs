@@ -107,6 +107,14 @@ test('the migration page and the 0.1.0 section give the old-app route in order',
   }
 });
 
+test('the page the 0.9 panel notice links names that notice and leads on to 1.0', () => {
+  // The 0.9.8 to 0.9.11 panel apps show "Panel Assistant is required" with panel-assistant.io/go/migration.
+  const page = html('/home-assistant/migration/');
+  assert.match(page, /<title>Panel Assistant is required/);
+  assert.ok(!text('/home-assistant/migration/').includes('After the 0.9.8 update'));
+  assert.match(content('/home-assistant/migration/'), /href="\/manage\/upgrade-to-1-0\/"/);
+});
+
 test('no prepare-a-panel page asks for a fixed address, and the English page says a moved panel is followed', () => {
   const pages = localized('/install/prepare-a-panel/');
   assert.ok(pages.length > 1);
