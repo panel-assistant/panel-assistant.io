@@ -26,6 +26,8 @@ function shellyVersions(track) {
     const version = line.split('|')[1];
     versions.set(version, (versions.get(version) ?? 0) + 1);
   }
+  const notes = JSON.parse(read(join(source, 'shelly-release-notes.json')));
+  for (const version of Object.keys(notes)) if (!versions.has(version)) versions.set(version, 0);
   return versions;
 }
 
@@ -57,8 +59,13 @@ test('built catalogue exposes every source build under each documented model', (
         objects,
         `${model} ${version} lost objects`,
       );
-      assert.match(page, /Full availability history/);
-      assert.match(page, /Archive:/);
+      if (objects) {
+        assert.match(page, /Full availability history/);
+        assert.match(page, /Archive:/);
+      } else {
+        assert.match(page, /No firmware package has been indexed/);
+        assert.doesNotMatch(page, /Original vendor URL/);
+      }
       pages++;
     }
   }
@@ -88,7 +95,8 @@ test('built catalogue compares download sizes and observed availability dates', 
   const catalogue = read(join(dist, 'index.html'));
   assert.equal((catalogue.match(/<table>/g) ?? []).length, models.length + 7);
   const downloads = models.reduce(
-    (sum, [, versions]) => sum + [...versions.values()].reduce((count, value) => count + value, 0),
+    (sum, [, versions]) =>
+      sum + [...versions.values()].reduce((count, value) => count + Math.max(1, value), 0),
     0,
   );
   assert.equal((catalogue.match(/<tr>/g) ?? []).length, downloads + models.length + 14);
@@ -175,5 +183,39 @@ test('Meta retail models expose build metadata, original vendor URLs and archive
     assert.doesNotMatch(page, /No public download URL or confirmed Internet Archive capture/);
     assert.match(page, /not a cross-model installation test/);
     assert.doesNotMatch(page, /drive\.google|gdrive:|access_token/);
+  }
+});
+
+test('every Shelly release displays its original summary and pinned vendor and confirmed archive links', () => {
+  const notes = JSON.parse(read(join(source, 'shelly-release-notes.json')));
+  const hardware = read(join(root, 'dist/hardware/panels/shelly/index.html'));
+  const catalogue = read(join(dist, 'index.html'));
+  assert.ok(Object.keys(notes).length >= 27);
+  for (const [version, note] of Object.entries(notes)) {
+    const page = `https://github.com/ShellyGroup/Wall-Display-Changelog/blob/${note.commit}/README.md`;
+    const anchor = `#${version.replaceAll('.', '')}`;
+    for (const [model] of models.filter(([name]) => name.startsWith('shelly-'))) {
+      const versionHtml = read(join(dist, model, slug(version), 'index.html'));
+      const modelHtml = read(join(dist, model, 'index.html'));
+      for (const html of [versionHtml, modelHtml, catalogue, hardware]) {
+        assert.ok(html.includes(note.summary), `${model} ${version} summary missing`);
+        assert.ok(
+          html.includes(`href="${page}${anchor}"`),
+          `${model} ${version} vendor permalink missing`,
+        );
+        if (note.wayback_ts) {
+          assert.ok(
+            html.includes(`href="https://web.archive.org/web/${note.wayback_ts}/${page}${anchor}"`),
+          );
+        } else {
+          assert.match(html, /Archived copy pending/);
+          assert.ok(!html.includes(`web/undefined/${page}`));
+        }
+      }
+      const raw = `https://raw.githubusercontent.com/ShellyGroup/Wall-Display-Changelog/${note.commit}/README.md`;
+      assert.ok(versionHtml.includes(`href="${raw}"`));
+      if (note.raw_wayback_ts) assert.ok(versionHtml.includes(`web/${note.raw_wayback_ts}/${raw}`));
+      else assert.match(versionHtml, /Source file capture pending/);
+    }
   }
 });
