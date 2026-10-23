@@ -167,27 +167,51 @@ export function confidence(data) {
  */
 export function confidenceChecklist(data) {
   const have = new Set(Array.isArray(data.evidence) ? data.evidence : []);
-  const item = (state, text) => ({ state, text });
-  const list = [item(have.has('bench') ? 'hit' : 'miss', 'Inspected on a unit we run')];
+  const item = (state, text, key) => ({ state, text, key });
+  const list = [
+    item(have.has('bench') ? 'hit' : 'miss', 'Inspected on a unit we run', 'confidence.inspected'),
+  ];
   if (have.has('bench')) {
     list.push(
       have.has('open')
-        ? item('hit', "Maker's firmware fully open")
+        ? item('hit', "Maker's firmware fully open", 'confidence.fully_open')
         : have.has('mostly-open')
-          ? item('part', "Maker's firmware mostly open")
-          : item('miss', "Maker's firmware restricts access"),
+          ? item('part', "Maker's firmware mostly open", 'confidence.mostly_open')
+          : item('miss', "Maker's firmware restricts access", 'confidence.restricted'),
     );
   }
   list.push(
-    item(have.has('firmware') ? 'hit' : 'miss', "Maker's firmware examined"),
-    item(have.has('documented') ? 'hit' : 'miss', 'Documented by the maker or published specs'),
+    item(have.has('firmware') ? 'hit' : 'miss', "Maker's firmware examined", 'confidence.firmware'),
+    item(
+      have.has('documented') ? 'hit' : 'miss',
+      'Documented by the maker or published specs',
+      'confidence.documented',
+    ),
   );
   if (!have.has('bench')) {
-    list.push(item(have.has('platform') ? 'hit' : 'miss', 'Same platform as a panel we inspected'));
+    list.push(
+      item(
+        have.has('platform') ? 'hit' : 'miss',
+        'Same platform as a panel we inspected',
+        'confidence.platform',
+      ),
+    );
   }
-  list.push(item(have.has('owners') ? 'hit' : 'miss', 'An owner runs Panel Assistant on one'));
+  list.push(
+    item(
+      have.has('owners') ? 'hit' : 'miss',
+      'An owner runs Panel Assistant on one',
+      'confidence.owners',
+    ),
+  );
   if (!have.has('bench') && parseFloat(String(data.android)) < OLD_ANDROID) {
-    list.push(item('miss', `Android ${data.android}: older than 10, and not inspected`));
+    list.push(
+      item(
+        'miss',
+        `Android ${data.android}: older than 10, and not inspected`,
+        'confidence.older_android',
+      ),
+    );
   }
   return list;
 }

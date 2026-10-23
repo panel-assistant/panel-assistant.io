@@ -7,6 +7,10 @@ import { getCollection } from 'astro:content';
 import { catalogueGroups, confidence } from '../hardware/catalogue.mjs';
 import ConfidenceBar from './ConfidenceBar.astro';
 
+const t = Astro.locals.t;
+const { locale } = Astro.locals.starlightRoute;
+const prefix = locale ? `/${locale}` : '';
+
 const runs = (data: Record<string, unknown>) =>
   !data.panelIndex && !(parseFloat(String(data.android ?? '99')) < 8);
 
@@ -26,7 +30,7 @@ const groups: { brand: string; entries: Listed[] }[] = catalogueGroups(pages)
       .map(
         (e: { label: string; slug: string; anchor?: string; data: Record<string, unknown> }) => ({
           label: e.label,
-          href: `/${e.slug}/${e.anchor ? `#${e.anchor}` : ''}`,
+          href: `${prefix}/${e.slug}/${e.anchor ? `#${e.anchor}` : ''}`,
           data: e.data,
         }),
       ),
@@ -37,9 +41,11 @@ const models = groups.reduce((n: number, g: { entries: unknown[] }) => n + g.ent
 
 <p class="coverage">
   <strong>
-    {models} named panels from {groups.length} brands
+    {t('panels.count')
+      .replace('{models}', String(models))
+      .replace('{brands}', String(groups.length))}
   </strong>{' '}
-  have their own hardware page, and other compatible Android panels start on the Generic profile.
+  {t('panels.coverage')}
 </p>
 <div class="brands not-content" data-pagefind-ignore>
   {groups.map((g) => (

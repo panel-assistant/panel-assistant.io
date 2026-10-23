@@ -1,14 +1,14 @@
 ---
 title: Connecter un panneau
 description: Afficher votre tableau de bord sur le panneau et comprendre comment le matériel du panneau apparaît dans Home Assistant.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 Un panneau ajouté à Home Assistant s’y connecte de deux façons. L’une affiche un tableau de bord à l’écran. L’autre intègre le matériel du panneau sous forme d’entités.
 
 ## Le tableau de bord à l’écran
 
-Ouvrez la page d’état du panneau dans votre navigateur, à son adresse sur le port 8888, et choisissez le tableau de bord que vous souhaitez afficher au mur. Le panneau charge lui-même ce tableau de bord. Lorsque le [filtrage des entités est activé](/fr/manage/performance/), il apprend quelles entités le tableau de bord utilise et ne demande que celles-ci à Home Assistant. La page consacrée au [moteur de rendu intégré](/fr/manage/built-in-renderer/) détaille le chargement du tableau de bord et le comportement du panneau si celui-ci ne se charge pas.
+Vous choisissez le tableau de bord dans l’assistant de configuration du panneau lors de son ajout. Pour le changer ensuite, ouvrez la page d’état du panneau dans votre navigateur, à son adresse sur le port 8888, et choisissez-en un autre. Le panneau charge lui-même ce tableau de bord. Lorsque le [filtrage des entités est activé](/fr/manage/performance/), il apprend quelles entités le tableau de bord utilise et ne demande que celles-ci à Home Assistant. La page consacrée au [moteur de rendu intégré](/fr/manage/built-in-renderer/) détaille le chargement du tableau de bord et le comportement du panneau si celui-ci ne se charge pas.
 
 ## Le matériel du panneau dans Home Assistant
 

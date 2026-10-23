@@ -1,7 +1,7 @@
 ---
 title: Premiers pas
 description: En quelques minutes, passez d’un panneau mural Android non configuré à votre tableau de bord Home Assistant, avec Home Assistant pour vous guider à chaque étape.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 Si vous avez déjà configuré un panneau mural ou un kiosque, vous vous souvenez sans doute du déroulement : installer des applications manuellement, chercher un moteur de navigateur capable d’afficher un tableau de bord, tâtonner dans les réglages et ne jamais vraiment faire confiance au prochain redémarrage. Configurer un panneau avec Panel Assistant sera une agréable surprise. Vous pouvez terminer en quelques minutes et, même si le panneau est au mur, vous n’aurez pas à vous lever de votre chaise. Bon, peut-être une fois ;-)
@@ -13,12 +13,12 @@ La première heure est la partie difficile de la mise en route de tout panneau. 
 Ajoutez Panel Assistant via HACS et redémarrez Home Assistant. C’est la seule chose que vous installez à la main. Ensuite, Home Assistant vous guide. Voir [Installer l’intégration](/fr/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 is in public preview. Until it is released, HACS installs 0.9.0. To install the preview instead, open **Panel Assistant** in HACS, turn on **Show beta versions** and download the newest 1.0 preview. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/fr/manage/upgrade-to-1-0/) explains what changes.
+Panel Assistant 1.0 est en préversion publique. Jusqu’à sa sortie, HACS installe la version 0.9.0. Pour installer la préversion à la place, ouvrez **Panel Assistant** dans HACS, activez **Afficher les versions bêta** et téléchargez la préversion 1.0 la plus récente. Un panneau exécutant l’application 1.0 ne peut pas revenir à la version 0.9 ; [Passer à la version 1.0](/fr/manage/upgrade-to-1-0/) explique les changements.
 :::
 
 ## 2. Activer le débogage sur le panneau
 
-Ouvrez les options pour les développeurs sur le panneau et activez ADB sur le réseau, sur le port TCP 5555, ou le débogage USB si vous branchez le panneau par câble. C’est ce qui permet à Home Assistant de procéder à l’installation pour vous. Les [pages consacrées au matériel](/fr/hardware/) indiquent où se trouve l’option sur chaque modèle, et [Préparer le panneau](/fr/install/prepare-a-panel/) fournit les détails.
+Ouvrez les options pour les développeurs sur le panneau : sur la plupart des panneaux, ouvrez **Paramètres**, puis **À propos**, et appuyez sept fois sur **Numéro de build**. Activez ensuite le **débogage USB** si vous branchez le panneau par câble, ou **ADB sur le réseau, sur le port TCP 5555** pour la méthode réseau. Tous les panneaux ne disposent pas d’un commutateur ADB réseau ; chaque [page consacrée au matériel](/fr/hardware/) indique si le vôtre en possède un et où il se trouve. S’il n’en a pas, utilisez la méthode USB. [Préparer le panneau](/fr/install/prepare-a-panel/) fournit les détails.
 
 ## 3. Ajouter le panneau
 
@@ -26,7 +26,7 @@ Dans Home Assistant, allez dans **Paramètres**, **Appareils et services**, **Aj
 
 ### Branché à votre ordinateur
 
-Un panneau neuf peut être configuré avant même d’être fixé au mur. Branchez-le à votre ordinateur avec un câble USB et installez directement depuis votre navigateur. Il vous faut Chrome ou Edge pour cela.
+Un panneau neuf peut être configuré avant même d’être fixé au mur. Branchez-le à votre ordinateur avec un câble USB et installez directement depuis votre navigateur. Il vous faut Chrome ou Edge pour cela. Après avoir choisi **Installer par USB sur cet ordinateur**, sélectionnez **Ouvrir l’installateur USB**, conservez la version recommandée et appuyez sur **Continuer** ; l’installateur s’ouvre dans une nouvelle fenêtre. Le panneau a toujours besoin du Wi-Fi pour terminer sa configuration : connectez-le à votre réseau depuis sa propre application Paramètres, avant ou après l’installation.
 
 <div class="pa-steps" role="region" aria-label="Installer par USB, étape par étape" tabindex="0">
 <figure>
@@ -35,12 +35,12 @@ Un panneau neuf peut être configuré avant même d’être fixé au mur. Branch
 <img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="L’étape Configurer un panneau dans Home Assistant propose Ajouter un panneau de votre réseau ou Installer par USB sur cet ordinateur">
 </figure>
 <figure>
-<figcaption><span>2</span> Branchez le panneau</figcaption>
+<figcaption><span>2</span> Branchez le panneau, appuyez sur Trouver mon panneau et choisissez le panneau dans la liste du navigateur</figcaption>
 <img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="375" alt="L’installateur USB vous demande de brancher le panneau et d’appuyer sur Trouver mon panneau">
 <img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="375" alt="L’installateur USB vous demande de brancher le panneau et d’appuyer sur Trouver mon panneau">
 </figure>
 <figure>
-<figcaption><span>3</span> Appuyez sur Autoriser sur le panneau</figcaption>
+<figcaption><span>3</span> Autorisez le débogage sur le panneau si cela vous est demandé</figcaption>
 <img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="263" alt="L’installateur USB attend que vous appuyiez sur Autoriser sur l’écran du panneau">
 <img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="263" alt="L’installateur USB attend que vous appuyiez sur Autoriser sur l’écran du panneau">
 </figure>
@@ -82,17 +82,26 @@ Si le panneau est déjà au mur, Home Assistant n’a besoin que de son adresse.
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="L’étape Choisir une version, avec la version recommandée en tête de liste">
 </figure>
 <figure>
-<figcaption><span>4</span> Il est ajouté</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="248" alt="Terminer la configuration de ce panneau">
-<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="248" alt="Terminer la configuration de ce panneau">
+<figcaption><span>4</span> Autorisez le débogage sur le panneau s’il le demande</figcaption>
+<img class="light:sl-hidden" src="/screenshots/ha-authorize-dark.png" width="580" height="354" alt="Home Assistant attend que vous cochiez Toujours autoriser depuis cet ordinateur et appuyiez sur Autoriser sur le panneau ; il poursuit automatiquement">
+<img class="dark:sl-hidden" src="/screenshots/ha-authorize-light.png" width="580" height="354" alt="Home Assistant attend que vous cochiez Toujours autoriser depuis cet ordinateur et appuyiez sur Autoriser sur le panneau ; il poursuit automatiquement">
+</figure>
+<figure>
+<figcaption><span>5</span> Ouvrez la page de configuration du panneau</figcaption>
+<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="248" alt="Home Assistant propose la page de configuration du panneau et vous demande de revenir sélectionner Terminé après l’avoir complétée">
+<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="248" alt="Home Assistant propose la page de configuration du panneau et vous demande de revenir sélectionner Terminé après l’avoir complétée">
 </figure>
 </div>
+
+Si le panneau demande s’il faut autoriser le débogage, cochez **Toujours autoriser depuis cet ordinateur** et appuyez sur **Autoriser** sur le panneau ; Home Assistant poursuit tout seul. Confirmez ensuite l’installation.
 
 Dans les deux cas, l’assistant se charge de la partie compliquée. Il vérifie ce qui est déjà sur le panneau, installe la version actuelle de l’application du panneau, la démarre et confirme qu’elle fonctionne correctement. Un panneau sur lequel l’application fonctionne déjà est pris en charge sans réinstallation. Le panneau reconnaît son modèle et charge le profil matériel correspondant : son écran, ses boutons, ses LED et ses capteurs arrivent donc dans Home Assistant prêts à l’emploi. Voir [Ajouter un panneau](/fr/install/installing-ha-paneld/).
 
 ## 4. Terminer dans l’assistant de configuration du panneau
 
-Home Assistant ouvre ensuite l’assistant de configuration du panneau, qui pose quelques questions rapides, notamment sur le nom du panneau et le tableau de bord à afficher au mur. Lorsque le filtrage des entités est activé, le panneau ne charge que les entités utilisées par ce tableau de bord, ce qui lui permet de rester rapide. Voir [Connecter un panneau](/fr/home-assistant/connect-a-panel/).
+Vient ensuite l’assistant de configuration du panneau. Il est hébergé par le panneau et s’ouvre dans le navigateur de votre ordinateur, pas sur l’écran du panneau. Après une installation réseau, Home Assistant affiche **Terminer la configuration de ce panneau** : ouvrez la page de configuration du panneau, terminez les étapes, puis revenez dans Home Assistant et sélectionnez **Terminé**. Après une installation USB, la fenêtre de l’installateur passe directement à l’assistant. Comme le panneau l’héberge, il ne se charge que dans un navigateur sur le même réseau que le panneau.
+
+L’assistant demande un nom pour le panneau, le connecte à Home Assistant et demande quel tableau de bord afficher et dans quelle pièce se trouve le panneau. Le panneau se connecte avec le compte Home Assistant utilisé pour cette connexion : si votre navigateur est connecté avec votre compte, le panneau peut donc utiliser le vôtre ; pour lui réserver un compte distinct, connectez-vous plutôt avec ce compte. Lorsque le filtrage des entités est activé, le panneau ne charge que les entités utilisées par ce tableau de bord, ce qui lui permet de rester rapide. Voir [Connecter un panneau](/fr/home-assistant/connect-a-panel/).
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="L’assistant de configuration du panneau, étape par étape" tabindex="0">
 <figure>
@@ -101,22 +110,27 @@ Home Assistant ouvre ensuite l’assistant de configuration du panneau, qui pose
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-name-light.png" width="524" height="702" alt="L’assistant de configuration du panneau demande l’ID du panneau et son nom convivial, avec un aperçu des noms d’entités que Home Assistant utilisera">
 </figure>
 <figure>
-<figcaption><span>2</span> Choisissez le tableau de bord et la pièce</figcaption>
+<figcaption><span>2</span> Connectez-vous à Home Assistant</figcaption>
+<img class="light:sl-hidden" src="/screenshots/panel-setup-sign-in-dark.png" width="524" height="688" alt="L’assistant propose de se connecter depuis ce navigateur ou sur le panneau, avec le compte Home Assistant que le panneau doit utiliser">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-sign-in-light.png" width="524" height="688" alt="L’assistant propose de se connecter depuis ce navigateur ou sur le panneau, avec le compte Home Assistant que le panneau doit utiliser">
+</figure>
+<figure>
+<figcaption><span>3</span> Choisissez le tableau de bord et la pièce</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-dashboard-dark.png" width="524" height="485" alt="L’assistant avec un tableau de bord et une pièce Home Assistant sélectionnés pour le panneau">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-dashboard-light.png" width="524" height="485" alt="L’assistant avec un tableau de bord et une pièce Home Assistant sélectionnés pour le panneau">
 </figure>
 <figure>
-<figcaption><span>3</span> Activez le filtre d’entités</figcaption>
+<figcaption><span>4</span> Activez le filtre d’entités si cela vous est demandé</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="636" alt="L’assistant recommande le filtre d’entités pour ce panneau et affiche le nombre d’entités Home Assistant">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="636" alt="L’assistant recommande le filtre d’entités pour ce panneau et affiche le nombre d’entités Home Assistant">
 </figure>
 <figure>
-<figcaption><span>4</span> Presque terminé</figcaption>
+<figcaption><span>5</span> Presque terminé</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-almost-there-dark.png" width="524" height="339" alt="L’assistant attend pendant que le panneau constitue son ensemble d’entités filtrées et charge le tableau de bord">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-almost-there-light.png" width="524" height="339" alt="L’assistant attend pendant que le panneau constitue son ensemble d’entités filtrées et charge le tableau de bord">
 </figure>
 <figure>
-<figcaption><span>5</span> Tout est prêt</figcaption>
+<figcaption><span>6</span> Tout est prêt</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-done-dark.png" width="524" height="526" alt="L’assistant confirme que le panneau est configuré et affiche le tableau de bord">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-done-light.png" width="524" height="526" alt="L’assistant confirme que le panneau est configuré et affiche le tableau de bord">
 </figure>

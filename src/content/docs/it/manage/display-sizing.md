@@ -1,7 +1,7 @@
 ---
 title: Dimensionamento del display
 description: Adattare le dimensioni di una plancia Home Assistant su un pannello al suo aspetto in un browser desktop, regolando densità e dimensione del testo.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 Una plancia Home Assistant progettata in un browser desktop viene spesso visualizzata con dimensioni errate su un pannello Android a parete: schede troppo grandi con bordi tagliati, oppure troppo piccole. Un telefono di solito mantiene dimensioni sostanzialmente coerenti con il desktop, ma spesso i pannelli no, perché i produttori impostano una densità di sistema e una scala del carattere poco adatte al display fisico. L'app del pannello offre due controlli, **densità (DPI)** e **dimensione del testo (scala del carattere)**, in **Installa**, poi **Dimensionamento del display**, per riallineare la disposizione e il testo. Solitamente servono entrambi.
@@ -18,7 +18,9 @@ La scheda **Dimensionamento del display** nella scheda **Installa** del pannello
 Questo richiede un metodo di accesso privilegiato approvato: normalmente il `su` del produttore o l'[helper root](https://github.com/panel-assistant/android/blob/main/helper/README.md). Anche un pannello compatibile senza root, il cui accesso avanzato facoltativo sia già stato approvato sul pannello, può effettuare queste precise modifiche al display. Quando nessun metodo supportato è pronto, la scheda rimane visibile ma bloccata.
 :::
 
-Per regolarlo, apri la stessa plancia in un browser desktop come riferimento. Riduci la densità finché la disposizione corrisponde (entrano più schede), poi ritocca la dimensione del testo finché anche il testo corrisponde.
+Per regolarlo, apri la stessa plancia in un browser desktop come riferimento. Riduci la densità finché la disposizione corrisponde (entrano più schede), poi ritocca la dimensione del testo finché anche il testo corrisponde. I valori adatti dipendono dall’installazione oltre che dal modello: dalla risoluzione del pannello, dalla distanza a cui si trovano le persone e da come è progettata la plancia.
+
+Alcuni modelli supportati includono una densità consigliata e, nella maggior parte di questi casi, anche una dimensione del testo. Quando Panel Assistant configura un pannello di questo tipo senza un metodo di accesso privilegiato, applica questi valori una sola volta tramite la connessione ADB; rimuovendo l’app tramite Panel Assistant vengono ripristinati i valori precedenti.
 
 ## I due controlli
 

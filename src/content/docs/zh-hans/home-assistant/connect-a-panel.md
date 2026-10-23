@@ -1,14 +1,14 @@
 ---
 title: 连接面板
 description: 将仪表盘显示在面板上，以及面板自身的硬件如何出现在 Home Assistant 中。
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 已添加到 Home Assistant 的面板通过两种方式与它连接。一种将仪表盘显示在屏幕上，另一种将面板自身的硬件作为实体接入。
 
 ## 屏幕上的仪表盘
 
-在浏览器中打开面板地址的 8888 端口上的状态页面，并选择你希望显示在墙上的仪表盘。面板会自行加载该仪表盘。[启用实体筛选](/zh-hans/manage/performance/)后，面板会了解仪表盘使用哪些实体，并只向 Home Assistant 请求这些实体。仪表盘加载方式，以及加载失败时面板的处理方式，详见 [内置渲染器](/zh-hans/manage/built-in-renderer/)页面。
+添加面板时，你会在面板的设置向导中选择仪表盘。以后如需更改，请在浏览器中打开面板地址的 8888 端口上的状态页面，并选择另一个仪表盘。面板会自行加载该仪表盘。[启用实体筛选](/zh-hans/manage/performance/)后，面板会了解仪表盘使用哪些实体，并只向 Home Assistant 请求这些实体。仪表盘加载方式，以及加载失败时面板的处理方式，详见 [内置渲染器](/zh-hans/manage/built-in-renderer/)页面。
 
 ## Home Assistant 中的面板硬件
 

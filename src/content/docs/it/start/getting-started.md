@@ -1,7 +1,7 @@
 ---
 title: Primi passi
 description: Da un pannello Android a parete non configurato alla tua plancia di Home Assistant in pochi minuti, con Home Assistant che ti guida a ogni passaggio.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 Se hai già configurato un pannello a parete o un kiosk, probabilmente ricordi com’è andata: installare app manualmente, cercare un motore del browser capace di mostrare una plancia, andare a tentativi con le impostazioni e non fidarti mai del tutto del prossimo riavvio. Configurare un pannello con Panel Assistant sarà una piacevole sorpresa. Puoi finire in pochi minuti e, anche se il pannello è già sulla parete, non dovrai alzarti dalla sedia. Va bene, forse una volta ;-)
@@ -13,12 +13,12 @@ La parte difficile di qualsiasi pannello è la prima ora. Panel Assistant se ne 
 Aggiungi Panel Assistant tramite HACS e riavvia Home Assistant. È l’unica cosa che installi a mano. Da qui in poi ti guida Home Assistant. Vedi [Installa l’integrazione](/it/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 is in public preview. Until it is released, HACS installs 0.9.0. To install the preview instead, open **Panel Assistant** in HACS, turn on **Show beta versions** and download the newest 1.0 preview. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/it/manage/upgrade-to-1-0/) explains what changes.
+Panel Assistant 1.0 è in anteprima pubblica. Fino al rilascio, HACS installa la versione 0.9.0. Per installare invece l’anteprima, apri **Panel Assistant** in HACS, attiva **Mostra versioni beta** e scarica l’anteprima 1.0 più recente. Un pannello con l’app 1.0 non può tornare alla versione 0.9; [passare alla versione 1.0](/it/manage/upgrade-to-1-0/) spiega cosa cambia.
 :::
 
 ## 2. Attiva il debug sul pannello
 
-Apri le opzioni sviluppatore sul pannello e attiva ADB di rete sulla porta TCP 5555, oppure il debug USB se colleghi il pannello via cavo. È questo che consente a Home Assistant di eseguire l'installazione per te. Le [pagine hardware](/it/hardware/) mostrano dove si trova l'interruttore su ciascun modello e [Prepara il pannello](/it/install/prepare-a-panel/) fornisce i dettagli.
+Apri le opzioni sviluppatore sul pannello: sulla maggior parte dei pannelli, apri **Impostazioni**, poi **Informazioni** e tocca **Numero build** sette volte. Quindi attiva il **debug USB** se colleghi il pannello via cavo, oppure **ADB di rete sulla porta TCP 5555** per l’installazione via rete. Non tutti i pannelli hanno un interruttore per ADB di rete; ogni [pagina hardware](/it/hardware/) indica se è presente e dove si trova e, se non c’è, usa l’installazione via USB. [Prepara il pannello](/it/install/prepare-a-panel/) fornisce i dettagli.
 
 ## 3. Aggiungi il pannello
 
@@ -26,7 +26,7 @@ In Home Assistant, vai su **Impostazioni**, **Dispositivi e servizi**, **Aggiung
 
 ### Collegato al computer
 
-Puoi configurare un pannello nuovo prima ancora di montarlo sulla parete. Collegalo al computer con un cavo USB e installa direttamente dal browser. Per farlo serve Chrome o Edge.
+Puoi configurare un pannello nuovo prima ancora di montarlo sulla parete. Collegalo al computer con un cavo USB e installa direttamente dal browser. Per farlo serve Chrome o Edge. Dopo aver scelto **Installa tramite USB su questo computer**, seleziona **Apri il programma di installazione USB**, mantieni la versione consigliata e premi **Continua**; il programma di installazione si apre in una nuova finestra. Per completare la configurazione il pannello ha comunque bisogno del Wi-Fi: collegalo alla tua rete nella sua app Impostazioni, prima o dopo l’installazione.
 
 <div class="pa-steps" role="region" aria-label="Installazione tramite USB, passo dopo passo" tabindex="0">
 <figure>
@@ -35,12 +35,12 @@ Puoi configurare un pannello nuovo prima ancora di montarlo sulla parete. Colleg
 <img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="Il passaggio Configura un pannello in Home Assistant, con le opzioni Aggiungi un pannello della tua rete o Installa tramite USB su questo computer">
 </figure>
 <figure>
-<figcaption><span>2</span> Collega il pannello</figcaption>
+<figcaption><span>2</span> Collega il pannello, premi Trova il mio pannello e scegli il pannello nell’elenco del browser</figcaption>
 <img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="375" alt="Il programma di installazione USB chiede di collegare il pannello e premere Trova il mio pannello">
 <img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="375" alt="Il programma di installazione USB chiede di collegare il pannello e premere Trova il mio pannello">
 </figure>
 <figure>
-<figcaption><span>3</span> Tocca Consenti sul pannello</figcaption>
+<figcaption><span>3</span> Consenti il debug sul pannello se richiesto</figcaption>
 <img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="263" alt="Il programma di installazione USB attende mentre tocchi Consenti sullo schermo del pannello">
 <img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="263" alt="Il programma di installazione USB attende mentre tocchi Consenti sullo schermo del pannello">
 </figure>
@@ -82,17 +82,26 @@ Se il pannello è già sulla parete, a Home Assistant basta il suo indirizzo.
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="Il passaggio Scegli una versione, con la versione consigliata in cima all’elenco">
 </figure>
 <figure>
-<figcaption><span>4</span> È aggiunto</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="248" alt="Completa la configurazione di questo pannello">
-<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="248" alt="Completa la configurazione di questo pannello">
+<figcaption><span>4</span> Consenti il debug sul pannello se lo richiede</figcaption>
+<img class="light:sl-hidden" src="/screenshots/ha-authorize-dark.png" width="580" height="354" alt="Home Assistant attende che tu selezioni Consenti sempre da questo computer e tocchi Consenti sul pannello; poi prosegue automaticamente">
+<img class="dark:sl-hidden" src="/screenshots/ha-authorize-light.png" width="580" height="354" alt="Home Assistant attende che tu selezioni Consenti sempre da questo computer e tocchi Consenti sul pannello; poi prosegue automaticamente">
+</figure>
+<figure>
+<figcaption><span>5</span> Apri la pagina di configurazione del pannello</figcaption>
+<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="248" alt="Home Assistant propone la pagina di configurazione del pannello e chiede di tornare e selezionare Fatto dopo averla completata">
+<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="248" alt="Home Assistant propone la pagina di configurazione del pannello e chiede di tornare e selezionare Fatto dopo averla completata">
 </figure>
 </div>
+
+Se il pannello chiede se consentire il debug, seleziona **Consenti sempre da questo computer** e tocca **Consenti** sul pannello; Home Assistant prosegue da solo. Poi conferma l’installazione.
 
 In entrambi i casi, la procedura guidata si occupa della parte complicata. Controlla cosa c’è già sul pannello, installa la versione corrente dell’app del pannello, la avvia e ne verifica il corretto funzionamento. Un pannello su cui l’app è già in esecuzione viene adottato, senza reinstallarla. Il pannello riconosce il proprio modello e carica il profilo hardware corrispondente, così schermo, pulsanti, LED e sensori arrivano in Home Assistant pronti all’uso. Vedi [Aggiungi un pannello](/it/install/installing-ha-paneld/).
 
 ## 4. Completa la procedura guidata del pannello
 
-Home Assistant apre quindi la procedura guidata di configurazione del pannello, che pone alcune brevi domande, tra cui il nome del pannello e la plancia da usare sulla parete. Con il filtro delle entità abilitato, il pannello carica solo le entità usate da quella plancia, ed è questo che lo mantiene veloce. Vedi [Connetti un pannello](/it/home-assistant/connect-a-panel/).
+Poi si passa alla procedura guidata di configurazione del pannello. È fornita dal pannello e si apre nel browser sul computer, non sullo schermo del pannello. Dopo un’installazione via rete, Home Assistant mostra **Completa la configurazione di questo pannello**: apri la pagina di configurazione del pannello, completa i passaggi, poi torna a Home Assistant e seleziona **Fatto**. Dopo un’installazione USB, la finestra del programma di installazione passa direttamente alla procedura guidata. Essendo fornita dal pannello, si carica solo in un browser sulla sua stessa rete.
+
+La procedura guidata chiede un nome per il pannello, lo fa accedere a Home Assistant e chiede quale plancia mostrare e in quale area si trovi il pannello. Il pannello si connette con l’account Home Assistant con cui accedi, quindi se il browser è connesso con il tuo account, anche il pannello potrebbe connettersi con quello; per usare un account dedicato al pannello, accedi invece con quell’account. Con il filtro delle entità abilitato, il pannello carica solo le entità usate da quella plancia, ed è questo che lo mantiene veloce. Vedi [Connetti un pannello](/it/home-assistant/connect-a-panel/).
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="La procedura guidata di configurazione del pannello, passo dopo passo" tabindex="0">
 <figure>
@@ -101,24 +110,29 @@ Home Assistant apre quindi la procedura guidata di configurazione del pannello, 
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-name-light.png" width="524" height="702" alt="La procedura guidata del pannello chiede un ID e un nome leggibile, con un’anteprima dei nomi delle entità che userà Home Assistant">
 </figure>
 <figure>
-<figcaption><span>2</span> Scegli la dashboard e l’area</figcaption>
-<img class="light:sl-hidden" src="/screenshots/panel-setup-dashboard-dark.png" width="524" height="485" alt="La procedura guidata con una dashboard e un’area di Home Assistant selezionate per il pannello">
-<img class="dark:sl-hidden" src="/screenshots/panel-setup-dashboard-light.png" width="524" height="485" alt="La procedura guidata con una dashboard e un’area di Home Assistant selezionate per il pannello">
+<figcaption><span>2</span> Accedi a Home Assistant</figcaption>
+<img class="light:sl-hidden" src="/screenshots/panel-setup-sign-in-dark.png" width="524" height="688" alt="La procedura guidata propone l’accesso da questo browser o dal pannello, usando l’account Home Assistant con cui il pannello deve connettersi">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-sign-in-light.png" width="524" height="688" alt="La procedura guidata propone l’accesso da questo browser o dal pannello, usando l’account Home Assistant con cui il pannello deve connettersi">
 </figure>
 <figure>
-<figcaption><span>3</span> Attiva il filtro delle entità</figcaption>
+<figcaption><span>3</span> Scegli la plancia e l’area</figcaption>
+<img class="light:sl-hidden" src="/screenshots/panel-setup-dashboard-dark.png" width="524" height="485" alt="La procedura guidata con una plancia e un’area di Home Assistant selezionate per il pannello">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-dashboard-light.png" width="524" height="485" alt="La procedura guidata con una plancia e un’area di Home Assistant selezionate per il pannello">
+</figure>
+<figure>
+<figcaption><span>4</span> Attiva il filtro delle entità, se richiesto</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="636" alt="La procedura guidata consiglia il filtro delle entità per questo pannello e mostra il numero di entità di Home Assistant">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="636" alt="La procedura guidata consiglia il filtro delle entità per questo pannello e mostra il numero di entità di Home Assistant">
 </figure>
 <figure>
-<figcaption><span>4</span> Ci siamo quasi</figcaption>
-<img class="light:sl-hidden" src="/screenshots/panel-setup-almost-there-dark.png" width="524" height="339" alt="La procedura guidata attende mentre il pannello prepara il suo insieme filtrato di entità e carica la dashboard">
-<img class="dark:sl-hidden" src="/screenshots/panel-setup-almost-there-light.png" width="524" height="339" alt="La procedura guidata attende mentre il pannello prepara il suo insieme filtrato di entità e carica la dashboard">
+<figcaption><span>5</span> Ci siamo quasi</figcaption>
+<img class="light:sl-hidden" src="/screenshots/panel-setup-almost-there-dark.png" width="524" height="339" alt="La procedura guidata attende mentre il pannello prepara il suo insieme filtrato di entità e carica la plancia">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-almost-there-light.png" width="524" height="339" alt="La procedura guidata attende mentre il pannello prepara il suo insieme filtrato di entità e carica la plancia">
 </figure>
 <figure>
-<figcaption><span>5</span> Tutto pronto</figcaption>
-<img class="light:sl-hidden" src="/screenshots/panel-setup-done-dark.png" width="524" height="526" alt="La procedura guidata conferma che il pannello è configurato e mostra la dashboard">
-<img class="dark:sl-hidden" src="/screenshots/panel-setup-done-light.png" width="524" height="526" alt="La procedura guidata conferma che il pannello è configurato e mostra la dashboard">
+<figcaption><span>6</span> Tutto pronto</figcaption>
+<img class="light:sl-hidden" src="/screenshots/panel-setup-done-dark.png" width="524" height="526" alt="La procedura guidata conferma che il pannello è configurato e mostra la plancia">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-done-light.png" width="524" height="526" alt="La procedura guidata conferma che il pannello è configurato e mostra la plancia">
 </figure>
 </div>
 

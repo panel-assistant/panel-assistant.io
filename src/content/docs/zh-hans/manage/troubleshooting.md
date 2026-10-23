@@ -1,7 +1,7 @@
 ---
 title: 故障排查
 description: 壁挂面板常见的问题，以及应先检查什么。
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 先查看 Home Assistant 中的面板设备，它提供状态传感器和可下载的诊断信息；同时查看面板自身地址的 8888 端口上的状态页面。该页面的 `/diag` 报告无需猜测就能回答下方大多数问题。
@@ -23,6 +23,22 @@ sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 ## 安装程序无法访问面板
 
 通过网络安装时：确认面板地址，并确认 TCP 端口 5555 上的网络 ADB 仍然开启，因为有些面板会在重启后再次关闭它。如果面板出现授权提示，请在面板屏幕上接受。通过 USB 安装时：确认使用的是基于 Chromium 的浏览器，线缆连接的是运行浏览器的电脑，并且已开启 USB 调试。各型号进入开发者选项和开启调试的方式不同，详见 [准备面板](/zh-hans/install/prepare-a-panel/)和 [硬件页面](/zh-hans/hardware/)。如果面板始终无法接受网络连接，请改为 [通过 USB 安装](/zh-hans/install/install-over-usb/)：面板无需网络 ADB，但浏览器仍需连接到 Home Assistant 以获取经过验证的发布版本。
+
+## 网络安装中途停止
+
+当 Home Assistant 停止网络安装时，其消息会说明安装进行到了哪一步。在下面找到与你的消息对应的情况。无论哪种情况，都不要卸载 Panel Assistant、清除其数据或重置面板：面板当前的状态能说明安装停在了哪里。
+
+### 未安装任何 APK
+
+如果消息说明未安装任何 APK，或未对面板做出任何改动，表示安装在改动之前就停止了。检查面板是否已开机、是否仍以同一地址连接到网络，然后再次添加 Panel Assistant 集成，并输入同一地址。Home Assistant 会在做出任何改动之前重新检查面板。如果安装第二次仍停在同一位置，请查看面板；如果面板上已有 Panel Assistant，请按照下一节操作。
+
+### 已安装，但未启动或未通过检查
+
+如果消息说明 APK 已安装，但 Panel Assistant 未启动或未通过检查，表示应用已在面板上，只缺最后一步。在面板的应用列表中打开 Panel Assistant，并等待设置界面出现。然后以同一地址再次添加 Panel Assistant 集成：应用响应后，Home Assistant 会提供连接选项（“Panel Assistant 已安装但未连接”），不会安装任何内容。如果 Home Assistant 表示已安装应用不是你选择的发布版本，请选择已安装的版本；可以在面板的 Android 设置中，依次打开“应用 › Panel Assistant”查看。如果 Panel Assistant 无法打开，或设置界面始终不出现，请不要重试自动安装，而应按下一节说明求助。
+
+### 安装可能已改动面板
+
+如果消息说明安装可能已改动面板，或 Home Assistant 无法验证结果、无法确认继续操作是否安全，表示 Home Assistant 无法判断面板进行到了哪一步，因此停止操作，而不会猜测。暂时不要重试自动安装。先查看面板：如果正在显示 Panel Assistant 的设置界面或仪表盘，或可以从面板的应用列表中打开应用，请按照上一节连接它。如果面板上没有 Panel Assistant，请在 [集成的问题区](https://github.com/panel-assistant/ha-integration/issues)求助，并附上面板型号、所选版本、完整消息，以及安装时的 Home Assistant 日志行（在日志中搜索 `panel_assistant`）。
 
 ## Home Assistant 中缺少面板的硬件
 

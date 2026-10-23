@@ -1,7 +1,7 @@
 ---
 title: Mises à jour et récupération
 description: Maintenir l’application du panneau à jour et savoir ce qui peut être récupéré en cas de problème.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 ## Mettre à jour un panneau
@@ -22,7 +22,11 @@ Certains panneaux ne peuvent être mis à jour que par ADB, car ils n’ont aucu
 
 La cause habituelle est une modification effectuée sur le panneau plutôt que dans Home Assistant. Une mise à jour du micrologiciel du fabricant, une réinitialisation d’usine ou une option du fabricant qui rétablit le logiciel d’origine peuvent toutes désactiver à nouveau les options pour les développeurs d’Android, et donc ADB. Rien ne vous avertit sur le moment, car, du point de vue du panneau, tout fonctionne normalement.
 
-Réactiver les options pour les développeurs et le débogage USB rétablit le moyen de mise à jour, et les étapes sont les mêmes que lors de la préparation initiale de ce panneau : voir [préparer un panneau](/fr/install/prepare-a-panel/#1-developer-options-and-debugging-are-on). L’accès à ces paramètres diffère selon les panneaux, et certains fabricants les cachent derrière une série d’appuis sur un écran À propos.
+Réactiver les options pour les développeurs et le débogage USB rétablit le moyen de mise à jour sur la plupart des panneaux, et les étapes sont les mêmes que lors de la préparation initiale de ce panneau : voir [préparer un panneau](/fr/install/prepare-a-panel/#1-developer-options-and-debugging-are-on). L’accès à ces paramètres diffère selon les panneaux, et certains fabricants les cachent derrière une série d’appuis sur un écran À propos.
+
+Si la réparation reste affichée ou si le panneau désactive lui-même le débogage réseau, comme un Meta Portal après un redémarrage ou un Shelly Wall Display après une réinitialisation, branchez le panneau à votre ordinateur par USB et lancez l’installateur USB depuis Home Assistant, comme indiqué dans [installer par USB](/fr/install/install-over-usb/#tout-commence-dans-home-assistant). Il n’y a rien à supprimer au préalable : sur un panneau qui possède déjà l’application, l’installateur n’installe rien. Si le panneau le demande, cochez **Toujours autoriser depuis cet ordinateur** et appuyez sur **Autoriser** ; l’installateur réactive alors le débogage réseau et indique que Panel Assistant peut de nouveau joindre le panneau. Home Assistant propose ensuite la mise à jour du panneau, et cette mise à jour conserve ses paramètres et son historique.
+
+Si Home Assistant affiche également **Autoriser les mises à jour sur …** pour le panneau, celui-ci est accessible mais n’a pas encore accepté cette instance Home Assistant. Ouvrez cette réparation, ou allez dans **Paramètres**, **Appareils et services**, **Panel Assistant**, sélectionnez **Configurer** pour le panneau et choisissez **Autoriser les mises à jour**, puis appuyez sur **Autoriser** sur le panneau lorsqu’il le demande.
 
 ## Ce qu’une mise à jour protège
 
@@ -32,7 +36,7 @@ Avant une modification dont vous n’êtes pas sûr, faites vous-même une sauve
 
 ## Récupération
 
-Lorsqu’un tableau de bord ne se charge plus après une mise à jour, la cause est généralement le WebView système ou le tableau de bord lui-même, et le panneau possède son propre comportement de [démarrage et récupération](/fr/manage/built-in-renderer/#startup-and-recovery) pour y faire face. [Dépannage](/fr/manage/troubleshooting/) présente les causes habituelles. Le retour à une version antérieure n’est pas actuellement décrit dans la documentation ; considérez donc un export de configuration comme votre moyen de revenir en arrière.
+Lorsqu’un tableau de bord ne se charge plus après une mise à jour, la cause est généralement le WebView système ou le tableau de bord lui-même, et le panneau possède son propre comportement de [démarrage et récupération](/fr/manage/built-in-renderer/#startup-and-recovery) pour y faire face. [Dépannage](/fr/manage/troubleshooting/) présente les causes habituelles. Un panneau exécutant la version 1.0 de l’application ne peut pas revenir à une version antérieure ; [passer à la version 1.0](/fr/manage/upgrade-to-1-0/#going-back) explique les retours possibles.
 
 La récupération à un niveau inférieur à celui de l’application est une autre affaire. Panel Assistant ne touche jamais au micrologiciel d’un panneau, mais les partitions du micrologiciel de certains panneaux disposant d’un accès root peuvent être sauvegardées et restaurées manuellement, comme décrit dans [sauvegarde et restauration du micrologiciel](/fr/hardware/guides/firmware-backup-and-restore/).
 

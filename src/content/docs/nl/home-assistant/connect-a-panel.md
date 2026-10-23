@@ -1,14 +1,14 @@
 ---
 title: Een paneel verbinden
 description: Je dashboard op het paneel zetten, en hoe de hardware van het paneel zelf wordt weergegeven in Home Assistant.
-sourceCommit: fa1d23a12549f2afa3962f9797cd8c52a38db322
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 Een paneel dat aan Home Assistant is toegevoegd, is er op twee manieren mee verbonden. De ene zet een dashboard op het scherm. De andere brengt de eigen hardware van het paneel binnen als entiteiten.
 
 ## Het dashboard op het scherm
 
-Open de statuspagina van het paneel in je browser, op zijn adres met poort 8888, en kies het dashboard dat je aan de muur wilt. Het paneel laadt dat dashboard zelf, bepaalt welke entiteiten het toont en vraagt alleen die op bij Home Assistant; daardoor blijft het snel. Hoe het dashboard wordt geladen en wat het paneel doet als het laden mislukt, lees je op de pagina over de [ingebouwde renderer](/nl/manage/built-in-renderer/).
+Je kiest het dashboard in de installatiewizard van het paneel wanneer het paneel wordt toegevoegd. Wil je het later wijzigen, open dan de statuspagina van het paneel in je browser, op zijn adres met poort 8888, en kies een ander dashboard. Het paneel laadt dat dashboard zelf. Als [entiteitsfiltering is ingeschakeld](/nl/manage/performance/), leert het welke entiteiten het dashboard gebruikt en vraagt het alleen die op bij Home Assistant. Hoe het dashboard wordt geladen en wat het paneel doet als het laden mislukt, lees je op de pagina over de [ingebouwde renderer](/nl/manage/built-in-renderer/).
 
 ## De hardware van het paneel in Home Assistant
 

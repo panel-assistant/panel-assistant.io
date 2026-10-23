@@ -1,0 +1,36 @@
+---
+title: Een paneel kiezen
+description: Panel Assistant draait op ARM Android-wandpanelen vanaf Android 8.0. Bekijk elk merk en model met eigen hardwareondersteuning, van Sonoff, Shelly, Tuya, Meta, Electron en Smatek, en wat een paneel nodig heeft.
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+---
+
+import SupportedPanels from '../../../../components/SupportedPanels.astro';
+
+**Panel Assistant draait op ARM Android-wandpanelen met Android 8.0 of nieuwer en toegang tot foutopsporing.** Je hoeft je model niet eerst op een lijst te vinden: installeer het, en het Home Assistant-dashboard, de schermhelderheid en het uitschakelen van het scherm, audio en de standaardsensoren van het paneel verschijnen meteen in Home Assistant.
+
+De modellen hieronder hebben elk een eigen [hardwarepagina](/nl/hardware/) met de feiten die je vóór aankoop moet controleren. Als er een model- of familieprofiel beschikbaar is, bereikt dat wat speciaal is aan dat paneel, zoals de leds, knoppen, relais, camera, microfoons en klimaatsensoren.
+
+## Panelen met afgestemde ondersteuning
+
+<SupportedPanels />
+
+Elke balk laat zien hoeveel vertrouwen we in een paneel hebben, en vult zich en wordt groener naarmate dat groeit. Een paneel dat we op een eigen exemplaar hebben onderzocht, biedt de meeste zekerheid, en nog meer als de firmware van de fabrikant het openlaat voor Panel Assistant. Voor andere panelen komt het vertrouwen uit onderzoek van de firmware van de fabrikant, de documentatie van de fabrikant, een gedeeld platform met een paneel dat we hebben onderzocht en eigenaren die er Panel Assistant op draaien. Een oudere Android-versie die we niet hebben onderzocht, telt juist tegen. Beweeg over een paneel of open het om te zien welke van deze vormen van bewijs er zijn.
+
+Verschillende van deze panelen zijn dezelfde hardware die onder andere merknamen wordt verkocht. Elke merknaam staat vermeld en leidt naar de ene pagina voor die hardware.
+
+## Elk ander Android-paneel
+
+**Een paneel dat hier niet wordt genoemd, is nog steeds een ondersteund paneel.** Panel Assistant hoeft je hardware niet te herkennen om erop te draaien. Elk paneel dat aan de vereisten hieronder voldoet, start met het generieke profiel. Dat geeft je het dashboard op het scherm, helderheid en het uitschakelen van het scherm, audio, navigatie en de standaard Android-sensoren zoals licht en nabijheid, allemaal als entiteiten op het eigen apparaat van het paneel in Home Assistant.
+
+Wat het eigen profiel van een model toevoegt, is de hardware die specifiek is voor dat model. Veel panelen hebben daar niets van, en veel eigenaren hebben het nooit nodig. Voor hen is het generieke profiel de volledige set functies, geen mindere.
+
+## Wat een paneel nodig heeft
+
+- **Android 8.0 of nieuwer op ARM.** Uitgebrachte builds ondersteunen `arm64-v8a` en `armeabi-v7a`.
+- **Ontwikkelaarsopties.** Het installatieprogramma gebruikt de foutopsporingsinterface van Android, die je op bijna elk paneel kunt inschakelen.
+- **Elke systeem-WebView.** Fabrikanten leveren vaak een verouderde browser-engine. De paneel-app controleert die, en [Het paneel voorbereiden](/nl/install/prepare-a-panel/) laat zien hoe je die op je paneel bijwerkt.
+- **Root, alleen voor een paar extra’s.** Sommige functies op sommige modellen hebben root nodig. Op elke hardwarepagina staat welke, en hoe je root krijgt.
+
+## Staat je paneel er niet bij?
+
+Hardwareondersteuning is data, geen code, dus een paneel toevoegen betekent een profiel schrijven in plaats van een nieuwe versie van de app. De snelste manier om je model een eigen profiel te geven, is ons erover te vertellen: vermeld in de [issues](https://github.com/panel-assistant/android/issues) welk model het is en wat er gebeurde. De [profieldocumentatie](/nl/reference/profiles/) beschrijft wat een profiel bevat, als je er zelf een wilt schrijven. Elke melding, of het nu werkt of niet, brengt meer panelen op deze pagina.

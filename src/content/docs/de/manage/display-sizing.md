@@ -1,7 +1,7 @@
 ---
 title: Anzeigegröße
 description: Die Größe eines Home Assistant-Dashboards auf einem Panel mit Dichte und Textgröße an die Darstellung im Desktop-Browser anpassen.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 Ein Home Assistant-Dashboard, das in einem Desktop-Browser gestaltet wurde, wird auf einem Android-Wandpanel oft in der falschen Größe dargestellt: Karten sind zu groß und ihre Ränder abgeschnitten, oder sie sind zu klein. Ein Smartphone bleibt meist ungefähr auf dem Niveau des Desktops, Panels jedoch häufig nicht. Ihre Hersteller liefern sie nämlich mit einer Systemdichte und Schriftskalierung aus, die schlecht zum physischen Display passen. Die Panel-App bietet unter **Installieren**, dann **Anzeigegröße**, zwei Regler: **Dichte (DPI)** und **Textgröße (Schriftskalierung)**. Damit kannst du Layout und Text wieder angleichen. Meist brauchst du beide.
@@ -18,7 +18,9 @@ Die Karte **Anzeigegröße** auf der Registerkarte **Installieren** des Panels l
 Dafür ist ein genehmigter privilegierter Zugangsweg erforderlich: normalerweise das `su` des Herstellers oder der [Root-Helfer](https://github.com/panel-assistant/android/blob/main/helper/README.md). Ein kompatibles, nicht gerootetes Panel, dessen optionaler erweiterter Zugriff bereits am Panel genehmigt wurde, kann ebenfalls genau diese Anzeigeänderungen vornehmen. Wenn kein unterstützter Zugangsweg bereitsteht, bleibt die Karte sichtbar, aber gesperrt.
 :::
 
-Öffne zum Abstimmen dasselbe Dashboard zum Vergleich in einem Desktop-Browser. Senke die Dichte, bis das Layout übereinstimmt und mehr Karten Platz haben. Passe dann die Textgröße in kleinen Schritten an, bis auch der Text übereinstimmt. Gute Werte hängen von der Installation ab: von der Auflösung des Panels, dem Abstand der Personen und der Gestaltung des Dashboards.
+Öffne zum Abstimmen dasselbe Dashboard zum Vergleich in einem Desktop-Browser. Senke die Dichte, bis das Layout übereinstimmt und mehr Karten Platz haben. Passe dann die Textgröße in kleinen Schritten an, bis auch der Text übereinstimmt. Gute Werte hängen sowohl vom Modell als auch von der Installation ab: von der Auflösung des Panels, dem Abstand der Personen und der Gestaltung des Dashboards.
+
+Einige unterstützte Modelle bringen eine empfohlene Dichte mit, die meisten davon auch eine Textgröße. Wenn Panel Assistant ein solches Panel ohne privilegierten Zugangsweg einrichtet, wendet es diese Werte einmal über seine ADB-Verbindung an. Beim Entfernen der App über Panel Assistant werden die vorherigen Werte wiederhergestellt.
 
 ## Die beiden Regler
 

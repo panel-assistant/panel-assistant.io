@@ -1,7 +1,7 @@
 ---
 title: Tamaño de pantalla
 description: Cómo ajustar el tamaño de un panel de control de Home Assistant en un panel para que coincida con su aspecto en un navegador de escritorio, mediante la densidad y el tamaño del texto.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 Un panel de control de Home Assistant diseñado en un navegador de escritorio suele mostrarse con un tamaño incorrecto en un panel de pared Android: tarjetas demasiado grandes con bordes recortados, o demasiado pequeñas. Un teléfono suele mantener un aspecto bastante parecido al del escritorio, pero los paneles a menudo no lo hacen porque sus fabricantes establecen una densidad del sistema y una escala de fuente poco adecuadas para la pantalla física. La aplicación del panel ofrece dos controles, **densidad (DPI)** y **tamaño del texto (escala de fuente)**, en **Instalar**, luego **Tamaño de pantalla**, para ajustar de nuevo el diseño y el texto. Normalmente necesitas ambos.
@@ -18,7 +18,9 @@ La tarjeta **Tamaño de pantalla** de la pestaña **Instalar** del panel estable
 Esto requiere una vía con privilegios aprobada: normalmente el `su` del fabricante o el [asistente root](https://github.com/panel-assistant/android/blob/main/helper/README.md). Un panel compatible sin root cuyo acceso mejorado opcional ya se haya aprobado en el propio panel también puede realizar estos cambios exactos de pantalla. Si no hay ninguna vía compatible lista, la tarjeta sigue visible, pero bloqueada.
 :::
 
-Para ajustarlo, abre el mismo panel de control en un navegador de escritorio como referencia. Reduce la densidad hasta que el diseño coincida (cabrán más tarjetas) y luego ajusta ligeramente el tamaño del texto hasta que coincida.
+Para ajustarlo, abre el mismo panel de control en un navegador de escritorio como referencia. Reduce la densidad hasta que el diseño coincida (cabrán más tarjetas) y luego ajusta ligeramente el tamaño del texto hasta que coincida. Los valores adecuados dependen de la instalación además del modelo: la resolución del panel, la distancia a la que se sitúan las personas y cómo está diseñado el panel de control.
+
+Algunos modelos compatibles incluyen una densidad recomendada y, en la mayoría de esos casos, también un tamaño del texto. Cuando Panel Assistant configura uno de esos paneles sin una vía con privilegios, aplica esos valores una vez a través de su conexión ADB, y al quitar la aplicación mediante Panel Assistant se restauran los valores anteriores.
 
 ## Los dos controles
 

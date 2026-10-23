@@ -1,7 +1,7 @@
 ---
 title: De integratie installeren
 description: Panel Assistant toevoegen aan Home Assistant via HACS, want daar begint alles.
-sourceCommit: c6d46a0cef54b402bad5b57775822f407335c1a5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 import { LinkButton } from '@astrojs/starlight/components';
@@ -21,13 +21,13 @@ Die knop opent de repository in HACS op je eigen Home Assistant, klaar om te dow
 2. Download **Panel Assistant** en herstart daarna Home Assistant.
 3. Ga naar **Instellingen**, **Apparaten en diensten**, **Integratie toevoegen** en kies **Panel Assistant**.
 
-HACS offers the latest release, which is 0.9.0 until 1.0 is released. Panel Assistant 1.0 is in public preview: to install it, turn on **Show beta versions** for Panel Assistant in HACS and download the newest 1.0 preview. Read [Upgrading to 1.0](/nl/manage/upgrade-to-1-0/) first, because a panel that runs the 1.0 app cannot go back to 0.9.
+HACS biedt de nieuwste release aan, en dat is 0.9.0 totdat 1.0 uitkomt. Panel Assistant 1.0 is beschikbaar als openbare preview: schakel om die te installeren **Bètaversies weergeven** voor Panel Assistant in HACS in en download de nieuwste 1.0-preview. Lees eerst [Upgraden naar 1.0](/nl/manage/upgrade-to-1-0/), want een paneel met de 1.0-app kan niet terug naar 0.9.
 
 ## Wat je krijgt
 
 - **Het installatieprogramma.** Een paneel toevoegen is een begeleide procedure binnen Home Assistant. Die controleert het paneel, installeert de paneel-app via het netwerk of [via USB](/nl/install/install-over-usb/), start hem en maakt pas daarna het apparaat aan. Een paneel waarop de app al draait, wordt overgenomen in plaats van opnieuw geïnstalleerd.
 - **Eén apparaat per paneel.** Elk paneel verschijnt onder Apparaten en diensten met een statussensor en downloadbare diagnostische gegevens, waaruit gevoelige gegevens zijn weggelaten, zodat je ze kunt delen als je om hulp vraagt.
-- **Al je panelen op één pagina.** Een item Panel Assistant in de zijbalk toont elk paneel, met of het bereikbaar is, welke versie erop draait en alles wat aandacht nodig heeft.
+- **Al je panelen op één plek.** Beheerders kunnen in de Panel Assistant-zijbalk een paneel kiezen en de eigen webinterface ervan binnen Home Assistant gebruiken.
 
 ## Wat er nog gaat komen
 
@@ -35,4 +35,8 @@ Panel Assistant is nieuw en ontwikkelt zich snel. Een paneel dat al geïnstallee
 
 ## Als je de eerdere 0.1.0-integratie hebt gebruikt
 
-Verwijder de oude integratie onder Apparaten en diensten en verwijder daarna de download ervan uit HACS. Voeg deze repository toe, download Panel Assistant, herstart Home Assistant en voeg de integratie daarna opnieuw toe met de hostnaam of het adres van je paneel.
+Verwijder de oude integratie onder Apparaten en diensten en verwijder daarna de download ervan uit HACS. Voeg deze repository toe en download Panel Assistant **0.9.0** in HACS vóór de eerste herstart (kies **Opnieuw downloaden** en selecteer versie 0.9.0). Herstart Home Assistant en voeg de integratie daarna opnieuw toe met de hostnaam of het adres van je paneel.
+
+Als je Panel Assistant 1.0 al hebt geïnstalleerd, volg dan [als een overstap niet is afgerond](/nl/manage/upgrade-to-1-0/#if-a-move-was-not-finished) voordat je van versie verandert.
+
+Een paneel uit die tijd draait nog de oude ha-paneld-app. Panel Assistant 1.0 kan het niet naar de nieuwe app overzetten: installeer eerst Panel Assistant 0.9.0 (open Panel Assistant in HACS, kies **Opnieuw downloaden** en selecteer versie 0.9.0), voeg het paneel toe en zet het over met de bijbehorende reparatie. Werk daarna bij naar 1.0.

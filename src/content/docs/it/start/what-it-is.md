@@ -1,7 +1,7 @@
 ---
 title: Come funziona
 description: Cosa porta Panel Assistant su un pannello, cosa rimane in Home Assistant e perché può essere completamente open source.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 Panel Assistant ha due parti. Una risiede in Home Assistant ed è ciò che vedi e usi. L’altra risiede su ogni pannello ed è ciò che lo rende veloce.
@@ -33,10 +33,10 @@ Per lo stesso motivo, il supporto hardware è l’ambito in cui il progetto ha p
 | Parte                         | Cos’è                                                                                                 | Dove                                                                                |
 | ----------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | Panel Assistant               | L’integrazione Home Assistant: programma di installazione, dispositivi e pagina con tutti i pannelli. | [panel-assistant/ha-integration](https://github.com/panel-assistant/ha-integration) |
-| ha-paneld                     | L’app sul pannello: dashboard, hardware, launcher e pagina di stato.                                  | [panel-assistant/android](https://github.com/panel-assistant/android)               |
+| ha-paneld                     | L’app sul pannello: plancia, hardware, launcher e pagina di stato.                                    | [panel-assistant/android](https://github.com/panel-assistant/android)               |
 | Profili hardware              | Le descrizioni per modello che indicano all’app cosa ha un pannello e come controllarlo.              | [Riferimento hardware](/it/hardware/)                                               |
 | Documentazione di riferimento | L’API, i profili hardware e il modello di sicurezza in dettaglio.                                     | [Riferimento](/it/reference/api/)                                                   |
 
 ## Cosa non è
 
-È pensato per pannelli a parete dedicati. Tablet e telefoni possono eseguirlo, ma qualsiasi dispositivo con una batteria ha bisogno di un cavo, e il progetto presuppone un pannello alimentato dalla rete elettrica, configurato una volta e poi lasciato funzionare senza interventi. Non è uno strumento per creare dashboard; mostra quelle che hai già. E non è finito: la direzione è il supporto hardware universale e la gestione di tutti i pannelli senza interventi.
+È pensato per pannelli a parete dedicati. Tablet e telefoni possono eseguirlo, ma qualsiasi dispositivo con una batteria ha bisogno di un cavo, e il progetto presuppone un pannello alimentato dalla rete elettrica, configurato una volta e poi lasciato funzionare senza interventi. Non è uno strumento per creare plance; mostra quelle che hai già. E non è finito: la direzione è il supporto hardware universale e la gestione di tutti i pannelli senza interventi.

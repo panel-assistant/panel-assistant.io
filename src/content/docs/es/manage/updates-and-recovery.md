@@ -1,7 +1,7 @@
 ---
 title: Actualizaciones y recuperación
 description: Cómo mantener actualizada la aplicación de un panel y qué se puede recuperar cuando algo falla.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 ## Actualizar un panel
@@ -22,7 +22,11 @@ Algunos paneles solo se pueden actualizar mediante ADB porque no tienen forma de
 
 La causa habitual es un cambio realizado en el panel, más que en Home Assistant. Una actualización del firmware del fabricante, un restablecimiento de fábrica o una opción del fabricante que restaura el software original pueden volver a deshabilitar las opciones para desarrolladores de Android y, con ellas, ADB. Nada te avisa en ese momento porque, desde el punto de vista del panel, no hay ningún problema.
 
-Volver a habilitar las opciones para desarrolladores y la depuración USB restablece la vía de actualización, y los pasos son los mismos que al preparar ese panel por primera vez: consulta [Preparar un panel](/es/install/prepare-a-panel/#1-developer-options-and-debugging-are-on). La forma de acceder a esos ajustes varía entre paneles y algunos fabricantes los ocultan detrás de una secuencia de pulsaciones en una pantalla de información.
+Volver a habilitar las opciones para desarrolladores y la depuración USB restablece la vía de actualización en la mayoría de los paneles, y los pasos son los mismos que al preparar ese panel por primera vez: consulta [Preparar un panel](/es/install/prepare-a-panel/#1-developer-options-and-debugging-are-on). La forma de acceder a esos ajustes varía entre paneles y algunos fabricantes los ocultan detrás de una secuencia de pulsaciones en una pantalla de información.
+
+Si la reparación persiste o el panel desactiva por sí solo la depuración por red, como un Meta Portal después de un reinicio o un Shelly Wall Display después de un restablecimiento, conecta el panel a tu ordenador por USB e inicia el instalador USB desde Home Assistant, como se explica en [Instalar por USB](/es/install/install-over-usb/#todo-empieza-dentro-de-home-assistant). No hace falta quitar nada antes: en un panel que ya tiene la aplicación, el instalador no instala nada. Si el panel lo pide, marca **Permitir siempre desde este ordenador** y toca **Permitir**; el instalador vuelve a activar la depuración por red e indica que Panel Assistant puede acceder de nuevo al panel. A partir de ahí, Home Assistant ofrece la actualización del panel, que conserva su configuración e historial.
+
+Si Home Assistant también muestra **Permitir actualizaciones en …** para el panel, se puede acceder a él, pero aún no ha aceptado este Home Assistant. Abre esa reparación o ve a **Configuración**, **Dispositivos y servicios**, **Panel Assistant**, selecciona **Configurar** para el panel y elige **Permitir actualizaciones**; después toca **Permitir** en el panel cuando lo pida.
 
 ## Qué protege una actualización
 
@@ -32,7 +36,7 @@ Antes de un cambio del que no estés seguro, haz tú mismo una copia de segurida
 
 ## Recuperación
 
-Si un panel de control no se carga después de una actualización, el problema suele estar en el WebView del sistema o en el propio panel de control, y el panel tiene su propio comportamiento de [Inicio y recuperación](/es/manage/built-in-renderer/#startup-and-recovery) para esos casos. [Solución de problemas](/es/manage/troubleshooting/) explica las causas habituales. Volver a una versión anterior no es algo que la documentación describa actualmente, así que considera una exportación de la configuración como tu vía de recuperación.
+Si un panel de control no se carga después de una actualización, el problema suele estar en el WebView del sistema o en el propio panel de control, y el panel tiene su propio comportamiento de [Inicio y recuperación](/es/manage/built-in-renderer/#startup-and-recovery) para esos casos. [Solución de problemas](/es/manage/troubleshooting/) explica las causas habituales. Un panel con la aplicación del panel 1.0 no puede volver a una versión anterior; [Actualizar a 1.0](/es/manage/upgrade-to-1-0/#going-back) explica qué se puede hacer.
 
 La recuperación por debajo de la aplicación es otra cuestión. Panel Assistant nunca toca el firmware de un panel, pero en algunos paneles con acceso root se pueden hacer copias de seguridad de las particiones del firmware y restaurarlas manualmente; esto se documenta en [Copia de seguridad y restauración del firmware](/es/hardware/guides/firmware-backup-and-restore/).
 
