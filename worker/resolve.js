@@ -12,6 +12,7 @@ const PREFIX = '/go/';
 // map at topics.docs, so an old link can be re-pointed with a one-line change
 // there instead of a code change here.
 const DOCS_TOPIC = 'docs';
+const REPAIR_TOPIC = 'repair';
 const FIRMWARE_TOPIC = 'firmware';
 // The settings topic takes `v=<app version>`, `lang` and `section=<setting key>` and lands on the
 // reference page for the nearest published version, at that setting. The app never learns page
@@ -78,12 +79,32 @@ function resolveDocsTopic(url, docsMap) {
   };
 }
 
+function resolveRepairTopic(url, repairMap) {
+  const issue = url.searchParams.get('issue');
+  const known = Boolean(issue) && !issue.startsWith('$') && Object.hasOwn(repairMap, issue);
+  const target = new URL(known ? repairMap[issue] : '/home-assistant/repairs/', url.origin);
+  if (target.origin === url.origin) {
+    for (const [key, value] of url.searchParams) {
+      if (key !== 'issue') target.searchParams.append(key, value);
+    }
+  }
+  return {
+    location: target.toString(),
+    known,
+    topic: REPAIR_TOPIC,
+    missKey: known ? undefined : pageMissKey(issue, 'repair-'),
+  };
+}
+
 export function resolve(requestUrl, topics, settings) {
   const url = new URL(requestUrl);
   if (url.pathname !== '/go' && !url.pathname.startsWith(PREFIX)) return null;
   const topic = decodeURIComponent(url.pathname.slice(PREFIX.length)).replace(/\/+$/, '');
   if (topic === DOCS_TOPIC && typeof topics[DOCS_TOPIC] === 'object' && topics[DOCS_TOPIC]) {
     return resolveDocsTopic(url, topics[DOCS_TOPIC]);
+  }
+  if (topic === REPAIR_TOPIC && typeof topics[REPAIR_TOPIC] === 'object' && topics[REPAIR_TOPIC]) {
+    return resolveRepairTopic(url, topics[REPAIR_TOPIC]);
   }
   if (topic === SETTINGS_TOPIC && typeof topics[SETTINGS_TOPIC] === 'string') {
     return resolveSettingsTopic(url, topics[SETTINGS_TOPIC], settings);
