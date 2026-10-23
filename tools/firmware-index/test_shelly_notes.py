@@ -1,5 +1,7 @@
 """Release-note discovery and capture through the monitor's production command."""
+import io
 import json
+import urllib.parse
 import pathlib
 import tempfile
 import unittest
@@ -78,6 +80,19 @@ class ShellyNotesTest(unittest.TestCase):
         self.assertEqual('20261023123456', note['wayback_ts'])
         self.assertEqual('', note['raw_wayback_ts'])
         self.assertNotIn('Frobnication', note['summary'])
+
+    def test_fresh_availability_query_avoids_a_cached_pre_submission_miss(self):
+        def response(request, **_kwargs):
+            query = urllib.parse.parse_qs(urllib.parse.urlsplit(request).query)
+            snapshot = {'closest': {'available': True, 'status': '200', 'timestamp': '20261023225146'}}
+            return io.StringIO(json.dumps({'archived_snapshots': snapshot if query.get('timestamp') else {}}))
+        with mock.patch.object(shelly, 'fetch_changelog', return_value=(COMMIT, CHANGELOG)), \
+                mock.patch.object(wayback, 'auth_header', return_value=({}, False)), \
+                mock.patch.object(wayback, 'urlopen', side_effect=response):
+            self.assertEqual(0, shelly.cmd_notes(self.args))
+        notes = json.loads(self.path.read_text())
+        self.assertTrue(all(n['wayback_ts'] == '20261023225146' and
+                            n['raw_wayback_ts'] == '20261023225146' for n in notes.values()))
 
     def test_invalid_changelog_preserves_existing_notes(self):
         self.run_notes()
