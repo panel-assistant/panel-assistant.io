@@ -12,6 +12,10 @@ sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 
 通过 HACS 添加 Panel Assistant，然后重启 Home Assistant。这是唯一需要你手动安装的内容。从此以后，Home Assistant 会引导你完成操作。参见 [安装集成](/zh-hans/home-assistant/custom-integration/)。
 
+:::note
+Panel Assistant 1.0 is in public preview. Until it is released, HACS installs 0.9.0. To install the preview instead, open **Panel Assistant** in HACS, turn on **Show beta versions** and download the newest 1.0 preview. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/zh-hans/manage/upgrade-to-1-0/) explains what changes.
+:::
+
 ## 2. 在面板上开启调试
 
 打开面板的开发者选项，启用 TCP 端口 5555 上的网络 ADB；如果通过线缆连接面板，则启用 USB 调试。这样 Home Assistant 才能替你安装。[硬件页面](/zh-hans/hardware/)说明了各型号的开关位置，[准备面板](/zh-hans/install/prepare-a-panel/)提供了详细步骤。

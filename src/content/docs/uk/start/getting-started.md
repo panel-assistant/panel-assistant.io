@@ -12,6 +12,10 @@ sourceCommit: 50fccda5c7e05cce0edbd2b4b37e006c473ca5df
 
 Додайте Panel Assistant через HACS і перезапустіть Home Assistant. Це єдине, що ви встановлюєте вручну. Далі вас вестиме Home Assistant. Див. [Встановлення інтеграції](/uk/home-assistant/custom-integration/).
 
+:::note
+Panel Assistant 1.0 is in public preview. Until it is released, HACS installs 0.9.0. To install the preview instead, open **Panel Assistant** in HACS, turn on **Show beta versions** and download the newest 1.0 preview. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/uk/manage/upgrade-to-1-0/) explains what changes.
+:::
+
 ## 2. Увімкніть налагодження на панелі
 
 Відкрийте на панелі параметри розробника й увімкніть налагодження. Саме це дає Home Assistant змогу виконати встановлення за вас. На [сторінках про обладнання](/uk/hardware/) показано, де цей перемикач на кожній моделі, а подробиці є на сторінці [Підготовка панелі](/uk/install/prepare-a-panel/).

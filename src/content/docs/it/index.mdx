@@ -9,7 +9,7 @@ head:
     content: Panel Assistant
 hero:
   title: Home Assistant, sulla parete, <span>come si deve.</span>
-  tagline: Panel Assistant trasforma un pannello Android a parete in una casa veloce e affidabile per le tue plance di Home Assistant. Installi e gestisci ogni pannello direttamente da Home Assistant.
+  tagline: Panel Assistant turns an Android wall panel into a fast, dependable home for your Home Assistant dashboards, and into a voice assistant where the panel has a microphone. You install and manage every panel from Home Assistant itself.
   actions:
     - text: Inizia
       link: /it/start/getting-started/
@@ -120,6 +120,12 @@ Un pannello a parete dovrebbe comportarsi come un interruttore della luce: sempr
 
 </Split>
 
+<Split title="Talk to it">
+
+A panel with a microphone can act as a Home Assistant Assist satellite on the device it already has, with no separate device to add. Turn it on from the panel's Configure page. It listens for Okay Nabu, Hey Jarvis, Hey Mycroft or Alexa on the panel itself, sends your command to Home Assistant only after it hears one, and speaks the answer through the panel's speaker. Each wake word can use its own Assist pipeline, you can train a wake word of your own, and any Home Assistant text-to-speech voice can make announcements through the speaker. [Set up the voice assistant](/it/manage/voice-assistant/).
+
+</Split>
+
 <Split title="Il software del produttore, sotto controllo">
 
 Panel Assistant assume il controllo della schermata iniziale e offre un modo per navigare sullo schermo anche su un pannello privo di pulsanti. Impedisce al widget di controllo del produttore di sovrapporsi alla tua plancia, rifiutandosi per progettazione di intervenire su qualsiasi componente necessario a mantenere in funzione il pannello.
@@ -137,7 +143,7 @@ Panel Assistant assume il controllo della schermata iniziale e offre un modo per
     },
     {
       title: 'Segnala il tuo pannello',
-      href: 'https://github.com/panel-assistant/ha-integration/issues',
+      href: 'https://github.com/panel-assistant/android/issues',
       text: 'Il nome del modello e ciò che ha funzionato, oppure il profilo che gli hai insegnato.',
     },
     {
@@ -192,7 +198,7 @@ Panel Assistant è nuovo e si evolve rapidamente. Oggi tre famiglie di pannelli 
 
 Tutto qui è software gratuito e open source con licenze permissive, senza account, servizi cloud o abbonamenti. È stato realizzato da un utente di Home Assistant che voleva pannelli a parete capaci di mantenere le promesse del loro hardware, ed è condiviso perché anche i tuoi possano farlo.
 
-È pensato per appartenere alla comunità che lo usa e lo migliora. I contributi vengono integrati con il nome dei loro autori e attribuiti a loro, mai riscritti di nascosto, dall’IA o da chiunque altro, per far passare il lavoro di qualcuno come opera del progetto.
+It is meant to belong to the community that uses and improves it. Contributions are merged under their authors' names and credited to them.
 
 </Split>
 

@@ -12,6 +12,10 @@ La première heure est la partie difficile de la mise en route de tout panneau. 
 
 Ajoutez Panel Assistant via HACS et redémarrez Home Assistant. C’est la seule chose que vous installez à la main. Ensuite, Home Assistant vous guide. Voir [Installer l’intégration](/fr/home-assistant/custom-integration/).
 
+:::note
+Panel Assistant 1.0 is in public preview. Until it is released, HACS installs 0.9.0. To install the preview instead, open **Panel Assistant** in HACS, turn on **Show beta versions** and download the newest 1.0 preview. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/fr/manage/upgrade-to-1-0/) explains what changes.
+:::
+
 ## 2. Activer le débogage sur le panneau
 
 Ouvrez les options pour les développeurs sur le panneau et activez ADB sur le réseau, sur le port TCP 5555, ou le débogage USB si vous branchez le panneau par câble. C’est ce qui permet à Home Assistant de procéder à l’installation pour vous. Les [pages consacrées au matériel](/fr/hardware/) indiquent où se trouve l’option sur chaque modèle, et [Préparer le panneau](/fr/install/prepare-a-panel/) fournit les détails.

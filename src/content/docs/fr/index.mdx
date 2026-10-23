@@ -9,7 +9,7 @@ head:
     content: Panel Assistant
 hero:
   title: Home Assistant au mur, <span>comme il se doit.</span>
-  tagline: Panel Assistant transforme un panneau mural Android en un support rapide et fiable pour vos tableaux de bord Home Assistant. Vous installez et gérez chaque panneau directement depuis Home Assistant.
+  tagline: Panel Assistant turns an Android wall panel into a fast, dependable home for your Home Assistant dashboards, and into a voice assistant where the panel has a microphone. You install and manage every panel from Home Assistant itself.
   actions:
     - text: Premiers pas
       link: /fr/start/getting-started/
@@ -120,6 +120,12 @@ Un panneau mural devrait se comporter comme un interrupteur : toujours disponibl
 
 </Split>
 
+<Split title="Talk to it">
+
+A panel with a microphone can act as a Home Assistant Assist satellite on the device it already has, with no separate device to add. Turn it on from the panel's Configure page. It listens for Okay Nabu, Hey Jarvis, Hey Mycroft or Alexa on the panel itself, sends your command to Home Assistant only after it hears one, and speaks the answer through the panel's speaker. Each wake word can use its own Assist pipeline, you can train a wake word of your own, and any Home Assistant text-to-speech voice can make announcements through the speaker. [Set up the voice assistant](/fr/manage/voice-assistant/).
+
+</Split>
+
 <Split title="Le logiciel du fabricant, maîtrisé">
 
 Panel Assistant prend le contrôle de l’écran d’accueil et fournit une navigation à l’écran aux panneaux sans boutons. Il empêche le widget de commande du fabricant de se superposer à votre tableau de bord, tout en refusant, par conception, de toucher à tout ce dont le panneau a besoin pour continuer à fonctionner.
@@ -137,7 +143,7 @@ Panel Assistant prend le contrôle de l’écran d’accueil et fournit une navi
     },
     {
       title: 'Parlez-nous de votre panneau',
-      href: 'https://github.com/panel-assistant/ha-integration/issues',
+      href: 'https://github.com/panel-assistant/android/issues',
       text: 'Indiquez le modèle et ce qui a fonctionné, ou partagez le profil que vous lui avez appris.',
     },
     {
@@ -192,7 +198,7 @@ Panel Assistant est nouveau et évolue rapidement. Trois familles de panneaux b�
 
 Tout ce qui est proposé ici est un logiciel gratuit et open source sous licences permissives, sans compte, service cloud ni abonnement. Le projet est créé par un utilisateur de Home Assistant qui souhaitait que les panneaux muraux tiennent enfin les promesses de leur matériel. Il est partagé pour que les vôtres en fassent autant.
 
-Le projet est destiné à appartenir à la communauté qui l’utilise et l’améliore. Les contributions sont intégrées sous le nom de leurs auteurs et leur sont attribuées. Elles ne sont jamais discrètement réécrites, par une IA ou qui que ce soit, pour présenter le travail d’autrui comme celui du projet.
+It is meant to belong to the community that uses and improves it. Contributions are merged under their authors' names and credited to them.
 
 </Split>
 
