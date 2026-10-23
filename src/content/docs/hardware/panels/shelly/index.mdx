@@ -156,7 +156,7 @@ Shelly's current-build CDN link can stop working when a newer version replaces i
 
 ### Current firmware and compatibility
 
-As checked on **2026-10-12**, Shelly offers **stable 2.8.3** on both OTA tracks, build `20261012-141904/2.8.3-48174502c`, with no beta currently offered. The [official changelog](https://github.com/ShellyGroup/Wall-Display-Changelog) describes fixes for slow-loading Home Assistant dashboards and repeated errors on modern models, and for missed software updates. It also adds the connected Wi-Fi network frequency to RPC status. Firmware 2.8.1 also fixes the vendor camera-talkback microphone remaining active when its button is not held.
+The [release-note table below](#vendor-release-notes) lists the vendor’s documented releases from 2.4.0, including 2.8.4. Version 2.8.4 addresses security issues in settings restore, Shelly Cloud server verification and the local web interface. The [catalogue](https://panel-assistant.io/go/firmware?device=shelly) shows indexed packages for each OTA track. A vendor release note is separate from the development testing described here.
 
 The X2i has now run **2.8.2 and 2.8.3** in development testing for the forthcoming Panel Assistant **1.0** release. Settings restore, an in-place update through Panel Assistant, startup brightness, API screen-off and software-injected wake have been checked; the [X2i page](/hardware/panels/shelly/wall-display-x2i/#firmware-and-why-the-shipped-version-matters) records the limits. **This is partial qualification, not a claim of full compatibility.** The in-place Panel Assistant update was checked on 2.8.2; it has not been checked on 2.8.3. Physical touch and paired proximity and light measurements remain unqualified on 2.8.3. These findings do not establish behaviour on the X1i, XL or another Shelly model.
 
@@ -254,12 +254,21 @@ Firmware 2.6.0 disclosed that RPC over BLE was open to any BLE connection withou
 - **2.6.0:** a BLE connection confirmation dialog, which the user must acknowledge before an RPC session opens.
 - **2.7.0:** the GATT server is non-connectable when _Enable Bluetooth RPC_ is off, and BLE scan matching is stricter to reduce unintended connections.
 
+## Vendor release notes
+
+import ShellyReleaseNotes from '../../../../../components/ShellyReleaseNotes.astro';
+
+These short summaries describe the topics in Shelly’s notes in our own words. Each source link is pinned to the vendor file as recorded, so later edits do not change it. “Archived copy” appears only after the Wayback availability API confirms a capture. The source file is also preserved separately. Notes can exist for versions whose packages have not been found; they do not establish compatibility with a particular model.
+
+<ShellyReleaseNotes />
+
 ## Firmware versions that affect third-party apps
 
 Stable track, most recent first. Dates for 2.8.1, 2.8.2 and 2.8.3 are the vendor package build dates. The full product changelog is at [ShellyGroup/Wall-Display-Changelog](https://github.com/ShellyGroup/Wall-Display-Changelog), which covers 2.4.0 and later; earlier releases are on `community.shelly.cloud`, which needs a login.
 
 | Version | Date          | Relevant change                                                                                                                                      |
 | ------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2.8.4   | 2026-10-19    | Vendor security fixes for backup restore, Cloud server verification and local web access; no hardware qualification claimed                          |
 | 2.8.3   | 2026-10-12    | Stable at the 2026-10-12 check; Home Assistant dashboard and update-detection fixes; partial X2i testing; full qualification pending                 |
 | 2.8.2   | 2026-10-08    | Group-control and Shelly Cloud reconnection fixes; partial X2i development testing; full qualification pending                                       |
 | 2.8.1   | 2026-10-06    | Vendor camera-talkback microphone records only while its button is held                                                                              |

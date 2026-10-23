@@ -1,0 +1,52 @@
+---
+import notes from '../../tools/firmware-index/shelly-release-notes.json';
+const releases = Object.entries(notes).sort(([a], [b]) =>
+  b.localeCompare(a, undefined, { numeric: true }),
+);
+---
+
+<div class="release-notes">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Version</th>
+        <th scope="col">Summary</th>
+        <th scope="col">Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      {releases.map(([version, note]) => {
+        const page = `https://github.com/ShellyGroup/Wall-Display-Changelog/blob/${note.commit}/README.md`;
+        const anchor = `#${version.replaceAll('.', '')}`;
+        return (
+          <tr>
+            <th scope="row">{version}</th>
+            <td class="summary">{note.summary}</td>
+            <td>
+              <a href={page + anchor}>Release notes</a>
+              {' · '}
+              {note.wayback_ts ? (
+                <a href={`https://web.archive.org/web/${note.wayback_ts}/${page}${anchor}`}>
+                  Archived copy
+                </a>
+              ) : (
+                'Archived copy pending'
+              )}
+            </td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .release-notes {
+    overflow-x: auto;
+  }
+  .summary {
+    min-width: 14rem;
+    max-width: 28rem;
+    white-space: normal;
+  }
+</style>
