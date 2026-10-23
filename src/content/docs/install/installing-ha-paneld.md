@@ -23,6 +23,4 @@ Both routes check the panel before changing anything. The network route adopts a
 
 The panel appears as a device with a status sensor and diagnostics, and on the Panel Assistant page in the sidebar. Next you finish in the panel's own setup wizard, where you name the panel and choose its dashboard. Until setup is finished, the panel's own screen shows a QR code and a **Set up** button, so you can also finish from a phone or on the panel itself. To change the dashboard later, open the panel's status page in your browser, at its address on port 8888.
 
-![The panel's standing screen before setup, showing its configuration address, a QR code, and Configure and Dashboard buttons](/screenshots/standing-screen.png)
-
 Continue with [Connect a panel](/home-assistant/connect-a-panel/).

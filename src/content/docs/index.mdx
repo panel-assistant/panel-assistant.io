@@ -9,7 +9,7 @@ head:
     content: Panel Assistant
 hero:
   title: Home Assistant, on the wall, <span>done properly.</span>
-  tagline: Panel Assistant turns an Android wall panel into a fast, dependable home for your Home Assistant dashboards. You install and manage every panel from Home Assistant itself.
+  tagline: Panel Assistant turns an Android wall panel into a fast, dependable home for your Home Assistant dashboards, and into a voice assistant where the panel has a microphone. You install and manage every panel from Home Assistant itself.
   actions:
     - text: Get started
       link: /start/getting-started/
@@ -119,6 +119,12 @@ A wall panel should behave like a light switch: always there, never needing you.
 
 </Split>
 
+<Split title="Talk to it">
+
+A panel with a microphone can act as a Home Assistant Assist satellite on the device it already has, with no separate device to add. Turn it on from the panel's Configure page. It listens for Okay Nabu, Hey Jarvis, Hey Mycroft or Alexa on the panel itself, sends your command to Home Assistant only after it hears one, and speaks the answer through the panel's speaker. Each wake word can use its own Assist pipeline, you can train a wake word of your own, and any Home Assistant text-to-speech voice can make announcements through the speaker. [Set up the voice assistant](/manage/voice-assistant/).
+
+</Split>
+
 <Split title="Vendor software, tamed">
 
 Panel Assistant takes over the home screen and gives a button-less panel an on-screen way to get around. It keeps a vendor's control widget from drawing over your dashboard, while refusing by design to touch anything the panel needs to stay alive.
@@ -136,7 +142,7 @@ Panel Assistant takes over the home screen and gives a button-less panel an on-s
     },
     {
       title: 'Report your panel',
-      href: 'https://github.com/panel-assistant/ha-integration/issues',
+      href: 'https://github.com/panel-assistant/android/issues',
       text: 'Model name and what worked, or share the profile you taught it.',
     },
     {
@@ -191,7 +197,7 @@ Panel Assistant is new and evolving quickly. Three panel families have full hard
 
 Everything here is free and open-source software under permissive licences, with no account, no cloud service and no subscription. It is built by a Home Assistant user who wanted wall panels to work the way the hardware always promised, and it is shared so that yours can too.
 
-It is meant to belong to the community that uses and improves it. Contributions are merged under their authors' names and credited to them, never quietly rewritten, by AI or anyone else, to pass someone's work off as the project's own.
+It is meant to belong to the community that uses and improves it. Contributions are merged under their authors' names and credited to them.
 
 </Split>
 

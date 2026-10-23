@@ -12,6 +12,10 @@ La parte difícil de cualquier panel es la primera hora. Panel Assistant se enca
 
 Añade Panel Assistant mediante HACS y reinicia Home Assistant. Es lo único que instalas a mano. A partir de aquí, Home Assistant te guía. Consulta [Instalar la integración](/es/home-assistant/custom-integration/).
 
+:::note
+Panel Assistant 1.0 is in public preview. Until it is released, HACS installs 0.9.0. To install the preview instead, open **Panel Assistant** in HACS, turn on **Show beta versions** and download the newest 1.0 preview. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/es/manage/upgrade-to-1-0/) explains what changes.
+:::
+
 ## 2. Activa la depuración en el panel
 
 Abre las opciones para desarrolladores del panel y habilita ADB por red en el puerto TCP 5555, o la depuración USB si vas a conectar el panel por cable. Eso permite que Home Assistant se encargue de la instalación por ti. Las [páginas de hardware](/es/hardware/) muestran dónde está el interruptor en cada modelo, y [Preparar el panel](/es/install/prepare-a-panel/) explica los detalles.

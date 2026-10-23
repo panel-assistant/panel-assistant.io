@@ -12,6 +12,10 @@ La parte difficile di qualsiasi pannello è la prima ora. Panel Assistant se ne 
 
 Aggiungi Panel Assistant tramite HACS e riavvia Home Assistant. È l’unica cosa che installi a mano. Da qui in poi ti guida Home Assistant. Vedi [Installa l’integrazione](/it/home-assistant/custom-integration/).
 
+:::note
+Panel Assistant 1.0 is in public preview. Until it is released, HACS installs 0.9.0. To install the preview instead, open **Panel Assistant** in HACS, turn on **Show beta versions** and download the newest 1.0 preview. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/it/manage/upgrade-to-1-0/) explains what changes.
+:::
+
 ## 2. Attiva il debug sul pannello
 
 Apri le opzioni sviluppatore sul pannello e attiva ADB di rete sulla porta TCP 5555, oppure il debug USB se colleghi il pannello via cavo. È questo che consente a Home Assistant di eseguire l'installazione per te. Le [pagine hardware](/it/hardware/) mostrano dove si trova l'interruttore su ciascun modello e [Prepara il pannello](/it/install/prepare-a-panel/) fornisce i dettagli.
