@@ -86,7 +86,12 @@ def submit(url):
 
 def available(url):
     """Return the snapshot timestamp if the URL is in the Wayback Machine, else None."""
-    q = f"{AVAIL}?url=" + urllib.parse.quote(url, safe="")
+    # A pre-submission miss can be cached. Ask for the closest capture to now so
+    # confirmation does not reuse that empty result after Save Page Now finishes.
+    q = AVAIL + "?" + urllib.parse.urlencode({
+        "url": url,
+        "timestamp": datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d%H%M%S"),
+    })
     try:
         with urlopen(q, timeout=30) as r:
             d = json.load(r)
