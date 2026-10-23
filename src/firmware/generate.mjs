@@ -201,7 +201,7 @@ for (const [version, note] of Object.entries(shellyNotes)) {
   )
     throw new Error(`Invalid release notes: ${version}`);
 }
-function releaseNotes(version) {
+function shellyReleaseNotes(version) {
   const note = shellyNotes[version];
   if (!note) return 'Vendor release notes not found for this version.';
   const page = `https://github.com/ShellyGroup/Wall-Display-Changelog/blob/${note.commit}/README.md`;
@@ -210,6 +210,46 @@ function releaseNotes(version) {
     ? `[Archived copy](https://web.archive.org/web/${note.wayback_ts}/${page}${anchor})`
     : 'Archived copy pending';
   return `${clean(note.summary)} [Release notes](${page}${anchor}) · ${archived}`;
+}
+const vendorNotes = JSON.parse(readFileSync(join(data, 'vendor-release-notes.json'), 'utf8'));
+for (const source of Object.values(vendorNotes)) {
+  for (const note of [
+    source,
+    ...Object.values(source.versions ?? {}),
+    ...Object.values(source.supplements ?? {}),
+  ]) {
+    for (const field of ['notice', 'summary']) {
+      if (
+        note[field] !== undefined &&
+        (typeof note[field] !== 'string' || !note[field] || /[<>|\r\n]/.test(note[field]))
+      )
+        throw new Error(`Invalid vendor notes ${field}`);
+    }
+    if (
+      note.url &&
+      !/^https:\/\/(?:sonoff\.tech|forum\.ewelink\.cc)\/[A-Za-z0-9_./-]+$/.test(note.url)
+    )
+      throw new Error('Invalid vendor notes source');
+    if (note.wayback_ts !== undefined && !/^(?:[0-9]{14})?$/.test(note.wayback_ts))
+      throw new Error('Invalid vendor notes capture');
+  }
+}
+function releaseNotes(vendor, version) {
+  if (vendor === 'shelly') return shellyReleaseNotes(version);
+  const source = vendorNotes[vendor];
+  const note = source?.supplements?.[version] ?? source?.versions?.[version];
+  const summary = clean(
+    note?.summary ?? source?.notice ?? 'No vendor release notes found for this panel.',
+  );
+  const url = note?.url ?? source?.url;
+  if (!url) return summary;
+  const link = `[${note ? 'Release notes' : 'Vendor changelog'}](${url})`;
+  const archive = note?.wayback_ts
+    ? ` · [Archived copy](https://web.archive.org/web/${note.wayback_ts}/${url})`
+    : note
+      ? ' · Archived copy pending'
+      : '';
+  return `${summary} ${link}${archive}`;
 }
 const shelly = parseShelly();
 // Notes establish a release, not a downloadable package or compatibility with either OTA track.
@@ -237,6 +277,24 @@ const catalogue = [
   'First and last seen are dates when our monitor successfully fetched that download, not release or removal dates. A dash means no successful check is recorded. Sizes are from the source index; open a version for exact bytes, downloads and archives. On a phone, swipe a table sideways to see every column.',
   '',
 ];
+catalogue.push(
+  '## Release notes for other tracked panels',
+  '',
+  'The hardware reports below also record firmware versions or platform observations. Where no vendor notes were found, their package analysis remains separate from a vendor changelog.',
+  '',
+  '| Panel | Release notes |',
+  '| --- | --- |',
+);
+const reports = {
+  'smatek-s9e': '/hardware/panels/smatek/s9e/',
+  'electron-wf2489t': '/hardware/panels/electron/wf2489t/',
+  'electron-smt156': '/hardware/panels/electron/smt156/',
+  'electron-wf1589t': '/hardware/panels/electron/wf1589t/',
+  'tuya-tpa10': '/hardware/panels/tuya/tpa10/',
+};
+for (const [vendor, href] of Object.entries(reports))
+  catalogue.push(`| [${vendorNotes[vendor].name}](${href}) | ${releaseNotes(vendor)} |`);
+catalogue.push('');
 let versionPages = 0;
 let artifactCount = 0;
 for (const model of models) {
@@ -253,10 +311,8 @@ for (const model of models) {
     '',
     `[Choosing and installing a build](${guide}).`,
     '',
-    model.track
-      ? '| Version | Download | Size | First seen | Last seen | Release notes |'
-      : '| Version | Download | Size | First seen | Last seen |',
-    model.track ? '| --- | --- | ---: | --- | --- | --- |' : '| --- | --- | ---: | --- | --- |',
+    '| Version | Download | Size | First seen | Last seen | Release notes |',
+    '| --- | --- | ---: | --- | --- | --- |',
   );
   const modelPage = [
     '---',
@@ -274,17 +330,13 @@ for (const model of models) {
     '',
     'First and last seen are successful monitor checks, not release or removal dates. A dash means no successful check is recorded.',
     '',
-    model.track
-      ? '| Version | Download | Size | First seen | Last seen | Release notes |'
-      : '| Version | Download | Size | First seen | Last seen |',
-    model.track ? '| --- | --- | ---: | --- | --- | --- |' : '| --- | --- | ---: | --- | --- |',
+    '| Version | Download | Size | First seen | Last seen | Release notes |',
+    '| --- | --- | ---: | --- | --- | --- |',
   ];
   for (const version of versions) {
     const artifacts = records.get(version);
     artifactCount += artifacts.length;
-    const notesCell = model.track
-      ? ` <span style="display:block;white-space:normal;min-width:16rem;max-width:26rem">${releaseNotes(version)}</span> |`
-      : '';
+    const notesCell = ` <span style="display:block;white-space:normal;min-width:16rem;max-width:26rem">${releaseNotes(model.track ? 'shelly' : 'sonoff', version)}</span> |`;
     if (!artifacts.length) {
       const row = `| [${version}](${pathFor(model.slug, version)}) | No indexed package | — | — | — |${notesCell}`;
       catalogue.push(row);
@@ -309,8 +361,8 @@ for (const model of models) {
         : 'A URL here is a CDN observation, not a claim that this upgrade path has been tested on hardware.',
       '',
     ];
+    page.push(releaseNotes(model.track ? 'shelly' : 'sonoff', version), '');
     if (model.track) {
-      page.push(releaseNotes(version), '');
       const note = shellyNotes[version];
       if (note) {
         const raw = `https://raw.githubusercontent.com/ShellyGroup/Wall-Display-Changelog/${note.commit}/README.md`;
@@ -392,9 +444,9 @@ for (const model of meta.models) {
   const archive = `[Internet Archive](${artifact.archiveUrl})`;
   const download = `${original} · ${archive}`;
   const summary = [
-    '| Version | Download | Size | First seen | Last seen |',
-    '| --- | --- | ---: | --- | --- |',
-    `| [${version}](${pathFor(model.slug, version)}) | ${download} | ${(artifact.bytes / 1048576).toFixed(1)} MiB | — | — |`,
+    '| Version | Download | Size | First seen | Last seen | Release notes |',
+    '| --- | --- | ---: | --- | --- | --- |',
+    `| [${version}](${pathFor(model.slug, version)}) | ${download} | ${(artifact.bytes / 1048576).toFixed(1)} MiB | — | — | <span style="display:block;white-space:normal;min-width:16rem;max-width:26rem">${releaseNotes('meta', version)}</span> |`,
     '',
   ];
   catalogue.push(`## [${model.name}](${pathFor(model.slug, '')})`, '', notice, '', ...summary);
@@ -409,7 +461,7 @@ for (const model of meta.models) {
       '',
       context,
       '',
-      'No vendor release notes found for this Meta Portal build.',
+      releaseNotes('meta', version),
       '',
       notice,
       '',
@@ -428,7 +480,7 @@ for (const model of meta.models) {
       '',
       context,
       '',
-      'No vendor release notes found for this Meta Portal build.',
+      releaseNotes('meta', version),
       '',
       notice,
       '',

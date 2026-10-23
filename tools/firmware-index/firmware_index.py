@@ -7,6 +7,8 @@ The site generator reads the canonical data files and preserved history branches
 """
 
 import argparse
+import gzip
+import hashlib
 import json
 import os
 import re
@@ -14,6 +16,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from html.parser import HTMLParser
 from concurrent.futures import ThreadPoolExecutor
 
 HOST = "https://global-otadl2bsy.coolkit.cc"
@@ -484,6 +487,130 @@ def cmd_probe(args):
     return 1 if down > 0 else 0
 
 
+SONOFF_NOTES_URL = "https://sonoff.tech/en-us/blogs/news/sonoff-nspanel-pro-version-update-information-and-faq"
+
+
+class SonoffNotesParser(HTMLParser):
+    """Read only explicit version headings; a gap is never inferred to have notes."""
+    def __init__(self):
+        super().__init__()
+        self.sections = {}
+        self.version = None
+        self.heading = None
+        self.skip = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag in ("script", "style"):
+            self.skip += 1
+        if re.fullmatch(r"h[1-6]", tag):
+            self.heading = []
+
+    def handle_data(self, text):
+        if self.skip:
+            return
+        if self.heading is not None:
+            self.heading.append(text)
+        elif self.version:
+            self.sections[self.version].append(text)
+
+    def handle_endtag(self, tag):
+        if tag in ("script", "style"):
+            self.skip -= 1
+        if re.fullmatch(r"h[1-6]", tag) and self.heading is not None:
+            title = " ".join("".join(self.heading).split())
+            match = re.match(r"^V?([0-9]+\.[0-9]+\.[0-9]+)(?:[^0-9.]|$)", title, re.I)
+            if match:
+                self.version = match[1]
+                if self.version in self.sections:
+                    raise ValueError("duplicate vendor version heading")
+                self.sections[self.version] = []
+            elif title.upper() == "FAQ":
+                self.version = None
+            elif self.version:
+                self.sections[self.version].append(title)
+            self.heading = None
+
+
+def parse_sonoff_notes(html):
+    parser = SonoffNotesParser()
+    parser.feed(html)
+    sections = {version: " ".join(" ".join(parts).split()) for version, parts in parser.sections.items()}
+    if not sections or any(not text for text in sections.values()):
+        raise ValueError("vendor page has no complete release-note sections")
+    return sections
+
+
+def fetch_notes_html(url):
+    from secure_urlopen import urlopen
+    request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept": "text/html"})
+    with urlopen(request, timeout=30) as response:
+        data = response.read(8 * 1024 * 1024 + 1)
+        if len(data) > 8 * 1024 * 1024:
+            raise ValueError("vendor notes exceed size limit")
+        if response.headers.get("Content-Encoding") == "gzip":
+            data = gzip.decompress(data)
+    return data.decode("utf-8")
+
+
+def notes_digest(section):
+    return hashlib.sha256(section.encode("utf-8")).hexdigest()
+
+
+def cmd_notes(args):
+    from pathlib import Path
+    from shelly_firmware import notes_summary
+    from wayback_archive import available, auth_header, submit, CONFIRM_WAIT
+
+    path = Path(args.notes)
+    catalogue = json.loads(path.read_text())
+    source = catalogue["sonoff"]
+    if source["url"] != SONOFF_NOTES_URL:
+        raise ValueError("unexpected Sonoff notes source")
+    # Fetch and parse before changing any stored metadata. Refused access or a changed
+    # vendor format fails visibly and retains the last verified sources and captures.
+    sections = parse_sonoff_notes(fetch_notes_html(source["url"]))
+    for version, section in sections.items():
+        old = source["versions"].get(version)
+        if old and old.get("wayback_ts"):
+            continue
+        summary, review = notes_summary(section)
+        if review and re.search(r"known (?:issues|bugs)|system stability", section, re.I):
+            summary, review = "General fixes; the vendor gives no further detail.", False
+        source["versions"][version] = dict(summary=summary, review_required=review,
+                                           section_sha256=notes_digest(section), wayback_ts="")
+
+    def confirm():
+        pending = {v: n for v, n in source["versions"].items() if not n["wayback_ts"]}
+        if not pending:
+            return
+        stamp = available(source["url"])
+        if not stamp:
+            return
+        try:
+            archived = parse_sonoff_notes(fetch_notes_html(
+                f"https://web.archive.org/web/{stamp}id_/" + source["url"]))
+        except Exception as exc:
+            print(f"Notes replay not confirmed ({type(exc).__name__}); retry next run")
+            return
+        for version, note in pending.items():
+            if version in archived and notes_digest(archived[version]) == note["section_sha256"]:
+                note["wayback_ts"] = stamp
+
+    confirm()
+    pending = [n for n in source["versions"].values() if not n["wayback_ts"]]
+    _, authenticated = auth_header()
+    if pending and authenticated:
+        # This page changes in place. A year-old capture cannot preserve a newly added section.
+        job, _response = submit(source["url"], freshness="1s")
+        if job:
+            time.sleep(CONFIRM_WAIT)
+            confirm()
+    path.write_text(json.dumps(catalogue, indent=2, ensure_ascii=False) + "\n")
+    print(f"Sonoff release notes: {len(source['versions'])} versions; "
+          f"{sum(not n['wayback_ts'] for n in source['versions'].values())} captures pending")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -498,6 +625,10 @@ def main():
     discover.add_argument("--json", help="write findings to JSON")
     discover.add_argument("--apply", action="store_true")
     discover.set_defaults(func=cmd_discover)
+
+    notes = sub.add_parser("notes", help="maintain vendor release notes and confirmed captures")
+    notes.add_argument("--notes", required=True)
+    notes.set_defaults(func=cmd_notes)
 
     args = ap.parse_args()
     sys.exit(args.func(args))

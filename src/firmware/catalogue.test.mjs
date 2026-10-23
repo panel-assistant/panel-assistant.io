@@ -93,13 +93,13 @@ test('built version pages carry the source downloads, capture links and older ch
 
 test('built catalogue compares download sizes and observed availability dates', () => {
   const catalogue = read(join(dist, 'index.html'));
-  assert.equal((catalogue.match(/<table>/g) ?? []).length, models.length + 7);
+  assert.equal((catalogue.match(/<table>/g) ?? []).length, models.length + 8);
   const downloads = models.reduce(
     (sum, [, versions]) =>
       sum + [...versions.values()].reduce((count, value) => count + Math.max(1, value), 0),
     0,
   );
-  assert.equal((catalogue.match(/<tr>/g) ?? []).length, downloads + models.length + 14);
+  assert.equal((catalogue.match(/<tr>/g) ?? []).length, downloads + models.length + 20);
   assert.match(catalogue, /<th[^>]*>Size<\/th>/);
   assert.match(catalogue, /<th[^>]*>First seen<\/th>/);
   assert.match(catalogue, /<th[^>]*>Last seen<\/th>/);
@@ -217,5 +217,51 @@ test('every Shelly release displays its original summary and pinned vendor and c
       if (note.raw_wayback_ts) assert.ok(versionHtml.includes(`web/${note.raw_wayback_ts}/${raw}`));
       else assert.match(versionHtml, /Source file capture pending/);
     }
+  }
+});
+
+test('every firmware family exposes vendor notes or an explicit search outcome', () => {
+  const notes = JSON.parse(read(join(source, 'vendor-release-notes.json')));
+  const catalogue = read(join(dist, 'index.html'));
+  for (const [model, versions] of models.filter(([name]) => name.startsWith('sonoff-'))) {
+    const modelHtml = read(join(dist, model, 'index.html'));
+    assert.match(modelHtml, /Release notes/);
+    for (const version of versions.keys()) {
+      const note = notes.sonoff.supplements[version] ?? notes.sonoff.versions[version];
+      const url = note?.url ?? notes.sonoff.url;
+      for (const html of [
+        catalogue,
+        modelHtml,
+        read(join(dist, model, slug(version), 'index.html')),
+      ]) {
+        assert.ok(html.includes(`href="${url}"`), `${model} ${version} lost the vendor source`);
+        assert.ok(html.includes(note?.summary ?? notes.sonoff.notice));
+        if (note?.wayback_ts) assert.ok(html.includes(`web/${note.wayback_ts}/${url}`));
+      }
+    }
+  }
+  const metadata = JSON.parse(read(join(source, 'fw-meta-portal.json')));
+  for (const model of metadata.models) {
+    const version = metadata.families[model.family].version;
+    for (const html of [
+      catalogue,
+      read(join(dist, model.slug, 'index.html')),
+      read(join(dist, model.slug, slug(version), 'index.html')),
+    ])
+      assert.ok(html.includes(notes.meta.notice), `${model.slug} has an unexplained notes gap`);
+  }
+  const reports = {
+    'smatek-s9e': 'smatek/s9e',
+    'electron-wf2489t': 'electron/wf2489t',
+    'electron-smt156': 'electron/smt156',
+    'electron-wf1589t': 'electron/wf1589t',
+    'tuya-tpa10': 'tuya/tpa10',
+  };
+  for (const [vendor, path] of Object.entries(reports)) {
+    assert.ok(catalogue.includes(notes[vendor].name));
+    assert.match(
+      read(join(root, 'dist/hardware/panels', path, 'index.html')),
+      /No vendor firmware release notes were found/,
+    );
   }
 });
