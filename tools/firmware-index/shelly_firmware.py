@@ -25,6 +25,7 @@ import os
 import pathlib
 import re
 import ssl
+import subprocess
 import sys
 import time
 import urllib.error
@@ -422,6 +423,151 @@ def cmd_archive(args):
 
 
 # --------------------------------------------------------------------------- #
+# release notes (shared by both OTA tracks)
+# --------------------------------------------------------------------------- #
+
+CHANGELOG_REPO = "https://github.com/ShellyGroup/Wall-Display-Changelog"
+NOTES_TOPICS = (
+    (r"security|attacker|authentication|genuine shelly|unauthori", "security"),
+    (r"home assistant|webview|dashboard|web browser", "dashboard browsing"),
+    (r"backup|import|export|restore|factory reset|uninstall all updates", "settings recovery"),
+    (r"firmware|software update|ota|updat(?:e|ing) download", "firmware updates"),
+    (r"microphone|talkback|camera", "cameras and audio input"),
+    (r"matter", "Matter devices"),
+    (r"thermostat|heating|cooling|temperature|humidity", "climate controls"),
+    (r"wifi|wi-fi|cloud|mqtt|network|bluetooth|\bble\b", "network connections"),
+    (r"screen|brightness|layout|tile|portrait|landscape|swipe|gesture", "display controls"),
+    (r"media|alarm|radio|speaker|ringtone|sonos|volume", "media and alarms"),
+    (r"relay|roller|cover|switch|light|button|group|scene|action", "device controls"),
+    (r"rpc|schedule|event|notify|accessibility", "automation interfaces"),
+    (r"appstore|app store|third.party app", "installed apps"),
+    (r"sensor|solar|\bpv\b|weather|zendure", "sensor readings"),
+)
+
+
+def fetch_changelog():
+    # Resolve once, then read the immutable file: a moving branch is never an archive identity.
+    commit = subprocess.check_output(
+        ["git", "ls-remote", CHANGELOG_REPO + ".git", "HEAD"],
+        text=True, timeout=30,
+    ).split()[0]
+    if not re.fullmatch(r"[a-f0-9]{40}", commit):
+        raise ValueError("invalid changelog commit")
+    raw_url = f"https://raw.githubusercontent.com/ShellyGroup/Wall-Display-Changelog/{commit}/README.md"
+    with urlopen(raw_url, timeout=30) as response:
+        text = response.read(1024 * 1024 + 1).decode("utf-8")
+    if len(text.encode("utf-8")) > 1024 * 1024:
+        raise ValueError("changelog exceeds size limit")
+    return commit, text
+
+
+def release_sections(text):
+    headings = list(re.finditer(r"^## ([0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?)\s*$", text, re.M))
+    sections = {}
+    for index, match in enumerate(headings):
+        version = match[1]
+        numbers = tuple(map(int, version.split("-")[0].split(".")))
+        if numbers < (2, 4, 0):
+            continue
+        end = headings[index + 1].start() if index + 1 < len(headings) else len(text)
+        section = text[match.end():end].strip()
+        if version in sections or not section:
+            raise ValueError(f"duplicate or empty release section: {version}")
+        sections[version] = section
+    if not sections:
+        raise ValueError("no release sections found in vendor changelog")
+    return sections
+
+
+def notes_summary(section):
+    # Original topic labels, never extracted vendor sentences. Unfamiliar sections need review.
+    topics = [label for pattern, label in NOTES_TOPICS if re.search(pattern, section, re.I)]
+    if not topics:
+        return "Vendor changes need a summary review; see the release notes.", True
+    selected = topics[:4]
+    wording = ", ".join(selected[:-1]) + " and " + selected[-1] if len(selected) > 1 else selected[0]
+    return "Changes to " + wording + ".", False
+
+
+def load_notes(path):
+    try:
+        notes = json.loads(pathlib.Path(path).read_text())
+    except FileNotFoundError:
+        return {}
+    if not isinstance(notes, dict):
+        raise ValueError("release notes must be a version map")
+    for version, note in notes.items():
+        if not _VERSION_RE.fullmatch(version) or not isinstance(note, dict):
+            raise ValueError("invalid release notes entry")
+        commit = note.get("commit", "")
+        summary = note.get("summary", "")
+        if (not re.fullmatch(r"[a-f0-9]{40}", commit) or not isinstance(summary, str)
+                or not 1 <= len(summary) <= 240 or re.search(r"[<>|\r\n]", summary)
+                or not isinstance(note.get("review_required"), bool)):
+            raise ValueError(f"invalid release notes metadata: {version}")
+        for key in ("wayback_ts", "raw_wayback_ts"):
+            stamp = note.get(key, "")
+            if not isinstance(stamp, str) or not _WAYBACK_TS_RE.fullmatch(stamp):
+                raise ValueError(f"invalid notes capture: {version}")
+    return notes
+
+
+def notes_urls(note):
+    commit = note["commit"]
+    return (f"{CHANGELOG_REPO}/blob/{commit}/README.md",
+            f"https://raw.githubusercontent.com/ShellyGroup/Wall-Display-Changelog/{commit}/README.md")
+
+
+def cmd_notes(args):
+    from wayback_archive import available, auth_header, submit
+
+    notes = load_notes(args.notes)
+    commit, text = fetch_changelog()
+    for version, section in release_sections(text).items():
+        if version not in notes:
+            summary, review = notes_summary(section)
+            notes[version] = dict(commit=commit, summary=summary, review_required=review,
+                                  wayback_ts="", raw_wayback_ts="")
+    # One README capture preserves every section at this commit. Fragments are reader navigation,
+    # not separate HTTP resources. Prioritise the latest release when snapshots differ.
+    pending = {}
+    for version in sorted(notes, key=lambda v: tuple(map(int, v.split("-")[0].split("."))), reverse=True):
+        note = notes[version]
+        for key, url in zip(("wayback_ts", "raw_wayback_ts"), notes_urls(note)):
+            if not note[key]:
+                pending.setdefault(url, []).append((note, key))
+    _, authed = auth_header()
+    submitted = []
+    for index, (url, targets) in enumerate(pending.items()):
+        stamp = available(url)
+        if not stamp and authed:
+            job, _response = submit(url)
+            if job:
+                submitted.append(url)
+            if (index + 1) % WAVE_SIZE == 0 and index + 1 < len(pending):
+                time.sleep(DRAIN_WAIT)
+        if stamp:
+            for note, key in targets:
+                note[key] = stamp
+    if submitted:
+        time.sleep(CONFIRM_WAIT)
+        for url in submitted:
+            stamp = available(url)
+            if stamp:
+                for note, key in pending[url]:
+                    note[key] = stamp
+    pathlib.Path(args.notes).write_text(json.dumps(notes, indent=2, ensure_ascii=False) + "\n")
+    remaining = sum(not note[key] for note in notes.values() for key in ("wayback_ts", "raw_wayback_ts"))
+    print(f"Release notes: {len(notes)} versions; {remaining} capture references pending")
+    if remaining and not authed:
+        print("WAYBACK_S3 not set; notes saved, captures will retry with authentication.")
+    reviews = [version for version, note in notes.items() if note["review_required"]]
+    if reviews:
+        print("Summary review required: " + ", ".join(reviews))
+    return 0
+
+
+# --------------------------------------------------------------------------- #
 # CLI
 # --------------------------------------------------------------------------- #
 
@@ -440,6 +586,10 @@ def main():
     a = sub.add_parser("archive", help="submit unarchived URLs to the Wayback Machine")
     a.add_argument("--dat", required=True)
     a.set_defaults(func=cmd_archive)
+
+    n = sub.add_parser("notes", help="discover and archive immutable vendor release notes")
+    n.add_argument("--notes", required=True)
+    n.set_defaults(func=cmd_notes)
 
     args = ap.parse_args()
     sys.exit(args.func(args))

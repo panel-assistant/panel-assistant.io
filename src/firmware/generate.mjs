@@ -186,7 +186,38 @@ function write(relative, body) {
   writeFileSync(target, body);
 }
 
+const shellyNotes = JSON.parse(readFileSync(join(data, 'shelly-release-notes.json'), 'utf8'));
+for (const [version, note] of Object.entries(shellyNotes)) {
+  assertVersion(version);
+  if (
+    !/^[a-f0-9]{40}$/.test(note.commit) ||
+    typeof note.summary !== 'string' ||
+    !note.summary ||
+    note.summary.length > 240 ||
+    /[<>|\r\n]/.test(note.summary) ||
+    typeof note.review_required !== 'boolean' ||
+    !/^(?:[0-9]{14})?$/.test(note.wayback_ts) ||
+    !/^(?:[0-9]{14})?$/.test(note.raw_wayback_ts)
+  )
+    throw new Error(`Invalid release notes: ${version}`);
+}
+function releaseNotes(version) {
+  const note = shellyNotes[version];
+  if (!note) return 'Vendor release notes not found for this version.';
+  const page = `https://github.com/ShellyGroup/Wall-Display-Changelog/blob/${note.commit}/README.md`;
+  const anchor = `#${version.replaceAll('.', '')}`;
+  const archived = note.wayback_ts
+    ? `[Archived copy](https://web.archive.org/web/${note.wayback_ts}/${page}${anchor})`
+    : 'Archived copy pending';
+  return `${clean(note.summary)} [Release notes](${page}${anchor}) · ${archived}`;
+}
 const shelly = parseShelly();
+// Notes establish a release, not a downloadable package or compatibility with either OTA track.
+for (const records of shelly.values()) {
+  for (const version of Object.keys(shellyNotes)) {
+    if (!records.has(version)) records.set(version, []);
+  }
+}
 const history = availabilityHistory();
 const wayback = branchJson('wayback-state', 'wayback.json');
 rmSync(output, { recursive: true, force: true });
@@ -218,12 +249,14 @@ for (const model of models) {
   catalogue.push(
     `## [${model.name}](${pathFor(model.slug, '')})`,
     '',
-    `${versions.length} indexed versions${model.track ? ` on the shared ${model.track} OTA track` : ''}.`,
+    `${versions.length} listed versions${model.track ? ` for the shared ${model.track} OTA track; some have vendor notes only` : ''}.`,
     '',
     `[Choosing and installing a build](${guide}).`,
     '',
-    '| Version | Download | Size | First seen | Last seen |',
-    '| --- | --- | ---: | --- | --- |',
+    model.track
+      ? '| Version | Download | Size | First seen | Last seen | Release notes |'
+      : '| Version | Download | Size | First seen | Last seen |',
+    model.track ? '| --- | --- | ---: | --- | --- | --- |' : '| --- | --- | ---: | --- | --- |',
   );
   const modelPage = [
     '---',
@@ -241,15 +274,25 @@ for (const model of models) {
     '',
     'First and last seen are successful monitor checks, not release or removal dates. A dash means no successful check is recorded.',
     '',
-    '| Version | Download | Size | First seen | Last seen |',
-    '| --- | --- | ---: | --- | --- |',
+    model.track
+      ? '| Version | Download | Size | First seen | Last seen | Release notes |'
+      : '| Version | Download | Size | First seen | Last seen |',
+    model.track ? '| --- | --- | ---: | --- | --- | --- |' : '| --- | --- | ---: | --- | --- |',
   ];
   for (const version of versions) {
     const artifacts = records.get(version);
     artifactCount += artifacts.length;
+    const notesCell = model.track
+      ? ` <span style="display:block;white-space:normal;min-width:16rem;max-width:26rem">${releaseNotes(version)}</span> |`
+      : '';
+    if (!artifacts.length) {
+      const row = `| [${version}](${pathFor(model.slug, version)}) | No indexed package | — | — | — |${notesCell}`;
+      catalogue.push(row);
+      modelPage.push(row);
+    }
     for (const artifact of artifacts) {
       const observed = status(history, artifact.url);
-      const row = `| [${version}](${pathFor(model.slug, version)}) | ${clean(artifact.type)} | ${(artifact.bytes / 1048576).toFixed(1)} MiB | ${observed.first} | ${observed.last} |`;
+      const row = `| [${version}](${pathFor(model.slug, version)}) | ${clean(artifact.type)} | ${(artifact.bytes / 1048576).toFixed(1)} MiB | ${observed.first} | ${observed.last} |${notesCell}`;
       catalogue.push(row);
       modelPage.push(row);
     }
@@ -262,10 +305,29 @@ for (const model of models) {
       `[All ${model.name} versions](${pathFor(model.slug, '')}) · [Firmware guide](${guide})`,
       '',
       model.track
-        ? `This is a **${model.track}** OTA package shared with other models on that track. Shelly replaces old CDN objects when a new version ships; use the archive link for an older build.`
+        ? `Packages indexed here belong to the shared **${model.track}** OTA track. Shelly replaces old CDN objects when a new version ships; use a recorded archive link for an older build.`
         : 'A URL here is a CDN observation, not a claim that this upgrade path has been tested on hardware.',
       '',
     ];
+    if (model.track) {
+      page.push(releaseNotes(version), '');
+      const note = shellyNotes[version];
+      if (note) {
+        const raw = `https://raw.githubusercontent.com/ShellyGroup/Wall-Display-Changelog/${note.commit}/README.md`;
+        page.push(
+          `[Vendor source file](${raw})` +
+            (note.raw_wayback_ts
+              ? ` · [Archived source file](https://web.archive.org/web/${note.raw_wayback_ts}/${raw})`
+              : ' · Source file capture pending'),
+          '',
+        );
+      }
+      if (!artifacts.length)
+        page.push(
+          'No firmware package has been indexed for this version on this track. The vendor notes alone do not establish model compatibility.',
+          '',
+        );
+    }
     for (const artifact of artifacts) {
       const observed = status(history, artifact.url);
       page.push(
@@ -347,6 +409,8 @@ for (const model of meta.models) {
       '',
       context,
       '',
+      'No vendor release notes found for this Meta Portal build.',
+      '',
       notice,
       '',
       ...summary,
@@ -363,6 +427,8 @@ for (const model of meta.models) {
       `[All ${model.name} versions](${pathFor(model.slug, '')})`,
       '',
       context,
+      '',
+      'No vendor release notes found for this Meta Portal build.',
       '',
       notice,
       '',

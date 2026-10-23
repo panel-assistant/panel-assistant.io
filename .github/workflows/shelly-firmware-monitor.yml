@@ -41,6 +41,7 @@ concurrency:
 
 env:
   DAT: tools/firmware-index/fw-shelly-walldisplay.dat
+  NOTES: tools/firmware-index/shelly-release-notes.json
 
 jobs:
   verify:
@@ -97,6 +98,9 @@ jobs:
           if git ls-remote --exit-code --heads "$repo_url" automation/shelly-firmware-index >/dev/null 2>&1; then
             git fetch -q "$repo_url" automation/shelly-firmware-index
             git show FETCH_HEAD:"$DAT" > "$DAT"
+            if git cat-file -e FETCH_HEAD:"$NOTES" 2>/dev/null; then
+              git show FETCH_HEAD:"$NOTES" > "$NOTES"
+            fi
           fi
 
       # Check both manifest endpoints for new versions. Sets has_new, has_pending,
@@ -114,11 +118,18 @@ jobs:
           WAYBACK_S3: ${{ secrets.WAYBACK_S3 }}
         run: python tools/firmware-index/shelly_firmware.py archive --dat "$DAT"
 
+      # Notes may arrive after the OTA package. Retry every day, including captures
+      # that Save Page Now accepted but the availability API has not confirmed yet.
+      - name: Update and archive release notes
+        env:
+          WAYBACK_S3: ${{ secrets.WAYBACK_S3 }}
+        run: python tools/firmware-index/shelly_firmware.py notes --notes "$NOTES"
+
       # Detect whether the .dat file actually changed (new entry or wayback_ts filled in).
       - name: Check for .dat changes
         id: diff
         run: |
-          if git diff --quiet "$DAT"; then
+          if git diff --quiet "$DAT" "$NOTES"; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -146,12 +157,13 @@ jobs:
           fi
 
           dat_content="$(cat "$DAT")"
+          notes_content="$(cat "$NOTES")"
           # The working-tree .dat was deliberately overwritten from the pending PR branch
           # earlier, so it is dirty against HEAD. Its content is saved above; restore the
           # checked-out copy or the branch switch below refuses with "local changes would
           # be overwritten by checkout" (this failed every scheduled run while a pending
           # branch existed).
-          git checkout -q -- "$DAT"
+          git checkout -q -- "$DAT" "$NOTES"
           if git ls-remote --exit-code --heads "$repo_url" "$branch" >/dev/null 2>&1; then
             git fetch -q "$repo_url" "$branch"
             git checkout -q -B "$branch" FETCH_HEAD
@@ -160,12 +172,14 @@ jobs:
           fi
           printf '%s\n' "$dat_content" > "$DAT"
 
-          git add "$DAT"
+          printf '%s\n' "$notes_content" > "$NOTES"
+
+          git add "$DAT" "$NOTES"
           git commit -q -m "$msg" || echo "nothing new to commit onto $branch"
           git push -q "$repo_url" "HEAD:$branch"
 
           if [ -z "$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$branch" --base main --state open --json number --jq '.[0].number')" ]; then
             gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" \
               --title "$msg" \
-              --body "Automated Shelly Wall Display firmware index update from the scheduled monitor. Review the \`.dat\` diff, then merge."
+              --body "Automated Shelly Wall Display firmware index update from the scheduled monitor. Review the firmware data and release-note summaries, then merge."
           fi
