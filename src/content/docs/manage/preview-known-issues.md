@@ -27,7 +27,7 @@ In 1.0 the Panel Assistant sidebar shows a panel's pages over the panel's own co
 
 ## Voice is on by default where the panel has a microphone
 
-On a Sonoff NSPanel Pro, a Tuya TPA10, an Electron WF1589T, a Shelly Wall Display X2i, a Meta Portal 10 (2nd generation) and a ZHICAI SMT1019, the voice assistant starts on unless you had already turned it off. If you do not want a panel listening for a wake word, turn it off under **Voice** on the panel's **Configure** page, or disable the panel's Assist satellite entity in Home Assistant.
+On a Sonoff NSPanel Pro, a Tuya TPA10, an Electron WF1589T, a Shelly Wall Display X2i, a Meta Portal 10 (2nd generation) and an Electron WF2489T, the voice assistant starts on unless you had already turned it off. If you do not want a panel listening for a wake word, turn it off under **Voice** on the panel's **Configure** page, or disable the panel's Assist satellite entity in Home Assistant.
 
 ## A screen lock PIN is asked for after a full screen-off
 
