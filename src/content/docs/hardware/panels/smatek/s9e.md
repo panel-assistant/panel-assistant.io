@@ -27,6 +27,8 @@ sidebar:
   label: S9E
 ---
 
+No vendor firmware release notes were found for the versions documented here. The version comparison below comes from inspecting the supplied images, rather than a vendor changelog.
+
 :::note
 Unlike the fully supported panels, the S9E has **not** been reverse-engineered on a unit in hand. Specifications come from Smatek's listing, and control paths come from [seaky/nspanel_pro_tools_apk issue 98](https://github.com/seaky/nspanel_pro_tools_apk/issues/98), the Home Assistant community thread and reporters. Relay and button support is implemented but untested on hardware, so treat control-path details as unconfirmed until validated.
 :::

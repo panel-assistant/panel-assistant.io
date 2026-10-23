@@ -28,6 +28,8 @@ sidebar:
   label: TPA10
 ---
 
+No vendor firmware release notes were found for this panel. The firmware facts on this page are observations from the inspected device.
+
 A roomy **10.1 in 1920×1200** rk3566 panel with a single front RGB LED, a monochrome button backlight, a rich sensor set (time-of-flight proximity, temperature and humidity, ambient light), a camera and five physical buttons. It has no Zigbee, NFC or IR. Reverse-engineered on a live unit (Android 11, rooted, `su` present).
 
 ## Also sold as

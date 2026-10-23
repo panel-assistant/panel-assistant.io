@@ -70,7 +70,7 @@ def _read(req):
         return {"status": "error", "raw": raw[:200]}
 
 
-def submit(url):
+def submit(url, *, freshness=FILE_FRESHNESS):
     """Fire a Save Page Now capture. Returns (job_id_or_None, raw_response)."""
     hdr, _ = auth_header()
     hdr.update({
@@ -78,7 +78,7 @@ def submit(url):
         "Content-Type": "application/x-www-form-urlencoded",
         "User-Agent": "ha-paneld-firmware-archiver",
     })
-    fields = {"url": url, "skip_first_archive": "1", "if_not_archived_within": FILE_FRESHNESS}
+    fields = {"url": url, "skip_first_archive": "1", "if_not_archived_within": freshness}
     body = urllib.parse.urlencode(fields).encode()
     resp = _read(urllib.request.Request(SAVE, data=body, headers=hdr, method="POST"))
     return resp.get("job_id"), resp

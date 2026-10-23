@@ -113,8 +113,15 @@ jobs:
         run: |
           python tools/firmware-index/firmware_index.py probe --history /tmp/discovery-history.json
 
+      # Notes can arrive after the binary. Maintain them on every scheduled run.
+      - name: Update vendor release notes and archives
+        id: notes
+        continue-on-error: true # persist confirmed binary discoveries before reporting a notes outage
+        env:
+          WAYBACK_S3: ${{ secrets.WAYBACK_S3 }}
+        run: python tools/firmware-index/firmware_index.py notes --notes tools/firmware-index/vendor-release-notes.json
+
       - name: Open/update pull request with the firmware index
-        if: steps.discover.outputs.found == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           NEW_VERSIONS: ${{ steps.discover.outputs.versions }}
@@ -129,7 +136,7 @@ jobs:
             msg="data: NSPanel Pro $NEW_VERSIONS discovered"
           fi
 
-          git add tools/firmware-index/fw-120p.dat tools/firmware-index/fw-86p.dat
+          git add tools/firmware-index/fw-120p.dat tools/firmware-index/fw-86p.dat tools/firmware-index/vendor-release-notes.json
           if git diff --cached --quiet; then
             echo "nothing new to commit onto $branch"
             exit 0
@@ -142,5 +149,11 @@ jobs:
               --title "$msg" \
               --body "Automated NSPanel Pro firmware discovery. Every appended URL was confirmed by ZIP magic and re-validated at its recorded byte size against the CDN.
 
-          Review the new .dat rows and the site firmware guide before merging. Do not widen any hardware-verification claim from CDN evidence. Full ROMs are not discoverable automatically (their filenames embed a build date), so check for one by hand if this release needs a checkpoint."
+          Review the firmware data, vendor-note summaries and the site firmware guide before merging. Do not widen any hardware-verification claim from CDN evidence. Full ROMs are not discoverable automatically (their filenames embed a build date), so check for one by hand if this release needs a checkpoint."
           fi
+
+      - name: Report release-note refresh failure
+        if: steps.notes.outcome == 'failure'
+        run: |
+          echo "::error::Vendor release notes could not be refreshed; prior notes were preserved."
+          exit 1

@@ -8,6 +8,8 @@ sidebar:
   order: 0
 ---
 
+No vendor firmware release notes were found that match the indexed Portal build numbers. The firmware catalogue records package metadata and preserved downloads; Meta product announcements do not establish changes in a particular build.
+
 :::note
 **One model has been examined on hardware: the [Portal 10" (2nd gen)](/hardware/panels/meta/portal-10-gen2/).** Its page carries what was measured, including what works, what does not, and the setup steps that matter. Portal support, including both Portal profiles, arrives with version 1.0 of the panel app; earlier versions run a Portal on the Generic profile. Everything about the other models on this page comes from Meta's developer documentation and public owner reports, and has not been checked on a unit.
 :::

@@ -1,0 +1,393 @@
+{
+  "sonoff": {
+    "name": "Sonoff NSPanel Pro",
+    "url": "https://sonoff.tech/en-us/blogs/news/sonoff-nspanel-pro-version-update-information-and-faq",
+    "notice": "No vendor release notes found for this exact version.",
+    "versions": {
+      "4.6.0": {
+        "summary": "Changes to security, dashboard browsing, Matter devices and climate controls.",
+        "review_required": false,
+        "section_sha256": "2c89acfcce4fed2017e4e22e71393aaac5cf2967b42c0cf067c18f36ed657811",
+        "wayback_ts": "20261023234633"
+      },
+      "4.5.3": {
+        "summary": "Changes to Matter devices, display controls and device controls.",
+        "review_required": false,
+        "section_sha256": "5f3b2e2182c8a067061fa653d2175f7936b67c0e516f056189965b1825dec981",
+        "wayback_ts": "20261023234633"
+      },
+      "4.5.2": {
+        "summary": "Changes to sensor readings.",
+        "review_required": false,
+        "section_sha256": "55d078c858c4c30152b72ff10c74ea0d7218f37e4d5ba4fd7a56308ad7b199e6",
+        "wayback_ts": "20261023234633"
+      },
+      "4.5.1": {
+        "summary": "General fixes; the vendor gives no further detail.",
+        "review_required": false,
+        "section_sha256": "7e9bf24fdf40b17dcd906805cbc9ba34538154449c09b555a2f3206d6cd37ea1",
+        "wayback_ts": "20261023234633"
+      },
+      "4.5.0": {
+        "summary": "Changes to security, dashboard browsing, Matter devices and climate controls.",
+        "review_required": false,
+        "section_sha256": "586b321301511257ba7031e32ee779bd16f3b57e131784e5c30bbfb8a4b59245",
+        "wayback_ts": "20261023234633"
+      },
+      "4.4.6": {
+        "summary": "Changes to dashboard browsing, firmware updates, climate controls and network connections.",
+        "review_required": false,
+        "section_sha256": "9f73e6cfbd0b9f5654f0d95f31f946c21186c389a82992b157271ab4ce03675c",
+        "wayback_ts": "20261023234633"
+      },
+      "4.4.0": {
+        "summary": "Changes to dashboard browsing, settings recovery, firmware updates and cameras and audio input.",
+        "review_required": false,
+        "section_sha256": "302f9d3d30a91571329fbda4e4e82a6c885f16edd064f75f7f048290f1e24278",
+        "wayback_ts": "20261023234633"
+      },
+      "4.3.2": {
+        "summary": "Changes to device controls.",
+        "review_required": false,
+        "section_sha256": "78582448f04b9d111a2b05beedf3d58adbd0e727beacad137b9399f88765becc",
+        "wayback_ts": "20260414120028"
+      },
+      "4.3.0": {
+        "summary": "Changes to security, dashboard browsing, cameras and audio input and Matter devices.",
+        "review_required": false,
+        "section_sha256": "50d36def0f5b07a5357c4e00914cfe5971e64b5ba502a25de5369f9cf55ef348",
+        "wayback_ts": "20260414120028"
+      },
+      "4.2.0": {
+        "summary": "Changes to cameras and audio input, Matter devices, climate controls and network connections.",
+        "review_required": false,
+        "section_sha256": "c065a6f2087a3f840a85751575101568bbaec67237419526abf7678273bb3d78",
+        "wayback_ts": "20260414120028"
+      },
+      "4.1.4": {
+        "summary": "Changes to firmware updates.",
+        "review_required": false,
+        "section_sha256": "b8d18b675e1a4537e817cae7622d2b20a0b94b8d665c1402fe08e91cf3f17683",
+        "wayback_ts": "20260414120028"
+      },
+      "4.1.3": {
+        "summary": "Changes to firmware updates.",
+        "review_required": false,
+        "section_sha256": "66da40d7eb8189b3ff03ef6d6b776c43f80e8efc054ebe85f1f7f8d8bf4e0a22",
+        "wayback_ts": "20260414120028"
+      },
+      "4.1.2": {
+        "summary": "Changes to firmware updates.",
+        "review_required": false,
+        "section_sha256": "3abec7a83c70d14377727b393afe7fccaf5d94ad1d157db9b29b5ec2f188d8d4",
+        "wayback_ts": "20260414120028"
+      },
+      "4.1.1": {
+        "summary": "Changes to display controls.",
+        "review_required": false,
+        "section_sha256": "de96fb7f92f38ec2192855ec530608fbf38e36d8ebf44266101fd49bd1d97a8a",
+        "wayback_ts": "20260414120028"
+      },
+      "4.1.0": {
+        "summary": "Changes to dashboard browsing, settings recovery, Matter devices and network connections.",
+        "review_required": false,
+        "section_sha256": "90a4b36947f16fd3eb21cf6445592f1893a9219ae2c0fe3d02059a31d0cfe696",
+        "wayback_ts": "20260414120028"
+      },
+      "4.0.11": {
+        "summary": "Changes to firmware updates.",
+        "review_required": false,
+        "section_sha256": "e9f90a7c20a641ab222c47bfa39935f05ed2eeea8450e2b8e40e35f1c747d324",
+        "wayback_ts": "20260414120028"
+      },
+      "3.12.0": {
+        "summary": "Changes to device controls.",
+        "review_required": false,
+        "section_sha256": "27290bd788da8745837bc3feae169075097c9de6fcb65ed9bc5338158edd5a48",
+        "wayback_ts": "20260414120028"
+      },
+      "3.11.0": {
+        "summary": "Changes to climate controls.",
+        "review_required": false,
+        "section_sha256": "6f359b1b5d0677004df7078d92ca976edf94f04767d9cdbc217f7714d97f1091",
+        "wayback_ts": "20260414120028"
+      },
+      "3.10.0": {
+        "summary": "Changes to climate controls.",
+        "review_required": false,
+        "section_sha256": "7a7d617585edcc11e6771a427bed2b9ad887412c3738e02db597ea66666452e5",
+        "wayback_ts": "20260414120028"
+      },
+      "3.9.4": {
+        "summary": "Changes to climate controls.",
+        "review_required": false,
+        "section_sha256": "f82d2261a8990a03c68785117fb7d0742bf492b61572ab65603a610eb6b6af25",
+        "wayback_ts": "20260414120028"
+      },
+      "3.8.7": {
+        "summary": "Changes to security and device controls.",
+        "review_required": false,
+        "section_sha256": "4a7ac8faf7d7b857e9601e77999013857ab43b74f4bbdedbc7e469e598c62efa",
+        "wayback_ts": "20260414120028"
+      },
+      "3.8.4": {
+        "summary": "Changes to display controls.",
+        "review_required": false,
+        "section_sha256": "f2d885a8b0663c3eae974aa4e608a7b71fde885c451a26ed161e6551945b1f49",
+        "wayback_ts": "20260414120028"
+      },
+      "3.8.1": {
+        "summary": "Changes to climate controls.",
+        "review_required": false,
+        "section_sha256": "326d85616626dbcd6b7aa22e2077cfa8ce72fe74efa4a5a8253be98f1c649cf9",
+        "wayback_ts": "20260414120028"
+      },
+      "3.8.0": {
+        "summary": "Changes to device controls.",
+        "review_required": false,
+        "section_sha256": "2f4547ad041f3293f638167e592ae8e960af3647a25b3ecad63048358f1d018d",
+        "wayback_ts": "20260414120028"
+      },
+      "3.7.2": {
+        "summary": "Vendor changes need a summary review; see the release notes.",
+        "review_required": true,
+        "section_sha256": "677a393d9bf5a1709c24788bb84c46fbab7a0253ac00fa574f962545dffb8455",
+        "wayback_ts": "20260414120028"
+      },
+      "3.7.1": {
+        "summary": "Changes to media and alarms, automation interfaces and sensor readings.",
+        "review_required": false,
+        "section_sha256": "30221a149d25c5772ae6b014560a751e3fe34433b1c8dfa56758d63a468773bc",
+        "wayback_ts": "20260414120028"
+      },
+      "3.7.0": {
+        "summary": "Changes to dashboard browsing, Matter devices, climate controls and display controls.",
+        "review_required": false,
+        "section_sha256": "a2eb671ae36ffe9fb3692a624815b6442feb58aafe345eec10668a7eba120d9d",
+        "wayback_ts": "20260414120028"
+      },
+      "3.6.1": {
+        "summary": "Changes to dashboard browsing, firmware updates, Matter devices and device controls.",
+        "review_required": false,
+        "section_sha256": "f62a50fccf9de5ecd996885d8e641115c19af14bdd7ead73f9301ac2787e7343",
+        "wayback_ts": "20260414120028"
+      },
+      "3.6.0": {
+        "summary": "Vendor changes need a summary review; see the release notes.",
+        "review_required": true,
+        "section_sha256": "ace23a8c1f0c1124e59248773497ebf509d185f7919b30e037158b9faef19014",
+        "wayback_ts": "20260414120028"
+      },
+      "3.5.0": {
+        "summary": "Changes to cameras and audio input, climate controls, network connections and display controls.",
+        "review_required": false,
+        "section_sha256": "8f428ca665b2f5e952846079c8d89adc7920a40ab48f1813576535b796b27220",
+        "wayback_ts": "20260414120028"
+      },
+      "3.4.0": {
+        "summary": "Changes to security, climate controls, display controls and media and alarms.",
+        "review_required": false,
+        "section_sha256": "db8a462e02a4116fe3584119e71f9fbaad2aad7b56d9234544ee8e735e91d2bb",
+        "wayback_ts": "20260414120028"
+      },
+      "3.3.0": {
+        "summary": "Changes to cameras and audio input, Matter devices, climate controls and display controls.",
+        "review_required": false,
+        "section_sha256": "2992660d91b1221c99777645d270426db27f2d7104612ec6abd7f7fa85748f54",
+        "wayback_ts": "20260414120028"
+      },
+      "3.2.0": {
+        "summary": "Changes to display controls and media and alarms.",
+        "review_required": false,
+        "section_sha256": "dffdf2887dd8bdab292d49ebe30ea610be6669e8763242e0a8bf54a70f1d707b",
+        "wayback_ts": "20260414120028"
+      },
+      "3.1.0": {
+        "summary": "Vendor changes need a summary review; see the release notes.",
+        "review_required": true,
+        "section_sha256": "10981c8e2809de4b1911fceb89b1cc634e8633304562bff2b7be5cb6cbeb4635",
+        "wayback_ts": "20260414120028"
+      },
+      "3.0.1": {
+        "summary": "Changes to Matter devices, climate controls and display controls.",
+        "review_required": false,
+        "section_sha256": "8a51c9d21a029c4a4c3cb5c5ed401bf022e42b3136fef2a2c735d56d4d5b5b4b",
+        "wayback_ts": "20260414120028"
+      },
+      "3.0.0": {
+        "summary": "Changes to Matter devices, climate controls, display controls and device controls.",
+        "review_required": false,
+        "section_sha256": "6a0c4c56643c6c7979c34115eb49131de3e0322531caf4535dec6a35d40b2fbb",
+        "wayback_ts": "20260414120028"
+      },
+      "2.4.0": {
+        "summary": "Changes to Matter devices and device controls.",
+        "review_required": false,
+        "section_sha256": "b7104bdebd4d4b218c742be689fe085fecabb375a21315dc1064167edd17b771",
+        "wayback_ts": "20260414120028"
+      },
+      "2.3.0": {
+        "summary": "Changes to Matter devices, climate controls, network connections and display controls.",
+        "review_required": false,
+        "section_sha256": "3d56f75edcb6e78829c7b77a71247a508f1ca1ed066f3a862f9cda3b7104457a",
+        "wayback_ts": "20260414120028"
+      },
+      "2.2.0": {
+        "summary": "Changes to security, Matter devices and device controls.",
+        "review_required": false,
+        "section_sha256": "4452f9e6d768e20808be12bd05c877c53536727c43091b3e7ea9c839b4f272bb",
+        "wayback_ts": "20260414120028"
+      },
+      "2.1.0": {
+        "summary": "Changes to climate controls, display controls and device controls.",
+        "review_required": false,
+        "section_sha256": "736fd31511e43910e9175fa13d6aa71ccd00e971756f57ee0deacc9c6bfe71de",
+        "wayback_ts": "20260414120028"
+      },
+      "2.0.0": {
+        "summary": "Changes to Matter devices, climate controls, network connections and media and alarms.",
+        "review_required": false,
+        "section_sha256": "1d3bfe8b3d73d77c0577b0d7c2276f6cb952365ff7cec52f46532224ffa7bec4",
+        "wayback_ts": "20260414120028"
+      },
+      "1.11.0": {
+        "summary": "Changes to display controls and device controls.",
+        "review_required": false,
+        "section_sha256": "8695288d87806d677781ea63c45ae8d8683d7ea460a3d309ce9e1276d2e337aa",
+        "wayback_ts": "20260414120028"
+      },
+      "1.10.0": {
+        "summary": "Changes to security, cameras and audio input, climate controls and network connections.",
+        "review_required": false,
+        "section_sha256": "3e0e323b6379fef7f8a47c7963a15eba057f69f76ac3dd83f42bad7468e5fbaf",
+        "wayback_ts": "20260414120028"
+      },
+      "1.9.0": {
+        "summary": "Changes to firmware updates and device controls.",
+        "review_required": false,
+        "section_sha256": "b984ee8a5d07c48747f4475e89e9dd968a6d68688a9aa4260844dfd93a5d86b2",
+        "wayback_ts": "20260414120028"
+      },
+      "1.8.0": {
+        "summary": "Changes to firmware updates, climate controls and sensor readings.",
+        "review_required": false,
+        "section_sha256": "954d765486a322dc33b418180a30f24489a7da4b03a0854f9c6f7b97f7d70ee0",
+        "wayback_ts": "20260414120028"
+      },
+      "1.7.0": {
+        "summary": "Changes to climate controls, display controls and device controls.",
+        "review_required": false,
+        "section_sha256": "48164470cdf6cd557ae2c5eb7e9ac0c2f286d92c68cd22bae383393e61ceee51",
+        "wayback_ts": "20260414120028"
+      },
+      "1.6.0": {
+        "summary": "Changes to firmware updates, climate controls, network connections and device controls.",
+        "review_required": false,
+        "section_sha256": "1a9f17687e887887bc803a3a1ee0aa1e75c8e2a53ae349ce750909c003d2c30a",
+        "wayback_ts": "20260414120028"
+      },
+      "1.5.4": {
+        "summary": "Vendor changes need a summary review; see the release notes.",
+        "review_required": true,
+        "section_sha256": "d276208853ecb9ea90258a0298661b277903b4f56cbe4da455579ed64613bd91",
+        "wayback_ts": "20260414120028"
+      },
+      "1.5.2": {
+        "summary": "Changes to device controls.",
+        "review_required": false,
+        "section_sha256": "830bb9ac65d16ce838c7ec46f2b14c99e86467e8e2c7af8ac3e0d585deeb54db",
+        "wayback_ts": "20260414120028"
+      },
+      "1.5.1": {
+        "summary": "Changes to climate controls and device controls.",
+        "review_required": false,
+        "section_sha256": "d6ac2e8491758810b9acd379d45b0ba6943ea7029badb11367fa6d77df466666",
+        "wayback_ts": "20260414120028"
+      },
+      "1.5.0": {
+        "summary": "Changes to security, display controls, device controls and sensor readings.",
+        "review_required": false,
+        "section_sha256": "e6173712430ab3e93b78b1a1b0d600795ff1e1969a9bf8f9e3da1d2869869155",
+        "wayback_ts": "20260414120028"
+      },
+      "1.4.0": {
+        "summary": "Changes to cameras and audio input, climate controls, display controls and device controls.",
+        "review_required": false,
+        "section_sha256": "155dcee3ae80a31daba84627d7cb9aff944d76edc76b8ea9d99af804e57e85b3",
+        "wayback_ts": "20260414120028"
+      },
+      "1.3.2": {
+        "summary": "Changes to dashboard browsing and device controls.",
+        "review_required": false,
+        "section_sha256": "567e38779d0fe2f25aea33296e88be7b0c92c1dd4033b00dc29101d16e09b657",
+        "wayback_ts": "20260414120028"
+      },
+      "1.3.1": {
+        "summary": "Changes to climate controls, display controls and device controls.",
+        "review_required": false,
+        "section_sha256": "dd8216e29bf95a4ae2be6303defca03f468891640c821f7ade1ac2054bccaa58",
+        "wayback_ts": "20260414120028"
+      },
+      "1.3.0": {
+        "summary": "Changes to climate controls, network connections, media and alarms and device controls.",
+        "review_required": false,
+        "section_sha256": "4aa23915c88c2a79373b193ff97045b4728f02493d0a59e539f3a4b00bf4ea88",
+        "wayback_ts": "20260414120028"
+      },
+      "1.2.1": {
+        "summary": "Changes to climate controls and device controls.",
+        "review_required": false,
+        "section_sha256": "7e07b498602f8846b6e448d48b2b4ce33417bc6b97505a12d65c16b524df770b",
+        "wayback_ts": "20260414120028"
+      },
+      "1.2.0": {
+        "summary": "Changes to cameras and audio input, display controls and device controls.",
+        "review_required": false,
+        "section_sha256": "2c9ee6ae735adbc4097756bdc5af8665fe99e5b0f5d45c8e65b07751cfc5195f",
+        "wayback_ts": "20260414120028"
+      },
+      "1.1.0": {
+        "summary": "Changes to cameras and audio input, media and alarms and device controls.",
+        "review_required": false,
+        "section_sha256": "e192c65da08976f0f08cd8f73b29f58d471d5719096eed3caf7ad20b49c16e46",
+        "wayback_ts": "20260414120028"
+      }
+    },
+    "supplements": {
+      "4.0.0": {
+        "url": "https://sonoff.tech/en-us/blogs/news/nspanel-pro-v4-0-0-update-now-supports-f-droid-and-home-assistant-app-install",
+        "summary": "Third-party app installation and Home Assistant app support.",
+        "wayback_ts": "20251129062508"
+      },
+      "4.0.7": {
+        "url": "https://forum.ewelink.cc/t/nspanel-pro-v4-0-7-optimized-version-released/205842",
+        "summary": "Cover controls and Zigbee display corrections.",
+        "wayback_ts": "20260615235903"
+      }
+    }
+  },
+  "meta": {
+    "name": "Meta Portal",
+    "notice": "No vendor release notes found for this build."
+  },
+  "smatek-s9e": {
+    "name": "Smatek S9E",
+    "notice": "No vendor firmware release notes found for the versions documented here."
+  },
+  "electron-wf2489t": {
+    "name": "Electron WF2489T",
+    "notice": "No vendor firmware release notes found for the stock and supplier builds documented here."
+  },
+  "electron-smt156": {
+    "name": "Electron SMT156",
+    "notice": "No vendor firmware release notes found for the documented build."
+  },
+  "electron-wf1589t": {
+    "name": "Electron WF1589T",
+    "notice": "No vendor firmware release notes found for this panel."
+  },
+  "tuya-tpa10": {
+    "name": "Tuya TPA10",
+    "notice": "No vendor firmware release notes found for this panel."
+  }
+}
