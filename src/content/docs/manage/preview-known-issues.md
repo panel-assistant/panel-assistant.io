@@ -3,11 +3,11 @@ title: Known issues in the 1.0 preview
 description: What owners of the Panel Assistant 1.0.0-preview1 pair have met so far, and what to do about each.
 ---
 
-Panel Assistant 1.0.0-preview1 and the matching panel app are an early preview for people who want to try 1.0 before the release candidates. This page lists what you may meet, with the way round each. Read [Upgrading to 1.0](/manage/upgrade-to-1-0/) first: it covers what must be true before you install and why a panel on 1.0 cannot go back to 0.9. Report anything else in the [issue tracker](https://github.com/panel-assistant/ha-integration/issues), with the panel model and what you saw, and it will be fixed in the next preview.
+Panel Assistant 1.0.0-preview1 and the matching panel app are an early preview for people who want to try 1.0 before the release candidates. This page lists what you may meet, with the way round each. Read [Upgrading to 1.0](/manage/upgrade-to-1-0/) first: it covers what must be true before you install and why a panel on 1.0 cannot go back to 0.9. Report anything else in the [issue tracker](https://github.com/panel-assistant/ha-integration/issues), with the panel model and what you saw, so it can be fixed in the next preview.
 
 ## The 1.0.0-preview1 released on 18 October was withdrawn
 
-A Panel Assistant 1.0.0-preview1 reached HACS on 18 October 2026 before the matching panel app was published, so it offered panels nothing and its Repair pointed at an update that did not exist. It was withdrawn on 23 October and replaced by this release, which keeps the same version name. If you installed the earlier one and still have it, HACS shows Panel Assistant as up to date and does not offer the replacement: in HACS open **Panel Assistant**, choose **Redownload**, pick **1.0.0-preview1** and restart Home Assistant. If you went back to 0.9.0, the usual update path applies.
+A Panel Assistant 1.0.0-preview1 was published on 18 October 2026 before the matching panel app was published, so it offered panels nothing and its Repair pointed at an update that did not exist. It was withdrawn on 23 October and replaced by this release, which keeps the same version name. If you installed the earlier one and still have it, HACS shows Panel Assistant as up to date and does not offer the replacement: in HACS open **Panel Assistant**, choose **Redownload**, pick **1.0.0-preview1** and restart Home Assistant. If you went back to 0.9.0, the usual update path applies.
 
 ## "Needs app 1.0.0-preview1" with no update to install
 
@@ -19,15 +19,15 @@ A panel the integration cannot reach over ADB installs its own update, and Andro
 
 ## Do not redownload 0.9.0 over 1.0
 
-Two Repairs in 1.0, for a panel still on MQTT and for a panel still running the old app, say to choose **Redownload** in HACS and pick 0.9.0. Doing that over an installed 1.0 removes nothing from Home Assistant, but 0.9.0 no longer finds a setting 1.0 removed and hands panels that already moved back to MQTT, where the 1.0 panel app does not answer. Follow [if a move was not finished](/manage/upgrade-to-1-0/#if-a-move-was-not-finished) instead: restore the Home Assistant backup you made before updating, finish the move in 0.9.0, then install 1.0 again. The Repair text will be corrected.
+Two Repairs in 1.0, for a panel still on MQTT and for a panel still running the old app, say to choose **Redownload** in HACS and pick 0.9.0. Do not: 0.9.0 installed over 1.0 no longer finds a setting 1.0 removed, and hands panels that already moved back to MQTT, where the 1.0 panel app does not answer. Follow [if a move was not finished](/manage/upgrade-to-1-0/#if-a-move-was-not-finished) instead, which restores the Home Assistant backup you made before updating while no panel runs the 1.0 app yet, and says to ask first if one already does.
 
 ## The sidebar cannot open a panel until it runs the 1.0 app
 
 In 1.0 the Panel Assistant sidebar shows a panel's pages over the panel's own connection to Home Assistant, so a panel still on a 0.9 app shows a notice that its pages could not be opened. The notice clears when the panel updates. Until then the panel's own page at its address on port 8888 works as before.
 
-## Voice starts on where the panel has a microphone
+## Voice is on by default where the panel has a microphone
 
-On a Sonoff NSPanel Pro, a Tuya TPA10, an Electron WF1589T, a Shelly Wall Display X2i, a Meta Portal 10 and a ZHICAI SMT1019, the voice assistant starts on unless you had already turned it off. If you do not want a panel listening for a wake word, turn it off under **Voice** on the panel's **Configure** page, or disable the panel's Assist satellite entity in Home Assistant.
+On a Sonoff NSPanel Pro, a Tuya TPA10, an Electron WF1589T, a Shelly Wall Display X2i, a Meta Portal 10 (2nd generation) and a ZHICAI SMT1019, the voice assistant starts on unless you had already turned it off. If you do not want a panel listening for a wake word, turn it off under **Voice** on the panel's **Configure** page, or disable the panel's Assist satellite entity in Home Assistant.
 
 ## A screen lock PIN is asked for after a full screen-off
 
