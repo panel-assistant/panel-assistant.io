@@ -149,11 +149,11 @@ Importing through the sidebar replaces the shared copy and can update other pane
 
 ## Panel user mismatch
 
-**What it means:** A request to use a different panel account waits for administrator consent.
+**What it means:** A panel account request is waiting for your confirmation.
 
-**Why it happens:** The authenticated requester differs from the panel’s recorded account; signing into Home Assistant is not authority to take over an existing panel.
+**Why it happens:** A signed-in Home Assistant user asked to connect as this panel. A first binding or a change from its saved account needs your approval.
 
-**How to fix it:** Check expected panel account; approve only deliberate change, otherwise close and ignore. Never blindly follow reconnect instructions to accept an unsolicited request.
+**How to fix it:** Open the Repair and compare the named panel and user with the account you deliberately set up. Select Submit only if you recognise the request. If the panel already has a different account, confirming the change stops accepting that account. For an unexpected request, close the dialog and ignore the issue: any signed-in user can request a panel connection.
 
 ## No update route
 
