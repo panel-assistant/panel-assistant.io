@@ -64,11 +64,18 @@ On the **Voice** card, the wake words picker has an **import** control. Choose t
 
 The wake word's id is derived from the `.tflite` file's name, lower-cased and reduced to letters, digits and underscores (it must start with a letter). It cannot reuse the id of a bundled wake word, and importing a model under a name you have already used replaces that earlier model.
 
-Once it is imported, tick it under **Wake words** and choose its pipeline under **Wake word pipelines**. It also appears in Home Assistant's own wake word selector for that panel from then on.
+Importing makes the wake word available; it does not activate it. To use it on a panel, tick it under **Wake words** and choose its pipeline under **Wake word pipelines**. It also appears in Home Assistant's own wake word selector for that panel from then on.
 
 ### On several panels
 
-An imported model lives on the one panel it was imported to. To use the same wake word on several panels, import it on each one through its own Configure page.
+Where you open Configure determines whether the import is shared:
+
+- **Directly on the panel's own Configure page:** the imported model stays on that panel. It is not shared with other panels.
+- **Inside the Panel Assistant sidebar in Home Assistant:** once the selected panel has validated and installed the model, Panel Assistant keeps a shared copy and installs it on every other panel with a microphone, including panels that connect later.
+
+Importing a newer model with the same id through the sidebar replaces the shared copy and can update panels that hold a previously shared copy. A different model imported independently under that id on another panel is kept; Panel Assistant raises a [wake-word Repair](/home-assistant/repairs/#wake-word-kept) rather than overwriting it. A panel that refuses a shared model also gets a [Repair with the reason](/home-assistant/repairs/#wake-word-refused).
+
+Sharing makes the model selectable on each panel; choose its wake word and pipeline separately on each one to activate it.
 
 ## Testing and tuning
 
