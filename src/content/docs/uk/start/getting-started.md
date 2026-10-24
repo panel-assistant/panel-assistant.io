@@ -13,7 +13,7 @@ sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 Додайте Panel Assistant через HACS і перезапустіть Home Assistant. Це єдине, що ви встановлюєте вручну. Далі вас вестиме Home Assistant. Див. [Встановлення інтеграції](/uk/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 доступний як публічна попередня версія. До його випуску HACS встановлює 0.9.0. Щоб натомість встановити попередню версію, відкрийте **Panel Assistant** у HACS, увімкніть **Show beta versions** (показувати бета-версії) і завантажте найновішу попередню версію 1.0. Панель із застосунком 1.0 не може повернутися до 0.9; [Оновлення до 1.0](/uk/manage/upgrade-to-1-0/) пояснює зміни.
+Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/uk/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/uk/manage/upgrade-to-1-0/) explains what changes.
 :::
 
 ## 2. Увімкніть налагодження на панелі

@@ -15,13 +15,13 @@ Panel Assistant 1.0 and the 1.0 panel app move together. The 1.0 integration tal
 
 ## 1. Update the integration
 
-1.0 is offered as a pre-release first. In HACS, open **Panel Assistant**, turn on **Show beta versions**, and download the 1.0 version. Restart Home Assistant when HACS asks you to, or when the Repair **Restart Home Assistant to finish updating Panel Assistant** appears.
+1.0 is offered as a release candidate first. Open **Settings**, **Devices and services**, **HACS**, and choose the **Panel Assistant** device. Expand the disabled entities and open **Pre-release**. In its settings, turn on **Enabled** and select **Update**, then turn on the **Pre-release** switch under **Diagnostic**. Return to Panel Assistant in HACS and download the 1.0 release candidate. Restart Home Assistant when HACS asks you to, or when the Repair **Restart Home Assistant to finish updating Panel Assistant** appears.
 
 ## 2. Check the Repairs
 
 After the restart, open **Settings**, **Repairs** again.
 
-- **"… needs app 1.0.0-preview1"** is expected on every panel that still runs a 0.9 app. Until it updates, Home Assistant cannot see or control that panel and its entities show as unavailable. The panel itself keeps working, with its settings and history.
+- **"… needs app 1.0.0-rc1"** is expected on every panel that still runs a 0.9 app. Until it updates, Home Assistant cannot see or control that panel and its entities show as unavailable. The panel itself keeps working, with its settings and history.
 - **"… cannot receive app updates"** means Panel Assistant has no way to install on that panel, usually after a change made on the panel itself, such as a firmware update or a reset. Reconnect the panel to Panel Assistant by USB, as the Repair's **Learn more** describes, and the update becomes available. Nothing is removed: on a panel that already has the app, the USB installer installs nothing and only lets Panel Assistant reach it again.
 - **"… was never moved off MQTT"** or **"… still runs the old app"** means a move was not finished in 0.9.0. See [if a move was not finished](#if-a-move-was-not-finished).
 
@@ -33,7 +33,7 @@ Once the 1.0 panel app's release is published, each panel's update entity in Hom
 
 There are two halves, and they differ.
 
-**A panel on the 1.0 app stays on 1.0.** The panel app refuses to install an older version over itself, Panel Assistant never offers one, and a 0.9 integration cannot talk to it. If a 1.0 panel misbehaves, look in [troubleshooting](/manage/troubleshooting/), then report it with a [support report](/home-assistant/support-report/) so it can be fixed in the next preview.
+**A panel on the 1.0 app stays on 1.0.** The panel app refuses to install an older version over itself, Panel Assistant never offers one, and a 0.9 integration cannot talk to it. If a 1.0 panel misbehaves, look in [troubleshooting](/manage/troubleshooting/), then report it with a [support report](/home-assistant/support-report/) so it can be fixed in the next release candidate.
 
 **The integration can go back while no panel runs 1.0.** Restore the Home Assistant backup you made before you started. That also undoes any other change made in Home Assistant since you created it. Your panels are still on their 0.9 app and reconnect to 0.9.0. Once any panel runs the 1.0 app, restoring the backup leaves that panel out of reach from Home Assistant until the integration is on 1.0 again.
 

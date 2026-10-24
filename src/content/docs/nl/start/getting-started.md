@@ -13,7 +13,7 @@ Het lastigste deel van elk paneel is het eerste uur. Panel Assistant doet dat uu
 Voeg Panel Assistant toe via HACS en start Home Assistant opnieuw op. Dit is het enige dat je handmatig moet installeren. Vanaf hier begeleidt Home Assistant je verder. Zie [De integratie installeren](/nl/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 is beschikbaar als openbare preview. Tot de release installeert HACS 0.9.0. Wil je de preview installeren, open dan **Panel Assistant** in HACS, schakel **Bètaversies weergeven** in en download de nieuwste 1.0-preview. Een paneel met de 1.0-app kan niet terug naar 0.9; [Upgraden naar 1.0](/nl/manage/upgrade-to-1-0/) legt uit wat er verandert.
+Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/nl/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/nl/manage/upgrade-to-1-0/) explains what changes.
 :::
 
 ## 2. Schakel foutopsporing in op het paneel

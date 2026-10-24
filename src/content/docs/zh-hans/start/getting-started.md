@@ -13,7 +13,7 @@ sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 通过 HACS 添加 Panel Assistant，然后重启 Home Assistant。这是唯一需要你手动安装的内容。从此以后，Home Assistant 会引导你完成操作。参见 [安装集成](/zh-hans/home-assistant/custom-integration/)。
 
 :::note
-Panel Assistant 1.0 正处于公开预览阶段。正式发布之前，HACS 安装的是 0.9.0。如果希望安装预览版，请在 HACS 中打开 **Panel Assistant**，开启**显示测试版本**，并下载最新的 1.0 预览版。运行 1.0 应用的面板无法退回 0.9；[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)说明了相关变化。
+Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/zh-hans/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/zh-hans/manage/upgrade-to-1-0/) explains what changes.
 :::
 
 ## 2. 在面板上开启调试

@@ -13,7 +13,7 @@ La parte difícil de cualquier panel es la primera hora. Panel Assistant se enca
 Añade Panel Assistant mediante HACS y reinicia Home Assistant. Es lo único que instalas a mano. A partir de aquí, Home Assistant te guía. Consulta [Instalar la integración](/es/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 está en vista previa pública. Hasta que se publique la versión definitiva, HACS instala 0.9.0. Para instalar la vista previa, abre **Panel Assistant** en HACS, activa **Mostrar versiones beta** y descarga la vista previa 1.0 más reciente. Un panel que ejecuta la aplicación 1.0 no puede volver a 0.9; [Actualizar a 1.0](/es/manage/upgrade-to-1-0/) explica qué cambia.
+Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/es/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/es/manage/upgrade-to-1-0/) explains what changes.
 :::
 
 ## 2. Activa la depuración en el panel

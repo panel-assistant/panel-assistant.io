@@ -13,7 +13,7 @@ La première heure est la partie difficile de la mise en route de tout panneau. 
 Ajoutez Panel Assistant via HACS et redémarrez Home Assistant. C’est la seule chose que vous installez à la main. Ensuite, Home Assistant vous guide. Voir [Installer l’intégration](/fr/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 est en préversion publique. Jusqu’à sa sortie, HACS installe la version 0.9.0. Pour installer la préversion à la place, ouvrez **Panel Assistant** dans HACS, activez **Afficher les versions bêta** et téléchargez la préversion 1.0 la plus récente. Un panneau exécutant l’application 1.0 ne peut pas revenir à la version 0.9 ; [Passer à la version 1.0](/fr/manage/upgrade-to-1-0/) explique les changements.
+Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/fr/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/fr/manage/upgrade-to-1-0/) explains what changes.
 :::
 
 ## 2. Activer le débogage sur le panneau
