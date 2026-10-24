@@ -17,7 +17,7 @@ Read the section for your panel before you confirm.
 1. ha-paneld gives the home screen back to the panel's own launcher, and turns back on the vendor apps it switched off.
 2. Panel Assistant checks on the panel that another launcher really holds the home screen. If none does, it stops and removes nothing.
 3. Panel Assistant uninstalls ha-paneld over the network debugging (ADB) connection it already uses. ha-paneld's settings on the panel are deleted.
-4. You choose whether Home Assistant forgets the panel too.
+4. If you selected **Also delete this panel from Home Assistant** before submitting, Home Assistant forgets the panel too. Leave it off to keep its entities and history.
 
 If removal stops part way, run it again: it picks up where it stopped.
 

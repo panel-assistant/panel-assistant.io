@@ -20,7 +20,7 @@ adb connect 192.168.1.50:5555 # replace this address with the panel's address
 
 ## Removing ha-paneld from a panel
 
-Choose the panel's **Remove Panel Assistant from this panel** option, under **Configure** in Home Assistant. It gives the panel its own home screen back, uninstalls the app and then asks whether Home Assistant should forget the panel. Read [Before you remove ha-paneld](/manage/removal-risks/) first.
+Choose the panel's **Remove Panel Assistant from this panel** option, under **Configure** in Home Assistant. Choose whether Home Assistant should forget the panel, then select **Submit**. Panel Assistant gives the panel its own home screen back and uninstalls the panel app. Read [Before you remove ha-paneld](/manage/removal-risks/) first.
 
 ## Access routes and security mode
 
