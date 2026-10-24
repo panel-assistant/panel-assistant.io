@@ -129,6 +129,7 @@ export default defineConfig({
                 { label: 'Panel Assistant is required', slug: 'home-assistant/migration' },
                 { ...label('sidebar.connect_panel'), slug: 'home-assistant/connect-a-panel' },
                 { ...label('sidebar.support_report'), slug: 'home-assistant/support-report' },
+                { label: 'Repairs', slug: 'home-assistant/repairs' },
                 { ...label('sidebar.move_from_mqtt'), slug: 'home-assistant/move-from-mqtt' },
               ],
             },
