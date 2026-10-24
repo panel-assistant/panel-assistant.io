@@ -1,6 +1,6 @@
 ---
 // Artwork source: https://github.com/maxlyth/pickles/blob/main/pickles.svg
-// Copy upstream artwork updates into public/pickles.svg.
+// Refresh public/pickles.svg with: node src/pickles/sync.mjs <pickles checkout> <commit>
 // The homepage hero: the headline, what the product is, the ways in, and a wall panel showing a
 // Home Assistant dashboard drawn in Home Assistant's own colours for the current theme.
 const { data } = Astro.locals.starlightRoute.entry;
@@ -64,7 +64,7 @@ const lastCards = [
     <h1 id="_top" data-page-title>
       {t('error.pickles.title')}
     </h1>
-    <img src="/pickles.svg" alt={t('error.pickles.alt')} width="265" height="293" />
+    <img src="/pickles.svg" alt={t('error.pickles.alt')} width="286" height="311" />
     <p>{t('error.pickles.story')}</p>
     <p class="error-detail">{t('error.not_found')}</p>
     <a href={Astro.locals.starlightRoute.siteTitleHref}>{t('error.home')}</a>
