@@ -1,0 +1,36 @@
+---
+title: Wybór panelu
+description: Panel Assistant działa na panelach ściennych z Androidem 8.0 lub nowszym i procesorem ARM. Sprawdź wszystkie marki i modele z własną obsługą sprzętu, od Sonoff, Shelly, Tuya, Meta, Electron i Smatek, oraz wymagania wobec panelu.
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+---
+
+import SupportedPanels from '../../../../components/SupportedPanels.astro';
+
+**Panel Assistant działa na panelach ściennych z procesorem ARM, Androidem 8.0 lub nowszym i dostępem do debugowania.** Nie musisz najpierw znaleźć swojego modelu na liście: zainstaluj aplikację, a pulpit nawigacyjny Home Assistant, jasność i wyłączanie ekranu, dźwięk oraz standardowe czujniki panelu od razu pojawią się w Home Assistant.
+
+Każdy z poniższych modeli ma własną [stronę sprzętu](/pl/hardware/) z informacjami do sprawdzenia przed zakupem. Tam, gdzie dostępny jest profil modelu lub rodziny, udostępnia on to, co szczególne dla danego panelu, na przykład diody LED, przyciski, przekaźniki, kamerę, mikrofony i czujniki klimatyczne.
+
+## Panele z dopracowaną obsługą
+
+<SupportedPanels />
+
+Każdy pasek pokazuje, jaką mamy pewność co do panelu; w miarę jej wzrostu wypełnia się i staje się zielony. Największą pewność mamy co do panelu zbadanego na własnym egzemplarzu, a jeszcze większą, jeśli dodatkowo oprogramowanie jego producenta pozostawia go otwartym na Panel Assistant. W przypadku pozostałych paneli pewność wynika z analizy oprogramowania producenta, dokumentacji producenta, wspólnej platformy ze zbadanym panelem oraz zgłoszeń właścicieli korzystających z Panel Assistant, natomiast starsza wersja Androida, której nie zbadaliśmy, ją obniża. Najedź na panel lub go otwórz, aby zobaczyć, które z tych dowodów mamy.
+
+Kilka z tych paneli to ten sam sprzęt sprzedawany pod różnymi markami. Każda marka jest wymieniona i prowadzi do jednej strony dla tego sprzętu.
+
+## Każdy inny panel z Androidem
+
+**Panel, którego nie wymieniono na tej stronie, nadal jest obsługiwany.** Panel Assistant nie musi rozpoznawać twojego sprzętu, żeby na nim działać. Każdy panel spełniający wymagania opisane niżej startuje z profilem Generic, który daje pulpit nawigacyjny na ekranie, jasność i wyłączanie ekranu, dźwięk, nawigację oraz standardowe czujniki Androida, takie jak czujnik światła i zbliżeniowy, a wszystko to jako encje na własnym urządzeniu panelu w Home Assistant.
+
+Profil konkretnego modelu dodaje sprzęt właściwy tylko temu modelowi. Wiele paneli go nie ma, a wielu właścicieli nigdy go nie potrzebuje. Dla nich Generic to pełny zestaw funkcji, a nie zestaw uboższy.
+
+## Czego potrzebuje panel
+
+- **Android 8.0 lub nowszy na ARM.** Wydane kompilacje obsługują `arm64-v8a` i `armeabi-v7a`.
+- **Opcje programisty.** Instalator korzysta z interfejsu debugowania Androida, który prawie każdy panel pozwala włączyć.
+- **Dowolny systemowy WebView.** Producenci często dostarczają przestarzały silnik przeglądarki. Aplikacja panelu go sprawdza, a [Przygotowanie panelu](/pl/install/prepare-a-panel/) pokazuje, jak go zaktualizować na twoim panelu.
+- **Root, tylko dla kilku dodatków.** Niektóre funkcje na niektórych modelach wymagają roota. Każda strona sprzętu mówi, których to dotyczy i jak go uzyskać.
+
+## Nie ma go jeszcze na liście?
+
+Obsługa sprzętu to dane, a nie kod, więc dodanie panelu oznacza napisanie profilu, a nie nowej wersji aplikacji. Najszybszy sposób, by twój model otrzymał własny profil, to zgłoszenie go: napisz w [zgłoszeniach](https://github.com/panel-assistant/android/issues), jaki to model i co się stało. [Dokumentacja profili](/pl/reference/profiles/) opisuje, co zawiera profil, jeśli chcesz go napisać. Każde zgłoszenie, czy panel działa, czy nie, dodaje kolejne panele do tej strony.

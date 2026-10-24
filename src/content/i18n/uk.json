@@ -87,5 +87,20 @@
   "error.pickles.story": "Наша панда влаштовує безлад. Ми намагаємося її приборкати, але вона повільна й уперта.",
   "error.not_found": "404 — Цю сторінку не знайдено.",
   "error.home": "Перейти на головну сторінку",
-  "error.pickles.alt": "Панда Піклз"
+  "error.pickles.alt": "Панда Піклз",
+  "panels.count": "{models} панелей у списку від {brands} брендів",
+  "panels.coverage": "мають власну сторінку обладнання, а інші сумісні панелі Android запускаються з профілем Generic.",
+  "confidence.title": "Упевненість",
+  "confidence.yes": "так",
+  "confidence.partly": "частково",
+  "confidence.no": "ні",
+  "confidence.inspected": "Досліджено на пристрої, яким ми користуємося",
+  "confidence.fully_open": "Прошивка виробника повністю відкрита",
+  "confidence.mostly_open": "Прошивка виробника переважно відкрита",
+  "confidence.restricted": "Прошивка виробника обмежує доступ",
+  "confidence.firmware": "Прошивку виробника досліджено",
+  "confidence.documented": "Задокументовано виробником або в опублікованих характеристиках",
+  "confidence.platform": "Та сама платформа, що й у дослідженої нами панелі",
+  "confidence.owners": "Власник використовує Panel Assistant на такій панелі",
+  "confidence.older_android": "Android {android}: старіший за 10, не досліджено"
 }

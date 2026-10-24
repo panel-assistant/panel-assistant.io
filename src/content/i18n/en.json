@@ -90,5 +90,20 @@
   "error.pickles.story": "Our panda is causing havoc. We’re trying to get him under control, but he’s slow and stubborn.",
   "error.not_found": "404 — This page could not be found.",
   "error.home": "Go to the homepage",
-  "error.pickles.alt": "Pickles the panda"
+  "error.pickles.alt": "Pickles the panda",
+  "panels.count": "{models} named panels from {brands} brands",
+  "panels.coverage": "have their own hardware page, and other compatible Android panels start on the Generic profile.",
+  "confidence.title": "Confidence",
+  "confidence.yes": "yes",
+  "confidence.partly": "partly",
+  "confidence.no": "no",
+  "confidence.inspected": "Inspected on a unit we run",
+  "confidence.fully_open": "Maker's firmware fully open",
+  "confidence.mostly_open": "Maker's firmware mostly open",
+  "confidence.restricted": "Maker's firmware restricts access",
+  "confidence.firmware": "Maker's firmware examined",
+  "confidence.documented": "Documented by the maker or published specs",
+  "confidence.platform": "Same platform as a panel we inspected",
+  "confidence.owners": "An owner runs Panel Assistant on one",
+  "confidence.older_android": "Android {android}: older than 10, and not inspected"
 }

@@ -9,7 +9,7 @@ head:
     content: Panel Assistant
 hero:
   title: Home Assistant aan de muur, <span>en dan goed.</span>
-  tagline: Panel Assistant turns an Android wall panel into a fast, dependable home for your Home Assistant dashboards, and into a voice assistant where the panel has a microphone. You install and manage every panel from Home Assistant itself.
+  tagline: Panel Assistant maakt van een Android-wandpaneel een snelle, betrouwbare plek voor je Home Assistant-dashboards, en een spraakassistent als het paneel een microfoon heeft. Je installeert en beheert elk paneel vanuit Home Assistant zelf.
   actions:
     - text: Aan de slag
       link: /nl/start/getting-started/
@@ -19,7 +19,7 @@ hero:
     - text: Wordt mijn paneel ondersteund?
       link: /nl/install/supported-panels/
       variant: secondary
-sourceCommit: 7f826badb62e49226db782fd204fd5fea2e2ee00
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 import Features from '../../../components/home/Features.astro';
@@ -86,7 +86,7 @@ Panel Assistant is het gratis en open-source medicijn. Het doet één ding: je d
   caption="minder statusverkeer van Home Assistant dat het paneel bereikt, gemeten in echte huizen"
 >
 
-Een dashboard op een wandpaneel ontvangt normaal gesproken elke statuswijziging in huis, of het die entiteit nu toont of niet. Bij een grote installatie is een zuinig paneel de hele tijd bezig met het decoderen van duizenden entiteiten die het nooit toont, en dat is meestal waarom het hapert.
+Een dashboard op een wandpaneel ontvangt normaal gesproken elke statuswijziging in huis, of het die entiteit nu toont of niet. Bij een grote installatie is een paneel met weinig rekenkracht de hele tijd bezig met het decoderen van duizenden entiteiten die het nooit toont, en dat is meestal waarom het hapert.
 
 Het entiteitsfilter van Panel Assistant leert van welke entiteiten je dashboard echt afhankelijk is, door de configuratie te lezen en het dashboard te volgen terwijl het draait, en vraagt Home Assistant daarna om alleen die te sturen. Home Assistant filtert voordat er iets wordt verstuurd, dus de rest bereikt het paneel nooit.
 
@@ -98,7 +98,7 @@ Het is het verschil tussen een paneel dat hapert en een paneel dat reageert op h
 
 De meeste panelen komen van een buitenlandse marktplaats met een dunne handleiding en geen enkele belofte dat er ooit iets anders op zal draaien dan de eigen app van de fabrikant. Pas als het geld en de avonden op zijn, ontdek je of het werkt. Panel Assistant wil die onzekerheid wegnemen: [controleer je model](/nl/install/supported-panels/) voordat je koopt, en weet dat er, zodra het binnen is, een geteste, herhaalbare manier is om het aan de praat te krijgen.
 
-Het lastigste aan elk paneel is het eerste uur. Panel Assistant doet dat uur voor je, vanuit Home Assistant. Zit het paneel al op je netwerk, geef de integratie dan het adres en die doet de rest. Zit het nog in de doos, sluit het dan met een USB-kabel aan op je laptop en installeer rechtstreeks vanuit je browser, nog voordat het aan de muur hangt. Hoe dan ook keur je één melding op het paneel goed en kijk je hoe het verder loopt.
+Het lastigste aan elk paneel is het eerste uur. Panel Assistant doet dat uur voor je, vanuit Home Assistant. Zit het paneel al op je netwerk, geef de integratie dan het adres en die doet de rest. Zit het nog in de doos, sluit het dan met een USB-kabel aan op je laptop en installeer rechtstreeks vanuit je browser, nog voordat het aan de muur hangt. Als het paneel je vraagt foutopsporing te autoriseren, keur de melding dan op het scherm goed en kijk hoe de installatie verder loopt.
 
 </Split>
 
@@ -116,19 +116,19 @@ Goedkope panelen zijn niet zonder reden traag, en Panel Assistant laat je die re
 
 <Split title="Ophangen en vergeten">
 
-Een wandpaneel hoort zich te gedragen als een lichtschakelaar: altijd aanwezig, nooit afhankelijk van jou. Panel Assistant leert het normale licht in de kamer kennen en dimt mee, leert zijn nabijheidssensor kennen zodat een zwaai het scherm wekt en een langslopende kat niet, geeft ’s nachts geheugen vrij terwijl het scherm uit is, en opent na een herstart vanzelf weer het laatste goed werkende dashboard.
+Een wandpaneel hoort zich te gedragen als een lichtschakelaar: altijd aanwezig, nooit afhankelijk van jou. Panel Assistant leert het normale licht in de kamer kennen en dimt mee, gebruikt gekalibreerde nabijheidsdetectie zodat het gekozen handgebaar het scherm wekt, geeft ’s nachts geheugen vrij terwijl het scherm uit is, en opent na een herstart vanzelf weer het laatste goed werkende dashboard.
 
 </Split>
 
-<Split title="Talk to it">
+<Split title="Praat ermee">
 
-A panel with a microphone can act as a Home Assistant Assist satellite on the device it already has, with no separate device to add. Turn it on from the panel's Configure page. It listens for Okay Nabu, Hey Jarvis, Hey Mycroft or Alexa on the panel itself, sends your command to Home Assistant only after it hears one, and speaks the answer through the panel's speaker. Each wake word can use its own Assist pipeline, you can train a wake word of your own, and any Home Assistant text-to-speech voice can make announcements through the speaker. [Set up the voice assistant](/nl/manage/voice-assistant/).
+Een paneel met een microfoon kan als Home Assistant Assist-satelliet werken op het apparaat dat je al hebt, zonder een apart apparaat toe te voegen. Schakel dit in op de pagina Configureren van het paneel. Het luistert op het paneel zelf naar Okay Nabu, Hey Jarvis, Hey Mycroft of Alexa, stuurt je opdracht pas naar Home Assistant nadat het er een hoort en spreekt het antwoord uit via de luidspreker van het paneel. Elk activeringswoord kan zijn eigen Assist-pijplijn gebruiken, je kunt zelf een activeringswoord trainen en elke tekst-naar-spraakstem van Home Assistant kan aankondigingen via de luidspreker doen. [De spraakassistent instellen](/nl/manage/voice-assistant/).
 
 </Split>
 
 <Split title="Software van de fabrikant, getemd">
 
-Panel Assistant neemt het startscherm over en geeft een paneel zonder knoppen een manier om op het scherm te navigeren. Het houdt beproefde browserengines achter de hand voor panelen die er een uitleveren die jaren te oud is, en voorkomt dat de bedieningswidget van een fabrikant over je dashboard heen tekent, terwijl het bewust weigert iets aan te raken wat het paneel nodig heeft om in leven te blijven.
+Panel Assistant neemt het startscherm over en geeft een paneel zonder knoppen een manier om op het scherm te navigeren. Het voorkomt dat de bedieningswidget van een fabrikant over je dashboard heen tekent, terwijl het bewust weigert iets aan te raken wat het paneel nodig heeft om in leven te blijven.
 
 </Split>
 
@@ -198,7 +198,7 @@ Panel Assistant is nieuw en ontwikkelt zich snel. Drie paneelfamilies hebben van
 
 Alles hier is gratis en open-source software onder ruime licenties, zonder account, zonder clouddienst en zonder abonnement. Het is gemaakt door een gebruiker van Home Assistant die wilde dat wandpanelen zouden werken zoals de hardware altijd beloofde, en het wordt gedeeld zodat die van jou dat ook kunnen.
 
-Het is bedoeld om toe te behoren aan de community die het gebruikt en verbetert. Contributions are merged under their authors' names and credited to them.
+Het is bedoeld om toe te behoren aan de community die het gebruikt en verbetert. Bijdragen worden onder de naam van hun auteurs samengevoegd en aan hen toegeschreven.
 
 </Split>
 

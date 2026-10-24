@@ -1,7 +1,7 @@
 ---
 title: 更新与恢复
 description: 让面板上的应用保持最新，以及出问题时可以恢复哪些内容。
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 ## 更新面板
@@ -22,7 +22,11 @@ Android System WebView 单独维护，具体通过 Play Store、厂商固件或�
 
 通常是面板上的改动导致，而不是 Home Assistant 中的改动。厂商固件更新、恢复出厂设置，或恢复出厂软件的厂商选项，都可能重新关闭 Android 的开发者选项，连带关闭 ADB。当时不会出现任何警告，因为从面板的角度看，一切正常。
 
-重新开启开发者选项和 USB 调试即可恢复更新途径，步骤与首次准备该面板时相同：请参阅 [准备面板](/zh-hans/install/prepare-a-panel/#1-developer-options-and-debugging-are-on)。不同面板进入这些设置的方式不同，有些厂商会将它们隐藏在“关于”页面的一连串点击操作之后。
+对于大多数面板，重新开启开发者选项和 USB 调试即可恢复更新途径，步骤与首次准备该面板时相同：请参阅 [准备面板](/zh-hans/install/prepare-a-panel/#1-developer-options-and-debugging-are-on)。不同面板进入这些设置的方式不同，有些厂商会将它们隐藏在“关于”页面的一连串点击操作之后。
+
+如果修复条目仍然存在，或面板会自行关闭网络调试，例如 Meta Portal 重启后或 Shelly Wall Display 重置后，请用 USB 将面板连接到计算机，并从 Home Assistant 启动 USB 安装程序，具体参见 [通过 USB 安装](/zh-hans/install/install-over-usb/#从-home-assistant-中开始)。无需先移除任何内容：对于已有应用的面板，安装程序不会安装任何内容。如果面板询问，请勾选**始终允许使用这台计算机进行调试**，并点按**允许**；安装程序随后会重新开启网络调试，并提示 Panel Assistant 已能再次访问面板。之后 Home Assistant 会提供该面板的更新，更新会保留设置和历史记录。
+
+如果 Home Assistant 还为该面板显示**允许更新……**，表示可以访问面板，但面板尚未接受此 Home Assistant。请打开该修复条目，或依次打开**设置**、**设备与服务**、**Panel Assistant**，选择面板的**配置**，再选择**允许更新**，然后在面板询问时点按**允许**。
 
 ## 更新会保护什么
 
@@ -32,7 +36,7 @@ Panel Assistant 在做出任何改动前都会检查面板，并在每次更新�
 
 ## 恢复
 
-更新后仪表盘无法加载，通常是系统 WebView 或仪表盘自身的问题。面板为此提供了自身的 [启动与恢复](/zh-hans/manage/built-in-renderer/#startup-and-recovery)机制。[故障排查](/zh-hans/manage/troubleshooting/)介绍了常见原因。当前文档没有说明如何退回早期发布版本，因此请将配置导出视为恢复原有配置的途径。
+更新后仪表盘无法加载，通常是系统 WebView 或仪表盘自身的问题。面板为此提供了自身的 [启动与恢复](/zh-hans/manage/built-in-renderer/#startup-and-recovery)机制。[故障排查](/zh-hans/manage/troubleshooting/)介绍了常见原因。运行 1.0 面板应用的面板无法退回更早的发布版本；[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/#going-back)说明了哪些部分可以退回旧版。
 
 应用以下层级的恢复是另一回事。Panel Assistant 从不改动面板固件，但部分已取得 root 权限的面板可以手动备份和恢复固件分区，相关步骤见 [固件备份与恢复](/zh-hans/hardware/guides/firmware-backup-and-restore/)。
 

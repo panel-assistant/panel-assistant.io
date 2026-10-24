@@ -3,17 +3,26 @@
 // score only orders and colours the bar. Hovering, focusing or tapping it opens a list of every
 // kind of evidence, each marked as held, partly held or missing; `open` shows that list in place.
 import { confidence, confidenceChecklist } from '../hardware/catalogue.mjs';
+import type english from '../content/i18n/en.json';
 
 const {
   data,
   wide = false,
   open = false,
 } = Astro.props as { data: Record<string, unknown>; wide?: boolean; open?: boolean };
+const translate = Astro.locals.t;
 const { score } = confidence(data);
-const checklist = confidenceChecklist(data);
+const checklist = confidenceChecklist(data).map((item) => ({
+  ...item,
+  text: translate(item.key as keyof typeof english).replace('{android}', String(data.android)),
+}));
 const MARK = { hit: '✓', part: '◐', miss: '✗' } as Record<string, string>;
-const SAID = { hit: 'yes', part: 'partly', miss: 'no' } as Record<string, string>;
-const label = `Confidence: ${checklist.map((c) => `${c.text}: ${SAID[c.state]}`).join('; ')}`;
+const SAID = {
+  hit: translate('confidence.yes'),
+  part: translate('confidence.partly'),
+  miss: translate('confidence.no'),
+} as Record<string, string>;
+const label = `${translate('confidence.title')}: ${checklist.map((c) => `${c.text}: ${SAID[c.state]}`).join('; ')}`;
 // Grey up to 3, then colour comes in slowly so only the top scores read as clearly green.
 const t = Math.max(0, (score - 3) / 7) ** 1.5;
 const fill = `hsl(${Math.round(90 + 50 * t)} ${Math.round(70 * t)}% 44%)`;
@@ -24,7 +33,7 @@ const fill = `hsl(${Math.round(90 + 50 * t)} ${Math.round(70 * t)}% 44%)`;
     <span class="fill" style={`width: ${score * 10}%; background: ${fill};`}></span>
   </span>
   <span class="detail" aria-hidden="true">
-    <span class="detail-title">Confidence</span>
+    <span class="detail-title">{translate('confidence.title')}</span>
     {checklist.map((c) => (
       <span class:list={['item', c.state]}>
         <span class="mark">{MARK[c.state]}</span>

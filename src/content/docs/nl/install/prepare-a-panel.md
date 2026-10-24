@@ -1,16 +1,18 @@
 ---
 title: Het paneel voorbereiden
-description: De twee dingen die een paneel nodig heeft voordat Panel Assistant erop kan installeren, en de WebView-update die bepaalt of het eerste dashboard er goed uitziet.
-sourceCommit: e132b3f499b292a1757d97d76675e840a7a25067
+description: Wat een paneel nodig heeft voordat Panel Assistant erop kan installeren, en de WebView-update die bepaalt of het eerste dashboard er goed uitziet.
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
-Er moeten twee dingen kloppen voordat je een paneel toevoegt, en een derde bepaalt of het eerste dashboard er goed uitziet. Voor geen van drieën heb je een opdrachtregel nodig.
+Eén ding moet kloppen voordat je een paneel toevoegt, en een tweede bepaalt of het eerste dashboard er goed uitziet. Voor geen van beide heb je een opdrachtregel nodig.
 
 ## 1. Ontwikkelaarsopties en foutopsporing staan aan
 
-Het installatieprogramma praat met het paneel via de foutopsporingsinterface van Android, die elk Android-apparaat heeft maar die standaard uit staat. Om die aan te zetten open je de ontwikkelaarsopties op het paneel en schakel je foutopsporing in: **USB-foutopsporing** voor de [USB-route](/nl/install/install-over-usb/). De precieze stappen verschillen per model en staan op de [hardwarepagina's](/nl/hardware/).
+Het installatieprogramma praat met het paneel via de foutopsporingsinterface van Android, die elk Android-apparaat heeft maar die standaard uit staat. Open op de meeste panelen **Instellingen**, dan **Over**, en tik zeven keer op **Buildnummer** totdat het paneel zegt dat je ontwikkelaar bent; **Ontwikkelaarsopties** verschijnt dan in Instellingen. Sommige fabrikanten verbergen dit of geven het een andere naam. De [hardwarepagina’s](/nl/hardware/) tonen de precieze stappen per model. Schakel in de ontwikkelaarsopties **USB-foutopsporing** in voor de [USB-route](/nl/install/install-over-usb/), of **netwerk-ADB op TCP-poort 5555** voor de netwerkroute. Niet elk paneel heeft een schakelaar voor netwerk-ADB; de hardwarepagina van je model vermeldt of die er is. Als die ontbreekt, gebruik dan de USB-route. De gekoppelde functie Draadloze foutopsporing van Android is een andere verbindingsmethode en wordt niet ondersteund door dit installatieprogramma.
 
-De eerste keer dat het installatieprogramma verbinding maakt, toont het paneel een autorisatievraag op zijn eigen scherm. Iemand moet die daar goedkeuren; dat kan niet op afstand.
+Als het paneel vraagt de verbinding te autoriseren, moet iemand die melding op het scherm van het paneel zelf goedkeuren; dat kan niet op afstand.
+
+Het paneel heeft geen vast adres nodig: Panel Assistant volgt een paneel waarvan het adres verandert.
 
 ## 2. De systeem-WebView is actueel
 

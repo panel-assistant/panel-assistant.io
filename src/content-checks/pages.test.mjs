@@ -123,19 +123,31 @@ test('no prepare-a-panel page asks for a fixed address, and the English page say
   assert.match(text('/install/prepare-a-panel/'), /follows a panel whose address changes/);
 });
 
-test('the Dutch, Polish and Ukrainian setup pages no longer send readers to wireless debugging', () => {
-  const wireless = [
-    'draadloze foutopsporing',
-    'debugowanie bezprzewodowe',
-    'debugowania bezprzewodowego',
-    'бездротове налагодження',
+test('published preparation guidance distinguishes network ADB from unsupported paired wireless debugging', () => {
+  // Published documentation contract: TCP 5555 is supported; Android's paired method is not.
+  const guidance = [
+    ['', /network ADB on TCP port 5555/, /paired Wireless debugging[^.]*not supported/],
+    [
+      'nl',
+      /netwerk-ADB op TCP-poort 5555/,
+      /gekoppelde functie Draadloze foutopsporing[^.]*niet ondersteund/,
+    ],
+    [
+      'pl',
+      /sieciowe ADB na porcie TCP 5555/,
+      /Parowane debugowanie bezprzewodowe[^.]*nie obsługuje/,
+    ],
+    [
+      'uk',
+      /мережевий ADB на TCP-порту 5555/,
+      /Бездротове налагодження[^.]*зі сполученням[^.]*не підтримує/,
+    ],
   ];
-  for (const locale of ['nl', 'pl', 'uk']) {
-    for (const page of ['/install/prepare-a-panel/', '/start/getting-started/']) {
-      const t = text(`/${locale}${page}`).toLowerCase();
-      for (const phrase of wireless)
-        assert.ok(!t.includes(phrase), `/${locale}${page} still says "${phrase}"`);
-    }
+  for (const [locale, network, unsupported] of guidance) {
+    const path = `${locale ? `/${locale}` : ''}/install/prepare-a-panel/`;
+    const shown = text(path);
+    assert.match(shown, network, `${path} must name the supported network connection`);
+    assert.match(shown, unsupported, `${path} must distinguish the unsupported paired method`);
   }
 });
 

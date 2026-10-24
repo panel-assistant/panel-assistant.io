@@ -85,5 +85,20 @@
   "error.pickles.story": "Onze panda zorgt voor chaos. We proberen hem onder controle te krijgen, maar hij is traag en koppig.",
   "error.not_found": "404 — Deze pagina kon niet worden gevonden.",
   "error.home": "Ga naar de homepage",
-  "error.pickles.alt": "Pickles de panda"
+  "error.pickles.alt": "Pickles de panda",
+  "panels.count": "{models} benoemde panelen van {brands} merken",
+  "panels.coverage": "hebben een eigen hardwarepagina, en andere compatibele Android-panelen starten met het generieke profiel.",
+  "confidence.title": "Vertrouwen",
+  "confidence.yes": "ja",
+  "confidence.partly": "gedeeltelijk",
+  "confidence.no": "nee",
+  "confidence.inspected": "Onderzocht op een exemplaar dat we zelf gebruiken",
+  "confidence.fully_open": "Firmware van de fabrikant volledig open",
+  "confidence.mostly_open": "Firmware van de fabrikant grotendeels open",
+  "confidence.restricted": "Firmware van de fabrikant beperkt de toegang",
+  "confidence.firmware": "Firmware van de fabrikant onderzocht",
+  "confidence.documented": "Gedocumenteerd door de fabrikant of in gepubliceerde specificaties",
+  "confidence.platform": "Hetzelfde platform als een paneel dat we hebben onderzocht",
+  "confidence.owners": "Een eigenaar draait er Panel Assistant op",
+  "confidence.older_android": "Android {android}: ouder dan 10 en niet onderzocht"
 }

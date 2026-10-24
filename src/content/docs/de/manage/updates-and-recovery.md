@@ -1,7 +1,7 @@
 ---
 title: Updates und Wiederherstellung
 description: Die App auf einem Panel aktuell halten und was sich wiederherstellen lässt, wenn etwas schiefgeht.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 ## Ein Panel aktualisieren
@@ -22,7 +22,11 @@ Manche Panels lassen sich nur über ADB aktualisieren, weil sie Apps nicht selbs
 
 Die übliche Ursache ist eine Änderung auf dem Panel und nicht in Home Assistant. Ein Update der Herstellerfirmware, ein Zurücksetzen auf Werkseinstellungen oder eine Herstelleroption, die die mitgelieferte Software wiederherstellt, können die Entwickleroptionen von Android wieder ausschalten. Damit wird auch ADB abgeschaltet. Es gibt in diesem Moment keine Warnung, weil aus Sicht des Panels nichts falsch läuft.
 
-Wenn du die Entwickleroptionen und USB-Debugging wieder aktivierst, stellst du den Update-Weg wieder her. Die Schritte sind dieselben wie bei der ersten Vorbereitung dieses Panels: siehe [Panel vorbereiten](/de/install/prepare-a-panel/#1-developer-options-and-debugging-are-on). Wie du diese Einstellungen erreichst, unterscheidet sich je nach Panel. Manche Hersteller verstecken sie hinter einer Folge von Berührungen auf einer Infoseite.
+Wenn du die Entwickleroptionen und USB-Debugging wieder aktivierst, stellst du bei den meisten Panels den Update-Weg wieder her. Die Schritte sind dieselben wie bei der ersten Vorbereitung dieses Panels: siehe [Panel vorbereiten](/de/install/prepare-a-panel/#1-developer-options-and-debugging-are-on). Wie du diese Einstellungen erreichst, unterscheidet sich je nach Panel. Manche Hersteller verstecken sie hinter einer Folge von Berührungen auf einer Infoseite.
+
+Wenn die Reparatur bestehen bleibt oder das Panel das Netzwerk-Debugging selbst ausschaltet, etwa ein Meta Portal nach einem Neustart oder ein Shelly Wall Display nach einem Zurücksetzen, schließe das Panel per USB an deinen Computer an und starte das USB-Installationsprogramm aus Home Assistant, wie unter [Über USB installieren](/de/install/install-over-usb/#der-ausgangspunkt-ist-home-assistant) beschrieben. Du musst vorher nichts entfernen: Auf einem Panel, auf dem die App bereits vorhanden ist, installiert das Installationsprogramm nichts. Wenn das Panel fragt, aktiviere **Von diesem Computer immer zulassen** und tippe auf **Zulassen**. Das Installationsprogramm schaltet dann das Netzwerk-Debugging wieder ein und meldet, dass Panel Assistant das Panel wieder erreichen kann. Home Assistant bietet von dort aus das Update des Panels an. Das Update behält seine Einstellungen und seinen Verlauf bei.
+
+Wenn Home Assistant für das Panel außerdem **Updates auf … erlauben** anzeigt, ist es erreichbar, hat diesen Home Assistant aber noch nicht akzeptiert. Öffne diese Reparatur oder gehe zu **Einstellungen**, **Geräte & Dienste**, **Panel Assistant**, wähle für das Panel **Konfigurieren** und dann **Updates erlauben**. Tippe anschließend auf dem Panel auf **Zulassen**, wenn es danach fragt.
 
 ## Was ein Update schützt
 
@@ -32,7 +36,7 @@ Erstelle vor einer Änderung, bei der du unsicher bist, selbst eine Sicherung: �
 
 ## Wiederherstellung
 
-Wenn ein Dashboard nach einem Update nicht lädt, liegt das meist an der System-WebView oder am Dashboard selbst. Das Panel hat dafür sein eigenes Verhalten für [Start und Wiederherstellung](/de/manage/built-in-renderer/#startup-and-recovery). [Fehlerbehebung](/de/manage/troubleshooting/) beschreibt die üblichen Ursachen. Eine Rückkehr zu einer früheren Version wird in der Dokumentation derzeit nicht beschrieben. Betrachte daher einen Konfigurationsexport als deinen Weg zurück.
+Wenn ein Dashboard nach einem Update nicht lädt, liegt das meist an der System-WebView oder am Dashboard selbst. Das Panel hat dafür sein eigenes Verhalten für [Start und Wiederherstellung](/de/manage/built-in-renderer/#startup-and-recovery). [Fehlerbehebung](/de/manage/troubleshooting/) beschreibt die üblichen Ursachen. Ein Panel mit der Panel-App 1.0 kann nicht zu einer früheren Version zurückkehren. [Upgrade auf 1.0](/de/manage/upgrade-to-1-0/#going-back) erklärt, was möglich ist.
 
 Die Wiederherstellung unterhalb der App-Ebene ist eine andere Sache. Panel Assistant rührt die Firmware eines Panels niemals an. Bei manchen gerooteten Panels lassen sich jedoch die Firmwarepartitionen von Hand sichern und wiederherstellen. Das ist unter [Firmware sichern und wiederherstellen](/de/hardware/guides/firmware-backup-and-restore/) dokumentiert.
 

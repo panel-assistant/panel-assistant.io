@@ -9,7 +9,7 @@ head:
     content: Panel Assistant
 hero:
   title: Home Assistant na ścianie, <span>zrobiony porządnie.</span>
-  tagline: Panel Assistant turns an Android wall panel into a fast, dependable home for your Home Assistant dashboards, and into a voice assistant where the panel has a microphone. You install and manage every panel from Home Assistant itself.
+  tagline: Panel Assistant zamienia panel ścienny z Androidem w szybki i niezawodny dom dla twoich pulpitów nawigacyjnych Home Assistant, a jeśli panel ma mikrofon — także w asystenta głosowego. Każdy panel instalujesz i zarządzasz nim z samego Home Assistant.
   actions:
     - text: Zacznij
       link: /pl/start/getting-started/
@@ -19,7 +19,7 @@ hero:
     - text: Czy mój panel jest obsługiwany?
       link: /pl/install/supported-panels/
       variant: secondary
-sourceCommit: 7f826badb62e49226db782fd204fd5fea2e2ee00
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 import Features from '../../../components/home/Features.astro';
@@ -98,7 +98,7 @@ To różnica między panelem, który się przycina, a takim, który reaguje w ch
 
 Większość paneli przychodzi z zagranicznych platform handlowych z cienką instrukcją i bez żadnej obietnicy, że uruchomi się na nich cokolwiek poza aplikacją producenta. Czy to działa, dowiadujesz się dopiero, gdy pieniądze i wieczory są już wydane. Panel Assistant ma zdjąć z ciebie tę niepewność: [sprawdź swój model](/pl/install/supported-panels/) przed zakupem i wiedz, że gdy dotrze, istnieje przetestowany, powtarzalny sposób, żeby go uruchomić.
 
-Najtrudniejsza w każdym panelu jest pierwsza godzina. Panel Assistant przejdzie ją za ciebie, z poziomu Home Assistant. Jeśli panel jest już w twojej sieci, podaj integracji jego adres, a ona zrobi resztę. Jeśli wciąż leży w pudełku, podłącz go kablem USB do laptopa i zainstaluj prosto z przeglądarki, zanim w ogóle trafi na ścianę. Tak czy inaczej zatwierdzasz jedno pytanie na panelu i śledzisz całość do końca.
+Najtrudniejsza w każdym panelu jest pierwsza godzina. Panel Assistant przejdzie ją za ciebie, z poziomu Home Assistant. Jeśli panel jest już w twojej sieci, podaj integracji jego adres, a ona zrobi resztę. Jeśli wciąż leży w pudełku, podłącz go kablem USB do laptopa i zainstaluj prosto z przeglądarki, zanim w ogóle trafi na ścianę. Jeśli panel poprosi o autoryzację debugowania, zaakceptuj prośbę na jego ekranie, a następnie obserwuj instalację do końca.
 
 </Split>
 
@@ -116,19 +116,19 @@ Tanie panele są wolne z konkretnych powodów, a Panel Assistant pokazuje ci te 
 
 <Split title="Zamontuj i zapomnij">
 
-Panel ścienny powinien zachowywać się jak włącznik światła: zawsze na miejscu, nigdy cię nie potrzebuje. Panel Assistant uczy się normalnego światła w pomieszczeniu i przygasa razem z nim, uczy się swojego czujnika zbliżeniowego, tak aby machnięcie budziło ekran, a przechodzący kot nie, zwalnia pamięć w nocy, gdy ekran jest wyłączony, i po ponownym uruchomieniu sam otwiera ostatni dobrze działający pulpit.
+Panel ścienny powinien zachowywać się jak włącznik światła: zawsze na miejscu, nigdy cię nie potrzebuje. Panel Assistant uczy się normalnego światła w pomieszczeniu i przygasa razem z nim, korzysta ze skalibrowanego czujnika zbliżeniowego, aby wybrany gest dłoni budził ekran, zwalnia pamięć w nocy, gdy ekran jest wyłączony, i po ponownym uruchomieniu sam otwiera ostatni dobrze działający pulpit.
 
 </Split>
 
-<Split title="Talk to it">
+<Split title="Porozmawiaj z nim">
 
-A panel with a microphone can act as a Home Assistant Assist satellite on the device it already has, with no separate device to add. Turn it on from the panel's Configure page. It listens for Okay Nabu, Hey Jarvis, Hey Mycroft or Alexa on the panel itself, sends your command to Home Assistant only after it hears one, and speaks the answer through the panel's speaker. Each wake word can use its own Assist pipeline, you can train a wake word of your own, and any Home Assistant text-to-speech voice can make announcements through the speaker. [Set up the voice assistant](/pl/manage/voice-assistant/).
+Panel z mikrofonem może działać jako satelita Home Assistant Assist na swoim istniejącym urządzeniu w Home Assistant, bez dodawania osobnego urządzenia. Włącz go na stronie konfiguracji panelu. Nasłuchuje słów Okay Nabu, Hey Jarvis, Hey Mycroft lub Alexa na samym panelu, wysyła twoje polecenie do Home Assistant dopiero po usłyszeniu jednego z nich i wypowiada odpowiedź przez głośnik panelu. Każde hasło wybudzające może korzystać z własnego potoku Assist, możesz wytrenować własne hasło, a dowolny głos syntezy mowy Home Assistant może odtwarzać komunikaty przez głośnik. [Skonfiguruj asystenta głosowego](/pl/manage/voice-assistant/).
 
 </Split>
 
 <Split title="Oprogramowanie producenta, okiełznane">
 
-Panel Assistant przejmuje ekran główny i daje panelowi bez przycisków ekranowy sposób poruszania się. Utrzymuje sprawdzone silniki przeglądarki dla paneli, które dostarczają silnik o lata za stary, i nie pozwala widżetowi sterującemu producenta rysować się na twoim pulpicie nawigacyjnym, a przy tym z założenia odmawia dotykania czegokolwiek, czego panel potrzebuje, żeby działać.
+Panel Assistant przejmuje ekran główny i daje panelowi bez przycisków ekranowy sposób poruszania się. Nie pozwala widżetowi sterującemu producenta rysować się na twoim pulpicie nawigacyjnym, a przy tym z założenia odmawia dotykania czegokolwiek, czego panel potrzebuje, żeby działać.
 
 </Split>
 
@@ -198,7 +198,7 @@ Panel Assistant jest nowy i szybko się rozwija. Trzy rodziny paneli mają dziś
 
 Wszystko tutaj to darmowe oprogramowanie o otwartym kodzie źródłowym na liberalnych licencjach, bez konta, bez usługi w chmurze i bez subskrypcji. Tworzy je użytkownik Home Assistant, który chciał, żeby panele ścienne działały tak, jak sprzęt zawsze obiecywał, i udostępnia je, żeby twoje też mogły.
 
-Ma należeć do społeczności, która z niego korzysta i go ulepsza. Contributions are merged under their authors' names and credited to them.
+Ma należeć do społeczności, która z niego korzysta i go ulepsza. Wkład jest scalany pod nazwiskami autorów i im przypisywany.
 
 </Split>
 

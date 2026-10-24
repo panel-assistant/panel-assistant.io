@@ -1,14 +1,14 @@
 ---
 title: Connetti un pannello
 description: Mostrare la tua plancia sul pannello e come l'hardware del pannello stesso appare in Home Assistant.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 Un pannello aggiunto a Home Assistant si connette in due modi. Uno mostra una plancia sullo schermo. L'altro porta l'hardware del pannello stesso al suo interno come entità.
 
 ## La plancia sullo schermo
 
-Apri la pagina di stato del pannello nel browser, al suo indirizzo sulla porta 8888, e scegli la plancia che vuoi sulla parete. Il pannello carica autonomamente quella plancia. Con il [filtro delle entità abilitato](/it/manage/performance/), apprende quali entità usa la plancia e richiede a Home Assistant solo quelle. I dettagli su come viene caricata la plancia e su cosa fa il pannello se il caricamento non riesce si trovano nella pagina del [renderer integrato](/it/manage/built-in-renderer/).
+Scegli la plancia nella procedura guidata di configurazione del pannello quando lo aggiungi. Per cambiarla in seguito, apri la pagina di stato del pannello nel browser, al suo indirizzo sulla porta 8888, e scegline un’altra. Il pannello carica autonomamente quella plancia. Con il [filtro delle entità abilitato](/it/manage/performance/), apprende quali entità usa la plancia e richiede a Home Assistant solo quelle. I dettagli su come viene caricata la plancia e su cosa fa il pannello se il caricamento non riesce si trovano nella pagina del [renderer integrato](/it/manage/built-in-renderer/).
 
 ## L'hardware del pannello in Home Assistant
 

@@ -1,14 +1,14 @@
 ---
 title: Podłączanie panelu
 description: Wyświetlanie pulpitu nawigacyjnego na panelu oraz to, jak własny sprzęt panelu pojawia się w Home Assistant.
-sourceCommit: fa1d23a12549f2afa3962f9797cd8c52a38db322
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 Panel dodany do Home Assistant łączy się z nim na dwa sposoby. Pierwszy wyświetla pulpit nawigacyjny na ekranie. Drugi wprowadza własny sprzęt panelu jako encje.
 
 ## Pulpit nawigacyjny na ekranie
 
-Otwórz stronę stanu panelu w przeglądarce, pod jego adresem na porcie 8888, i wybierz pulpit nawigacyjny, który chcesz mieć na ścianie. Panel sam ładuje ten pulpit, ustala, które encje są na nim pokazane, i prosi Home Assistant tylko o nie, dzięki czemu działa szybko. Szczegóły tego, jak pulpit jest ładowany i co panel robi, gdy nie uda się go załadować, znajdziesz na stronie o [wbudowanym rendererze](/pl/manage/built-in-renderer/).
+Pulpit nawigacyjny wybierasz w kreatorze konfiguracji panelu podczas jego dodawania. Aby zmienić go później, otwórz stronę stanu panelu w przeglądarce, pod jego adresem na porcie 8888, i wybierz inny. Panel sam ładuje ten pulpit. Przy [włączonym filtrowaniu encji](/pl/manage/performance/) uczy się, których encji używa pulpit, i prosi Home Assistant tylko o nie. Szczegóły tego, jak pulpit jest ładowany i co panel robi, gdy nie uda się go załadować, znajdziesz na stronie o [wbudowanym rendererze](/pl/manage/built-in-renderer/).
 
 ## Sprzęt panelu w Home Assistant
 

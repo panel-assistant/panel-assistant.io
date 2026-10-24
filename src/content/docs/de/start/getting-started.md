@@ -1,7 +1,7 @@
 ---
 title: Erste Schritte
 description: In wenigen Minuten vom uneingerichteten Android-Wandpanel zum Home Assistant-Dashboard, mit Home Assistant als Begleiter bei jedem Schritt.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 Wenn du schon einmal ein Wandpanel oder einen Kiosk eingerichtet hast, erinnerst du dich wahrscheinlich an den Ablauf: Apps manuell installieren, nach einer Browser-Engine suchen, die ein Dashboard darstellen kann, Einstellungen erraten und dem nächsten Neustart nie ganz trauen. Die Einrichtung mit Panel Assistant wird dich angenehm überraschen. Du kannst in wenigen Minuten fertig sein, und selbst wenn das Panel schon an der Wand hängt, musst du nicht von deinem Stuhl aufstehen. Na gut, vielleicht einmal ;-)
@@ -13,12 +13,12 @@ Bei jedem Panel ist die erste Stunde der schwierige Teil. Panel Assistant übern
 Füge Panel Assistant über HACS hinzu und starte Home Assistant neu. Das ist das Einzige, was du von Hand installierst. Ab jetzt führt dich Home Assistant durch den Ablauf. Siehe [Die Integration installieren](/de/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 is in public preview. Until it is released, HACS installs 0.9.0. To install the preview instead, open **Panel Assistant** in HACS, turn on **Show beta versions** and download the newest 1.0 preview. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/de/manage/upgrade-to-1-0/) explains what changes.
+Panel Assistant 1.0 ist als öffentliche Vorschau verfügbar. Bis zur Veröffentlichung installiert HACS die Version 0.9.0. Um stattdessen die Vorschau zu installieren, öffne **Panel Assistant** in HACS, aktiviere **Beta-Versionen anzeigen** und lade die neueste 1.0-Vorschau herunter. Ein Panel mit der App 1.0 kann nicht zu 0.9 zurückkehren. [Upgrade auf 1.0](/de/manage/upgrade-to-1-0/) erklärt, was sich ändert.
 :::
 
 ## 2. Debugging auf dem Panel einschalten
 
-Öffne die Entwickleroptionen auf dem Panel und aktiviere Netzwerk-ADB auf TCP-Port 5555 oder USB-Debugging, wenn du das Panel per Kabel anschließt. So kann Home Assistant die Installation für dich übernehmen. Die [Hardwareseiten](/de/hardware/) zeigen, wo sich der Schalter bei jedem Modell befindet, und [Panel vorbereiten](/de/install/prepare-a-panel/) enthält die Einzelheiten.
+Öffne die Entwickleroptionen auf dem Panel: Öffne bei den meisten Panels **Einstellungen**, dann **Über das Gerät** und tippe siebenmal auf **Build-Nummer**. Aktiviere dann **USB-Debugging**, wenn du das Panel per Kabel anschließt, oder **Netzwerk-ADB auf TCP-Port 5555** für den Netzwerkweg. Nicht jedes Panel hat einen Schalter für Netzwerk-ADB. Die jeweilige [Hardwareseite](/de/hardware/) sagt, ob dein Panel einen hat und wo er ist. Wenn es keinen gibt, nutze den USB-Weg. [Panel vorbereiten](/de/install/prepare-a-panel/) enthält die Einzelheiten.
 
 ## 3. Das Panel hinzufügen
 
@@ -26,7 +26,7 @@ Gehe in Home Assistant zu **Einstellungen**, **Geräte & Dienste**, **Integratio
 
 ### An deinen Computer angeschlossen
 
-Ein neues Panel kannst du einrichten, bevor es an die Wand kommt. Schließe es mit einem USB-Kabel an deinen Computer an und installiere direkt aus deinem Browser. Dafür brauchst du Chrome oder Edge.
+Ein neues Panel kannst du einrichten, bevor es an die Wand kommt. Schließe es mit einem USB-Kabel an deinen Computer an und installiere direkt aus deinem Browser. Dafür brauchst du Chrome oder Edge. Nachdem du **Über USB an diesem Computer installieren** gewählt hast, wähle **USB-Installationsprogramm öffnen**, behalte die empfohlene Version bei und drücke **Weiter**. Das Installationsprogramm öffnet sich in einem neuen Fenster. Das Panel benötigt weiterhin WLAN, um die Einrichtung abzuschließen. Verbinde es deshalb vor oder nach der Installation über seine eigene Einstellungen-App mit deinem Netzwerk.
 
 <div class="pa-steps" role="region" aria-label="Über USB installieren, Schritt für Schritt" tabindex="0">
 <figure>
@@ -35,12 +35,12 @@ Ein neues Panel kannst du einrichten, bevor es an die Wand kommt. Schließe es m
 <img class="dark:sl-hidden" src="/screenshots/ha-menu-light.png" width="580" height="330" alt="Der Schritt Panel einrichten in Home Assistant bietet Panel im Netzwerk hinzufügen oder Über USB an diesem Computer installieren an">
 </figure>
 <figure>
-<figcaption><span>2</span> Schließe das Panel an</figcaption>
+<figcaption><span>2</span> Schließe das Panel an, drücke Mein Panel finden und wähle das Panel aus der Liste deines Browsers</figcaption>
 <img class="light:sl-hidden" src="/screenshots/usb-connect-dark.png" width="520" height="375" alt="Das USB-Installationsprogramm fordert dich auf, das Panel anzuschließen und Mein Panel finden zu drücken">
 <img class="dark:sl-hidden" src="/screenshots/usb-connect-light.png" width="520" height="375" alt="Das USB-Installationsprogramm fordert dich auf, das Panel anzuschließen und Mein Panel finden zu drücken">
 </figure>
 <figure>
-<figcaption><span>3</span> Tippe auf dem Panel auf Zulassen</figcaption>
+<figcaption><span>3</span> Erlaube Debugging auf dem Panel, wenn du dazu aufgefordert wirst</figcaption>
 <img class="light:sl-hidden" src="/screenshots/usb-allow-dark.png" width="520" height="263" alt="Das USB-Installationsprogramm wartet, während du auf dem Bildschirm des Panels auf Zulassen tippst">
 <img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="263" alt="Das USB-Installationsprogramm wartet, während du auf dem Bildschirm des Panels auf Zulassen tippst">
 </figure>
@@ -82,17 +82,26 @@ Wenn das Panel schon an der Wand hängt, braucht Home Assistant nur seine Adress
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="Der Schritt Version wählen mit der empfohlenen Version oben in der Liste">
 </figure>
 <figure>
-<figcaption><span>4</span> Hinzugefügt</figcaption>
-<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="248" alt="Einrichtung dieses Panels abschließen">
-<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="248" alt="Einrichtung dieses Panels abschließen">
+<figcaption><span>4</span> Erlaube Debugging auf dem Panel, wenn es danach fragt</figcaption>
+<img class="light:sl-hidden" src="/screenshots/ha-authorize-dark.png" width="580" height="354" alt="Home Assistant wartet, bis du auf dem Panel Von diesem Computer immer zulassen aktivierst und auf Zulassen tippst; danach fährt es automatisch fort">
+<img class="dark:sl-hidden" src="/screenshots/ha-authorize-light.png" width="580" height="354" alt="Home Assistant wartet, bis du auf dem Panel Von diesem Computer immer zulassen aktivierst und auf Zulassen tippst; danach fährt es automatisch fort">
+</figure>
+<figure>
+<figcaption><span>5</span> Öffne die Einrichtungsseite des Panels</figcaption>
+<img class="light:sl-hidden" src="/screenshots/ha-done-dark.png" width="580" height="248" alt="Home Assistant bietet die Einrichtungsseite des Panels an und fordert dich auf, nach deren Abschluss zurückzukehren und Fertig zu wählen">
+<img class="dark:sl-hidden" src="/screenshots/ha-done-light.png" width="580" height="248" alt="Home Assistant bietet die Einrichtungsseite des Panels an und fordert dich auf, nach deren Abschluss zurückzukehren und Fertig zu wählen">
 </figure>
 </div>
+
+Wenn das Panel fragt, ob Debugging erlaubt werden soll, aktiviere **Von diesem Computer immer zulassen** und tippe auf dem Panel auf **Zulassen**. Home Assistant fährt selbstständig fort. Bestätige dann die Installation.
 
 In beiden Fällen übernimmt der Assistent den komplizierten Teil. Er prüft, was bereits auf dem Panel vorhanden ist, installiert die aktuelle Version der Panel-App, startet sie und bestätigt, dass sie ordnungsgemäß läuft. Ein Panel, auf dem die App schon läuft, wird übernommen, ohne sie neu zu installieren. Das Panel erkennt sein Modell und lädt das passende Hardware-Profil. Bildschirm, Tasten, LEDs und Sensoren stehen dadurch in Home Assistant sofort bereit. Siehe [Ein Panel hinzufügen](/de/install/installing-ha-paneld/).
 
 ## 4. Im Einrichtungsassistenten des Panels abschließen
 
-Home Assistant öffnet anschließend den eigenen Einrichtungsassistenten des Panels, der ein paar kurze Fragen stellt, unter anderem nach einem Namen für das Panel und dem Dashboard für die Wand. Bei aktiviertem Entitätenfilter lädt das Panel nur die Entitäten, die dieses Dashboard verwendet. Dadurch bleibt es schnell. Siehe [Panel verbinden](/de/home-assistant/connect-a-panel/).
+Als Nächstes folgt der eigene Einrichtungsassistent des Panels. Er wird vom Panel bereitgestellt und öffnet sich im Browser auf deinem Computer, nicht auf dem Bildschirm des Panels. Nach einer Netzwerkinstallation zeigt Home Assistant **Einrichtung dieses Panels abschließen**: Öffne die Einrichtungsseite des Panels, schließe dort die Schritte ab, kehre dann zu Home Assistant zurück und wähle **Fertig**. Nach einer USB-Installation wechselt das Installationsfenster direkt zum Assistenten. Weil das Panel ihn bereitstellt, lädt er nur in einem Browser im selben Netzwerk wie das Panel.
+
+Der Assistent fragt nach einem Namen für das Panel, meldet es bei Home Assistant an und fragt, welches Dashboard angezeigt werden soll und in welchem Bereich sich das Panel befindet. Das Panel verbindet sich als das Home Assistant-Konto, mit dem du dich anmeldest. Wenn dein Browser als du angemeldet ist, verbindet sich das Panel daher möglicherweise als du. Damit das Panel sein eigenes Konto verwendet, melde dich stattdessen als dieses Konto an. Bei aktiviertem Entitätenfilter lädt das Panel nur die Entitäten, die dieses Dashboard verwendet. Dadurch bleibt es schnell. Siehe [Panel verbinden](/de/home-assistant/connect-a-panel/).
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="Der Einrichtungsassistent des Panels, Schritt für Schritt" tabindex="0">
 <figure>
@@ -101,22 +110,27 @@ Home Assistant öffnet anschließend den eigenen Einrichtungsassistenten des Pan
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-name-light.png" width="524" height="702" alt="Der Einrichtungsassistent des Panels fragt nach Panel-ID und Anzeigename und zeigt eine Vorschau der Entitätsnamen, die Home Assistant verwenden wird">
 </figure>
 <figure>
-<figcaption><span>2</span> Wähle Dashboard und Bereich</figcaption>
+<figcaption><span>2</span> Melde dich bei Home Assistant an</figcaption>
+<img class="light:sl-hidden" src="/screenshots/panel-setup-sign-in-dark.png" width="524" height="688" alt="Der Assistent bietet die Anmeldung aus diesem Browser oder auf dem Panel mit dem Home Assistant-Konto an, als das sich das Panel verbinden soll">
+<img class="dark:sl-hidden" src="/screenshots/panel-setup-sign-in-light.png" width="524" height="688" alt="Der Assistent bietet die Anmeldung aus diesem Browser oder auf dem Panel mit dem Home Assistant-Konto an, als das sich das Panel verbinden soll">
+</figure>
+<figure>
+<figcaption><span>3</span> Wähle Dashboard und Bereich</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-dashboard-dark.png" width="524" height="485" alt="Der Assistent mit einem für das Panel ausgewählten Dashboard und einem Home Assistant-Bereich">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-dashboard-light.png" width="524" height="485" alt="Der Assistent mit einem für das Panel ausgewählten Dashboard und einem Home Assistant-Bereich">
 </figure>
 <figure>
-<figcaption><span>3</span> Schalte den Entitätenfilter ein</figcaption>
+<figcaption><span>4</span> Schalte den Entitätenfilter ein, wenn du dazu aufgefordert wirst</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-filter-dark.png" width="524" height="636" alt="Der Assistent empfiehlt den Entitätenfilter für dieses Panel und zeigt die Anzahl der Home Assistant-Entitäten">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-filter-light.png" width="524" height="636" alt="Der Assistent empfiehlt den Entitätenfilter für dieses Panel und zeigt die Anzahl der Home Assistant-Entitäten">
 </figure>
 <figure>
-<figcaption><span>4</span> Fast geschafft</figcaption>
+<figcaption><span>5</span> Fast geschafft</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-almost-there-dark.png" width="524" height="339" alt="Der Assistent wartet, während das Panel seine gefilterte Entitätsauswahl zusammenstellt und das Dashboard lädt">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-almost-there-light.png" width="524" height="339" alt="Der Assistent wartet, während das Panel seine gefilterte Entitätsauswahl zusammenstellt und das Dashboard lädt">
 </figure>
 <figure>
-<figcaption><span>5</span> Alles bereit</figcaption>
+<figcaption><span>6</span> Alles bereit</figcaption>
 <img class="light:sl-hidden" src="/screenshots/panel-setup-done-dark.png" width="524" height="526" alt="Der Assistent bestätigt, dass das Panel eingerichtet ist, und zeigt das Dashboard">
 <img class="dark:sl-hidden" src="/screenshots/panel-setup-done-light.png" width="524" height="526" alt="Der Assistent bestätigt, dass das Panel eingerichtet ist, und zeigt das Dashboard">
 </figure>

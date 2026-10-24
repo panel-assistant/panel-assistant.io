@@ -86,5 +86,20 @@
   "error.pickles.story": "Nasza panda sieje zamęt. Próbujemy ją opanować, ale jest powolna i uparta.",
   "error.not_found": "404 — Nie znaleziono tej strony.",
   "error.home": "Przejdź do strony głównej",
-  "error.pickles.alt": "Panda Pickles"
+  "error.pickles.alt": "Panda Pickles",
+  "panels.count": "Wymienione modele paneli ({models}) od {brands} marek",
+  "panels.coverage": "mają własne strony sprzętu, a pozostałe zgodne panele z Androidem zaczynają od profilu Generic.",
+  "confidence.title": "Pewność",
+  "confidence.yes": "tak",
+  "confidence.partly": "częściowo",
+  "confidence.no": "nie",
+  "confidence.inspected": "Zbadany na używanym przez nas egzemplarzu",
+  "confidence.fully_open": "Oprogramowanie producenta zapewnia pełny dostęp",
+  "confidence.mostly_open": "Oprogramowanie producenta zapewnia dostęp w większości",
+  "confidence.restricted": "Oprogramowanie producenta ogranicza dostęp",
+  "confidence.firmware": "Przeanalizowane oprogramowanie producenta",
+  "confidence.documented": "Dokumentacja producenta lub opublikowana specyfikacja",
+  "confidence.platform": "Ta sama platforma co zbadany przez nas panel",
+  "confidence.owners": "Właściciel używa na nim Panel Assistant",
+  "confidence.older_android": "Android {android}: starszy niż 10, niezbadany"
 }

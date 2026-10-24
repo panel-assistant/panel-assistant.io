@@ -1,12 +1,12 @@
 ---
 title: Przenoszenie panelu z MQTT
 description: Przekazywanie encji panelu z integracji MQTT w Home Assistant do Panel Assistant, z zachowaniem ich identyfikatorów encji, historii i dostosowań.
-sourceCommit: fa1d23a12549f2afa3962f9797cd8c52a38db322
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
-Do tej pory ekran, diody LED, przyciski i czujniki panelu trafiały do Home Assistant przez integrację MQTT. Panel Assistant może teraz sam przejąć te encje i komunikować się z panelem przez własne połączenie Home Assistant zamiast przez brokera. Obsługa MQTT zostanie usunięta z ha-paneld przed wersją 1.0, po czym panel nie będzie w ogóle potrzebował brokera, a ta strona pokazuje, jak przejść na nowe rozwiązanie wcześniej.
+Panel Assistant 1.0 korzysta z natywnego połączenia Home Assistant i nie obsługuje MQTT. Jeśli encje twojego panelu nadal korzystają z MQTT, najpierw uruchom Panel Assistant **0.9.0**, aby dokończyć przenoszenie z zachowaniem identyfikatorów encji, historii i dostosowań. Jeśli masz już wersję 1.0, przed zmianą wersji postępuj zgodnie z sekcją [Jeśli przenoszenie nie zostało ukończone](/pl/manage/upgrade-to-1-0/#if-a-move-was-not-finished).
 
-Ten przewodnik dotyczy Panel Assistant 0.8 i starszych. Panel Assistant 1.0 nie ma już opcji **Sterowanie**, z której tu korzystasz, więc przenieś każdy panel przed aktualizacją Panel Assistant do 1.0.
+Poniższy przewodnik to historyczne instrukcje dla Panel Assistant od 0.3 do 0.8. Jego opcja **Sterowanie** nie jest dostępna w 1.0.
 
 Przenosisz jeden panel naraz i każde przeniesienie można cofnąć. Encje panelu zachowują swoje identyfikatory, historię oraz każdą nazwę, ikonę czy obszar, które im nadałeś, więc pulpity nawigacyjne i automatyzacje, które z nich korzystają, nadal działają.
 
@@ -17,7 +17,7 @@ Przenoszenie to nowość. Wypróbuj je najpierw na jednym panelu i daj nam znać
 ## Zanim zaczniesz
 
 - **Panel Assistant od 0.3.0 do 0.8** w Home Assistant, zainstalowany przez HACS zgodnie z opisem w [Instalacja integracji](/pl/home-assistant/custom-integration/).
-- **ha-paneld 0.9.8-rc1 lub nowszy** na panelu. To wersja przedpremierowa: na stronie stanu panelu ustaw **Kanał automatycznych aktualizacji ha-paneld** na `prerelease`, a następnie zainstaluj aktualizację z encji aktualizacji panelu w Home Assistant.
+- **ha-paneld 0.9.8-rc1 lub nowszy** na panelu. Zainstaluj oferowaną aktualizację z encji aktualizacji Panel Assistant tego panelu w Home Assistant. Jeśli potrzebujesz wersji przedpremierowej, której tam nie ma, wybierz ją na karcie **Instalacja** w interfejsie WWW panelu i sam rozpocznij instalację.
 - **Panel jest zalogowany do Home Assistant**, a jest, jeśli wyświetla twój pulpit nawigacyjny.
 - **Zostaw konfigurację MQTT bez zmian.** Panel nadal używa brokera podczas przenoszenia i nic nie trzeba w nim zmieniać.
 
@@ -36,7 +36,7 @@ Na razie nic się nie przenosi. Każdy panel znany Panel Assistant otrzymuje dru
 
 Pomiń ten krok, jeśli panel jest już widoczny pod Panel Assistant w **Ustawienia**, **Urządzenia oraz usługi**.
 
-Wybierz **Dodaj integrację**, potem **Panel Assistant**, potem **Dodaj panel w swojej sieci** i wpisz nazwę hosta lub adres panelu. Panel Assistant znajdzie już działający ha-paneld i zaproponuje **Połącz z Home Assistant**. Nic na panelu nie jest instalowane ponownie.
+Wybierz **Dodaj integrację**, potem **Panel Assistant**, potem **Dodaj panel** i wpisz nazwę hosta lub adres panelu. Panel Assistant znajdzie już działający ha-paneld i zaproponuje **Połącz z Home Assistant**. Nic na panelu nie jest instalowane ponownie.
 
 ## 3. Potwierdź użytkownika panelu
 
@@ -54,7 +54,7 @@ Od teraz zmiana ustawienia lub naciśnięcie przycisku w encjach panelu przechod
 
 ### Co nie jest przenoszone
 
-Dwa przyciski MQTT nie mają odpowiednika w Panel Assistant, **Update ha-paneld** i **Update Companion app**, więc zostają usunięte, razem z ewentualną pozostałą encją aktualizacji MQTT dla ha-paneld. Ich zadanie przejmuje encja aktualizacji Panel Assistant tego panelu.
+Dwa przyciski MQTT nie mają odpowiednika w Panel Assistant, **Update ha-paneld** i **Update Companion app**, więc zostają usunięte, razem z ewentualną pozostałą encją aktualizacji MQTT dla ha-paneld. Aby zaktualizować aplikację panelu, użyj encji aktualizacji Panel Assistant tego panelu.
 
 Jeśli nadałeś któremuś z nich własną nazwę, ikonę lub obszar albo go ukryłeś lub wyłączyłeś, Panel Assistant nie usunie go za ciebie. Zamiast tego pokaże go naprawa, a panel zachowa swoje encje MQTT, dopóki nie usuniesz tej encji lub nie wyczyścisz tych ustawień.
 

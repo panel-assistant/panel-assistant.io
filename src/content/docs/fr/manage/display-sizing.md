@@ -1,7 +1,7 @@
 ---
 title: Dimensionnement de l’affichage
 description: Faire correspondre la taille d’un tableau de bord Home Assistant sur un panneau à son apparence dans un navigateur d’ordinateur, à l’aide de la densité et de la taille du texte.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 ---
 
 Un tableau de bord Home Assistant conçu dans un navigateur d’ordinateur s’affiche souvent à la mauvaise taille sur un panneau mural Android : les cartes sont trop grandes et leurs bords sont coupés, ou elles sont trop petites. Un téléphone reste généralement assez proche de l’affichage sur ordinateur, mais les panneaux s’en écartent souvent, car leurs fabricants définissent une densité système et une échelle de police mal adaptées à l’écran physique. L’application du panneau vous propose deux réglages, **densité (DPI)** et **taille du texte (échelle de police)**, sous **Installer**, puis **Dimensionnement de l’affichage**, pour rétablir les proportions de la disposition et du texte. Vous avez généralement besoin des deux.
@@ -18,7 +18,9 @@ La carte **Dimensionnement de l’affichage** de l’onglet **Installer** du pan
 Cela nécessite un moyen d’accès privilégié approuvé : normalement le `su` du fabricant ou l’[assistant root](https://github.com/panel-assistant/android/blob/main/helper/README.md). Un panneau compatible sans accès root, dont l’accès renforcé facultatif a déjà été approuvé sur le panneau, peut également effectuer ces modifications précises de l’affichage. Lorsqu’aucun moyen pris en charge n’est prêt, la carte reste visible mais verrouillée.
 :::
 
-Pour régler l’affichage, ouvrez le même tableau de bord dans un navigateur d’ordinateur comme référence. Réduisez la densité jusqu’à ce que la disposition corresponde, avec davantage de cartes à l’écran, puis ajustez légèrement la taille du texte jusqu’à ce qu’il corresponde.
+Pour régler l’affichage, ouvrez le même tableau de bord dans un navigateur d’ordinateur comme référence. Réduisez la densité jusqu’à ce que la disposition corresponde, avec davantage de cartes à l’écran, puis ajustez légèrement la taille du texte jusqu’à ce qu’il corresponde. Les bonnes valeurs dépendent de l’installation autant que du modèle : la résolution du panneau, la distance à laquelle les personnes se tiennent et la conception du tableau de bord.
+
+Certains modèles pris en charge fournissent une densité recommandée, et la plupart d’entre eux une taille de texte également. Lorsque Panel Assistant configure un tel panneau sans moyen d’accès privilégié, il les applique une fois par sa connexion ADB, et la suppression de l’application via Panel Assistant rétablit les valeurs précédentes.
 
 ## Les deux réglages
 
