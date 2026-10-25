@@ -164,6 +164,13 @@ test('the install-recovery topic Panel Assistant links from its install failures
     assert.ok(section.includes(`id="${id}"`), `#${anchor} has no #${id}`);
 });
 
+test('the update-webview topic the panel app links from its browser engine step lands on the stock versions and the sideload steps', () => {
+  const topics = JSON.parse(readFileSync('worker/topics.json', 'utf8'));
+  const page = content(topics['update-webview']);
+  for (const id of ['stock-versions-and-known-working-replacements', 'sideload-and-verify'])
+    assert.ok(page.includes(`id="${id}"`), `${topics['update-webview']} has no #${id}`);
+});
+
 test('Move a panel from MQTT sends a reader already on 1.0 to the unfinished-move steps, not back to 0.9.0', () => {
   // Downloading 0.9.0 again over 1.0 hands moved panels back to MQTT; the upgrade page restores the backup instead.
   const pages = localized('/home-assistant/move-from-mqtt/');
