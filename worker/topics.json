@@ -29,7 +29,7 @@
     "sonoff": "/hardware/firmware/builds/#sonoff-nspanel-pro-86p"
   },
   "issues": "https://github.com/panel-assistant/ha-integration/issues",
-  "discord": "https://discord.gg/qey8RQkSW",
+  "discord": "https://discord.gg/BsahqbZzRX",
   "docs": {
     "$comment": "Old ha-paneld docs/ paths (lowercased, no docs/ prefix, no .md suffix) to site pages. /go/docs?page=<old path> resolves through this map so a repository stub can be repointed here without a code change. Never a fixed string — resolve.js reads it as a nested map.",
     "adaptive-brightness": "/manage/adaptive-brightness/",
