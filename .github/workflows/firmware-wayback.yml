@@ -24,6 +24,10 @@ on:
         description: 'Optional JSON array of public Meta CDN asset URLs (maximum 10)'
         type: string
         required: false
+      notes_commit:
+        description: 'Optional full commit SHA of the Shelly vendor README to preserve'
+        type: string
+        required: false
       rebuild_site:
         description: 'Rebuild the site when archive state changes'
         type: boolean
@@ -68,10 +72,14 @@ jobs:
         env:
           WAYBACK_S3: ${{ secrets.WAYBACK_S3 }}
           MANUAL_URLS_JSON: ${{ inputs.urls_json }}
+          NOTES_COMMIT: ${{ inputs.notes_commit }}
         run: |
           args=()
           if [[ -n "$MANUAL_URLS_JSON" ]]; then
             args+=(--urls-json "$MANUAL_URLS_JSON")
+          fi
+          if [[ -n "$NOTES_COMMIT" ]]; then
+            args+=(--shelly-notes-commit "$NOTES_COMMIT")
           fi
           python tools/firmware-index/wayback_archive.py \
             --state wayback.json "${args[@]}"
