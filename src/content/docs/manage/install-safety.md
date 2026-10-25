@@ -7,7 +7,7 @@ This page describes the checks made by the retired [command-line installer](/man
 
 ## Trust and credential boundaries
 
-Credential files keep secrets out of shell history and out of the command lines of child processes on the computer running the installer. They do not add encryption to the panel's management API. The panel's API at `http://<panel>:8888` follows the project's trusted-network model, so broker credentials and Home Assistant tokens cross that connection as unencrypted HTTP. Run the installer only on a trusted, segmented network. The [security reference](/reference/security/) describes the model.
+Credential files keep secrets out of shell history and out of the command lines of child processes on the computer running the installer. They do not add encryption to the panel's management API. The panel's API (for example, `http://<panel>:8888` with the default port) follows the project's trusted-network model, so broker credentials and Home Assistant tokens cross that connection as unencrypted HTTP. Run the installer only on a trusted, segmented network. The [security reference](/reference/security/) describes the model.
 
 Signing in with a Home Assistant username and password works differently. The password goes from the installing computer to Home Assistant's login endpoint and never reaches the panel. Use an `https://` Home Assistant URL so the login is encrypted in transit; an `http://` URL sends the password unencrypted. The panel receives only the resulting refresh token, which can be revoked.
 

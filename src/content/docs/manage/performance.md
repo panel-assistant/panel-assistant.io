@@ -11,7 +11,7 @@ A common cause is the number of Home Assistant entity states and updates reachin
 
 ## Measure before changing anything
 
-Open the panel's web interface at `http://<panel-ip>:8888/`, or use the **Visit** link on the panel's device page in Home Assistant. Record the same dashboard view for a similar period before and after each change, so the comparison means something.
+Use **Visit** on the panel's device page in Home Assistant to open its web interface (for example, `http://<panel-ip>:8888/` with the default port). Record the same dashboard view for a similar period before and after each change, so the comparison means something.
 
 - **Dashboard responsiveness**: real interaction latency, the slowest interaction broken down into input, handler and presentation time, main-thread blocking, time to interactive, and unexpected renderer reloads.
 - **Home Assistant state stream**: state updates per second, the uncompressed JSON payload rate, the initial hydration size, the time until the main thread yields, and the three entities contributing most over the last hour, ranked by both update rate and payload volume.
@@ -82,7 +82,7 @@ Home Assistant's frontend normally subscribes to the state of every entity the s
 
 The entity filter applies only to the built-in renderer. Guided setup asks whether to turn it on before the first dashboard load; on a panel that is already set up:
 
-1. On port 8888, open **Configure**, then **Dashboard**, select **Built-in renderer (ha-paneld)**, and turn on **Entity filtering**.
+1. Use **Visit** on the panel's device page in Home Assistant, then open **Configure**, then **Dashboard**, select **Built-in renderer (ha-paneld)**, and turn on **Entity filtering**.
 2. Open the **Entities** tab and select **Scan dashboard now**.
 3. Visit every dashboard tab and use its controls, pop-ups and conditional content, so dependencies at run time have a chance to be observed.
 4. Review the current, suggested and excluded entities. Pin anything a custom card or template needs indirectly.

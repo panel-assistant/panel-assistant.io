@@ -21,7 +21,7 @@ All three are privileged, so the feature needs **root or the [root helper](https
 
 This is managed **on the panel's own web interface**, in the **Install** tab, not from Home Assistant. It is something you do once when setting a panel up or after a firmware update, not something you switch day to day, so it does not belong on a dashboard.
 
-Open the panel's web interface at `http://<panel-ip>:8888/install` and find the **Vendor packages** card.
+Use **Visit** on the panel's device page in Home Assistant, open **Install**, and find the **Vendor packages** card (for example, `http://<panel-ip>:8888/install` with the default port).
 
 Press **Find a package…** to open a list of the apps on the panel you might want to control, grouped to make the choice easier:
 

@@ -3,7 +3,7 @@ title: Troubleshooting
 description: The things that usually go wrong with a wall panel, and where to look first.
 ---
 
-Start with the panel's device in Home Assistant, which has a status sensor and a diagnostics download, and with the panel's own status page at its address on port 8888, whose `/diag` report answers most of the questions below without guesswork.
+Start with the panel's device in Home Assistant, which has a status sensor and a diagnostics download, and with the panel's own status page: use **Visit** on its device page in Home Assistant. Its `/diag` report answers most of the questions below without guesswork.
 
 When you need to see what the panel is doing as it happens, the **Logs** tab on that page streams the panel app's own log live, with tokens and passwords redacted.
 

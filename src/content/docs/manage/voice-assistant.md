@@ -13,7 +13,7 @@ It needs ha-paneld 0.9.9 or later on the panel and the Panel Assistant integrati
 
 It is off by default, so the voice assistant does not hold the microphone until you enable it.
 
-1. Open `http://<panel>:8888/`, then **Configure**.
+1. Use **Visit** on the panel's device page in Home Assistant, then open **Configure** (for example, `http://<panel>:8888/` with the default port).
 2. On the **Voice** card, turn on **Voice assistant**.
 3. Tick each wake word you want the panel to listen for under **Wake words**.
 4. Under **Wake word pipelines**, choose which Assist pipeline each ticked wake word should use.

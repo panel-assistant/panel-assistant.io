@@ -66,7 +66,7 @@ If the panel's own home screen can open Android Settings, removal leaves it as i
 
 ## Check before you remove
 
-- **Find your firmware version.** Panel Assistant shows it at the top of this page when it links here. On the panel, ha-paneld's own page at `http://<panel>:8888` lists it as _Firmware_.
+- **Find your firmware version.** Panel Assistant shows it at the top of this page when it links here. Use **Visit** on the panel's device page in Home Assistant to open ha-paneld's own page (for example, `http://<panel>:8888` with the default port), which lists it as _Firmware_.
 - **Know your way back to debugging** for your panel and firmware, from the section above.
 - **Keep a launcher that opens Android Settings** if the vendor's home screen has none.
 - **Do not restart the panel** between removing ha-paneld and anything you still need debugging for.

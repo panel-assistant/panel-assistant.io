@@ -77,7 +77,7 @@ A remote Configure save in Hardened mode must save a power safety reduction sepa
 
 Hardened mode rejects tap injection from anywhere other than loopback, so a request cannot approve itself. It also refuses to turn on network ADB, Android's wireless debugging or the WebView developer tools relay. Switch the panel back to Relaxed mode at the panel before using any of those.
 
-The approval boundary does not make the rest of the API on port 8888 authenticated. Diagnostic and status reads and routine controls keep their normal trusted-network behaviour. Keep the panel's API away from untrusted networks even with Hardened mode on; the [security reference](/reference/security/) describes the full posture.
+The approval boundary does not make the rest of the panel's API authenticated. Diagnostic and status reads and routine controls keep their normal trusted-network behaviour. Keep the panel's API away from untrusted networks even with Hardened mode on; the [security reference](/reference/security/) describes the full posture.
 
 Updates start when you install through Panel Assistant or choose an installation yourself. The panel app has no scheduled installation policy or saved update channel. Owner-started installations from the **Install** tab remain available, with approval at the panel for protected remote requests in Hardened mode.
 
