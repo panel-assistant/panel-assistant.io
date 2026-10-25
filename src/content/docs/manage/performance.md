@@ -6,7 +6,7 @@ description: Why a wall panel can feel slow with a dashboard that is fine on a p
 An inexpensive Android wall panel can feel sluggish, stutter while scrolling, go blank or stop updating even though the same dashboard works well on a phone or a desktop. Start with the work Home Assistant sends to the panel, then measure what is left of the dashboard and hardware limits, before assuming the panel has to be replaced.
 
 :::tip
-A common cause is the number of Home Assistant entity states and updates reaching the dashboard. A large installation can make a low-powered panel process thousands of entities it never displays. With the [built-in renderer](/manage/built-in-renderer/), the first fix to try is entity filtering.
+A common cause is the number of Home Assistant entity states and updates reaching the dashboard. [The drag race](/manage/drag-race/) shows what that costs on two identical panels, filmed side by side. A large installation can make a low-powered panel process thousands of entities it never displays. With the [built-in renderer](/manage/built-in-renderer/), the first fix to try is entity filtering.
 :::
 
 ## Measure before changing anything

@@ -154,6 +154,7 @@ export default defineConfig({
                 { label: 'Updates and recovery', slug: 'manage/updates-and-recovery' },
                 { label: 'Upgrading to 1.0', slug: 'manage/upgrade-to-1-0' },
                 { label: 'Performance', slug: 'manage/performance' },
+                { label: 'The drag race', slug: 'manage/drag-race' },
                 { label: 'Troubleshooting', slug: 'manage/troubleshooting' },
                 { label: 'Before you remove ha-paneld', slug: 'manage/removal-risks' },
                 { label: 'Install script (retired)', slug: 'manage/command-line-install' },
