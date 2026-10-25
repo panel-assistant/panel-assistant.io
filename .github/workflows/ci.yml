@@ -5,6 +5,11 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Published Android tag required in the release catalogue
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -65,6 +70,9 @@ jobs:
 
       # Internal links are validated during the build, so a broken one fails here.
       - name: Build
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          EXPECTED_RELEASE_TAG: ${{ inputs.release_tag }}
         run: npm run build
 
       # The /go redirect table is checked against the pages this build produced,
@@ -131,6 +139,19 @@ jobs:
               exit 0
             fi
             echo "attempt $attempt: live code or firmware data refs have not changed yet"
+            sleep 10
+          done
+          exit 1
+
+      - name: Verify the live release catalogue
+        run: |
+          for attempt in 1 2 3 4 5 6; do
+            if curl -fsS --max-time 20 "https://panel-assistant.io/releases/v1.json?attempt=${attempt}" -o "$RUNNER_TEMP/releases-v1.json" && \
+                cmp --silent dist/releases/v1.json "$RUNNER_TEMP/releases-v1.json"; then
+              echo "live release catalogue matches the checked site artifact"
+              exit 0
+            fi
+            echo "attempt $attempt: live release catalogue has not changed yet"
             sleep 10
           done
           exit 1

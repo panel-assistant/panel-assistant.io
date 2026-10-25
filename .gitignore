@@ -23,3 +23,5 @@ src/content/docs/reference/settings/
 public/settings-versions.json
 # Normalized from tracked screenshot sources before build and dev.
 public/screenshots/
+# Fetched from public Android release metadata before every build.
+public/releases/
