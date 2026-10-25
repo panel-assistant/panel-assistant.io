@@ -26,6 +26,7 @@ const git = (...args) =>
   execFileSync('git', ['--git-dir', cache, ...args], {
     encoding: 'utf8',
     maxBuffer: 64 * 1024 * 1024,
+    timeout: 300_000, // a stalled ls-remote or fetch fails the build instead of holding the runner for hours
     stdio: ['ignore', 'pipe', 'inherit'],
   });
 

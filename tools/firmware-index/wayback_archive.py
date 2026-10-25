@@ -24,6 +24,7 @@ Usage:
   python wayback_archive.py --state wayback.json [--max N]
                             [--wave-size N] [--drain-wait S] [--workers N]
                             [--urls-json JSON]  # bounded manual public Meta CDN URLs
+                            [--shelly-notes-commit SHA]  # one pinned Shelly vendor README
 """
 
 import argparse
@@ -203,10 +204,17 @@ def archive_progress(urls, files):
     return archived, len(urls) - archived
 
 
+def notes_commit(value):
+    if not re.fullmatch(r"[a-f0-9]{40}", value):
+        raise argparse.ArgumentTypeError("notes commit must be a full lowercase Git commit SHA")
+    return value
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--state", required=True)
     ap.add_argument("--urls-json", type=manual_urls, help="manually capture only these public Meta CDN URLs (JSON array, maximum 10)")
+    ap.add_argument("--shelly-notes-commit", type=notes_commit, help="capture only this immutable vendor README and raw file")
     ap.add_argument("--max", type=int, default=0, help="cap captures submitted per run (0 = all)")
     ap.add_argument("--workers", type=int, default=6, help="concurrent submissions within a wave")
     ap.add_argument("--wave-size", type=int, default=WAVE_SIZE)
@@ -224,7 +232,14 @@ def main():
 
     state = load_state(args.state)
     files = state["files"]
-    urls = args.urls_json if args.urls_json is not None else priority_urls(load_devices())
+    if args.shelly_notes_commit:
+        commit = args.shelly_notes_commit
+        urls = [f"https://github.com/ShellyGroup/Wall-Display-Changelog/blob/{commit}/README.md",
+                f"https://raw.githubusercontent.com/ShellyGroup/Wall-Display-Changelog/{commit}/README.md"]
+    elif args.urls_json is not None:
+        urls = args.urls_json
+    else:
+        urls = priority_urls(load_devices())
 
     # Pass A — confirm anything already archived (catches prior runs' async completions).
     got = confirm_batch(state, args.state, [u for u in urls if u not in files])

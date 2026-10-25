@@ -155,6 +155,7 @@ export default defineConfig({
                 { label: 'Upgrading to 1.0', slug: 'manage/upgrade-to-1-0' },
                 { label: 'Known issues in 1.0.0-rc1', slug: 'manage/known-issues' },
                 { label: 'Performance', slug: 'manage/performance' },
+                { label: 'The drag race', slug: 'manage/drag-race' },
                 { ...label('sidebar.troubleshooting'), slug: 'manage/troubleshooting' },
                 { label: 'Before you remove ha-paneld', slug: 'manage/removal-risks' },
                 { label: 'Install script (retired)', slug: 'manage/command-line-install' },
