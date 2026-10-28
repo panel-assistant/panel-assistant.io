@@ -1,10 +1,10 @@
 ---
 title: Dépannage
 description: Les problèmes courants d’un panneau mural et les premiers points à vérifier.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
 ---
 
-Commencez par l’appareil correspondant au panneau dans Home Assistant, qui propose un capteur d’état et un téléchargement des diagnostics, ainsi que par la page d’état du panneau à son adresse sur le port 8888 : son rapport `/diag` répond à la plupart des questions ci-dessous sans devoir deviner.
+Commencez par l’appareil correspondant au panneau dans Home Assistant, qui propose un capteur d’état et un téléchargement des diagnostics, ainsi que par la page d’état du panneau : utilisez **Visiter** sur la page de son appareil dans Home Assistant. Son rapport `/diag` répond à la plupart des questions ci-dessous sans devoir deviner.
 
 Pour voir ce que fait le panneau au moment où cela se produit, l’onglet **Journaux** de cette page diffuse en direct le journal de l’application du panneau, en masquant les jetons et les mots de passe.
 

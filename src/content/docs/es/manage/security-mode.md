@@ -1,7 +1,7 @@
 ---
 title: Modo de seguridad
 description: El comportamiento predeterminado del panel para redes de confianza y el modo reforzado, que requiere que alguien en el panel apruebe las acciones remotas de gran impacto.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
 ---
 
 La interfaz web del panel, su API y sus controles de Home Assistant están diseñados para una red doméstica de confianza. El **modo relajado** es el predeterminado: las automatizaciones, las herramientas de instalación y las acciones del navegador funcionan sin una solicitud adicional. Una acción queda fuera de esa regla deliberadamente. Encender la cámara a través de su entidad de Home Assistant pide aprobación en el panel en todos los modos, incluido el relajado. El ajuste Cámara de Configurar es una vía independiente de configuración del propietario. Apagarla nunca pide aprobación.
@@ -78,7 +78,7 @@ Al guardar de forma remota desde Configurar en el modo reforzado, una reducción
 
 El modo reforzado rechaza la inyección de pulsaciones desde cualquier lugar que no sea la interfaz de bucle local, por lo que una solicitud no puede aprobarse a sí misma. También se niega a habilitar ADB por red, la depuración inalámbrica de Android o el retransmisor de herramientas de desarrollo de WebView. Vuelve a poner el panel en modo relajado desde el propio panel antes de utilizar cualquiera de esas funciones.
 
-El límite de aprobación no hace que el resto de la API del puerto 8888 requiera autenticación. Las lecturas de diagnóstico y estado y los controles habituales mantienen su comportamiento normal de red de confianza. Mantén la API del panel fuera del alcance de redes que no sean de confianza incluso con el modo reforzado habilitado; la [referencia de seguridad](/es/reference/security/) describe la situación completa.
+El límite de aprobación no hace que el resto de la API del panel requiera autenticación. Las lecturas de diagnóstico y estado y los controles habituales mantienen su comportamiento normal de red de confianza. Mantén la API del panel fuera del alcance de redes que no sean de confianza incluso con el modo reforzado habilitado; la [referencia de seguridad](/es/reference/security/) describe la situación completa.
 
 Las actualizaciones empiezan cuando instalas a través de Panel Assistant o eliges una instalación por tu cuenta. La aplicación del panel no tiene una política de instalación programada ni un canal de actualización guardado. Las instalaciones iniciadas por el propietario desde la pestaña **Instalar** siguen disponibles, con aprobación en el panel para las solicitudes remotas protegidas en el modo reforzado.
 

@@ -1,10 +1,10 @@
 ---
 title: Risoluzione dei problemi
 description: I problemi più comuni di un pannello a parete e dove cercare per prima cosa.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
 ---
 
-Inizia dal dispositivo del pannello in Home Assistant, che ha un sensore di stato e consente di scaricare la diagnostica, e dalla pagina di stato del pannello al suo indirizzo sulla porta 8888, il cui rapporto `/diag` risponde alla maggior parte delle domande qui sotto senza dover fare supposizioni.
+Inizia dal dispositivo del pannello in Home Assistant, che ha un sensore di stato e consente di scaricare la diagnostica, e dalla pagina di stato del pannello stesso: usa **Visita** nella sua pagina del dispositivo in Home Assistant. Il suo rapporto `/diag` risponde alla maggior parte delle domande qui sotto senza dover fare supposizioni.
 
 Quando devi vedere cosa sta facendo il pannello in tempo reale, la scheda **Registri** di quella pagina trasmette in diretta il registro dell'app del pannello, con token e password oscurati.
 

@@ -1,10 +1,10 @@
 ---
 title: Solución de problemas
 description: Los problemas habituales de un panel de pared y dónde mirar primero.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
 ---
 
-Empieza por el dispositivo del panel en Home Assistant, que tiene un sensor de estado y una descarga de diagnóstico, y por la página de estado del propio panel, en su dirección y el puerto 8888: su informe `/diag` responde a la mayoría de las preguntas siguientes sin necesidad de hacer conjeturas.
+Empieza por el dispositivo del panel en Home Assistant, que tiene un sensor de estado y una descarga de diagnóstico, y por la página de estado del propio panel: usa **Visitar** en la página de su dispositivo en Home Assistant. Su informe `/diag` responde a la mayoría de las preguntas siguientes sin necesidad de hacer conjeturas.
 
 Cuando necesites ver qué está haciendo el panel en ese momento, la pestaña **Registros** de esa página transmite en directo el registro de la aplicación del panel, con los tokens y las contraseñas ocultos.
 

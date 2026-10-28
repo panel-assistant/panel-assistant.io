@@ -1,7 +1,7 @@
 ---
 title: Mode de sécurité
 description: Le comportement par défaut du panneau sur un réseau de confiance et le mode renforcé, qui exige qu’une personne présente au panneau approuve les actions distantes ayant des conséquences importantes.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
 ---
 
 L’interface web du panneau, son API et ses commandes Home Assistant sont conçues pour un réseau domestique de confiance. Le **mode souple** est activé par défaut : les automatisations, les outils d’installation et les actions du navigateur fonctionnent sans demande supplémentaire. Une action échappe délibérément à cette règle. Activer la caméra via son entité Home Assistant demande une approbation au panneau dans tous les modes, y compris le mode souple. Le réglage Caméra dans Configurer constitue un moyen de configuration distinct pour le propriétaire. La désactiver ne demande jamais d’approbation.
@@ -78,7 +78,7 @@ En mode renforcé, un enregistrement à distance dans Configurer doit enregistre
 
 Le mode renforcé rejette l’injection d’appuis depuis toute origine autre que l’interface de boucle locale, afin qu’une requête ne puisse pas s’approuver elle-même. Il refuse aussi d’activer ADB sur le réseau, le débogage sans fil d’Android ou le relais des outils de développement WebView. Sur le panneau, repassez en mode souple avant d’utiliser l’un de ces moyens.
 
-La limite d’approbation ne rend pas le reste de l’API sur le port 8888 authentifié. La lecture des diagnostics et de l’état ainsi que les commandes courantes conservent leur comportement habituel sur un réseau de confiance. N’exposez pas l’API du panneau à des réseaux non fiables, même lorsque le mode renforcé est activé ; la [référence de sécurité](/fr/reference/security/) décrit l’ensemble du modèle de sécurité.
+La limite d’approbation ne rend pas le reste de l’API du panneau authentifié. La lecture des diagnostics et de l’état ainsi que les commandes courantes conservent leur comportement habituel sur un réseau de confiance. N’exposez pas l’API du panneau à des réseaux non fiables, même lorsque le mode renforcé est activé ; la [référence de sécurité](/fr/reference/security/) décrit l’ensemble du modèle de sécurité.
 
 Les mises à jour commencent lorsque vous lancez une installation via Panel Assistant ou que vous choisissez vous-même une installation. L’application du panneau n’a ni politique d’installation planifiée ni canal de mise à jour enregistré. Les installations lancées par le propriétaire depuis l’onglet **Installer** restent disponibles, avec une approbation au panneau pour les requêtes distantes protégées en mode renforcé.
 

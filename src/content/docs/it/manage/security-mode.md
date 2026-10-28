@@ -1,7 +1,7 @@
 ---
 title: Modalità di sicurezza
 description: Il comportamento predefinito del pannello su una rete fidata e la modalità rafforzata, che richiede a qualcuno presente al pannello di approvare le azioni remote ad alto impatto.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
 ---
 
 L'interfaccia web del pannello, la sua API e i suoi controlli di Home Assistant sono progettati per una rete domestica fidata. La **modalità permissiva** è quella predefinita: automazioni, strumenti di installazione e azioni del browser funzionano senza una richiesta aggiuntiva. Un'azione è deliberatamente esclusa da questa regola. Accendere la fotocamera tramite la sua entità Home Assistant richiede l'approvazione sul pannello in ogni modalità, inclusa quella permissiva. L'impostazione Fotocamera in Configura è un percorso separato di configurazione del proprietario. Spegnerla non richiede mai l'approvazione.
@@ -78,7 +78,7 @@ Un salvataggio remoto di Configura in modalità rafforzata deve salvare una ridu
 
 La modalità rafforzata rifiuta l'iniezione di tocchi da qualsiasi origine diversa dal loopback, quindi una richiesta non può approvare sé stessa. Si rifiuta inoltre di attivare ADB di rete, il debug wireless di Android o il relay degli strumenti di sviluppo della WebView. Riporta il pannello in modalità permissiva sul pannello stesso prima di usare uno qualsiasi di questi strumenti.
 
-Il limite dell'approvazione non rende autenticato il resto dell'API sulla porta 8888. Le letture della diagnostica e dello stato e i controlli ordinari mantengono il normale comportamento previsto per una rete fidata. Mantieni l'API del pannello lontana dalle reti non fidate anche con la modalità rafforzata attiva; il [riferimento sulla sicurezza](/it/reference/security/) descrive l'intero modello di sicurezza.
+Il limite dell'approvazione non rende autenticato il resto dell'API del pannello. Le letture della diagnostica e dello stato e i controlli ordinari mantengono il normale comportamento previsto per una rete fidata. Mantieni l'API del pannello lontana dalle reti non fidate anche con la modalità rafforzata attiva; il [riferimento sulla sicurezza](/it/reference/security/) descrive l'intero modello di sicurezza.
 
 Gli aggiornamenti iniziano quando installi tramite Panel Assistant o scegli tu stesso un'installazione. L'app del pannello non ha criteri di installazione pianificata né un canale di aggiornamento salvato. Le installazioni avviate dal proprietario dalla scheda **Installa** rimangono disponibili, con approvazione sul pannello per le richieste remote protette in modalità rafforzata.
 

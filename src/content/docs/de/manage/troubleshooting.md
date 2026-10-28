@@ -1,10 +1,10 @@
 ---
 title: Fehlerbehebung
 description: Was bei einem Wandpanel häufig schiefgeht und wo du zuerst nachsehen solltest.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
 ---
 
-Beginne beim Gerät des Panels in Home Assistant, das einen Statussensor und einen Diagnose-Download bietet, und bei der eigenen Statusseite des Panels unter seiner Adresse auf Port 8888. Ihr Bericht unter `/diag` beantwortet die meisten der folgenden Fragen ohne Rätselraten.
+Beginne beim Gerät des Panels in Home Assistant, das einen Statussensor und einen Diagnose-Download bietet, und bei der eigenen Statusseite des Panels: Wähle dazu **Besuchen** auf seiner Geräteseite in Home Assistant. Ihr Bericht unter `/diag` beantwortet die meisten der folgenden Fragen ohne Rätselraten.
 
 Wenn du unmittelbar sehen möchtest, was das Panel gerade tut, überträgt die Registerkarte **Protokolle** auf dieser Seite das eigene Protokoll der Panel-App live. Tokens und Passwörter sind dabei unkenntlich gemacht.
 

@@ -1,14 +1,14 @@
 ---
 title: 连接面板
 description: 将仪表盘显示在面板上，以及面板自身的硬件如何出现在 Home Assistant 中。
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
 ---
 
 已添加到 Home Assistant 的面板通过两种方式与它连接。一种将仪表盘显示在屏幕上，另一种将面板自身的硬件作为实体接入。
 
 ## 屏幕上的仪表盘
 
-添加面板时，你会在面板的设置向导中选择仪表盘。以后如需更改，请在浏览器中打开面板地址的 8888 端口上的状态页面，并选择另一个仪表盘。面板会自行加载该仪表盘。[启用实体筛选](/zh-hans/manage/performance/)后，面板会了解仪表盘使用哪些实体，并只向 Home Assistant 请求这些实体。仪表盘加载方式，以及加载失败时面板的处理方式，详见 [内置渲染器](/zh-hans/manage/built-in-renderer/)页面。
+添加面板时，你会在面板的设置向导中选择仪表盘。以后如需更改，请在 Home Assistant 中该面板的设备页面上选择 **访问** 打开其状态页面，并选择另一个仪表盘。面板会自行加载该仪表盘。[启用实体筛选](/zh-hans/manage/performance/)后，面板会了解仪表盘使用哪些实体，并只向 Home Assistant 请求这些实体。仪表盘加载方式，以及加载失败时面板的处理方式，详见 [内置渲染器](/zh-hans/manage/built-in-renderer/)页面。
 
 ## Home Assistant 中的面板硬件
 
@@ -16,4 +16,4 @@ sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 
 ## 面板的状态页面
 
-每台面板都会在本地网络的 8888 端口上提供自己的页面。你可以在其中选择仪表盘、查看面板正在做什么，以及阅读诊断报告。它面向可信的家庭网络设计，因此请像对待面板本机的访问一样对待此页面的访问。[API 参考](/zh-hans/reference/api/)和 [安全模式](/zh-hans/manage/security-mode/)介绍了它提供的功能和信任模型。
+在 Home Assistant 中该面板的设备页面上选择 **访问**，即可打开其状态页面。每台面板都会在本地网络上提供此页面，默认使用端口 **8888**（例如 `http://<panel>:8888/`）。你可以在其中选择仪表盘、查看面板正在做什么，以及阅读诊断报告。它面向可信的家庭网络设计，因此请像对待面板本机的访问一样对待此页面的访问。[API 参考](/zh-hans/reference/api/)和 [安全模式](/zh-hans/manage/security-mode/)介绍了它提供的功能和信任模型。

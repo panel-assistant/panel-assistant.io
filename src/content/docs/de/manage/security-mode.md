@@ -1,7 +1,7 @@
 ---
 title: Sicherheitsmodus
 description: Das Standardverhalten des Panels in einem vertrauenswürdigen Netzwerk und der Gehärtete Modus, in dem jemand am Panel entfernte Aktionen mit weitreichenden Auswirkungen genehmigen muss.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
 ---
 
 Die Weboberfläche des Panels, seine API und seine Home Assistant-Steuerelemente sind für ein vertrauenswürdiges Heimnetzwerk ausgelegt. Der **Entspannte Modus** ist der Standard: Automatisierungen, Installationswerkzeuge und Browseraktionen funktionieren ohne zusätzliche Aufforderung. Eine Aktion ist bewusst von dieser Regel ausgenommen. Das Einschalten der Kamera über ihre Home Assistant-Entität erfordert in jedem Modus eine Genehmigung am Panel, auch im Entspannten Modus. Die Kameraeinstellung unter „Konfigurieren“ ist ein separater Konfigurationsweg für den Eigentümer. Das Ausschalten verlangt niemals eine Genehmigung.
@@ -78,7 +78,7 @@ Beim Speichern aus der Ferne über „Konfigurieren“ im Gehärteten Modus muss
 
 Der Gehärtete Modus lehnt das Einschleusen von Berührungen von überall außer Loopback ab, damit eine Anfrage sich nicht selbst genehmigen kann. Er weigert sich außerdem, Netzwerk-ADB, das drahtlose Debugging von Android oder das Relay für WebView-Entwicklerwerkzeuge einzuschalten. Schalte das Panel am Panel selbst wieder in den Entspannten Modus, bevor du einen dieser Wege nutzt.
 
-Die Genehmigungsgrenze macht den übrigen Teil der API auf Port 8888 nicht zu einer authentifizierten API. Diagnose- und Statusabfragen sowie gewöhnliche Steuerelemente behalten ihr übliches Verhalten für vertrauenswürdige Netzwerke bei. Halte die API des Panels auch bei eingeschaltetem Gehärtetem Modus von nicht vertrauenswürdigen Netzwerken fern. Die [Sicherheitsreferenz](/de/reference/security/) beschreibt das gesamte Sicherheitskonzept.
+Die Genehmigungsgrenze macht den übrigen Teil der API des Panels nicht zu einer authentifizierten API. Diagnose- und Statusabfragen sowie gewöhnliche Steuerelemente behalten ihr übliches Verhalten für vertrauenswürdige Netzwerke bei. Halte die API des Panels auch bei eingeschaltetem Gehärtetem Modus von nicht vertrauenswürdigen Netzwerken fern. Die [Sicherheitsreferenz](/de/reference/security/) beschreibt das gesamte Sicherheitskonzept.
 
 Updates beginnen, wenn du über Panel Assistant installierst oder selbst eine Installation auswählst. Die Panel-App hat weder eine Richtlinie für geplante Installationen noch einen gespeicherten Update-Kanal. Vom Eigentümer gestartete Installationen über die Registerkarte **Installieren** bleiben verfügbar. Im Gehärteten Modus benötigen geschützte entfernte Anfragen dabei eine Genehmigung am Panel.
 
