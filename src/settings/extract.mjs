@@ -74,8 +74,11 @@ function facts(block, constants) {
     out.push(`Default ${value === 'true' ? 'on' : 'off'}`);
   else if (/^-?\d+(\.\d+)?$/.test(value ?? '')) out.push(`Default ${value}`);
   const bound = (name) => {
-    const m = new RegExp(`\\b${name} = (-?[\\d.]+)`).exec(block);
-    return m ? String(Number(m[1])) : null;
+    const m = new RegExp(
+      `\\b${name} = (-?\\d(?:[\\d_]*\\d)?(?:\\.\\d(?:[\\d_]*\\d)?)?)(?=\\s*(?:,|$))`,
+    ).exec(block);
+    const value = m ? Number(m[1].replaceAll('_', '')) : NaN;
+    return Number.isFinite(value) ? String(value) : null;
   };
   const [min, max] = [bound('min'), bound('max')];
   if (min !== null && max !== null) out.push(`${min} to ${max}`);

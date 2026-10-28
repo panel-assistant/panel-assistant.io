@@ -6,7 +6,7 @@ import { join } from 'node:path';
 
 const LOCALES = ['de', 'es', 'fr', 'it', 'nl', 'pl', 'uk', 'zh-hans'];
 
-// Panel Assistant's `options.step.init.menu_options.remove_app` in translations/en.json, at 1.0.0-preview1.
+// The published rc1 removal label; rc2 is documented separately until released.
 const REMOVE_OPTION = 'Remove Panel Assistant from this panel';
 // The broadcast that frees an ADB uninstall of the panel app, as Panel Assistant's own removal sends it.
 const RELEASE_RECEIVER = 'ReleaseDeviceAdminReceiver';
@@ -56,11 +56,14 @@ test('a page that tells the reader to uninstall the panel app names how to relea
   assert.deepEqual(missing, []);
 });
 
-test('the removal-risks page names the remove option as Panel Assistant labels it', () => {
+test('the removal guide distinguishes the published rc1 and unreleased rc2 removal options', () => {
   const labels = [
     ...content('/manage/removal-risks/').matchAll(/<strong>([^<]*from this panel)<\/strong>/g),
   ].map((m) => m[1]);
-  assert.deepEqual(labels, [REMOVE_OPTION]);
+  assert.deepEqual(labels, [REMOVE_OPTION, 'Remove from this panel']);
+  const guidance = text('/manage/removal-risks/');
+  assert.match(guidance, /unreleased 1\.0\.0-rc2 version[^.]*Remove from this panel/);
+  assert.match(guidance, /In 1\.0\.0-rc1[^.]*Also delete this panel from Home Assistant/);
 });
 
 test('no display-sizing page says no standard values ship, and the English page says what setup applies', () => {

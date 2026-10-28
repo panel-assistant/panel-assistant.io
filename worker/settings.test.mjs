@@ -132,6 +132,20 @@ test('the facts line keeps only values that read well, and the fingerprint follo
   );
 });
 
+test('published numeric ranges preserve Kotlin separators, signs and decimals in the reader page', () => {
+  for (const [bounds, expected] of [
+    ['min = 5.0, max = 86_400.0', '5 to 86400'],
+    ['min = -2.5, max = 1_000.25', '-2.5 to 1000.25'],
+  ]) {
+    const groups = extractSettings(
+      kotlin(`        SettingSpec(key = "s", group = "G", type = SettingType.INT, ${bounds}),`),
+      en(['s']),
+    );
+    const rendered = page('1.0.0-rc1', groups, '1.0.0-rc1', 1, {}, () => 'Title');
+    assert.ok(rendered.includes(expected), `reader range is missing: ${expected}`);
+  }
+});
+
 test('a tag whose strings and registry disagree fails the build', () => {
   const source = kotlin(`        SettingSpec(key = "panel_id", group = "Identity"),`);
   assert.throws(() => extractSettings(source, en([])), /no label for setting panel_id/);
