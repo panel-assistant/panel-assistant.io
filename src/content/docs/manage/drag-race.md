@@ -9,7 +9,7 @@ Two Sonoff NSPanel Pro 86 panels, side by side on the same Home Assistant, each 
 
 ![Film A: the first panel on the Companion app, the second on Panel Assistant, racing at the same moment](/screenshots/drag-race-film-a.gif)
 
-Seven touches: four page changes, a return home, and three taps on a light card. Three runs each way; the films show the median run, and the panels swap roles between the two films.
+Seven touches: three page changes, a return home, and three taps on a light card. Three runs each way; the films show the median run, and the panels swap roles between the two films.
 
 |                                         | Companion app, firmware web engine | Panel Assistant, its own web engine |
 | --------------------------------------- | ---------------------------------- | ----------------------------------- |
@@ -44,7 +44,7 @@ Fifteen seconds is not a slow panel. It is a panel you have given up on and walk
 
 - Two Sonoff NSPanel Pro 86 panels (four-core Rockchip PX30, 480 by 480 screens) on one production Home Assistant with about 4,100 entities and some 20 state changes a second.
 - Two copies of one dashboard, identical apart from the light behind one card, so that the two panels never fight over a single entity.
-- The Companion app 2026.6.5 on the firmware's own web engine, Chromium 107, which is what most installed panels still run. Panel Assistant on Chromium 138, the web engine it installs and keeps current.
+- The Companion app 2026.6.5 on the firmware's own web engine, Chromium 107, which is what most installed panels still run. Panel Assistant on Chromium 138, the compatible web engine used for these runs.
 - Touches injected as raw screen events at the same instant on both panels. Each step recorded by the panel itself; the clock runs from the touch until the screen has stopped changing. A step that is still changing when its clip ends voids the run.
 - Three runs each way, the median run filmed. A music card that fetched lyrics from the internet was removed from the race, since no panel app can speed up an external service, and the live camera page was left out because its time is stream set-up rather than dashboard work.
 

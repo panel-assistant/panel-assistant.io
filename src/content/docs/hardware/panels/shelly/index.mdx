@@ -309,7 +309,7 @@ Two family profiles follow the two OTA tracks, alongside an exact [X2i profile](
 - `platform.has_recents` on the models other than the X2i. The modern profile omits Recents based on X2i firmware evidence, while the legacy profile declares it available. On the X2i, neither the Recents key nor Android's accessibility Recents action does anything, because the firmware has no recents task directory.
 - Default display density and an appropriate `provisioning.display.density` per model.
 - Whether an adb foothold and `adb root` are reachable on the legacy `userdebug` base build, which would allow the helper daemon. One X2i ships a `user` build, so there is no vendor route to root on that unit; whether the other modern models do the same is untested.
-- Whether the panel app's HTTP service on port 8888 is reachable from the LAN, which depends on the device's firewall.
+- Whether the panel app's HTTP service on its reported port (8888 by default) is reachable from the LAN, which depends on the device's firewall.
 
 ## Sources
 

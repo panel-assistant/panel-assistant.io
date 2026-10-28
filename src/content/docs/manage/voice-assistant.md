@@ -6,12 +6,12 @@ description: Turning a panel's microphone into a Home Assistant Assist satellite
 A panel with a microphone can act as a Home Assistant [Assist satellite](https://www.home-assistant.io/voice_control/). It listens for a wake word, streams your command to Home Assistant, and speaks the answer back through the panel's speaker. There is no separate device to add: the satellite is an `assist_satellite.<panel>` entity on the panel's existing Home Assistant device, and the audio travels over the same connection the panel already uses.
 
 :::note
-It needs ha-paneld 0.9.9 or later on the panel and the Panel Assistant integration 0.7.0 or later in Home Assistant. The Voice card is offered when the device profile declares a microphone, or when Android reports a built-in microphone on a panel whose profile leaves it unspecified. An unverified microphone must pass the panel's capture check before listening starts. A profile that explicitly declares no microphone does not offer Voice.
+The Voice card is offered when the device profile declares a microphone, or when Android reports a built-in microphone on a panel whose profile leaves it unspecified. An unverified microphone must pass the panel's capture check before listening starts. A profile that explicitly declares no microphone does not offer Voice.
 :::
 
 ## Turn it on
 
-It is off by default, so the voice assistant does not hold the microphone until you enable it.
+Voice is on by default on a new installation when the panel's device profile declares a microphone. Existing saved settings are preserved. On other panels where the Voice card is offered, turn **Voice assistant** on to use it. Turn it off if you do not want the panel listening for a wake word.
 
 1. Use **Visit** on the panel's device page in Home Assistant, then open **Configure** (for example, `http://<panel>:8888/` with the default port).
 2. On the **Voice** card, turn on **Voice assistant**.

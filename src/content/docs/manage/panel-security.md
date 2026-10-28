@@ -11,7 +11,7 @@ Using your usual account is fine, especially if your Home Assistant installation
 
 Home Assistant also saves a default dashboard and theme for each user. A panel user can have a wall dashboard and appearance without changing the choices on your phone or computer. The built-in renderer uses that default dashboard when **Home dashboard** is set to **Auto**; a dashboard selected in the panel settings takes priority. Its **Dashboard theme** setting can request light or dark mode, while an explicit Home Assistant theme choice still takes priority.
 
-You can give the panel user its own sidebar items and order, language, time zone, and number, date and time formats in **Home Assistant → User profile → General**. Sidebar preferences matter when the sidebar is visible; the panel hides navigation by default. Hiding a sidebar item does not restrict access to it. See [Home Assistant's user profile guide](https://www.home-assistant.io/docs/configuration/user-configuration/) for these account settings.
+You can give the panel user its own sidebar items and order, language, time zone, and number, date and time formats in **Home Assistant → User profile → General**. Sidebar preferences matter when the sidebar is visible; the built-in renderer hides the docked sidebar on first run. Hiding a sidebar item does not restrict access to it. See [Home Assistant's user profile guide](https://www.home-assistant.io/docs/configuration/user-configuration/) for these account settings.
 
 ### Change the panel's sign-in
 
@@ -23,7 +23,7 @@ The browser must be able to reach both Home Assistant and the panel's local addr
 
 A panel can use a VLAN without internet access if your firewall still lets the panel and Home Assistant reach each other, and a browser on your network can reach the panel when someone needs to sign in. The panel uses Home Assistant's local address for sign-in and its dashboard. Home Assistant also needs to reach the panel for management and updates.
 
-Panel Assistant can fetch a verified panel-app update on the Home Assistant machine and send it to the panel over the local network. Home Assistant still needs access to the update source. The panel's version checks and owner-started installations from its Install tab use GitHub and also need internet access. Those checks and downloads will not work on a VLAN with no internet route. Android System WebView is maintained separately through the Play Store, vendor firmware or a manual installation, so plan how you will maintain it too.
+Panel Assistant can fetch a verified panel-app update on the Home Assistant machine and send it to the panel over the local network. Home Assistant still needs access to the update source. The panel's version checks and owner-started installations from its Install tab use GitHub and also need internet access. Those checks and downloads will not work on a VLAN with no internet route. In the unreleased 1.0.0-rc2 version, an app update started from Home Assistant can also install a compatible WebView on supported panels. Plan for the [WebView update route](/hardware/guides/update-the-webview/) your panel supports too.
 
 Network separation limits which devices can reach the panel's web interface and API. It does not reduce the rights of a Home Assistant account already signed in on the panel. If the panel uses an administrator account, that sign-in remains an administrator sign-in even on an isolated VLAN. Choose the account and firewall rules to match what you trust on the wall and on the local network.
 

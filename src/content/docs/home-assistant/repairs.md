@@ -253,11 +253,11 @@ Importing through the sidebar replaces the shared copy and can update other pane
 
 ## Installer failure: update
 
-**What it means:** Home Assistant could not confirm that the update completed. It may already have completed on the panel.
+**What it means:** Home Assistant could not confirm that the update completed. In the unreleased 1.0.0-rc2 version, the panel app may already be installed while its browser-engine update remains unfinished.
 
-**Why it happens:** The update attempt failed; the Repair retains its report.
+**Why it happens:** The app update or, in that version, its browser-engine update failed or could not be verified. The Repair retains the report for the whole attempt.
 
-**How to fix it:** Read the Support report, restore the reported connection or installation requirement, then choose Try again. If Allow updates is offered, use it to approve Home Assistant on the panel first.
+**How to fix it:** Read the Support report, restore the reported connection or installation requirement, then choose **Try again**. In the unreleased 1.0.0-rc2 version, if only the browser-engine update remains unfinished and Panel Assistant confirms that the requested app version is installed, it continues that stage without reinstalling the app. If **Allow updates** is offered, use it to approve Home Assistant on the panel first. See the [WebView guide](/hardware/guides/update-the-webview/) if the browser engine cannot be updated.
 
 ## Installer failure: retry hold
 

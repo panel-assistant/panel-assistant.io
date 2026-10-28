@@ -177,7 +177,7 @@ adb -s $IP reboot
 **The reported WebView version is wrong after this method, so do not trust it.** `Settings, WebView` and `adb shell dumpsys webviewupdate` still show **`83.0.4103.120`**, because a sideloaded SystemWebView **stamps the OEM stock `versionName` and `versionCode`** to clear the panel's minimum-version gate and get selected. The _actual_ engine is 150. Verify it by:
 
 - **User-Agent:** open any "what's my user agent" page on the panel; the UA contains `Chrome/150.0.7871.63`.
-- **The panel app:** the `:8888` status page and `/diag` show `engine Chromium 150.0.7871.63`, because they read the UA, not the stamped package version.
+- **The panel app:** the panel's status page and `/diag`, using its reported HTTP port (8888 by default) show `engine Chromium 150.0.7871.63`, because they read the UA, not the stamped package version.
 
 A plain adb sideload does **not** work on this signature-locked panel. Cromite 147 remains in the mirror as a fallback, using the same procedure with a different APK.
 :::

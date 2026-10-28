@@ -26,7 +26,7 @@ Profiles also do not grant authority. A privileged driver remains unavailable un
 
 You need only a profile-capable ha-paneld installation and a web browser. The Profiles page includes a YAML editor with validation feedback; exporting to a separate text editor is optional. You do not need Android Studio, Gradle, the Android SDK or a repository checkout.
 
-1. Open `http://<panel-ip>:8888/profiles` on the same trusted network as the panel.
+1. Open the panel's device page in Home Assistant, select **Visit**, then open **Profiles**. If you connect directly, use the panel's reported HTTP port (`http://<panel-ip>:8888/profiles` with the default port).
 2. If ha-paneld already recognises the panel, export the exact active profile revision and use it as a reference. Bundled profiles are immutable, so the first edit creates a self-contained local fork rather than modifying the copy shipped with the app.
 3. If the panel uses **Generic**, download its passive device draft. The draft includes the panel fingerprint and explicit unknown/TODO values; it does not guess privileged hardware or run an active probe.
 4. Give the profile a stable lowercase ID and version, complete its provenance and compatibility metadata, and begin with exact matching rules. Use the [example below](#examples) and the [format reference](/reference/profiles/format/).

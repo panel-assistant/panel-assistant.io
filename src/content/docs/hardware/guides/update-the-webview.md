@@ -8,9 +8,13 @@ sidebar:
 
 Read this before anything else: an outdated WebView is the most common first-run failure on these panels.
 
-The panel app's built-in renderer relies on Android's **system WebView**, and most of these panels ship with one far too old to run a current Home Assistant frontend. Out of the box that can produce a blank or broken dashboard, missing cards, or "browser not supported". Panels **without** Google Play (Sonoff NSPanel Pro, Tuya TPA10) cannot update it through the Play Store, so install a current WebView with the method for your panel below. The **Electron WF1589T and ZHICAI SMT1019 have Google Play**, so update _Android System WebView_ from the Play Store, or use the Play WebView development channel.
+The panel app's built-in renderer relies on Android's **system WebView**, and most of these panels ship with one far too old to run a current Home Assistant frontend. Out of the box that can produce a blank or broken dashboard, missing cards, or "browser not supported". Panels **without** Google Play (Sonoff NSPanel Pro, Tuya TPA10) need another update route. The **Electron WF1589T and ZHICAI SMT1019 have Google Play**, so update _Android System WebView_ from the Play Store, or use the Play WebView development channel.
 
-The clean way is a direct adb sideload of the standard Android System WebView (package **`com.android.webview`**) matched to the panel's Android version and ABI, with no third-party app store involved.
+In the unreleased 1.0.0-rc2 version, installation and panel-app updates started from Home Assistant can also install a verified compatible WebView. This needs a supported profile, a non-Play-managed provider with the same package and signer as the selected build, and a permitted installation route. If that update remains unfinished, choose **Try again** in the panel's update Repair. It checks existing work before requesting another attempt; there is no scheduled retry. An old engine does not prevent setup and pairing, but the dashboard may still fail to display. The TPA10's signature-locked stock provider still needs its documented root swap before a differently signed replacement can be used.
+
+## Manual fallback
+
+Use the existing method for your panel below when the managed route is unavailable. A direct adb sideload of the standard Android System WebView (package **`com.android.webview`**) needs a build matched to the panel's Android version and ABI, with no third-party app store involved.
 
 :::tip
 The package name must be `com.android.webview` for the system to select it automatically. The **SystemWebView** builds from Cromite and LineageOS use `com.android.webview` and do register as the provider, but the regular Cromite **browser** app uses a different package and does not. Use the SystemWebView build, not the browser APK.

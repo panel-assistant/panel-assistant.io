@@ -14,7 +14,7 @@ Before saving, require the preview to report that every predicate in one complet
 
 ## Trying a community profile safely
 
-1. Open `http://<panel-ip>:8888/profiles`, export the active revision and make a current full panel backup.
+1. Open the panel's device page in Home Assistant, select **Visit**, then open **Profiles**. Export the active revision and make a current full panel backup. If you connect directly, use the panel's reported HTTP port (`http://<panel-ip>:8888/profiles` with the default port).
 2. Download and inspect the YAML. Confirm that its exact firmware and modification assumptions describe the panel in front of you.
 3. Paste or upload the YAML on **Profiles**, then validate it. Do not continue if the identity match is incomplete, a required compiled driver is missing or an unsafe input mapping is reported. Validation does not prove live hardware authority.
 4. Save the validated content as an inactive local revision. Saving still does not alter the running profile.

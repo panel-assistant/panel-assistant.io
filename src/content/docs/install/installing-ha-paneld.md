@@ -15,12 +15,14 @@ For a panel that is already on your network. Go to **Settings**, **Devices and s
 
 For a panel that is still in the box, or whose vendor software makes network access awkward. Plug it into your laptop and install from your browser over the USB cable. Your browser stays connected to Home Assistant, which supplies the verified release; the panel does not need network ADB. Start it from **Settings**, **Devices and services**, **Add integration**, **Panel Assistant**, **Install using USB on this computer**; it needs a Chromium-based browser. See [Install over USB](/install/install-over-usb/).
 
+In the unreleased 1.0.0-rc2 version, either installer can also request a verified compatible browser-engine update on supported panels. An update that cannot finish does not prevent setup or pairing; see [Prepare the panel](/install/prepare-a-panel/) for recovery.
+
 ## What the installer protects
 
 Both routes check the panel before changing anything. The network route adopts an existing app rather than reinstalling it. USB does not overwrite a different existing installation; if the exact selected build is already installed, it finishes that build's setup. An interrupted USB install can be retried with the same release, checking what completed before carrying on. For backups before an app update, see [Updates and recovery](/manage/updates-and-recovery/).
 
 ## After it is installed
 
-The panel appears as a device with a status sensor and diagnostics, and on the Panel Assistant page in the sidebar. Next you finish in the panel's own setup wizard, where you name the panel and choose its dashboard. Until setup is finished, the panel's own screen shows a QR code and a **Set up** button, so you can also finish from a phone or on the panel itself. To change the dashboard later, open the panel's status page in your browser, at its address on port 8888.
+The panel appears as a device with a status sensor and diagnostics, and on the Panel Assistant page in the sidebar. Next you finish in the panel's own setup wizard, where you name the panel and choose its dashboard. Until setup is finished, the panel's own screen shows a QR code and a **Set up** button, so you can also finish from a phone or on the panel itself. To change the dashboard later, open the panel's device page in Home Assistant and select **Visit**. If you open the panel's address directly, use its reported HTTP port; the default is 8888.
 
 Continue with [Connect a panel](/home-assistant/connect-a-panel/).

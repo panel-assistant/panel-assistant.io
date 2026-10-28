@@ -188,15 +188,15 @@ A stored schema-2 revision may contain `proximity_near_below`, `proximity_near_r
 | `provisioning.recipes`                        | Optional; default `[]`         | List of at most 32 core-owned recipe selections.                                                                                                                                             |
 | `provisioning.recipes[].id`                   | Required per item              | Unique registered ID. Schema 2 knows `nspanel-pro.watchdog-e2big-repair` and `tpa10.vendor-stack-minimize`. Recipe entries cannot contain arguments, commands, URLs or workflow definitions. |
 
-The three WebView IDs currently resolve inside the core as follows:
+In the unreleased 1.0.0-rc2 version, the three WebView IDs resolve to the following core-owned builds and compatibility metadata:
 
-| Artifact ID           | Core-owned build                                      |
-| --------------------- | ----------------------------------------------------- |
-| `lineageos-138-arm`   | LineageOS System WebView `138.0.7204.63`, 32-bit ARM. |
-| `lineageos-150-arm`   | LineageOS System WebView `150.0.7871.63`, 32-bit ARM. |
-| `lineageos-150-arm64` | LineageOS System WebView `150.0.7871.63`, 64-bit ARM. |
+| Artifact ID           | Core-owned build                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------ |
+| `lineageos-138-arm`   | LineageOS System WebView `138.0.7204.63`; ARM ABIs `armeabi-v7a` and `arm64-v8a`; Android 8–9.         |
+| `lineageos-150-arm`   | LineageOS System WebView `150.0.7871.63`; ARM ABI `armeabi-v7a`; Android 10 or newer.                  |
+| `lineageos-150-arm64` | LineageOS System WebView `150.0.7871.63`; ARM ABIs `armeabi-v7a` and `arm64-v8a`; Android 10 or newer. |
 
-The WebView artifact field is retained for compatibility and recovery of an already started swap. The panel app does not offer a new WebView installation or repair.
+The WebView artifact field selects a build whose download, checksum, package, version and signer are compiled into the core. In the unreleased 1.0.0-rc2 version, a panel-app update started from Home Assistant can also install a compatible WebView. If that update remains unfinished, use its update Repair to try again. Importing or activating a profile does not start an update. See [Update the WebView](/hardware/guides/update-the-webview/).
 
 ### Conditional driver requirements
 
@@ -270,7 +270,7 @@ Create separate profiles when no named strategy covers the difference, or when t
 
 ## Capabilities and compiled drivers
 
-A capability declaration contains hardware facts and, where needed, a driver ID with typed parameters. Driver IDs name implementations compiled into ha-paneld. The driver owns validation of paths, ranges, event codes, package names and other security-sensitive input. Privileged paths are selected from core allowlists. The retained `provisioning.software.webview.artifact` metadata names a URL, version, artifact checksum and signer hash compiled into and audited with the core; a profile cannot redefine that trust root. The panel app does not use it to offer a new WebView installation or repair.
+A capability declaration contains hardware facts and, where needed, a driver ID with typed parameters. Driver IDs name implementations compiled into ha-paneld. The driver owns validation of paths, ranges, event codes, package names and other security-sensitive input. Privileged paths are selected from core allowlists. The retained `provisioning.software.webview.artifact` metadata names a URL, version, artifact checksum and signer hash compiled into and audited with the core; a profile cannot redefine that trust root. In the unreleased 1.0.0-rc2 version, an owner-started update checks the installed provider and its compatibility before using that artifact; the profile cannot supply a different download or trust root.
 
 Profiles cannot supply:
 
