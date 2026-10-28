@@ -16,6 +16,7 @@ Use the existing Repair’s guarded **Try again** only after checking its report
 - [Mqtt panel needs 0.9.0](#mqtt-panel-needs-090)
 - [Panel permissions](#panel-permissions)
 - [Panel proximity setup](#panel-proximity-setup)
+- [Dashboard unfiltered](#dashboard-unfiltered)
 - [Voice microphone silent](#voice-microphone-silent)
 - [Voice microphone no audio](#voice-microphone-no-audio)
 - [Voice microphone no audio detail](#voice-microphone-no-audio-detail)
@@ -86,6 +87,14 @@ Use the existing Repair’s guarded **Try again** only after checking its report
 **Why it happens:** The panel reports calibration_required. Calibration measures this installation and needs a person in front of the panel; starting setup alone does not establish completion.
 
 **How to fix it:** Open this panel’s Configure page at Presence & wake and choose Set up proximity on panel. Follow the physical instructions on the panel, taking about a minute. After it says calibration is saved, return to the Repair and Submit. Home Assistant reads fresh status before completing; if setup is still running or the panel cannot be read, finish setup or restore the connection and submit again. The dashboard’s Open proximity setup action is also an on-panel starting point.
+
+## Dashboard unfiltered
+
+**What it means:** The panel is showing its dashboard with all of Home Assistant's entities instead of only the ones its dashboard uses.
+
+**Why it happens:** While the panel learns which entities its dashboard uses, it waits behind a screen that says what it is waiting for. If that wait lasts longer than 90 seconds, the panel shows the dashboard unfiltered rather than leave you without one. Common causes are a scan Home Assistant did not answer, a sign-in Home Assistant refused, dashboard rules that need your decision, and a browser engine too old to filter. The panel keeps trying behind the dashboard.
+
+**How to fix it:** Open this panel in the Panel Assistant sidebar, then Entities, to see what it is waiting for. Answer a decision about flagged rules there, or sign in again from Configure if Home Assistant refused the sign-in. If Panel Assistant offers a newer browser engine for the panel, install it. The panel returns to the filtered dashboard on its own, and the Repair clears.
 
 ## Voice microphone silent
 

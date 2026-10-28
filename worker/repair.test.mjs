@@ -8,8 +8,8 @@ const topics = JSON.parse(readFileSync(new URL('./topics.json', import.meta.url)
 const origin = 'https://panel-assistant.io';
 
 test('every Repair opens its own documentation section, preserving version and language', () => {
-  assert.equal(Object.keys(topics.repair).length, 35);
-  assert.equal(new Set(Object.values(topics.repair)).size, 35);
+  assert.equal(Object.keys(topics.repair).length, 36);
+  assert.equal(new Set(Object.values(topics.repair)).size, 36);
   for (const [issue, destination] of Object.entries(topics.repair)) {
     const hit = resolve(`${origin}/go/repair?issue=${issue}&v=1.0.0-rc1&build=824&lang=de`, topics);
     const url = new URL(hit.location);
