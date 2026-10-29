@@ -10,7 +10,7 @@ description: What removing ha-paneld from a panel does, which panels and firmwar
 
 Panel Assistant removes ha-paneld in one step, from the panel's **Remove Panel Assistant from this panel** option, under **Configure** in Home Assistant (Panel Assistant 0.9 calls it Remove ha-paneld from this panel). On most panels that is all there is to it. On some, removal leaves the panel with no way back to Android Settings or to network debugging, and then nothing can install an app on it again, Panel Assistant included, until you take the vendor's own route back. On some firmware that route means signing in to a vendor account, or connecting a computer by USB.
 
-In the unreleased 1.0.0-rc2 version, this option is called **Remove from this panel** and successful removal also deletes the panel from Home Assistant; there is no option to keep its entry.
+In the unreleased 1.0.0-rc2 version, this option is called **Remove from this panel** and successful removal also deletes the panel from Home Assistant; there is no option to keep its entry. The panel’s device page also has a **Remove from this panel** button. Pressing it removes nothing: it opens a lasting Repair, **Remove Panel Assistant from &lt;panel&gt;**, under **Settings → System → Repairs**. Read its warning before confirming removal with one **Submit**. If you pressed the button by mistake, close the dialog without submitting and leave the Repair unconfirmed.
 
 Read the section for your panel before you confirm.
 
@@ -22,6 +22,10 @@ Read the section for your panel before you confirm.
 4. In 1.0.0-rc1, if you selected **Also delete this panel from Home Assistant** before submitting, Home Assistant forgets the panel too. Leave it off to keep its entities and history. In the unreleased 1.0.0-rc2 version, successful removal always deletes the entry.
 
 If removal stops part way, run it again: it picks up where it stopped.
+
+## Reinstalling this panel
+
+First get debugging back using the section for your panel below and [Prepare a panel](/install/prepare-a-panel/#1-developer-options-and-debugging-are-on). Then follow [Add a panel](/install/installing-ha-paneld/) to install Panel Assistant again. Removal deletes the app’s settings; reinstalling does not restore them.
 
 ## Why a panel can get stuck
 

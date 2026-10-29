@@ -1,0 +1,24 @@
+{
+  "source": "https://github.com/panel-assistant/ha-integration/blob/05bd70e732fcdb639994fa8f2c716987cfd45722/custom_components/panel_assistant/strings.json",
+  "entity": {
+    "button": {
+      "remove_from_panel": {
+        "name": "Remove from this panel"
+      }
+    }
+  },
+  "issues": {
+    "remove_from_panel": {
+      "title": "Remove Panel Assistant from {panel}"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "menu_options": {
+          "remove_app": "Remove from this panel"
+        }
+      }
+    }
+  }
+}

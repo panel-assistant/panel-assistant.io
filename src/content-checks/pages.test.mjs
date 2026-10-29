@@ -6,6 +6,13 @@ import { join } from 'node:path';
 
 const LOCALES = ['de', 'es', 'fr', 'it', 'nl', 'pl', 'uk', 'zh-hans'];
 
+// Public label contract: this pinned English subset keeps rc2 guidance aligned with Panel Assistant.
+const removalStrings = JSON.parse(
+  readFileSync(new URL('./fixtures/pa-removal-strings.json', import.meta.url), 'utf8'),
+);
+const REMOVE_BUTTON = removalStrings.entity.button.remove_from_panel.name;
+const REMOVE_MENU = removalStrings.options.step.init.menu_options.remove_app;
+const REMOVE_REPAIR = removalStrings.issues.remove_from_panel.title.replace('{panel}', '<panel>');
 // The published rc1 removal label; rc2 is documented separately until released.
 const REMOVE_OPTION = 'Remove Panel Assistant from this panel';
 // The broadcast that frees an ADB uninstall of the panel app, as Panel Assistant's own removal sends it.
@@ -17,6 +24,8 @@ const plain = (fragment) =>
     .replace(/<(script|style)\b[\s\S]*?<\/\1>/g, '')
     .replace(/<[^>]+>/g, '')
     .replace(/&nbsp;/g, ' ')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
     .replace(/\s+/g, ' ');
 // The page's own content, without the navigation, which names every page.
 const content = (path) => html(path).split('<main')[1] ?? '';
@@ -60,9 +69,17 @@ test('the removal guide distinguishes the published rc1 and unreleased rc2 remov
   const labels = [
     ...content('/manage/removal-risks/').matchAll(/<strong>([^<]*from this panel)<\/strong>/g),
   ].map((m) => m[1]);
-  assert.deepEqual(labels, [REMOVE_OPTION, 'Remove from this panel']);
+  assert.deepEqual(labels, [REMOVE_OPTION, REMOVE_MENU, REMOVE_BUTTON]);
   const guidance = text('/manage/removal-risks/');
-  assert.match(guidance, /unreleased 1\.0\.0-rc2 version[^.]*Remove from this panel/);
+  assert.ok(
+    guidance.includes(`unreleased 1.0.0-rc2 version, this option is called ${REMOVE_MENU}`),
+  );
+  assert.ok(guidance.includes(`device page also has a ${REMOVE_BUTTON} button`));
+  assert.ok(guidance.includes(`Repair, ${REMOVE_REPAIR}`));
+  assert.match(guidance, /one Submit/);
+  const repairs = text('/home-assistant/repairs/');
+  assert.ok(repairs.includes(REMOVE_REPAIR));
+  assert.match(content('/home-assistant/repairs/'), /href="\/manage\/removal-risks\/"/);
   assert.match(guidance, /In 1\.0\.0-rc1[^.]*Also delete this panel from Home Assistant/);
 });
 

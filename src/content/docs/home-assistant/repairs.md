@@ -11,6 +11,7 @@ Use the existing Repair’s guarded **Try again** only after checking its report
 
 ## Find your Repair
 
+- [Remove Panel Assistant from &lt;panel&gt;](#remove-panel-assistant-from-panel)
 - [Panel app too old](#panel-app-too-old)
 - [Old app needs 0.9.0](#old-app-needs-090)
 - [Mqtt panel needs 0.9.0](#mqtt-panel-needs-090)
@@ -47,6 +48,14 @@ Use the existing Repair’s guarded **Try again** only after checking its report
 - [Installer failure: ADB authorization](#installer-failure-adb-authorization)
 - [Adb update authorization](#adb-update-authorization)
 - [Another Home Assistant](#another-home-assistant)
+
+## Remove Panel Assistant from &lt;panel&gt;
+
+**What it means:** In the unreleased 1.0.0-rc2 version, someone pressed **Remove from this panel** on this panel’s device page. The button removes nothing; the Repair stays available until removal finishes.
+
+**Why it happens:** Panel Assistant asks you to confirm before restoring the vendor home screen and apps, uninstalling ha-paneld and deleting the panel from Home Assistant.
+
+**How to fix it:** Read [what removal does and how to reinstall](/manage/removal-risks/) before selecting **Submit** once to confirm. If this was a mistake, close the dialog without submitting and leave the Repair unconfirmed.
 
 ## Panel app too old
 
