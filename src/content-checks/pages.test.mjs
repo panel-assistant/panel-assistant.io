@@ -83,6 +83,19 @@ test('the removal guide distinguishes the published rc1 and unreleased rc2 remov
   assert.match(guidance, /In 1\.0\.0-rc1[^.]*Also delete this panel from Home Assistant/);
 });
 
+test('the removal guide explains entry deletion and how to recover if it happened first', () => {
+  const guidance = text('/manage/removal-risks/');
+  assert.match(guidance, /Deleting the panel’s entry in Home Assistant leaves ha-paneld installed/);
+  assert.match(
+    guidance,
+    /Before deleting the entry, use the removal option described above to remove the app/,
+  );
+  assert.match(
+    guidance,
+    /If you have already deleted the entry, add the panel again in Home Assistant, then use the removal option described above/,
+  );
+});
+
 test('no display-sizing page says no standard values ship, and the English page says what setup applies', () => {
   const removed = [
     'no standard values ship',

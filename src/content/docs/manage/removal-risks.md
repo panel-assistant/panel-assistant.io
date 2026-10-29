@@ -12,6 +12,10 @@ Panel Assistant removes ha-paneld in one step, from the panel's **Remove Panel A
 
 In the unreleased 1.0.0-rc2 version, this option is called **Remove from this panel** and successful removal also deletes the panel from Home Assistant; there is no option to keep its entry. The panel’s device page also has a **Remove from this panel** button. Pressing it removes nothing: it opens a lasting Repair, **Remove Panel Assistant from &lt;panel&gt;**, under **Settings → System → Repairs**. Read its warning before confirming removal with one **Submit**. If you pressed the button by mistake, close the dialog without submitting and leave the Repair unconfirmed.
 
+Deleting the panel’s entry in Home Assistant leaves ha-paneld installed. Before deleting the entry, use the removal option described above to remove the app.
+
+If you have already deleted the entry, add the panel again in Home Assistant, then use the removal option described above.
+
 Read the section for your panel before you confirm.
 
 ## What removal does
