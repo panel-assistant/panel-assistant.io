@@ -1,7 +1,7 @@
 ---
 title: Installer par USB
 description: Mettre en service un panneau neuf depuis votre navigateur avec un câble USB, avant de le fixer au mur.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
 La méthode USB s’adresse à un panneau encore dans sa boîte ou dont le logiciel du fabricant complique l’accès réseau. Branchez le panneau à l’ordinateur devant lequel vous êtes installé : votre navigateur installe l’application du panneau directement par le câble. Le panneau n’a pas besoin d’ADB sur le réseau. Votre navigateur doit rester connecté à Home Assistant, qui fournit la version vérifiée. La plupart des gens ne l’utilisent qu’une seule fois, avant de fixer le panneau.
@@ -15,7 +15,7 @@ L’installateur USB est lancé depuis Home Assistant par un administrateur : al
 - L'[intégration](/fr/home-assistant/custom-integration/) installée et un compte administrateur.
 - Un navigateur basé sur Chromium, comme Chrome ou Edge. Firefox et Safari ne peuvent pas communiquer avec les périphériques USB.
 - Un câble USB reliant le panneau à l'ordinateur ou au téléphone sur lequel ce navigateur fonctionne. Pas au serveur Home Assistant.
-- Le débogage USB activé dans les options pour les développeurs du panneau. Si le panneau affiche une demande d’autorisation lors de la connexion, quelqu’un doit l’accepter sur son écran ; certains panneaux ne la demandent jamais. Les [pages consacrées au matériel](/fr/hardware/) indiquent comment accéder aux options pour les développeurs sur chaque modèle.
+- Le débogage USB activé dans les options pour les développeurs du panneau. Si le panneau affiche une demande d’autorisation lors de la connexion, quelqu’un doit l’accepter sur son écran ; certains panneaux ne la demandent jamais. Les [pages consacrées au matériel](/fr/hardware/) donnent les procédures de débogage connues et identifient les modèles dont l’accès USB initial reste non vérifié.
 
 ## Le déroulement
 

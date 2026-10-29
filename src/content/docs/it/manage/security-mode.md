@@ -1,7 +1,7 @@
 ---
 title: Modalità di sicurezza
 description: Il comportamento predefinito del pannello su una rete fidata e la modalità rafforzata, che richiede a qualcuno presente al pannello di approvare le azioni remote ad alto impatto.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 L'interfaccia web del pannello, la sua API e i suoi controlli di Home Assistant sono progettati per una rete domestica fidata. La **modalità permissiva** è quella predefinita: automazioni, strumenti di installazione e azioni del browser funzionano senza una richiesta aggiuntiva. Un'azione è deliberatamente esclusa da questa regola. Accendere la fotocamera tramite la sua entità Home Assistant richiede l'approvazione sul pannello in ogni modalità, inclusa quella permissiva. L'impostazione Fotocamera in Configura è un percorso separato di configurazione del proprietario. Spegnerla non richiede mai l'approvazione.
@@ -20,7 +20,7 @@ Questa impostazione può essere modificata solo sul pannello stesso:
 
 1. Apri la schermata **Configura** dell'app del pannello sul pannello.
 2. Apri il menu aggiuntivo della barra degli strumenti e scegli **Modalità di sicurezza**.
-3. Scegli **Abilita modalità rafforzata**.
+3. Scegli **Attiva la modalità protetta**.
 
 ADB di rete e il debug wireless di Android devono prima essere entrambi disattivati, perché ciascuno consente a un client ADB remoto di inserire comandi di input nella schermata di approvazione. Prima di confermare la modifica, l'app del pannello controlla tutte le proprietà Android supportate relative ad ADB di rete, ADB di rete persistente, indirizzi espliciti di ascolto ADB e stato del debug wireless. Arresta inoltre qualsiasi relay di rete attivo degli strumenti di sviluppo della WebView e verifica che il suo processo e il suo servizio in ascolto non siano più presenti. Se non può accertare che questi percorsi di controllo remoto siano inattivi, si rifiuta di attivare la modalità rafforzata. Disattiva ADB e il debug wireless nelle opzioni sviluppatore di Android e riprova. Se la verifica del relay non riesce, riavvia il pannello prima di riprovare.
 

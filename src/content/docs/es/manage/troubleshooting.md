@@ -1,7 +1,7 @@
 ---
 title: Solución de problemas
 description: Los problemas habituales de un panel de pared y dónde mirar primero.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
 ---
 
 Empieza por el dispositivo del panel en Home Assistant, que tiene un sensor de estado y una descarga de diagnóstico, y por la página de estado del propio panel: usa **Visitar** en la página de su dispositivo en Home Assistant. Su informe `/diag` responde a la mayoría de las preguntas siguientes sin necesidad de hacer conjeturas.
@@ -14,7 +14,7 @@ Cuando necesites ver qué está haciendo el panel en ese momento, la pestaña **
 
 Comprueba primero el WebView del sistema. Es, con mucha diferencia, el fallo más habitual en el primer inicio, y un WebView antiguo produce exactamente estos síntomas, aunque parezca un fallo de la aplicación del panel. El procedimiento está en [Actualizar el WebView del sistema](/es/hardware/guides/update-the-webview/).
 
-Si el WebView está actualizado, la sección [Inicio y recuperación](/es/manage/built-in-renderer/#startup-and-recovery) explica qué hace el panel cuando un panel de control no se carga y cómo averiguar el motivo.
+Si el WebView está actualizado, la sección [Inicio y recuperación](/es/manage/built-in-renderer/#inicio-y-recuperación) explica qué hace el panel cuando un panel de control no se carga y cómo averiguar el motivo.
 
 ## El panel de control va lento
 
@@ -28,6 +28,8 @@ Por red: confirma la dirección del panel y que ADB por red en el puerto TCP 555
 
 Cuando Home Assistant detiene una instalación por red, su mensaje indica hasta dónde llegó. Busca a continuación la frase que coincida con tu caso. En todos los casos, no desinstales Panel Assistant, no borres sus datos ni restablezcas el panel: el estado del panel es lo que permite saber dónde se detuvo la instalación.
 
+Cuando los pasos siguientes indiquen que vuelvas a añadir la integración, si el panel ya está añadido y el mensaje apareció al permitir actualizaciones en **Configurar** o en una reparación, reintenta allí y no vuelvas a añadir la integración.
+
 ### No se instaló ningún APK
 
 Si el mensaje dice que no se instaló ningún APK o que no se realizó ningún cambio en el panel, la instalación se detuvo antes de modificar nada. Comprueba que el panel esté encendido y en tu red con la misma dirección; después, vuelve a añadir la integración Panel Assistant e introduce esa misma dirección. Home Assistant vuelve a comprobar el panel antes de modificar nada. Si la instalación se detiene en el mismo punto por segunda vez, mira el panel y sigue la sección siguiente si Panel Assistant está instalado.
@@ -38,7 +40,7 @@ Si el mensaje dice que el APK está instalado pero Panel Assistant no se inició
 
 ### La instalación puede haber modificado el panel
 
-Si el mensaje dice que la instalación puede haber modificado el panel, que Home Assistant no pudo verificar el resultado o que no puede demostrar que sea seguro continuar, Home Assistant no pudo determinar hasta dónde llegó el panel y se detiene en lugar de hacer suposiciones. No reintentes todavía la instalación automática. Mira primero el panel: si aparece la pantalla de configuración o el panel de control de Panel Assistant, o si la aplicación se abre desde la lista de aplicaciones del panel, sigue la sección anterior para conectarlo. Si Panel Assistant no está en el panel, pregunta en las [incidencias de la integración](https://github.com/panel-assistant/ha-integration/issues) e incluye el modelo del panel, la versión que elegiste, el mensaje completo y las líneas del registro de Home Assistant correspondientes a la instalación (busca `panel_assistant` en el registro).
+Si el mensaje dice que el instalador «se detuvo con un resultado no reconocido», que la instalación puede haber modificado el panel, que Home Assistant no pudo verificar el resultado o que no puede demostrar que sea seguro continuar, Home Assistant no pudo determinar hasta dónde llegó el panel y se detiene en lugar de hacer suposiciones. No reintentes todavía la instalación automática. Mira primero el panel: si aparece la pantalla de configuración o el panel de control de Panel Assistant, o si la aplicación se abre desde la lista de aplicaciones del panel, sigue la sección anterior para conectarlo. Si Panel Assistant no está en el panel, pregunta en las [incidencias de la integración](https://github.com/panel-assistant/ha-integration/issues) e incluye el modelo del panel, la versión que elegiste, el mensaje completo y las líneas del registro de Home Assistant correspondientes a la instalación (busca `panel_assistant` en el registro).
 
 ## El hardware del panel no aparece en Home Assistant
 

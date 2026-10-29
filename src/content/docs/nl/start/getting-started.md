@@ -1,7 +1,7 @@
 ---
 title: Aan de slag
 description: Van een leeg Android-wandpaneel naar je Home Assistant-dashboard in een paar minuten, waarbij Home Assistant je bij elke stap begeleidt.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
 Als je al eens een wandpaneel of kiosk hebt ingericht, weet je waarschijnlijk nog hoe dat ging: apps sideloaden, zoeken naar een browser-engine die een dashboard kon tekenen, gokken naar instellingen, en de volgende herstart nooit helemaal vertrouwen. Een paneel instellen met Panel Assistant zal als een aangename schok komen. Je kunt binnen een paar minuten klaar zijn, en zelfs als het paneel al aan de muur hangt, hoef je niet uit je stoel op te staan. Oké, misschien één keer ;-)
@@ -13,12 +13,12 @@ Het lastigste deel van elk paneel is het eerste uur. Panel Assistant doet dat uu
 Voeg Panel Assistant toe via HACS en start Home Assistant opnieuw op. Dit is het enige dat je handmatig moet installeren. Vanaf hier begeleidt Home Assistant je verder. Zie [De integratie installeren](/nl/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/nl/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/nl/manage/upgrade-to-1-0/) explains what changes.
+Panel Assistant 1.0 is een release candidate. HACS biedt standaard 0.9.0. Wil je de release candidate proberen, activeer dan de schakelaar **Pre-release** op het apparaat Panel Assistant onder **Instellingen**, **Apparaten en diensten**, **HACS** en zet hem aan; [De integratie installeren](/nl/home-assistant/custom-integration/) legt de stap met de uitgeschakelde entiteit uit. Een paneel waarop de 1.0-app draait, kan niet terug naar 0.9; [Upgraden naar 1.0](/nl/manage/upgrade-to-1-0/) legt uit wat er verandert.
 :::
 
 ## 2. Schakel foutopsporing in op het paneel
 
-Open de ontwikkelaarsopties op het paneel: open op de meeste panelen **Instellingen**, dan **Over**, en tik zeven keer op **Buildnummer**. Schakel daarna **USB-foutopsporing** in als je het paneel aansluit, of **netwerk-ADB op TCP-poort 5555** voor de netwerkroute. Niet elk paneel heeft een schakelaar voor netwerk-ADB; elke [hardwarepagina](/nl/hardware/) vermeldt of jouw paneel die heeft en waar die zit. Als die ontbreekt, gebruik dan de USB-route. [Het paneel voorbereiden](/nl/install/prepare-a-panel/) geeft de details.
+Open de ontwikkelaarsopties op het paneel: open op de meeste panelen **Instellingen**, dan **Over**, en tik zeven keer op **Buildnummer**. Schakel daarna **USB-foutopsporing** in als je het paneel aansluit, of **netwerk-ADB op TCP-poort 5555** voor de netwerkroute. Niet elk paneel heeft een schakelaar voor netwerk-ADB; de [hardwarepagina’s](/nl/hardware/) vermelden bekende routes en geven aan wanneer de eerste toegang niet is geverifieerd. Is netwerktoegang niet beschikbaar, gebruik dan USB zodra USB-foutopsporing en een USB-datapoort voor je model zijn bevestigd. [Het paneel voorbereiden](/nl/install/prepare-a-panel/) geeft de details.
 
 ## 3. Voeg het paneel toe
 
@@ -45,9 +45,9 @@ Je kunt een gloednieuw paneel al instellen voordat je het aan de muur hangt. Slu
 <img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="263" alt="Het USB-installatieprogramma wacht terwijl je op het scherm van het paneel op Toestaan tikt">
 </figure>
 <figure>
-<figcaption><span>4</span> Druk op Install</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="323" alt="Het USB-installatieprogramma, klaar om te installeren, met één knop Install">
-<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="323" alt="Het USB-installatieprogramma, klaar om te installeren, met één knop Install">
+<figcaption><span>4</span> Druk op Installeren</figcaption>
+<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="323" alt="Het USB-installatieprogramma, klaar om te installeren, met één knop Installeren">
+<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="323" alt="Het USB-installatieprogramma, klaar om te installeren, met één knop Installeren">
 </figure>
 <figure>
 <figcaption><span>5</span> Kijk mee terwijl het installeert</figcaption>
@@ -102,6 +102,8 @@ Hoe dan ook neemt de wizard het rommelige deel voor zijn rekening. Hij controlee
 Daarna volgt de eigen installatiewizard van het paneel. Die wordt door het paneel aangeboden en opent in je browser op de computer, niet op het scherm van het paneel. Na een netwerkinstallatie toont Home Assistant **Rond de installatie van dit paneel af**: open de installatiepagina van het paneel, doorloop daar de stappen, keer terug naar Home Assistant en kies **Gereed**. Na een USB-installatie gaat het installatievenster meteen verder met de wizard. Omdat het paneel de wizard aanbiedt, laadt die alleen in een browser op hetzelfde netwerk als het paneel.
 
 De wizard vraagt om een naam voor het paneel, meldt het paneel aan bij Home Assistant en vraagt welk dashboard het moet tonen en in welke ruimte het staat. Het paneel maakt verbinding met het Home Assistant-account waarmee je je aanmeldt. Als je browser als jou is aangemeld, kan het paneel dus als jou verbinden; wil je voor het paneel een eigen account gebruiken, meld je dan met dat account aan. Als entiteitsfiltering is ingeschakeld, laadt het paneel alleen de entiteiten die dat dashboard gebruikt, en daardoor blijft het snel. Zie [Een paneel verbinden](/nl/home-assistant/connect-a-panel/).
+
+In de nog niet uitgebrachte versie 1.0.0-rc2 kan de configuratie worden afgerond, ook als de browser-engine van het paneel te oud is om een actueel Home Assistant-dashboard met de ingebouwde renderer weer te geven. De wizard waarschuwt als dit aandacht nodig heeft. Volg de [WebView-handleiding](/nl/hardware/guides/update-the-webview/) voordat je op het dashboard vertrouwt; alleen het afronden van de configuratie bevestigt niet dat het dashboard kan laden.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="De installatiewizard voor het paneel, stap voor stap" tabindex="0">
 <figure>

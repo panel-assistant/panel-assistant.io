@@ -1,7 +1,7 @@
 ---
 title: Compte du panneau et sécurité réseau
 description: Choisissez le compte Home Assistant utilisé par votre panneau et prévoyez son accès réseau.
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 ## Quel compte Home Assistant le panneau utilise-t-il ?
@@ -12,7 +12,7 @@ Vous pouvez utiliser votre compte habituel, en particulier si votre installation
 
 Home Assistant enregistre aussi un tableau de bord et un thème par défaut pour chaque utilisateur. L’utilisateur du panneau peut avoir un tableau de bord mural et une apparence propres sans modifier les choix sur votre téléphone ou votre ordinateur. Le moteur de rendu intégré utilise ce tableau de bord par défaut lorsque **Tableau de bord d’accueil** est réglé sur **Auto** ; un tableau de bord sélectionné dans les paramètres du panneau est prioritaire. Son réglage **Thème du tableau de bord** peut demander le mode clair ou sombre, tandis qu’un choix explicite de thème dans Home Assistant reste prioritaire.
 
-Vous pouvez définir les éléments de la barre latérale et leur ordre, la langue, le fuseau horaire ainsi que les formats des nombres, des dates et des heures pour l’utilisateur du panneau dans **Home Assistant → Profil utilisateur → Général**. Les préférences de la barre latérale comptent lorsqu’elle est visible ; le panneau masque la navigation par défaut. Masquer un élément de la barre latérale ne restreint pas son accès. Voir le [guide du profil utilisateur de Home Assistant](https://www.home-assistant.io/docs/configuration/user-configuration/) pour ces paramètres de compte.
+Vous pouvez définir les éléments de la barre latérale et leur ordre, la langue, le fuseau horaire ainsi que les formats des nombres, des dates et des heures pour l’utilisateur du panneau dans **Home Assistant → Profil utilisateur → Général**. Les préférences de la barre latérale comptent lorsqu’elle est visible ; le moteur de rendu intégré masque la barre latérale ancrée au premier lancement. Masquer un élément de la barre latérale ne restreint pas son accès. Voir le [guide du profil utilisateur de Home Assistant](https://www.home-assistant.io/docs/configuration/user-configuration/) pour ces paramètres de compte.
 
 ### Changer la connexion du panneau
 
@@ -24,7 +24,7 @@ Le navigateur doit pouvoir joindre à la fois Home Assistant et l’adresse loca
 
 Un panneau peut utiliser un VLAN sans accès à Internet si votre pare-feu permet toujours au panneau et à Home Assistant de se joindre mutuellement, et si un navigateur sur votre réseau peut joindre le panneau lorsqu’une personne doit se connecter. Le panneau utilise l’adresse locale de Home Assistant pour la connexion et son tableau de bord. Home Assistant doit aussi pouvoir joindre le panneau pour la gestion et les mises à jour.
 
-Panel Assistant peut récupérer une mise à jour vérifiée de l’application du panneau sur la machine Home Assistant et l’envoyer au panneau par le réseau local. Home Assistant doit toujours avoir accès à la source des mises à jour. Les vérifications de version du panneau et les installations lancées par le propriétaire depuis son onglet Installer utilisent GitHub et nécessitent aussi un accès à Internet. Ces vérifications et téléchargements ne fonctionneront pas sur un VLAN sans accès à Internet. Android System WebView est maintenu séparément via le Play Store, le micrologiciel du fabricant ou une installation manuelle ; prévoyez donc aussi comment vous le maintiendrez.
+Panel Assistant peut récupérer une mise à jour vérifiée de l’application du panneau sur la machine Home Assistant et l’envoyer au panneau par le réseau local. Home Assistant doit toujours avoir accès à la source des mises à jour. Les vérifications de version du panneau et les installations lancées par le propriétaire depuis son onglet Installer utilisent GitHub et nécessitent aussi un accès à Internet. Ces vérifications et téléchargements ne fonctionneront pas sur un VLAN sans accès à Internet. Dans la version 1.0.0-rc2 non encore publiée, une mise à jour de l’application lancée depuis Home Assistant peut aussi installer un WebView compatible sur les panneaux pris en charge. Prévoyez aussi la [méthode de mise à jour de WebView](/fr/hardware/guides/update-the-webview/) prise en charge par votre panneau.
 
 La séparation des réseaux limite les appareils qui peuvent accéder à l’interface web et à l’API du panneau. Elle ne réduit pas les droits d’un compte Home Assistant déjà connecté sur le panneau. Si le panneau utilise un compte administrateur, cette connexion reste une connexion administrateur, même sur un VLAN isolé. Choisissez le compte et les règles du pare-feu en fonction de la confiance que vous accordez à ce qui est sur le mur et sur le réseau local.
 

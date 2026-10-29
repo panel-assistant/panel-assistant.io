@@ -1,0 +1,391 @@
+---
+title: Shelly Wall Display
+description: Shelly Wall Display 系列说明，涵盖型号平台、固件通道、WebView、传感器和访问模型；其中一款型号已有硬件实测。
+vendor: Shelly
+panelIndex: true
+sidebar:
+  label: 概览
+  order: 0
+sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
+---
+
+:::note
+**已有一款型号完成硬件检查：[X2i](/zh-hans/hardware/panels/shelly/wall-display-x2i/)。** 其实测结果见独立页面。本页其他内容均属研究：产品规格来自 Shelly 当前产品和知识库页面，固件行为来自 OTA 分析（包括现代平台分区镜像的设备树解析）及官方 [Wall Display 更新日志](https://github.com/ShellyGroup/Wall-Display-Changelog)。从 Panel Assistant 1.0 起，X1i、XL 和使用同一固件的后续型号共用一个配置文件，其依据是 X2i 揭示的 Shelly 固件行为，详见[下文](#x2i-对系列其他型号的意义)；各自硬件仍需在面板上检查，而非假定相同。
+:::
+
+Shelly Wall Display 有五款命名型号，分属两个互不相关的硬件平台：**原版**和 **X2** 使用 armeabi-v7a 旧平台通道，**X1i**、**X2i** 和 **XL** 使用 arm64-v8a 现代平台通道。各通道内共用固件、OTA 机制、访问模型和安全特性，两通道间也大体共用，因此本页统一介绍；各型号页面仅列自身规格、别名和照片。
+
+- [Wall Display（原版）](/zh-hans/hardware/panels/shelly/wall-display/)：4 英寸，480×480，Android 7
+- [Wall Display X2](/zh-hans/hardware/panels/shelly/wall-display-x2/)：6.9 英寸，1440×720，Android 8.1
+- [Wall Display X1i](/zh-hans/hardware/panels/shelly/wall-display-x1i/)：4 英寸，720×720，Android 11
+- [Wall Display X2i](/zh-hans/hardware/panels/shelly/wall-display-x2i/)：6.9 英寸，1440×720，Android 11
+- [Wall Display XL](/zh-hans/hardware/panels/shelly/wall-display-xl/)：10.1 英寸，Android 11
+
+:::caution
+**原版 Wall Display 出厂为 Android 7.0**，低于 Panel Assistant 支持的最低 Android 版本。X2 运行 Android 8.1，X1i、X2i 和 XL 运行 Android 11。
+:::
+
+## 其他销售名称
+
+Shelly Wall Display、Shelly Wall Display X2、Shelly Wall Display X1i、Shelly Wall Display X2i、Shelly Wall Display XL、SAWD-0A1XX10EU1、SAWD-2A1XX10EU1，固件代号 Stargate、Pegasus、Cally、Jenna、Blake、Maverick、Dayna 和 Atlantis，OTA 通道 WallDisplay 和 WallDisplayV2，设备标识 k400_mt6580_32_n 和 e500_7731e_32u_o，启动器包 cloud.shelly.stargate。
+
+## 产品系列
+
+固件代号有助于检查 OTA，但不能替代零售型号名。
+
+| 固件代号 | 市售名称                                                              | 显示屏             | 平台                                                                 | 继电器硬件                                     |
+| -------- | --------------------------------------------------------------------- | ------------------ | -------------------------------------------------------------------- | ---------------------------------------------- |
+| Stargate | [Wall Display（原版）](/zh-hans/hardware/panels/shelly/wall-display/) | 4 英寸，480×480    | MT6580，Android 7                                                    | 1 路输出                                       |
+| Pegasus  | [Wall Display X2](/zh-hans/hardware/panels/shelly/wall-display-x2/)   | 6.9 英寸，1440×720 | SC7731E，Cortex-A7，Android 8.1                                      | 1 路输出                                       |
+| Cally    | [Wall Display X1i](/zh-hans/hardware/panels/shelly/wall-display-x1i/) | 4 英寸，720×720    | RK3326-S，Cortex-A35，Android 11                                     | 可更换底座：标准为 1 路输出，可选 2 路输出底座 |
+| Jenna    | [Wall Display X2i](/zh-hans/hardware/panels/shelly/wall-display-x2i/) | 6.9 英寸，1440×720 | Shelly 规格为 RK3326-S；芯片报告 RK3326 系列，Cortex-A35，Android 11 | 可更换底座：标准为 1 路输出，可选 2 路输出底座 |
+| Blake    | [Wall Display XL](/zh-hans/hardware/panels/shelly/wall-display-xl/)   | 10.1 英寸          | RK3566，Cortex-A55，Android 11                                       | 1 路输出                                       |
+
+:::note
+Shelly 固件还包含 **Maverick**、**Dayna** 和 **Atlantis** 名称，但没有对应的在售产品。在实机识别前，应视为未记录型号。
+:::
+
+:::caution
+一份归档分区镜像被归入类似 XL 的 SKU，却自称 `Jenna`，并描述不同显示平台。它可证明该镜像的信息，但不能可靠证明当前零售产品规格。以上官方型号页面优先；匹配实际设备时应使用运行时标识。
+:::
+
+## 硬件平台
+
+Wall Display 是 **Android 设备**，不是 Shelly Gen1、Gen2 开关那样的 ESP 嵌入式产品。它运行名为 Stargate 的自定义 Android 启动器应用。
+
+原版 Wall Display、X2、X1i 和 X2i、XL 并非可互换的同一硬件类别：分别使用 MT6580、SC7731E、RK3326-S 和 RK3566。共用 OTA 通道表示软件包兼容性，而非共用 SoC。旧平台镜像以 `userdebug` 基础构建为目标，所以如果能够建立 adb 连接，可能可以使用 `adb root`，但尚无经过验证的用户访问途径。现代平台镜像没有 OTA 元数据指纹，也不显示构建类型；一台原厂固件 X2i 报告 `user` 构建，因此至少该设备没有厂商 root 途径。参见[访问模型](#访问模型)。
+
+Shelly 记录原版和 X2 有温湿度传感器，原版、X2、X1i、X2i 和 XL 有环境光传感器。X2、X1i 和 X2i 记录有接近检测；XL 有运动传感器。X2i 的光照和接近传感器是普通 Android 传感器，部件为 Sensortek STK3A5x；其他每款型号的元件和访问途径仍未确认。继电器数量取决于型号和底座，除 X2i 外，尚未确认应用可访问的 Android 继电器接口。
+
+## 厂商固件上的 Home Assistant 仪表盘
+
+### 两种模式（固件 2.7.0 及以后）
+
+**内置 WebView 浏览器**（所有型号）：设置（Settings）、_Home Assistant_（旧固件为 设置（Settings）、网络（Network）、Home Assistant）打开配置的 Home Assistant URL。从 2.7.0 起再次完整支持，并包含 _清除 WebView 缓存_（Clear WebView cache） 选项。
+
+**从内置 AppStore 安装的应用**（仅现代 AppStore 设备：Blake、Jenna、Cally、Maverick、Dayna）。这样安装的应用运行于系统 WebView，曾在内置浏览器有问题时正常渲染。
+
+### 各固件的内置浏览器
+
+| 固件           | 状态                                                        |
+| -------------- | ----------------------------------------------------------- |
+| 2.3.0 之前     | 没有此功能                                                  |
+| 2.3.0 预发布版 | 在 设置（Settings）、网络（Network）、Home Assistant 下引入 |
+| 2.6.0          | 在 AppStore 设备上**弃用**，改用 AppStore 应用              |
+| 2.7.0          | **恢复支持**，与 AppStore 应用并存                          |
+
+### 已知兼容性问题
+
+Wall Display XL 的内置浏览器在 Home Assistant 前端 2025.12 和某个 2026.1 预发布版上出现渲染与布局问题（[home-assistant/frontend#28755](https://github.com/home-assistant/frontend/issues/28755) 和 `#28746`；核心兼容性见 [home-assistant/core#162665](https://github.com/home-assistant/core/issues/162665)）。同一设备上使用系统 WebView 的应用渲染正常，表明问题特定于内置浏览器的 WebView，而非硬件。
+
+### WebView
+
+**原版 Wall Display（`SAWD-0A1XX10EU1`，Android 7）：**标准 OTA 包不含原厂系统 WebView。Shelly 发布独立更新 ZIP，安装 `com.google.android.webview` **119.0.6045.194**。尚未确认其他型号有等效软件包。
+
+**WallDisplayV2 通道（arm64、Android 11）：**标准 OTA 不含 WebView 包，因此无法从固件读取原厂 WebView 版本。一台原厂 2.5.4 固件 X2i 带有 Chromium 131.0.6778.200，远高于 Panel Assistant 最低要求，无需更新。其他现代型号是否出厂使用同一构建尚未确认。
+
+参见[更新系统 WebView](/zh-hans/hardware/guides/update-the-webview/)。
+
+## 访问模型
+
+:::caution
+**Shelly 未在任何 Wall Display 上开放 root，但 adb 的障碍并没有此前认为的那么大。** 尚无已知型号提供 `su` 或面向开发者的 root 途径。然而，[X2i](/zh-hans/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode) 可从设置应用解锁开发者选项和 USB 调试，随后接受 adb 连接且不提示授权。这足以安装和日常运行 Panel Assistant，但下列特权功能仍不可用。其他现代型号是否也有该解锁方法尚未测试；旧平台 `userdebug` 基础构建则是下文介绍的独立问题。
+:::
+
+以下大部分内容形成于尚未检查 Shelly 实机之前，将此系列描述为封闭平台。X2i 有不同表现时，应以其自身页面为准，且仅适用于 X2i。
+
+**值得探查的例外，但仅限旧硬件。** 旧平台 OTA 在 `META-INF/com/android/metadata` 声明目标构建，至 2.7.3 仍为 `alps/full_k400_mt6580_32_n/k400_mt6580_32_n:7.0/NRD90M/vXD100008:userdebug/test-keys`。`userdebug` 构建的 `adb root` 可以成功，因此**如果**能建立 adb 连接，即可获得 root 并使用辅助守护进程。此证据有两项限制：指纹描述的是设备的**基础系统镜像**，时间戳为 2022-11-14，仅应用 OTA 不会修改它；且尚未在实机验证 adb 途径。
+
+**这不适用于现代平台通道。** WallDisplayV2 包不声明构建类型。没有 `META-INF/com/android/metadata` 指纹，且捆绑 APK 以外的任何条目都不含 `userdebug`、`test-keys`、`release-keys` 或 `ro.build.fingerprint` 标记（检查于 2.7.3；未搜索 APK 载荷本身）。更新脚本读取 `ro.build.product` 仅用于日志，将 `ro.build.version.incremental` 读入 `HW_VERSION` 以控制一个条件步骤：仅当其以 `vBlake` 开头且尚无摄像头包时安装 `Camera2.apk`。两者均不作为断言，因此同一个 ZIP 可安装到每款现代型号，且**零售现代平台 OTA** 也未表明任何构建类型。Shelly 自己的[安全态势说明](https://github.com/ShellyGroup/Wall-Display-Changelog/blob/main/SECURITY_POSTURE.md)与官方更新日志位于同一仓库，适用于当前世代硬件，称生产设备使用 Android `user` 构建类型，默认禁用 ADB 和开发者/调试功能。
+
+还需一项限定以保持范围准确：一份归档**分区**镜像（不属于任一零售 OTA 通道）自称 Android 11 `userdebug`。其 SKU 与代号的归档对应关系不可靠，显示平台也与当前零售规格矛盾，因此只能证明该镜像，不能证明现代零售设备的运行情况。实机证实前，应视现代硬件为封闭平台。
+
+**缺少 root 对面板应用意味着什么：**
+
+- 辅助守护进程（`hapaneld-helper`）需要通往 `/system` 的特权途径，没有带 root 的 adb 立足点就无法获得，因此每个配置文件声明 `platform.app_can_su: false`。旧平台 `userdebug` 基础构建是否改变这一点，列在下方未知项中。
+- 真正需要 root 的操作因此不可用。X2i 的日常操作不在其中：亮度使用 Android 自身设置，传感器是普通 Android 传感器，即将发布的 1.0 通过 Shelly 本地 API 完全关闭屏幕，并以 Android 超时作为备用；Panel Assistant 通过 adb 安装、更新和配置应用，包括显示大小和文字大小。失去的是少量特权功能：从面板重启或切回厂商启动器。Android 11 或更新版本还可通过已启用的无障碍服务提供无 root 截图和点击；远程点击仍受安全设置约束。
+- 现代内置 AppStore 表明 Shelly 可分发获批应用，但面板应用不在其中。安装需旁加载；X2i 需先按上述步骤解锁开发者模式。旧设备仍无已确认安装途径。
+- **设备所有者行为取决于固件。** X2i 原厂 2.5.4 没有设备所有者，甚至没有设备管理员。更新到 2.7.4 后，Shelly 启动器成为设备所有者，但该设备上 Panel Assistant 未因此失去功能：两版固件均可无 root 将它设为主屏幕应用并保持，设备所有者也不限制其他应用。两版固件均无法停用 Shelly 启动器。从 2.8.0 起，现代型号可恢复出厂时的应用版本；使用前须了解下方[恢复限制](#恢复出厂时的版本)。
+
+## 将面板连接到电脑
+
+:::caution
+**能为 Wall Display 供电的 USB 线仍可能不传输数据。** 这是线缆属性，而非面板属性，两种情况面板都会亮起，因此无数据线和正常线看起来可能一样。电脑始终看不到面板时，线缆远比面板、驱动或浏览器更可能是原因，请先换线。
+:::
+
+[X2i](/zh-hans/hardware/panels/shelly/wall-display-x2i/) 还要求 USB-A 转 USB-C 线，而非 USB-C 转 USB-C；原因见其页面。其他型号是否有同样限制尚未测试。
+
+## 内置传感器与继电器
+
+传感器和继电器细节因型号而异。根据固件和产品页面：
+
+| 元件       | 说明                                                                                                                                                                                                                        |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 温度和湿度 | 原版和 X2 有记录。X1i、X2i 和 XL 没有内置温湿度传感器。Android API 可见性未验证。                                                                                                                                           |
+| 环境光     | 原版、X2、X1i、X2i 和 XL 均有记录。X2i 实测为无需权限的普通 Android 传感器；其他型号均未验证。                                                                                                                              |
+| 运动和接近 | X2、X1i 和 X2i 记录有接近检测；XL 官方记录为运动传感器。X2i 实测为无需权限的普通 Android 唤醒传感器；其他型号未验证。                                                                                                       |
+| 继电器     | 原版、X2 和 XL 为一路输出。X1i 和 X2i 出厂带一路输出底座，并支持单独出售的两路输出底座。X2i 有无特权 sysfs 控制途径，但未使用；见[继电器](/zh-hans/hardware/panels/shelly/wall-display-x2i/#relays)。其他型号均未确认途径。 |
+
+请通过 Home Assistant 的 Shelly 集成处理继电器实体，不要假定面板应用可直接控制。除 X2i 外，普通 Android 应用能否看到传感器仍未验证。
+
+## X2i 对系列其他型号的意义
+
+已有一台 [X2i](/zh-hans/hardware/panels/shelly/wall-display-x2i/) 完成台架检查。X1i、XL、Maverick 和 Dayna 在同一 OTA 通道运行相同 Shelly 固件，X1i 也属于同一处理器系列。**从 Panel Assistant 1.0 起，它们共用一个 Shelly 配置文件，包含 X2i 所证明的固件本身的行为**，而非 X2i 主板特性：
+
+- **无 root 完全关闭屏幕。** 即将发布的 1.0 使用 Shelly 本地 API 关闭背光，同时保持 Android 唤醒。启用 Shelly 密码后，因 API 需要 Digest 认证，当前实现回退到 Android 屏幕超时。仅在 X2i 上测试。
+- **仅返回和主屏幕。** 现代配置文件依据 X2i 固件证据，推定其他现代型号同样不提供最近任务。仅 X2i 已检查实机。
+- **将 Panel Assistant 作为主屏幕。** Shelly 启动器保持安装且无法停用，但不会夺回主屏幕。
+- **干净的仪表盘。** Panel Assistant 关闭 Shelly 固件在每个应用上绘制的角落覆盖层，同时仍可从导航栏进入 Shelly 自身界面。
+
+依赖各型号自身硬件的功能，会在 Panel Assistant 启动时在面板上检查，绝不依据 X2i 假定：
+
+- **挥手唤醒**需要接近传感器。X1i 记录有该传感器，可能与 X2i 使用相同部件。XL 最可能不同，因为 Shelly 记录其为运动传感器而非接近传感器。
+- 从完全黑屏状态**触摸唤醒**仅在 X2i 上测量。
+- X2i 的**继电器**可通过所有用户可写的软件控件访问，但 Panel Assistant 不驱动任何 Shelly 型号的继电器。请使用 Home Assistant 自带的 Shelly 集成。
+
+**这些行为尚未在其他型号确认。** 如果你有运行 Panel Assistant 的 X1i 或 XL，报告哪些功能正常，是提升其在[支持面板列表](/zh-hans/install/supported-panels/)中等级的最快方法。隐藏的开发者模式解锁是测量这些行为的前提，目前仅 X2i 已确认，[其页面提供确切步骤](/zh-hans/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode)。
+
+## 固件 OTA 机制
+
+### 选择并安装构建
+
+请使用设备确切 OTA 通道提供的版本，变更前检查[官方 Wall Display 更新日志](https://github.com/ShellyGroup/Wall-Display-Changelog)。[固件目录](https://panel-assistant.io/go/firmware?device=shelly)记录已发现软件包及其可用性；不证明版本适合所有型号或安装环境。即使版本号一致，`WallDisplay` 和 `WallDisplayV2` 软件包也不兼容。应用 ZIP 前，请确认实际设备的更新通道。
+
+无需电脑进行正常更新时，请打开 Shelly 应用，选择 Wall Display，再选择 **设置 → 设备信息 → 固件 → 更新**（Settings → Device Information → Firmware → Update）。也可以打开设备本地 WebUI `http://<device-ip>`，选择 **设置 → 固件 → 更新**（Settings → Firmware → Update）。Shelly 逐步推送更新，因此新版本可能不会立即在每台设备出现。要安装指定版本，请从目录下载设备所属通道的 ZIP，并在 WebUI 使用 **固件 → 自定义固件**（Firmware → Custom firmware）（WallDisplayV2 设备为 `http://<device-ip>/#/settings/firmware`）。
+
+更新版本替代旧版后，Shelly 当前构建的 CDN 链接可能失效。旧版仅在目录**记录了捕获**时使用 Wayback 链接；未捕获版本可能已无法恢复。
+
+### 当前固件与兼容性
+
+[下方发行说明表](#厂商发行说明)列出厂商自 2.4.0 起的已记录版本，包括 2.8.4。2.8.4 修复设置恢复、Shelly Cloud 服务器验证和本地 Web 界面的安全问题。[目录](https://panel-assistant.io/go/firmware?device=shelly)显示各 OTA 通道已索引软件包。厂商发行说明与此处所述开发测试是两回事。
+
+X2i 已为即将发布的 Panel Assistant **1.0** 进行 **2.8.2 和 2.8.3** 开发测试。已检查设置恢复、通过 Panel Assistant 原位更新、启动亮度、API 关屏和软件注入唤醒；[X2i 页面](/zh-hans/hardware/panels/shelly/wall-display-x2i/#firmware-and-why-the-shipped-version-matters)记录其限制。**这是部分验证，不代表完整兼容性。** Panel Assistant 原位更新在 2.8.2 检查过，尚未在 2.8.3 检查。2.8.3 的实体触摸及配对接近/光照测量仍未验证。这些结果不能证明 X1i、XL 或其他 Shelly 型号的行为。
+
+报告问题时请记录型号和固件版本，尤其是厂商更新后开始的问题。更新前保存 Panel Assistant 备份，并另存 Shelly 配置备份。两种设置备份都不是完整 Android 固件镜像。
+
+### 恢复出厂时的版本
+
+从 **2.8.0** 起，现代型号提供 **设置 → 重置设备 → 卸载所有更新**（Settings → Reset device → Uninstall all updates），也可通过 `Shelly.UninstallAllUpdates` 调用。Shelly 称此操作将厂商应用恢复为**显示屏出厂时的那一个版本**，具体取决于生产日期。它不允许从固件目录任意选择旧版本。
+
+Shelly 称通常会保留设备、房间和设置，但 Android 可能重置它们。出厂固件**早于 2.6.2 的显示屏会在此操作中恢复出厂设置**。请先阅读确认信息并保存两种设置备份。Panel Assistant 尚未验证其安装和设置能否在此操作后保留。
+
+签名 OTA 下载更新厂商应用及相关文件，不含完整 Android 分区镜像，因此保存 OTA 与证明完整固件恢复、保留设备专用校准是不同事情。[Shelly 更新和恢复说明](https://github.com/ShellyGroup/Wall-Display-Changelog#modern-devices-ota-updates)描述了恢复出厂版本选项；此处尚未测试该操作。
+
+### 固件是什么
+
+Wall Display 固件是打包成签名 Android OTA ZIP 的 **Android APK**（Stargate 启动器应用）。它与 Shelly Gen1 固件（ESP8266 `.zip`）或 Gen2 开关固件（EFR32 `.gbl`）完全不同：这是 Shelly 应用内 OTA 下载器实施的 Android 应用更新，而非分区级刷写。
+
+### OTA API
+
+Wall Display 设备使用 **Shelly Gen2 RPC API** 管理更新：
+
+```
+Shelly.CheckForUpdate  →  { "stable": {"version": "2.7.1", "build_id": "..."}, ... }
+Shelly.Update { "stage": "stable" }    // pull from the update manifest
+Shelly.Update { "url": "..." }         // install from a custom URL
+```
+
+每小时更新检查（从 2.6.0 起）和启动检查自动运行。检查更新与安装更新是两回事。从 2.7.0 起，OTA 合理性检查在应用前验证下载更新是否针对正确硬件构建。
+
+### 更新清单端点（已验证）
+
+有**两个固件通道**，按软件包 ABI 划分，而非单一统一硬件世代。
+
+#### 通道 1：WallDisplay（armeabi-v7a，原版和 X2）
+
+```
+GET https://updates.shelly.cloud/update/WallDisplay
+```
+
+覆盖 SAWD-0A1XX10EU1（Stargate）和 SAWD-2A1XX10EU1（Pegasus）。OTA 更新脚本在应用前断言 `ro.product.device` 为 `k400_mt6580_32_n`（Stargate）或 `e500_7731e_32u_o`（Pegasus）。
+
+2.7.1 时捕获的响应示例：`stable.version` 为 `2.7.1`、`build_id` 为 `20260609-205046/2.7.1-857d7175`，CDN URL 指向以 SHA-256 命名的二进制对象（见下方说明）。当前版本请查索引，不要依据此示例。
+
+#### 通道 2：WallDisplayV2（arm64-v8a，Android 11 型号）
+
+```
+GET https://updates.shelly.cloud/update/WallDisplayV2
+```
+
+覆盖 Blake、Jenna、Cally、Maverick 和 Dayna。OTA 更新脚本读取 `ro.build.product` 仅用于日志，不按产品断言，因此同一 ZIP 可安装于全部现代型号。
+
+响应与通道 1 的版本和构建 ID 相同（上例为 `2.7.1`），但编译目标为 arm64-v8a。两通道共用版本号和构建 ID：从同一代码库同时针对不同 ABI 编译。
+
+:::note
+**CDN URL 按内容寻址**：文件名为 SHA-256，路径不含版本。每次发行均改变，无法推导旧版 URL。新版本发布后旧 URL 可能返回 404，因此可用时保存原文件很重要。每次发现新版本都会**尝试**归档至 Wayback Machine，只有在 [`tools/firmware-index/fw-shelly-walldisplay.dat`](https://github.com/panel-assistant/panel-assistant.io/blob/main/tools/firmware-index/fw-shelly-walldisplay.dat) 中该版本 CDN URL 旁写入捕获时间戳后才算**确认**。空时间戳表示归档待处理或未成功，不表示文件已安全保存。请从索引本身确认哪些版本已归档。没有确认捕获的版本可能已无法从目录下载。
+:::
+
+#### 静态旧版 CDN（仅 SAWD-0A1XX10EU1）
+
+```
+https://repo.shelly.cloud/firmware/SAWD-0A1XX10EU1/stable/SAWD-0A1XX10EU1.zip
+https://repo.shelly.cloud/firmware/SAWD-0A1XX10EU1/stable/SAWD-0A1XX10EU1-WebViewUpdate.zip
+```
+
+固定于 1.2.1（2023-08-15）。WebView 更新 ZIP（107.5 MB）包含旧 Android 7 设备的系统 WebView APK。目录列表返回 403。
+
+### OTA 文件格式
+
+已在两个通道验证。每个 OTA ZIP 包含：
+
+- `META-INF/com/google/android/updater-script`，自定义 shell 脚本 OTA 应用程序（不是 Edify）
+- `manifest.json`：`{"name":"WallDisplay[V2]","version":"X.Y.Z","build_id":"...","build_timestamp":"..."}`
+- `system/priv-app/Stargate/Stargate.apk`，Shelly 启动器（arm64 为 31 MB，armeabi-v7a 约 10 MB）
+- `META-INF/MANIFEST.MF`、`CERT.SF` 和 `CERT.RSA`，使用 SignApk 签名
+
+旧平台额外内容：`scatter.txt`（MediaTek MT6580 分区布局）和 `META-INF/com/android/metadata`（构建指纹 `alps/full_k400_mt6580_32_n/...`、Android 7.0）；更新脚本先断言产品设备再继续。
+
+现代平台额外内容：`device_owner_2.xml`、`device_admins.xml` 和 `tzdata/` 更新；没有 `scatter.txt`，因为不是分区级刷写。
+
+Stargate APK 的原生库路径确认 ABI：`lib/armeabi-v7a/libstargate_input.so`（旧平台）和 `lib/arm64-v8a/libstargate_input.so`（现代平台）。
+
+### 已知固件文件
+
+| 文件                                       | 通道                      | 版本                 | ABI         | 大小     |
+| ------------------------------------------ | ------------------------- | -------------------- | ----------- | -------- |
+| `WallDisplay-2.7.1-stable.bin`             | `WallDisplay`             | 2.7.1                | armeabi-v7a | 28.6 MB  |
+| `WallDisplayV2-2.7.1-stable.bin`           | `WallDisplayV2`           | 2.7.1                | arm64-v8a   | 38 MB    |
+| `SAWD-0A1XX10EU1-stable-firmware.zip`      | repo.shelly.cloud（静态） | 1.2.1（2023-08-15）  | armeabi-v7a | 12.5 MB  |
+| `SAWD-0A1XX10EU1-stable-WebViewUpdate.zip` | repo.shelly.cloud（静态） | Android 7 的 WebView | armeabi-v7a | 107.5 MB |
+
+## 安全
+
+固件 2.6.0 披露，通过 BLE 的 RPC 曾允许任何 BLE 连接未经认证访问（由 [Pen Test Partners](https://www.pentestpartners.com/) 报告）。分阶段修复如下：
+
+- **2.6.0：**加入 BLE 连接确认对话框，用户确认后才开放 RPC 会话。
+- **2.7.0：**关闭 _启用 Bluetooth RPC_（Enable Bluetooth RPC） 时 GATT 服务器不可连接，并收紧 BLE 扫描匹配以减少意外连接。
+
+## 厂商发行说明
+
+import releaseNotes from '../../../../../../../tools/firmware-index/shelly-release-notes.json';
+
+这些简短摘要以我们自己的文字介绍 Shelly 说明中的主题。每个来源链接固定到记录时的厂商文件，后续编辑不会改变它。只有 Wayback 可用性 API 确认捕获后才显示“归档副本”。来源文件也另行保留。可能存在尚未找到软件包的版本说明；它们不证明与特定型号兼容。
+
+<div class="release-notes" style={{ overflowX: 'auto' }}>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">版本</th>
+        <th scope="col">摘要</th>
+        <th scope="col">来源</th>
+      </tr>
+    </thead>
+    <tbody>
+      {Object.entries(releaseNotes)
+        .sort(([a], [b]) => b.localeCompare(a, undefined, { numeric: true }))
+        .map(([version, note]) => {
+          const page = `https://github.com/ShellyGroup/Wall-Display-Changelog/blob/${note.commit}/README.md`;
+          const anchor = `#${version.replaceAll('.', '')}`;
+          const summaries = {
+            '2.8.4': '安全、设置恢复、固件更新和Matter 设备方面的变更。',
+            '2.8.3': '仪表盘浏览、固件更新、Matter 设备和暖通空调控制方面的变更。',
+            '2.8.2': '暖通空调控制、网络连接、显示控制和设备控制方面的变更。',
+            '2.8.1': '摄像头和音频输入、暖通空调控制、显示控制和设备控制方面的变更。',
+            '2.8.0': '仪表盘浏览、设置恢复、固件更新和摄像头和音频输入方面的变更。',
+            '2.7.4': '网络连接和显示控制方面的变更。',
+            '2.7.3': '仪表盘浏览、暖通空调控制、网络连接和显示控制方面的变更。',
+            '2.7.2': '仪表盘浏览、设置恢复、暖通空调控制和设备控制方面的变更。',
+            '2.7.1': '暖通空调控制、网络连接、媒体和闹钟和设备控制方面的变更。',
+            '2.7.0': '安全、仪表盘浏览、固件更新和摄像头和音频输入方面的变更。',
+            '2.6.2': '设置恢复、摄像头和音频输入、暖通空调控制和显示控制方面的变更。',
+            '2.6.1': '显示控制方面的变更。',
+            '2.6.0': '安全、设置恢复、固件更新和暖通空调控制方面的变更。',
+            '2.5.8': '暖通空调控制和自动化接口方面的变更。',
+            '2.5.7': '仪表盘浏览、暖通空调控制、网络连接和显示控制方面的变更。',
+            '2.5.6': '仪表盘浏览、设置恢复、显示控制和设备控制方面的变更。',
+            '2.5.5': '网络连接、显示控制、媒体和闹钟和设备控制方面的变更。',
+            '2.5.4': '暖通空调控制、显示控制、设备控制和传感器读数方面的变更。',
+            '2.5.3': '仪表盘浏览、显示控制和设备控制方面的变更。',
+            '2.5.2': '暖通空调控制、显示控制和自动化接口方面的变更。',
+            '2.5.1': '暖通空调控制、网络连接、显示控制和设备控制方面的变更。',
+            '2.4.5': '网络连接方面的变更。',
+            '2.4.4': '网络连接、显示控制、设备控制和自动化接口方面的变更。',
+            '2.4.3': '设置恢复、显示控制、设备控制和传感器读数方面的变更。',
+            '2.4.2': '显示控制和传感器读数方面的变更。',
+            '2.4.1': '显示控制和传感器读数方面的变更。',
+            '2.4.0': '设置恢复、固件更新、网络连接和显示控制方面的变更。',
+          };
+          return (
+            <tr>
+              <th scope="row">{version}</th>
+              <td>{summaries[version]}</td>
+              <td>
+                <a href={page + anchor}>发行说明</a>
+                {' · '}
+                {note.wayback_ts ? (
+                  <a href={`https://web.archive.org/web/${note.wayback_ts}/${page}${anchor}`}>
+                    归档副本
+                  </a>
+                ) : (
+                  '归档副本待完成'
+                )}
+              </td>
+            </tr>
+          );
+        })}
+    </tbody>
+  </table>
+</div>
+
+## 影响第三方应用的固件版本
+
+稳定通道，最新在前。2.8.1、2.8.2、2.8.3 的日期是厂商软件包构建日期。完整产品更新日志位于 [ShellyGroup/Wall-Display-Changelog](https://github.com/ShellyGroup/Wall-Display-Changelog)，覆盖 2.4.0 及以后；更早版本在需要登录的 `community.shelly.cloud`。
+
+| 版本  | 日期       | 相关变化                                                                                                |
+| ----- | ---------- | ------------------------------------------------------------------------------------------------------- |
+| 2.8.4 | 2026-10-19 | 厂商修复备份恢复、Cloud 服务器验证和本地 Web 访问安全问题；不声称经过硬件验证                           |
+| 2.8.3 | 2026-10-12 | 在 2026-10-12 检查时为稳定版；修复 Home Assistant 仪表盘和更新检测；X2i 部分测试，完整验证待完成        |
+| 2.8.2 | 2026-10-08 | 修复组控制和 Shelly Cloud 重连；X2i 部分开发测试，完整验证待完成                                        |
+| 2.8.1 | 2026-10-06 | 厂商摄像头对讲麦克风仅在按住按钮时录音                                                                  |
+| 2.8.0 | 见更新日志 | 现代型号获得 Matter 功能和恢复出厂应用版本功能，存在恢复出厂设置限制                                    |
+| 2.7.3 | 2026-07-29 | 历史分析：旧平台 OTA 声明 `userdebug` 基础构建                                                          |
+| 2.7.2 | 2026-07-16 | 恢复出厂设置时卸载第三方应用                                                                            |
+| 2.7.0 | 2026-06-03 | 恢复支持内置 Home Assistant 浏览器，并加入清缓存选项；OTA 硬件合理性检查；关闭 BLE RPC 时 GATT 不可连接 |
+| 2.6.0 | 2026-05-12 | AppStore（仅现代型号）；每小时 OTA 检查；BLE 认证对话框；AppStore 型号弃用内置 Home Assistant 浏览器    |
+| 2.5.6 | 2026-02-04 | 重型 Home Assistant 仪表盘在后台暂停 WebView 以免崩溃，也会重新加载 WebRTC 流                           |
+| 2.5.3 | 约 2025-10 | 旧 X1 的 WebView 版本检查                                                                               |
+| 2.5.1 | 2025-10-27 | 开放 Android 无障碍设置                                                                                 |
+| 2.3.4 | 2025-02-23 | 紧急修复使设备停留在旧固件的 OTA 更新通道故障                                                           |
+| 1.2.1 | 2023-08-15 | 最早确认可下载版本（静态 CDN）                                                                          |
+
+## 设备配置文件：已知与未知
+
+两个家族配置文件对应两个 OTA 通道，另有精确的 [X2i 配置文件](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display-x2i.yaml)：[`shelly-wall-display.yaml`](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display.yaml) 和 [`shelly-wall-display-v2.yaml`](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display-v2.yaml)。OTA 通道范围过广，不能表示各型号专属 SoC、显示屏和继电器信息，因此两者刻意保持通用，字段仍属初步信息。下表描述这两个文件。X2i 实际报告的内容见[其独立页面](/zh-hans/hardware/panels/shelly/wall-display-x2i/)。
+
+### 固件中已知或可推导的信息
+
+| 字段                              | `shelly-wall-display`（旧平台）          | `shelly-wall-display-v2`（现代平台）      | 来源                                                                                                      |
+| --------------------------------- | ---------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `soc_class`                       | 因型号而异；原版为 MT6580，X2 为 SC7731E | 因型号而异；X1i 为 RK3326-S，XL 为 RK3566 | 官方型号页面；OTA 指纹                                                                                    |
+| `platform.su_form` / `app_can_su` | `none` / `false`                         | `none` / `false`                          | 没有面向用户的 root（旧平台目标为 `userdebug` 基础构建；现代平台未显示构建类型；见[访问模型](#访问模型)） |
+| `hardware.led.mechanism`          | `none`                                   | `none`                                    | 当前配置文件声明；未在所有型号验证                                                                        |
+| `hardware.screen_off`             | `brightness-zero`                        | `vendor-rpc`                              | 现代 Stargate 屏幕 API；不可用或有密码时回退到 Android 超时                                               |
+| `platform.has_recents`            | `true`                                   | `false`                                   | 依据实测 X2i 固件推及现代型号的声明；其他型号需实机确认                                                   |
+| `hardware.relay_base`             | 无                                       | 无                                        | 继电器通过 Home Assistant Shelly 集成操作；尚未确认应用可访问的标准途径                                   |
+| `hardware.zigbee_gateway_dir`     | 无                                       | 无                                        | 没有 Zigbee 或 Thread 无线模块                                                                            |
+| `sensors.proximity_technology`    | 无                                       | 无                                        | 其余每款型号均需实机证据                                                                                  |
+| `sensors.light_technology`        | `Ambient light`                          | `Ambient light`                           | 官方型号页面；X2i 以外 Android API 是否开放未验证                                                         |
+| 应用包                            | `cloud.shelly.stargate`（主屏幕启动器）  | 相同                                      | Stargate APK 清单；2.7.3 载荷额外安装设备所有者策略文件                                                   |
+
+### 检查实机前的未知项
+
+- 准确区分 X2、X1i 和 XL、避免误匹配配置文件所需的运行时标识。X2i 的每个标识都一致报告其固件代号，这是其他型号首先应尝试的线索。
+- 除 X2i 外，Android `SensorManager` 是否提供各型号记录的环境光、运动或接近传感器。
+- 除 X2i 外各型号的 `platform.has_recents`。现代配置文件依据 X2i 固件证据省略最近任务，旧平台配置文件则声明可用。在 X2i 上，最近任务键和 Android 无障碍最近任务操作都无效，因为固件没有最近任务目录。
+- 各型号默认显示密度和适当的 `provisioning.display.density`。
+- 旧平台 `userdebug` 基础构建能否建立 adb 立足点并使用 `adb root`，从而允许辅助守护进程。一台 X2i 出厂为 `user` 构建，因此该设备没有厂商 root 途径；其他现代型号是否相同尚未测试。
+- 面板应用报告端口（默认 8888）上的 HTTP 服务能否从局域网访问，取决于设备防火墙。
+
+## 来源
+
+- [ShellyGroup/Wall-Display-Changelog](https://github.com/ShellyGroup/Wall-Display-Changelog)：官方固件更新日志。
+- [SECURITY_POSTURE.md](https://github.com/ShellyGroup/Wall-Display-Changelog/blob/main/SECURITY_POSTURE.md)：Shelly 对当前世代硬件构建类型、adb、旁加载和更新签名的说明。
+- [Shelly Wall Display 知识库](https://kb.shelly.cloud/knowledge-base/shelly-wall-display)：原版 4 英寸型号。
+- [Shelly Wall Display X2 知识库](https://kb.shelly.cloud/knowledge-base/shelly-wall-display-x2)
+- [Shelly Wall Display X1i 知识库](https://kb.shelly.cloud/knowledge-base/shelly-wall-display-x1i)
+- [Shelly Wall Display X2i 知识库](https://kb.shelly.cloud/knowledge-base/shelly-wall-display-x2i)
+- [Shelly Wall Display XL 知识库](https://kb.shelly.cloud/knowledge-base/shelly-wall-display-xl)
+- [Shelly Gen2 RPC API](https://shelly-api-docs.shelly.cloud/gen2/ComponentsAndServices/Shelly/)：`Shelly.CheckForUpdate` 和 `Shelly.Update`。
+- [home-assistant/frontend#28755](https://github.com/home-assistant/frontend/issues/28755)：XL 内置浏览器渲染问题。
+- [home-assistant/core#162665](https://github.com/home-assistant/core/issues/162665)：Home Assistant 集成兼容性。
+- [Pen Test Partners](https://www.pentestpartners.com/)：BLE RPC 认证问题，在 2.6.0 和 2.7.0 修复。

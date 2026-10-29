@@ -1,7 +1,7 @@
 ---
 title: 入门
 description: 只需几分钟，就能让尚未配置的 Android 墙面面板显示 Home Assistant 仪表盘，每一步都有 Home Assistant 引导。
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
 如果你以前设置过墙面面板或自助终端，大概还记得那套过程：侧载应用、寻找能绘制仪表盘的浏览器引擎、猜测设置项的作用，还总担心下次重启会出问题。用 Panel Assistant 设置面板，会给你一个惊喜。几分钟就能完成，即使面板已经挂在墙上，你也不用离开椅子。好吧，也许需要一次 ;-)
@@ -13,12 +13,12 @@ sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 通过 HACS 添加 Panel Assistant，然后重启 Home Assistant。这是唯一需要你手动安装的内容。从此以后，Home Assistant 会引导你完成操作。参见 [安装集成](/zh-hans/home-assistant/custom-integration/)。
 
 :::note
-Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/zh-hans/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/zh-hans/manage/upgrade-to-1-0/) explains what changes.
+Panel Assistant 1.0 是候选发布版。HACS 默认提供 0.9.0。要试用候选发布版，请在 **设置**、**设备与服务**、**HACS** 下的 Panel Assistant 设备中启用并打开 **预发布** 开关；[安装集成](/zh-hans/home-assistant/custom-integration/)介绍了如何启用已禁用的实体。运行 1.0 应用的面板无法回退到 0.9；[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)说明了相关变化。
 :::
 
 ## 2. 在面板上开启调试
 
-打开面板的开发者选项：大多数面板可以依次打开**设置**、**关于**，然后连续点按**版本号**七次。如果通过线缆连接面板，则开启 **USB 调试**；如果通过网络安装，则开启 **TCP 端口 5555 上的网络 ADB**。并非所有面板都有网络 ADB 开关；各型号的 [硬件页面](/zh-hans/hardware/)会说明是否提供该开关及其位置。如果没有，请使用 USB 方式。[准备面板](/zh-hans/install/prepare-a-panel/)提供了详细步骤。
+打开面板的开发者选项：大多数面板可以依次打开**设置**、**关于**，然后连续点按**版本号**七次。如果通过线缆连接面板，则开启 **USB 调试**；如果通过网络安装，则开启 **TCP 端口 5555 上的网络 ADB**。并非所有面板都有网络 ADB 开关；[硬件页面](/zh-hans/hardware/)列出了已知途径，并说明哪些型号的初始访问尚未验证。如果无法使用网络访问，请在确认该型号具备 USB 调试和 USB 数据端口后使用 USB。[准备面板](/zh-hans/install/prepare-a-panel/)提供了详细步骤。
 
 ## 3. 添加面板
 
@@ -102,6 +102,8 @@ Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try
 接下来是面板自身的设置向导。它由面板提供，在计算机的浏览器中打开，而不是显示在面板屏幕上。网络安装完成后，Home Assistant 会显示**完成此面板的设置**：打开面板的设置页面，完成其中的步骤，然后返回 Home Assistant 并选择**完成**。USB 安装完成后，安装程序窗口会直接进入向导。由于向导由面板提供，只有与面板位于同一网络的浏览器才能加载它。
 
 向导会要求为面板命名，让面板登录 Home Assistant，并询问要显示哪个仪表盘以及面板所在的区域。面板会以你登录时使用的 Home Assistant 账户连接，因此，如果浏览器已以你的身份登录，面板也可能以你的身份连接；如果希望面板使用独立账户，请改用该账户登录。启用实体筛选后，面板只加载该仪表盘使用的实体，从而保持快速响应。请参阅 [连接面板](/zh-hans/home-assistant/connect-a-panel/)。
+
+在尚未发布的 1.0.0-rc2 版本中，即使面板浏览器引擎过旧，无法使用内置渲染器显示当前 Home Assistant 仪表盘，也可以完成设置。需要处理时，向导会显示警告。在依赖仪表盘之前，请按照 [WebView 指南](/zh-hans/hardware/guides/update-the-webview/)操作；仅完成设置并不能确认仪表盘可以加载。
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="面板设置向导的详细步骤" tabindex="0">
 <figure>

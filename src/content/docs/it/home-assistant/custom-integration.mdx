@@ -1,0 +1,42 @@
+---
+title: Installa l'integrazione
+description: Aggiungere Panel Assistant a Home Assistant tramite HACS, il punto di partenza.
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+Panel Assistant è un'integrazione personalizzata, aggiunta tramite [HACS](https://hacs.xyz/). Sono necessari Home Assistant 2026.8.3 o successivo e HACS.
+
+<LinkButton
+  href="https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration"
+  icon="external"
+>
+  Apri in HACS
+</LinkButton>
+
+Quel pulsante apre il repository nell'HACS della tua istanza Home Assistant, pronto per il download. Se preferisci procedere manualmente:
+
+1. In HACS, aggiungi `https://github.com/panel-assistant/ha-integration` come repository personalizzato con la categoria **Integrazione**.
+2. Scarica **Panel Assistant**, poi riavvia Home Assistant.
+3. Vai in **Impostazioni**, **Dispositivi e servizi**, **Aggiungi integrazione** e scegli **Panel Assistant**.
+
+HACS propone l'ultima versione stabile, 0.9.0. Per provare la release candidate 1.0, apri **Impostazioni**, **Dispositivi e servizi**, **HACS** e scegli il dispositivo **Panel Assistant**. Espandi le entità disabilitate e apri **Pre-release**. Nelle sue impostazioni, attiva **Abilitata** e seleziona **Aggiorna**, poi attiva l'interruttore **Pre-release** sotto **Diagnostica**. Torna a Panel Assistant in HACS e scarica la release candidate, poi riavvia Home Assistant. Leggi prima [Aggiornare alla versione 1.0](/it/manage/upgrade-to-1-0/), perché un pannello con l'app 1.0 non può tornare alla 0.9.
+
+## Cosa ottieni
+
+- **Il programma di installazione.** L'aggiunta di un pannello è una procedura guidata in Home Assistant. Controlla il pannello, installa l'app tramite la rete o [tramite USB](/it/install/install-over-usb/), la avvia e solo allora crea il dispositivo. Un pannello che esegue già l'app viene adottato invece di essere reinstallato.
+- **Un dispositivo per pannello.** Ogni pannello appare sotto Dispositivi e servizi con un sensore di stato e dati diagnostici scaricabili, oscurati per poterli condividere quando chiedi aiuto.
+- **Tutti i pannelli in un unico posto.** Gli amministratori possono scegliere un pannello dalla barra laterale Panel Assistant e usare la sua interfaccia web all'interno di Home Assistant.
+
+## Cosa deve ancora arrivare
+
+Panel Assistant è nuovo e si evolve rapidamente. Un pannello già installato si aggiorna dalla sua entità di aggiornamento in Home Assistant, come descritto in [Aggiornamenti e ripristino](/it/manage/updates-and-recovery/). Il programma di installazione USB è la parte più recente; è sicuro riprovare, ma aspettati qualche imperfezione. Il tuo riscontro è benvenuto nelle [segnalazioni](https://github.com/panel-assistant/ha-integration/issues) e su [Discord](https://panel-assistant.io/go/discord).
+
+## Se usavi la precedente integrazione 0.1.0
+
+Rimuovi la vecchia voce dell'integrazione sotto Dispositivi e servizi, poi rimuovi il relativo download da HACS. Aggiungi questo repository e scarica Panel Assistant **0.9.0** in HACS prima del primo riavvio (scegli **Scarica di nuovo** e seleziona la versione 0.9.0). Riavvia Home Assistant, poi aggiungi nuovamente l'integrazione usando il nome host o l'indirizzo del pannello.
+
+Se hai già installato Panel Assistant 1.0, segui [Se una migrazione non è stata completata](/it/manage/upgrade-to-1-0/#se-una-migrazione-non-è-stata-completata) prima di cambiare versione.
+
+Un pannello di quel periodo esegue ancora la vecchia app ha-paneld. Panel Assistant 1.0 non può migrarlo alla nuova app: installa prima Panel Assistant 0.9.0 (in HACS, apri Panel Assistant, scegli **Scarica di nuovo** e seleziona la versione 0.9.0), aggiungi il pannello e migralo con la sua Riparazione, poi aggiorna alla 1.0.

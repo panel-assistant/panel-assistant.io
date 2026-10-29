@@ -1,7 +1,7 @@
 ---
 title: Instalacja przez USB
 description: Uruchomienie zupełnie nowego panelu z przeglądarki za pomocą kabla USB, zanim trafi na ścianę.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
 Ścieżka USB jest dla panelu, który wciąż leży w pudełku, albo takiego, którego oprogramowanie producenta utrudnia dostęp przez sieć. Podłącz panel do komputera, przy którym siedzisz, a przeglądarka zainstaluje aplikację panelu prosto przez kabel. Panel nie potrzebuje sieciowego ADB. Przeglądarka musi utrzymywać połączenie z Home Assistant, który dostarcza zweryfikowane wydanie. Większość osób korzysta z tego dokładnie raz, zanim panel zostanie zamontowany.
@@ -15,7 +15,7 @@ Instalator USB uruchamia administrator z Home Assistant: przejdź do **Ustawieni
 - Zainstalowanej [integracji](/pl/home-assistant/custom-integration/) i konta administratora.
 - Przeglądarki opartej na Chromium, takiej jak Chrome lub Edge. Firefox i Safari nie potrafią komunikować się z urządzeniami USB.
 - Kabla USB od panelu do komputera lub telefonu z tą przeglądarką. Nie do serwera Home Assistant.
-- Włączonego debugowania USB w opcjach programisty panelu. Jeśli po podłączeniu panel wyświetli prośbę o autoryzację, ktoś przy panelu musi ją zaakceptować; niektóre panele nigdy o to nie proszą. [Strony sprzętu](/pl/hardware/) pokazują, jak dostać się do opcji programisty w każdym modelu.
+- Włączonego debugowania USB w opcjach programisty panelu. Jeśli po podłączeniu panel wyświetli prośbę o autoryzację, ktoś przy panelu musi ją zaakceptować; niektóre panele nigdy o to nie proszą. [Strony sprzętu](/pl/hardware/) opisują znane procedury debugowania i wskazują modele, dla których początkowy dostęp USB pozostaje niezweryfikowany.
 
 ## Co się dzieje
 

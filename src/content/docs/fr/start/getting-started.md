@@ -1,7 +1,7 @@
 ---
 title: Premiers pas
 description: En quelques minutes, passez d’un panneau mural Android non configuré à votre tableau de bord Home Assistant, avec Home Assistant pour vous guider à chaque étape.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
 Si vous avez déjà configuré un panneau mural ou un kiosque, vous vous souvenez sans doute du déroulement : installer des applications manuellement, chercher un moteur de navigateur capable d’afficher un tableau de bord, tâtonner dans les réglages et ne jamais vraiment faire confiance au prochain redémarrage. Configurer un panneau avec Panel Assistant sera une agréable surprise. Vous pouvez terminer en quelques minutes et, même si le panneau est au mur, vous n’aurez pas à vous lever de votre chaise. Bon, peut-être une fois ;-)
@@ -13,12 +13,12 @@ La première heure est la partie difficile de la mise en route de tout panneau. 
 Ajoutez Panel Assistant via HACS et redémarrez Home Assistant. C’est la seule chose que vous installez à la main. Ensuite, Home Assistant vous guide. Voir [Installer l’intégration](/fr/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/fr/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/fr/manage/upgrade-to-1-0/) explains what changes.
+Panel Assistant 1.0 est une version candidate. HACS propose la version 0.9.0 par défaut. Pour essayer la version candidate, rendez disponible puis activez l’interrupteur **Préversion** sur l’appareil Panel Assistant sous **Paramètres**, **Appareils et services**, **HACS** ; [Installer l’intégration](/fr/home-assistant/custom-integration/) détaille l’étape de l’entité désactivée. Un panneau qui exécute l’application 1.0 ne peut pas revenir à la version 0.9 ; [Passer à la version 1.0](/fr/manage/upgrade-to-1-0/) explique les changements.
 :::
 
 ## 2. Activer le débogage sur le panneau
 
-Ouvrez les options pour les développeurs sur le panneau : sur la plupart des panneaux, ouvrez **Paramètres**, puis **À propos**, et appuyez sept fois sur **Numéro de build**. Activez ensuite le **débogage USB** si vous branchez le panneau par câble, ou **ADB sur le réseau, sur le port TCP 5555** pour la méthode réseau. Tous les panneaux ne disposent pas d’un commutateur ADB réseau ; chaque [page consacrée au matériel](/fr/hardware/) indique si le vôtre en possède un et où il se trouve. S’il n’en a pas, utilisez la méthode USB. [Préparer le panneau](/fr/install/prepare-a-panel/) fournit les détails.
+Ouvrez les options pour les développeurs sur le panneau : sur la plupart des panneaux, ouvrez **Paramètres**, puis **À propos**, et appuyez sept fois sur **Numéro de build**. Activez ensuite le **débogage USB** si vous branchez le panneau par câble, ou **ADB sur le réseau, sur le port TCP 5555** pour la méthode réseau. Tous les panneaux ne disposent pas d’un commutateur ADB réseau ; les [pages consacrées au matériel](/fr/hardware/) répertorient les méthodes connues et indiquent quand l’accès initial n’est pas vérifié. Si l’accès réseau est indisponible, utilisez l’USB une fois le débogage USB et la présence d’un port USB de données confirmés pour votre modèle. [Préparer le panneau](/fr/install/prepare-a-panel/) fournit les détails.
 
 ## 3. Ajouter le panneau
 
@@ -102,6 +102,8 @@ Dans les deux cas, l’assistant se charge de la partie compliquée. Il vérifie
 Vient ensuite l’assistant de configuration du panneau. Il est hébergé par le panneau et s’ouvre dans le navigateur de votre ordinateur, pas sur l’écran du panneau. Après une installation réseau, Home Assistant affiche **Terminer la configuration de ce panneau** : ouvrez la page de configuration du panneau, terminez les étapes, puis revenez dans Home Assistant et sélectionnez **Terminé**. Après une installation USB, la fenêtre de l’installateur passe directement à l’assistant. Comme le panneau l’héberge, il ne se charge que dans un navigateur sur le même réseau que le panneau.
 
 L’assistant demande un nom pour le panneau, le connecte à Home Assistant et demande quel tableau de bord afficher et dans quelle pièce se trouve le panneau. Le panneau se connecte avec le compte Home Assistant utilisé pour cette connexion : si votre navigateur est connecté avec votre compte, le panneau peut donc utiliser le vôtre ; pour lui réserver un compte distinct, connectez-vous plutôt avec ce compte. Lorsque le filtrage des entités est activé, le panneau ne charge que les entités utilisées par ce tableau de bord, ce qui lui permet de rester rapide. Voir [Connecter un panneau](/fr/home-assistant/connect-a-panel/).
+
+Dans la version 1.0.0-rc2 non encore publiée, la configuration peut se terminer même si le moteur de navigateur du panneau est trop ancien pour afficher un tableau de bord Home Assistant actuel avec le moteur de rendu intégré. L’assistant avertit lorsqu’une intervention est nécessaire. Suivez le [guide WebView](/fr/hardware/guides/update-the-webview/) avant de vous fier au tableau de bord ; terminer la configuration ne confirme pas à lui seul que le tableau de bord peut se charger.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="L’assistant de configuration du panneau, étape par étape" tabindex="0">
 <figure>

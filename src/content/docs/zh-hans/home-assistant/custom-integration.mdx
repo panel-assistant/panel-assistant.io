@@ -1,0 +1,42 @@
+---
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+title: 安装集成
+description: 通过 HACS 将 Panel Assistant 添加到 Home Assistant，一切从这里开始。
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+Panel Assistant 是通过 [HACS](https://hacs.xyz/) 添加的自定义集成。您需要 Home Assistant 2026.8.3 或更高版本，以及 HACS。
+
+<LinkButton
+  href="https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration"
+  icon="external"
+>
+  在 HACS 中打开
+</LinkButton>
+
+此按钮会在您自己的 Home Assistant 的 HACS 中打开该仓库，供您下载。如果您更愿意手动操作：
+
+1. 在 HACS 中将 `https://github.com/panel-assistant/ha-integration` 添加为自定义仓库，类别选择 **集成**。
+2. 下载 **Panel Assistant**，然后重启 Home Assistant。
+3. 前往 **设置**、**设备与服务**、**添加集成**，选择 **Panel Assistant**。
+
+HACS 提供最新稳定版 0.9.0。要试用 1.0 候选发布版，请打开 **设置**、**设备与服务**、**HACS**，选择 **Panel Assistant** 设备。展开已禁用的实体，打开 **预发布**。在其设置中开启 **已启用**，选择 **更新**，然后打开 **诊断** 下的 **预发布** 开关。返回 HACS 中的 Panel Assistant，下载候选发布版，然后重启 Home Assistant。请先阅读[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)，因为运行 1.0 应用的面板无法回退到 0.9。
+
+## 您将获得什么
+
+- **安装程序。** 在 Home Assistant 内按照引导流程添加面板。它会检查面板，通过网络或 [USB](/zh-hans/install/install-over-usb/) 安装面板应用，启动应用，最后才创建设备。对于已运行该应用的面板，它会直接接管，而不重新安装。
+- **每块面板对应一个设备。** 每块面板都会出现在“设备与服务”中，并提供状态传感器和可下载的诊断信息。诊断信息经过脱敏，可在求助时分享。
+- **集中管理所有面板。** 管理员可以从 Panel Assistant 侧边栏中选择一块面板，在 Home Assistant 内使用面板自身的网页界面。
+
+## 后续改进
+
+Panel Assistant 刚刚起步，正在快速发展。已安装的面板通过 Home Assistant 中的更新实体进行更新，详见[更新与恢复](/zh-hans/manage/updates-and-recovery/)。USB 安装程序是最新加入的部分；可以安全重试，但目前仍可能有不完善之处。欢迎通过 [issues](https://github.com/panel-assistant/ha-integration/issues) 和 [Discord](https://panel-assistant.io/go/discord) 反馈。
+
+## 如果您使用过早期的 0.1.0 集成
+
+在“设备与服务”中移除旧的集成条目，然后从 HACS 中移除其下载。在首次重启之前，添加此仓库并在 HACS 中下载 Panel Assistant **0.9.0**（选择 **重新下载**，再选择版本 0.9.0）。重启 Home Assistant，然后使用面板的主机名或地址重新添加集成。
+
+如果已经安装 Panel Assistant 1.0，请在更改版本之前按照[如果迁移未完成](/zh-hans/manage/upgrade-to-1-0/#如果迁移未完成)中的说明操作。
+
+当时的面板仍运行旧的 ha-paneld 应用。Panel Assistant 1.0 无法将其迁移到新应用：请先安装 Panel Assistant 0.9.0（在 HACS 中打开 Panel Assistant，选择 **重新下载**，再选择版本 0.9.0），添加面板并使用其修复项完成迁移，然后再更新到 1.0。

@@ -1,7 +1,7 @@
 ---
 title: Installeren via USB
 description: Een gloednieuw paneel vanuit je browser met een USB-kabel aan de praat krijgen, voordat het aan de muur gaat.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
 De USB-route is voor een paneel dat nog in de doos zit, of een paneel waarvan de software van de fabrikant netwerktoegang lastig maakt. Sluit het paneel aan op de computer waar je achter zit, en je browser installeert de paneel-app rechtstreeks via de kabel. Het paneel heeft geen netwerk-ADB nodig. Je browser moet verbonden blijven met Home Assistant, dat de geverifieerde release levert. De meeste mensen gebruiken dit precies één keer, voordat het paneel wordt opgehangen.
@@ -15,7 +15,7 @@ Een beheerder start het USB-installatieprogramma vanuit Home Assistant: ga naar 
 - De [integratie](/nl/home-assistant/custom-integration/) geïnstalleerd, en een beheerdersaccount.
 - Een op Chromium gebaseerde browser zoals Chrome of Edge. Firefox en Safari kunnen niet met USB-apparaten praten.
 - Een USB-kabel van het paneel naar de computer of telefoon waarop die browser draait. Niet naar de Home Assistant-server.
-- USB-foutopsporing ingeschakeld in de ontwikkelaarsopties van het paneel. Als het paneel bij het verbinden een autorisatievraag toont, moet iemand bij het paneel die goedkeuren; sommige panelen vragen er nooit om. De [hardwarepagina's](/nl/hardware/) laten per model zien hoe je bij de ontwikkelaarsopties komt.
+- USB-foutopsporing ingeschakeld in de ontwikkelaarsopties van het paneel. Als het paneel bij het verbinden een autorisatievraag toont, moet iemand bij het paneel die goedkeuren; sommige panelen vragen er nooit om. De [hardwarepagina's](/nl/hardware/) beschrijven de bekende foutopsporingsprocedures en geven aan bij welke modellen de eerste USB-toegang nog niet is geverifieerd.
 
 ## Wat er gebeurt
 

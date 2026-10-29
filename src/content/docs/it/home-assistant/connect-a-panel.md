@@ -1,7 +1,7 @@
 ---
 title: Connetti un pannello
 description: Mostrare la tua plancia sul pannello e come l'hardware del pannello stesso appare in Home Assistant.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 Un pannello aggiunto a Home Assistant si connette in due modi. Uno mostra una plancia sullo schermo. L'altro porta l'hardware del pannello stesso al suo interno come entità.

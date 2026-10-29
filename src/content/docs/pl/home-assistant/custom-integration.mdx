@@ -1,7 +1,7 @@
 ---
 title: Instalacja integracji
 description: Dodawanie Panel Assistant do Home Assistant przez HACS, od którego wszystko się zaczyna.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 import { LinkButton } from '@astrojs/starlight/components';
@@ -21,7 +21,7 @@ Ten przycisk otwiera repozytorium w HACS w twoim własnym Home Assistant, gotowe
 2. Pobierz **Panel Assistant**, a następnie uruchom ponownie Home Assistant.
 3. Przejdź do **Ustawienia**, **Urządzenia oraz usługi**, **Dodaj integrację** i wybierz **Panel Assistant**.
 
-HACS offers the latest stable release, 0.9.0. To try the 1.0 release candidate, open **Settings**, **Devices and services**, **HACS**, and choose the **Panel Assistant** device. Expand the disabled entities and open **Pre-release**. In its settings, turn on **Enabled** and select **Update**, then turn on the **Pre-release** switch under **Diagnostic**. Return to Panel Assistant in HACS and download the release candidate, then restart Home Assistant. Read [Upgrading to 1.0](/pl/manage/upgrade-to-1-0/) first, because a panel that runs the 1.0 app cannot go back to 0.9.
+HACS oferuje najnowsze stabilne wydanie, 0.9.0. Aby wypróbować kandydata do wydania 1.0, otwórz **Ustawienia**, **Urządzenia i usługi**, **HACS** i wybierz urządzenie **Panel Assistant**. Rozwiń wyłączone encje i otwórz **Wersja wstępna**. W jej ustawieniach włącz **Włączone** i wybierz **Aktualizuj**, a następnie włącz przełącznik **Wersja wstępna** w sekcji **Diagnostyka**. Wróć do Panel Assistant w HACS i pobierz kandydata do wydania, a następnie uruchom ponownie Home Assistant. Najpierw przeczytaj [Aktualizacja do 1.0](/pl/manage/upgrade-to-1-0/), ponieważ panel z aplikacją 1.0 nie może wrócić do 0.9.
 
 ## Co otrzymujesz
 
@@ -37,6 +37,6 @@ Panel Assistant jest nowy i szybko się rozwija. Już zainstalowany panel aktual
 
 Usuń stary wpis integracji w Urządzenia oraz usługi, a następnie usuń jej pobraną kopię z HACS. Dodaj to repozytorium i pobierz Panel Assistant **0.9.0** w HACS przed pierwszym ponownym uruchomieniem (wybierz **Pobierz ponownie** i wersję 0.9.0). Uruchom ponownie Home Assistant, a potem dodaj integrację jeszcze raz, podając nazwę hosta lub adres panelu.
 
-Jeśli masz już zainstalowany Panel Assistant 1.0, przed zmianą wersji postępuj zgodnie z sekcją [Jeśli przenoszenie nie zostało ukończone](/pl/manage/upgrade-to-1-0/#if-a-move-was-not-finished).
+Jeśli masz już zainstalowany Panel Assistant 1.0, przed zmianą wersji postępuj zgodnie z sekcją [Jeśli przenoszenie nie zostało ukończone](/pl/manage/upgrade-to-1-0/#jeśli-przenoszenie-nie-zostało-zakończone).
 
 Panel z tamtego okresu nadal ma starą aplikację ha-paneld. Panel Assistant 1.0 nie potrafi przenieść go do nowej aplikacji: najpierw zainstaluj Panel Assistant 0.9.0 (w HACS otwórz Panel Assistant, wybierz **Pobierz ponownie** i wersję 0.9.0), dodaj panel i przenieś go za pomocą jego Naprawy, a następnie zaktualizuj do 1.0.

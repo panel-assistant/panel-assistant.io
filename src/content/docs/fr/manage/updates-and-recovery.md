@@ -1,7 +1,7 @@
 ---
 title: Mises à jour et récupération
 description: Maintenir l’application du panneau à jour et savoir ce qui peut être récupéré en cas de problème.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 ## Mettre à jour un panneau
@@ -10,7 +10,9 @@ sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 
 Une mise à jour commence lorsque Panel Assistant ou vous-même la demandez explicitement. L’application du panneau n’installe pas de mises à jour planifiées. L’onglet **Installer** de son interface web vous permet aussi de choisir et d’installer une version de l’application du panneau, y compris une préversion. Ce choix s’applique à l’installation que vous lancez ; aucun canal de mise à jour n’est enregistré.
 
-Android System WebView est maintenu séparément, via le Play Store, le micrologiciel du fabricant ou une installation manuelle, selon ce qui convient à votre panneau. Voir [mettre à jour le WebView système](/fr/hardware/guides/update-the-webview/).
+Dans la version 1.0.0-rc2 non encore publiée, une mise à jour de l’application du panneau lancée depuis Home Assistant peut aussi installer un System WebView vérifié et compatible sur les panneaux pris en charge. Si l’étape du moteur de navigateur reste inachevée, utilisez l’action **Réessayer** de la Réparation de mise à jour. Elle vérifie le travail existant avant de demander une nouvelle tentative ; aucune relance n’est planifiée. Les autres panneaux nécessitent toujours le Play Store, le micrologiciel du fabricant ou la méthode manuelle décrite dans [Mettre à jour le WebView système](/fr/hardware/guides/update-the-webview/).
+
+Dans cette version, un panneau rooté pris en charge peut garder ADB réseau désactivé pendant que Panel Assistant le gère via sa connexion d’application authentifiée. Les mises à jour de l’application et la maintenance prise en charge utilisent cette connexion et l’installateur privilégié du panneau. Le service local de récupération peut rouvrir ADB réseau si la connexion de l’application cesse d’être renouvelée ou si la récupération l’exige.
 
 ### Panneaux qui ont besoin d’ADB
 
@@ -22,7 +24,7 @@ Certains panneaux ne peuvent être mis à jour que par ADB, car ils n’ont aucu
 
 La cause habituelle est une modification effectuée sur le panneau plutôt que dans Home Assistant. Une mise à jour du micrologiciel du fabricant, une réinitialisation d’usine ou une option du fabricant qui rétablit le logiciel d’origine peuvent toutes désactiver à nouveau les options pour les développeurs d’Android, et donc ADB. Rien ne vous avertit sur le moment, car, du point de vue du panneau, tout fonctionne normalement.
 
-Réactiver les options pour les développeurs et le débogage USB rétablit le moyen de mise à jour sur la plupart des panneaux, et les étapes sont les mêmes que lors de la préparation initiale de ce panneau : voir [préparer un panneau](/fr/install/prepare-a-panel/#1-developer-options-and-debugging-are-on). L’accès à ces paramètres diffère selon les panneaux, et certains fabricants les cachent derrière une série d’appuis sur un écran À propos.
+Réactiver les options pour les développeurs et le débogage USB rétablit le moyen de mise à jour sur la plupart des panneaux, et les étapes sont les mêmes que lors de la préparation initiale de ce panneau : voir [préparer un panneau](/fr/install/prepare-a-panel/#1-les-options-pour-les-développeurs-et-le-débogage-sont-activés). L’accès à ces paramètres diffère selon les panneaux, et certains fabricants les cachent derrière une série d’appuis sur un écran À propos.
 
 Si la réparation reste affichée ou si le panneau désactive lui-même le débogage réseau, comme un Meta Portal après un redémarrage ou un Shelly Wall Display après une réinitialisation, branchez le panneau à votre ordinateur par USB et lancez l’installateur USB depuis Home Assistant, comme indiqué dans [installer par USB](/fr/install/install-over-usb/#tout-commence-dans-home-assistant). Il n’y a rien à supprimer au préalable : sur un panneau qui possède déjà l’application, l’installateur n’installe rien. Si le panneau le demande, cochez **Toujours autoriser depuis cet ordinateur** et appuyez sur **Autoriser** ; l’installateur réactive alors le débogage réseau et indique que Panel Assistant peut de nouveau joindre le panneau. Home Assistant propose ensuite la mise à jour du panneau, et cette mise à jour conserve ses paramètres et son historique.
 
@@ -36,7 +38,7 @@ Avant une modification dont vous n’êtes pas sûr, faites vous-même une sauve
 
 ## Récupération
 
-Lorsqu’un tableau de bord ne se charge plus après une mise à jour, la cause est généralement le WebView système ou le tableau de bord lui-même, et le panneau possède son propre comportement de [démarrage et récupération](/fr/manage/built-in-renderer/#startup-and-recovery) pour y faire face. [Dépannage](/fr/manage/troubleshooting/) présente les causes habituelles. Un panneau exécutant la version 1.0 de l’application ne peut pas revenir à une version antérieure ; [passer à la version 1.0](/fr/manage/upgrade-to-1-0/#going-back) explique les retours possibles.
+Lorsqu’un tableau de bord ne se charge plus après une mise à jour, la cause est généralement le WebView système ou le tableau de bord lui-même, et le panneau possède son propre comportement de [démarrage et récupération](/fr/manage/built-in-renderer/#démarrage-et-récupération) pour y faire face. [Dépannage](/fr/manage/troubleshooting/) présente les causes habituelles. Un panneau exécutant la version 1.0 de l’application ne peut pas revenir à une version antérieure ; [passer à la version 1.0](/fr/manage/upgrade-to-1-0/#revenir-en-arrière) explique les retours possibles.
 
 La récupération à un niveau inférieur à celui de l’application est une autre affaire. Panel Assistant ne touche jamais au micrologiciel d’un panneau, mais les partitions du micrologiciel de certains panneaux disposant d’un accès root peuvent être sauvegardées et restaurées manuellement, comme décrit dans [sauvegarde et restauration du micrologiciel](/fr/hardware/guides/firmware-backup-and-restore/).
 

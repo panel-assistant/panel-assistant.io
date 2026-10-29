@@ -1,7 +1,7 @@
 ---
 title: 通过 USB 安装
 description: 在面板上墙前，通过浏览器和 USB 数据线让全新面板运行起来。
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
 USB 安装适用于尚未拆箱的面板，或厂商软件让网络访问变得困难的面板。将面板插到你正在使用的电脑上，浏览器即可通过线缆直接安装面板应用。面板不需要网络 ADB。浏览器必须始终连接到 Home Assistant，由它提供经过验证的发布版本。大多数人只会在面板上墙之前使用一次这种方式。
@@ -15,7 +15,7 @@ USB 安装程序由管理员从 Home Assistant 启动：依次打开**设置**�
 - 已安装的 [集成](/zh-hans/home-assistant/custom-integration/)，以及管理员账户。
 - 基于 Chromium 的浏览器，例如 Chrome 或 Edge。Firefox 和 Safari 无法与 USB 设备通信。
 - 一根 USB 数据线，用来连接面板和运行该浏览器的电脑或手机，而不是连接 Home Assistant 服务器。
-- 在面板的开发者选项中开启 USB 调试。如果连接时面板显示授权提示，需要有人在面板上接受；有些面板从不询问。[硬件页面](/zh-hans/hardware/)介绍了各型号如何进入开发者选项。
+- 在面板的开发者选项中开启 USB 调试。如果连接时面板显示授权提示，需要有人在面板上接受；有些面板从不询问。[硬件页面](/zh-hans/hardware/)提供已知的调试操作步骤，并指出哪些型号的首次 USB 访问仍未经验证。
 
 ## 安装过程
 

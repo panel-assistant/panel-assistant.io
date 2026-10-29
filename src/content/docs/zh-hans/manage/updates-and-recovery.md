@@ -1,7 +1,7 @@
 ---
 title: 更新与恢复
 description: 让面板上的应用保持最新，以及出问题时可以恢复哪些内容。
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 ## 更新面板
@@ -10,7 +10,9 @@ sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
 
 只有在 Panel Assistant 或你明确请求时，更新才会开始。面板应用不会按计划安装更新。其网页界面的**安装**标签页也允许你选择并安装面板应用版本，包括预发布版本。所选版本只适用于你此次启动的安装；应用不会保存更新通道。
 
-Android System WebView 单独维护，具体通过 Play Store、厂商固件或手动安装，取决于你的面板。请参阅 [更新系统 WebView](/zh-hans/hardware/guides/update-the-webview/)。
+在尚未发布的 1.0.0-rc2 版本中，从 Home Assistant 启动的面板应用更新还可以在受支持的面板上安装经过验证且兼容的 System WebView。如果浏览器引擎阶段尚未完成，请使用更新修复项的 **重试** 操作。它会先检查已有进度，再请求再次尝试；不会定时重试。其他面板仍需使用 Play Store、厂商固件，或[更新系统 WebView](/zh-hans/hardware/guides/update-the-webview/)介绍的手动方式。
+
+在该版本中，受支持且已获取 root 的面板可以关闭网络 ADB，同时由 Panel Assistant 通过经过身份验证的应用连接进行管理。应用更新和受支持的维护使用该连接及面板的特权安装程序。如果应用连接不再续期，或恢复操作需要，本地恢复服务可以重新开启网络 ADB。
 
 ### 需要 ADB 的面板
 
@@ -22,7 +24,7 @@ Android System WebView 单独维护，具体通过 Play Store、厂商固件或�
 
 通常是面板上的改动导致，而不是 Home Assistant 中的改动。厂商固件更新、恢复出厂设置，或恢复出厂软件的厂商选项，都可能重新关闭 Android 的开发者选项，连带关闭 ADB。当时不会出现任何警告，因为从面板的角度看，一切正常。
 
-对于大多数面板，重新开启开发者选项和 USB 调试即可恢复更新途径，步骤与首次准备该面板时相同：请参阅 [准备面板](/zh-hans/install/prepare-a-panel/#1-developer-options-and-debugging-are-on)。不同面板进入这些设置的方式不同，有些厂商会将它们隐藏在“关于”页面的一连串点击操作之后。
+对于大多数面板，重新开启开发者选项和 USB 调试即可恢复更新途径，步骤与首次准备该面板时相同：请参阅 [准备面板](/zh-hans/install/prepare-a-panel/#1-开启开发者选项和调试)。不同面板进入这些设置的方式不同，有些厂商会将它们隐藏在“关于”页面的一连串点击操作之后。
 
 如果修复条目仍然存在，或面板会自行关闭网络调试，例如 Meta Portal 重启后或 Shelly Wall Display 重置后，请用 USB 将面板连接到计算机，并从 Home Assistant 启动 USB 安装程序，具体参见 [通过 USB 安装](/zh-hans/install/install-over-usb/#从-home-assistant-中开始)。无需先移除任何内容：对于已有应用的面板，安装程序不会安装任何内容。如果面板询问，请勾选**始终允许使用这台计算机进行调试**，并点按**允许**；安装程序随后会重新开启网络调试，并提示 Panel Assistant 已能再次访问面板。之后 Home Assistant 会提供该面板的更新，更新会保留设置和历史记录。
 
@@ -36,7 +38,7 @@ Panel Assistant 在做出任何改动前都会检查面板，并在每次更新�
 
 ## 恢复
 
-更新后仪表盘无法加载，通常是系统 WebView 或仪表盘自身的问题。面板为此提供了自身的 [启动与恢复](/zh-hans/manage/built-in-renderer/#startup-and-recovery)机制。[故障排查](/zh-hans/manage/troubleshooting/)介绍了常见原因。运行 1.0 面板应用的面板无法退回更早的发布版本；[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/#going-back)说明了哪些部分可以退回旧版。
+更新后仪表盘无法加载，通常是系统 WebView 或仪表盘自身的问题。面板为此提供了自身的 [启动与恢复](/zh-hans/manage/built-in-renderer/#启动与恢复)机制。[故障排查](/zh-hans/manage/troubleshooting/)介绍了常见原因。运行 1.0 面板应用的面板无法退回更早的发布版本；[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/#回退)说明了哪些部分可以退回旧版。
 
 应用以下层级的恢复是另一回事。Panel Assistant 从不改动面板固件，但部分已取得 root 权限的面板可以手动备份和恢复固件分区，相关步骤见 [固件备份与恢复](/zh-hans/hardware/guides/firmware-backup-and-restore/)。
 

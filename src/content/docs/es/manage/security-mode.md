@@ -1,7 +1,7 @@
 ---
 title: Modo de seguridad
 description: El comportamiento predeterminado del panel para redes de confianza y el modo reforzado, que requiere que alguien en el panel apruebe las acciones remotas de gran impacto.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 La interfaz web del panel, su API y sus controles de Home Assistant están diseñados para una red doméstica de confianza. El **modo relajado** es el predeterminado: las automatizaciones, las herramientas de instalación y las acciones del navegador funcionan sin una solicitud adicional. Una acción queda fuera de esa regla deliberadamente. Encender la cámara a través de su entidad de Home Assistant pide aprobación en el panel en todos los modos, incluido el relajado. El ajuste Cámara de Configurar es una vía independiente de configuración del propietario. Apagarla nunca pide aprobación.
@@ -20,7 +20,7 @@ Este ajuste solo se puede cambiar en el propio panel:
 
 1. Abre la pantalla **Configurar** de la aplicación del panel en el propio panel.
 2. Abre el menú de opciones adicionales de la barra de herramientas y elige **Modo de seguridad**.
-3. Elige **Habilitar el modo reforzado**.
+3. Elige **Activar el modo reforzado**.
 
 Primero deben estar deshabilitados tanto ADB por red como la depuración inalámbrica de Android, porque cualquiera de los dos permite que un cliente ADB remoto inyecte entradas en la pantalla de aprobación. Antes de aplicar el cambio, la aplicación del panel comprueba todas las propiedades de Android compatibles relativas a ADB por red, ADB por red persistente, direcciones explícitas de escucha de ADB y el estado de la depuración inalámbrica. También detiene cualquier retransmisor de herramientas de desarrollo de WebView activo en la red y verifica que su proceso y su punto de escucha hayan desaparecido. Si no puede confirmar que estas vías de control remoto están inactivas, se niega a habilitar el modo reforzado. Deshabilita ADB y la depuración inalámbrica en las opciones para desarrolladores de Android y vuelve a intentarlo. Si falla la verificación del retransmisor, reinicia el panel antes de volver a intentarlo.
 

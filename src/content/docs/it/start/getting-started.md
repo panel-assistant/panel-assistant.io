@@ -1,7 +1,7 @@
 ---
 title: Primi passi
 description: Da un pannello Android a parete non configurato alla tua plancia di Home Assistant in pochi minuti, con Home Assistant che ti guida a ogni passaggio.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
 Se hai già configurato un pannello a parete o un kiosk, probabilmente ricordi com’è andata: installare app manualmente, cercare un motore del browser capace di mostrare una plancia, andare a tentativi con le impostazioni e non fidarti mai del tutto del prossimo riavvio. Configurare un pannello con Panel Assistant sarà una piacevole sorpresa. Puoi finire in pochi minuti e, anche se il pannello è già sulla parete, non dovrai alzarti dalla sedia. Va bene, forse una volta ;-)
@@ -13,12 +13,12 @@ La parte difficile di qualsiasi pannello è la prima ora. Panel Assistant se ne 
 Aggiungi Panel Assistant tramite HACS e riavvia Home Assistant. È l’unica cosa che installi a mano. Da qui in poi ti guida Home Assistant. Vedi [Installa l’integrazione](/it/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/it/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/it/manage/upgrade-to-1-0/) explains what changes.
+Panel Assistant 1.0 è una release candidate. HACS propone la versione 0.9.0 per impostazione predefinita. Per provare la release candidate, abilita e attiva l'interruttore **Pre-release** sul dispositivo Panel Assistant in **Impostazioni**, **Dispositivi e servizi**, **HACS**; [Installa l'integrazione](/it/home-assistant/custom-integration/) descrive il passaggio relativo all'entità disabilitata. Un pannello con l'app 1.0 non può tornare alla 0.9; [Aggiornare alla versione 1.0](/it/manage/upgrade-to-1-0/) spiega cosa cambia.
 :::
 
 ## 2. Attiva il debug sul pannello
 
-Apri le opzioni sviluppatore sul pannello: sulla maggior parte dei pannelli, apri **Impostazioni**, poi **Informazioni** e tocca **Numero build** sette volte. Quindi attiva il **debug USB** se colleghi il pannello via cavo, oppure **ADB di rete sulla porta TCP 5555** per l’installazione via rete. Non tutti i pannelli hanno un interruttore per ADB di rete; ogni [pagina hardware](/it/hardware/) indica se è presente e dove si trova e, se non c’è, usa l’installazione via USB. [Prepara il pannello](/it/install/prepare-a-panel/) fornisce i dettagli.
+Apri le opzioni sviluppatore sul pannello: sulla maggior parte dei pannelli, apri **Impostazioni**, poi **Informazioni** e tocca **Numero build** sette volte. Quindi attiva il **debug USB** se colleghi il pannello via cavo, oppure **ADB di rete sulla porta TCP 5555** per l’installazione via rete. Non tutti i pannelli hanno un interruttore per ADB di rete; le [pagine hardware](/it/hardware/) elencano i percorsi noti e indicano quando l’accesso iniziale non è verificato. Se l’accesso tramite rete non è disponibile, usa USB una volta confermati il debug USB e una porta dati USB per il tuo modello. [Prepara il pannello](/it/install/prepare-a-panel/) fornisce i dettagli.
 
 ## 3. Aggiungi il pannello
 
@@ -102,6 +102,8 @@ In entrambi i casi, la procedura guidata si occupa della parte complicata. Contr
 Poi si passa alla procedura guidata di configurazione del pannello. È fornita dal pannello e si apre nel browser sul computer, non sullo schermo del pannello. Dopo un’installazione via rete, Home Assistant mostra **Completa la configurazione di questo pannello**: apri la pagina di configurazione del pannello, completa i passaggi, poi torna a Home Assistant e seleziona **Fatto**. Dopo un’installazione USB, la finestra del programma di installazione passa direttamente alla procedura guidata. Essendo fornita dal pannello, si carica solo in un browser sulla sua stessa rete.
 
 La procedura guidata chiede un nome per il pannello, lo fa accedere a Home Assistant e chiede quale plancia mostrare e in quale area si trovi il pannello. Il pannello si connette con l’account Home Assistant con cui accedi, quindi se il browser è connesso con il tuo account, anche il pannello potrebbe connettersi con quello; per usare un account dedicato al pannello, accedi invece con quell’account. Con il filtro delle entità abilitato, il pannello carica solo le entità usate da quella plancia, ed è questo che lo mantiene veloce. Vedi [Connetti un pannello](/it/home-assistant/connect-a-panel/).
+
+Nella versione 1.0.0-rc2 non ancora rilasciata, la configurazione può essere completata anche quando il motore del browser del pannello è troppo vecchio per mostrare una plancia Home Assistant attuale con il renderer integrato. La procedura guidata avvisa quando è necessario intervenire. Segui la [guida WebView](/it/hardware/guides/update-the-webview/) prima di fare affidamento sulla plancia; completare la sola configurazione non conferma che la plancia possa caricarsi.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="La procedura guidata di configurazione del pannello, passo dopo passo" tabindex="0">
 <figure>

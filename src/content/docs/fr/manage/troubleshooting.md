@@ -1,7 +1,7 @@
 ---
 title: Dépannage
 description: Les problèmes courants d’un panneau mural et les premiers points à vérifier.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
 ---
 
 Commencez par l’appareil correspondant au panneau dans Home Assistant, qui propose un capteur d’état et un téléchargement des diagnostics, ainsi que par la page d’état du panneau : utilisez **Visiter** sur la page de son appareil dans Home Assistant. Son rapport `/diag` répond à la plupart des questions ci-dessous sans devoir deviner.
@@ -28,6 +28,8 @@ Sur le réseau : vérifiez l’adresse du panneau et que l’accès ADB sur le r
 
 Lorsque Home Assistant arrête une installation réseau, son message indique jusqu’où l’installation est allée. Retrouvez ci-dessous la phrase qui correspond à votre message. Dans tous les cas, ne désinstallez pas Panel Assistant, n’effacez pas ses données et ne réinitialisez pas le panneau : c’est l’état du panneau qui permet de savoir où l’installation s’est arrêtée.
 
+Lorsque les étapes ci-dessous vous demandent d’ajouter de nouveau l’intégration, si le panneau est déjà ajouté et que ce message est apparu pendant l’autorisation des mises à jour dans **Configurer** ou une réparation, réessayez à cet endroit et n’ajoutez pas de nouveau l’intégration.
+
 ### Aucun APK n’a été installé
 
 Si le message indique qu’aucun APK n’a été installé ou qu’aucune modification n’a été apportée au panneau, l’installation s’est arrêtée avant de changer quoi que ce soit. Vérifiez que le panneau est allumé et connecté à votre réseau à la même adresse, puis ajoutez de nouveau l’intégration Panel Assistant et saisissez la même adresse. Home Assistant vérifie de nouveau le panneau avant toute modification. Si l’installation s’arrête au même endroit une deuxième fois, regardez le panneau et suivez la section suivante si Panel Assistant y est présent.
@@ -38,7 +40,7 @@ Si le message indique que l’APK est installé mais que Panel Assistant n’a p
 
 ### L’installation a peut-être modifié le panneau
 
-Si le message indique que l’installation a peut-être modifié le panneau, que Home Assistant n’a pas pu vérifier le résultat ou qu’il ne peut pas prouver qu’il est sûr de continuer, Home Assistant n’a pas pu déterminer jusqu’où le panneau est allé et s’arrête donc plutôt que de deviner. Ne relancez pas encore l’installation automatique. Regardez d’abord le panneau : si l’écran de configuration ou le tableau de bord de Panel Assistant est affiché, ou si l’application s’ouvre depuis la liste des applications du panneau, suivez la section précédente pour le connecter. Si Panel Assistant n’est pas sur le panneau, demandez de l’aide dans les [tickets de l’intégration](https://github.com/panel-assistant/ha-integration/issues) et indiquez le modèle du panneau, la version que vous avez choisie, le message complet et les lignes du journal Home Assistant correspondant à l’installation (recherchez `panel_assistant` dans le journal).
+Si le message indique que l’installateur « s’est arrêté avec un résultat non reconnu », que l’installation a peut-être modifié le panneau, que Home Assistant n’a pas pu vérifier le résultat ou qu’il ne peut pas prouver qu’il est sûr de continuer, Home Assistant n’a pas pu déterminer jusqu’où le panneau est allé et s’arrête donc plutôt que de deviner. Ne relancez pas encore l’installation automatique. Regardez d’abord le panneau : si l’écran de configuration ou le tableau de bord de Panel Assistant est affiché, ou si l’application s’ouvre depuis la liste des applications du panneau, suivez la section précédente pour le connecter. Si Panel Assistant n’est pas sur le panneau, demandez de l’aide dans les [tickets de l’intégration](https://github.com/panel-assistant/ha-integration/issues) et indiquez le modèle du panneau, la version que vous avez choisie, le message complet et les lignes du journal Home Assistant correspondant à l’installation (recherchez `panel_assistant` dans le journal).
 
 ## Le matériel du panneau n’apparaît pas dans Home Assistant
 

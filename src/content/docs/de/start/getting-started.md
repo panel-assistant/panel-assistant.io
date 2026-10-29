@@ -1,7 +1,7 @@
 ---
 title: Erste Schritte
 description: In wenigen Minuten vom uneingerichteten Android-Wandpanel zum Home Assistant-Dashboard, mit Home Assistant als Begleiter bei jedem Schritt.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
 Wenn du schon einmal ein Wandpanel oder einen Kiosk eingerichtet hast, erinnerst du dich wahrscheinlich an den Ablauf: Apps manuell installieren, nach einer Browser-Engine suchen, die ein Dashboard darstellen kann, Einstellungen erraten und dem nächsten Neustart nie ganz trauen. Die Einrichtung mit Panel Assistant wird dich angenehm überraschen. Du kannst in wenigen Minuten fertig sein, und selbst wenn das Panel schon an der Wand hängt, musst du nicht von deinem Stuhl aufstehen. Na gut, vielleicht einmal ;-)
@@ -13,12 +13,12 @@ Bei jedem Panel ist die erste Stunde der schwierige Teil. Panel Assistant übern
 Füge Panel Assistant über HACS hinzu und starte Home Assistant neu. Das ist das Einzige, was du von Hand installierst. Ab jetzt führt dich Home Assistant durch den Ablauf. Siehe [Die Integration installieren](/de/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/de/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/de/manage/upgrade-to-1-0/) explains what changes.
+Panel Assistant 1.0 ist ein Release Candidate. HACS bietet standardmäßig 0.9.0 an. Um den Release Candidate auszuprobieren, aktiviere die Entität und schalte den Schalter **Vorabversion** am Panel Assistant-Gerät unter **Einstellungen**, **Geräte & Dienste**, **HACS** ein; [Die Integration installieren](/de/home-assistant/custom-integration/) erklärt den Schritt für die deaktivierte Entität. Ein Panel mit der 1.0-App kann nicht zu 0.9 zurückkehren; [Upgrade auf 1.0](/de/manage/upgrade-to-1-0/) erklärt die Änderungen.
 :::
 
 ## 2. Debugging auf dem Panel einschalten
 
-Öffne die Entwickleroptionen auf dem Panel: Öffne bei den meisten Panels **Einstellungen**, dann **Über das Gerät** und tippe siebenmal auf **Build-Nummer**. Aktiviere dann **USB-Debugging**, wenn du das Panel per Kabel anschließt, oder **Netzwerk-ADB auf TCP-Port 5555** für den Netzwerkweg. Nicht jedes Panel hat einen Schalter für Netzwerk-ADB. Die jeweilige [Hardwareseite](/de/hardware/) sagt, ob dein Panel einen hat und wo er ist. Wenn es keinen gibt, nutze den USB-Weg. [Panel vorbereiten](/de/install/prepare-a-panel/) enthält die Einzelheiten.
+Öffne die Entwickleroptionen auf dem Panel: Öffne bei den meisten Panels **Einstellungen**, dann **Über das Gerät** und tippe siebenmal auf **Build-Nummer**. Aktiviere dann **USB-Debugging**, wenn du das Panel per Kabel anschließt, oder **Netzwerk-ADB auf TCP-Port 5555** für den Netzwerkweg. Nicht jedes Panel hat einen Schalter für Netzwerk-ADB; die [Hardwareseiten](/de/hardware/) nennen bekannte Zugangswege und weisen darauf hin, wenn der erste Zugang nicht verifiziert ist. Wenn kein Netzwerkzugang verfügbar ist, nutze USB, sobald USB-Debugging und ein USB-Datenanschluss für dein Modell bestätigt sind. [Panel vorbereiten](/de/install/prepare-a-panel/) enthält die Einzelheiten.
 
 ## 3. Das Panel hinzufügen
 
@@ -102,6 +102,8 @@ In beiden Fällen übernimmt der Assistent den komplizierten Teil. Er prüft, wa
 Als Nächstes folgt der eigene Einrichtungsassistent des Panels. Er wird vom Panel bereitgestellt und öffnet sich im Browser auf deinem Computer, nicht auf dem Bildschirm des Panels. Nach einer Netzwerkinstallation zeigt Home Assistant **Einrichtung dieses Panels abschließen**: Öffne die Einrichtungsseite des Panels, schließe dort die Schritte ab, kehre dann zu Home Assistant zurück und wähle **Fertig**. Nach einer USB-Installation wechselt das Installationsfenster direkt zum Assistenten. Weil das Panel ihn bereitstellt, lädt er nur in einem Browser im selben Netzwerk wie das Panel.
 
 Der Assistent fragt nach einem Namen für das Panel, meldet es bei Home Assistant an und fragt, welches Dashboard angezeigt werden soll und in welchem Bereich sich das Panel befindet. Das Panel verbindet sich als das Home Assistant-Konto, mit dem du dich anmeldest. Wenn dein Browser als du angemeldet ist, verbindet sich das Panel daher möglicherweise als du. Damit das Panel sein eigenes Konto verwendet, melde dich stattdessen als dieses Konto an. Bei aktiviertem Entitätenfilter lädt das Panel nur die Entitäten, die dieses Dashboard verwendet. Dadurch bleibt es schnell. Siehe [Panel verbinden](/de/home-assistant/connect-a-panel/).
+
+In der noch nicht veröffentlichten Version 1.0.0-rc2 kann die Einrichtung auch dann abgeschlossen werden, wenn die Browser-Engine des Panels zu alt ist, um ein aktuelles Home Assistant-Dashboard mit dem integrierten Renderer anzuzeigen. Der Assistent warnt, wenn dies Aufmerksamkeit erfordert. Folge der [WebView-Anleitung](/de/hardware/guides/update-the-webview/), bevor du dich auf das Dashboard verlässt; der Abschluss der Einrichtung allein bestätigt nicht, dass das Dashboard geladen werden kann.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="Der Einrichtungsassistent des Panels, Schritt für Schritt" tabindex="0">
 <figure>

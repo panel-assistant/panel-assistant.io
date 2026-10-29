@@ -1,7 +1,7 @@
 ---
 title: Connecter un panneau
 description: Afficher votre tableau de bord sur le panneau et comprendre comment le matériel du panneau apparaît dans Home Assistant.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 Un panneau ajouté à Home Assistant s’y connecte de deux façons. L’une affiche un tableau de bord à l’écran. L’autre intègre le matériel du panneau sous forme d’entités.

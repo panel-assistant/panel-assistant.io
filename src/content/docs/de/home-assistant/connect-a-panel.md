@@ -1,7 +1,7 @@
 ---
 title: Panel verbinden
 description: Dein Dashboard auf das Panel bringen und wie die eigene Hardware des Panels in Home Assistant erscheint.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 Ein Panel, das zu Home Assistant hinzugefügt wurde, verbindet sich auf zwei Arten damit. Die eine bringt ein Dashboard auf den Bildschirm. Die andere bindet die eigene Hardware des Panels als Entitäten ein.

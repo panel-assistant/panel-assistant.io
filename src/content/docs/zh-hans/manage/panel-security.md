@@ -1,7 +1,7 @@
 ---
 title: 面板账户与网络安全
 description: 选择面板使用的 Home Assistant 账户，并规划其网络访问。
-sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 ## 面板使用哪个 Home Assistant 账户？
@@ -12,19 +12,19 @@ sourceCommit: 9d098839121f176fd5c9e1c6a182c752fd4cfba5
 
 Home Assistant 还会为每个用户保存默认仪表盘和主题。面板用户可以拥有自己的壁挂仪表盘和外观，而不改变手机或电脑上的选择。当**主仪表盘**设为**自动**时，内置渲染器会使用该默认仪表盘；在面板设置中明确选择的仪表盘优先。其**仪表盘主题**设置可以请求浅色或深色模式，但明确选择的 Home Assistant 主题仍然优先。
 
-你可以在 **Home Assistant → 用户个人资料 → 常规**中，为面板用户设置独立的侧边栏项目与顺序、语言、时区，以及数字、日期和时间格式。侧边栏可见时，其偏好设置才有影响；面板默认隐藏导航。隐藏某个侧边栏项目不会限制对它的访问。有关这些账户设置，请参阅 [Home Assistant 的用户个人资料指南](https://www.home-assistant.io/docs/configuration/user-configuration/)。
+你可以在 **Home Assistant → 用户个人资料 → 常规**中，为面板用户设置独立的侧边栏项目与顺序、语言、时区，以及数字、日期和时间格式。侧边栏可见时，其偏好设置才有影响；内置渲染器会在首次运行时隐藏停靠的侧边栏。隐藏某个侧边栏项目不会限制对它的访问。有关这些账户设置，请参阅 [Home Assistant 的用户个人资料指南](https://www.home-assistant.io/docs/configuration/user-configuration/)。
 
 ### 更改面板的登录账户
 
-在 Home Assistant 中打开 **Panel Assistant**，选择面板，然后打开其**配置**标签页。在**浏览器登录**下选择**重新连接**和**复制链接**。在浏览器隐私窗口中打开该链接，以你希望面板使用的现有用户身份登录 Home Assistant，然后让浏览器返回面板。如果平时的浏览器已经以管理员身份登录，使用隐私窗口会有帮助。你也可以直接在面板上打开**配置**，从那里开始浏览器登录。如果 Home Assistant 随后在**设置 → 修复**中报告面板用户不匹配，请确认所列的新用户就是你选择的用户。
+在 Home Assistant 中打开 **Panel Assistant**，选择面板，然后打开其**设置**标签页。在**浏览器登录**下选择**重新连接**和**复制链接**。在浏览器隐私窗口中打开该链接，以你希望面板使用的现有用户身份登录 Home Assistant，然后让浏览器返回面板。如果平时的浏览器已经以管理员身份登录，使用隐私窗口会有帮助。你也可以直接在面板上打开**设置**，从那里开始浏览器登录。如果 Home Assistant 随后在**设置 → 修复**中报告面板用户不匹配，请确认所列的新用户就是你选择的用户。
 
-浏览器必须能够同时访问 Home Assistant 和面板的本地地址，才能完成登录。面板也必须能够访问 Home Assistant。如果你通过 Home Assistant 远程打开了配置页面，但浏览器无法访问面板的本地地址，请连接到面板所在网络后完成登录，或直接在面板上完成。
+浏览器必须能够同时访问 Home Assistant 和面板的本地地址，才能完成登录。面板也必须能够访问 Home Assistant。如果你通过 Home Assistant 远程打开了设置页面，但浏览器无法访问面板的本地地址，请连接到面板所在网络后完成登录，或直接在面板上完成。
 
 ## 将面板放在单独的网络中
 
 面板可以使用无法访问互联网的 VLAN，前提是防火墙仍允许面板与 Home Assistant 相互访问，而且需要登录时，你网络中的浏览器能够访问面板。面板使用 Home Assistant 的本地地址登录并加载仪表盘。Home Assistant 也需要访问面板，以进行管理和更新。
 
-Panel Assistant 可以在 Home Assistant 所在的机器上获取经过验证的面板应用更新，再通过本地网络发送给面板。Home Assistant 仍需能够访问更新来源。面板的版本检查以及用户从“安装”标签页主动启动的安装使用 GitHub，也需要互联网访问。没有互联网路由的 VLAN 无法执行这些检查和下载。Android System WebView 通过 Play Store、厂商固件或手动安装单独维护，因此也请规划它的维护方式。
+Panel Assistant 可以在 Home Assistant 所在的机器上获取经过验证的面板应用更新，再通过本地网络发送给面板。Home Assistant 仍需能够访问更新来源。面板的版本检查以及用户从“安装”标签页主动启动的安装使用 GitHub，也需要互联网访问。没有互联网路由的 VLAN 无法执行这些检查和下载。在尚未发布的 1.0.0-rc2 版本中，从 Home Assistant 启动的应用更新还可以在受支持的面板上安装兼容的 WebView。也请规划你的面板所支持的 [WebView 更新途径](/zh-hans/hardware/guides/update-the-webview/)。
 
 网络隔离会限制哪些设备能够访问面板的网页界面和 API，但不会降低已在面板上登录的 Home Assistant 账户权限。如果面板使用管理员账户，即使处于隔离的 VLAN 中，它仍然以管理员身份登录。请根据你对墙上面板和本地网络的信任程度，选择账户和防火墙规则。
 
