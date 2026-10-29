@@ -54,9 +54,30 @@ These points come from Meta's documentation or are properties of Meta's shared s
 
 - **ADB is a Meta setting, not Android's developer options.** It is under **Settings › Debug › ADB Enabled**, and Meta's documentation says to enter your PIN if prompted. On the tested unit the PIN was the one set for the Meta account during setup.
 - **Setup needs a Meta sign-in** before Settings can be reached. Meta offers Facebook and WhatsApp sign-in; only Facebook worked for us. Keep that account signed in for as long as you use the Portal as a panel; the [10" (2nd gen) page](/hardware/panels/meta/portal-10-gen2/#before-you-buy) explains why.
-- **No root.** Retail Portals ship locked production builds with no `su`, and no bootloader unlock is known. Panel Assistant does not need root on a Portal, but root-dependent self-update and screenshot-based remote control are unavailable. The tested Portal runs Android 10, below the Android 11 requirement for Accessibility screenshots without root.
+- **Stock firmware has no root.** Retail Portals ship locked production builds with no `su`, and no bootloader unlock is known. Community research now reports temporary privileged provisioning on specific builds; see [CVE-2026-43499](#cve-2026-43499-and-community-provisioning). Panel Assistant does not need root on a Portal, but root-dependent self-update and screenshot-based remote control are unavailable. The tested Portal runs Android 10, below the Android 11 requirement for Accessibility screenshots without root.
 - **Meta's own WebView.** The tested Portal renders web content with Meta's own build of the Chromium WebView (131), which is current enough for Home Assistant dashboards with no update. Meta's software keeps its own packages up to date in the background.
 - **Meta is winding Portal down.** Meta stopped selling Portals in 2022 and has withdrawn features since. Expect more of Meta's own services, and possibly sign-in methods, to stop working over time. The panel app does not depend on any of them, but the Meta account and the ADB switch it gates are outside anyone's control but Meta's.
+
+## CVE-2026-43499 and community provisioning
+
+**As of 29 October 2026:** [CVE-2026-43499](https://www.cve.org/CVERecord?id=CVE-2026-43499), published on 21 May 2026, is a Linux kernel flaw in rtmutex/futex locking that can let code already running locally gain higher privileges. The [official CVE record](https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/43xxx/CVE-2026-43499.json) rates it High, CVSS 3.1 **7.8**. It is a security vulnerability affecting untrusted local code as well as an opening for owners to change otherwise restricted settings.
+
+[Community Portal provisioning research](https://github.com/jxlarrea/portal-root-kiosk-satellite/tree/f941b575caa118d48afdf8b17d791d024932a088) adapts the GhostLock exploit to Portal firmware. Its author [reports these exact targets as tested](https://github.com/jxlarrea/portal-root-kiosk-satellite/blob/f941b575caa118d48afdf8b17d791d024932a088/README.md#supported-models):
+
+| Model                | Codename | Android | Firmware build     | Kernel          |
+| -------------------- | -------- | ------- | ------------------ | --------------- |
+| Portal (1st gen)     | `aloha`  | 9       | `1041515800015050` | `4.4.153+`      |
+| Portal+ (1st gen)    | `aloha`  | 9       | `1041515800015050` | `4.4.153+`      |
+| Portal 10" (2nd gen) | `omni`   | 10      | `3051355900018050` | `4.9.227-perf+` |
+| Portal Mini          | `omni`   | 10      | `3051355900018050` | `4.9.227-perf+` |
+| Portal+ (2nd gen)    | `cipher` | 10      | `4051355900018050` | `4.9.227-perf+` |
+| Portal Go            | `terry`  | 10      | `5051355900018050` | `4.9.227-perf+` |
+
+These are author-reported exploit targets, not independent Panel Assistant qualification or a claim that every firmware build is supported. The linked source records full firmware fingerprints. Portal TV is also listed by the research project, but remains unsupported by Panel Assistant.
+
+The practical benefit is optional provisioning: temporary privileged execution can keep wireless ADB available after a restart, avoiding stock firmware's repeated USB setup, and change restricted audio settings or install limited helpers. The project does not install permanent `su` or a root daemon. Its default preset also installs its own app, replaces the home screen, sets Device Owner, removes Meta accounts and disables services; that preset is not a Panel Assistant installation step.
+
+Panel Assistant still uses the existing [stock USB installation](/hardware/panels/meta/portal-10-gen2/#installing-panel-assistant) and has no integration with this exploit. Exploit attempts can hang or reboot the device, and persistent provisioning changes do not patch the vulnerability. The stock measurements and model support statuses on these pages remain unchanged.
 
 ## Firmware
 

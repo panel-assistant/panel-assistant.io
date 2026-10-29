@@ -52,6 +52,8 @@ If you own one, the device codename and Android version it reports, from the pan
 
 ## Firmware
 
+Community research reports both 1st-generation models on `aloha`, firmware `1041515800015050`, kernel `4.4.153+`, as tested targets for CVE-2026-43499. See [the family security and provisioning note](/hardware/panels/meta/#cve-2026-43499-and-community-provisioning) for possible benefits, limits and the source; Panel Assistant has not independently tested this exploit.
+
 Each model has a firmware catalogue with indexed builds, original Meta download URLs and Internet Archive copies:
 
 - [Portal (1st gen) firmware](/hardware/firmware/builds/meta-portal-10-gen1/).

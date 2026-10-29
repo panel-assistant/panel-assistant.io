@@ -45,6 +45,8 @@ On first start the panel app picks the profile from what the Portal reports abou
 
 ## Firmware
 
+Community research reports Portal Mini on `omni`, firmware `3051355900018050`, kernel `4.9.227-perf+`, as a tested target for CVE-2026-43499. See [the family security and provisioning note](/hardware/panels/meta/#cve-2026-43499-and-community-provisioning) for possible benefits, limits and the source; Panel Assistant has not independently tested this exploit.
+
 See the [Portal Mini firmware catalogue](/hardware/firmware/builds/meta-portal-mini-8/) for indexed builds, original Meta download URLs and Internet Archive copies.
 
 ## Sources

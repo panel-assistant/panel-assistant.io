@@ -17,7 +17,7 @@ sidebar:
 ---
 
 :::note
-**Everything on this page was measured on one retail Portal 10" (2nd gen)** on Meta's firmware `QKQ1.210213.001.3051355900018050` (Android 10, security patch 2020-08-05), running Panel Assistant with no root. Portal support needs version 1.0 or later of the panel app. Nothing here has been checked on another Portal model; see the [Meta Portal family page](/hardware/panels/meta/) for how the others are handled.
+**The stock Panel Assistant setup and behaviour on this page were measured on one retail Portal 10" (2nd gen)** on Meta's firmware `QKQ1.210213.001.3051355900018050` (Android 10, security patch 2020-08-05), running Panel Assistant with no root. Portal support needs version 1.0 or later of the panel app. Nothing here has been checked on another Portal model; see the [Meta Portal family page](/hardware/panels/meta/) for how the others are handled.
 :::
 
 The Portal 10" (2nd gen), model **WD50JM**, is a 10.1 in landscape smart display on a Qualcomm QCS605 with about 3 GB of RAM, a 13 MP camera with its own camera light, two microphones, a speaker and a physical privacy slider. Meta's [ADB switch](#enabling-adb) is all Panel Assistant needs: the panel app installs over USB, recognises the Portal and loads its own hardware profile, and the dashboard, camera, microphone, wake word, spoken replies, light sensor and a real screen-off all work without root.
@@ -139,6 +139,8 @@ The reset erases everything, including the panel app and its settings. Afterward
 :::
 
 ## Firmware
+
+Community research reports this model on `omni`, firmware `3051355900018050`, kernel `4.9.227-perf+`, as a tested target for CVE-2026-43499. See [the family security and provisioning note](/hardware/panels/meta/#cve-2026-43499-and-community-provisioning) for possible benefits, limits and the source; Panel Assistant has not independently tested this exploit.
 
 See the [Portal 10" (2nd gen) firmware catalogue](/hardware/firmware/builds/meta-portal-10-gen2/) for indexed builds, original Meta download URLs and Internet Archive copies.
 
