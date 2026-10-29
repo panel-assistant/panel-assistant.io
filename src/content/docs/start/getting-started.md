@@ -76,7 +76,7 @@ If the panel is already on the wall, all Home Assistant needs is its address.
 <img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="The Add a panel step, with the panel's IP address entered">
 </figure>
 <figure>
-<figcaption><span>3</span> Pick a version</figcaption>
+<figcaption><span>3</span> Pick a version if more than one is offered</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="The Choose a version step, with the recommended release at the top of the list">
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="The Choose a version step, with the recommended release at the top of the list">
 </figure>
