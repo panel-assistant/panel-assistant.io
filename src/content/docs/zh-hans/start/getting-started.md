@@ -1,7 +1,7 @@
 ---
 title: 入门
 description: 只需几分钟，就能让尚未配置的 Android 墙面面板显示 Home Assistant 仪表盘，每一步都有 Home Assistant 引导。
-sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
+sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
 ---
 
 如果你以前设置过墙面面板或自助终端，大概还记得那套过程：侧载应用、寻找能绘制仪表盘的浏览器引擎、猜测设置项的作用，还总担心下次重启会出问题。用 Panel Assistant 设置面板，会给你一个惊喜。几分钟就能完成，即使面板已经挂在墙上，你也不用离开椅子。好吧，也许需要一次 ;-)
@@ -77,7 +77,7 @@ Panel Assistant 1.0 是候选发布版。HACS 默认提供 0.9.0。要试用候�
 <img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="“添加面板”步骤，已输入面板的 IP 地址">
 </figure>
 <figure>
-<figcaption><span>3</span> 选择版本</figcaption>
+<figcaption><span>3</span> 如果提供多个版本，请选择一个版本</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="“选择版本”步骤，推荐版本位于列表顶部">
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="“选择版本”步骤，推荐版本位于列表顶部">
 </figure>

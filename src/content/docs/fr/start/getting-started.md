@@ -1,7 +1,7 @@
 ---
 title: Premiers pas
 description: En quelques minutes, passez d’un panneau mural Android non configuré à votre tableau de bord Home Assistant, avec Home Assistant pour vous guider à chaque étape.
-sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
+sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
 ---
 
 Si vous avez déjà configuré un panneau mural ou un kiosque, vous vous souvenez sans doute du déroulement : installer des applications manuellement, chercher un moteur de navigateur capable d’afficher un tableau de bord, tâtonner dans les réglages et ne jamais vraiment faire confiance au prochain redémarrage. Configurer un panneau avec Panel Assistant sera une agréable surprise. Vous pouvez terminer en quelques minutes et, même si le panneau est au mur, vous n’aurez pas à vous lever de votre chaise. Bon, peut-être une fois ;-)
@@ -77,7 +77,7 @@ Si le panneau est déjà au mur, Home Assistant n’a besoin que de son adresse.
 <img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="L’étape Ajouter un panneau, avec l’adresse IP du panneau renseignée">
 </figure>
 <figure>
-<figcaption><span>3</span> Choisissez une version</figcaption>
+<figcaption><span>3</span> Choisissez une version si plusieurs sont proposées</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="L’étape Choisir une version, avec la version recommandée en tête de liste">
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="L’étape Choisir une version, avec la version recommandée en tête de liste">
 </figure>

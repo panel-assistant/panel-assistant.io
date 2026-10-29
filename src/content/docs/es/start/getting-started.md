@@ -1,7 +1,7 @@
 ---
 title: Primeros pasos
 description: De un panel de pared Android sin configurar a tu panel de control de Home Assistant en minutos, con Home Assistant guiándote en cada paso.
-sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
+sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
 ---
 
 Si alguna vez has configurado un panel de pared o un quiosco, probablemente recuerdes cómo fue: instalar apps por tu cuenta, buscar un motor de navegador capaz de mostrar un panel de control, probar ajustes a ciegas y no acabar de fiarte del siguiente reinicio. Configurar un panel con Panel Assistant será una sorpresa agradable. Puedes terminar en minutos y, aunque el panel esté en la pared, no tendrás que levantarte de la silla. Bueno, quizá una vez ;-)
@@ -77,7 +77,7 @@ Si el panel ya está en la pared, Home Assistant solo necesita su dirección.
 <img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="El paso Añadir un panel, con la dirección IP del panel introducida">
 </figure>
 <figure>
-<figcaption><span>3</span> Elige una versión</figcaption>
+<figcaption><span>3</span> Elige una versión si se ofrece más de una</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="El paso Elige una versión, con la versión recomendada al principio de la lista">
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="El paso Elige una versión, con la versión recomendada al principio de la lista">
 </figure>

@@ -1,7 +1,7 @@
 ---
 title: Початок роботи
 description: Від звичайної настінної панелі на Android до вашої інформаційної панелі Home Assistant за лічені хвилини, і Home Assistant проведе вас через кожен крок.
-sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
+sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
 ---
 
 Якщо ви вже колись налаштовували настінну панель або кіоск, то, мабуть, пам’ятаєте, як це було: ручне встановлення застосунків, пошуки браузерного рушія, здатного відобразити інформаційну панель, налаштування навмання і вічна невпевненість у наступному перезавантаженні. Налаштування панелі з Panel Assistant стане для вас приємним шоком. Ви впораєтеся за лічені хвилини, і навіть коли панель уже висить на стіні, вам не доведеться вставати з крісла. Ну, хіба що раз ;-)
@@ -77,7 +77,7 @@ Panel Assistant 1.0 — кандидат на випуск. HACS типово п
 <img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="Крок «Додати панель» із введеною IP-адресою панелі">
 </figure>
 <figure>
-<figcaption><span>3</span> Виберіть версію</figcaption>
+<figcaption><span>3</span> Виберіть версію, якщо запропоновано кілька</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="Крок «Виберіть версію» з рекомендованим випуском угорі списку">
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="Крок «Виберіть версію» з рекомендованим випуском угорі списку">
 </figure>

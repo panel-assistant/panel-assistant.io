@@ -1,7 +1,7 @@
 ---
 title: Pierwsze kroki
 description: W kilka minut od gołego panelu ściennego z Androidem do twojego pulpitu nawigacyjnego Home Assistant, a Home Assistant prowadzi cię przez każdy krok.
-sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
+sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
 ---
 
 Jeśli kiedyś konfigurowałeś panel ścienny lub kiosk, pewnie pamiętasz, jak to wyglądało: instalowanie aplikacji z innych źródeł, szukanie silnika przeglądarki, który potrafiłby wyświetlić pulpit nawigacyjny, zgadywanie ustawień i nigdy do końca pewności, co będzie po następnym restarcie. Konfiguracja panelu z Panel Assistant będzie dla ciebie miłym szokiem. Możesz skończyć w kilka minut, a nawet gdy panel wisi już na ścianie, nie musisz wstawać z krzesła. No dobrze, może raz ;-)
@@ -77,7 +77,7 @@ Jeśli panel wisi już na ścianie, Home Assistant potrzebuje tylko jego adresu.
 <img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="Krok Dodaj panel z wpisanym adresem IP panelu">
 </figure>
 <figure>
-<figcaption><span>3</span> Wybierz wersję</figcaption>
+<figcaption><span>3</span> Wybierz wersję, jeśli dostępnych jest kilka</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="Krok Wybierz wersję z zalecanym wydaniem na górze listy">
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="Krok Wybierz wersję z zalecanym wydaniem na górze listy">
 </figure>

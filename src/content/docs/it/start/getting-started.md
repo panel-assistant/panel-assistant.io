@@ -1,7 +1,7 @@
 ---
 title: Primi passi
 description: Da un pannello Android a parete non configurato alla tua plancia di Home Assistant in pochi minuti, con Home Assistant che ti guida a ogni passaggio.
-sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
+sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
 ---
 
 Se hai già configurato un pannello a parete o un kiosk, probabilmente ricordi com’è andata: installare app manualmente, cercare un motore del browser capace di mostrare una plancia, andare a tentativi con le impostazioni e non fidarti mai del tutto del prossimo riavvio. Configurare un pannello con Panel Assistant sarà una piacevole sorpresa. Puoi finire in pochi minuti e, anche se il pannello è già sulla parete, non dovrai alzarti dalla sedia. Va bene, forse una volta ;-)
@@ -77,7 +77,7 @@ Se il pannello è già sulla parete, a Home Assistant basta il suo indirizzo.
 <img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="Il passaggio Aggiungi un pannello, con l’indirizzo IP del pannello inserito">
 </figure>
 <figure>
-<figcaption><span>3</span> Scegli una versione</figcaption>
+<figcaption><span>3</span> Scegli una versione se ne viene proposta più di una</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="Il passaggio Scegli una versione, con la versione consigliata in cima all’elenco">
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="Il passaggio Scegli una versione, con la versione consigliata in cima all’elenco">
 </figure>

@@ -1,7 +1,7 @@
 ---
 title: Aan de slag
 description: Van een leeg Android-wandpaneel naar je Home Assistant-dashboard in een paar minuten, waarbij Home Assistant je bij elke stap begeleidt.
-sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
+sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
 ---
 
 Als je al eens een wandpaneel of kiosk hebt ingericht, weet je waarschijnlijk nog hoe dat ging: apps sideloaden, zoeken naar een browser-engine die een dashboard kon tekenen, gokken naar instellingen, en de volgende herstart nooit helemaal vertrouwen. Een paneel instellen met Panel Assistant zal als een aangename schok komen. Je kunt binnen een paar minuten klaar zijn, en zelfs als het paneel al aan de muur hangt, hoef je niet uit je stoel op te staan. Oké, misschien één keer ;-)
@@ -77,7 +77,7 @@ Als het paneel al aan de muur hangt, heeft Home Assistant alleen het adres nodig
 <img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="De stap Een paneel toevoegen, met het IP-adres van het paneel ingevuld">
 </figure>
 <figure>
-<figcaption><span>3</span> Kies een versie</figcaption>
+<figcaption><span>3</span> Kies een versie als er meerdere worden aangeboden</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="De stap Kies een versie, met de aanbevolen release bovenaan de lijst">
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="De stap Kies een versie, met de aanbevolen release bovenaan de lijst">
 </figure>

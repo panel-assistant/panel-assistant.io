@@ -1,7 +1,7 @@
 ---
 title: Erste Schritte
 description: In wenigen Minuten vom uneingerichteten Android-Wandpanel zum Home Assistant-Dashboard, mit Home Assistant als Begleiter bei jedem Schritt.
-sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
+sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
 ---
 
 Wenn du schon einmal ein Wandpanel oder einen Kiosk eingerichtet hast, erinnerst du dich wahrscheinlich an den Ablauf: Apps manuell installieren, nach einer Browser-Engine suchen, die ein Dashboard darstellen kann, Einstellungen erraten und dem nächsten Neustart nie ganz trauen. Die Einrichtung mit Panel Assistant wird dich angenehm überraschen. Du kannst in wenigen Minuten fertig sein, und selbst wenn das Panel schon an der Wand hängt, musst du nicht von deinem Stuhl aufstehen. Na gut, vielleicht einmal ;-)
@@ -77,7 +77,7 @@ Wenn das Panel schon an der Wand hängt, braucht Home Assistant nur seine Adress
 <img class="dark:sl-hidden" src="/screenshots/ha-address-light.png" width="580" height="377" alt="Der Schritt Panel hinzufügen mit eingetragener IP-Adresse des Panels">
 </figure>
 <figure>
-<figcaption><span>3</span> Wähle eine Version</figcaption>
+<figcaption><span>3</span> Wähle eine Version, wenn mehrere angeboten werden</figcaption>
 <img class="light:sl-hidden" src="/screenshots/ha-version-dark.png" width="580" height="304" alt="Der Schritt Version wählen mit der empfohlenen Version oben in der Liste">
 <img class="dark:sl-hidden" src="/screenshots/ha-version-light.png" width="580" height="304" alt="Der Schritt Version wählen mit der empfohlenen Version oben in der Liste">
 </figure>
