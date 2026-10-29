@@ -89,7 +89,7 @@ export function page(version, groups, latest, order, depth, titleOf) {
       );
       const more = depthMatches(depth[s.key], s.spec) ? depth[s.key] : null;
       const help = s.help || more?.help;
-      if (help) lines.push('', `<p>${escape(help)}</p>`);
+      if (help) lines.push('', escape(help));
       if (more?.body) lines.push('', more.body);
       if (more?.related.length)
         lines.push(

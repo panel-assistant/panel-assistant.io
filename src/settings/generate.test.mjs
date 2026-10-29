@@ -5,8 +5,9 @@ import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } f
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { resolve } from '../../worker/resolve.js';
+import { markdownToHtml } from 'satteri';
 
-test('a historical release omits the retired allowed-app list from pages and settings links', () => {
+test('generated historical settings render help Markdown and omit retired allowed-app links', () => {
   const root = mkdtempSync(join(tmpdir(), 'settings-reference-'));
   try {
     const source = join(root, 'android');
@@ -33,6 +34,9 @@ test('a historical release omits the retired allowed-app list from pages and set
       JSON.stringify({
         strings: {
           'settings.kiosk_lock.label': { text: 'Lock Android to dashboard' },
+          'settings.kiosk_lock.help': {
+            text: 'Choose **Native** navigation.\n\nA second paragraph.',
+          },
           'settings.kiosk_companion_packages.label': { text: 'Apps the lock allows' },
           'settings.kiosk_companion_packages.help': { text: 'Allowed package names' },
         },
@@ -50,6 +54,11 @@ test('a historical release omits the retired allowed-app list from pages and set
     });
     const page = readFileSync(join(site, 'src/content/docs/reference/settings/v0-9-8.md'), 'utf8');
     assert.match(page, /id="kiosk_lock"/);
+    const { html } = markdownToHtml(page.replace(/^---\n[\s\S]*?\n---\n/, ''));
+    assert.match(html, /<strong>Native<\/strong>/);
+    assert.doesNotMatch(html, /\*\*/);
+    assert.match(html, /<p>A second paragraph\.<\/p>/);
+    assert.doesNotMatch(html, /<p(?:\s[^>]*)?>(?:(?!<\/p>)[\s\S])*<p(?:\s[^>]*)?>/);
     assert.doesNotMatch(
       page,
       /kiosk_companion_packages|Apps the lock allows|Allowed package names/,
