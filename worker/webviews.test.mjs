@@ -33,18 +33,31 @@ test('HEAD reports the same APK metadata without a body', async () => {
   assert.equal(await response.text(), '');
 });
 
-test('missing APK and non-hash paths are honest 404s', async () => {
-  for (const path of [
-    `${'b'.repeat(64)}.apk`,
-    '',
-    'folder/file.apk',
-    key.toUpperCase(),
-    `${key}%2fother`,
-  ]) {
-    const response = await worker.fetch(request(path), env);
-    assert.equal(response.status, 404, path);
-    assert.equal(response.headers.has('cache-control'), false);
+test('missing curated APK is an honest uncached 404', async () => {
+  const response = await worker.fetch(request(`${'b'.repeat(64)}.apk`), env);
+  assert.equal(response.status, 404);
+  assert.equal(response.headers.has('cache-control'), false);
+});
+
+test('invalid APK keys never access storage even if objects exist there', async () => {
+  const calls = [];
+  const bucket = Object.fromEntries(
+    ['get', 'head'].map((method) => [
+      method,
+      async (name) => {
+        calls.push([method, name]);
+        return object();
+      },
+    ]),
+  );
+  for (const method of ['GET', 'HEAD']) {
+    for (const path of ['', 'folder/file.apk', key.toUpperCase(), `${key}%2fother`]) {
+      const response = await worker.fetch(request(path, { method }), { WEBVIEWS: bucket });
+      assert.equal(response.status, 404, `${method} ${path}`);
+      assert.equal(response.headers.has('cache-control'), false);
+    }
   }
+  assert.deepEqual(calls, []);
 });
 
 test('download endpoint rejects writes', async () => {
