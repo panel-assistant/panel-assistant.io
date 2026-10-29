@@ -27,6 +27,8 @@ Over the network: confirm the panel's address and that network ADB on TCP port 5
 
 When Home Assistant stops a network install, its message says how far the install got. Find the sentence that matches yours below. In every case, do not uninstall Panel Assistant, clear its data or reset the panel: the panel's state is what tells you where the install stopped.
 
+Where the steps below tell you to add the integration again, if the panel is already added and this message appeared while allowing updates in **Configure** or a Repair, retry there and do not add the integration again.
+
 ### No APK was installed
 
 If the message says that no APK was installed or that no panel change was made, the install stopped before it changed anything. Check that the panel is switched on and on your network at the same address, then add the Panel Assistant integration again and enter the same address. Home Assistant checks the panel again before it changes anything. If the install stops at the same place a second time, look at the panel and follow the next section if Panel Assistant is on it.
@@ -37,7 +39,7 @@ If the message says the APK is installed but Panel Assistant did not start or di
 
 ### The install may have changed the panel
 
-If the message says the install may have changed the panel, or that Home Assistant could not verify the result or cannot prove it is safe to continue, Home Assistant could not tell how far the panel got, so it stops rather than guess. Do not retry the automatic install yet. Look at the panel first: if Panel Assistant's setup screen or dashboard is showing, or the app opens from the panel's app list, follow the section above to connect it. If Panel Assistant is not on the panel, ask in the [integration issues](https://github.com/panel-assistant/ha-integration/issues) and include the panel model, the version you chose, the full message and the Home Assistant log lines from the install (search the log for `panel_assistant`).
+If the message says the installer "stopped with an unrecognised result", that the install may have changed the panel, or that Home Assistant could not verify the result or cannot prove it is safe to continue, Home Assistant could not tell how far the panel got, so it stops rather than guess. Do not retry the automatic install yet. Look at the panel first: if Panel Assistant's setup screen or dashboard is showing, or the app opens from the panel's app list, follow the section above to connect it. If Panel Assistant is not on the panel, ask in the [integration issues](https://github.com/panel-assistant/ha-integration/issues) and include the panel model, the version you chose, the full message and the Home Assistant log lines from the install (search the log for `panel_assistant`).
 
 ## The panel's hardware is missing from Home Assistant
 

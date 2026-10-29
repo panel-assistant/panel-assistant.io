@@ -165,6 +165,13 @@ test('the install-recovery topic Panel Assistant links from its install failures
     'the-install-may-have-changed-the-panel',
   ])
     assert.ok(section.includes(`id="${id}"`), `#${anchor} has no #${id}`);
+  const uncertain = plain(section.split('id="the-install-may-have-changed-the-panel"')[1]);
+  assert.match(uncertain, /stopped with an unrecognised result/);
+  const context = plain(section.split('<h3')[0]);
+  assert.match(
+    context,
+    /steps below tell you to add[^.]*already added[^.]*allowing updates[^.]*Configure[^.]*Repair[^.]*retry there[^.]*do not add[^.]*again/,
+  );
 });
 
 test('the update-webview topic the panel app links from its browser engine step lands on the stock versions and the sideload steps', () => {
