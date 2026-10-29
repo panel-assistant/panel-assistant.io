@@ -75,7 +75,7 @@ These points come from Meta's documentation or are properties of Meta's shared s
 
 These are author-reported exploit targets, not independent Panel Assistant qualification or a claim that every firmware build is supported. The linked source records full firmware fingerprints. Portal TV is also listed by the research project, but remains unsupported by Panel Assistant.
 
-The practical benefit is optional provisioning: temporary privileged execution can keep wireless ADB available after a restart, avoiding stock firmware's repeated USB setup, and change restricted audio settings or install limited helpers. The project does not install permanent `su` or a root daemon. Its default preset also installs its own app, replaces the home screen, sets Device Owner, removes Meta accounts and disables services; that preset is not a Panel Assistant installation step.
+The practical benefit is optional provisioning: temporary privileged execution can keep wireless ADB available after a restart, avoiding stock firmware's repeated USB setup, and change restricted audio settings or install limited helpers. The project does not install permanent `su` or a root daemon. Its recommended `kiosk` preset also installs its own app, replaces the home screen, sets Device Owner, removes Meta accounts and disables services; that preset is not a Panel Assistant installation step.
 
 Panel Assistant still uses the existing [stock USB installation](/hardware/panels/meta/portal-10-gen2/#installing-panel-assistant) and has no integration with this exploit. Exploit attempts can hang or reboot the device, and persistent provisioning changes do not patch the vulnerability. The stock measurements and model support statuses on these pages remain unchanged.
 
