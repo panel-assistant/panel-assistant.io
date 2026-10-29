@@ -3,11 +3,11 @@ title: Prepare the panel
 description: What a panel needs before Panel Assistant can install on it, and the WebView update that decides whether the first dashboard looks right.
 ---
 
-One thing needs to be true before you add a panel, and a second decides whether the first dashboard looks right. Neither needs a command line.
+One thing needs to be true before you add a panel, and a second decides whether the first dashboard looks right. The route depends on your model and firmware.
 
 ## 1. Developer options and debugging are on
 
-The installer talks to the panel through Android's debugging interface, which every Android device has but ships turned off. On most panels, open **Settings**, then **About**, and tap **Build number** seven times until the panel says you are a developer; **Developer options** then appears in Settings. Some vendors hide or rename this, and the [hardware pages](/hardware/) show the exact sequence for each model. In developer options, turn on **USB debugging** for the [USB route](/install/install-over-usb/), or **network ADB on TCP port 5555** for the network route. Not every panel has a network ADB switch; the hardware page for your model says whether it does, and if it has none, use the USB route. Android's paired Wireless debugging feature is a different connection method and is not supported by this installer.
+The installer talks to the panel through Android's debugging interface, which vendors may disable or restrict. On most panels, open **Settings**, then **About**, and tap **Build number** seven times until the panel says you are a developer; **Developer options** then appears in Settings. Some vendors hide or rename this, and the [hardware pages](/hardware/) give the known steps and mark procedures that are unverified. In developer options, turn on **USB debugging** for the [USB route](/install/install-over-usb/), or **network ADB on TCP port 5555** for the network route. Not every panel has a network ADB switch; the hardware page for your model says whether it does, and if it has none, use the USB route once USB debugging is available. If USB access is also unverified, ask the supplier for instructions for your model and firmware before choosing either installer. Root access is separate: an `adb root` command assumes debugging already works. Android's paired Wireless debugging feature is a different connection method and is not supported by this installer.
 
 If the panel asks you to authorise the connection, someone has to accept that prompt on the panel's own screen; it cannot be accepted remotely.
 

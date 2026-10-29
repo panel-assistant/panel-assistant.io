@@ -74,6 +74,8 @@ Meta documents the procedure for every Portal ([Meta, Portal setup for Android a
 **The ADB Enabled item looks exactly the same whether ADB is on or off, and every tap switches it.** Nothing on the Portal's screen tells you its state. The only proof is on the computer: the Portal appearing in the browser's USB device list, or in `adb devices`. If it is not there, tap the item once more and check again rather than tapping several times.
 :::
 
+There is no verified way to enable network ADB on TCP port 5555 without a computer. Use the USB route above first; enabling Meta’s ADB switch alone is not a verified network-install route. The USB installer prepares network debugging for later updates. No root is needed.
+
 ## Installing Panel Assistant
 
 Install the panel app from Home Assistant with the [USB installer](/install/install-over-usb/), with the Portal connected to your computer by USB-C and ADB switched on as above. Panel Assistant is required: it is how the app is installed, connected and updated. On the tested Portal the installer completed normally, the app came up on the dashboard setup screen, and on first start it selected the Portal 10" (2nd gen) profile on its own.

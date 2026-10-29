@@ -92,6 +92,8 @@ Detection cannot rely on `ro.product.model`, because both variants report `px30_
 
 Unlike the TPA10, the NSPanel Pro has **no adb password**. It ships as a `userdebug` build with test keys (`ro.debuggable=1`), so `adb root` works and `/system` can be remounted. The only hard part is _reaching_ developer options, which the eWeLink firmware hides differently per version. Distilled from blakadder's guides ([sideload](https://blakadder.com/nspanel-pro-sideload/), [secrets](https://blakadder.com/nspanel-pro-secrets/)).
 
+**Initial route (86P and 120P).** Whether network ADB on TCP port 5555 can be enabled without a computer depends on firmware; no universal on-panel switch is established. The eWeLink developer-mode route below is documented for the stated firmware, but does not establish TCP5555 on every later build. If network ADB is unavailable, use the documented USB route for your firmware. Root commands do not enable initial access.
+
 **1. Enable adb.** The route depends on firmware:
 
 - **Older firmware:** open the case (remove the back screws and disconnect the touch connector) to expose the OTG USB port, and connect a host; adb works directly over USB.

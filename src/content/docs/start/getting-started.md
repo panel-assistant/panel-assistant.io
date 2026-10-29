@@ -17,7 +17,7 @@ Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try
 
 ## 2. Switch on debugging on the panel
 
-Open developer options on the panel: on most panels, open **Settings**, then **About**, and tap **Build number** seven times. Then turn on **USB debugging** if you are plugging the panel in, or **network ADB on TCP port 5555** for the network route. Not every panel has a network ADB switch; each [hardware page](/hardware/) says whether yours does and where it is, and if it has none, use the USB route. [Prepare the panel](/install/prepare-a-panel/) has the details.
+Open developer options on the panel: on most panels, open **Settings**, then **About**, and tap **Build number** seven times. Then turn on **USB debugging** if you are plugging the panel in, or **network ADB on TCP port 5555** for the network route. Not every panel has a network ADB switch; the [hardware pages](/hardware/) list known routes and say when initial access is unverified. If network access is unavailable, use USB once USB debugging and a USB data port are confirmed for your model. [Prepare the panel](/install/prepare-a-panel/) has the details.
 
 ## 3. Add the panel
 

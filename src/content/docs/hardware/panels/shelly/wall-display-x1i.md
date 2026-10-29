@@ -30,6 +30,10 @@ sidebar:
 
 The Wall Display X1i, firmware codename **Cally**, is a 4 in 720×720 panel on a Rockchip RK3326-S (Cortex-A35), Android 11. It is on the modern **WallDisplayV2** (arm64-v8a) OTA track, alongside the [X2i](/hardware/panels/shelly/wall-display-x2i/), [XL](/hardware/panels/shelly/wall-display-xl/), Maverick and Dayna, and has access to the built-in AppStore.
 
+## Initial debugging access
+
+**Network ADB on TCP port 5555 without a computer: not established on this model.** Initial USB debugging and the vendor-menu unlock are also unverified here. The [X2i procedure](/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode) is confirmed on the X2i only; shared firmware does not prove that it works here. Ask Shelly for the procedure for your model and firmware. Use the [USB installer](/install/install-over-usb/) only once USB debugging and a USB data connection are available. A root-capable build alone does not enable debugging.
+
 ## Also sold as
 
 Shelly Wall Display X1i, firmware codename Cally.

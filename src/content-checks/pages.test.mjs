@@ -232,3 +232,21 @@ test('no instruction for a Configure page setting asks the reader to save', () =
     );
   }
 });
+
+// Reader contract: inspect built page content, including the routes offered to new owners.
+test('panel access guidance distinguishes initial debugging from root and unknown routes', () => {
+  for (const model of ['electron/wf1589t', 'electron/wf2489t', 'electron/smt156', 'smatek/s9e']) {
+    const t = text(`/hardware/panels/${model}/`);
+    assert.match(t, /Initial debugging access/);
+    assert.match(t, /TCP port 5555[^.]*not established/);
+    assert.match(t, /initial USB debugging[^.]*not established/i);
+    assert.match(t, /root[^.]*already working ADB connection/i);
+  }
+  for (const model of ['wall-display', 'wall-display-x2', 'wall-display-x1i', 'wall-display-xl']) {
+    assert.match(
+      text(`/hardware/panels/shelly/${model}/`),
+      /Initial debugging access[\s\S]*TCP port 5555[^.]*not established/,
+    );
+  }
+  assert.match(text('/install/prepare-a-panel/'), /USB access is also unverified/);
+});

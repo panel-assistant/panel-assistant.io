@@ -58,6 +58,8 @@ Changing firmware on a button-less panel? Read [Firmware backup and restore](/ha
 
 The TPA10 ships with adb **password-protected** and network adb off. The reliable route to first access is the USB diagnostics-app backdoor, with no password arithmetic. `su` is already present, so once adb is in you have root. Distilled from [seaky/nspanel_pro_tools_apk issue 123](https://github.com/seaky/nspanel_pro_tools_apk/issues/123).
 
+**Initial route.** There is no verified way to enable network ADB on TCP port 5555 without a computer. Use USB first, following the diagnostics-app procedure below; the later root commands make network ADB persistent only after that first connection.
+
 **1. Enable Developer options.** Settings, _About_, tap the build or version number seven times.
 
 **2. First access through the USB diagnostics-app backdoor (recommended).** Developer options exposes a Tuya engineering **diagnostics app** with a Chinese-only UI. While that app is open, adb over the **USB** port is allowed _without_ the password, and the session is already rooted. Connect USB and run:

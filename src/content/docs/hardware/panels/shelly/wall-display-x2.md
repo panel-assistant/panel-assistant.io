@@ -26,6 +26,10 @@ sidebar:
 
 The Wall Display X2, firmware codename **Pegasus**, is a 6.9 in 1440×720 panel on a Spreadtrum/UNISOC SC7731E (Cortex-A7), Android 8.1. It is on the legacy **WallDisplay** (armeabi-v7a) OTA track, alongside the [original](/hardware/panels/shelly/wall-display/).
 
+## Initial debugging access
+
+**Network ADB on TCP port 5555 without a computer: not established on this model.** Initial USB debugging and the vendor-menu unlock are also unverified here. The [X2i procedure](/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode) is confirmed on the X2i only; shared firmware does not prove that it works here. Ask Shelly for the procedure for your model and firmware. Use the [USB installer](/install/install-over-usb/) only once USB debugging and a USB data connection are available. A root-capable build alone does not enable debugging.
+
 ## Also sold as
 
 Shelly Wall Display X2, SAWD-2A1XX10EU1, firmware codename Pegasus, device ID e500_7731e_32u_o.

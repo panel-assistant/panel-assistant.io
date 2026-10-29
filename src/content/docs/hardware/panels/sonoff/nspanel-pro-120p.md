@@ -44,3 +44,7 @@ NSPanel Pro 120, NSPanel Pro 120P, NSPanel120P, NSPanel Pro Gen1, SN_3326S, nspa
 :::note
 The Cortex-A35 is an efficiency core with markedly lower per-clock throughput than the A55 (TPA10) or A72 (WF1589T). With 2 GB RAM, the NSPanel Pro line is the **entry-level performer** of the fully supported panels; see the [performance comparison](/hardware/#performance-comparison).
 :::
+
+## Initial debugging access
+
+Network ADB on TCP port 5555 without a computer depends on the installed firmware; no universal switch is established. Follow the [NSPanel Pro initial ADB steps](/hardware/panels/sonoff/#gaining-adb-and-root-access), including the firmware-specific USB procedure when network access is unavailable. The later root steps require an existing debugging connection.

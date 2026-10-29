@@ -35,6 +35,14 @@ Unlike the fully supported panels, the S9E has **not** been reverse-engineered o
 
 A 10.1 in **1920×1200** RK3566 in-wall panel, the same SoC family as the TPA10, with **two on-board mains relays**, four LED-backlit buttons, a radar proximity sensor, and **Zigbee, Ethernet and RS485**.
 
+## Initial debugging access
+
+**Network ADB on TCP port 5555 without a computer: not established.** An owner running Panel Assistant or a firmware build offering root does not establish how a new panel enables debugging.
+
+**The initial USB debugging procedure is not established either.** Ask the supplier for the debugging instructions for your exact firmware and confirmation of a USB data port. If it provides USB debugging, use the [USB installer](/install/install-over-usb/); do not assume a charging port provides ADB. No verified factory-menu sequence is available here.
+
+Root checks require an already working ADB connection. Root access and initial debugging access are separate questions.
+
 ## Also sold as
 
 Smatek S9E, Smatek S9, S9E-NZ (without the Zigbee gateway), S9PE, S9PE-NZ (PoE variant), `Build.MODEL` S9, `Build.DEVICE` rk3566_r, `ro.product.version` S9_Android_1.0.2 and S9_Android_1.1.0.
