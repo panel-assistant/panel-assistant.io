@@ -32,6 +32,14 @@ The panel app checks each privileged route when it uses it, so a panel without r
 
 - Get adb working reliably, ideally on the network with your workstation's key pre-authorised, before disabling any vendor app. Disabling a vendor launcher, settings or hardware app first can lock you out of the panel.
 - Keep a way to navigate. On a panel without buttons, the panel app's navigation actions replace the vendor's Back and Recents.
-- Stop the vendor updater where there is one, or an over-the-air update can revert your changes. See [Stop unwanted updates](/hardware/guides/firmware-backup-and-restore/#stop-unwanted-updates).
+- Check what a vendor update changes before deciding whether to defer it: updates can revert access changes, but also fix security flaws. See [Firmware updates and capabilities](/hardware/firmware/#firmware-updates-and-capabilities) and [Stop unwanted updates](/hardware/guides/firmware-backup-and-restore/#stop-unwanted-updates).
 - Take a partition backup before modifying firmware on a rooted Rockchip panel. See [Firmware backup and restore](/hardware/guides/firmware-backup-and-restore/).
 - Some routes need `adb disable-verity`, which reboots the panel. A panel protected by a PIN cannot start its apps again after a reboot until someone enters the PIN, so be in front of it.
+
+## Potential routes on other firmware
+
+[CVE-2026-43499](https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/43xxx/CVE-2026-43499.json) is a Linux kernel privilege-escalation flaw reached by code already running locally. It is a research candidate for other current and future panel families, not just Meta Portal. A kernel version alone does not establish a usable route on a vendor build: patches, kernel configuration and device restrictions need checking.
+
+Keep three questions separate: can an owner first install or execute code; can that code gain kernel privileges; and can the panel app use the resulting access, including after a restart? Temporary privilege could help with installation, make ADB less awkward, change administrative settings or enable access to restricted hardware. It does not by itself provide persistent root or an app-accessible helper.
+
+The [Meta Portal research](/hardware/panels/meta/#cve-2026-43499-and-community-provisioning) is an example with exact reported targets and explicit limits. It is not a generic Panel Assistant installer or a newly delivered capability. Shelly applicability and patched vendor builds have not been established. Normal installation and everyday use remain rootless where the panel supports them.

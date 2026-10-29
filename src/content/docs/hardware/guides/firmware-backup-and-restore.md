@@ -46,7 +46,7 @@ adb -s $IP:5555 pull /sdcard/idb_head.img ./idb_head.img && adb -s $IP:5555 shel
 
 ## Stop unwanted updates
 
-Once adb is enabled you probably want to stop the vendor pushing an update that reverts your changes. Disable the updater app; `pm enable` puts it back:
+Decide whether to defer a vendor update using the [firmware security and capability guidance](/hardware/firmware/#firmware-updates-and-capabilities). A backup alone does not prove you can downgrade or restore access. If you choose to pause automatic updates on a **WF1589T**, this disables its updater; `pm enable` puts it back:
 
 ```bash
 adb -s $IP:5555 shell 'pm disable-user --user 0 com.elclcd.otaupdater'   # WF1589T
