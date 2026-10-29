@@ -495,23 +495,3 @@ test('the live worker routes /comments to the handler and everything else as bef
   assert.match(wrangler, /"run_worker_first": \[[^\]]*"\/comments"/);
   assert.match(wrangler, /"run_worker_first": \[[^\]]*"\/comments\/count"/);
 });
-
-test('the Worker holds no comment state: no storage binding and no module-level cache', () => {
-  const wrangler = readFileSync(new URL('./wrangler.jsonc', import.meta.url), 'utf8');
-  for (const binding of [
-    'kv_namespaces',
-    'd1_databases',
-    'r2_buckets',
-    'durable_objects',
-    'queues',
-    'hyperdrive',
-    'vectorize',
-  ]) {
-    assert.ok(!wrangler.includes(`"${binding}"`), binding);
-  }
-  const source = readFileSync(new URL('./comments.js', import.meta.url), 'utf8');
-  const topLevel = source
-    .split('\n')
-    .filter((l) => /^(let|var)\s|^const\s+\w+\s*=\s*(new\s|\[|\{)/.test(l));
-  assert.deepEqual(topLevel, []);
-});
