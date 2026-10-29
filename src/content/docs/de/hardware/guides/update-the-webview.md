@@ -13,6 +13,8 @@ Der integrierte Renderer der Panel-App nutzt Androids **System-WebView**. Die me
 
 In der noch nicht veröffentlichten Version 1.0.0-rc2 können eine aus Home Assistant gestartete Installation und Updates der Panel-App auch ein verifiziertes kompatibles WebView installieren. Dafür sind ein unterstütztes Profil, ein nicht durch Play verwalteter Anbieter mit demselben Paket und Signierer wie der ausgewählte Build sowie ein zulässiger Installationsweg erforderlich. Bleibt dieses Update unvollständig, wähle **Erneut versuchen** in der Update-Reparatur des Panels. Sie prüft vorhandene Arbeit, bevor sie einen weiteren Versuch anfordert; es gibt keinen geplanten Wiederholungsversuch. Eine alte Engine verhindert Einrichtung und Kopplung nicht, aber das Dashboard wird möglicherweise weiterhin nicht angezeigt. Der durch Signaturprüfung gesperrte Originalanbieter des TPA10 benötigt weiterhin den dokumentierten Root-Austausch, bevor ein anders signierter Ersatz genutzt werden kann.
 
+<a id="manual-fallback"></a>
+
 ## Manueller Ausweichweg
 
 Nutze das unten beschriebene bestehende Verfahren für dein Panel, wenn der verwaltete Weg nicht verfügbar ist. Für die direkte manuelle adb-Installation des regulären Android System WebView (Paket **`com.android.webview`**) ist ein zur Android-Version und ABI des Panels passender Build erforderlich, ohne App-Store eines Drittanbieters.

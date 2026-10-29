@@ -87,7 +87,7 @@ Deux images d’origine ont été analysées. Ce sont des fichiers OTA `.zip` pa
 | `S9_1920x1200_20251202_Android_US` | `S9_Android_1.1.0`   | `eng.xiaolp.20251202.160404` | `/sys/class/strelay`  |
 
 :::caution
-**La classe sysfs des relais a changé de nom entre les versions.** Seule l’image **initiale** (1.0.2) utilise `/sys/class/st_relay` ; **toutes les images plus récentes** (1.1.0 et suivantes) utilisent `/sys/class/strelay`, confirmé par [un utilisateur](https://github.com/panel-assistant/android/issues/3) et par la comparaison des micrologiciels. L’application sonde les deux noms et utilise celui exposé par le panneau ; voir [Relais](#relais-classe-strelay-ou-st_relay-root).
+**La classe sysfs des relais a changé de nom entre les versions.** Seule l’image **initiale** (1.0.2) utilise `/sys/class/st_relay` ; **toutes les images plus récentes** (1.1.0 et suivantes) utilisent `/sys/class/strelay`, confirmé par [un utilisateur](https://github.com/panel-assistant/android/issues/3) et par la comparaison des micrologiciels. L’application sonde les deux noms et utilise celui exposé par le panneau ; voir [Relais](#relais--classe-strelay-ou-st_relay-root).
 :::
 
 Les deux images ont été partagées par l’utilisateur depuis Smatek : `S9_1920x1200_20240712_Android_US` (**1.0.2**) et `S9_1920x1200_20251202_Android_US` (**1.1.0**). Les liens de téléchargement Smatek d’origine sur `docs.smatek.store:10001` ne sont plus accessibles ; contactez l’assistance Smatek ou l’auteur du rapport pour en obtenir une copie.

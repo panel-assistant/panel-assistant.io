@@ -21,7 +21,7 @@ Un profil peut sélectionner des pilotes et transformations déjà fournis par h
 
 Un profil ne peut pas ajouter de code exécutable, commandes shell, verbes du démon auxiliaire, ioctls noyau, bibliothèques natives ou nouveau protocole matériel. Si un panneau nécessite un mécanisme absent de l’éditeur ou de la référence du format, celui-ci doit d’abord être implémenté et vérifié dans ha-paneld. Cette limite garde le fichier YAML échangé inspectable et l’empêche de devenir un script root arbitraire.
 
-Les profils n’accordent pas non plus d’autorité. Un pilote privilégié reste indisponible tant que sa voie active requise ne réussit pas. Voir [Autorité : Android standard et voies privilégiées](#autorité-android-standard-et-voies-privilégiées).
+Les profils n’accordent pas non plus d’autorité. Un pilote privilégié reste indisponible tant que sa voie active requise ne réussit pas. Voir [Autorité : Android standard et voies privilégiées](#autorité--android-standard-et-voies-privilégiées).
 
 ## Démarrage rapide sans environnement de développement
 

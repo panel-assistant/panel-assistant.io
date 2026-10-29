@@ -55,6 +55,8 @@ Die wichtigsten Fakten: ADB ist **passwortgeschützt**, verwende daher die USB-H
 Du willst die Firmware eines Panels ohne Tasten ändern? Lies zuerst [Firmware sichern und wiederherstellen](/de/hardware/guides/firmware-backup-and-restore/). Das TPA10 (rk3566, Android 11, 7,28 GB eMMC `mmcblk2`) hat einen überprüften, softwareseitig gestarteten Loader-Zugangsweg über `adb reboot loader` und `rkdeveloptool`. Die versenkte [Lochtaste](#buttons) ist keine Linux-Eingabe; ihr Verhalten beim Werksreset oder Maskrom-Einstieg wurde nicht sicher bestätigt. Verlasse dich daher nicht auf sie als Wiederherstellungsweg.
 :::
 
+<a id="gaining-adb-and-root-access"></a>
+
 ## ADB- und Root-Zugriff erhalten
 
 Das TPA10 wird mit **passwortgeschütztem** ADB und ausgeschaltetem Netzwerk-ADB ausgeliefert. Der zuverlässige Erstzugang ist die USB-Hintertür der Diagnose-App, ohne Passwortberechnung. `su` ist bereits vorhanden; sobald du ADB-Zugriff hast, hast du Root. Zusammengefasst aus [seaky/nspanel_pro_tools_apk Issue 123](https://github.com/seaky/nspanel_pro_tools_apk/issues/123).

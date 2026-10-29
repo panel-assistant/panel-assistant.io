@@ -55,6 +55,8 @@ Lo esencial: adb está **protegido con contraseña**, así que usa la vía de ac
 ¿Vas a cambiar el firmware de un panel sin botones? Lee primero [Copia de seguridad y restauración del firmware](/es/hardware/guides/firmware-backup-and-restore/). El TPA10 (rk3566, Android 11, eMMC de 7.28 GB `mmcblk2`) tiene una vía Loader verificada que se inicia por software mediante `adb reboot loader` y `rkdeveloptool`. El [botón empotrado](#botones) no es una entrada de Linux y su comportamiento de restablecimiento de fábrica o Maskrom no se ha confirmado con seguridad; no dependas de él como vía de recuperación.
 :::
 
+<a id="gaining-adb-and-root-access"></a>
+
 ## Obtener acceso adb y root
 
 El TPA10 viene con adb **protegido con contraseña** y adb de red desactivado. La vía fiable para el primer acceso es la entrada USB de la app de diagnóstico, sin cálculos de contraseñas. `su` ya está presente, así que, una vez conectado por adb, tienes root. Resumen de [seaky/nspanel_pro_tools_apk, incidencia 123](https://github.com/seaky/nspanel_pro_tools_apk/issues/123).

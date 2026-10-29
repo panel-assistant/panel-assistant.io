@@ -56,7 +56,7 @@ Meta Portal, Facebook Portal, Portal (2nd gen), Portal 10", modèle WD50JM. Andr
 Aucun de ces points n’interdit d’acheter un Portal, mais mieux vaut les connaître à l’avance.
 
 - **Il faut un compte Facebook.** La configuration Meta ne donne pas accès aux réglages sans connexion. Elle propose Facebook ou WhatsApp ; le code QR WhatsApp n’est jamais apparu lors de nos essais, et la connexion Facebook a fonctionné. Un nouveau compte créé pour le panneau convient.
-- **Le compte doit rester connecté.** Activer ADB demande le code PIN du compte Meta créé à la configuration. Sans compte connecté, nous n’avons trouvé aucun moyen de réactiver ADB, et la réinitialisation Meta à l’écran a aussi cessé de fonctionner ; seule la [réinitialisation matérielle](#récupération-réinitialisation-dusine) a rétabli le Portal. Ne supprimez pas le compte et ne désactivez pas l’application de configuration Meta.
+- **Le compte doit rester connecté.** Activer ADB demande le code PIN du compte Meta créé à la configuration. Sans compte connecté, nous n’avons trouvé aucun moyen de réactiver ADB, et la réinitialisation Meta à l’écran a aussi cessé de fonctionner ; seule la [réinitialisation matérielle](#récupération--réinitialisation-dusine) a rétabli le Portal. Ne supprimez pas le compte et ne désactivez pas l’application de configuration Meta.
 - **ADB ne reste pas activé.** Le réglage ADB Meta est signalé comme se désactivant à chaque redémarrage ; prévoyez donc de le réactiver. La connexion de débogage réseau utilisée par Panel Assistant pour les mises à jour a été perdue à chaque redémarrage essayé. Cela a des conséquences pour les [mises à jour](#mises-à-jour).
 - **Refusez si possible le téléchargement du micrologiciel à la configuration.** Meta propose de télécharger une mise à jour. Nous l’avons refusée : tout a donc été testé sur la version nommée en tête de page. On ignore si un micrologiciel Meta ultérieur change l’accès ADB, et Meta ne publie aucun moyen de revenir en arrière.
 - **Meta abandonne progressivement Portal.** Meta a cessé de vendre les Portal en 2022 et a retiré des fonctions depuis. Attendez-vous à l’arrêt d’autres services Meta, voire de méthodes de connexion. L’application du panneau ne dépend d’aucun de ces services.
@@ -105,7 +105,7 @@ Puis [ajoutez le panneau](/fr/install/installing-ha-paneld/) dans Panel Assistan
 - **Les réglages Android sont largement inaccessibles.** Meta remplace l’application Réglages Android par une version réduite. Panel Assistant règle les besoins de l’application pendant l’installation ; les autres réglages Android ne peuvent pas être modifiés sur le panneau.
 
 :::danger
-**Ne désactivez pas l’application de configuration Meta (`com.facebook.alohaapps.devicesetup`) et ne supprimez pas le compte Meta.** Avec le compte supprimé et cette application désactivée, le Portal testé a perdu le commutateur ADB et la réinitialisation Meta à l’écran ; seule la [réinitialisation matérielle](#récupération-réinitialisation-dusine) l’a récupéré. Laissez intacts le compte Meta et ses applications de réglages et de configuration.
+**Ne désactivez pas l’application de configuration Meta (`com.facebook.alohaapps.devicesetup`) et ne supprimez pas le compte Meta.** Avec le compte supprimé et cette application désactivée, le Portal testé a perdu le commutateur ADB et la réinitialisation Meta à l’écran ; seule la [réinitialisation matérielle](#récupération--réinitialisation-dusine) l’a récupéré. Laissez intacts le compte Meta et ses applications de réglages et de configuration.
 :::
 
 ## Mises à jour

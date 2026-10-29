@@ -55,6 +55,8 @@ Tuya TPA10, TPA10, TPA10-M2 (M2A, M2E, M2U, M2X), TPA10 Control Panel MAX, Contr
 Змінюєте прошивку на панелі без кнопок? Спочатку прочитайте [Резервне копіювання й відновлення прошивки](/uk/hardware/guides/firmware-backup-and-restore/). TPA10 (rk3566, Android 11, 7.28 ГБ eMMC `mmcblk2`) має перевірений програмний перехід у Loader через `adb reboot loader` і `rkdeveloptool`. Заглиблена [кнопка в отворі](#buttons) не є входом Linux; її поведінку заводського скидання чи Maskrom безпечно не підтверджено, тому не покладайтеся на неї як на спосіб відновлення.
 :::
 
+<a id="gaining-adb-and-root-access"></a>
+
 ## Отримання доступу adb і root
 
 TPA10 постачається з adb, **захищеним паролем**, і вимкненим мережевим adb. Надійний спосіб першого доступу — прихований вхід через діагностичний застосунок і USB без обчислення пароля. `su` вже присутній, тому після отримання adb є й root. Узагальнено з [seaky/nspanel_pro_tools_apk, issue 123](https://github.com/seaky/nspanel_pro_tools_apk/issues/123).

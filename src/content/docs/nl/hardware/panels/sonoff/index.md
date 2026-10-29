@@ -60,6 +60,8 @@ Deze pagina beveelt in de tekst geen firmwareversie aan; de gegenereerde [firmwa
 **Communitymeldingen beschrijven herstartlussen op 4.5.1 en 4.5.2**, met intervallen van ongeveer 10 tot 60 minuten op beide modellen. Voor 4.7.0 bevat de feedbackdraad meldingen van verbindingsproblemen met subapparaten na bijwerken; sommige werden opgelost door een herstart, andere worden als aanhoudend beschreven. Die zijn niet gereproduceerd of gekwantificeerd, dus behandel ze als ongeverifieerde gebruikersmeldingen in plaats van een bekende regressie. Verifieer een nieuwere release op één paneel voordat je die op meerdere uitrolt; **4.0.12** blijft het conservatieve volledige-ROM-controlepunt om op vast te zetten.
 :::
 
+<a id="firmware-quirks-by-version"></a>
+
 ### Firmware-eigenaardigheden per versie
 
 Gedrag dat verandert tussen eWeLink-firmwareversies, oudste eerst. `ro.product.version` is het **interne** ID (`NSPanel86P_x.y.z` of `s6_android_x.y.z` op de 86P, `NSPanel120P_x.y.z` op de 120P), _niet_ het marketing- of OTA-nummer dat de eWeLink-app toont (4.0.12, 4.5.x). Detectie en versiegebonden logica moeten `ro.product.version` lezen, niet de marketingtekst.
