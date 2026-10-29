@@ -1,7 +1,7 @@
 ---
 title: Primeros pasos
 description: De un panel de pared Android sin configurar a tu panel de control de Home Assistant en minutos, con Home Assistant guiándote en cada paso.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
 Si alguna vez has configurado un panel de pared o un quiosco, probablemente recuerdes cómo fue: instalar apps por tu cuenta, buscar un motor de navegador capaz de mostrar un panel de control, probar ajustes a ciegas y no acabar de fiarte del siguiente reinicio. Configurar un panel con Panel Assistant será una sorpresa agradable. Puedes terminar en minutos y, aunque el panel esté en la pared, no tendrás que levantarte de la silla. Bueno, quizá una vez ;-)
@@ -13,12 +13,12 @@ La parte difícil de cualquier panel es la primera hora. Panel Assistant se enca
 Añade Panel Assistant mediante HACS y reinicia Home Assistant. Es lo único que instalas a mano. A partir de aquí, Home Assistant te guía. Consulta [Instalar la integración](/es/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/es/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/es/manage/upgrade-to-1-0/) explains what changes.
+Panel Assistant 1.0 es una versión candidata. HACS ofrece 0.9.0 de forma predeterminada. Para probar la versión candidata, habilita y activa el interruptor **Versión preliminar** en el dispositivo Panel Assistant, en **Ajustes**, **Dispositivos y servicios**, **HACS**; [Instalar la integración](/es/home-assistant/custom-integration/) explica el paso de la entidad deshabilitada. Un panel que ejecuta la aplicación 1.0 no puede volver a 0.9; [Actualizar a 1.0](/es/manage/upgrade-to-1-0/) explica los cambios.
 :::
 
 ## 2. Activa la depuración en el panel
 
-Abre las opciones para desarrolladores del panel: en la mayoría de los paneles, abre **Ajustes**, luego **Información** y toca **Número de compilación** siete veces. Después activa **Depuración USB** si vas a conectar el panel por cable, o **ADB por red en el puerto TCP 5555** para la opción de red. No todos los paneles tienen un interruptor de ADB por red; cada [página de hardware](/es/hardware/) indica si el tuyo lo tiene y dónde está, y, si no lo tiene, utiliza la opción USB. [Preparar el panel](/es/install/prepare-a-panel/) explica los detalles.
+Abre las opciones para desarrolladores del panel: en la mayoría de los paneles, abre **Ajustes**, luego **Información** y toca **Número de compilación** siete veces. Después activa **Depuración USB** si vas a conectar el panel por cable, o **ADB por red en el puerto TCP 5555** para la opción de red. No todos los paneles tienen un interruptor de ADB por red; las [páginas de hardware](/es/hardware/) enumeran las vías conocidas e indican cuándo el acceso inicial no está verificado. Si el acceso por red no está disponible, utiliza USB una vez que se hayan confirmado la depuración USB y un puerto de datos USB para tu modelo. [Preparar el panel](/es/install/prepare-a-panel/) explica los detalles.
 
 ## 3. Añade el panel
 
@@ -102,6 +102,8 @@ En ambos casos, el asistente se encarga de la parte complicada. Comprueba qué h
 A continuación viene el asistente de configuración del propio panel. El panel lo sirve y se abre en el navegador de tu ordenador, no en la pantalla del panel. Después de una instalación por red, Home Assistant muestra **Terminar de configurar este panel**: abre la página de configuración del panel, completa sus pasos y luego vuelve a Home Assistant y selecciona **Listo**. Después de una instalación por USB, la ventana del instalador pasa directamente al asistente. Como lo sirve el panel, solo se carga en un navegador que esté en la misma red que el panel.
 
 El asistente pide un nombre para el panel, inicia su sesión en Home Assistant y pregunta qué panel de control mostrar y en qué área está el panel. El panel se conecta con la cuenta de Home Assistant con la que inicies sesión, así que, si tu navegador tiene iniciada tu sesión, el panel puede conectarse con tu cuenta; para que utilice su propia cuenta, inicia sesión con ella. Con el filtrado de entidades habilitado, el panel carga solo las entidades que utiliza ese panel de control, lo que lo mantiene ágil. Consulta [Conectar un panel](/es/home-assistant/connect-a-panel/).
+
+En la versión 1.0.0-rc2, aún no publicada, la configuración puede terminar aunque el motor del navegador del panel sea demasiado antiguo para mostrar un panel de control actual de Home Assistant con el renderizador integrado. El asistente avisa cuando esto requiere atención. Sigue la [guía de WebView](/es/hardware/guides/update-the-webview/) antes de depender del panel de control; terminar la configuración por sí solo no confirma que pueda cargarse.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="El asistente de configuración del panel, paso a paso" tabindex="0">
 <figure>

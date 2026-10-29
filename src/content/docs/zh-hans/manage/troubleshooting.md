@@ -1,7 +1,7 @@
 ---
 title: 故障排查
 description: 壁挂面板常见的问题，以及应先检查什么。
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
 ---
 
 先查看 Home Assistant 中的面板设备，它提供状态传感器和可下载的诊断信息；同时查看面板自身的状态页面：在 Home Assistant 中该面板的设备页面上使用 **访问**。该页面的 `/diag` 报告无需猜测就能回答下方大多数问题。
@@ -14,7 +14,7 @@ sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
 
 先检查系统 WebView。这是首次运行时最常见的故障，远超其他原因。旧版 WebView 恰好会造成这些症状，却看起来像面板应用出错。操作步骤见 [更新系统 WebView](/zh-hans/hardware/guides/update-the-webview/)。
 
-如果 WebView 已是最新版本，[启动与恢复](/zh-hans/manage/built-in-renderer/#startup-and-recovery)一节说明了仪表盘加载失败时面板会如何处理，以及如何查看原因。
+如果 WebView 已是最新版本，[启动与恢复](/zh-hans/manage/built-in-renderer/#启动与恢复)一节说明了仪表盘加载失败时面板会如何处理，以及如何查看原因。
 
 ## 仪表盘响应缓慢
 
@@ -28,6 +28,8 @@ sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
 
 当 Home Assistant 停止网络安装时，其消息会说明安装进行到了哪一步。在下面找到与你的消息对应的情况。无论哪种情况，都不要卸载 Panel Assistant、清除其数据或重置面板：面板当前的状态能说明安装停在了哪里。
 
+下述步骤要求再次添加集成时，如果面板已添加，且此消息出现在**配置**或修复中允许更新的过程中，请在那里重试，不要再次添加集成。
+
 ### 未安装任何 APK
 
 如果消息说明未安装任何 APK，或未对面板做出任何改动，表示安装在改动之前就停止了。检查面板是否已开机、是否仍以同一地址连接到网络，然后再次添加 Panel Assistant 集成，并输入同一地址。Home Assistant 会在做出任何改动之前重新检查面板。如果安装第二次仍停在同一位置，请查看面板；如果面板上已有 Panel Assistant，请按照下一节操作。
@@ -38,7 +40,7 @@ sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
 
 ### 安装可能已改动面板
 
-如果消息说明安装可能已改动面板，或 Home Assistant 无法验证结果、无法确认继续操作是否安全，表示 Home Assistant 无法判断面板进行到了哪一步，因此停止操作，而不会猜测。暂时不要重试自动安装。先查看面板：如果正在显示 Panel Assistant 的设置界面或仪表盘，或可以从面板的应用列表中打开应用，请按照上一节连接它。如果面板上没有 Panel Assistant，请在 [集成的问题区](https://github.com/panel-assistant/ha-integration/issues)求助，并附上面板型号、所选版本、完整消息，以及安装时的 Home Assistant 日志行（在日志中搜索 `panel_assistant`）。
+如果消息说明安装程序“因无法识别的结果而停止”、安装可能已改动面板，或 Home Assistant 无法验证结果、无法确认继续操作是否安全，表示 Home Assistant 无法判断面板进行到了哪一步，因此停止操作，而不会猜测。暂时不要重试自动安装。先查看面板：如果正在显示 Panel Assistant 的设置界面或仪表盘，或可以从面板的应用列表中打开应用，请按照上一节连接它。如果面板上没有 Panel Assistant，请在 [集成的问题区](https://github.com/panel-assistant/ha-integration/issues)求助，并附上面板型号、所选版本、完整消息，以及安装时的 Home Assistant 日志行（在日志中搜索 `panel_assistant`）。
 
 ## Home Assistant 中缺少面板的硬件
 

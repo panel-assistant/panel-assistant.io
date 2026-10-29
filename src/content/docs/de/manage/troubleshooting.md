@@ -1,7 +1,7 @@
 ---
 title: Fehlerbehebung
 description: Was bei einem Wandpanel häufig schiefgeht und wo du zuerst nachsehen solltest.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
 ---
 
 Beginne beim Gerät des Panels in Home Assistant, das einen Statussensor und einen Diagnose-Download bietet, und bei der eigenen Statusseite des Panels: Wähle dazu **Besuchen** auf seiner Geräteseite in Home Assistant. Ihr Bericht unter `/diag` beantwortet die meisten der folgenden Fragen ohne Rätselraten.
@@ -28,6 +28,8 @@ Ein Teil davon liegt am Panel, ein Teil am Dashboard. [Leistung](/de/manage/perf
 
 Wenn Home Assistant eine Netzwerkinstallation stoppt, sagt seine Meldung, wie weit die Installation gekommen ist. Suche unten den Satz, der zu deiner Meldung passt. In jedem Fall gilt: Deinstalliere Panel Assistant nicht, lösche seine Daten nicht und setze das Panel nicht zurück. Der Zustand des Panels zeigt dir, wo die Installation angehalten hat.
 
+Wenn die folgenden Schritte dich auffordern, die Integration erneut hinzuzufügen, das Panel aber schon hinzugefügt ist und die Meldung beim Erlauben von Updates über **Konfigurieren** oder eine Reparatur erschien, versuche es dort erneut und füge die Integration nicht erneut hinzu.
+
 ### Es wurde kein APK installiert
 
 Wenn die Meldung sagt, dass kein APK installiert oder keine Änderung am Panel vorgenommen wurde, hat die Installation angehalten, bevor sie etwas verändert hat. Prüfe, ob das Panel eingeschaltet und unter derselben Adresse in deinem Netzwerk ist. Füge dann die Panel Assistant-Integration erneut hinzu und gib dieselbe Adresse ein. Home Assistant prüft das Panel erneut, bevor es etwas verändert. Wenn die Installation ein zweites Mal an derselben Stelle anhält, sieh auf dem Panel nach und folge dem nächsten Abschnitt, falls Panel Assistant darauf vorhanden ist.
@@ -38,7 +40,7 @@ Wenn die Meldung sagt, dass das APK installiert ist, Panel Assistant aber nicht 
 
 ### Die Installation hat das Panel möglicherweise verändert
 
-Wenn die Meldung sagt, dass die Installation das Panel möglicherweise verändert hat, Home Assistant das Ergebnis nicht überprüfen konnte oder nicht nachweisen kann, dass ein Fortfahren sicher ist, konnte Home Assistant nicht erkennen, wie weit das Panel gekommen ist. Es hält deshalb an, statt zu raten. Wiederhole die automatische Installation noch nicht. Sieh zuerst auf dem Panel nach: Wenn der Einrichtungsbildschirm oder das Dashboard von Panel Assistant angezeigt wird oder die App sich über die App-Liste öffnen lässt, folge dem vorherigen Abschnitt, um sie zu verbinden. Wenn Panel Assistant nicht auf dem Panel ist, frage in den [Issues der Integration](https://github.com/panel-assistant/ha-integration/issues) und nenne das Panelmodell, die gewählte Version, die vollständige Meldung und die Home Assistant-Protokollzeilen der Installation (suche im Protokoll nach `panel_assistant`).
+Wenn die Meldung sagt, dass das Installationsprogramm „mit einem unbekannten Ergebnis angehalten“ hat, die Installation das Panel möglicherweise verändert hat, Home Assistant das Ergebnis nicht überprüfen konnte oder nicht nachweisen kann, dass ein Fortfahren sicher ist, konnte Home Assistant nicht erkennen, wie weit das Panel gekommen ist. Es hält deshalb an, statt zu raten. Wiederhole die automatische Installation noch nicht. Sieh zuerst auf dem Panel nach: Wenn der Einrichtungsbildschirm oder das Dashboard von Panel Assistant angezeigt wird oder die App sich über die App-Liste öffnen lässt, folge dem vorherigen Abschnitt, um sie zu verbinden. Wenn Panel Assistant nicht auf dem Panel ist, frage in den [Issues der Integration](https://github.com/panel-assistant/ha-integration/issues) und nenne das Panelmodell, die gewählte Version, die vollständige Meldung und die Home Assistant-Protokollzeilen der Installation (suche im Protokoll nach `panel_assistant`).
 
 ## Die Hardware des Panels fehlt in Home Assistant
 

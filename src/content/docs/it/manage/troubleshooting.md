@@ -1,7 +1,7 @@
 ---
 title: Risoluzione dei problemi
 description: I problemi più comuni di un pannello a parete e dove cercare per prima cosa.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
 ---
 
 Inizia dal dispositivo del pannello in Home Assistant, che ha un sensore di stato e consente di scaricare la diagnostica, e dalla pagina di stato del pannello stesso: usa **Visita** nella sua pagina del dispositivo in Home Assistant. Il suo rapporto `/diag` risponde alla maggior parte delle domande qui sotto senza dover fare supposizioni.
@@ -14,7 +14,7 @@ Quando devi vedere cosa sta facendo il pannello in tempo reale, la scheda **Regi
 
 Controlla prima la WebView di sistema. È di gran lunga il problema più comune al primo avvio e una WebView vecchia produce esattamente questi sintomi, che sembrano un guasto dell'app del pannello. La procedura è in [Aggiornamento della WebView di sistema](/it/hardware/guides/update-the-webview/).
 
-Se la WebView è aggiornata, la sezione [avvio e ripristino](/it/manage/built-in-renderer/#startup-and-recovery) spiega cosa fa il pannello quando una plancia non si carica e come scoprirne il motivo.
+Se la WebView è aggiornata, la sezione [avvio e ripristino](/it/manage/built-in-renderer/#avvio-e-recupero) spiega cosa fa il pannello quando una plancia non si carica e come scoprirne il motivo.
 
 ## La plancia è lenta
 
@@ -28,6 +28,8 @@ Via rete: conferma l'indirizzo del pannello e che ADB di rete sulla porta TCP 55
 
 Quando Home Assistant interrompe un’installazione di rete, il messaggio indica fino a che punto è arrivata. Trova qui sotto la frase che corrisponde al tuo caso. In ogni caso, non disinstallare Panel Assistant, non cancellarne i dati e non ripristinare il pannello: lo stato del pannello permette di capire dove si è fermata l’installazione.
 
+Dove i passaggi sotto indicano di aggiungere nuovamente l’integrazione, se il pannello è già aggiunto e questo messaggio è comparso mentre consentivi gli aggiornamenti in **Configura** o in una Riparazione, riprova lì e non aggiungere nuovamente l’integrazione.
+
 ### Nessun APK è stato installato
 
 Se il messaggio dice che non è stato installato alcun APK o che non è stata apportata alcuna modifica al pannello, l’installazione si è fermata prima di cambiare qualcosa. Controlla che il pannello sia acceso e connesso alla tua rete allo stesso indirizzo, poi aggiungi nuovamente l’integrazione Panel Assistant e inserisci lo stesso indirizzo. Home Assistant controlla nuovamente il pannello prima di modificare qualsiasi cosa. Se l’installazione si ferma nello stesso punto una seconda volta, guarda il pannello e segui la sezione successiva se Panel Assistant è presente.
@@ -38,7 +40,7 @@ Se il messaggio dice che l’APK è installato ma Panel Assistant non si è avvi
 
 ### L’installazione potrebbe aver modificato il pannello
 
-Se il messaggio dice che l’installazione potrebbe aver modificato il pannello, che Home Assistant non ha potuto verificare il risultato o che non può accertare che sia sicuro continuare, Home Assistant non ha potuto stabilire fino a che punto è arrivato il pannello, quindi si ferma anziché fare supposizioni. Non riprovare ancora l’installazione automatica. Guarda prima il pannello: se appare la schermata di configurazione o la plancia di Panel Assistant, oppure se l’app si apre dall’elenco delle app del pannello, segui la sezione precedente per connetterla. Se Panel Assistant non è sul pannello, chiedi nelle [segnalazioni dell’integrazione](https://github.com/panel-assistant/ha-integration/issues) e includi il modello del pannello, la versione che hai scelto, il messaggio completo e le righe del registro di Home Assistant relative all’installazione (cerca `panel_assistant` nel registro).
+Se il messaggio dice che l’installatore si è "interrotto con un risultato non riconosciuto", che l’installazione potrebbe aver modificato il pannello, che Home Assistant non ha potuto verificare il risultato o che non può accertare che sia sicuro continuare, Home Assistant non ha potuto stabilire fino a che punto è arrivato il pannello, quindi si ferma anziché fare supposizioni. Non riprovare ancora l’installazione automatica. Guarda prima il pannello: se appare la schermata di configurazione o la plancia di Panel Assistant, oppure se l’app si apre dall’elenco delle app del pannello, segui la sezione precedente per connetterla. Se Panel Assistant non è sul pannello, chiedi nelle [segnalazioni dell’integrazione](https://github.com/panel-assistant/ha-integration/issues) e includi il modello del pannello, la versione che hai scelto, il messaggio completo e le righe del registro di Home Assistant relative all’installazione (cerca `panel_assistant` nel registro).
 
 ## L'hardware del pannello non appare in Home Assistant
 

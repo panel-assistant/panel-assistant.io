@@ -1,7 +1,7 @@
 ---
 title: Een paneel verbinden
 description: Je dashboard op het paneel zetten, en hoe de hardware van het paneel zelf wordt weergegeven in Home Assistant.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 Een paneel dat aan Home Assistant is toegevoegd, is er op twee manieren mee verbonden. De ene zet een dashboard op het scherm. De andere brengt de eigen hardware van het paneel binnen als entiteiten.

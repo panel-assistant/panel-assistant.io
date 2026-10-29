@@ -1,7 +1,7 @@
 ---
 title: Modo de seguridad
 description: El comportamiento predeterminado del panel para redes de confianza y el modo reforzado, que requiere que alguien en el panel apruebe las acciones remotas de gran impacto.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 La interfaz web del panel, su API y sus controles de Home Assistant están diseñados para una red doméstica de confianza. El **modo relajado** es el predeterminado: las automatizaciones, las herramientas de instalación y las acciones del navegador funcionan sin una solicitud adicional. Una acción queda fuera de esa regla deliberadamente. Encender la cámara a través de su entidad de Home Assistant pide aprobación en el panel en todos los modos, incluido el relajado. El ajuste Cámara de Configurar es una vía independiente de configuración del propietario. Apagarla nunca pide aprobación.

@@ -1,0 +1,42 @@
+---
+title: Installer l’intégration
+description: Ajouter Panel Assistant à Home Assistant via HACS, le point de départ de toute installation.
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+Panel Assistant est une intégration personnalisée, ajoutée via [HACS](https://hacs.xyz/). Vous avez besoin de Home Assistant 2026.8.3 ou version ultérieure et de HACS.
+
+<LinkButton
+  href="https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration"
+  icon="external"
+>
+  Ouvrir dans HACS
+</LinkButton>
+
+Ce bouton ouvre le dépôt dans le HACS de votre propre instance Home Assistant, prêt à être téléchargé. Si vous préférez le faire manuellement :
+
+1. Dans HACS, ajoutez `https://github.com/panel-assistant/ha-integration` comme dépôt personnalisé dans la catégorie **Intégration**.
+2. Téléchargez **Panel Assistant**, puis redémarrez Home Assistant.
+3. Allez dans **Paramètres**, **Appareils et services**, **Ajouter une intégration**, puis choisissez **Panel Assistant**.
+
+HACS propose la dernière version stable, 0.9.0. Pour essayer la version candidate 1.0, ouvrez **Paramètres**, **Appareils et services**, **HACS**, puis choisissez l’appareil **Panel Assistant**. Développez les entités désactivées et ouvrez **Préversion**. Dans ses paramètres, activez **Activé** et sélectionnez **Mettre à jour**, puis activez l’interrupteur **Préversion** sous **Diagnostic**. Revenez à Panel Assistant dans HACS, téléchargez la version candidate, puis redémarrez Home Assistant. Lisez d’abord [Passer à la version 1.0](/fr/manage/upgrade-to-1-0/), car un panneau qui exécute l’application 1.0 ne peut pas revenir à la version 0.9.
+
+## Ce que vous obtenez
+
+- **L’installateur.** L’ajout d’un panneau se fait dans un parcours guidé au sein de Home Assistant. Il vérifie le panneau, installe l’application du panneau par le réseau ou [par USB](/fr/install/install-over-usb/), la démarre, puis crée l’appareil. Un panneau qui exécute déjà l’application est adopté au lieu d’être réinstallé.
+- **Un appareil par panneau.** Chaque panneau apparaît dans Appareils et services avec un capteur d’état et des diagnostics téléchargeables, expurgés pour pouvoir être partagés lorsque vous demandez de l’aide.
+- **Tous vos panneaux au même endroit.** Les administrateurs peuvent choisir un panneau dans la barre latérale Panel Assistant et utiliser son interface web au sein de Home Assistant.
+
+## Ce qui reste à venir
+
+Panel Assistant est récent et évolue rapidement. Un panneau déjà installé se met à jour depuis son entité de mise à jour dans Home Assistant, comme décrit dans [Mises à jour et récupération](/fr/manage/updates-and-recovery/). L’installateur USB est la partie la plus récente ; vous pouvez le relancer sans risque, mais attendez-vous à quelques imperfections. Vos retours sont les bienvenus dans les [tickets](https://github.com/panel-assistant/ha-integration/issues) et sur [Discord](https://panel-assistant.io/go/discord).
+
+## Si vous utilisiez l’ancienne intégration 0.1.0
+
+Supprimez l’ancienne entrée d’intégration dans Appareils et services, puis supprimez son téléchargement dans HACS. Ajoutez ce dépôt et téléchargez Panel Assistant **0.9.0** dans HACS avant le premier redémarrage (choisissez **Retélécharger** et sélectionnez la version 0.9.0). Redémarrez Home Assistant, puis ajoutez à nouveau l’intégration avec le nom d’hôte ou l’adresse de votre panneau.
+
+Si vous avez déjà installé Panel Assistant 1.0, suivez [si une migration n’a pas été terminée](/fr/manage/upgrade-to-1-0/#si-une-migration-na-pas-été-terminée) avant de changer de version.
+
+Un panneau de cette époque exécute encore l’ancienne application ha-paneld. Panel Assistant 1.0 ne peut pas le migrer vers la nouvelle application : installez d’abord Panel Assistant 0.9.0 (dans HACS, ouvrez Panel Assistant, choisissez **Retélécharger** et sélectionnez la version 0.9.0), ajoutez le panneau et migrez-le avec sa Réparation, puis passez à la version 1.0.

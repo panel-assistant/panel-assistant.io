@@ -1,10 +1,10 @@
 ---
 title: Sicherheitsmodus
 description: Das Standardverhalten des Panels in einem vertrauenswürdigen Netzwerk und der Gehärtete Modus, in dem jemand am Panel entfernte Aktionen mit weitreichenden Auswirkungen genehmigen muss.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
-Die Weboberfläche des Panels, seine API und seine Home Assistant-Steuerelemente sind für ein vertrauenswürdiges Heimnetzwerk ausgelegt. Der **Entspannte Modus** ist der Standard: Automatisierungen, Installationswerkzeuge und Browseraktionen funktionieren ohne zusätzliche Aufforderung. Eine Aktion ist bewusst von dieser Regel ausgenommen. Das Einschalten der Kamera über ihre Home Assistant-Entität erfordert in jedem Modus eine Genehmigung am Panel, auch im Entspannten Modus. Die Kameraeinstellung unter „Konfigurieren“ ist ein separater Konfigurationsweg für den Eigentümer. Das Ausschalten verlangt niemals eine Genehmigung.
+Die Weboberfläche des Panels, seine API und seine Home Assistant-Steuerelemente sind für ein vertrauenswürdiges Heimnetzwerk ausgelegt. Der **Entspannte Modus** ist der Standard: Automatisierungen, Installationswerkzeuge und Browseraktionen funktionieren ohne zusätzliche Aufforderung. Eine Aktion ist bewusst von dieser Regel ausgenommen. Das Einschalten der Kamera über ihre Home Assistant-Entität erfordert in jedem Modus eine Genehmigung am Panel, auch im Entspannten Modus. Die Kameraeinstellung unter „Konfiguration“ ist ein separater Konfigurationsweg für den Eigentümer. Das Ausschalten verlangt niemals eine Genehmigung.
 
 Für ein Panel in einem Netzwerk, das mit weniger vertrauenswürdigen Geräten geteilt wird, ergänzt der optionale **Gehärtete Modus** eine persönliche Genehmigung für ausgewählte Netzwerkvorgänge mit weitreichenden Auswirkungen. Er bildet eine zusätzliche Sicherheitsgrenze, ersetzt aber weder ein separates Netzwerk noch eine Firewall und bietet keine allgemeine Authentifizierung der API. Endpunkte mit reinem Lesezugriff und gewöhnliche Panelsteuerungen bleiben im Rahmen des üblichen Modells für vertrauenswürdige Netzwerke verfügbar.
 
@@ -18,7 +18,7 @@ Die Weboberfläche kennzeichnet betroffene Aktionen in beiden Modi mit einem kle
 
 Diese Einstellung kann nur auf dem Panel selbst geändert werden:
 
-1. Öffne auf dem Panel den Bildschirm **Konfigurieren** der Panel-App.
+1. Öffne auf dem Panel den Bildschirm **Konfiguration** der Panel-App.
 2. Öffne das Menü für weitere Optionen in der Symbolleiste und wähle **Sicherheitsmodus**.
 3. Wähle **Gehärteten Modus aktivieren**.
 
@@ -43,7 +43,7 @@ Wenn der Gehärtete Modus eine geschützte Anfrage an die API abfängt, gibt der
 
 So schließt du den Vorgang ab:
 
-1. Öffne auf dem Panel **Konfigurieren**, das Menü für weitere Optionen in der Symbolleiste, **Sicherheitsmodus** und dann **Genehmigungen prüfen**.
+1. Öffne auf dem Panel **Konfiguration**, das Menü für weitere Optionen in der Symbolleiste, **Sicherheitsmodus** und dann **Genehmigungen prüfen**.
 2. Prüfe den Vorgang, seine Zusammenfassung und das anfragende Gerät. Genehmige ihn dann oder lehne ihn ab.
 3. Sende innerhalb von zehn Minuten nach der ursprünglichen Anfrage dieselbe Anfrage erneut vom selben Gerät.
 
@@ -68,13 +68,13 @@ Im Gehärteten Modus benötigt ein direkter Netzwerkclient eine Genehmigung am P
 - Wartungsschritte zur Datenbankwiederherstellung vorantreiben;
 - die Konfiguration einer separaten Dashboard-App reparieren oder die Browserdaten des integrierten Renderers löschen;
 - die System-Anzeigedichte oder Schriftskalierung ändern;
-- die konfigurierten Schutzfunktionen zum Wachhalten oder zum Verhindern des Dimmens bei Inaktivität, die das Panel erreichbar halten, über die Seite „Konfigurieren“ oder Home Assistant ausschalten;
+- die konfigurierten Schutzfunktionen zum Wachhalten oder zum Verhindern des Dimmens bei Inaktivität, die das Panel erreichbar halten, über die Seite „Konfiguration“ oder Home Assistant ausschalten;
 - die Sicherheitseinstellungen für die Stromversorgung des Panels reparieren; oder
 - einen bestimmten, unveränderten Warnhinweis zu einer Sicherheitseinstellung für die Stromversorgung ausblenden, die nur von Hand korrigiert werden kann. Dadurch ändert sich nur die Anzeige. Die zugrunde liegende Bewertung, die Diagnosedaten und das Installationsergebnis bleiben gleich.
 
-Das Einschalten der Panelkamera über ihre Home Assistant-Entität erfordert in beiden Modi eine Genehmigung am Panel. Das Einschalten unter „Konfigurieren“ bleibt eine separate Eigentümereinstellung. Die Kameraberechtigung von Android und eine funktionierende Anzeige für die Kameranutzung sind weiterhin erforderlich.
+Das Einschalten der Panelkamera über ihre Home Assistant-Entität erfordert in beiden Modi eine Genehmigung am Panel. Das Einschalten unter „Konfiguration“ bleibt eine separate Eigentümereinstellung. Die Kameraberechtigung von Android und eine funktionierende Anzeige für die Kameranutzung sind weiterhin erforderlich.
 
-Beim Speichern aus der Ferne über „Konfigurieren“ im Gehärteten Modus muss eine Verringerung der Stromversorgungssicherheit getrennt von Änderungen an Herstellerpaketen gespeichert werden, da dafür unterschiedliche Arten von Genehmigung erforderlich sind. Gemeinsame Speichervorgänge im Entspannten Modus oder über Loopback werden direkt ausgeführt.
+Beim Speichern aus der Ferne über „Konfiguration“ im Gehärteten Modus muss eine Verringerung der Stromversorgungssicherheit getrennt von Änderungen an Herstellerpaketen gespeichert werden, da dafür unterschiedliche Arten von Genehmigung erforderlich sind. Gemeinsame Speichervorgänge im Entspannten Modus oder über Loopback werden direkt ausgeführt.
 
 Der Gehärtete Modus lehnt das Einschleusen von Berührungen von überall außer Loopback ab, damit eine Anfrage sich nicht selbst genehmigen kann. Er weigert sich außerdem, Netzwerk-ADB, das drahtlose Debugging von Android oder das Relay für WebView-Entwicklerwerkzeuge einzuschalten. Schalte das Panel am Panel selbst wieder in den Entspannten Modus, bevor du einen dieser Wege nutzt.
 

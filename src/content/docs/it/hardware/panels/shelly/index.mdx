@@ -1,0 +1,412 @@
+---
+title: Shelly Wall Display
+description: Note sulla famiglia Shelly Wall Display, con piattaforme dei modelli, canali firmware, WebView, sensori e modello di accesso, con un modello ora misurato sull'hardware.
+vendor: Shelly
+panelIndex: true
+sidebar:
+  label: Panoramica
+  order: 0
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
+---
+
+:::note
+**Un modello è stato esaminato sull'hardware: [X2i](/it/hardware/panels/shelly/wall-display-x2i/).** La sua pagina riporta le misurazioni. Tutto il resto di questa pagina è ricerca: le specifiche provengono dalle pagine attuali dei prodotti e della knowledge base Shelly, il comportamento firmware dall'analisi OTA, inclusa l'analisi dell'albero dispositivi dell'immagine delle partizioni moderna, più il [changelog ufficiale Wall Display](https://github.com/ShellyGroup/Wall-Display-Changelog). Da Panel Assistant 1.0, X1i, XL e i modelli successivi sullo stesso firmware condividono un profilo basato su quanto X2i ha mostrato sul firmware Shelly, come descritto [sotto](#cosa-significa-x2i-per-il-resto-della-gamma); il loro hardware viene comunque verificato sul pannello, senza presumerne le caratteristiche.
+:::
+
+Shelly vende Wall Display come cinque modelli su due piattaforme hardware indipendenti: **originale** e **X2** sul canale precedente armeabi-v7a, e **X1i**, **X2i** e **XL** sul canale moderno arm64-v8a. Firmware, meccanismo OTA, modello di accesso e sicurezza sono condivisi all'interno di ogni canale, e in gran parte tra entrambi: questa pagina li tratta una sola volta; la pagina di ogni modello riporta solo specifiche, alias e foto.
+
+- [Wall Display (originale)](/it/hardware/panels/shelly/wall-display/): 4 in, 480×480, Android 7
+- [Wall Display X2](/it/hardware/panels/shelly/wall-display-x2/): 6,9 in, 1440×720, Android 8.1
+- [Wall Display X1i](/it/hardware/panels/shelly/wall-display-x1i/): 4 in, 720×720, Android 11
+- [Wall Display X2i](/it/hardware/panels/shelly/wall-display-x2i/): 6,9 in, 1440×720, Android 11
+- [Wall Display XL](/it/hardware/panels/shelly/wall-display-xl/): 10,1 in, Android 11
+
+:::caution
+Il **Wall Display originale ha Android 7.0**, inferiore alla versione minima supportata da Panel Assistant. X2 usa Android 8.1, mentre X1i, X2i e XL usano Android 11.
+:::
+
+## Venduto anche come
+
+Shelly Wall Display, Shelly Wall Display X2, Shelly Wall Display X1i, Shelly Wall Display X2i, Shelly Wall Display XL, SAWD-0A1XX10EU1, SAWD-2A1XX10EU1, nomi in codice firmware Stargate, Pegasus, Cally, Jenna, Blake, Maverick, Dayna e Atlantis, canali OTA WallDisplay e WallDisplayV2, ID dispositivo k400_mt6580_32_n ed e500_7731e_32u_o, pacchetto launcher cloud.shelly.stargate.
+
+## Famiglia di prodotti
+
+I nomi in codice firmware sono utili quando esamini un OTA, ma non sostituiscono il nome commerciale del modello.
+
+| Nome in codice firmware | Nome commerciale                                                     | Schermo          | Piattaforma                                                                                       | Hardware relè                                                      |
+| ----------------------- | -------------------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Stargate                | [Wall Display (originale)](/it/hardware/panels/shelly/wall-display/) | 4 in, 480×480    | MT6580, Android 7                                                                                 | 1 uscita                                                           |
+| Pegasus                 | [Wall Display X2](/it/hardware/panels/shelly/wall-display-x2/)       | 6,9 in, 1440×720 | SC7731E, Cortex-A7, Android 8.1                                                                   | 1 uscita                                                           |
+| Cally                   | [Wall Display X1i](/it/hardware/panels/shelly/wall-display-x1i/)     | 4 in, 720×720    | RK3326-S, Cortex-A35, Android 11                                                                  | base intercambiabile: 1 uscita standard, base opzionale a 2 uscite |
+| Jenna                   | [Wall Display X2i](/it/hardware/panels/shelly/wall-display-x2i/)     | 6,9 in, 1440×720 | RK3326-S secondo le specifiche Shelly; il chip riporta la famiglia RK3326, Cortex-A35, Android 11 | base intercambiabile: 1 uscita standard, base opzionale a 2 uscite |
+| Blake                   | [Wall Display XL](/it/hardware/panels/shelly/wall-display-xl/)       | 10,1 in          | RK3566, Cortex-A55, Android 11                                                                    | 1 uscita                                                           |
+
+:::note
+Il firmware Shelly nomina anche **Maverick**, **Dayna** e **Atlantis**, che non corrispondono a prodotti venduti da Shelly. Considerali non documentati finché non saranno identificati da un'unità funzionante.
+:::
+
+:::caution
+Un'immagine delle partizioni archiviata sotto uno SKU simile a XL si identifica come `Jenna` e descrive una piattaforma schermo diversa. È una prova utile su quell'immagine, ma non sulle specifiche commerciali attuali. Prevalgono le pagine ufficiali dei modelli sopra; usa gli identificatori a runtime per riconoscere un dispositivo reale.
+:::
+
+## Piattaforma hardware
+
+Wall Display è un **dispositivo Android**, non un prodotto embedded basato su ESP come gli interruttori Gen1 e Gen2 Shelly. Esegue un'app launcher Android personalizzata chiamata Stargate.
+
+Wall Display originale, X2, X1i e X2i, e XL non sono un'unica classe hardware intercambiabile: usano rispettivamente MT6580, SC7731E, RK3326-S e RK3566. I canali OTA condivisi descrivono la compatibilità dei pacchetti, non un SoC comune. L'immagine precedente è destinata a una build di base `userdebug`, quindi `adb root` potrebbe essere possibile _se_ si riesce a stabilire una connessione adb, ma non è stato verificato alcun percorso per l'utente. L'immagine moderna non ha fingerprint nei metadati OTA e non mostra il tipo di build, e un X2i con firmware di fabbrica riporta una build `user`: almeno quell'unità non offre quindi un percorso root del produttore. Vedi [Modello di accesso](#modello-di-accesso).
+
+Shelly documenta sensori di temperatura e umidità su originale e X2, e di luce ambiente su originale, X2, X1i, X2i e XL. X2, X1i e X2i hanno prossimità documentata; XL ha un sensore di movimento. Su X2i entrambi sono sensori Android ordinari e i componenti sono Sensortek STK3A5x; su tutti gli altri modelli componenti e percorsi di accesso non sono ancora accertati. Il numero di relè dipende da modello e base e, fuori da X2i, non è stata accertata alcuna interfaccia relè Android accessibile all'app.
+
+## Plance Home Assistant sul firmware del produttore
+
+### Due modalità (firmware 2.7.0 e successivo)
+
+**Browser WebView integrato** (tutti i modelli): Impostazioni, _Home Assistant_ (Impostazioni, Rete, Home Assistant sui firmware precedenti) apre una WebView a un URL Home Assistant configurato. Da 2.7.0 è nuovamente pienamente supportato e include l'opzione _Cancella cache WebView_.
+
+**Un'app dall'AppStore integrato** (solo dispositivi AppStore moderni: Blake, Jenna, Cally, Maverick, Dayna). Le app installate così usano WebView di sistema e hanno visualizzato correttamente contenuti dove il browser integrato aveva problemi.
+
+### Browser integrato per firmware
+
+| Firmware          | Stato                                                              |
+| ----------------- | ------------------------------------------------------------------ |
+| prima di 2.3.0    | Funzione inesistente                                               |
+| 2.3.0 pre-release | Introdotta in Impostazioni, Rete, Home Assistant                   |
+| 2.6.0             | **Deprecata** sui dispositivi AppStore a favore delle app AppStore |
+| 2.7.0             | **Nuovamente supportata**, insieme alle app AppStore               |
+
+### Problemi di compatibilità noti
+
+Il browser integrato di Wall Display XL aveva problemi di rendering e layout con il frontend Home Assistant 2025.12 e una pre-release 2026.1 (segnalati in [home-assistant/frontend#28755](https://github.com/home-assistant/frontend/issues/28755) e `#28746`; compatibilità core in [home-assistant/core#162665](https://github.com/home-assistant/core/issues/162665)). Un'app che usava WebView di sistema sullo stesso dispositivo visualizzava correttamente: il problema era quindi specifico di WebView del browser integrato e non dell'hardware.
+
+### WebView
+
+**Wall Display originale (`SAWD-0A1XX10EU1`, Android 7):** WebView di sistema originale non è incluso nel pacchetto OTA standard. Shelly pubblica uno ZIP di aggiornamento separato che installa `com.google.android.webview` **119.0.6045.194**. Non è stato accertato un pacchetto equivalente per gli altri modelli.
+
+**Canale WallDisplayV2 (arm64, Android 11):** l'OTA standard non include un pacchetto WebView, quindi la versione originale non è leggibile dal firmware. Un X2i con firmware di fabbrica 2.5.4 ha Chromium 131.0.6778.200, ben superiore al minimo di Panel Assistant e senza necessità di aggiornamento. Non è confermato se gli altri modelli moderni abbiano la stessa build.
+
+Vedi [Aggiornare WebView di sistema](/it/hardware/guides/update-the-webview/).
+
+## Modello di accesso
+
+:::caution
+**Shelly non espone root su alcun Wall Display, ma adb non è l'ostacolo che si pensava.** Nessun modello noto offre `su` o un percorso root per sviluppatori. Opzioni sviluppatore e debug USB si sbloccano però dall'app Impostazioni su un [X2i](/it/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode), che ha poi accettato una connessione adb senza richiesta di autorizzazione. Basta per installare Panel Assistant e usarlo quotidianamente, anche se le funzioni privilegiate sotto restano inaccessibili. Lo stesso sblocco sugli altri modelli moderni non è stato provato, e la build di base `userdebug` del canale precedente solleva una questione separata trattata sotto.
+:::
+
+Gran parte di quanto segue è stato accertato prima di poter esaminare un'unità Shelly e descrive la famiglia come chiusa. Dove X2i differisce, la sua pagina è autorevole per X2i e solo per X2i.
+
+**Un aspetto da approfondire, ma solo sull'hardware precedente.** L'OTA precedente dichiara la build di destinazione in `META-INF/com/android/metadata`, e al firmware 2.7.3 è ancora `alps/full_k400_mt6580_32_n/k400_mt6580_32_n:7.0/NRD90M/vXD100008:userdebug/test-keys`. Su una build `userdebug`, `adb root` _riesce_: **se** si stabilisce una connessione adb, root e demone helper diventano disponibili. Questa prova ha due limiti: il fingerprint descrive l'**immagine OS di base**, con timestamp 2022-11-14, che l'OTA della sola app non modifica, e nessun percorso adb è stato verificato su un'unità.
+
+**Non si estende al canale moderno.** Il pacchetto WallDisplayV2 non dichiara il tipo di build. Non ha fingerprint `META-INF/com/android/metadata` e nessuno dei marcatori `userdebug`, `test-keys`, `release-keys` o `ro.build.fingerprint` compare nelle voci esterne agli APK inclusi (controllato a 2.7.3; i contenuti degli APK non sono stati cercati). Lo script di aggiornamento legge `ro.build.product` solo per registrare il dispositivo e `ro.build.version.incremental` in `HW_VERSION`, che condiziona un solo passaggio: `Camera2.apk` viene installato solo quando quel valore inizia con `vBlake` e non esiste già un pacchetto fotocamera. Nessuno dei due valori viene verificato come requisito, quindi uno ZIP si installa su ogni modello moderno e l'**OTA commerciale moderno** non indica il tipo di build in nessuna direzione. La [nota sulla sicurezza](https://github.com/ShellyGroup/Wall-Display-Changelog/blob/main/SECURITY_POSTURE.md) di Shelly, pubblicata nello stesso repository del changelog ufficiale e riferita all'hardware attuale, afferma che _i dispositivi di produzione usano il tipo di build Android `user`, con ADB e funzioni sviluppatore/debug disabilitati per impostazione predefinita_.
+
+Una precisazione mantiene esatto l'ambito: un'immagine **delle partizioni** archiviata, esterna a entrambi i canali OTA commerciali, si identifica come Android 11 `userdebug`. La sua associazione SKU–nome in codice è inaffidabile e la piattaforma schermo contraddice le specifiche commerciali attuali: è una prova su quell'immagine, non su ciò che eseguono le unità moderne in vendita. Considera l'hardware moderno chiuso finché un'unità funzionante non dimostri altrimenti.
+
+**Cosa significa l'assenza di root per l'app del pannello:**
+
+- Il demone helper (`hapaneld-helper`) richiede un percorso privilegiato verso `/system`, che non esiste senza accesso adb con root: ogni profilo dichiara quindi `platform.app_can_su: false`. Se la build di base `userdebug` precedente cambi questo è elencato sotto come sconosciuto.
+- Le azioni che richiedono davvero root non sono disponibili. Su X2i quelle quotidiane non vi rientrano: luminosità tramite l'impostazione Android, sensori Android ordinari, la prossima versione 1.0 spegne completamente lo schermo tramite API locale Shelly con timeout Android come alternativa, e Panel Assistant installa, aggiorna e configura l'app tramite adb, incluse dimensioni schermo e testo. Si perde un piccolo insieme privilegiato: riavviare o tornare al launcher del produttore dal pannello. Android 11 o successivo può anche fornire screenshot e tocchi tramite il servizio Accessibilità abilitato senza root; i tocchi remoti restano soggetti alle impostazioni di sicurezza.
+- L'AppStore integrato moderno dimostra che Shelly può distribuire applicazioni approvate, ma l'app del pannello non è tra queste. Si installa tramite sideload, su X2i dopo lo sblocco sviluppatore sopra. I dispositivi precedenti non hanno ancora un percorso di installazione confermato.
+- **Il comportamento del proprietario dispositivo dipende dal firmware.** Su X2i con 2.5.4 di fabbrica non ci sono né proprietario dispositivo né amministratore dispositivo. Aggiornando a 2.7.4 il launcher Shelly diventa proprietario dispositivo, e su quell'unità questo non ha tolto nulla a Panel Assistant: impostarlo come app Home ha funzionato senza root su entrambi i firmware ed è rimasto stabile, e il proprietario dispositivo non impone restrizioni alle altre app. Il launcher Shelly non può essere disabilitato su nessuno dei due firmware. Dal firmware 2.8.0 i modelli moderni possono tornare alla versione dell'app con cui sono stati consegnati; prima di usare l'opzione considera i [limiti di recupero](#tornare-alla-versione-di-fabbrica) sotto.
+
+## Collegare un pannello a un computer
+
+:::caution
+**Un cavo USB che alimenta Wall Display può comunque non trasportare dati.** È una proprietà dei cavi, non di questi pannelli, e il pannello si accende comunque: un cavo non adatto e uno funzionante possono sembrare identici. Se il pannello non compare mai sul computer, il cavo è una spiegazione molto più probabile del pannello, dei driver o del browser: provane prima un altro.
+:::
+
+[X2i](/it/hardware/panels/shelly/wall-display-x2i/) richiede inoltre un cavo USB-A–USB-C anziché USB-C–USB-C; la sua pagina spiega perché. Non è stato provato qui se gli altri modelli condividano il vincolo.
+
+## Sensori e relè integrati
+
+I dettagli di sensori e relè variano per modello. Da firmware e pagine prodotto:
+
+| Componente             | Note                                                                                                                                                                                                                                                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Temperatura e umidità  | Documentate su originale e X2. X1i, X2i e XL non hanno sensori integrati di temperatura o umidità. Visibilità tramite API Android non verificata.                                                                                                                                                                   |
+| Luce ambiente          | Documentata su originale, X2, X1i, X2i e XL. Misurata su X2i come sensore Android ordinario senza autorizzazioni; non verificata su ogni altro modello.                                                                                                                                                             |
+| Movimento e prossimità | Prossimità documentata su X2, X1i e X2i; XL ha un sensore di movimento ufficiale. Misurata su X2i come sensore Android ordinario di risveglio senza autorizzazioni; non verificata altrove.                                                                                                                         |
+| Relè                   | Un'uscita su originale, X2 e XL. X1i e X2i hanno una base a un'uscita e supportano una base a due uscite venduta separatamente. Su X2i esiste un controllo sysfs non privilegiato ma non viene usato; vedi [Relè](/it/hardware/panels/shelly/wall-display-x2i/#relays). Nessun percorso accertato su altri modelli. |
+
+Gestisci le entità relè tramite l'integrazione Shelly di Home Assistant, senza presumere che l'app del pannello possa controllarle direttamente. Fuori da X2i resta non verificato se le normali app Android vedano i sensori.
+
+## Cosa significa X2i per il resto della gamma
+
+Un [X2i](/it/hardware/panels/shelly/wall-display-x2i/) è stato esaminato al banco. X1i, XL, Maverick e Dayna usano lo stesso firmware Shelly sullo stesso canale OTA, e X1i condivide la famiglia del processore. **Da Panel Assistant 1.0 condividono un profilo Shelly che trasferisce quanto X2i ha mostrato vero del firmware stesso**, anziché della scheda X2i:
+
+- **Spegnimento completo dello schermo senza root.** La prossima versione 1.0 usa l'API locale Shelly per spegnere la retroilluminazione mentre Android resta attivo. Con password Shelly abilitata, l'implementazione attuale ripiega sul timeout schermo Android perché l'API richiede autenticazione Digest. Provato solo su X2i.
+- **Solo Indietro e Home.** Il profilo moderno omette Recenti basandosi sulle prove firmware X2i proiettate sugli altri modelli moderni. Solo X2i è stato verificato sull'hardware.
+- **Panel Assistant come schermata Home.** Il launcher Shelly resta installato e non può essere disabilitato, ma non si riprende la schermata Home.
+- **Una plancia pulita.** Panel Assistant disattiva la sovrapposizione nell'angolo disegnata dal firmware Shelly sopra ogni app, mentre l'interfaccia Shelly resta raggiungibile dalla barra di navigazione.
+
+Ciò che dipende dall'hardware di ogni modello viene verificato sul pannello all'avvio di Panel Assistant, mai presunto da X2i:
+
+- **Risveglio con un gesto:** richiede un sensore di prossimità. X1i ne documenta uno e potrebbe condividere il componente X2i. XL è il più probabile a differire, perché Shelly lo documenta come sensore di movimento anziché prossimità.
+- **Risveglio con tocco** dallo schermo completamente buio misurato solo su X2i.
+- **I relè** X2i sono raggiungibili tramite un controllo software scrivibile da tutti, ma Panel Assistant non li gestisce su alcun modello Shelly. Usa l'integrazione Shelly di Home Assistant.
+
+**Nulla di questo è stato ancora confermato su un altro modello.** Se hai X1i o XL con Panel Assistant, segnalare cosa funziona è il modo più rapido per migliorare la sua posizione nell'[elenco dei pannelli supportati](/it/install/supported-panels/). Uno sblocco nascosto della modalità sviluppatore rende misurabile tutto questo ed è confermato solo su X2i, la cui [pagina riporta la sequenza esatta](/it/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode).
+
+## Meccanismo OTA del firmware
+
+### Scegliere e installare una build
+
+Usa la versione offerta per il canale OTA esatto del dispositivo e controlla il [changelog ufficiale Wall Display](https://github.com/ShellyGroup/Wall-Display-Changelog) prima di cambiarla. Il [catalogo firmware](https://panel-assistant.io/go/firmware?device=shelly) registra i pacchetti trovati e la loro disponibilità; non dimostra che una versione sia adatta a ogni modello o installazione. I pacchetti `WallDisplay` e `WallDisplayV2` sono incompatibili anche quando i numeri di versione coincidono. Identifica il canale di aggiornamento del dispositivo reale prima di applicare uno ZIP.
+
+Per un normale aggiornamento senza computer, apri l’app Shelly, seleziona Wall Display, poi scegli **Impostazioni → Informazioni dispositivo → Firmware → Aggiorna**. In alternativa, apri la WebUI locale su `http://<device-ip>` e scegli **Impostazioni → Firmware → Aggiorna**. Shelly distribuisce gli aggiornamenti gradualmente: una versione appena pubblicata può non comparire subito su ogni dispositivo. Per applicare una versione specifica, scarica dal catalogo lo ZIP per il canale del dispositivo e usa **Firmware → Firmware personalizzato** nella WebUI (`http://<device-ip>/#/settings/firmware` sui dispositivi WallDisplayV2).
+
+Il link CDN Shelly alla build attuale può smettere di funzionare quando una nuova versione la sostituisce. Per una build precedente usa il link Wayback del catalogo **solo dove è registrata un'acquisizione**; una versione non acquisita potrebbe non essere più recuperabile.
+
+### Firmware attuale e compatibilità
+
+La [tabella delle note di rilascio sotto](#note-di-rilascio-del-produttore) elenca le versioni documentate dal produttore da 2.4.0, inclusa 2.8.4. La versione 2.8.4 risolve problemi di sicurezza nel ripristino impostazioni, nella verifica del server Shelly Cloud e nell'interfaccia web locale. Il [catalogo](https://panel-assistant.io/go/firmware?device=shelly) mostra i pacchetti indicizzati per ogni canale OTA. Una nota di rilascio del produttore è distinta dalle prove di sviluppo descritte qui.
+
+X2i ha ora eseguito **2.8.2 e 2.8.3** nelle prove di sviluppo per la prossima versione Panel Assistant **1.0**. Sono stati controllati ripristino impostazioni, aggiornamento sul posto tramite Panel Assistant, luminosità all'avvio, spegnimento schermo via API e risveglio iniettato via software; la [pagina X2i](/it/hardware/panels/shelly/wall-display-x2i/#firmware-and-why-the-shipped-version-matters) registra i limiti. **È una qualifica parziale, non una dichiarazione di piena compatibilità.** L'aggiornamento sul posto di Panel Assistant è stato controllato su 2.8.2, non su 2.8.3. Tocco fisico e misurazioni abbinate di prossimità e luce restano non qualificati su 2.8.3. Questi risultati non dimostrano il comportamento su X1i, XL o altri modelli Shelly.
+
+Registra modello e versione firmware quando segnali un problema, soprattutto se inizia dopo un aggiornamento del produttore. Prima di aggiornare conserva un backup Panel Assistant e, separatamente, un backup della configurazione Shelly. Nessun backup delle impostazioni è un'immagine completa del firmware Android.
+
+### Tornare alla versione di fabbrica
+
+Da **2.8.0**, i modelli moderni offrono **Impostazioni → Ripristina dispositivo → Disinstalla tutti gli aggiornamenti**, esposto anche come `Shelly.UninstallAllUpdates`. Secondo Shelly questo riporta l'app del produttore all'**unica versione con cui lo schermo è stato consegnato**, che varia con la data di produzione. Non permette di selezionare una versione precedente qualsiasi dal catalogo firmware.
+
+Shelly afferma che dispositivi, stanze e impostazioni sono normalmente mantenuti, ma Android può ripristinarli. Uno schermo consegnato con firmware **precedente a 2.6.2 viene ripristinato alle impostazioni di fabbrica** durante questa operazione. Leggi la conferma e salva prima entrambi i backup delle impostazioni. Panel Assistant non ha verificato la conservazione della propria installazione e impostazioni attraverso questa operazione.
+
+Gli OTA firmati aggiornano app del produttore e file correlati. Non contengono un'immagine completa delle partizioni Android: conservare un OTA è distinto dal dimostrare un ripristino completo del firmware o conservare la calibrazione specifica del dispositivo. Le [note Shelly su aggiornamento e recupero](https://github.com/ShellyGroup/Wall-Display-Changelog#modern-devices-ota-updates) descrivono l'opzione della versione di fabbrica; l'operazione non è stata provata qui.
+
+### Che cos'è il firmware
+
+Il firmware Wall Display è un **APK Android** (l'app launcher Stargate) confezionato come ZIP OTA Android firmato. È diverso dal firmware Shelly Gen1 (ESP8266 `.zip`) o degli interruttori Gen2 (EFR32 `.gbl`): è un aggiornamento di applicazione Android applicato dal downloader OTA nell'app Shelly, non un flash a livello di partizione.
+
+### API OTA
+
+I dispositivi Wall Display usano l'**API RPC Shelly Gen2** per gestire gli aggiornamenti:
+
+```
+Shelly.CheckForUpdate  →  { "stable": {"version": "2.7.1", "build_id": "..."}, ... }
+Shelly.Update { "stage": "stable" }    // pull from the update manifest
+Shelly.Update { "url": "..." }         // install from a custom URL
+```
+
+Un controllo orario (da 2.6.0) e un controllo all'avvio vengono eseguiti automaticamente. Cercare un aggiornamento è distinto dall'installarlo. Da 2.7.0 un controllo di coerenza OTA verifica che l'aggiornamento scaricato sia destinato all'hardware corretto prima di applicarlo.
+
+### Endpoint dei manifesti di aggiornamento (verificati)
+
+Esistono **due canali firmware**, divisi per ABI del pacchetto anziché per una generazione hardware uniforme.
+
+#### Canale 1: WallDisplay (armeabi-v7a, originale e X2)
+
+```
+GET https://updates.shelly.cloud/update/WallDisplay
+```
+
+Comprende SAWD-0A1XX10EU1 (Stargate) e SAWD-2A1XX10EU1 (Pegasus). Lo script OTA verifica che `ro.product.device` sia `k400_mt6580_32_n` (Stargate) o `e500_7731e_32u_o` (Pegasus) prima di applicare l'aggiornamento.
+
+Risposta di esempio, acquisita a 2.7.1: `stable.version` `2.7.1`, `build_id` `20260609-205046/2.7.1-857d7175` e un URL CDN che è un blob denominato dal suo SHA-256 (vedi nota sotto). Per la versione attuale leggi l'indice, non questo esempio.
+
+#### Canale 2: WallDisplayV2 (arm64-v8a, modelli Android 11)
+
+```
+GET https://updates.shelly.cloud/update/WallDisplayV2
+```
+
+Comprende Blake, Jenna, Cally, Maverick e Dayna. Lo script OTA legge `ro.build.product` solo per i registri, senza verifiche per prodotto: uno ZIP si installa quindi su tutti i modelli moderni.
+
+La risposta ha la stessa versione e ID build del canale 1 (`2.7.1` nell'esempio sopra), compilata per arm64-v8a. Entrambi i canali condividono numeri di versione e ID build: vengono compilati insieme dallo stesso codice per ABI diverse.
+
+:::note
+**L'URL CDN è basato sul contenuto**: un nome file SHA-256 senza versione nel percorso. Cambia a ogni rilascio e non può essere dedotto per versioni precedenti. Gli URL precedenti possono restituire 404 dopo un nuovo rilascio, quindi è importante salvare l'originale mentre è disponibile. L'archiviazione su Wayback Machine viene quindi **tentata** per ogni versione scoperta ed è **confermata** solo quando viene scritto un timestamp di acquisizione accanto al suo URL CDN in [`tools/firmware-index/fw-shelly-walldisplay.dat`](https://github.com/panel-assistant/panel-assistant.io/blob/main/tools/firmware-index/fw-shelly-walldisplay.dat). Un timestamp vuoto significa archiviazione in attesa o non riuscita; non significa che i file siano al sicuro. Leggi dall'indice stesso quali versioni sono confermate. Una versione senza acquisizione confermata potrebbe non essere più scaricabile dal catalogo.
+:::
+
+#### CDN statico precedente (solo SAWD-0A1XX10EU1)
+
+```
+https://repo.shelly.cloud/firmware/SAWD-0A1XX10EU1/stable/SAWD-0A1XX10EU1.zip
+https://repo.shelly.cloud/firmware/SAWD-0A1XX10EU1/stable/SAWD-0A1XX10EU1-WebViewUpdate.zip
+```
+
+Fermo alla versione 1.2.1 (2023-08-15). Lo ZIP di aggiornamento WebView (107,5 MB) contiene l'APK WebView di sistema per il dispositivo Android 7 precedente. L'elenco della directory restituisce 403.
+
+### Formato dei file OTA
+
+Verificato su entrambi i canali. Ogni ZIP OTA contiene:
+
+- `META-INF/com/google/android/updater-script`, applicatore OTA personalizzato in script shell (non Edify)
+- `manifest.json`: `{"name":"WallDisplay[V2]","version":"X.Y.Z","build_id":"...","build_timestamp":"..."}`
+- `system/priv-app/Stargate/Stargate.apk`, il launcher Shelly (31 MB per arm64, circa 10 MB per armeabi-v7a)
+- `META-INF/MANIFEST.MF`, `CERT.SF` e `CERT.RSA`, firmati con SignApk
+
+Aggiunte precedenti: `scatter.txt` (schema partizioni MediaTek MT6580) e `META-INF/com/android/metadata` (fingerprint build `alps/full_k400_mt6580_32_n/...`, Android 7.0); lo script verifica il dispositivo prodotto prima di procedere.
+
+Aggiunte moderne: `device_owner_2.xml`, `device_admins.xml` e aggiornamenti `tzdata/`; nessun `scatter.txt`, perché non è un flash a livello di partizione.
+
+Il percorso delle librerie native nell'APK Stargate conferma l'ABI: `lib/armeabi-v7a/libstargate_input.so` (precedente) e `lib/arm64-v8a/libstargate_input.so` (moderno).
+
+### File firmware noti
+
+| File                                       | Canale                      | Versione              | ABI         | Dimensioni |
+| ------------------------------------------ | --------------------------- | --------------------- | ----------- | ---------- |
+| `WallDisplay-2.7.1-stable.bin`             | `WallDisplay`               | 2.7.1                 | armeabi-v7a | 28,6 MB    |
+| `WallDisplayV2-2.7.1-stable.bin`           | `WallDisplayV2`             | 2.7.1                 | arm64-v8a   | 38 MB      |
+| `SAWD-0A1XX10EU1-stable-firmware.zip`      | repo.shelly.cloud (statico) | 1.2.1 (2023-08-15)    | armeabi-v7a | 12,5 MB    |
+| `SAWD-0A1XX10EU1-stable-WebViewUpdate.zip` | repo.shelly.cloud (statico) | WebView per Android 7 | armeabi-v7a | 107,5 MB   |
+
+## Sicurezza
+
+Il firmware 2.6.0 ha rivelato che RPC tramite BLE era aperto a qualsiasi connessione BLE senza autenticazione (segnalato da [Pen Test Partners](https://www.pentestpartners.com/)). È stato corretto per fasi:
+
+- **2.6.0:** finestra di conferma della connessione BLE, che l'utente deve accettare prima di aprire una sessione RPC.
+- **2.7.0:** il server GATT non è connettibile quando _Abilita RPC Bluetooth_ è disattivato, e il riconoscimento nelle scansioni BLE è più restrittivo per ridurre connessioni involontarie.
+
+## Note di rilascio del produttore
+
+import notes from '../../../../../../../tools/firmware-index/shelly-release-notes.json';
+
+export const summaries = {
+  '2.8.4':
+    'Modifiche a sicurezza, recupero delle impostazioni, aggiornamenti firmware e dispositivi Matter.',
+  '2.8.3':
+    'Modifiche a navigazione della plancia, aggiornamenti firmware, dispositivi Matter e controlli del clima.',
+  '2.8.2':
+    'Modifiche a controlli del clima, connessioni di rete, controlli dello schermo e controlli dei dispositivi.',
+  '2.8.1':
+    'Modifiche a fotocamere e ingresso audio, controlli del clima, controlli dello schermo e controlli dei dispositivi.',
+  '2.8.0':
+    'Modifiche a navigazione della plancia, recupero delle impostazioni, aggiornamenti firmware e fotocamere e ingresso audio.',
+  '2.7.4': 'Modifiche a connessioni di rete e controlli dello schermo.',
+  '2.7.3':
+    'Modifiche a navigazione della plancia, controlli del clima, connessioni di rete e controlli dello schermo.',
+  '2.7.2':
+    'Modifiche a navigazione della plancia, recupero delle impostazioni, controlli del clima e controlli dei dispositivi.',
+  '2.7.1':
+    'Modifiche a controlli del clima, connessioni di rete, contenuti multimediali e sveglie e controlli dei dispositivi.',
+  '2.7.0':
+    'Modifiche a sicurezza, navigazione della plancia, aggiornamenti firmware e fotocamere e ingresso audio.',
+  '2.6.2':
+    'Modifiche a recupero delle impostazioni, fotocamere e ingresso audio, controlli del clima e controlli dello schermo.',
+  '2.6.1': 'Modifiche a controlli dello schermo.',
+  '2.6.0':
+    'Modifiche a sicurezza, recupero delle impostazioni, aggiornamenti firmware e controlli del clima.',
+  '2.5.8': 'Modifiche a controlli del clima e interfacce di automazione.',
+  '2.5.7':
+    'Modifiche a navigazione della plancia, controlli del clima, connessioni di rete e controlli dello schermo.',
+  '2.5.6':
+    'Modifiche a navigazione della plancia, recupero delle impostazioni, controlli dello schermo e controlli dei dispositivi.',
+  '2.5.5':
+    'Modifiche a connessioni di rete, controlli dello schermo, contenuti multimediali e sveglie e controlli dei dispositivi.',
+  '2.5.4':
+    'Modifiche a controlli del clima, controlli dello schermo, controlli dei dispositivi e letture dei sensori.',
+  '2.5.3':
+    'Modifiche a navigazione della plancia, controlli dello schermo e controlli dei dispositivi.',
+  '2.5.2': 'Modifiche a controlli del clima, controlli dello schermo e interfacce di automazione.',
+  '2.5.1':
+    'Modifiche a controlli del clima, connessioni di rete, controlli dello schermo e controlli dei dispositivi.',
+  '2.4.5': 'Modifiche a connessioni di rete.',
+  '2.4.4':
+    'Modifiche a connessioni di rete, controlli dello schermo, controlli dei dispositivi e interfacce di automazione.',
+  '2.4.3':
+    'Modifiche a recupero delle impostazioni, controlli dello schermo, controlli dei dispositivi e letture dei sensori.',
+  '2.4.2': 'Modifiche a controlli dello schermo e letture dei sensori.',
+  '2.4.1': 'Modifiche a controlli dello schermo e letture dei sensori.',
+  '2.4.0':
+    'Modifiche a recupero delle impostazioni, aggiornamenti firmware, connessioni di rete e controlli dello schermo.',
+};
+
+Queste brevi sintesi descrivono con parole nostre gli argomenti delle note Shelly. Ogni link sorgente è fissato al file del produttore registrato, quindi modifiche successive non lo cambiano. “Copia archiviata” compare solo dopo che l'API di disponibilità Wayback conferma un'acquisizione. Anche il file sorgente è conservato separatamente. Possono esistere note per versioni i cui pacchetti non sono stati trovati; non dimostrano compatibilità con un modello specifico.
+
+<div className="release-notes">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Versione</th>
+        <th scope="col">Sintesi</th>
+        <th scope="col">Fonte</th>
+      </tr>
+    </thead>
+    <tbody>
+      {Object.entries(notes)
+        .sort(([a], [b]) => b.localeCompare(a, undefined, { numeric: true }))
+        .map(([version, note]) => {
+          const page = `https://github.com/ShellyGroup/Wall-Display-Changelog/blob/${note.commit}/README.md`;
+          const anchor = `#${version.replaceAll('.', '')}`;
+          return (
+            <tr>
+              <th scope="row">{version}</th>
+              <td>{summaries[version]}</td>
+              <td>
+                <a href={page + anchor}>Note di rilascio</a>
+                {' · '}
+                {note.wayback_ts ? (
+                  <a href={`https://web.archive.org/web/${note.wayback_ts}/${page}${anchor}`}>
+                    Copia archiviata
+                  </a>
+                ) : (
+                  'Copia archiviata in attesa'
+                )}
+              </td>
+            </tr>
+          );
+        })}
+    </tbody>
+  </table>
+</div>
+
+## Versioni firmware che influiscono sulle app di terze parti
+
+Canale stabile, dalla più recente. Le date di 2.8.1, 2.8.2 e 2.8.3 sono le date di compilazione dei pacchetti del produttore. Il changelog completo è su [ShellyGroup/Wall-Display-Changelog](https://github.com/ShellyGroup/Wall-Display-Changelog), che copre 2.4.0 e successive; le versioni precedenti sono su `community.shelly.cloud`, che richiede accesso.
+
+| Versione | Data           | Modifica rilevante                                                                                                                                                     |
+| -------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2.8.4    | 2026-10-19     | Correzioni di sicurezza del produttore per ripristino backup, verifica server Cloud e accesso web locale; nessuna qualifica hardware dichiarata                        |
+| 2.8.3    | 2026-10-12     | Stabile al controllo del 2026-10-12; correzioni plancia Home Assistant e rilevamento aggiornamenti; prove X2i parziali; qualifica completa in attesa                   |
+| 2.8.2    | 2026-10-08     | Correzioni controllo gruppi e riconnessione Shelly Cloud; prove di sviluppo X2i parziali; qualifica completa in attesa                                                 |
+| 2.8.1    | 2026-10-06     | Il microfono della comunicazione bidirezionale fotocamera del produttore registra solo mentre si tiene premuto il pulsante                                             |
+| 2.8.0    | Vedi changelog | I modelli moderni ottengono funzioni Matter e ritorno alla versione app di fabbrica, con limiti di ripristino alle impostazioni di fabbrica                            |
+| 2.7.3    | 2026-07-29     | Analisi storica: l'OTA precedente dichiara una build di base `userdebug`                                                                                               |
+| 2.7.2    | 2026-07-16     | Le app di terze parti vengono disinstallate con il ripristino di fabbrica                                                                                              |
+| 2.7.0    | 2026-06-03     | Browser Home Assistant integrato nuovamente supportato, con pulizia cache; controllo coerenza hardware OTA; GATT non connettibile quando RPC tramite BLE è disattivato |
+| 2.6.0    | 2026-05-12     | AppStore (solo modelli moderni); controllo OTA orario; finestra autenticazione BLE; browser Home Assistant integrato deprecato sui modelli AppStore                    |
+| 2.5.6    | 2026-02-04     | WebView sospeso in background sulle plance Home Assistant pesanti per evitare arresti, ricaricando anche i flussi WebRTC                                               |
+| 2.5.3    | circa 2025-10  | Controllo versione WebView sul vecchio X1                                                                                                                              |
+| 2.5.1    | 2025-10-27     | Impostazioni Accessibilità Android esposte                                                                                                                             |
+| 2.3.4    | 2025-02-23     | Correzione urgente di un guasto al canale OTA che lasciava i dispositivi su firmware vecchio                                                                           |
+| 1.2.1    | 2023-08-15     | Versione scaricabile confermata più vecchia (CDN statico)                                                                                                              |
+
+## Profili dispositivo: noto e sconosciuto
+
+Due profili di famiglia seguono i due canali OTA, accanto a un [profilo X2i esatto](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display-x2i.yaml): [`shelly-wall-display.yaml`](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display.yaml) e [`shelly-wall-display-v2.yaml`](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display-v2.yaml). Un canale OTA è troppo ampio per rappresentare SoC, schermo e relè specifici del modello: entrambi restano deliberatamente generici e i campi preliminari. La tabella sotto li descrive. Per ciò che X2i riporta davvero, leggi [la sua pagina](/it/hardware/panels/shelly/wall-display-x2i/).
+
+### Noto o deducibile dal firmware
+
+| Campo                             | `shelly-wall-display` (precedente)                | `shelly-wall-display-v2` (moderno)           | Fonte                                                                                                                                                         |
+| --------------------------------- | ------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `soc_class`                       | dipende dal modello; originale MT6580, X2 SC7731E | dipende dal modello; X1i RK3326-S, XL RK3566 | pagine ufficiali dei modelli; fingerprint OTA                                                                                                                 |
+| `platform.su_form` / `app_can_su` | `none` / `false`                                  | `none` / `false`                             | nessun root esposto all'utente (precedente destinato a build di base `userdebug`; moderno non mostra il tipo; vedi [Modello di accesso](#modello-di-accesso)) |
+| `hardware.led.mechanism`          | `none`                                            | `none`                                       | dichiarazione del profilo attuale; non verificata su ogni modello                                                                                             |
+| `hardware.screen_off`             | `brightness-zero`                                 | `vendor-rpc`                                 | API schermo Stargate moderna, con timeout Android alternativo quando indisponibile o protetta da password                                                     |
+| `platform.has_recents`            | `true`                                            | `false`                                      | dichiarazione moderna proiettata dal firmware X2i misurato; altri modelli richiedono conferma su hardware                                                     |
+| `hardware.relay_base`             | assente                                           | assente                                      | relè gestiti tramite integrazione Shelly Home Assistant; nessun percorso standard accessibile all'app accertato                                               |
+| `hardware.zigbee_gateway_dir`     | assente                                           | assente                                      | nessuna radio Zigbee o Thread                                                                                                                                 |
+| `sensors.proximity_technology`    | assente                                           | assente                                      | richiede prove hardware su ogni modello restante                                                                                                              |
+| `sensors.light_technology`        | `Ambient light`                                   | `Ambient light`                              | pagine ufficiali dei modelli; esposizione API Android non verificata fuori da X2i                                                                             |
+| Pacchetto app                     | `cloud.shelly.stargate` (launcher Home)           | uguale                                       | manifesto APK Stargate; il contenuto 2.7.3 installa anche file di criteri proprietario dispositivo                                                            |
+
+### Sconosciuto finché non si esamina un'unità funzionante
+
+- Gli identificatori runtime esatti per distinguere X2, X1i e XL senza corrispondenze false dei profili. X2i riporta coerentemente il nome in codice firmware in ogni identificatore: è la prima cosa da provare sugli altri.
+- Se `SensorManager` Android esponga ogni sensore di luce ambiente, movimento o prossimità documentato sui modelli diversi da X2i.
+- `platform.has_recents` sui modelli diversi da X2i. Il profilo moderno omette Recenti in base alle prove firmware X2i, mentre quello precedente lo dichiara disponibile. Su X2i né il tasto Recenti né l'azione Recenti di accessibilità Android fanno nulla, perché il firmware non ha una directory delle attività recenti.
+- Densità schermo predefinita e `provisioning.display.density` appropriata per modello.
+- Se accesso adb e `adb root` siano raggiungibili sulla build di base `userdebug` precedente, consentendo il demone helper. Un X2i viene fornito con build `user`, quindi su quell'unità non esiste un percorso root del produttore; non è provato se gli altri modelli moderni facciano lo stesso.
+- Se il servizio HTTP dell'app sulla porta indicata (8888 per impostazione predefinita) sia raggiungibile dalla LAN, cosa che dipende dal firewall del dispositivo.
+
+## Fonti
+
+- [ShellyGroup/Wall-Display-Changelog](https://github.com/ShellyGroup/Wall-Display-Changelog): changelog ufficiale del firmware.
+- [SECURITY_POSTURE.md](https://github.com/ShellyGroup/Wall-Display-Changelog/blob/main/SECURITY_POSTURE.md): dichiarazione Shelly su tipo di build, adb, sideload e firma aggiornamenti per l'hardware attuale.
+- [Knowledge base Shelly Wall Display](https://kb.shelly.cloud/knowledge-base/shelly-wall-display): modello originale da 4 in.
+- [Knowledge base Shelly Wall Display X2](https://kb.shelly.cloud/knowledge-base/shelly-wall-display-x2)
+- [Knowledge base Shelly Wall Display X1i](https://kb.shelly.cloud/knowledge-base/shelly-wall-display-x1i)
+- [Knowledge base Shelly Wall Display X2i](https://kb.shelly.cloud/knowledge-base/shelly-wall-display-x2i)
+- [Knowledge base Shelly Wall Display XL](https://kb.shelly.cloud/knowledge-base/shelly-wall-display-xl)
+- [API RPC Shelly Gen2](https://shelly-api-docs.shelly.cloud/gen2/ComponentsAndServices/Shelly/): `Shelly.CheckForUpdate` e `Shelly.Update`.
+- [home-assistant/frontend#28755](https://github.com/home-assistant/frontend/issues/28755): problema di rendering del browser integrato su XL.
+- [home-assistant/core#162665](https://github.com/home-assistant/core/issues/162665): compatibilità dell'integrazione Home Assistant.
+- [Pen Test Partners](https://www.pentestpartners.com/): problema di autenticazione RPC BLE, corretto in 2.6.0 e 2.7.0.

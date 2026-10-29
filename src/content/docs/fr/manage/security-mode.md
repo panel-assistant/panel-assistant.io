@@ -1,7 +1,7 @@
 ---
 title: Mode de sécurité
 description: Le comportement par défaut du panneau sur un réseau de confiance et le mode renforcé, qui exige qu’une personne présente au panneau approuve les actions distantes ayant des conséquences importantes.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 L’interface web du panneau, son API et ses commandes Home Assistant sont conçues pour un réseau domestique de confiance. Le **mode souple** est activé par défaut : les automatisations, les outils d’installation et les actions du navigateur fonctionnent sans demande supplémentaire. Une action échappe délibérément à cette règle. Activer la caméra via son entité Home Assistant demande une approbation au panneau dans tous les modes, y compris le mode souple. Le réglage Caméra dans Configurer constitue un moyen de configuration distinct pour le propriétaire. La désactiver ne demande jamais d’approbation.

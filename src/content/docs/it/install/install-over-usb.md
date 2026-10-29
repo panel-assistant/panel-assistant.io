@@ -1,7 +1,7 @@
 ---
 title: Installare tramite USB
 description: Metti in funzione un pannello nuovo dal browser con un cavo USB, prima di montarlo a parete.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
 L'installazione via USB è pensata per un pannello ancora nella scatola o il cui software del produttore rende difficile l'accesso alla rete. Collega il pannello al computer che stai usando e il browser installa l'app del pannello direttamente attraverso il cavo. Il pannello non necessita di ADB di rete. Il browser deve rimanere connesso a Home Assistant, che fornisce la versione verificata. La maggior parte delle persone usa questa procedura una sola volta, prima di montare il pannello.
@@ -15,7 +15,7 @@ Il programma di installazione USB viene avviato da un amministratore da Home Ass
 - L'[integrazione](/it/home-assistant/custom-integration/) installata e un account amministratore.
 - Un browser basato su Chromium, come Chrome o Edge. Firefox e Safari non possono comunicare con i dispositivi USB.
 - Un cavo USB dal pannello al computer o al telefono su cui è in esecuzione quel browser. Non al server Home Assistant.
-- Il debug USB attivato nelle opzioni sviluppatore del pannello. Se il pannello mostra una richiesta di autorizzazione quando lo colleghi, qualcuno davanti al pannello deve accettarla; alcuni pannelli non la mostrano mai. Le [pagine sull'hardware](/it/hardware/) mostrano come accedere alle opzioni sviluppatore su ciascun modello.
+- Il debug USB attivato nelle opzioni sviluppatore del pannello. Se il pannello mostra una richiesta di autorizzazione quando lo colleghi, qualcuno davanti al pannello deve accettarla; alcuni pannelli non la mostrano mai. Le [pagine sull'hardware](/it/hardware/) indicano le procedure di debug note e identificano i modelli il cui accesso USB iniziale non è ancora verificato.
 
 ## Come funziona
 

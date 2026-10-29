@@ -1,7 +1,7 @@
 ---
 title: Pierwsze kroki
 description: W kilka minut od gołego panelu ściennego z Androidem do twojego pulpitu nawigacyjnego Home Assistant, a Home Assistant prowadzi cię przez każdy krok.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
 Jeśli kiedyś konfigurowałeś panel ścienny lub kiosk, pewnie pamiętasz, jak to wyglądało: instalowanie aplikacji z innych źródeł, szukanie silnika przeglądarki, który potrafiłby wyświetlić pulpit nawigacyjny, zgadywanie ustawień i nigdy do końca pewności, co będzie po następnym restarcie. Konfiguracja panelu z Panel Assistant będzie dla ciebie miłym szokiem. Możesz skończyć w kilka minut, a nawet gdy panel wisi już na ścianie, nie musisz wstawać z krzesła. No dobrze, może raz ;-)
@@ -13,16 +13,16 @@ Najtrudniejsza przy każdym panelu jest pierwsza godzina. Panel Assistant przejd
 Dodaj Panel Assistant przez HACS i uruchom ponownie Home Assistant. To jedyna rzecz, którą instalujesz ręcznie. Od tej chwili prowadzi cię Home Assistant. Zobacz [Instalacja integracji](/pl/home-assistant/custom-integration/).
 
 :::note
-Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/pl/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/pl/manage/upgrade-to-1-0/) explains what changes.
+Panel Assistant 1.0 jest kandydatem do wydania. HACS domyślnie oferuje 0.9.0. Aby wypróbować kandydata do wydania, uaktywnij i włącz przełącznik **Wersja wstępna** na urządzeniu Panel Assistant w **Ustawienia**, **Urządzenia i usługi**, **HACS**; [Instalacja integracji](/pl/home-assistant/custom-integration/) opisuje krok z wyłączoną encją. Panel z aplikacją 1.0 nie może wrócić do 0.9; [Aktualizacja do 1.0](/pl/manage/upgrade-to-1-0/) wyjaśnia zmiany.
 :::
 
 ## 2. Włącz debugowanie na panelu
 
-Otwórz opcje programisty na panelu: na większości paneli otwórz **Ustawienia**, następnie **Informacje** i dotknij **Numer kompilacji** siedem razy. Następnie włącz **debugowanie USB**, jeśli podłączasz panel kablem, albo **sieciowe ADB na porcie TCP 5555** dla ścieżki sieciowej. Nie każdy panel ma przełącznik sieciowego ADB; każda [strona sprzętu](/pl/hardware/) mówi, czy twój go ma i gdzie, a jeśli nie, użyj ścieżki USB. Szczegóły znajdziesz w [Przygotowaniu panelu](/pl/install/prepare-a-panel/).
+Otwórz opcje programisty na panelu: na większości paneli otwórz **Ustawienia**, następnie **Informacje** i dotknij **Numer kompilacji** siedem razy. Następnie włącz **debugowanie USB**, jeśli podłączasz panel kablem, albo **sieciowe ADB na porcie TCP 5555** dla ścieżki sieciowej. Nie każdy panel ma przełącznik sieciowego ADB; [strony o sprzęcie](/pl/hardware/) podają znane drogi i wskazują, kiedy początkowy dostęp nie jest zweryfikowany. Jeśli dostęp sieciowy jest niedostępny, użyj USB po potwierdzeniu debugowania USB i portu danych USB dla twojego modelu. Szczegóły znajdziesz w [Przygotowaniu panelu](/pl/install/prepare-a-panel/).
 
 ## 3. Dodaj panel
 
-W Home Assistant przejdź do **Ustawienia**, **Urządzenia oraz usługi**, **Dodaj integrację** i wybierz **Panel Assistant**. Następnie wybierz, jak panel jest podłączony.
+W Home Assistant przejdź do **Ustawienia**, **Urządzenia i usługi**, **Dodaj integrację** i wybierz **Panel Assistant**. Następnie wybierz, jak panel jest podłączony.
 
 ### Podłączony do komputera
 
@@ -45,9 +45,9 @@ Zupełnie nowy panel możesz skonfigurować, zanim w ogóle zawiśnie na ściani
 <img class="dark:sl-hidden" src="/screenshots/usb-allow-light.png" width="520" height="263" alt="Instalator USB czeka, aż dotkniesz Zezwól na ekranie panelu">
 </figure>
 <figure>
-<figcaption><span>4</span> Naciśnij Install</figcaption>
-<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="323" alt="Instalator USB gotowy do instalacji, z jednym przyciskiem Install">
-<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="323" alt="Instalator USB gotowy do instalacji, z jednym przyciskiem Install">
+<figcaption><span>4</span> Naciśnij Zainstaluj</figcaption>
+<img class="light:sl-hidden" src="/screenshots/usb-confirm-dark.png" width="520" height="323" alt="Instalator USB gotowy do instalacji, z jednym przyciskiem Zainstaluj">
+<img class="dark:sl-hidden" src="/screenshots/usb-confirm-light.png" width="520" height="323" alt="Instalator USB gotowy do instalacji, z jednym przyciskiem Zainstaluj">
 </figure>
 <figure>
 <figcaption><span>5</span> Obserwuj instalację</figcaption>
@@ -102,6 +102,8 @@ Tak czy inaczej, kreator zajmuje się najbardziej kłopotliwą częścią. Spraw
 Następnie przychodzi czas na kreator konfiguracji samego panelu. Udostępnia go panel, ale otwiera się on w przeglądarce na komputerze, a nie na ekranie panelu. Po instalacji sieciowej Home Assistant pokazuje **Dokończ konfigurację tego panelu**: otwórz stronę konfiguracji panelu, wykonaj tam wszystkie kroki, a potem wróć do Home Assistant i wybierz **Gotowe**. Po instalacji USB okno instalatora przechodzi prosto do kreatora. Ponieważ udostępnia go panel, ładuje się tylko w przeglądarce w tej samej sieci co panel.
 
 Kreator prosi o nazwę panelu, loguje go do Home Assistant i pyta, który pulpit nawigacyjny wyświetlać oraz w którym obszarze znajduje się panel. Panel łączy się jako konto Home Assistant, którym się zalogujesz, więc jeśli twoja przeglądarka jest zalogowana jako ty, panel może połączyć się jako ty; aby panel korzystał z własnego konta, zaloguj się zamiast tego na to konto. Przy włączonym filtrowaniu encji panel ładuje tylko encje używane przez ten pulpit, dzięki czemu działa szybko. Zobacz [Podłączanie panelu](/pl/home-assistant/connect-a-panel/).
+
+W niewydanej wersji 1.0.0-rc2 konfiguracja może się zakończyć nawet wtedy, gdy silnik przeglądarki panelu jest za stary, aby wyświetlić aktualny pulpit Home Assistant we wbudowanym rendererze. Kreator ostrzega, gdy wymaga to uwagi. Wykonaj instrukcje [przewodnika WebView](/pl/hardware/guides/update-the-webview/), zanim zaczniesz polegać na pulpicie; samo ukończenie konfiguracji nie potwierdza, że pulpit może się załadować.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="Kreator konfiguracji panelu – krok po kroku" tabindex="0">
 <figure>

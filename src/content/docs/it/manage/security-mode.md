@@ -1,7 +1,7 @@
 ---
 title: Modalità di sicurezza
 description: Il comportamento predefinito del pannello su una rete fidata e la modalità rafforzata, che richiede a qualcuno presente al pannello di approvare le azioni remote ad alto impatto.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 L'interfaccia web del pannello, la sua API e i suoi controlli di Home Assistant sono progettati per una rete domestica fidata. La **modalità permissiva** è quella predefinita: automazioni, strumenti di installazione e azioni del browser funzionano senza una richiesta aggiuntiva. Un'azione è deliberatamente esclusa da questa regola. Accendere la fotocamera tramite la sua entità Home Assistant richiede l'approvazione sul pannello in ogni modalità, inclusa quella permissiva. L'impostazione Fotocamera in Configura è un percorso separato di configurazione del proprietario. Spegnerla non richiede mai l'approvazione.

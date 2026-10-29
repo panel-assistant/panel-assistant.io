@@ -1,7 +1,7 @@
 ---
 title: Podłączanie panelu
 description: Wyświetlanie pulpitu nawigacyjnego na panelu oraz to, jak własny sprzęt panelu pojawia się w Home Assistant.
-sourceCommit: 72865c3dcae1e1938e0e4d130db4f6f429002ee5
+sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
 Panel dodany do Home Assistant łączy się z nim na dwa sposoby. Pierwszy wyświetla pulpit nawigacyjny na ekranie. Drugi wprowadza własny sprzęt panelu jako encje.
