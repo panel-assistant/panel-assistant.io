@@ -20,9 +20,9 @@ Alle drei Aktionen sind privilegiert. Die Funktion benötigt daher **Root oder d
 
 ## Verwendung
 
-Die Verwaltung erfolgt **in der eigenen Weboberfläche des Panels**, im Tab **Installieren**, nicht in Home Assistant. Das erledigst du einmal bei der Einrichtung eines Panels oder nach einem Firmware-Update, statt es täglich umzuschalten. Daher gehört es nicht auf ein Dashboard.
+Die Verwaltung erfolgt **in der eigenen Weboberfläche des Panels**, im Tab **Installation**, nicht in Home Assistant. Das erledigst du einmal bei der Einrichtung eines Panels oder nach einem Firmware-Update, statt es täglich umzuschalten. Daher gehört es nicht auf ein Dashboard.
 
-Wähle auf der Geräteseite des Panels in Home Assistant **Besuchen**, öffne **Installieren** und suche die Karte **Herstellerpakete** (zum Beispiel `http://<panel-ip>:8888/install` beim Standardport).
+Wähle auf der Geräteseite des Panels in Home Assistant **Besuchen**, öffne **Installation** und suche die Karte **Herstellerpakete** (zum Beispiel `http://<panel-ip>:8888/install` beim Standardport).
 
 Drücke **Paket suchen…**, um eine Liste von Apps auf dem Panel zu öffnen, die du möglicherweise steuern möchtest. Sie ist zur leichteren Auswahl gruppiert:
 

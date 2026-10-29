@@ -12,7 +12,7 @@ Panel Assistant 1.0 y la aplicación del panel 1.0 avanzan juntos. La integraci�
 
 **Haz una copia de seguridad de Home Assistant.** En **Ajustes**, **Sistema**, **Copias de seguridad**, crea una copia y consérvala hasta que todos los paneles ejecuten 1.0 y estés satisfecho con su funcionamiento. Es tu vía para volver atrás en el lado de Home Assistant.
 
-**Conserva una copia de seguridad de cada panel.** En la interfaz web de cada panel, abre **Instalación**, después **Copia de seguridad**, y guarda el archivo `.hpb` descargado. Panel Assistant también guarda los ajustes del panel antes de cada actualización, pero tu propia copia es la que puedes restaurar tú mismo.
+**Conserva una copia de seguridad de cada panel.** En la interfaz web de cada panel, abre **Instalar**, después **Copia de seguridad**, y guarda el archivo `.hpb` descargado. Panel Assistant también guarda los ajustes del panel antes de cada actualización, pero tu propia copia es la que puedes restaurar tú mismo.
 
 ## 1. Actualizar la integración
 

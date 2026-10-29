@@ -12,7 +12,7 @@ Panel Assistant 1.0 et l’application de panneau 1.0 évoluent ensemble. L’in
 
 **Créez une sauvegarde Home Assistant.** Dans **Paramètres**, **Système**, **Sauvegardes**, créez une sauvegarde et conservez-la jusqu’à ce que tous les panneaux exécutent la version 1.0 et vous donnent satisfaction. C’est votre moyen de revenir en arrière côté Home Assistant.
 
-**Conservez une sauvegarde de chaque panneau.** Sur l’interface web de chaque panneau, ouvrez **Installation**, puis **Sauvegarde**, et conservez le fichier `.hpb` téléchargé. Panel Assistant enregistre aussi les réglages du panneau avant chaque mise à jour, mais votre propre copie est celle que vous pouvez restaurer vous-même.
+**Conservez une sauvegarde de chaque panneau.** Sur l’interface web de chaque panneau, ouvrez **Installer**, puis **Sauvegarde**, et conservez le fichier `.hpb` téléchargé. Panel Assistant enregistre aussi les réglages du panneau avant chaque mise à jour, mais votre propre copie est celle que vous pouvez restaurer vous-même.
 
 ## 1. Mettre à jour l’intégration
 
