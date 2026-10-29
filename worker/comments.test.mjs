@@ -496,22 +496,30 @@ test('the live worker routes /comments to the handler and everything else as bef
   assert.match(wrangler, /"run_worker_first": \[[^\]]*"\/comments\/count"/);
 });
 
-test('the Worker holds no comment state: no storage binding and no module-level cache', () => {
+// Source-text reason: these architectural privacy constraints cover bindings and persistent
+// module state that successful request/response tests alone cannot rule out.
+test('the Worker declares only the curated WebView storage bucket', () => {
   const wrangler = readFileSync(new URL('./wrangler.jsonc', import.meta.url), 'utf8');
+  const config = JSON.parse(wrangler.replace(/^\s*\/\/.*$/gm, '').replace(/,(\s*[}\]])/g, '$1'));
+  assert.deepEqual(config.r2_buckets, [
+    { binding: 'WEBVIEWS', bucket_name: 'panel-assistant-webviews' },
+  ]);
   for (const binding of [
     'kv_namespaces',
     'd1_databases',
-    'r2_buckets',
     'durable_objects',
     'queues',
     'hyperdrive',
     'vectorize',
   ]) {
-    assert.ok(!wrangler.includes(`"${binding}"`), binding);
+    assert.equal(Object.hasOwn(config, binding), false, binding);
   }
+});
+
+test('comments keep no module-level mutable state or cache', () => {
   const source = readFileSync(new URL('./comments.js', import.meta.url), 'utf8');
   const topLevel = source
     .split('\n')
-    .filter((l) => /^(let|var)\s|^const\s+\w+\s*=\s*(new\s|\[|\{)/.test(l));
+    .filter((line) => /^(let|var)\s|^const\s+\w+\s*=\s*(new\s|\[|\{)/.test(line));
   assert.deepEqual(topLevel, []);
 });

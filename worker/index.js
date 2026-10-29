@@ -1,5 +1,6 @@
 // Answers /go/<topic> with a redirect, takes anonymous comments at /comments, signs editors in
 // with GitHub at /oauth/, and hands everything else to the static site.
+import { handleWebView } from './webviews.js';
 import topics from './topics.json' with { type: 'json' };
 import { resolve } from './resolve.js';
 import { recordMiss } from './misses.js';
@@ -15,6 +16,7 @@ import settings from '../dist/settings-versions.json' with { type: 'json' };
 export default {
   async fetch(request, env) {
     const { pathname } = new URL(request.url);
+    if (pathname.startsWith('/downloads/webview/')) return handleWebView(request, env);
     if (pathname === '/comments/count') {
       return handleCommentCount(request, env, commentConfig);
     }
