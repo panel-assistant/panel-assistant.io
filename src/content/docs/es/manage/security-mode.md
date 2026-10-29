@@ -20,7 +20,7 @@ Este ajuste solo se puede cambiar en el propio panel:
 
 1. Abre la pantalla **Configurar** de la aplicación del panel en el propio panel.
 2. Abre el menú de opciones adicionales de la barra de herramientas y elige **Modo de seguridad**.
-3. Elige **Habilitar el modo reforzado**.
+3. Elige **Activar el modo reforzado**.
 
 Primero deben estar deshabilitados tanto ADB por red como la depuración inalámbrica de Android, porque cualquiera de los dos permite que un cliente ADB remoto inyecte entradas en la pantalla de aprobación. Antes de aplicar el cambio, la aplicación del panel comprueba todas las propiedades de Android compatibles relativas a ADB por red, ADB por red persistente, direcciones explícitas de escucha de ADB y el estado de la depuración inalámbrica. También detiene cualquier retransmisor de herramientas de desarrollo de WebView activo en la red y verifica que su proceso y su punto de escucha hayan desaparecido. Si no puede confirmar que estas vías de control remoto están inactivas, se niega a habilitar el modo reforzado. Deshabilita ADB y la depuración inalámbrica en las opciones para desarrolladores de Android y vuelve a intentarlo. Si falla la verificación del retransmisor, reinicia el panel antes de volver a intentarlo.
 

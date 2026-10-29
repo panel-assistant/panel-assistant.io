@@ -20,7 +20,7 @@ Verlange vor dem Speichern, dass die Vorschau bestätigt, dass jedes Prädikat e
 3. Füge das YAML unter **Profile** ein oder lade es hoch und validiere es. Fahre nicht fort, wenn die Identitätsübereinstimmung unvollständig ist, ein erforderlicher kompilierter Treiber fehlt oder eine unsichere Eingabezuordnung gemeldet wird. Die Validierung beweist keine tatsächliche Hardwareberechtigung.
 4. Speichere den validierten Inhalt als inaktive lokale Revision. Auch das Speichern ändert das laufende Profil nicht.
 5. Teste und aktiviere es nur, während jemand das Panel sehen und berühren kann. Folge der [Checkliste für Profiltests](/de/reference/profiles/testing/). Die Aktivierung ist an die genaue Profil-ID, Revision und den Inhaltshash gebunden.
-6. Prüfe nach dem Neustart die tatsächlichen Funktionsergebnisse und bestätige die aktive Revision, erwarteten Bedienelemente und Home Assistant-Entitäten. Ein nicht verfügbarer Weg muss nicht verfügbar bleiben, statt als erfolgreich zu gelten. Probiere **Zurückrollen** aus, bevor du dich unbeaufsichtigt auf das Profil verlässt; eine fehlgeschlagene Startzustandsprüfung sollte automatisch zur letzten funktionierenden Revision zurückkehren.
+6. Prüfe nach dem Neustart die tatsächlichen Funktionsergebnisse und bestätige die aktive Revision, erwarteten Bedienelemente und Home Assistant-Entitäten. Ein nicht verfügbarer Weg muss nicht verfügbar bleiben, statt als erfolgreich zu gelten. Probiere **Rollback** aus, bevor du dich unbeaufsichtigt auf das Profil verlässt; eine fehlgeschlagene Startzustandsprüfung sollte automatisch zur letzten funktionierenden Revision zurückkehren.
 
 Die Rückkehr zu **Automatik verwenden** wählt nur ein mitgeliefertes Profil oder den vorsichtigen Generic-Fallback aus. Eine Community-Revision wird nicht automatisch erneut aktiviert.
 
@@ -32,13 +32,13 @@ Drei Dinge können sie dennoch fehlen lassen. Die Karte Kamera unter **Konfigura
 
 - **Das Profil unterdrückt sie.** `hardware.camera: false` ist ein bewusster dritter Zustand und nicht dasselbe wie das Weglassen des Schlüssels: Er besagt, dass das aufgelistete Gerät keine nutzbare Raumkamera ist, etwa bei einem HDMI-Aufnahmeeingang. Entferne die Zeile oder setze sie auf `true`, um die Kamera anzubieten.
 - **Android hat keine Kamera aufgelistet.** Wenn das Panel eine hat, deklariere `hardware.camera: true` in seinem Profil. Eine Deklaration hat Vorrang vor einer leeren Auflistung. Das hilft daher auch, wenn der Kameradienst vorhanden, die Auflistung aber unzuverlässig ist.
-- **Die Auflistung hat noch nicht geantwortet.** Das ist keine Aussage über die Hardware. Warte einige Sekunden und lade Konfigurieren neu; du musst nichts bearbeiten.
+- **Die Auflistung hat noch nicht geantwortet.** Das ist keine Aussage über die Hardware. Warte einige Sekunden und lade Konfiguration neu; du musst nichts bearbeiten.
 
 Eine Kamera zu deklarieren, die die Platine nicht bereitstellt, ist sicher und schadet nicht. Eine kleine Laufzeitprüfung liest Androids Liste der Kamera-IDs für die Funktionsmeldung. Eine deklarierte Kamera wird weiterhin angeboten; eine Platine ohne Kamera lehnt das Öffnen mit einem klassifizierten Fehler `no_camera_id` ab, dessen Handlungshinweis auf ein falsches Profil verweist. Das destabilisiert das Panel nicht.
 
 Eine Anforderung gehört zum Schalter. Die Kameranutzung wird sicher verweigert, wenn das Panel dem Raum nicht anzeigen kann, dass sie geöffnet ist. Bei ausgeschaltetem Bildschirm erfordert das einen Anzeigeweg außerhalb des Displays. Stelle für Aufnahmen bei ausgeschaltetem Bildschirm eine funktionierende LED-Anzeige bereit. Bei eingeschaltetem Bildschirm kann die Bildschirmanzeige die Anforderung ohne LED erfüllen. Setze `hardware.camera_lens_offset_px` so, dass diese Anzeige unter der Linse statt daneben sitzt.
 
-Alles andere an der Kamera bleibt durch das Flag unverändert: Sie bleibt aus, bis sie aktiviert wird, der Schalter ist nie als Standard vorgeschlagen, und das Einschalten über die Home Assistant-Kameraentität fordert in jedem Sicherheitsmodus eine Bestätigung auf dem Bildschirm des Panels an. Die Kameraeinstellung unter Konfigurieren ist ein separater Konfigurationsweg für den Besitzer.
+Alles andere an der Kamera bleibt durch das Flag unverändert: Sie bleibt aus, bis sie aktiviert wird, der Schalter ist nie als Standard vorgeschlagen, und das Einschalten über die Home Assistant-Kameraentität fordert in jedem Sicherheitsmodus eine Bestätigung auf dem Bildschirm des Panels an. Die Kameraeinstellung unter Konfiguration ist ein separater Konfigurationsweg für den Besitzer.
 
 ## Katalog
 

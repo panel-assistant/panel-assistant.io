@@ -8,7 +8,7 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 
 **Aus Home Assistant.** Jedes Panel hat eine Update-Entität. Wenn eine neuere Version veröffentlicht wird, bietet die Entität sie an, und ein Tastendruck startet die Installation. Panel Assistant installiert das Update und bestätigt, dass das Panel wieder ordnungsgemäß läuft. Diesen Weg solltest du nutzen.
 
-Ein Update beginnt, wenn Panel Assistant oder du es ausdrücklich anforderst. Die Panel-App installiert keine geplanten Updates. Auf der Registerkarte **Installieren** ihrer Weboberfläche kannst du ebenfalls eine Version der Panel-App auswählen und installieren, auch eine Vorabversion. Die Auswahl gilt für die Installation, die du startest. Es gibt keinen gespeicherten Update-Kanal.
+Ein Update beginnt, wenn Panel Assistant oder du es ausdrücklich anforderst. Die Panel-App installiert keine geplanten Updates. Auf der Registerkarte **Installation** ihrer Weboberfläche kannst du ebenfalls eine Version der Panel-App auswählen und installieren, auch eine Vorabversion. Die Auswahl gilt für die Installation, die du startest. Es gibt keinen gespeicherten Update-Kanal.
 
 In der unveröffentlichten Version 1.0.0-rc2 kann ein über Home Assistant gestartetes Update der Panel-App auf unterstützten Panels auch eine geprüfte, kompatible System-WebView installieren. Wenn der Schritt für die Browser-Engine unvollständig bleibt, verwende **Erneut versuchen** in der Update-Reparatur. Dabei wird vorhandene Arbeit geprüft, bevor ein weiterer Versuch angefordert wird. Es gibt keine geplanten Wiederholungen. Andere Panels benötigen weiterhin den Play Store, die Herstellerfirmware oder den unter [System-WebView aktualisieren](/de/hardware/guides/update-the-webview/) beschriebenen manuellen Weg.
 
@@ -34,7 +34,7 @@ Wenn Home Assistant für das Panel außerdem **Updates auf … erlauben** anzeig
 
 Panel Assistant prüft das Panel, bevor es etwas ändert, und sichert vor jedem Update die Einstellungen des Panels. Die letzten fünf Sicherungen pro Panel werden aufbewahrt.
 
-Erstelle vor einer Änderung, bei der du unsicher bist, selbst eine Sicherung: Öffne in der Weboberfläche des Panels **Installieren**, dann **Sicherung**, und bewahre die heruntergeladene `.hpb`-Datei auf.
+Erstelle vor einer Änderung, bei der du unsicher bist, selbst eine Sicherung: Öffne in der Weboberfläche des Panels **Installation**, dann **Sicherung**, und bewahre die heruntergeladene `.hpb`-Datei auf.
 
 ## Wiederherstellung
 

@@ -35,7 +35,7 @@ Il renderer integrato richiede entrambi:
 
 Alla maggior parte delle persone basta una Android System WebView aggiornata. L'app controlla la capacità della WebView e verifica la compatibilità di Home Assistant prima di caricare la plancia.
 
-Se il pannello mostra **Aggiornamento di Home Assistant necessario**, aggiorna Home Assistant e seleziona **Riprova**. Nulla sul pannello può sostituire quell'aggiornamento.
+Se il pannello mostra **È necessario aggiornare Home Assistant**, aggiorna Home Assistant e seleziona **Riprova**. Nulla sul pannello può sostituire quell'aggiornamento.
 
 Se mostra **Il visualizzatore web di questo pannello è troppo vecchio**, segui [aggiornare la WebView](/it/hardware/guides/update-the-webview/). Nella versione 1.0.0-rc2 non ancora pubblicata, un aggiornamento dell'app del pannello avviato da Home Assistant può anche installare una WebView compatibile verificata quando il pannello lo consente. Gli altri pannelli richiedono il metodo descritto nella guida. Dopo aver aggiornato la WebView, seleziona **Riprova**.
 

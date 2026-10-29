@@ -8,7 +8,7 @@ Begin bij het apparaat van het paneel in Home Assistant, met zijn statussensor e
 
 Wil je zien wat het paneel op dit moment doet, dan streamt het tabblad **Logs** op die pagina het eigen logboek van de paneel-app live, met tokens en wachtwoorden onleesbaar gemaakt.
 
-![Het tabblad Logboeken in de webinterface van het paneel, met het live logboek van de paneel-app, een filtervak en bediening voor Volgen en Pauzeren](/screenshots/ui-logs-dark.png)
+![Het tabblad Logs in de webinterface van het paneel, met het live logboek van de paneel-app, een filtervak en bediening voor Volgen en Pauzeren](/screenshots/ui-logs-dark.png)
 
 ## Het dashboard is leeg, half getekend of vol scriptfouten
 

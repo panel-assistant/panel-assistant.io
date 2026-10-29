@@ -50,7 +50,7 @@ Se due satelliti sulla stessa istanza Home Assistant sentono la stessa frase di 
 La scheda Voce offre alcune opzioni di regolazione oltre all'elenco delle parole di attivazione:
 
 - **Sensibilità di attivazione:** Bassa, Normale o Alta. Alta abbassa la soglia del modello della parola di attivazione: il pannello si attiva quindi più facilmente, ma è anche più probabile un'attivazione errata; Bassa richiede una corrispondenza più chiara prima dell'attivazione.
-- **Guadagno microfono (dB):** amplifica solo l'audio inviato a Home Assistant per la trascrizione, mai l'audio analizzato dal rilevatore della parola di attivazione stesso. Aumentalo se la parola di attivazione viene rilevata in modo affidabile ma i comandi pronunciati dall'altro lato della stanza vengono persi o capiti male.
+- **Guadagno del microfono (dB):** amplifica solo l'audio inviato a Home Assistant per la trascrizione, mai l'audio analizzato dal rilevatore della parola di attivazione stesso. Aumentalo se la parola di attivazione viene rilevata in modo affidabile ma i comandi pronunciati dall'altro lato della stanza vengono persi o capiti male.
 - **Sorgente audio:** la sorgente audio Android usata per acquisire il microfono. Lasciala al valore predefinito (`voice_recognition`) salvo indicazioni diverse.
 
 ## Risoluzione dei problemi

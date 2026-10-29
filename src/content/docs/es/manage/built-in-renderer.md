@@ -105,7 +105,7 @@ Usa **Restablecer datos aprendidos** en Entidades si las pruebas de un panel de 
 
 **Tema del panel de control** (Configurar y después Renderizador integrado) decide quién elige entre claro y oscuro:
 
-- **Seguir Home Assistant** (predeterminado) deja la decisión a Home Assistant. El panel solo aporta un punto de partida: en Android 13 y posteriores sigue el ajuste del sistema en tiempo real; en Android 10 a 12 lo sigue al cargar; en Android 9 y anteriores lo determina **Modo oscuro** (Configurar y después Display). Un tema elegido en Home Assistant tiene prioridad.
+- **Seguir Home Assistant** (predeterminado) deja la decisión a Home Assistant. El panel solo aporta un punto de partida: en Android 13 y posteriores sigue el ajuste del sistema en tiempo real; en Android 10 a 12 lo sigue al cargar; en Android 9 y anteriores lo determina **Modo oscuro** (Configurar y después Pantalla). Un tema elegido en Home Assistant tiene prioridad.
 - **Ambiente** elige claro u oscuro a partir del modelo de la habitación usado por Brillo automático. Esta debe estar activa; hasta recibir lecturas útiles sigue Home Assistant. El cambio requiere un minuto completo de luz u oscuridad sostenida.
 - **Oscuro** y **Claro** dejan la elección al panel. Sirven para un quiosco con la barra lateral oculta donde no se puede acceder al perfil de Home Assistant.
 

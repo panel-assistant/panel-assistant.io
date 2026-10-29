@@ -47,7 +47,7 @@ adb shell am broadcast --include-stopped-packages -n io.panelassistant.android/i
 adb shell pm uninstall io.panelassistant.android
 ```
 
-Якщо `pm uninstall` усе ще відповідає `DELETE_FAILED_DEVICE_POLICY_MANAGER`, зачекайте секунду й виконайте ще раз. Встановіть іншу збірку, а потім відновіть копію через **Встановлення → Відновити**. Див. [Оновлення та відновлення](/uk/manage/updates-and-recovery/).
+Якщо `pm uninstall` усе ще відповідає `DELETE_FAILED_DEVICE_POLICY_MANAGER`, зачекайте секунду й виконайте ще раз. Встановіть іншу збірку, а потім відновіть копію через **Встановлення → Відновлення**. Див. [Оновлення та відновлення](/uk/manage/updates-and-recovery/).
 
 Щоб стабільно підписувати власні збірки, скопіюйте [`keystore.properties.example`](https://github.com/panel-assistant/android/blob/main/keystore.properties.example) до `keystore.properties` і заповніть його; за наявності цього файла `assembleRelease` підписується ключем випуску. Форк, що публікує теговані випуски через GitHub Actions, натомість надає той самий ключ як секрети репозиторію.
 

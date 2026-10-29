@@ -20,7 +20,7 @@ Prima di salvare, esigi che l'anteprima riporti che ogni predicato in un gruppo 
 3. Incolla o carica lo YAML in **Profili**, poi convalidalo. Non proseguire se la corrispondenza di identità è incompleta, manca un driver compilato necessario o viene segnalata una mappatura di input non sicura. La convalida non prova le autorizzazioni hardware dal vivo.
 4. Salva il contenuto convalidato come revisione locale inattiva. Il salvataggio continua a non modificare il profilo in esecuzione.
 5. Provalo e attivalo solo mentre qualcuno può vedere e toccare il pannello, seguendo la [lista di controllo dei test dei profili](/it/reference/profiles/testing/). L'attivazione è legata all'ID del profilo, alla revisione e all'hash esatti del contenuto.
-6. Dopo il riavvio, esamina i risultati dal vivo delle funzionalità e conferma la revisione attiva, i controlli attesi e le entità Home Assistant. Un percorso non disponibile deve rimanere non disponibile anziché essere considerato riuscito. Prova **Ripristina la revisione precedente** prima di affidarti al profilo senza supervisione; una salute all'avvio non valida dovrebbe riportare automaticamente all'ultima revisione funzionante nota.
+6. Dopo il riavvio, esamina i risultati dal vivo delle funzionalità e conferma la revisione attiva, i controlli attesi e le entità Home Assistant. Un percorso non disponibile deve rimanere non disponibile anziché essere considerato riuscito. Prova **Ripristina** per tornare alla revisione precedente prima di affidarti al profilo senza supervisione; una salute all'avvio non valida dovrebbe riportare automaticamente all'ultima revisione funzionante nota.
 
 Tornare a **Usa selezione automatica** seleziona solo un profilo incluso o il fallback prudente Generic. Non riattiverà automaticamente una revisione della comunità.
 
@@ -38,7 +38,7 @@ Dichiarare una fotocamera non esposta dalla scheda è sicuro e non dannoso. Un c
 
 Un requisito accompagna questa opzione. L'uso della fotocamera viene negato se il pannello non può mostrare alla stanza che è aperta, e mentre lo schermo è spento ciò richiede un percorso di indicazione indipendente dallo schermo. Per acquisire con lo schermo spento, fornisci un percorso funzionante di indicazione LED. Mentre lo schermo è acceso, l'indicatore sullo schermo può soddisfare il requisito senza LED. Imposta `hardware.camera_lens_offset_px` affinché quell'indicatore sia sotto l'obiettivo anziché accanto.
 
-Tutto il resto della fotocamera rimane invariato rispetto all'opzione: rimane spenta finché non viene abilitata, l'interruttore non è mai un valore predefinito suggerito e l'attivazione tramite l'entità fotocamera di Home Assistant chiede approvazione sullo schermo del pannello in ogni modalità di sicurezza. L'impostazione Fotocamera in Configura è un percorso separato di configurazione del proprietario.
+Tutto il resto della fotocamera rimane invariato rispetto all'opzione: rimane spenta finché non viene abilitata, l'interruttore non è mai un valore predefinito suggerito e l'attivazione tramite l'entità fotocamera di Home Assistant chiede approvazione sullo schermo del pannello in ogni modalità di sicurezza. L'impostazione Videocamera in Configura è un percorso separato di configurazione del proprietario.
 
 ## Catalogo
 

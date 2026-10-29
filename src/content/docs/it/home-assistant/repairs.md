@@ -87,7 +87,7 @@ Usa **Riprova**, con le sue verifiche di sicurezza, nella Riparazione esistente 
 
 **Perché accade:** Un'installazione precedente o un'autorizzazione Android modificata possono lasciare mancante un'autorizzazione necessaria. L'autorizzazione alla fotocamera è rilevante quando la fotocamera è attiva; quella al microfono quando sono attivi la fotocamera o la voce. Se lo stato della funzione è sconosciuto, l'avviso rimane finché non può essere verificato.
 
-**Come risolvere:** Sul pannello fisico apri Impostazioni Android → App → Panel Assistant. Consenti fotocamera, microfono e notifiche dove elencati. In Accesso speciale alle app consenti Modifica impostazioni di sistema e Visualizzazione sopra altre app, poi abilita Panel Assistant in Accessibilità. Se la navigazione è Mostra con scorrimento o Sempre attiva e manca l'autorizzazione di sovrapposizione, scorri verso l'alto dal bordo inferiore della plancia per aprire Visualizzazione sopra altre app, concedila, torna indietro e scorri di nuovo. Torna alla Riparazione e premi Invia. Home Assistant deve verificare nuovamente ogni autorizzazione pertinente; una lettura non riuscita o il solo aggiornamento dell'app non possono chiudere la Riparazione.
+**Come risolvere:** Sul pannello fisico apri Impostazioni Android → App → Panel Assistant. Consenti fotocamera, microfono e notifiche dove elencati. In Accesso speciale alle app consenti Modifica impostazioni di sistema e Visualizzazione sopra altre app, poi abilita Panel Assistant in Accessibilità. Se la navigazione è Scorri per mostrarla o Sempre attiva e manca l'autorizzazione di sovrapposizione, scorri verso l'alto dal bordo inferiore della plancia per aprire Visualizzazione sopra altre app, concedila, torna indietro e scorri di nuovo. Torna alla Riparazione e premi Invia. Home Assistant deve verificare nuovamente ogni autorizzazione pertinente; una lettura non riuscita o il solo aggiornamento dell'app non possono chiudere la Riparazione.
 
 <a id="panel-proximity-setup"></a>
 
@@ -97,7 +97,7 @@ Usa **Riprova**, con le sue verifiche di sicurezza, nella Riparazione esistente 
 
 **Perché accade:** Il pannello segnala calibration_required. La calibrazione misura questa installazione e richiede una persona davanti al pannello; avviare la configurazione non ne dimostra il completamento.
 
-**Come risolvere:** Apri la pagina Configura del pannello in Presenza e risveglio e scegli Configura prossimità sul pannello. Segui le istruzioni fisiche sul pannello, per circa un minuto. Quando indica che la calibrazione è stata salvata, torna alla Riparazione e premi Invia. Home Assistant legge lo stato aggiornato prima di completare; se la configurazione è ancora in corso o il pannello non è leggibile, completa la configurazione o ripristina la connessione e invia di nuovo. Anche l'azione Apri configurazione prossimità nella Dashboard avvia la procedura sul pannello.
+**Come risolvere:** Apri la pagina Configura del pannello in Presenza e riattivazione e scegli Configura prossimità sul pannello. Segui le istruzioni fisiche sul pannello, per circa un minuto. Quando indica che la calibrazione è stata salvata, torna alla Riparazione e premi Invia. Home Assistant legge lo stato aggiornato prima di completare; se la configurazione è ancora in corso o il pannello non è leggibile, completa la configurazione o ripristina la connessione e invia di nuovo. Anche l'azione Apri configurazione di prossimità nella Dashboard avvia la procedura sul pannello.
 
 <a id="dashboard-unfiltered"></a>
 

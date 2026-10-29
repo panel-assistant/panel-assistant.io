@@ -10,11 +10,11 @@ Elijas la que elijas, sigue primero [Preparar el panel](/es/install/prepare-a-pa
 
 ## Por la red
 
-Para un panel que ya está en tu red. Ve a **Ajustes**, **Dispositivos y servicios**, añade **Panel Assistant** e introduce la dirección del panel. La integración comprueba qué hay en el panel, te pide que apruebes una solicitud de depuración en la propia pantalla del panel si es necesario, te pide que confirmes la instalación, instala la aplicación del panel, la inicia y solo entonces crea el dispositivo. Si el panel ya ejecuta la aplicación, la adopta en su lugar, lo que resulta más rápido.
+Para un panel que ya está en tu red. Ve a **Configuración**, **Dispositivos y servicios**, añade **Panel Assistant** e introduce la dirección del panel. La integración comprueba qué hay en el panel, te pide que apruebes una solicitud de depuración en la propia pantalla del panel si es necesario, te pide que confirmes la instalación, instala la aplicación del panel, la inicia y solo entonces crea el dispositivo. Si el panel ya ejecuta la aplicación, la adopta en su lugar, lo que resulta más rápido.
 
 ## Por USB
 
-Para un panel que aún está en la caja o cuyo software del fabricante dificulta el acceso por red. Conéctalo al portátil e instala desde el navegador mediante el cable USB. El navegador permanece conectado a Home Assistant, que proporciona la versión verificada; el panel no necesita ADB por red. Inicia el proceso desde **Ajustes**, **Dispositivos y servicios**, **Añadir integración**, **Panel Assistant**, **Instalar mediante USB en este ordenador**; se necesita un navegador basado en Chromium. Consulta [Instalar por USB](/es/install/install-over-usb/).
+Para un panel que aún está en la caja o cuyo software del fabricante dificulta el acceso por red. Conéctalo al portátil e instala desde el navegador mediante el cable USB. El navegador permanece conectado a Home Assistant, que proporciona la versión verificada; el panel no necesita ADB por red. Inicia el proceso desde **Configuración**, **Dispositivos y servicios**, **Añadir integración**, **Panel Assistant**, **Instalar mediante USB en este ordenador**; se necesita un navegador basado en Chromium. Consulta [Instalar por USB](/es/install/install-over-usb/).
 
 En la versión 1.0.0-rc2, aún no publicada, ambos instaladores también pueden solicitar una actualización verificada y compatible del motor del navegador en los paneles compatibles. Si la actualización no puede terminar, no impide la configuración ni el emparejamiento; consulta las instrucciones de recuperación en [Preparar el panel](/es/install/prepare-a-panel/).
 

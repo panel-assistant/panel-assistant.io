@@ -35,9 +35,9 @@ Wbudowany renderer wymaga obu elementów:
 
 Większość osób potrzebuje tylko aktualnego Android System WebView. Aplikacja panelu sprawdza tę funkcję WebView i zgodność Home Assistant przed załadowaniem pulpitu.
 
-Jeśli panel pokazuje **Wymagana aktualizacja Home Assistant**, zaktualizuj Home Assistant i wybierz **Ponów**. Nic na panelu nie może zastąpić tej aktualizacji.
+Jeśli panel pokazuje **Wymagana aktualizacja Home Assistant**, zaktualizuj Home Assistant i wybierz **Spróbuj ponownie**. Nic na panelu nie może zastąpić tej aktualizacji.
 
-Jeśli pokazuje **Przeglądarka internetowa tego panelu jest zbyt stara**, wykonaj [aktualizację WebView](/pl/hardware/guides/update-the-webview/). W niewydanej wersji 1.0.0-rc2 aktualizacja aplikacji panelu rozpoczęta z Home Assistant może również zainstalować zweryfikowany, zgodny WebView, jeśli panel na to pozwala. Pozostałe panele wymagają metody opisanej w przewodniku. Po aktualizacji WebView wybierz **Ponów**.
+Jeśli pokazuje **Przeglądarka internetowa tego panelu jest zbyt stara**, wykonaj [aktualizację WebView](/pl/hardware/guides/update-the-webview/). W niewydanej wersji 1.0.0-rc2 aktualizacja aplikacji panelu rozpoczęta z Home Assistant może również zainstalować zweryfikowany, zgodny WebView, jeśli panel na to pozwala. Pozostałe panele wymagają metody opisanej w przewodniku. Po aktualizacji WebView wybierz **Spróbuj ponownie**.
 
 Wbudowany renderer nigdy nie przechodzi na most o słabszej izolacji. Inny renderer może pomóc, gdy nie można zaktualizować samego Home Assistant, ale każda aplikacja pulpitu na panelu korzysta z tego samego systemowego WebView, więc żadna nie omija jego przestarzałej wersji.
 
@@ -117,7 +117,7 @@ Interfejs internetowy panelu jest od tego niezależny i zawsze stosuje ustawieni
 
 ## Korzystanie z osobnej aplikacji pulpitu
 
-Jeśli panel potrzebuje funkcji wymienionej w [Ograniczeniach](#ograniczenia), otwórz stronę Konfiguruj i wybierz inną zainstalowaną aplikację w polu **Aplikacja pulpitu**. Zmiana działa od razu. Nie wybieraj w tym celu **Auto**, ponieważ Auto korzysta z wbudowanego renderera, gdy jest gotowy.
+Jeśli panel potrzebuje funkcji wymienionej w [Ograniczeniach](#ograniczenia), otwórz stronę Konfiguracja i wybierz inną zainstalowaną aplikację w polu **Aplikacja pulpitu**. Zmiana działa od razu. Nie wybieraj w tym celu **Auto**, ponieważ Auto korzysta z wbudowanego renderera, gdy jest gotowy.
 
 ## Ograniczenia
 

@@ -47,7 +47,7 @@ adb shell am broadcast --include-stopped-packages -n io.panelassistant.android/i
 adb shell pm uninstall io.panelassistant.android
 ```
 
-Se `pm uninstall` risponde ancora `DELETE_FAILED_DEVICE_POLICY_MANAGER`, attendi un secondo e rieseguilo. Installa l'altra build, poi ripristina il backup da **Installa → Ripristina**. Vedi [Aggiornamenti e ripristino](/it/manage/updates-and-recovery/).
+Se `pm uninstall` risponde ancora `DELETE_FAILED_DEVICE_POLICY_MANAGER`, attendi un secondo e rieseguilo. Installa l'altra build, poi ripristina il backup da **Installa → Ripristino**. Vedi [Aggiornamenti e ripristino](/it/manage/updates-and-recovery/).
 
 Per firmare in modo coerente le tue build, copia [`keystore.properties.example`](https://github.com/panel-assistant/android/blob/main/keystore.properties.example) in `keystore.properties` e compilalo; con il file presente, `assembleRelease` è firmato per il rilascio. Un fork che pubblica versioni con tag tramite GitHub Actions fornisce invece la stessa chiave come segreti del repository.
 

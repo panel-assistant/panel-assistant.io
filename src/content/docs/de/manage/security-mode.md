@@ -18,9 +18,9 @@ Die Weboberfläche kennzeichnet betroffene Aktionen in beiden Modi mit einem kle
 
 Diese Einstellung kann nur auf dem Panel selbst geändert werden:
 
-1. Öffne auf dem Panel den Bildschirm **Konfiguration** der Panel-App.
+1. Öffne auf dem Panel den Bildschirm **Konfigurieren** der Panel-App.
 2. Öffne das Menü für weitere Optionen in der Symbolleiste und wähle **Sicherheitsmodus**.
-3. Wähle **Gehärteten Modus aktivieren**.
+3. Wähle **Hardened-Modus aktivieren**.
 
 Netzwerk-ADB und das drahtlose Debugging von Android müssen zunächst beide ausgeschaltet sein, denn jeder dieser Wege ermöglicht einem entfernten ADB-Client, Eingaben auf dem Genehmigungsbildschirm einzuschleusen. Bevor sie die Änderung übernimmt, prüft die Panel-App jede unterstützte Android-Eigenschaft für Netzwerk-ADB, dauerhaftes Netzwerk-ADB, explizite ADB-Listen-Adressen und den Zustand des drahtlosen Debuggings. Sie beendet außerdem jedes aktive Relay für WebView-Entwicklerwerkzeuge im Netzwerk und prüft, dass dessen Prozess und Listener nicht mehr vorhanden sind. Wenn sie nicht feststellen kann, dass diese Fernsteuerungswege inaktiv sind, weigert sie sich, den Gehärteten Modus einzuschalten. Schalte ADB und drahtloses Debugging in den Entwickleroptionen von Android aus und versuche es erneut. Wenn die Überprüfung des Relays fehlschlägt, starte das Panel vor einem erneuten Versuch neu.
 
@@ -43,7 +43,7 @@ Wenn der Gehärtete Modus eine geschützte Anfrage an die API abfängt, gibt der
 
 So schließt du den Vorgang ab:
 
-1. Öffne auf dem Panel **Konfiguration**, das Menü für weitere Optionen in der Symbolleiste, **Sicherheitsmodus** und dann **Genehmigungen prüfen**.
+1. Öffne auf dem Panel **Konfigurieren**, das Menü für weitere Optionen in der Symbolleiste, **Sicherheitsmodus** und dann **Bestätigungen prüfen**.
 2. Prüfe den Vorgang, seine Zusammenfassung und das anfragende Gerät. Genehmige ihn dann oder lehne ihn ab.
 3. Sende innerhalb von zehn Minuten nach der ursprünglichen Anfrage dieselbe Anfrage erneut vom selben Gerät.
 
@@ -80,7 +80,7 @@ Der Gehärtete Modus lehnt das Einschleusen von Berührungen von überall außer
 
 Die Genehmigungsgrenze macht den übrigen Teil der API des Panels nicht zu einer authentifizierten API. Diagnose- und Statusabfragen sowie gewöhnliche Steuerelemente behalten ihr übliches Verhalten für vertrauenswürdige Netzwerke bei. Halte die API des Panels auch bei eingeschaltetem Gehärtetem Modus von nicht vertrauenswürdigen Netzwerken fern. Die [Sicherheitsreferenz](/de/reference/security/) beschreibt das gesamte Sicherheitskonzept.
 
-Updates beginnen, wenn du über Panel Assistant installierst oder selbst eine Installation auswählst. Die Panel-App hat weder eine Richtlinie für geplante Installationen noch einen gespeicherten Update-Kanal. Vom Eigentümer gestartete Installationen über die Registerkarte **Installieren** bleiben verfügbar. Im Gehärteten Modus benötigen geschützte entfernte Anfragen dabei eine Genehmigung am Panel.
+Updates beginnen, wenn du über Panel Assistant installierst oder selbst eine Installation auswählst. Die Panel-App hat weder eine Richtlinie für geplante Installationen noch einen gespeicherten Update-Kanal. Vom Eigentümer gestartete Installationen über die Registerkarte **Installation** bleiben verfügbar. Im Gehärteten Modus benötigen geschützte entfernte Anfragen dabei eine Genehmigung am Panel.
 
 ## Die Home Assistant-Adresse ändern
 

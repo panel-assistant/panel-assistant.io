@@ -16,7 +16,7 @@ De renderer gebruikt de gedocumenteerde Home Assistant-interface `?external_auth
 
 - Opent na een appherstart het laatste geverifieerde dashboard terwijl hij op de achtergrond de Home Assistant-dashboardlijst vernieuwt. Eerst wordt nog een korte compatibiliteitscontrole uitgevoerd. Het onthouden dashboard is aan server, account en ingesteld dashboard gebonden. Een expliciet ingesteld dashboard of tabblad heeft altijd voorrang.
 - Bevriest de pagina terwijl het scherm uit staat en hervat bij ontwaken, wat ’s nachts ongeveer 70% renderer-CPU bespaart.
-- Herlaadt een dashboard dat opende maar nooit verbond. Nieuwe pogingen worden na herhaalde fouten minder frequent en het paneel toont duidelijk **Opnieuw verbinden met Home Assistant…** in plaats van een browserfoutpagina.
+- Herlaadt een dashboard dat opende maar nooit verbond. Nieuwe pogingen worden na herhaalde fouten minder frequent en het paneel toont duidelijk **Opnieuw verbinding maken met Home Assistant…** in plaats van een browserfoutpagina.
 - Herhaalt herstelbare controles met oplopende vertraging. Een blijvend geweigerde aanmelding stopt de pogingen en toont instructies voor Browseraanmelding. Een niet-ondersteunde Home Assistant-versie of ongeschikte WebView vermeldt de benodigde update en wacht daarop.
 - Geeft opgehoopt geheugen vrij door onzichtbaar te herladen terwijl het scherm uit staat.
 - Vangt renderercrashes op en begrenst hun frequentie. Een pagina die blijft crashen, valt terug op de beheerlauncher in plaats van de hele nacht opnieuw te starten.
@@ -35,7 +35,7 @@ De ingebouwde renderer vereist beide:
 
 De meeste mensen hebben alleen een actuele Android System WebView nodig. De paneel-app controleert de WebView-mogelijkheid en verifieert Home Assistant-compatibiliteit voordat hij het dashboard laadt.
 
-Toont het paneel **Home Assistant-upgrade vereist**, werk Home Assistant dan bij en kies **Opnieuw proberen**. Niets op het paneel kan dit vervangen.
+Toont het paneel **Upgrade van Home Assistant vereist**, werk Home Assistant dan bij en kies **Opnieuw proberen**. Niets op het paneel kan dit vervangen.
 
 Toont het **De webviewer van dit paneel is te oud**, volg dan [De WebView bijwerken](/nl/hardware/guides/update-the-webview/). In de nog niet uitgebrachte versie 1.0.0-rc2 kan een vanuit Home Assistant gestarte paneel-app-update ook een geverifieerde, compatibele WebView installeren wanneer het paneel dat toestaat. Andere panelen vereisen de methode in de handleiding. Kies na de WebView-update **Opnieuw proberen**.
 
@@ -105,7 +105,7 @@ Gebruik **Geleerde gegevens resetten** op Entiteiten als oude dashboardgegevens 
 
 **Dashboard-thema** (Configureren, dan Ingebouwde renderer) bepaalt wie licht of donker kiest:
 
-- **Home Assistant volgen** (standaard) laat Home Assistant kiezen. Het paneel levert alleen een beginpunt: op Android 13 en nieuwer volgt het de systeeminstelling live, op Android 10 tot 12 bij het laden van het dashboard en op Android 9 en ouder via **Donkere modus** (Configureren, dan Beeldscherm). Een in Home Assistant gekozen thema heeft voorrang.
+- **Home Assistant volgen** (standaard) laat Home Assistant kiezen. Het paneel levert alleen een beginpunt: op Android 13 en nieuwer volgt het de systeeminstelling live, op Android 10 tot 12 bij het laden van het dashboard en op Android 9 en ouder via **Donkere modus** (Configureren, dan Weergave). Een in Home Assistant gekozen thema heeft voorrang.
 - **Omgevingslicht** kiest licht of donker met het kamermodel van Automatische helderheid. Automatische helderheid moet aan staan; tot bruikbare metingen binnenkomen, volgt het Home Assistant. Een verandering vereist een volle minuut aanhoudend licht of donker.
 - **Donker** en **Licht** laten het paneel kiezen. Dit is voor een kioskdashboard met verborgen zijbalk, waarbij de Home Assistant-profielpagina helemaal niet bereikbaar is vanaf het paneel.
 

@@ -8,7 +8,7 @@ La vía USB sirve para un panel que aún está en la caja o cuyo software del fa
 
 ## Todo empieza dentro de Home Assistant
 
-Un administrador inicia el instalador USB desde Home Assistant: ve a **Ajustes**, **Dispositivos y servicios**, **Añadir integración**, elige **Panel Assistant** y después **Instalar mediante USB en este ordenador**. El enlace **Añadir panel** de la página de Panel Assistant en la barra lateral abre la misma elección. Home Assistant verifica la versión y se la entrega al instalador, que se abre en su propia ventana segura. Por eso no hay un botón de instalación en este sitio: la página que realiza el trabajo solo acepta una versión de tu propio Home Assistant, para que no llegue al panel nada que Home Assistant no haya verificado.
+Un administrador inicia el instalador USB desde Home Assistant: ve a **Configuración**, **Dispositivos y servicios**, **Añadir integración**, elige **Panel Assistant** y después **Instalar mediante USB en este ordenador**. El enlace **Añadir panel** de la página de Panel Assistant en la barra lateral abre la misma elección. Home Assistant verifica la versión y se la entrega al instalador, que se abre en su propia ventana segura. Por eso no hay un botón de instalación en este sitio: la página que realiza el trabajo solo acepta una versión de tu propio Home Assistant, para que no llegue al panel nada que Home Assistant no haya verificado.
 
 ## Qué necesitas
 
@@ -29,4 +29,4 @@ Si el cable se desconecta a medias, vuelve a conectarlo, espera a que arranque e
 
 ## Después
 
-El panel ya ejecuta la aplicación. Un panel recién sacado de la caja aún no está en tu red, así que conéctalo al Wi-Fi desde la aplicación Ajustes del propio panel, antes o después de instalar: tanto el asistente de configuración como la conexión a Home Assistant lo necesitan. Si el panel no aparece en Home Assistant al terminar la configuración, ve a **Ajustes**, **Dispositivos y servicios**, **Añadir integración**, elige **Panel Assistant**, después **Añadir un panel de tu red**, e introduce su dirección. El instalador USB no actualiza un panel que ya tiene la aplicación; para eso consulta [Actualizaciones y recuperación](/es/manage/updates-and-recovery/).
+El panel ya ejecuta la aplicación. Un panel recién sacado de la caja aún no está en tu red, así que conéctalo al Wi-Fi desde la aplicación Ajustes del propio panel, antes o después de instalar: tanto el asistente de configuración como la conexión a Home Assistant lo necesitan. Si el panel no aparece en Home Assistant al terminar la configuración, ve a **Configuración**, **Dispositivos y servicios**, **Añadir integración**, elige **Panel Assistant**, después **Añadir un panel de tu red**, e introduce su dirección. El instalador USB no actualiza un panel que ya tiene la aplicación; para eso consulta [Actualizaciones y recuperación](/es/manage/updates-and-recovery/).

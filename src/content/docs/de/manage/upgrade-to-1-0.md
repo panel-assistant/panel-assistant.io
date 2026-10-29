@@ -12,7 +12,7 @@ Panel Assistant 1.0 und die Panel-App 1.0 gehören zusammen. Die Integration 1.0
 
 **Erstelle eine Home Assistant-Sicherung.** Erstelle unter **Einstellungen**, **System**, **Backups** eine Sicherung und bewahre sie auf, bis jedes Panel mit 1.0 läuft und du damit zufrieden bist. Sie ist dein Rückweg für die Home Assistant-Seite.
 
-**Bewahre eine Sicherung jedes Panels auf.** Öffne in der Weboberfläche jedes Panels **Installieren**, dann **Sicherung**, und bewahre die heruntergeladene `.hpb`-Datei auf. Panel Assistant sichert die Einstellungen des Panels auch vor jedem Update. Deine eigene Kopie ist jedoch diejenige, die du selbst wiederherstellen kannst.
+**Bewahre eine Sicherung jedes Panels auf.** Öffne in der Weboberfläche jedes Panels **Installation**, dann **Sicherung**, und bewahre die heruntergeladene `.hpb`-Datei auf. Panel Assistant sichert die Einstellungen des Panels auch vor jedem Update. Deine eigene Kopie ist jedoch diejenige, die du selbst wiederherstellen kannst.
 
 ## 1. Integration aktualisieren
 

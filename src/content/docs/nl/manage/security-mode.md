@@ -20,7 +20,7 @@ Deze instelling kan alleen op het paneel zelf worden gewijzigd:
 
 1. Open het scherm **Configureren** van de paneel-app op het paneel.
 2. Open het overloopmenu van de werkbalk en kies **Beveiligingsmodus**.
-3. Kies **Hardened inschakelen**.
+3. Kies **Hardened-modus inschakelen**.
 
 Netwerk-ADB en draadloze foutopsporing van Android moeten eerst beide uit staan, omdat elk een externe ADB-client invoer op het goedkeuringsscherm laat injecteren. Voordat de wijziging wordt vastgelegd, controleert de paneel-app alle ondersteunde Android-eigenschappen voor netwerk-ADB, blijvende netwerk-ADB, expliciete ADB-luisteradressen en de toestand van draadloze foutopsporing. Ook stopt hij elke actieve WebView-ontwikkeltoolsrelay op het netwerk en controleert of proces en luisterpoort verdwenen zijn. Kan hij niet vaststellen dat deze afstandsbedieningsroutes inactief zijn, dan weigert hij Hardened in te schakelen. Zet ADB en draadloze foutopsporing uit in de ontwikkelaarsopties van Android en probeer opnieuw. Mislukt de verificatie van de relay, herstart dan het paneel voordat je opnieuw probeert.
 
@@ -43,7 +43,7 @@ Wanneer Hardened een beschermd API-verzoek onderschept, geeft de eerste poging H
 
 De bewerking afronden:
 
-1. Open op het paneel **Configureren**, het overloopmenu van de werkbalk, **Beveiligingsmodus** en dan **Goedkeuringen bekijken**.
+1. Open op het paneel **Configureren**, het overloopmenu van de werkbalk, **Beveiligingsmodus** en dan **Goedkeuringen controleren**.
 2. Controleer de bewerking, samenvatting en het aanvragende apparaat en keur goed of weiger.
 3. Stuur binnen tien minuten na het oorspronkelijke verzoek exact hetzelfde verzoek opnieuw vanaf hetzelfde apparaat.
 

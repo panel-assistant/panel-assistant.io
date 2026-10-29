@@ -7,15 +7,15 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 Ein Panel mit Mikrofon kann als Home Assistant [Assist-Satellit](https://www.home-assistant.io/voice_control/) dienen. Es lauscht auf ein Aktivierungswort, überträgt deinen Befehl an Home Assistant und gibt die Antwort über seinen Lautsprecher aus. Du musst kein separates Gerät hinzufügen: Der Satellit ist eine Entität `assist_satellite.<panel>` am vorhandenen Home Assistant-Gerät des Panels. Audio wird über dieselbe Verbindung übertragen, die das Panel bereits verwendet.
 
 :::note
-Die Karte „Sprache“ wird angeboten, wenn das Geräteprofil ein Mikrofon angibt oder Android ein integriertes Mikrofon auf einem Panel meldet, dessen Profil dazu keine Angabe macht. Ein ungeprüftes Mikrofon muss die Aufnahmeprüfung des Panels bestehen, bevor das Lauschen beginnt. Wenn ein Profil ausdrücklich kein Mikrofon angibt, wird „Sprache“ nicht angeboten.
+Die Karte „Sprachassistent“ wird angeboten, wenn das Geräteprofil ein Mikrofon angibt oder Android ein integriertes Mikrofon auf einem Panel meldet, dessen Profil dazu keine Angabe macht. Ein ungeprüftes Mikrofon muss die Aufnahmeprüfung des Panels bestehen, bevor das Lauschen beginnt. Wenn ein Profil ausdrücklich kein Mikrofon angibt, wird „Sprachassistent“ nicht angeboten.
 :::
 
 ## Einschalten
 
-Bei einer neuen Installation ist Sprachsteuerung standardmäßig eingeschaltet, wenn das Geräteprofil des Panels ein Mikrofon angibt. Vorhandene gespeicherte Einstellungen bleiben erhalten. Schalte auf anderen Panels, auf denen die Karte „Sprache“ angeboten wird, **Sprachassistent** ein, um sie zu nutzen. Schalte ihn aus, wenn das Panel nicht auf ein Aktivierungswort lauschen soll.
+Bei einer neuen Installation ist Sprachsteuerung standardmäßig eingeschaltet, wenn das Geräteprofil des Panels ein Mikrofon angibt. Vorhandene gespeicherte Einstellungen bleiben erhalten. Schalte auf anderen Panels, auf denen die Karte „Sprachassistent“ angeboten wird, **Sprachassistent** ein, um sie zu nutzen. Schalte ihn aus, wenn das Panel nicht auf ein Aktivierungswort lauschen soll.
 
 1. Wähle auf der Geräteseite des Panels in Home Assistant **Besuchen** und öffne **Konfiguration** (zum Beispiel `http://<panel>:8888/` beim Standardport).
-2. Schalte auf der Karte **Sprachassistent** den **Sprachassistenten** ein.
+2. Aktiviere auf der Karte **Sprachassistent** die Einstellung **Sprachassistent**.
 3. Aktiviere unter **Aktivierungswörter** jedes Wort, auf das das Panel lauschen soll.
 4. Wähle unter **Aktivierungswort-Pipelines**, welche Assist-Pipeline jedes aktivierte Aktivierungswort verwenden soll.
 
@@ -47,7 +47,7 @@ Wenn zwei Satelliten derselben Home Assistant-Instanz dieselbe Aktivierungswort-
 
 ## Einstellungen
 
-Die Karte „Sprache“ bietet neben der Aktivierungswortliste einige weitere Einstellmöglichkeiten:
+Die Karte „Sprachassistent“ bietet neben der Aktivierungswortliste einige weitere Einstellmöglichkeiten:
 
 - **Aktivierungsempfindlichkeit:** Niedrig, Normal oder Hoch. „Hoch“ senkt den Schwellenwert des Aktivierungswortmodells. Das Panel reagiert dadurch leichter, aber auch eher auf eine falsche Übereinstimmung. „Niedrig“ verlangt vor der Aktivierung eine deutlichere Übereinstimmung.
 - **Mikrofonverstärkung (dB):** Verstärkt nur das Audio, das zur Transkription an Home Assistant gesendet wird, niemals das Audio, das der Aktivierungswort-Erkenner selbst analysiert. Erhöhe sie, wenn das Aktivierungswort zuverlässig auslöst, aber aus der Entfernung gesprochene Befehle überhört oder falsch verstanden werden.

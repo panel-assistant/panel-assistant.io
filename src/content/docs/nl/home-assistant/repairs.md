@@ -87,7 +87,7 @@ Gebruik de beveiligde actie **Opnieuw proberen** van de bestaande reparatie pas 
 
 **Waarom dit gebeurt:** Door een oudere installatie of gewijzigde Android-machtiging kan een vereiste toestemming ontbreken. Cameratoestemming is relevant zolang de camera aan staat; microfoontoestemming zolang camera of spraak aan staat. Bij een onbekende functiestatus blijft de waarschuwing bestaan totdat die kan worden gecontroleerd.
 
-**Hoe je dit oplost:** Open op het fysieke paneel Android Instellingen → Apps → Panel Assistant. Sta camera, microfoon en meldingen toe waar die worden vermeld. Sta onder Speciale app-toegang Systeeminstellingen wijzigen en Weergeven over andere apps toe en schakel daarna Panel Assistant in onder Toegankelijkheid. Als de navigatie op Tonen met veeggebaar of Altijd aan staat en de overlaytoestemming ontbreekt, veeg je vanaf de onderkant van het dashboard omhoog om Weergeven over andere apps te openen. Sta dit toe, keer terug en veeg opnieuw. Ga terug naar de reparatie en kies Verzenden. Home Assistant moet elke relevante toestemming opnieuw verifiëren; alleen een mislukte uitlezing of app-update kan de reparatie niet sluiten.
+**Hoe je dit oplost:** Open op het fysieke paneel Android Instellingen → Apps → Panel Assistant. Sta camera, microfoon en meldingen toe waar die worden vermeld. Sta onder Speciale app-toegang Systeeminstellingen wijzigen en Weergeven over andere apps toe en schakel daarna Panel Assistant in onder Toegankelijkheid. Als de navigatie op Veeg om te tonen of Altijd aan staat en de overlaytoestemming ontbreekt, veeg je vanaf de onderkant van het dashboard omhoog om Weergeven over andere apps te openen. Sta dit toe, keer terug en veeg opnieuw. Ga terug naar de reparatie en kies Verzenden. Home Assistant moet elke relevante toestemming opnieuw verifiëren; alleen een mislukte uitlezing of app-update kan de reparatie niet sluiten.
 
 <a id="panel-proximity-setup"></a>
 
@@ -97,7 +97,7 @@ Gebruik de beveiligde actie **Opnieuw proberen** van de bestaande reparatie pas 
 
 **Waarom dit gebeurt:** Het paneel meldt calibration_required. Kalibratie meet deze installatie en vereist iemand voor het paneel; alleen de configuratie starten bewijst niet dat die is voltooid.
 
-**Hoe je dit oplost:** Open de pagina Configureren van dit paneel bij Aanwezigheid en activeren en kies Nabijheid instellen op paneel. Volg de fysieke instructies op het paneel; dit duurt ongeveer een minuut. Nadat het meldt dat de kalibratie is opgeslagen, ga je terug naar de reparatie en kies je Verzenden. Home Assistant leest een nieuwe status voordat het afrondt; als de configuratie nog loopt of het paneel niet kan worden uitgelezen, voltooi je de configuratie of herstel je de verbinding en verzend je opnieuw. De dashboardactie Nabijheidsconfiguratie openen is ook een startpunt op het paneel.
+**Hoe je dit oplost:** Open de pagina Configureren van dit paneel bij Aanwezigheid & wekken en kies Nabijheid instellen op paneel. Volg de fysieke instructies op het paneel; dit duurt ongeveer een minuut. Nadat het meldt dat de kalibratie is opgeslagen, ga je terug naar de reparatie en kies je Verzenden. Home Assistant leest een nieuwe status voordat het afrondt; als de configuratie nog loopt of het paneel niet kan worden uitgelezen, voltooi je de configuratie of herstel je de verbinding en verzend je opnieuw. De dashboardactie Nabijheidsinstelling openen is ook een startpunt op het paneel.
 
 <a id="dashboard-unfiltered"></a>
 

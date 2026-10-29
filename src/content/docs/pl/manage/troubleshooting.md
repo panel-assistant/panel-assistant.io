@@ -8,7 +8,7 @@ Zacznij od urządzenia panelu w Home Assistant, które ma czujnik stanu i możli
 
 Gdy potrzebujesz obserwować bieżące działanie panelu, karta **Logi** na tej stronie przesyła na żywo dziennik aplikacji panelu, z ukrytymi tokenami i hasłami.
 
-![Karta Dzienniki interfejsu internetowego panelu przesyłająca dziennik aplikacji na żywo, z polem filtrowania i przyciskami Śledź oraz Wstrzymaj](/screenshots/ui-logs-dark.png)
+![Karta Logi interfejsu internetowego panelu przesyłająca dziennik aplikacji na żywo, z polem filtrowania i przyciskami Śledź oraz Wstrzymaj](/screenshots/ui-logs-dark.png)
 
 ## Pulpit jest pusty, częściowo narysowany lub pełen błędów skryptów
 

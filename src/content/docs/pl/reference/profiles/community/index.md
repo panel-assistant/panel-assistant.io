@@ -20,7 +20,7 @@ Przed zapisem wymagaj, aby podgląd potwierdził zgodność każdego warunku w j
 3. Wklej lub prześlij YAML na stronie **Profile** i zweryfikuj go. Nie kontynuuj przy niepełnym dopasowaniu tożsamości, braku wymaganego skompilowanego sterownika lub zgłoszonym niebezpiecznym mapowaniu wejść. Walidacja nie potwierdza rzeczywistych uprawnień do sprzętu.
 4. Zapisz zweryfikowaną treść jako nieaktywną lokalną rewizję. Zapis nadal nie zmienia działającego profilu.
 5. Testuj i aktywuj tylko wtedy, gdy ktoś widzi panel i może go dotknąć, zgodnie z [listą kontrolną testowania profilu](/pl/reference/profiles/testing/). Aktywacja jest powiązana z dokładnym identyfikatorem profilu, rewizją i skrótem treści.
-6. Po restarcie sprawdź rzeczywiste wyniki funkcji i potwierdź aktywną rewizję, oczekiwane elementy sterujące i encje Home Assistant. Niedostępna ścieżka musi pozostać niedostępna zamiast być uznana za udaną. Sprawdź **Wycofaj** przed pozostawieniem profilu bez nadzoru; nieudana kontrola stanu przy uruchomieniu powinna automatycznie przywrócić ostatnią sprawną rewizję.
+6. Po restarcie sprawdź rzeczywiste wyniki funkcji i potwierdź aktywną rewizję, oczekiwane elementy sterujące i encje Home Assistant. Niedostępna ścieżka musi pozostać niedostępna zamiast być uznana za udaną. Sprawdź **Cofnij** przed pozostawieniem profilu bez nadzoru; nieudana kontrola stanu przy uruchomieniu powinna automatycznie przywrócić ostatnią sprawną rewizję.
 
 Powrót do **Tryb automatyczny** wybiera tylko profil dołączony do aplikacji lub zachowawczy profil zastępczy Generic. Nie aktywuje automatycznie ponownie rewizji społecznościowej.
 

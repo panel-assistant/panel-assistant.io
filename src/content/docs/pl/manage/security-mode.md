@@ -4,7 +4,7 @@ description: Domyślne zachowanie panelu w zaufanej sieci i tryb wzmocniony wyma
 sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
-Interfejs internetowy panelu, jego API i sterowanie w Home Assistant są przeznaczone do zaufanej sieci domowej. Domyślny jest **tryb swobodny**: automatyzacje, narzędzia instalatora i działania przeglądarki działają bez dodatkowego monitu. Jedno działanie celowo nie podlega tej zasadzie. Włączenie kamery przez jej encję Home Assistant wymaga zatwierdzenia na panelu w każdym trybie, także swobodnym. Ustawienie Kamera w Konfiguruj jest osobną drogą konfiguracji właściciela. Wyłączenie nigdy nie wymaga zgody.
+Interfejs internetowy panelu, jego API i sterowanie w Home Assistant są przeznaczone do zaufanej sieci domowej. Domyślny jest **tryb swobodny**: automatyzacje, narzędzia instalatora i działania przeglądarki działają bez dodatkowego monitu. Jedno działanie celowo nie podlega tej zasadzie. Włączenie kamery przez jej encję Home Assistant wymaga zatwierdzenia na panelu w każdym trybie, także swobodnym. Ustawienie Kamera na stronie Konfiguracja jest osobną drogą konfiguracji właściciela. Wyłączenie nigdy nie wymaga zgody.
 
 Na panelu w sieci współdzielonej z mniej zaufanymi urządzeniami opcjonalny **tryb wzmocniony** dodaje osobiste zatwierdzanie wybranych operacji sieciowych o dużych skutkach. To dodatkowa granica bezpieczeństwa, a nie zamiennik osobnej sieci czy zapory ani ogólne uwierzytelnianie API. Punkty końcowe tylko do odczytu i zwykłe sterowanie panelem pozostają dostępne w normalnym modelu zaufanej sieci.
 
@@ -18,9 +18,9 @@ Interfejs internetowy oznacza objęte działania małą tarczą w obu trybach, a
 
 To ustawienie można zmienić tylko na samym panelu:
 
-1. Otwórz ekran **Konfiguruj** aplikacji panelu na panelu.
+1. Otwórz ekran **Skonfiguruj** aplikacji panelu na panelu.
 2. Otwórz menu dodatkowych opcji paska narzędzi i wybierz **Tryb bezpieczeństwa**.
-3. Wybierz **Włącz tryb wzmocniony**.
+3. Wybierz **Włącz tryb Hardened**.
 
 Najpierw muszą być wyłączone zarówno sieciowe ADB, jak i debugowanie bezprzewodowe Androida, ponieważ każde pozwala zdalnemu klientowi ADB wstrzykiwać działania na ekranie zatwierdzania. Przed zatwierdzeniem zmiany aplikacja panelu sprawdza wszystkie obsługiwane właściwości Androida dotyczące sieciowego ADB, trwałego sieciowego ADB, jawnych adresów nasłuchiwania ADB i stanu debugowania bezprzewodowego. Zatrzymuje także aktywny sieciowy przekaźnik narzędzi programistycznych WebView i sprawdza, czy jego proces i nasłuch zniknęły. Jeśli nie potrafi ustalić, że te drogi zdalnego sterowania są nieaktywne, odmawia włączenia trybu wzmocnionego. Wyłącz ADB i debugowanie bezprzewodowe w opcjach programisty Androida i spróbuj ponownie. Jeśli weryfikacja przekaźnika zawiedzie, uruchom ponownie panel przed kolejną próbą.
 
@@ -43,7 +43,7 @@ Gdy tryb wzmocniony przechwyci chronione żądanie API, pierwsza próba zwraca H
 
 Aby ukończyć operację:
 
-1. Na panelu otwórz **Konfiguruj**, menu dodatkowych opcji paska narzędzi, **Tryb bezpieczeństwa**, a następnie **Przejrzyj zatwierdzenia**.
+1. Na panelu otwórz **Skonfiguruj**, menu dodatkowych opcji paska narzędzi, **Tryb bezpieczeństwa**, a następnie **Przejrzyj zatwierdzenia**.
 2. Sprawdź operację, jej podsumowanie i urządzenie żądające, a następnie zatwierdź lub odrzuć.
 3. W ciągu dziesięciu minut od pierwotnego żądania wyślij identyczne żądanie ponownie z tego samego urządzenia.
 
@@ -68,13 +68,13 @@ W trybie wzmocnionym bezpośredni klient sieciowy potrzebuje zgody na panelu, za
 - przejść do kolejnego etapu konserwacji odzyskiwania bazy danych;
 - naprawić konfigurację osobnej aplikacji pulpitu lub wyczyścić dane przeglądania wbudowanego renderera;
 - zmienić systemową gęstość wyświetlania lub skalę czcionek;
-- wyłączyć skonfigurowane zabezpieczenia podtrzymujące wybudzenie lub zapobiegające przyciemnieniu bezczynności, które utrzymują osiągalność panelu, ze strony Konfiguruj lub Home Assistant;
+- wyłączyć skonfigurowane zabezpieczenia podtrzymujące wybudzenie lub zapobiegające przyciemnieniu bezczynności, które utrzymują osiągalność panelu, ze strony Konfiguracja lub Home Assistant;
 - naprawić ustawienia bezpieczeństwa zasilania panelu; lub
 - ukryć jedno dokładne, niezmienione ostrzeżenie o ustawieniu bezpieczeństwa zasilania, które można poprawić tylko ręcznie. Zmienia to tylko wyświetlanie; podstawowa ocena, diagnostyka i wynik instalatora pozostają takie same.
 
-Włączenie kamery panelu przez jej encję Home Assistant wymaga zgody na panelu w obu trybach. Włączenie z Konfiguruj pozostaje osobnym ustawieniem właściciela; nadal wymagane są uprawnienie kamery Androida i działający wskaźnik używania kamery.
+Włączenie kamery panelu przez jej encję Home Assistant wymaga zgody na panelu w obu trybach. Włączenie na stronie Konfiguracja pozostaje osobnym ustawieniem właściciela; nadal wymagane są uprawnienie kamery Androida i działający wskaźnik używania kamery.
 
-Zdalny zapis Konfiguruj w trybie wzmocnionym musi zapisać zmniejszenie bezpieczeństwa zasilania osobno od zmian pakietów producenta, ponieważ potrzebują one innych rodzajów zgody. Łączone zapisy w trybie swobodnym lub przez pętlę zwrotną przechodzą bezpośrednio.
+Zdalny zapis na stronie Konfiguracja w trybie wzmocnionym musi zapisać zmniejszenie bezpieczeństwa zasilania osobno od zmian pakietów producenta, ponieważ potrzebują one innych rodzajów zgody. Łączone zapisy w trybie swobodnym lub przez pętlę zwrotną przechodzą bezpośrednio.
 
 Tryb wzmocniony odrzuca wstrzykiwanie dotknięć z każdego miejsca poza pętlą zwrotną, więc żądanie nie może samo się zatwierdzić. Odmawia też włączenia sieciowego ADB, debugowania bezprzewodowego Androida i przekaźnika narzędzi programistycznych WebView. Przed ich użyciem przełącz panel z powrotem w tryb swobodny przy samym panelu.
 

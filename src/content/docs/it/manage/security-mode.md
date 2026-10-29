@@ -20,7 +20,7 @@ Questa impostazione può essere modificata solo sul pannello stesso:
 
 1. Apri la schermata **Configura** dell'app del pannello sul pannello.
 2. Apri il menu aggiuntivo della barra degli strumenti e scegli **Modalità di sicurezza**.
-3. Scegli **Abilita modalità rafforzata**.
+3. Scegli **Attiva la modalità protetta**.
 
 ADB di rete e il debug wireless di Android devono prima essere entrambi disattivati, perché ciascuno consente a un client ADB remoto di inserire comandi di input nella schermata di approvazione. Prima di confermare la modifica, l'app del pannello controlla tutte le proprietà Android supportate relative ad ADB di rete, ADB di rete persistente, indirizzi espliciti di ascolto ADB e stato del debug wireless. Arresta inoltre qualsiasi relay di rete attivo degli strumenti di sviluppo della WebView e verifica che il suo processo e il suo servizio in ascolto non siano più presenti. Se non può accertare che questi percorsi di controllo remoto siano inattivi, si rifiuta di attivare la modalità rafforzata. Disattiva ADB e il debug wireless nelle opzioni sviluppatore di Android e riprova. Se la verifica del relay non riesce, riavvia il pannello prima di riprovare.
 

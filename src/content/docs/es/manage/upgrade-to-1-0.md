@@ -8,19 +8,19 @@ Panel Assistant 1.0 y la aplicación del panel 1.0 avanzan juntos. La integraci�
 
 ## Antes de empezar
 
-**Termina todo lo que deba hacer 0.9.0.** Ejecuta Panel Assistant **0.9.0** y abre **Ajustes**, **Reparaciones**. Panel Assistant 1.0 ya no puede migrar un panel desde MQTT ni desde la antigua aplicación ha-paneld, así que deja ambos casos sin cambios. Si 0.9.0 muestra cualquiera de ellos para alguno de tus paneles, sigue su reparación hasta completar la migración; [Migrar un panel desde MQTT](/es/home-assistant/move-from-mqtt/) explica la parte de MQTT. Si utilizas una versión de Panel Assistant anterior a 0.9.0, actualiza primero a 0.9.0 y deja que termine.
+**Termina todo lo que deba hacer 0.9.0.** Ejecuta Panel Assistant **0.9.0** y abre **Configuración**, **Reparaciones**. Panel Assistant 1.0 ya no puede migrar un panel desde MQTT ni desde la antigua aplicación ha-paneld, así que deja ambos casos sin cambios. Si 0.9.0 muestra cualquiera de ellos para alguno de tus paneles, sigue su reparación hasta completar la migración; [Migrar un panel desde MQTT](/es/home-assistant/move-from-mqtt/) explica la parte de MQTT. Si utilizas una versión de Panel Assistant anterior a 0.9.0, actualiza primero a 0.9.0 y deja que termine.
 
-**Haz una copia de seguridad de Home Assistant.** En **Ajustes**, **Sistema**, **Copias de seguridad**, crea una copia y consérvala hasta que todos los paneles ejecuten 1.0 y estés satisfecho con su funcionamiento. Es tu vía para volver atrás en el lado de Home Assistant.
+**Haz una copia de seguridad de Home Assistant.** En **Configuración**, **Sistema**, **Copias de seguridad**, crea una copia y consérvala hasta que todos los paneles ejecuten 1.0 y estés satisfecho con su funcionamiento. Es tu vía para volver atrás en el lado de Home Assistant.
 
 **Conserva una copia de seguridad de cada panel.** En la interfaz web de cada panel, abre **Instalar**, después **Copia de seguridad**, y guarda el archivo `.hpb` descargado. Panel Assistant también guarda los ajustes del panel antes de cada actualización, pero tu propia copia es la que puedes restaurar tú mismo.
 
 ## 1. Actualizar la integración
 
-1.0 se ofrece primero como versión candidata. Abre **Ajustes**, **Dispositivos y servicios**, **HACS** y elige el dispositivo **Panel Assistant**. Despliega las entidades deshabilitadas y abre **Versión preliminar**. En sus ajustes, activa **Habilitado** y selecciona **Actualizar**; después activa el interruptor **Versión preliminar** en **Diagnóstico**. Vuelve a Panel Assistant en HACS y descarga la versión candidata de 1.0. Reinicia Home Assistant cuando HACS lo solicite o cuando aparezca la reparación **Reinicia Home Assistant para terminar de actualizar Panel Assistant**.
+1.0 se ofrece primero como versión candidata. Abre **Configuración**, **Dispositivos y servicios**, **HACS** y elige el dispositivo **Panel Assistant**. Despliega las entidades deshabilitadas y abre **Versión preliminar**. En sus ajustes, activa **Habilitado** y selecciona **Actualizar**; después activa el interruptor **Versión preliminar** en **Diagnóstico**. Vuelve a Panel Assistant en HACS y descarga la versión candidata de 1.0. Reinicia Home Assistant cuando HACS lo solicite o cuando aparezca la reparación **Reinicia Home Assistant para terminar de actualizar Panel Assistant**.
 
 ## 2. Comprobar las reparaciones
 
-Después del reinicio, vuelve a abrir **Ajustes**, **Reparaciones**.
+Después del reinicio, vuelve a abrir **Configuración**, **Reparaciones**.
 
 - **«… necesita la aplicación 1.0.0-rc1»** es normal en todos los paneles que aún ejecutan una aplicación 0.9. Hasta que se actualicen, Home Assistant no puede verlos ni controlarlos y sus entidades aparecen como no disponibles. El propio panel sigue funcionando con sus ajustes y su historial.
 - **«… no puede recibir actualizaciones de la aplicación»** significa que Panel Assistant no tiene una vía para instalar en ese panel, normalmente tras un cambio realizado en el propio panel, como una actualización de firmware o un restablecimiento. Vuelve a conectar el panel a Panel Assistant por USB, como describe **Más información** de la reparación, y la actualización estará disponible. No se elimina nada: en un panel que ya tiene la aplicación, el instalador USB no instala nada y solo permite que Panel Assistant vuelva a acceder a él.
