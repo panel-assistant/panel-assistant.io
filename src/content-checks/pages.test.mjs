@@ -181,6 +181,21 @@ test('the update-webview topic the panel app links from its browser engine step 
     assert.ok(page.includes(`id="${id}"`), `${topics['update-webview']} has no #${id}`);
 });
 
+test('the Sonoff WebView section gives the unreleased managed route and manual fallback', () => {
+  const section = content('/hardware/panels/sonoff/')
+    .split('id="webview-update-this-first"')[1]
+    ?.split('<h2')[0];
+  assert.ok(section, 'the existing WebView section anchor must resolve');
+  const guidance = plain(section);
+  assert.match(guidance, /unreleased 1\.0\.0-rc2/);
+  assert.match(guidance, /installation and panel-app updates started from Home Assistant/);
+  assert.match(guidance, /verified compatible WebView/);
+  assert.match(guidance, /unfinished[^.]*Try again[^.]*update Repair/);
+  assert.match(guidance, /manual fallback[^.]*adb/i);
+  assert.match(guidance, /Chromium 107/);
+  assert.match(guidance, /Chromium 138/);
+});
+
 test('Move a panel from MQTT sends a reader already on 1.0 to the unfinished-move steps, not back to 0.9.0', () => {
   // Downloading 0.9.0 again over 1.0 hands moved panels back to MQTT; the upgrade page restores the backup instead.
   const pages = localized('/home-assistant/move-from-mqtt/');
