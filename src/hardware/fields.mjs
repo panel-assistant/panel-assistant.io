@@ -84,6 +84,8 @@ export function nearDuplicates(keys) {
 
 /** Column heading from a key: `android_version` reads `Android version`, `soc` reads `SOC`. */
 export function fieldLabel(key) {
+  if (key === 'webview_ships_with') return 'WebView — Ships with';
+  if (key === 'webview_can_reach') return 'WebView — Can reach';
   const words = key
     .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
     .split(/[\s_-]+/)

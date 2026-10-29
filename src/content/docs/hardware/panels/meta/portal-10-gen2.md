@@ -8,7 +8,8 @@ android: '10'
 screen: 10.1 in, 1280 × 800
 support: Preliminary
 root: No root; Meta's ADB switch is enough for setup
-webview: Meta's own Chromium 131 WebView
+webview_ships_with: 'Meta WebView, Chromium 131.0.6778.39 on firmware 3051355900018050'
+webview_can_reach: 'Chromium 131 — vendor only on verified stock firmware; no newer qualified provider. This major no longer receives Chromium security fixes'
 released: '2019'
 evidence: [bench, firmware, documented]
 sidebar:
@@ -32,23 +33,23 @@ The most-needed facts: **keep the Meta account signed in**, because the ADB swit
 
 Meta Portal, Facebook Portal, Portal (2nd gen), Portal 10", model WD50JM. Android reports model `Portal`, device and board `omni`, product `omni_prod`, manufacturer and brand `Facebook`, hardware platform `atlas`.
 
-|            |                                                                                                                                           |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| SoC        | Qualcomm **QCS605**, 8 cores                                                                                                              |
-| RAM        | About **3 GB** (Android reports 2.85 GB)                                                                                                  |
-| Storage    | 6.7 GB for apps and data, about 3.9 GB free after setup; no memory card slot                                                              |
-| Display    | **1280×800** landscape, 10.1 in, **about 149 ppi**, at Android's 160 dpi base density. FocalTech touch controller with double-tap to wake |
-| Android    | 10 (API 29), production `user` build, SELinux enforcing; arm64-v8a                                                                        |
-| WebView    | Meta's own WebView build, Chromium **131**, kept current by Meta's background updater. No WebView work needed                             |
-| Sensors    | **Accelerometer** and tilt; **ambient light with colour**. **No proximity sensor**                                                        |
-| Camera     | **13 MP** sensor at the top left of the bezel, with a **green camera light** beside it. Apps such as the panel app are offered 1280×720   |
-| Audio      | **Two microphones**, one speaker                                                                                                          |
-| Privacy    | **Three-position slider**: camera on and microphones on; camera covered; camera covered and microphones off                               |
-| Buttons    | Volume up and volume down. No power button                                                                                                |
-| Radios     | Wi-Fi, Bluetooth with **Bluetooth Low Energy**                                                                                            |
-| Connectors | **USB-C**, used for ADB                                                                                                                   |
-| Root       | None. No `su`, no known bootloader unlock. ADB comes from Meta's own Debug setting                                                        |
-| Released   | 2019 (announced September, on sale October)                                                                                               |
+|            |                                                                                                                                                              |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| SoC        | Qualcomm **QCS605**, 8 cores                                                                                                                                 |
+| RAM        | About **3 GB** (Android reports 2.85 GB)                                                                                                                     |
+| Storage    | 6.7 GB for apps and data, about 3.9 GB free after setup; no memory card slot                                                                                 |
+| Display    | **1280×800** landscape, 10.1 in, **about 149 ppi**, at Android's 160 dpi base density. FocalTech touch controller with double-tap to wake                    |
+| Android    | 10 (API 29), production `user` build, SELinux enforcing; arm64-v8a                                                                                           |
+| WebView    | Meta's own Chromium **131**; vendor only on verified stock firmware, with no newer qualified provider. This major no longer receives Chromium security fixes |
+| Sensors    | **Accelerometer** and tilt; **ambient light with colour**. **No proximity sensor**                                                                           |
+| Camera     | **13 MP** sensor at the top left of the bezel, with a **green camera light** beside it. Apps such as the panel app are offered 1280×720                      |
+| Audio      | **Two microphones**, one speaker                                                                                                                             |
+| Privacy    | **Three-position slider**: camera on and microphones on; camera covered; camera covered and microphones off                                                  |
+| Buttons    | Volume up and volume down. No power button                                                                                                                   |
+| Radios     | Wi-Fi, Bluetooth with **Bluetooth Low Energy**                                                                                                               |
+| Connectors | **USB-C**, used for ADB                                                                                                                                      |
+| Root       | None. No `su`, no known bootloader unlock. ADB comes from Meta's own Debug setting                                                                           |
+| Released   | 2019 (announced September, on sale October)                                                                                                                  |
 
 ## Before you buy
 
@@ -88,7 +89,7 @@ Then [add the panel](/install/installing-ha-paneld/) in Panel Assistant as usual
 
 ## What works
 
-- **The dashboard**, smoothly, in Meta's own current WebView.
+- **The dashboard**, smoothly, in Meta's own Chromium 131 WebView.
 - **Camera.** Off by default, like on every panel, and turned on from the **Camera** card in Configure. It then serves a 1280×720 stream and still images to Home Assistant, and the Portal's green camera light comes on while it is in use.
 - **Microphones, wake word and spoken replies.** The wake word was recognised and Home Assistant's voice pipeline answered through the Portal's speaker. See [voice assistant](/manage/voice-assistant/).
 - **Ambient light**, including colour, as a normal Android sensor, for adaptive brightness and Home Assistant.

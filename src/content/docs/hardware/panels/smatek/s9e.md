@@ -8,7 +8,8 @@ android: '11'
 screen: 10.1 in, 1920 × 1200
 support: Community-tested
 root: Relays, button LEDs, proximity (app su reported working)
-webview: Chromium 83 on 2024-07; 131 on 2025-12
+webview_ships_with: 'Chromium 83 on 2024-07 firmware; 131 on 2025-12 firmware'
+webview_can_reach: 'Not established — root and userdebug alone do not verify a replacement'
 released: 'not before 2021 (est., RK3566 SoC)'
 photos:
   - src: 'asset:hardware-smatek-s9e-front.jpg'
@@ -69,7 +70,7 @@ The control surfaces below are **root sysfs** writes, and the relays switch **ma
 :::
 
 :::tip
-Because the S9E shares the TPA10's **RK3566** platform, the panel app's existing app-side features probably work without S9E-specific code, and temperature, humidity and light may surface through `SensorManager`. On the older firmware the shipped **WebView is very old (Chromium 83)**, so update it first: Magisk OpenWebView, the 2025-03-24 firmware, or a sideloaded SystemWebView. The 2025-12 firmware already ships Chromium 131. See [Updating the system WebView](/hardware/guides/update-the-webview/).
+Because the S9E shares the TPA10's **RK3566** platform, the panel app's existing app-side features probably work without S9E-specific code, and temperature, humidity and light may surface through `SensorManager`. On the older firmware the shipped **WebView is very old (Chromium 83)**, so a newer engine would help. No replacement route has been verified on this model; root and a userdebug build alone do not prove compatibility. The 2025-12 firmware ships Chromium 131, which no longer receives Chromium security fixes. See [Updating the system WebView](/hardware/guides/update-the-webview/).
 :::
 
 :::tip

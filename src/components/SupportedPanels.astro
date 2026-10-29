@@ -56,6 +56,10 @@ const models = groups.reduce((n: number, g: { entries: unknown[] }) => n + g.ent
           <li>
             <a href={e.href}>{e.label}</a>
             <ConfidenceBar data={e.data} />
+            <span class="webview-capability">
+              <strong>WebView — Can reach:</strong>{' '}
+              {String(e.data.webview_can_reach ?? 'Not established')}
+            </span>
           </li>
         ))}
       </ul>
@@ -64,6 +68,10 @@ const models = groups.reduce((n: number, g: { entries: unknown[] }) => n + g.ent
 </div>
 
 <style>
+  .webview-capability {
+    flex-basis: 100%;
+    font-size: var(--sl-text-sm);
+  }
   .coverage {
     font-size: var(--sl-text-lg);
   }

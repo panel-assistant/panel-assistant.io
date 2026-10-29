@@ -8,7 +8,8 @@ android: '9'
 screen: 10.1 in, 1280 × 800; Portal+ 15.6 in, 1920 × 1080
 support: Untested
 root: No root; Meta's ADB switch is expected to be enough
-webview: Not established
+webview_ships_with: 'Not established for this model'
+webview_can_reach: 'Not established — the stock Meta-only restriction is verified on the Portal 10-inch (2nd gen), not this model'
 released: '2018'
 sold_as_note: '10.1 in, 1280×800 landscape screen; two full-range speakers'
 covers:

@@ -8,7 +8,8 @@ android: '8.1'
 screen: 4.7 in, 750 × 1334, portrait, landscape available
 support: Full
 root: userdebug, no adb password; su for backlight-off
-webview: Chromium 107 on 3.5.1; sideload LineageOS 138
+webview_ships_with: 'Chromium 129.0.6668.70 on firmware 4.0.12; other firmware not established'
+webview_can_reach: 'Chromium 138 — verified sideload on open userdebug firmware; Android 8/9 major ceiling'
 released: '2024-08 (est.)'
 photos:
   - src: 'asset:hardware-sonoff-nspanel-pro-120p-front.jpg'

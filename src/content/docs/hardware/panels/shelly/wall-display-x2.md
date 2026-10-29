@@ -8,7 +8,8 @@ android: '8.1'
 screen: 6.9 in, 1440 × 720
 support: Untested
 root: Not established on this model
-webview: 'Not established (WallDisplay track carries no OTA WebView package for this model)'
+webview_ships_with: 'Not established'
+webview_can_reach: 'Not established — no verified provider update route for this model'
 released: '2025-01 (est.)'
 photos:
   - src: 'asset:hardware-shelly-wall-display-x2-front.jpg'

@@ -8,7 +8,8 @@ android: '10'
 screen: 8 in, 1280 × 800
 support: Untested
 root: No root; Meta's ADB switch is expected to be enough
-webview: Meta's own WebView (expected)
+webview_ships_with: 'Not established for this model'
+webview_can_reach: 'Not established — the stock Meta-only restriction is verified on the Portal 10-inch (2nd gen), not this model'
 released: '2019'
 evidence: [documented, platform]
 sidebar:

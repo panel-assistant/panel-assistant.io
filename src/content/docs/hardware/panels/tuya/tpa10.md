@@ -8,7 +8,8 @@ android: '11'
 screen: 10.1 in, 1920 × 1200
 support: Full
 root: su present; helper for LED, climate, 5th button
-webview: Chrome 83; root swap to LineageOS 150
+webview_ships_with: 'Chromium 83'
+webview_can_reach: 'Chromium 156.0.8078.47 verified after the initial root swap and a same-signer update; no final ceiling established'
 released: '2023-08 (est.)'
 photos:
   - src: 'asset:hardware-tuya-tpa10-front.jpg'
@@ -110,7 +111,7 @@ The vendor's on-device apps were _not_ a useful reverse-engineering source. `com
 
 ## WebView: update this first
 
-The stock WebView is **Chrome 83**, far too old for a current Home Assistant frontend, so the dashboard stays blank or broken until you replace it. The recommended build is **LineageOS System WebView 150** (`armeabi-v7a`), a current, maintained, vanilla Chromium engine. Prefer it over Cromite: Cromite patches Chromium's autoplay content setting to _block_, which stops Home Assistant camera card (WebRTC) streams from starting without a tap, while LineageOS leaves autoplay allowed so camera streams start on their own.
+The stock WebView is **Chrome 83**, far too old for a current Home Assistant frontend, so the dashboard stays blank or broken until you replace it. The manual procedure below installs the known-working **LineageOS System WebView 150** (`armeabi-v7a`), a vanilla Chromium engine. A TPA10 has also been verified on **156.0.8078.47** after an ordinary same-signer update from 150; 150 is not its final ceiling. The previously tested Cromite 147 build blocked autoplay, stopping Home Assistant camera streams from starting without a tap; the tested LineageOS 150 and 156 builds let them start on their own.
 
 The TPA10 has limited video decoder headroom inside WebView. Several visible 720p WebRTC cards can drop frames or leave one stream waiting for its first frame even though a single stream is healthy. If that happens, use lower-resolution substreams, fewer simultaneous autoplay cards, or snapshots that switch to live video on tap.
 

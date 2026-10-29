@@ -8,7 +8,8 @@ android: '7.0'
 screen: 4 in, 480 × 480
 support: Research
 root: Not established; userdebug base build, unconfirmed
-webview: 'com.google.android.webview 119.0.6045.194 via official ZIP'
+webview_ships_with: 'Factory version not established'
+webview_can_reach: 'Chromium 119.0.6045.194 through Shelly’s official WebView ZIP; Android 7 major ceiling'
 released: '2023-09 (est.)'
 photos:
   - src: 'asset:hardware-shelly-wall-display-front.jpg'

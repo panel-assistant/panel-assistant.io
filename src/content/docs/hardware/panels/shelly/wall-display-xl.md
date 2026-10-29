@@ -8,7 +8,8 @@ android: '11'
 screen: 10.1 in
 support: Untested
 root: Not established on this model
-webview: 'Not established (WallDisplayV2 track carries no OTA WebView package)'
+webview_ships_with: 'Google WebView 131.0.6778.105 on reporter firmware'
+webview_can_reach: 'Not established — installed signer and update route remain unverified'
 released: '2025-09 (est.)'
 photos:
   - src: 'asset:hardware-shelly-wall-display-xl-front.jpg'

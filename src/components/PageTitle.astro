@@ -23,6 +23,16 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
 
 <Default />
 <TranslationNote />
+{isPanel && entry.data.webview_can_reach && (
+  <div class="webview-facts">
+    <p>
+      <strong>WebView — Ships with:</strong> {String(entry.data.webview_ships_with)}
+    </p>
+    <p>
+      <strong>Can reach:</strong> {String(entry.data.webview_can_reach)}
+    </p>
+  </div>
+)}
 {evidence && (
   <div class="confidence-line">
     <span class="confidence-heading">Confidence</span>

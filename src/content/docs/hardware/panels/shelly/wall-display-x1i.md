@@ -8,7 +8,8 @@ android: '11'
 screen: 4 in, 720 × 720
 support: Untested
 root: Not established on this model
-webview: 'Not established (WallDisplayV2 track carries no OTA WebView package)'
+webview_ships_with: 'Not established'
+webview_can_reach: 'Not established — no verified provider update route for this model'
 released: '2026-07 (est.)'
 photos:
   - src: 'asset:hardware-shelly-wall-display-x1i-front.jpg'
