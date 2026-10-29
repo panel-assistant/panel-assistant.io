@@ -35,7 +35,7 @@ test('generated historical settings render help Markdown and omit retired allowe
         strings: {
           'settings.kiosk_lock.label': { text: 'Lock Android to dashboard' },
           'settings.kiosk_lock.help': {
-            text: 'Choose **Native** navigation.\n\nA second paragraph.',
+            text: 'Choose **Native** navigation for <b> & c.\n\nA second paragraph.',
           },
           'settings.kiosk_companion_packages.label': { text: 'Apps the lock allows' },
           'settings.kiosk_companion_packages.help': { text: 'Allowed package names' },
@@ -58,6 +58,8 @@ test('generated historical settings render help Markdown and omit retired allowe
     assert.match(html, /<strong>Native<\/strong>/);
     assert.doesNotMatch(html, /\*\*/);
     assert.match(html, /<p>A second paragraph\.<\/p>/);
+    assert.match(html, /&lt;b&gt; &amp; c/);
+    assert.doesNotMatch(html, /<b>/);
     assert.doesNotMatch(html, /<p(?:\s[^>]*)?>(?:(?!<\/p>)[\s\S])*<p(?:\s[^>]*)?>/);
     assert.doesNotMatch(
       page,

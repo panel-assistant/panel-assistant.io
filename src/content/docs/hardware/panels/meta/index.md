@@ -60,7 +60,7 @@ These points come from Meta's documentation or are properties of Meta's shared s
 
 ## CVE-2026-43499 and community provisioning
 
-**As of 29 October 2026:** [CVE-2026-43499](https://www.cve.org/CVERecord?id=CVE-2026-43499), published on 21 May 2026, is a Linux kernel flaw in rtmutex/futex locking that can let code already running locally gain higher privileges. The [official CVE record](https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/43xxx/CVE-2026-43499.json) rates it High, CVSS 3.1 **7.8**. It is a security vulnerability affecting untrusted local code as well as an opening for owners to change otherwise restricted settings.
+**As of 29 October 2026:** [CVE-2026-43499](https://www.cve.org/CVERecord?id=CVE-2026-43499), published on 21 May 2026, is a Linux kernel flaw in rtmutex/futex locking that can let code already running locally gain higher privileges. The [official CVE record](https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/43xxx/CVE-2026-43499.json) rates it High, CVSS 3.1 **7.8**. Untrusted local code, such as a malicious app, could use it to take control of the device; it is also an opening for owners to change otherwise restricted settings.
 
 [Community Portal provisioning research](https://github.com/jxlarrea/portal-root-kiosk-satellite/tree/f941b575caa118d48afdf8b17d791d024932a088) adapts the GhostLock exploit to Portal firmware. Its author [reports these exact targets as tested](https://github.com/jxlarrea/portal-root-kiosk-satellite/blob/f941b575caa118d48afdf8b17d791d024932a088/README.md#supported-models):
 
@@ -75,7 +75,7 @@ These points come from Meta's documentation or are properties of Meta's shared s
 
 These are author-reported exploit targets, not independent Panel Assistant qualification or a claim that every firmware build is supported. The linked source records full firmware fingerprints. Portal TV is also listed by the research project, but remains unsupported by Panel Assistant.
 
-The practical benefit is optional provisioning: temporary privileged execution can keep wireless ADB available after a restart, avoiding stock firmware's repeated USB setup, and change restricted audio settings or install limited helpers. The project does not install permanent `su` or a root daemon. Its recommended `kiosk` preset also installs its own app, replaces the home screen, sets Device Owner, removes Meta accounts and disables services; that preset is not a Panel Assistant installation step.
+The project reports that temporary privileged execution can keep wireless ADB available after a restart, change restricted audio settings or install limited helpers, without installing a permanent `su` or root daemon. Its recommended `kiosk` preset installs a different app as the home screen and Device Owner, removes Meta accounts and disables services, so it replaces Panel Assistant rather than preparing a panel for it.
 
 Panel Assistant still uses the existing [stock USB installation](/hardware/panels/meta/portal-10-gen2/#installing-panel-assistant) and has no integration with this exploit. Exploit attempts can hang or reboot the device, and persistent provisioning changes do not patch the vulnerability. The stock measurements and model support statuses on these pages remain unchanged.
 

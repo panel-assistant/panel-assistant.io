@@ -35,7 +35,7 @@ The original Wall Display, firmware codename **Stargate**, is the entry model of
 
 ## Initial debugging access
 
-**Network ADB on TCP port 5555 without a computer: not established on this model.** Initial USB debugging and the vendor-menu unlock are also unverified here. The [X2i procedure](/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode) is confirmed on the X2i only; shared firmware does not prove that it works here. Ask Shelly for the procedure for your model and firmware. Use the [USB installer](/install/install-over-usb/) only once USB debugging and a USB data connection are available. A root-capable build alone does not enable debugging.
+**Network ADB on TCP port 5555 without a computer: not established on this model.** Initial USB debugging and the vendor-menu unlock are also unverified here. The [X2i procedure](/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode) is confirmed on the X2i only; shared firmware does not prove that it works here. Ask Shelly for the procedure for your model and firmware. Debugging access would not make it installable: Android 7.0 is below the minimum Panel Assistant supports, so no install route applies to this model.
 
 ## Also sold as
 
