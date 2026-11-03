@@ -1,5 +1,5 @@
 ---
-sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
+sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
 title: 修复
 description: Panel Assistant 各项修复提示的含义、出现原因以及解决方法。
 ---
@@ -12,6 +12,7 @@ description: Panel Assistant 各项修复提示的含义、出现原因以及解
 
 ## 查找修复提示
 
+- [从 &lt;面板&gt; 移除 Panel Assistant](#从-面板-移除-panel-assistant)
 - [面板应用过旧](#panel-app-too-old)
 - [旧版应用需要 0.9.0](#old-app-needs-090)
 - [MQTT 面板需要 0.9.0](#mqtt-panel-needs-090)
@@ -48,6 +49,14 @@ description: Panel Assistant 各项修复提示的含义、出现原因以及解
 - [安装程序失败：ADB 授权](#installer-failure-adb-authorization)
 - [ADB 更新授权](#adb-update-authorization)
 - [另一个 Home Assistant](#another-home-assistant)
+
+## 从 &lt;面板&gt; 移除 Panel Assistant
+
+**含义：** 在尚未发布的 1.0.0-rc2 版本中，有人在此面板的设备页面上按下了**从此面板移除**。此按钮不会移除任何内容；此修复会一直保持可用，直到移除完成。
+
+**原因：**Panel Assistant 会在恢复厂商主屏幕和应用、卸载 ha-paneld 以及从 Home Assistant 中删除面板之前，请您确认。
+
+**解决方法：** 请先阅读[移除会执行哪些操作以及如何重新安装](/zh-hans/manage/removal-risks/)，再选择一次**提交**以确认。如果这是误操作，请关闭对话框而不提交，让此修复保持未确认状态。
 
 <a id="panel-app-too-old"></a>
 

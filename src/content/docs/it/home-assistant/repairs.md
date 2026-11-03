@@ -1,7 +1,7 @@
 ---
 title: Riparazioni
 description: Significato di ogni Riparazione di Panel Assistant, perché compare e come risolverla.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
 ---
 
 Apri **Impostazioni → Sistema → Riparazioni** in Home Assistant e scegli il messaggio di Panel Assistant. Il primo link apre l'impostazione o i passaggi di recupero pertinenti. Usa **Ulteriori informazioni** per la spiegazione seguente.
@@ -12,6 +12,7 @@ Usa **Riprova**, con le sue verifiche di sicurezza, nella Riparazione esistente 
 
 ## Trova la tua Riparazione
 
+- [Rimuovi Panel Assistant da &lt;pannello&gt;](#rimuovi-panel-assistant-da-pannello)
 - [App del pannello troppo vecchia](#app-del-pannello-troppo-vecchia)
 - [La vecchia app richiede 0.9.0](#la-vecchia-app-richiede-090)
 - [Il pannello MQTT richiede 0.9.0](#il-pannello-mqtt-richiede-090)
@@ -48,6 +49,14 @@ Usa **Riprova**, con le sue verifiche di sicurezza, nella Riparazione esistente 
 - [Installazione non riuscita: autorizzazione ADB](#installazione-non-riuscita-autorizzazione-adb)
 - [Autorizzazione aggiornamento ADB](#autorizzazione-aggiornamento-adb)
 - [Un altro Home Assistant](#un-altro-home-assistant)
+
+## Rimuovi Panel Assistant da &lt;pannello&gt;
+
+**Cosa significa:** Nella versione 1.0.0-rc2 non ancora pubblicata, qualcuno ha premuto **Rimuovi da questo pannello** nella pagina del dispositivo di questo pannello. Il pulsante non rimuove nulla; la Riparazione resta disponibile fino al completamento della rimozione.
+
+**Perché accade:** Panel Assistant ti chiede conferma prima di ripristinare la schermata iniziale e le app del produttore, disinstallare ha-paneld ed eliminare il pannello da Home Assistant.
+
+**Come risolvere:** Leggi [cosa comporta la rimozione e come reinstallare](/it/manage/removal-risks/) prima di selezionare **Invia** una volta per confermare. Se è stato un errore, chiudi la finestra di dialogo senza inviare e lascia la Riparazione non confermata.
 
 <a id="panel-app-too-old"></a>
 

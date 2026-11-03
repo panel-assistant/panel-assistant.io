@@ -39,7 +39,7 @@ Si l’agent de conversation du pipeline pose une question complémentaire, le p
 
 ## Annonces et lancement d’une conversation
 
-Une fois l’assistant vocal activé, `assist_satellite.announce` énonce un message sur le panneau depuis toute automatisation ou tout script, éventuellement précédé d’un bref carillon. `assist_satellite.start_conversation` énonce une invite puis écoute la réponse ; Home Assistant ne l’autorise qu’avec un agent de conversation capable de démarrer lui-même une conversation, ce que l’agent Home Assistant intégré ne permet pas. Les deux services nécessitent que l’assistant vocal soit activé ; voir [Synthèse vocale](/fr/manage/text-to-speech/#play-an-announcement-with-the-voice-assistant-on) pour l’alternative REST plus simple sur les panneaux sans microphone.
+Une fois l’assistant vocal activé, `assist_satellite.announce` énonce un message sur le panneau depuis toute automatisation ou tout script, éventuellement précédé d’un bref carillon. `assist_satellite.start_conversation` énonce une invite puis écoute la réponse ; Home Assistant ne l’autorise qu’avec un agent de conversation capable de démarrer lui-même une conversation, ce que l’agent Home Assistant intégré ne permet pas. Les deux services nécessitent que l’assistant vocal soit activé ; voir [Synthèse vocale](/fr/manage/text-to-speech/#diffuser-une-annonce-lorsque-lassistant-vocal-est-activé) pour l’alternative REST plus simple sur les panneaux sans microphone.
 
 ## Plusieurs assistants dans une même pièce
 

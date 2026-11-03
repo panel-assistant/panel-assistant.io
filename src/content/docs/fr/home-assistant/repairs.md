@@ -1,7 +1,7 @@
 ---
 title: Réparations
 description: Signification de chaque réparation Panel Assistant, raison de son apparition et solution.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
 ---
 
 Ouvrez **Paramètres → Système → Réparations** dans Home Assistant et choisissez le message Panel Assistant. Son premier lien ouvre le réglage ou les étapes de récupération utiles. Utilisez **En savoir plus** pour l’explication ci-dessous.
@@ -12,6 +12,7 @@ N’utilisez **Réessayer**, avec les contrôles de la réparation existante, qu
 
 ## Trouver votre réparation
 
+- [Retirer Panel Assistant de &lt;panneau&gt;](#retirer-panel-assistant-de-panneau)
 - [Application du panneau trop ancienne](#panel-app-too-old)
 - [L’ancienne application nécessite 0.9.0](#old-app-needs-090)
 - [Le panneau MQTT nécessite 0.9.0](#mqtt-panel-needs-090)
@@ -48,6 +49,14 @@ N’utilisez **Réessayer**, avec les contrôles de la réparation existante, qu
 - [Échec de l’installateur : autorisation ADB](#installer-failure-adb-authorization)
 - [Autorisation de mise à jour ADB](#adb-update-authorization)
 - [Un autre Home Assistant](#another-home-assistant)
+
+## Retirer Panel Assistant de &lt;panneau&gt;
+
+**Signification :** Dans la version 1.0.0-rc2, non encore publiée, quelqu’un a appuyé sur **Retirer de ce panneau** sur la page de l’appareil de ce panneau. Le bouton ne supprime rien ; la réparation reste disponible jusqu’à la fin du retrait.
+
+**Cause :** Panel Assistant vous demande de confirmer avant de restaurer l’écran d’accueil et les applications du fabricant, de désinstaller ha-paneld et de supprimer le panneau de Home Assistant.
+
+**Solution :** Lisez [ce que fait le retrait et comment réinstaller](/fr/manage/removal-risks/) avant de sélectionner **Valider** une fois pour confirmer. S’il s’agissait d’une erreur, fermez la boîte de dialogue sans valider et laissez la réparation non confirmée.
 
 <a id="panel-app-too-old"></a>
 
