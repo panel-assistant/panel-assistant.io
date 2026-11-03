@@ -6,7 +6,7 @@ sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
 
 Los sensores de proximidad de los paneles murales Android no comparten una escala útil común. Algunos indican una distancia, otros solo indican dos valores, la polaridad puede estar invertida y las lecturas en reposo pueden presentar desviaciones entre unidades y versiones de firmware. La aplicación del panel utiliza el modelo calibrado del perfil de sensor activo, o un modelo que guardes mediante la configuración guiada, para interpretar su nivel de referencia, su referencia de proximidad y su polaridad.
 
-![La configuración guiada de proximidad del panel, en el paso 3 de 7, que te pide que camines hacia el panel como lo harías normalmente mientras realiza una cuenta atrás](/es/screenshots/proximity-setup-screen-480.gif)
+![La configuración guiada de proximidad del panel, en el paso 3 de 7, que te pide que camines hacia el panel como lo harías normalmente mientras realiza una cuenta atrás](/screenshots/proximity-setup-screen-480.gif)
 
 ## Configuración guiada
 

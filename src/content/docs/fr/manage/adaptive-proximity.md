@@ -6,7 +6,7 @@ sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
 
 Les capteurs de proximité des panneaux muraux Android ne partagent pas une même échelle exploitable. Certains indiquent une distance, d’autres seulement deux valeurs, la polarité peut être inversée et les mesures au repos peuvent dériver selon les appareils et les versions du micrologiciel. L’application du panneau utilise le modèle étalonné du profil de capteur actif, ou un modèle que vous enregistrez lors de la configuration guidée, pour interpréter la valeur de base, la référence de proximité et la polarité du capteur.
 
-![La configuration guidée de proximité du panneau, à l’étape 3 sur 7, vous demandant de marcher vers le panneau comme vous le feriez normalement pendant le compte à rebours](/fr/screenshots/proximity-setup-screen-480.gif)
+![La configuration guidée de proximité du panneau, à l’étape 3 sur 7, vous demandant de marcher vers le panneau comme vous le feriez normalement pendant le compte à rebours](/screenshots/proximity-setup-screen-480.gif)
 
 ## Configuration guidée
 
