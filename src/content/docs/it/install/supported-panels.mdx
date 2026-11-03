@@ -1,0 +1,36 @@
+---
+title: Scegli un pannello
+description: Panel Assistant funziona sui pannelli a parete Android con architettura ARM, da Android 8.0 in poi. Scopri tutte le marche e i modelli con supporto hardware dedicato, di Sonoff, Shelly, Tuya, Meta, Electron e Smatek, e i requisiti di un pannello.
+sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
+---
+
+import SupportedPanels from '../../../../components/SupportedPanels.astro';
+
+**Panel Assistant funziona sui pannelli a parete Android con architettura ARM, Android 8.0 o versioni successive e accesso al debug.** Non devi prima trovare il tuo modello in un elenco: installalo e la plancia di Home Assistant, la luminosità e lo spegnimento dello schermo, l'audio e i sensori standard del pannello sono subito disponibili in Home Assistant.
+
+Ciascuno dei modelli qui sotto ha una propria [pagina hardware](/it/hardware/) con le informazioni da verificare prima dell'acquisto. Quando è disponibile un profilo per il modello o la famiglia, questo consente di accedere alle caratteristiche specifiche del pannello, come LED, pulsanti, relè, fotocamera, microfoni e sensori climatici.
+
+## Pannelli con supporto ottimizzato
+
+<SupportedPanels />
+
+Ogni barra mostra il nostro grado di fiducia in un pannello, riempiendosi e diventando verde man mano che la fiducia aumenta. Un pannello che abbiamo esaminato su un esemplare di nostra proprietà offre la maggiore certezza, ancora di più se il firmware del produttore lo lascia aperto a Panel Assistant. Per gli altri pannelli, la fiducia deriva dall'esame del firmware del produttore, dalla documentazione del produttore, dalla condivisione della piattaforma con un pannello che abbiamo esaminato e dai proprietari che vi eseguono Panel Assistant, mentre una versione meno recente di Android che non abbiamo esaminato incide negativamente. Passa il puntatore su un pannello o aprilo per vedere quali di questi elementi sono presenti.
+
+Diversi di questi pannelli sono lo stesso hardware venduto con marchi diversi. Il nome di ogni marchio è elencato e rimanda all'unica pagina dedicata a quell'hardware.
+
+## Tutti gli altri pannelli Android
+
+**Un pannello che non è menzionato qui è comunque un pannello supportato.** Panel Assistant non deve riconoscere il tuo hardware per funzionare su di esso. Qualsiasi pannello che soddisfi i requisiti qui sotto si avvia con il profilo Generic, che offre la plancia sullo schermo, la luminosità e lo spegnimento dello schermo, l'audio, la navigazione e i sensori standard di Android, come quelli di luce e prossimità, tutti come entità del dispositivo del pannello in Home Assistant.
+
+Il profilo dedicato a un modello aggiunge l'accesso all'hardware specifico di quel modello. Molti pannelli non ne hanno e molti proprietari non ne hanno mai bisogno. Per loro, Generic offre l'insieme completo delle funzionalità, non uno ridotto.
+
+## Cosa serve a un pannello
+
+- **Android 8.0 o versioni successive su ARM.** Le build rilasciate supportano `arm64-v8a` e `armeabi-v7a`.
+- **Opzioni sviluppatore.** Il programma di installazione usa l'interfaccia di debug di Android, che quasi tutti i pannelli permettono di attivare.
+- **Qualsiasi WebView di sistema.** I fornitori spesso distribuiscono un motore del browser non aggiornato. L'app del pannello lo controlla e [Preparazione del pannello](/it/install/prepare-a-panel/) mostra come aggiornarlo sul tuo pannello.
+- **Root, solo per alcune funzionalità aggiuntive.** Alcune funzionalità di alcuni modelli richiedono l'accesso root. Ogni pagina hardware indica quali e come ottenerlo.
+
+## Non è ancora nell'elenco?
+
+Il supporto hardware è costituito da dati, non da codice, quindi aggiungere un pannello significa scrivere un profilo anziché una nuova versione dell'app. Il modo più rapido per dare al tuo modello un profilo dedicato è parlarcene: indica il modello e ciò che è successo nelle [segnalazioni](https://github.com/panel-assistant/android/issues). La [documentazione dei profili](/it/reference/profiles/) descrive cosa contiene un profilo, se desideri scriverne uno. Ogni segnalazione, che riporti un funzionamento riuscito o meno, porta altri pannelli su questa pagina.

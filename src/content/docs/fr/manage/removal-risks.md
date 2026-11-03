@@ -1,7 +1,7 @@
 ---
 title: Avant de retirer ha-paneld
 description: Les effets du retrait de ha-paneld d’un panneau, les panneaux et micrologiciels qui peuvent perdre l’accès aux paramètres Android, et les vérifications préalables.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
 ---
 
 <div id="removal-this-panel" class="removal-this-panel" hidden>
@@ -11,7 +11,11 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 
 Panel Assistant retire ha-paneld en une seule étape, depuis l’option **Retirer Panel Assistant de ce panneau**, sous **Configurer** dans Home Assistant (Panel Assistant 0.9 l’appelle Retirer ha-paneld de ce panneau). Sur la plupart des panneaux, cela suffit. Sur certains, le retrait ne laisse aucun moyen de revenir aux paramètres Android ou au débogage réseau ; plus rien ne peut alors y installer d’application, Panel Assistant compris, tant que vous n’utilisez pas la méthode de récupération du fabricant. Sur certains micrologiciels, cela implique de se connecter à un compte du fabricant ou de brancher un ordinateur par USB.
 
-Dans la version 1.0.0-rc2 non encore publiée, cette option s’appelle **Retirer de ce panneau** et un retrait réussi supprime aussi le panneau de Home Assistant ; aucune option ne permet de conserver son entrée.
+Dans la version 1.0.0-rc2, qui n’est pas encore publiée, cette option s’appelle **Retirer de ce panneau** et un retrait réussi supprime également le panneau de Home Assistant ; aucune option ne permet de conserver son entrée. La page de l’appareil correspondant au panneau comporte aussi un bouton **Retirer de ce panneau**. Appuyer dessus ne retire rien : cela ouvre une correction persistante, **Retirer Panel Assistant de &lt;panel&gt;**, dans **Paramètres → Système → Corrections**. Lisez son avertissement avant de confirmer le retrait en sélectionnant une fois **Valider**. Si vous avez appuyé sur le bouton par erreur, fermez la boîte de dialogue sans valider et laissez la correction non confirmée.
+
+La suppression de l’entrée du panneau dans Home Assistant laisse ha-paneld installé. Avant de supprimer cette entrée, utilisez l’option de retrait décrite ci-dessus pour désinstaller l’application.
+
+Si vous avez déjà supprimé l’entrée, ajoutez à nouveau le panneau dans Home Assistant, puis utilisez l’option de retrait décrite ci-dessus.
 
 Lisez la section de votre panneau avant de confirmer.
 
@@ -23,6 +27,10 @@ Lisez la section de votre panneau avant de confirmer.
 4. Dans la version 1.0.0-rc1, si vous avez sélectionné **Supprimer aussi ce panneau de Home Assistant** avant de valider, Home Assistant oublie aussi le panneau. Laissez cette option désactivée pour conserver ses entités et son historique. Dans la version 1.0.0-rc2 non encore publiée, un retrait réussi supprime toujours l’entrée.
 
 Si le retrait s’interrompt, relancez-le : il reprend là où il s’est arrêté.
+
+## Réinstallation de ce panneau
+
+Rétablissez d’abord le débogage en vous aidant de la section consacrée à votre panneau ci-dessous et de [Préparer un panneau](/fr/install/prepare-a-panel/#1-les-options-pour-les-développeurs-et-le-débogage-sont-activés). Suivez ensuite [Ajouter un panneau](/fr/install/installing-ha-paneld/) pour réinstaller Panel Assistant. Le retrait efface les paramètres de l’application ; la réinstallation ne les restaure pas.
 
 ## Pourquoi un panneau peut se retrouver bloqué
 

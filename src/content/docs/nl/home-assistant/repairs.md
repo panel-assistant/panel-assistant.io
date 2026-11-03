@@ -1,7 +1,7 @@
 ---
 title: Reparaties
 description: Wat elke Panel Assistant-reparatie betekent, waarom die verschijnt en hoe je die oplost.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
 ---
 
 Open **Instellingen → Systeem → Reparaties** in Home Assistant en kies het Panel Assistant-bericht. De eerste link opent de betreffende instelling of herstelstappen. Gebruik **Meer informatie** voor de onderstaande uitleg.
@@ -12,6 +12,7 @@ Gebruik de beveiligde actie **Opnieuw proberen** van de bestaande reparatie pas 
 
 ## Zoek je reparatie
 
+- [Panel Assistant van &lt;panel&gt; halen](#panel-assistant-van-panel-halen)
 - [Paneelapp te oud](#panel-app-too-old)
 - [Oude app heeft 0.9.0 nodig](#old-app-needs-090)
 - [MQTT-paneel heeft 0.9.0 nodig](#mqtt-panel-needs-090)
@@ -48,6 +49,14 @@ Gebruik de beveiligde actie **Opnieuw proberen** van de bestaande reparatie pas 
 - [Installatiefout: ADB-autorisatie](#installer-failure-adb-authorization)
 - [ADB-updateautorisatie](#adb-update-authorization)
 - [Een andere Home Assistant](#another-home-assistant)
+
+## Panel Assistant van &lt;panel&gt; halen
+
+**Wat het betekent:** In de nog niet uitgebrachte versie 1.0.0-rc2 heeft iemand op de apparaatpagina van dit paneel op **Van dit paneel verwijderen** gedrukt. De knop verwijdert niets; de reparatie blijft beschikbaar totdat de verwijdering is voltooid.
+
+**Waarom dit gebeurt:** Panel Assistant vraagt je om bevestiging voordat het het startscherm en de apps van de fabrikant herstelt, ha-paneld verwijdert en het paneel uit Home Assistant verwijdert.
+
+**Hoe je dit oplost:** Lees [wat verwijderen doet en hoe je opnieuw installeert](/nl/manage/removal-risks/) voordat je **Verzenden** één keer selecteert om te bevestigen. Als dit een vergissing was, sluit je het dialoogvenster zonder te verzenden en laat je de reparatie onbevestigd.
 
 <a id="panel-app-too-old"></a>
 
