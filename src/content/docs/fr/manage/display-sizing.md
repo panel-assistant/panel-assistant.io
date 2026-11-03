@@ -1,10 +1,10 @@
 ---
 title: Dimensionnement de l’affichage
 description: Faire correspondre la taille d’un tableau de bord Home Assistant sur un panneau à son apparence dans un navigateur d’ordinateur, à l’aide de la densité et de la taille du texte.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 33ce23572aefb327319703efb255e5129b71ecbf
 ---
 
-Un tableau de bord Home Assistant conçu dans un navigateur d’ordinateur s’affiche souvent à la mauvaise taille sur un panneau mural Android : les cartes sont trop grandes et leurs bords sont coupés, ou elles sont trop petites. Un téléphone reste généralement assez proche de l’affichage sur ordinateur, mais les panneaux s’en écartent souvent, car leurs fabricants définissent une densité système et une échelle de police mal adaptées à l’écran physique. L’application du panneau vous propose deux réglages, **densité (DPI)** et **taille du texte (échelle de police)**, sous **Installer**, puis **Dimensionnement de l’affichage**, pour rétablir les proportions de la disposition et du texte. Vous avez généralement besoin des deux.
+Un tableau de bord Home Assistant conçu dans un navigateur d’ordinateur s’affiche souvent à la mauvaise taille sur un panneau mural Android : les cartes sont trop grandes et leurs bords sont coupés, ou elles sont trop petites. Un téléphone reste généralement assez proche de l’affichage sur ordinateur, mais les panneaux s’en écartent souvent, car leurs fabricants définissent une densité système et une échelle de police mal adaptées à l’écran physique. L’application du panneau vous propose deux réglages, **Densité logique (dpi)** et **Taille du texte**, sous **Installer**, puis **Dimensionnement de l’affichage**, pour rétablir les proportions de la disposition et du texte. Vous avez généralement besoin des deux.
 
 :::caution[Expérimental]
 Les réglages fonctionnent, mais les valeurs appropriées pour chaque panneau ne sont pas encore établies. Considérez la densité et la taille du texte comme des réglages à expérimenter plutôt que comme une fonction finalisée. Les retours sur les valeurs qui conviennent bien à un panneau donné sont les bienvenus.
@@ -24,10 +24,10 @@ Certains modèles pris en charge fournissent une densité recommandée, et la pl
 
 ## Les deux réglages
 
-| Réglage                                 | Ce qu’il modifie                                                                                                                                                                                                                                                             | Mécanisme                            |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| **Densité (DPI)**                       | La disposition entière. La zone d’affichage effective en dp est `physical px ÷ (density / 160)`. Une densité plus faible permet d’afficher davantage de contenu, plus près de la zone d’affichage plus large d’un ordinateur ; une densité plus élevée agrandit l’affichage. | `wm density <n>`                     |
-| **Taille du texte (échelle de police)** | Le texte du tableau de bord. L’échelle de police du système Android devient le `textZoom` du WebView (`textZoom = scale × 100`).                                                                                                                                             | `settings put system font_scale <f>` |
+| Réglage                   | Ce qu’il modifie                                                                                                                                                                                                                                                             | Mécanisme                            |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| **Densité logique (dpi)** | La disposition entière. La zone d’affichage effective en dp est `physical px ÷ (density / 160)`. Une densité plus faible permet d’afficher davantage de contenu, plus près de la zone d’affichage plus large d’un ordinateur ; une densité plus élevée agrandit l’affichage. | `wm density <n>`                     |
+| **Taille du texte**       | Le texte du tableau de bord. L’échelle de police du système Android devient le `textZoom` du WebView (`textZoom = scale × 100`).                                                                                                                                             | `settings put system font_scale <f>` |
 
 La sortie de la commande Android `wm density` appelle la valeur de base d’usine `Physical density`. Ce libellé est trompeur : il s’agit de la densité qu’Android utilise pour la disposition après la réinitialisation d’un réglage personnalisé, et non d’une mesure des pixels par pouce de l’écran. L’application du panneau l’indique comme **base d’usine** et n’affiche une valeur physique en PPI que pour les profils matériels dont les dimensions de l’écran ont été vérifiées indépendamment.
 

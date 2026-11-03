@@ -1,10 +1,10 @@
 ---
 title: Anzeigegröße
 description: Die Größe eines Home Assistant-Dashboards auf einem Panel mit Dichte und Textgröße an die Darstellung im Desktop-Browser anpassen.
-sourceCommit: 8eeaa5fae655155d6bdca33322869afe356ca542
+sourceCommit: 33ce23572aefb327319703efb255e5129b71ecbf
 ---
 
-Ein Home Assistant-Dashboard, das in einem Desktop-Browser gestaltet wurde, wird auf einem Android-Wandpanel oft in der falschen Größe dargestellt: Karten sind zu groß und ihre Ränder abgeschnitten, oder sie sind zu klein. Ein Smartphone bleibt meist ungefähr auf dem Niveau des Desktops, Panels jedoch häufig nicht. Ihre Hersteller liefern sie nämlich mit einer Systemdichte und Schriftskalierung aus, die schlecht zum physischen Display passen. Die Panel-App bietet unter **Installieren**, dann **Anzeigegröße**, zwei Regler: **Dichte (DPI)** und **Textgröße (Schriftskalierung)**. Damit kannst du Layout und Text wieder angleichen. Meist brauchst du beide.
+Ein Home Assistant-Dashboard, das in einem Desktop-Browser entworfen wurde, wird auf einem Android-Wandpanel oft in der falschen Größe dargestellt: Die Karten sind zu groß und ihre Ränder abgeschnitten, oder sie sind zu klein. Auf einem Smartphone entspricht die Darstellung meist weitgehend der auf dem Desktop, auf Panels dagegen häufig nicht, weil deren Hersteller eine Systemdichte und eine Schriftskalierung voreinstellen, die schlecht zum physischen Display passen. Die Panel-App bietet dir unter **Installation** und dort unter **Anzeigegröße** zwei Regler, **Logische Dichte (dpi)** und **Textgröße**, um Layout und Text wieder an die Darstellung auf dem Desktop anzugleichen. Meist brauchst du beide.
 
 :::caution[Experimentell]
 Die Regler funktionieren, aber die passenden Werte für jedes Panel stehen noch nicht fest. Betrachte Dichte und Textgröße als etwas zum Ausprobieren, nicht als fertige Funktion. Rückmeldungen zu Werten, die bei einem bestimmten Panel gut funktionieren, sind willkommen.
@@ -12,7 +12,7 @@ Die Regler funktionieren, aber die passenden Werte für jedes Panel stehen noch 
 
 ## Verwendung
 
-Die Karte **Anzeigegröße** auf der Registerkarte **Installieren** des Panels legt eine benutzerdefinierte logische Dichte und Textgröße fest, wendet sie sofort an oder stellt die werkseitige Basisdichte von Android wieder her. Beide überstehen einen Neustart, da es sich um Systemeinstellungen von Android handelt.
+Die Karte **Anzeigegröße** auf dem Tab **Installation** des Panels legt eine benutzerdefinierte logische Dichte und Textgröße fest, wendet beide unmittelbar an oder setzt die Dichte auf die werkseitige Basisdichte von Android zurück. Beide Einstellungen bleiben nach einem Neustart erhalten, da sie Android-Systemeinstellungen sind.
 
 :::note
 Dafür ist ein genehmigter privilegierter Zugangsweg erforderlich: normalerweise das `su` des Herstellers oder der [Root-Helfer](https://github.com/panel-assistant/android/blob/main/helper/README.md). Ein kompatibles, nicht gerootetes Panel, dessen optionaler erweiterter Zugriff bereits am Panel genehmigt wurde, kann ebenfalls genau diese Anzeigeänderungen vornehmen. Wenn kein unterstützter Zugangsweg bereitsteht, bleibt die Karte sichtbar, aber gesperrt.
@@ -24,10 +24,10 @@ Einige unterstützte Modelle bringen eine empfohlene Dichte mit, die meisten dav
 
 ## Die beiden Regler
 
-| Regler                            | Was er ändert                                                                                                                                                                                                                                                  | Mechanismus                          |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| **Dichte (DPI)**                  | Das gesamte Layout. Der effektive Darstellungsbereich in dp ist `physical px ÷ (density / 160)`. Eine niedrigere Dichte schafft mehr Platz und nähert sich dem breiteren Darstellungsbereich eines Desktops an; bei einer höheren wird die Darstellung größer. | `wm density <n>`                     |
-| **Textgröße (Schriftskalierung)** | Text im Dashboard. Die systemweite Schriftskalierung von Android wird zum `textZoom` der WebView (`textZoom = scale × 100`).                                                                                                                                   | `settings put system font_scale <f>` |
+| Regler                    | Was er ändert                                                                                                                                                                                                                                                  | Mechanismus                          |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| **Logische Dichte (dpi)** | Das gesamte Layout. Der effektive Darstellungsbereich in dp ist `physical px ÷ (density / 160)`. Eine niedrigere Dichte schafft mehr Platz und nähert sich dem breiteren Darstellungsbereich eines Desktops an; bei einer höheren wird die Darstellung größer. | `wm density <n>`                     |
+| **Textgröße**             | Text im Dashboard. Die systemweite Schriftskalierung von Android wird zum `textZoom` der WebView (`textZoom = scale × 100`).                                                                                                                                   | `settings put system font_scale <f>` |
 
 Die Ausgabe von `wm density` in Android bezeichnet den werkseitigen Basiswert als `Physical density`. Diese Bezeichnung ist irreführend: Es ist die Dichte, die Android nach dem Zurücksetzen einer Überschreibung für das Layout verwendet, keine Messung der Pixel pro Zoll des Displays. Die Panel-App bezeichnet sie als **werkseitige Basis** und zeigt physische PPI nur bei Hardwareprofilen an, deren Bildschirmabmessungen unabhängig geprüft wurden.
 
