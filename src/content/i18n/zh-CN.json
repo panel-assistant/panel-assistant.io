@@ -104,5 +104,6 @@
   "confidence.documented": "厂商文档或已公布的规格中有记载",
   "confidence.platform": "与我们检查过的一款面板采用相同平台",
   "confidence.owners": "有用户在其拥有的一台面板上运行 Panel Assistant",
-  "confidence.older_android": "Android {android}：版本低于 10，且未经检查"
+  "confidence.older_android": "Android {android}：版本低于 10，且未经检查",
+  "confidence.inspected": "已在我们使用的一台设备上检查"
 }

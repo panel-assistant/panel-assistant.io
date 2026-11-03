@@ -39,7 +39,7 @@ Jeśli agent rozmowy potoku zada dodatkowe pytanie, panel sam ponownie rozpoczyn
 
 ## Komunikaty i rozpoczynanie rozmowy
 
-Gdy asystent głosowy jest włączony, `assist_satellite.announce` odczytuje na panelu wiadomość z dowolnej automatyzacji lub skryptu, opcjonalnie poprzedzoną krótkim sygnałem. `assist_satellite.start_conversation` odczytuje komunikat rozpoczynający rozmowę i nasłuchuje odpowiedzi; Home Assistant pozwala na to tylko z agentem rozmowy obsługującym samodzielne rozpoczynanie rozmowy, czego wbudowany agent Home Assistant nie obsługuje. Obie usługi wymagają włączonego asystenta głosowego; [Zamiana tekstu na mowę](/pl/manage/text-to-speech/#play-an-announcement-with-the-voice-assistant-on) opisuje prostszą alternatywę REST na panelach bez mikrofonu.
+Gdy asystent głosowy jest włączony, `assist_satellite.announce` odczytuje na panelu wiadomość z dowolnej automatyzacji lub skryptu, opcjonalnie poprzedzoną krótkim sygnałem. `assist_satellite.start_conversation` odczytuje komunikat rozpoczynający rozmowę i nasłuchuje odpowiedzi; Home Assistant pozwala na to tylko z agentem rozmowy obsługującym samodzielne rozpoczynanie rozmowy, czego wbudowany agent Home Assistant nie obsługuje. Obie usługi wymagają włączonego asystenta głosowego; [Zamiana tekstu na mowę](/pl/manage/text-to-speech/#odtwórz-komunikat-przy-włączonym-asystencie-głosowym) opisuje prostszą alternatywę REST na panelach bez mikrofonu.
 
 ## Kilku asystentów w jednym pomieszczeniu
 

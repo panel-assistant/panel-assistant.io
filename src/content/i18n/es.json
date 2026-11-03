@@ -104,5 +104,6 @@
   "confidence.documented": "Documentado por el fabricante o en las especificaciones publicadas",
   "confidence.platform": "Misma plataforma que un panel que hemos inspeccionado",
   "confidence.owners": "Un propietario usa Panel Assistant en uno",
-  "confidence.older_android": "Android {android}: anterior a 10 y sin inspeccionar"
+  "confidence.older_android": "Android {android}: anterior a 10 y sin inspeccionar",
+  "panels.count": "{models} paneles identificados de {brands} marcas"
 }
