@@ -3,7 +3,7 @@ title: Display sizing
 description: Matching the size of a Home Assistant dashboard on a panel to how it looks in a desktop browser, with density and text size.
 ---
 
-A Home Assistant dashboard designed in a desktop browser often renders at the wrong size on an Android wall panel: cards too large with clipped edges, or too small. A phone usually stays broadly in step with the desktop, but panels frequently do not, because their makers ship a system density and font scale that are poorly matched to the physical display. The panel app gives you two controls, **density (DPI)** and **text size (font scale)**, in **Install**, then **Display sizing**, to bring the layout and the text back in line. You usually need both.
+A Home Assistant dashboard designed in a desktop browser often renders at the wrong size on an Android wall panel: cards too large with clipped edges, or too small. A phone usually stays broadly in step with the desktop, but panels frequently do not, because their makers ship a system density and font scale that are poorly matched to the physical display. The panel app gives you two controls, **Logical density (dpi)** and **Text size**, in **Install**, then **Display sizing**, to bring the layout and the text back in line. You usually need both.
 
 :::caution[Experimental]
 The controls work, but the right values for each panel are not settled. Treat density and text size as something to experiment with rather than a finished feature. Feedback on values that work well for a given panel is welcome.
@@ -23,10 +23,10 @@ Some supported models ship a recommended density, and most of those a text size 
 
 ## The two controls
 
-| Control                    | What it changes                                                                                                                                                             | Mechanism                            |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| **Density (DPI)**          | The whole layout. The effective viewport in dp is `physical px ÷ (density / 160)`. A lower density fits more, closer to a desktop's wider viewport; a higher one is larger. | `wm density <n>`                     |
-| **Text size (font scale)** | Text in the dashboard. Android's system font scale becomes the WebView's `textZoom` (`textZoom = scale × 100`).                                                             | `settings put system font_scale <f>` |
+| Control                   | What it changes                                                                                                                                                             | Mechanism                            |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| **Logical density (dpi)** | The whole layout. The effective viewport in dp is `physical px ÷ (density / 160)`. A lower density fits more, closer to a desktop's wider viewport; a higher one is larger. | `wm density <n>`                     |
+| **Text size**             | Text in the dashboard. Android's system font scale becomes the WebView's `textZoom` (`textZoom = scale × 100`).                                                             | `settings put system font_scale <f>` |
 
 Android's `wm density` output calls the factory base value `Physical density`. That label is misleading: it is the density Android uses for layout once an override is reset, not a measurement of the display's pixels per inch. The panel app reports it as the **factory base**, and shows a physical PPI only for hardware profiles whose screen dimensions have been checked independently.
 
