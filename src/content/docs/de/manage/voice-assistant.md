@@ -39,7 +39,7 @@ Wenn der Konversationsagent der Pipeline eine Rückfrage stellt, beginnt das Pan
 
 ## Durchsagen und eine Konversation starten
 
-Wenn der Sprachassistent eingeschaltet ist, spricht `assist_satellite.announce` eine Nachricht aus einer beliebigen Automatisierung oder einem Skript auf dem Panel, optional mit einem kurzen Signalton davor. `assist_satellite.start_conversation` spricht eine Aufforderung und lauscht anschließend auf die Antwort. Home Assistant erlaubt dies nur mit einem Konversationsagenten, der das eigenständige Starten einer Konversation unterstützt. Der integrierte Home Assistant-Agent unterstützt das nicht. Beide Dienste benötigen den eingeschalteten Sprachassistenten. Eine einfachere REST-Alternative für Panels ohne Mikrofon findest du unter [Text-to-Speech](/de/manage/text-to-speech/#play-an-announcement-with-the-voice-assistant-on).
+Wenn der Sprachassistent eingeschaltet ist, spricht `assist_satellite.announce` eine Nachricht aus einer beliebigen Automatisierung oder einem Skript auf dem Panel, optional mit einem kurzen Signalton davor. `assist_satellite.start_conversation` spricht eine Aufforderung und lauscht anschließend auf die Antwort. Home Assistant erlaubt dies nur mit einem Konversationsagenten, der das eigenständige Starten einer Konversation unterstützt. Der integrierte Home Assistant-Agent unterstützt das nicht. Beide Dienste benötigen den eingeschalteten Sprachassistenten. Eine einfachere REST-Alternative für Panels ohne Mikrofon findest du unter [Text-to-Speech](/de/manage/text-to-speech/#eine-ankündigung-bei-eingeschaltetem-sprachassistenten-wiedergeben).
 
 ## Mehrere Assistenten in einem Raum
 
