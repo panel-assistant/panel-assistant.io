@@ -1,0 +1,36 @@
+---
+title: Elige un panel
+description: Panel Assistant funciona en paneles de pared Android con arquitectura ARM a partir de Android 8.0. Consulta todas las marcas y modelos con soporte de hardware propio, de Sonoff, Shelly, Tuya, Meta, Electron y Smatek, y lo que necesita un panel.
+sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
+---
+
+import SupportedPanels from '../../../../components/SupportedPanels.astro';
+
+**Panel Assistant funciona en paneles de pared Android con arquitectura ARM, Android 8.0 o posterior y acceso de depuración.** No necesitas encontrar primero tu modelo en una lista: instálalo y el panel de control de Home Assistant, el brillo y el apagado de la pantalla, el audio y los sensores estándar del panel aparecen en Home Assistant de inmediato.
+
+Cada uno de los modelos que aparecen a continuación tiene su propia [página de hardware](/es/hardware/) con los datos que debes comprobar antes de comprar. Cuando hay un perfil de modelo o de familia disponible, este permite acceder a los elementos particulares de ese panel, como sus LED, botones, relés, cámara, micrófonos y sensores climáticos.
+
+## Paneles con soporte adaptado
+
+<SupportedPanels />
+
+Cada barra muestra cuánta confianza tenemos en un panel y se llena y se vuelve verde a medida que aumenta esa confianza. Un panel que hemos inspeccionado en una unidad propia ofrece la mayor certeza, y aún más cuando el firmware de su fabricante lo deja abierto a Panel Assistant. Para los demás paneles, la confianza procede de examinar el firmware del fabricante, de la documentación del fabricante, de compartir plataforma con un panel que hemos inspeccionado y de propietarios que ejecutan Panel Assistant en uno, mientras que una versión antigua de Android que no hemos inspeccionado cuenta en su contra. Pasa el cursor sobre un panel o ábrelo para ver cuáles de estos criterios cumple.
+
+Varios de estos paneles son el mismo hardware vendido bajo distintas marcas. El nombre de cada marca aparece en la lista y lleva a la única página de ese hardware.
+
+## Todos los demás paneles Android
+
+**Un panel que no se menciona aquí sigue siendo un panel compatible.** Panel Assistant no necesita reconocer tu hardware para funcionar en él. Cualquier panel que cumpla los requisitos indicados a continuación se inicia con el perfil Generic, que te proporciona el panel de control en pantalla, el brillo y el apagado de la pantalla, el audio, la navegación y los sensores estándar de Android, como los de luz y proximidad, todo ello como entidades del dispositivo del propio panel en Home Assistant.
+
+Lo que añade el perfil propio de un modelo es el hardware particular de ese modelo. Muchos paneles no tienen hardware particular, y muchos propietarios nunca lo necesitan. Para ellos, Generic es el conjunto completo de funciones, no uno inferior.
+
+## Lo que necesita un panel
+
+- **Android 8.0 o posterior en ARM.** Las compilaciones publicadas admiten `arm64-v8a` y `armeabi-v7a`.
+- **Opciones de desarrollador.** El instalador utiliza la interfaz de depuración de Android, que casi todos los paneles te permiten activar.
+- **Cualquier WebView del sistema.** Los proveedores suelen incluir un motor de navegador desactualizado. La aplicación del panel lo comprueba, y [Preparar el panel](/es/install/prepare-a-panel/) muestra cómo actualizarlo en tu panel.
+- **Root, solo para unas pocas funciones adicionales.** Algunas funciones de algunos modelos necesitan root. Cada página de hardware indica cuáles y cómo obtenerlo.
+
+## ¿Aún no está en la lista?
+
+El soporte de hardware consiste en datos, no en código, por lo que añadir un panel implica escribir un perfil en lugar de una nueva versión de la aplicación. La forma más rápida de conseguir un perfil propio para tu modelo es hablarnos de él: indica en las [incidencias](https://github.com/panel-assistant/android/issues) qué modelo es y qué ocurrió. La [documentación de perfiles](/es/reference/profiles/) describe qué contiene un perfil, por si quieres escribir uno. Cada informe, tanto si funciona como si no, incorpora más paneles a esta página.

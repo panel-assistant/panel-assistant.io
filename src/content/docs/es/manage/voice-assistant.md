@@ -39,7 +39,7 @@ Si el agente de conversación del flujo hace una pregunta de seguimiento, el pan
 
 ## Anuncios e inicio de conversaciones
 
-Una vez activado el asistente de voz, `assist_satellite.announce` pronuncia un mensaje en el panel desde cualquier automatización o script, opcionalmente precedido de un breve tono. `assist_satellite.start_conversation` pronuncia un mensaje inicial y después escucha la respuesta; Home Assistant solo lo permite con un agente de conversación que admita iniciar una conversación por sí mismo, lo que no admite el agente integrado de Home Assistant. Ambos servicios requieren el asistente de voz activado; consulta [Texto a voz](/es/manage/text-to-speech/#play-an-announcement-with-the-voice-assistant-on) para conocer la alternativa REST más sencilla en paneles sin micrófono.
+Una vez activado el asistente de voz, `assist_satellite.announce` pronuncia un mensaje en el panel desde cualquier automatización o script, opcionalmente precedido de un breve tono. `assist_satellite.start_conversation` pronuncia un mensaje inicial y después escucha la respuesta; Home Assistant solo lo permite con un agente de conversación que admita iniciar una conversación por sí mismo, lo que no admite el agente integrado de Home Assistant. Ambos servicios requieren el asistente de voz activado; consulta [Texto a voz](/es/manage/text-to-speech/#reproducir-un-anuncio-con-el-asistente-de-voz-habilitado) para conocer la alternativa REST más sencilla en paneles sin micrófono.
 
 ## Varios asistentes en una habitación
 

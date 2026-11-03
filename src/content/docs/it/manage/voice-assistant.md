@@ -39,7 +39,7 @@ Se l'agente di conversazione della pipeline pone una domanda successiva, il pann
 
 ## Annunci e avvio di una conversazione
 
-Una volta attivo l'assistente vocale, `assist_satellite.announce` pronuncia un messaggio sul pannello da qualsiasi automazione o script, facoltativamente preceduto da un breve suono. `assist_satellite.start_conversation` pronuncia una richiesta e poi ascolta la risposta; Home Assistant lo consente solo con un agente di conversazione che supporti l'avvio autonomo di una conversazione, cosa che l'agente integrato Home Assistant non supporta. Entrambi i servizi richiedono l'assistente vocale attivo; vedi [Sintesi vocale](/it/manage/text-to-speech/#play-an-announcement-with-the-voice-assistant-on) per l'alternativa REST più semplice sui pannelli senza microfono.
+Una volta attivo l'assistente vocale, `assist_satellite.announce` pronuncia un messaggio sul pannello da qualsiasi automazione o script, facoltativamente preceduto da un breve suono. `assist_satellite.start_conversation` pronuncia una richiesta e poi ascolta la risposta; Home Assistant lo consente solo con un agente di conversazione che supporti l'avvio autonomo di una conversazione, cosa che l'agente integrato Home Assistant non supporta. Entrambi i servizi richiedono l'assistente vocale attivo; vedi [Sintesi vocale](/it/manage/text-to-speech/#riproduci-un-annuncio-con-lassistente-vocale-attivo) per l'alternativa REST più semplice sui pannelli senza microfono.
 
 ## Più assistenti nella stessa stanza
 

@@ -1,0 +1,36 @@
+---
+title: Choisir un panneau
+description: Panel Assistant fonctionne sur les panneaux muraux Android à architecture ARM à partir d’Android 8.0. Découvrez toutes les marques et tous les modèles bénéficiant d’une prise en charge matérielle spécifique, de Sonoff, Shelly, Tuya, Meta, Electron et Smatek, ainsi que les prérequis d’un panneau.
+sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
+---
+
+import SupportedPanels from '../../../../components/SupportedPanels.astro';
+
+**Panel Assistant fonctionne sur les panneaux muraux Android à architecture ARM équipés d’Android 8.0 ou d’une version ultérieure et offrant un accès au débogage.** Vous n’avez pas besoin de trouver d’abord votre modèle dans une liste : installez-le, et le tableau de bord Home Assistant, la luminosité et l’extinction de l’écran, l’audio et les capteurs standard du panneau sont immédiatement disponibles dans Home Assistant.
+
+Les modèles ci-dessous disposent chacun de leur propre [page matérielle](/fr/hardware/) présentant les points à vérifier avant l’achat. Lorsqu’un profil de modèle ou de famille est disponible, il donne accès aux particularités de ce panneau, comme ses LED, ses boutons, ses relais, sa caméra, ses microphones et ses capteurs climatiques.
+
+## Panneaux bénéficiant d’une prise en charge adaptée
+
+<SupportedPanels />
+
+Chaque barre indique notre niveau de confiance dans un panneau ; elle se remplit et devient verte à mesure que cette confiance augmente. Un panneau que nous avons examiné sur un exemplaire nous appartenant offre le plus de certitude, et davantage encore lorsque le micrologiciel de son fabricant le laisse ouvert à Panel Assistant. Pour les autres panneaux, la confiance repose sur l’examen du micrologiciel du fabricant, la documentation du fabricant, le partage d’une plateforme avec un panneau que nous avons examiné et les propriétaires qui y font fonctionner Panel Assistant, tandis qu’une ancienne version d’Android que nous n’avons pas examinée joue en sa défaveur. Survolez ou ouvrez un panneau pour voir lesquels de ces éléments sont présents.
+
+Plusieurs de ces panneaux sont un même matériel vendu sous différentes marques. Le nom de chaque marque est répertorié et mène à la page unique consacrée à ce matériel.
+
+## Tous les autres panneaux Android
+
+**Un panneau qui n’est pas nommé ici reste un panneau pris en charge.** Panel Assistant n’a pas besoin de reconnaître votre matériel pour fonctionner dessus. Tout panneau qui répond aux exigences ci-dessous démarre avec le profil Generic, qui vous donne accès au tableau de bord sur l’écran, à la luminosité et à l’extinction de l’écran, à l’audio, à la navigation et aux capteurs Android standard, comme ceux de lumière et de proximité, le tout sous forme d’entités rattachées à l’appareil propre au panneau dans Home Assistant.
+
+Le profil propre à un modèle ajoute la prise en charge du matériel particulier à ce modèle. De nombreux panneaux n’en possèdent pas, et de nombreux propriétaires n’en ont jamais besoin. Pour eux, Generic offre l’ensemble des fonctionnalités, et non un ensemble réduit.
+
+## Ce dont un panneau a besoin
+
+- **Android 8.0 ou une version ultérieure sur ARM.** Les versions publiées prennent en charge `arm64-v8a` et `armeabi-v7a`.
+- **Options pour les développeurs.** Le programme d’installation utilise l’interface de débogage d’Android, que presque tous les panneaux vous permettent d’activer.
+- **N’importe quel WebView système.** Les fournisseurs livrent souvent un moteur de navigateur obsolète. L’application du panneau le vérifie, et la page [Préparer le panneau](/fr/install/prepare-a-panel/) explique comment le mettre à jour sur votre panneau.
+- **Accès root, uniquement pour quelques fonctionnalités supplémentaires.** Certaines fonctionnalités de certains modèles nécessitent un accès root. Chaque page matérielle précise lesquelles et comment obtenir cet accès.
+
+## Pas encore dans la liste ?
+
+La prise en charge matérielle repose sur des données, pas sur du code : ajouter un panneau consiste donc à écrire un profil plutôt qu’une nouvelle version de l’application. Le moyen le plus rapide de doter votre modèle de son propre profil est de nous en parler : indiquez dans les [tickets](https://github.com/panel-assistant/android/issues) de quel modèle il s’agit et ce qui s’est passé. La [documentation des profils](/fr/reference/profiles/) décrit le contenu d’un profil, si vous souhaitez en écrire un. Chaque retour, que le panneau fonctionne ou non, permet d’ajouter davantage de panneaux à cette page.
