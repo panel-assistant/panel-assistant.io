@@ -39,7 +39,7 @@ description: 将面板麦克风变为 Home Assistant Assist 卫星设备，以�
 
 ## 播报和发起对话
 
-开启语音助手后，任何自动化或脚本均可使用 `assist_satellite.announce` 在面板上朗读消息，并可选择先播放短促提示音。`assist_satellite.start_conversation` 会朗读提示，然后监听回复；Home Assistant 仅允许支持主动发起对话的对话代理使用此功能，内置 Home Assistant 代理不支持。两个服务均需要开启语音助手；对于没有麦克风的面板，更简单的 REST 替代方式请参阅[文字转语音](/zh-hans/manage/text-to-speech/#play-an-announcement-with-the-voice-assistant-on)。
+开启语音助手后，任何自动化或脚本均可使用 `assist_satellite.announce` 在面板上朗读消息，并可选择先播放短促提示音。`assist_satellite.start_conversation` 会朗读提示，然后监听回复；Home Assistant 仅允许支持主动发起对话的对话代理使用此功能，内置 Home Assistant 代理不支持。两个服务均需要开启语音助手；对于没有麦克风的面板，更简单的 REST 替代方式请参阅[文字转语音](/zh-hans/manage/text-to-speech/#在语音助手已启用时播放播报)。
 
 ## 同一房间内的多个助手
 

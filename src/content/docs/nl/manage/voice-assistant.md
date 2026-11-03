@@ -39,7 +39,7 @@ Stelt de gespreksagent van de pipeline een vervolgvraag, dan begint het paneel v
 
 ## Aankondigingen en een gesprek starten
 
-Als de spraakassistent aan staat, spreekt `assist_satellite.announce` vanuit elke automatisering of elk script een bericht op het paneel uit, eventueel voorafgegaan door een kort geluid. `assist_satellite.start_conversation` spreekt een openingsbericht uit en luistert vervolgens naar het antwoord; Home Assistant staat dit alleen toe met een gespreksagent die zelf een gesprek kan beginnen, wat de ingebouwde Home Assistant-agent niet kan. Beide diensten vereisen een ingeschakelde spraakassistent; zie [Tekst-naar-spraak](/nl/manage/text-to-speech/#play-an-announcement-with-the-voice-assistant-on) voor het eenvoudiger REST-alternatief op panelen zonder microfoon.
+Als de spraakassistent aan staat, spreekt `assist_satellite.announce` vanuit elke automatisering of elk script een bericht op het paneel uit, eventueel voorafgegaan door een kort geluid. `assist_satellite.start_conversation` spreekt een openingsbericht uit en luistert vervolgens naar het antwoord; Home Assistant staat dit alleen toe met een gespreksagent die zelf een gesprek kan beginnen, wat de ingebouwde Home Assistant-agent niet kan. Beide diensten vereisen een ingeschakelde spraakassistent; zie [Tekst-naar-spraak](/nl/manage/text-to-speech/#een-aankondiging-afspelen-met-de-spraakassistent-ingeschakeld) voor het eenvoudiger REST-alternatief op panelen zonder microfoon.
 
 ## Meerdere assistenten in één kamer
 

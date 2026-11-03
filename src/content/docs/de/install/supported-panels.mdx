@@ -1,0 +1,36 @@
+---
+title: Wähle ein Panel
+description: Panel Assistant läuft auf Android-Wandpanels mit ARM ab Android 8.0. Hier findest du alle Marken und Modelle mit eigener Hardware-Unterstützung, von Sonoff, Shelly, Tuya, Meta, Electron und Smatek, sowie die Anforderungen an ein Panel.
+sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
+---
+
+import SupportedPanels from '../../../../components/SupportedPanels.astro';
+
+**Panel Assistant läuft auf Android-Wandpanels mit ARM, Android 8.0 oder neuer und Debugging-Zugriff.** Du musst dein Modell nicht erst auf einer Liste finden: Installiere die App, und das Home Assistant-Dashboard, Bildschirmhelligkeit und Bildschirmabschaltung, Audio und die Standardsensoren des Panels stehen sofort in Home Assistant zur Verfügung.
+
+Die unten aufgeführten Modelle haben jeweils eine eigene [Hardware-Seite](/de/hardware/) mit den Fakten, die du vor dem Kauf prüfen solltest. Wenn ein Profil für das Modell oder die Modellfamilie verfügbar ist, ermöglicht es den Zugriff auf die Besonderheiten dieses Panels, etwa seine LEDs, Tasten, Relais, Kamera, Mikrofone und Klimasensoren.
+
+## Panels mit abgestimmter Unterstützung
+
+<SupportedPanels />
+
+Jeder Balken zeigt, wie viel Vertrauen wir in ein Panel haben. Mit wachsendem Vertrauen füllt er sich und wird grün. Am sichersten sind wir bei einem Panel, das wir an einem eigenen Exemplar untersucht haben, und noch sicherer, wenn die Firmware des Herstellers es für Panel Assistant offen lässt. Bei anderen Panels entsteht Vertrauen durch die Untersuchung der Hersteller-Firmware, die Dokumentation des Herstellers, eine gemeinsame Plattform mit einem von uns untersuchten Panel und Besitzer, die Panel Assistant auf einem solchen Panel betreiben. Eine ältere Android-Version, die wir nicht untersucht haben, wirkt sich dagegen negativ aus. Bewege den Mauszeiger über ein Panel oder öffne es, um zu sehen, welche dieser Punkte darauf zutreffen.
+
+Bei mehreren dieser Panels handelt es sich um dieselbe Hardware, die unter verschiedenen Marken verkauft wird. Jeder Markenname ist aufgeführt und verweist auf die eine Seite für diese Hardware.
+
+## Jedes andere Android-Panel
+
+**Auch ein Panel, das hier nicht genannt wird, ist ein unterstütztes Panel.** Panel Assistant muss deine Hardware nicht erkennen, um darauf zu laufen. Jedes Panel, das die folgenden Anforderungen erfüllt, startet mit dem Profil Generic. Damit erhältst du das Dashboard auf dem Bildschirm, Helligkeit und das Ausschalten des Bildschirms, Audio, Navigation und die standardmäßigen Android-Sensoren wie Licht und Näherung – alles als Entitäten am eigenen Gerät des Panels in Home Assistant.
+
+Das eigene Profil eines Modells ergänzt die Unterstützung für die modellspezifische Hardware. Viele Panels haben keine solche Hardware, und viele Besitzer brauchen sie nie. Für sie ist Generic der vollständige Funktionsumfang, kein geringerer.
+
+## Was ein Panel braucht
+
+- **Android 8.0 oder neuer auf ARM.** Veröffentlichte Builds unterstützen `arm64-v8a` und `armeabi-v7a`.
+- **Entwickleroptionen.** Das Installationsprogramm verwendet die Debugging-Schnittstelle von Android, die du bei fast jedem Panel aktivieren kannst.
+- **Eine beliebige System-WebView.** Anbieter liefern oft eine veraltete Browser-Engine aus. Die Panel-App prüft sie, und [Panel vorbereiten](/de/install/prepare-a-panel/) zeigt dir, wie du sie auf deinem Panel aktualisierst.
+- **Root, nur für wenige Extras.** Einige Funktionen auf einigen Modellen benötigen Root. Jede Hardware-Seite nennt diese Funktionen und erklärt, wie du Root erhältst.
+
+## Noch nicht auf der Liste?
+
+Hardware-Unterstützung besteht aus Daten, nicht aus Code. Ein Panel hinzuzufügen bedeutet daher, ein Profil zu schreiben, nicht eine neue Version der App. Am schnellsten bekommt dein Modell ein eigenes Profil, wenn du uns davon erzählst: Gib in den [Issues](https://github.com/panel-assistant/android/issues) an, um welches Modell es sich handelt und was passiert ist. Die [Profildokumentation](/de/reference/profiles/) beschreibt, was ein Profil enthält, falls du eines schreiben möchtest. Jede Rückmeldung, ob es funktioniert oder nicht, bringt weitere Panels auf diese Seite.
