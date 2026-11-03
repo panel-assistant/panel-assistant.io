@@ -90,5 +90,19 @@
   "error.pickles.story": "我们的熊猫正在捣乱。我们正努力把它管住，但它动作慢，还很固执。",
   "error.not_found": "404 — 找不到此页面。",
   "error.home": "返回首页",
-  "error.pickles.alt": "熊猫 Pickles"
+  "error.pickles.alt": "熊猫 Pickles",
+  "panels.count": "来自 {brands} 个品牌的 {models} 款有明确名称的面板",
+  "panels.coverage": "各有专属硬件页面，其他兼容的 Android 面板则先使用“通用”配置文件。",
+  "confidence.title": "可信度",
+  "confidence.yes": "是",
+  "confidence.partly": "部分",
+  "confidence.no": "否",
+  "confidence.fully_open": "厂商固件完全开放",
+  "confidence.mostly_open": "厂商固件大部分开放",
+  "confidence.restricted": "厂商固件限制访问",
+  "confidence.firmware": "已检查厂商固件",
+  "confidence.documented": "厂商文档或已公布的规格中有记载",
+  "confidence.platform": "与我们检查过的一款面板采用相同平台",
+  "confidence.owners": "有用户在其拥有的一台面板上运行 Panel Assistant",
+  "confidence.older_android": "Android {android}：版本低于 10，且未经检查"
 }

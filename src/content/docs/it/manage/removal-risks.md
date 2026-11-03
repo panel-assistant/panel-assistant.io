@@ -1,7 +1,7 @@
 ---
 title: Prima di rimuovere ha-paneld
 description: Cosa comporta rimuovere ha-paneld da un pannello, quali pannelli e firmware possono rimanere senza un modo per tornare alle impostazioni Android e cosa controllare prima.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
 ---
 
 <div id="removal-this-panel" class="removal-this-panel" hidden>
@@ -11,7 +11,11 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 
 Panel Assistant rimuove ha-paneld in un unico passaggio, dall'opzione **Rimuovi Panel Assistant da questo pannello** del pannello, sotto **Configura** in Home Assistant (Panel Assistant 0.9 la chiama Rimuovi ha-paneld da questo pannello). Sulla maggior parte dei pannelli non serve altro. Su alcuni, la rimozione lascia il pannello senza un modo per tornare alle Impostazioni Android o al debug di rete: nulla può quindi installarvi nuovamente un'app, Panel Assistant incluso, finché non segui il percorso di ripristino del produttore. Su alcuni firmware quel percorso richiede l'accesso a un account del produttore o il collegamento di un computer tramite USB.
 
-Nella versione 1.0.0-rc2 non ancora rilasciata, questa opzione si chiama **Rimuovi da questo pannello** e una rimozione riuscita elimina anche il pannello da Home Assistant; non esiste un'opzione per conservarne la voce.
+Nella versione 1.0.0-rc2 non ancora rilasciata, questa opzione si chiama **Remove from this panel** e, se la rimozione riesce, elimina anche il pannello da Home Assistant; non è disponibile alcuna opzione per conservarne la voce. Anche la pagina del dispositivo del pannello ha un pulsante **Remove from this panel**. Premerlo non rimuove nulla: apre una riparazione persistente, **Remove Panel Assistant from &lt;panel&gt;**, in **Settings → System → Repairs**. Leggi l'avviso prima di confermare la rimozione premendo una sola volta **Submit**. Se hai premuto il pulsante per errore, chiudi la finestra di dialogo senza inviare e lascia la riparazione non confermata.
+
+Eliminare la voce del pannello in Home Assistant lascia ha-paneld installato. Prima di eliminare la voce, usa l'opzione di rimozione descritta sopra per rimuovere l'app.
+
+Se hai già eliminato la voce, aggiungi di nuovo il pannello in Home Assistant, poi usa l'opzione di rimozione descritta sopra.
 
 Leggi la sezione relativa al tuo pannello prima di confermare.
 
@@ -23,6 +27,10 @@ Leggi la sezione relativa al tuo pannello prima di confermare.
 4. In 1.0.0-rc1, se hai selezionato **Elimina anche questo pannello da Home Assistant** prima dell'invio, anche Home Assistant dimentica il pannello. Lascia l'opzione disattivata per conservarne entità e cronologia. Nella versione 1.0.0-rc2 non ancora rilasciata, una rimozione riuscita elimina sempre la voce.
 
 Se la rimozione si ferma a metà, eseguila nuovamente: riprende da dove si era fermata.
+
+## Reinstallazione di questo pannello
+
+Per prima cosa ripristina il debug seguendo la sezione dedicata al tuo pannello più sotto e [Preparare un pannello](/it/install/prepare-a-panel/#1-opzioni-sviluppatore-e-debug-sono-attivi). Poi segui [Aggiungere un pannello](/it/install/installing-ha-paneld/) per installare di nuovo Panel Assistant. La rimozione elimina le impostazioni dell'app; la reinstallazione non le ripristina.
 
 ## Perché un pannello può rimanere bloccato
 

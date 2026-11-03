@@ -90,5 +90,19 @@
   "error.pickles.story": "Unser Panda richtet Chaos an. Wir versuchen, ihn in den Griff zu bekommen, aber er ist langsam und stur.",
   "error.not_found": "404 — Diese Seite wurde nicht gefunden.",
   "error.home": "Zur Startseite",
-  "error.pickles.alt": "Pickles, der Panda"
+  "error.pickles.alt": "Pickles, der Panda",
+  "panels.count": "{models} namentlich aufgeführte Panels von {brands} Marken",
+  "panels.coverage": "haben eine eigene Hardware-Seite, und andere kompatible Android-Panels starten mit dem Generic-Profil.",
+  "confidence.yes": "ja",
+  "confidence.partly": "teilweise",
+  "confidence.no": "nein",
+  "confidence.inspected": "An einem von uns betriebenen Gerät geprüft",
+  "confidence.fully_open": "Firmware des Herstellers vollständig offen",
+  "confidence.mostly_open": "Firmware des Herstellers größtenteils offen",
+  "confidence.restricted": "Firmware des Herstellers schränkt den Zugriff ein",
+  "confidence.firmware": "Firmware des Herstellers untersucht",
+  "confidence.documented": "Vom Hersteller oder durch veröffentlichte Spezifikationen dokumentiert",
+  "confidence.platform": "Gleiche Plattform wie ein von uns geprüftes Panel",
+  "confidence.owners": "Ein Besitzer betreibt Panel Assistant auf einem solchen Gerät",
+  "confidence.older_android": "Android {android}: älter als 10 und nicht geprüft"
 }

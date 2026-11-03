@@ -90,5 +90,20 @@
   "error.pickles.story": "Notre panda sème la pagaille. Nous essayons de le maîtriser, mais il est lent et têtu.",
   "error.not_found": "404 — Cette page est introuvable.",
   "error.home": "Aller à la page d’accueil",
-  "error.pickles.alt": "Pickles le panda"
+  "error.pickles.alt": "Pickles le panda",
+  "panels.count": "{models} panneaux de {brands} marques, identifiés par leur nom,",
+  "panels.coverage": "ont leur propre page consacrée au matériel, et les autres panneaux Android compatibles commencent avec le profil générique.",
+  "confidence.title": "Confiance",
+  "confidence.yes": "oui",
+  "confidence.partly": "en partie",
+  "confidence.no": "non",
+  "confidence.inspected": "Inspecté sur un exemplaire que nous utilisons",
+  "confidence.fully_open": "Micrologiciel du fabricant entièrement ouvert",
+  "confidence.mostly_open": "Micrologiciel du fabricant en grande partie ouvert",
+  "confidence.restricted": "Le micrologiciel du fabricant restreint l’accès",
+  "confidence.firmware": "Micrologiciel du fabricant examiné",
+  "confidence.documented": "Documenté par le fabricant ou dans les spécifications publiées",
+  "confidence.platform": "Même plateforme qu’un panneau que nous avons inspecté",
+  "confidence.owners": "Un propriétaire utilise Panel Assistant sur un exemplaire",
+  "confidence.older_android": "Android {android} : antérieur à 10 et non inspecté"
 }

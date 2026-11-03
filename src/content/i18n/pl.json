@@ -101,5 +101,11 @@
   "confidence.documented": "Dokumentacja producenta lub opublikowana specyfikacja",
   "confidence.platform": "Ta sama platforma co zbadany przez nas panel",
   "confidence.owners": "Właściciel używa na nim Panel Assistant",
-  "confidence.older_android": "Android {android}: starszy niż 10, niezbadany"
+  "confidence.older_android": "Android {android}: starszy niż 10, niezbadany",
+  "sidebar.support_report": "Zrozum raport pomocy technicznej",
+  "sidebar.display_sizing": "Rozmiar wyświetlania",
+  "sidebar.panel_security": "Bezpieczeństwo konta panelu i sieci",
+  "sidebar.security_mode": "Tryb bezpieczeństwa",
+  "sidebar.updates_recovery": "Aktualizacje i odzyskiwanie",
+  "sidebar.troubleshooting": "Rozwiązywanie problemów"
 }

@@ -1,7 +1,7 @@
 ---
 title: Bevor du ha-paneld entfernst
 description: Was das Entfernen von ha-paneld bewirkt, welche Panels und Firmwares danach keinen Rückweg zu den Android-Einstellungen bieten können und was du vorher prüfen solltest.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
 ---
 
 <div id="removal-this-panel" class="removal-this-panel" hidden>
@@ -11,7 +11,11 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 
 Panel Assistant entfernt ha-paneld in einem Schritt über die Option **Panel Assistant von diesem Panel entfernen** unter **Konfigurieren** in Home Assistant (Panel Assistant 0.9 nennt sie „ha-paneld von diesem Panel entfernen“). Auf den meisten Panels ist damit alles erledigt. Auf manchen gibt es nach dem Entfernen keinen Weg zurück zu den Android-Einstellungen oder zum Netzwerk-Debugging. Dann kann nichts mehr eine App darauf installieren, auch Panel Assistant nicht, bis du den Rückweg des Herstellers verwendest. Bei manchen Firmwares bedeutet das die Anmeldung bei einem Herstellerkonto oder den Anschluss eines Computers über USB.
 
-In der unveröffentlichten Version 1.0.0-rc2 heißt diese Option **Von diesem Panel entfernen**. Eine erfolgreiche Entfernung löscht das Panel auch aus Home Assistant. Es gibt keine Option, seinen Eintrag zu behalten.
+In der noch nicht veröffentlichten Version 1.0.0-rc2 heißt diese Option **Remove from this panel**, und bei erfolgreicher Entfernung wird das Panel auch aus Home Assistant gelöscht; es gibt keine Option, seinen Eintrag zu behalten. Auf der Geräteseite des Panels gibt es außerdem die Schaltfläche **Remove from this panel**. Wenn du sie drückst, wird nichts entfernt: Sie öffnet unter **Settings → System → Repairs** eine dauerhaft bestehende Reparaturmeldung namens **Remove Panel Assistant from &lt;panel&gt;**. Lies die darin enthaltene Warnung, bevor du die Entfernung durch einmaliges Betätigen von **Submit** bestätigst. Wenn du die Schaltfläche versehentlich gedrückt hast, schließe den Dialog ohne Absenden und lasse die Reparaturmeldung unbestätigt.
+
+Wenn du den Eintrag des Panels in Home Assistant löschst, bleibt ha-paneld installiert. Nutze vor dem Löschen des Eintrags die oben beschriebene Entfernungsoption, um die App zu entfernen.
+
+Wenn du den Eintrag bereits gelöscht hast, füge das Panel in Home Assistant erneut hinzu und nutze anschließend die oben beschriebene Entfernungsoption.
 
 Lies den Abschnitt für dein Panel, bevor du bestätigst.
 
@@ -23,6 +27,10 @@ Lies den Abschnitt für dein Panel, bevor du bestätigst.
 4. Wenn du in 1.0.0-rc1 vor dem Absenden **Dieses Panel auch aus Home Assistant löschen** ausgewählt hast, vergisst Home Assistant das Panel ebenfalls. Lasse es ausgeschaltet, um Entitäten und Verlauf zu behalten. In der unveröffentlichten Version 1.0.0-rc2 löscht eine erfolgreiche Entfernung immer den Eintrag.
 
 Wenn die Entfernung unterbrochen wird, führe sie erneut aus: Sie setzt dort fort, wo sie angehalten hat.
+
+## Dieses Panel neu installieren
+
+Aktiviere zunächst das Debugging wieder mithilfe des unten stehenden Abschnitts für dein Panel und der Anleitung [Ein Panel vorbereiten](/de/install/prepare-a-panel/#1-entwickleroptionen-und-debugging-sind-eingeschaltet). Folge anschließend der Anleitung [Ein Panel hinzufügen](/de/install/installing-ha-paneld/), um Panel Assistant erneut zu installieren. Beim Entfernen werden die Einstellungen der App gelöscht; eine erneute Installation stellt sie nicht wieder her.
 
 ## Warum ein Panel feststecken kann
 

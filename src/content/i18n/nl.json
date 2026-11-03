@@ -100,5 +100,11 @@
   "confidence.documented": "Gedocumenteerd door de fabrikant of in gepubliceerde specificaties",
   "confidence.platform": "Hetzelfde platform als een paneel dat we hebben onderzocht",
   "confidence.owners": "Een eigenaar draait er Panel Assistant op",
-  "confidence.older_android": "Android {android}: ouder dan 10 en niet onderzocht"
+  "confidence.older_android": "Android {android}: ouder dan 10 en niet onderzocht",
+  "sidebar.support_report": "Een supportrapport begrijpen",
+  "sidebar.display_sizing": "Weergavegrootte",
+  "sidebar.panel_security": "Account- en netwerkbeveiliging van het paneel",
+  "sidebar.security_mode": "Beveiligingsmodus",
+  "sidebar.updates_recovery": "Updates en herstel",
+  "sidebar.troubleshooting": "Problemen oplossen"
 }
