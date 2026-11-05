@@ -52,7 +52,7 @@ sidebar:
 
 ### 厂商锁定的面板
 
-在已验证的固件上，**Shelly X2i** 最高只能使用 Chromium **131**：Android 仅接受带有 Shelly 签名的更新，并会拒绝侧载的 Google 提供程序。**Meta Portal 10 英寸（第 2 代）**也最高只能使用 Chromium **131**：其锁定的提供程序列表仅接受 Meta 的 WebView。在已验证的原装固件上，只有厂商能够提供可被接受的更新版引擎，而目前没有这样的版本可用。[社区 Portal 配置研究](/zh-hans/hardware/panels/meta/#cve-2026-43499-and-community-provisioning)尚未确立合格的 WebView 升级途径。Chromium 131 已不再获得 Chromium 安全修复。这并不能证明当前仪表盘存在故障。其他 Portal 型号尚未验证；不要假定它们与已测量型号具有相同的版本或版本上限。
+在已验证的固件上，**Shelly X2i** 最高只能使用 Chromium **131**：Android 仅接受带有 Shelly 签名的更新，并会拒绝侧载的 Google 提供程序。<strong>Meta Portal 10 英寸（第 2 代）</strong>也最高只能使用 Chromium **131**：其锁定的提供程序列表仅接受 Meta 的 WebView。在已验证的原装固件上，只有厂商能够提供可被接受的更新版引擎，而目前没有这样的版本可用。[社区 Portal 配置研究](/zh-hans/hardware/panels/meta/#cve-2026-43499-and-community-provisioning)尚未确立合格的 WebView 升级途径。Chromium 131 已不再获得 Chromium 安全修复。这并不能证明当前仪表盘存在故障。其他 Portal 型号尚未验证；不要假定它们与已测量型号具有相同的版本或版本上限。
 
 ## 侧载与验证
 
