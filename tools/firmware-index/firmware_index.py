@@ -199,6 +199,10 @@ TRANSIENT_HTTP_CODES = {429, 500, 502, 503, 504}
 # ConnectionResetError and an HTTPException), a timeout or a DNS blip.
 TRANSIENT_ERRORS = (OSError, http.client.HTTPException)
 
+
+class CdnUnreachable(Exception):
+    """A probe still failed transiently after every retry: a vendor outage."""
+
 # Retries and waits across one discover run, printed so a slow scheduled run
 # says where its time went.
 _discover_stats = {"probes": 0, "retries": 0, "slept": 0}
@@ -232,11 +236,13 @@ def discover_one(url):
         except urllib.error.HTTPError as exc:
             if exc.code == 403:
                 return None         # This CDN's explicit missing-object response.
-            if exc.code not in TRANSIENT_HTTP_CODES or delay is None:
+            if exc.code not in TRANSIENT_HTTP_CODES:
                 raise
-        except TRANSIENT_ERRORS:
             if delay is None:
-                raise
+                raise CdnUnreachable(f"HTTP {exc.code}") from exc
+        except TRANSIENT_ERRORS as exc:
+            if delay is None:
+                raise CdnUnreachable(f"{type(exc).__name__}: {exc}") from exc
         # A throttled, briefly unavailable or disconnecting CDN is not an
         # answer. Wait and ask again; a persistent failure ends the run as a
         # warning (cmd_discover), never as "not found".
@@ -446,11 +452,13 @@ def cmd_discover(args):
     _discover_stats.update(probes=0, retries=0, slept=0)
     try:
         return _discover(devices, args)
-    except TRANSIENT_ERRORS as exc:
+    except CdnUnreachable as exc:
         # The CDN kept failing after every retry. That is a vendor outage,
-        # not a finding and not a broken prober: leave the index unchanged
-        # and let tomorrow's run search again.
-        print(f"::warning::Sonoff CDN unreachable after retries ({type(exc).__name__}: {exc}); "
+        # not a finding and not a broken prober: no probe has written
+        # anything yet, so the index is unchanged; tomorrow's run searches
+        # again. Any other error, including a non-transient HTTP status from
+        # the harness, still fails the run.
+        print(f"::warning::Sonoff CDN unreachable after retries ({exc}); "
               "index left unchanged")
         set_github_output(found="false")
         return 0

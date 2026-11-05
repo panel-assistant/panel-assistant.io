@@ -193,11 +193,11 @@ class DiscoveryTest(unittest.TestCase):
             self.assertIsNone(firmware_index.discover_one("https://example.invalid/x"))
         with mock.patch("urllib.request.urlopen", side_effect=throttled), \
                 mock.patch("time.sleep"):
-            with self.assertRaises(urllib.error.HTTPError):
+            with self.assertRaises(firmware_index.CdnUnreachable):
                 firmware_index.discover_one("https://example.invalid/x")
         with mock.patch("urllib.request.urlopen", side_effect=TimeoutError("timed out")), \
                 mock.patch("time.sleep"):
-            with self.assertRaises(TimeoutError):
+            with self.assertRaises(firmware_index.CdnUnreachable):
                 firmware_index.discover_one("https://example.invalid/x")
 
     def test_a_briefly_unavailable_cdn_is_asked_again(self):
@@ -217,9 +217,20 @@ class DiscoveryTest(unittest.TestCase):
         unavailable = urllib.error.HTTPError("https://example.invalid/x", 503, "unavailable", {}, None)
         with mock.patch("urllib.request.urlopen", side_effect=unavailable) as urlopen, \
                 mock.patch("time.sleep"):
-            with self.assertRaises(urllib.error.HTTPError):
+            with self.assertRaises(firmware_index.CdnUnreachable):
                 firmware_index.discover_one("https://example.invalid/x")
         self.assertEqual(urlopen.call_count, 4)
+
+    def test_a_vanished_known_object_still_fails_the_run(self):
+        # A 404 for an indexed object means the CDN changed, not an outage:
+        # it must stay red, never a daily warning that hides a blind prober.
+        gone = urllib.error.HTTPError("https://example.invalid/x", 404, "not found", {}, None)
+        with mock.patch("urllib.request.urlopen", side_effect=gone), \
+                mock.patch("time.sleep"), mock.patch("sys.stdout", io.StringIO()):
+            with self.assertRaises(urllib.error.HTTPError):
+                firmware_index.cmd_discover(
+                    SimpleNamespace(index_window=2, minor_window=1, json=None, apply=False)
+                )
 
     def test_every_indexed_diff_was_within_the_search_its_predecessors_imply(self):
         # Replay the real index: for each diff target in index order, the
