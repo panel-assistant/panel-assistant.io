@@ -27,4 +27,4 @@ Sustituye ambos ID de entidad por los de tu Home Assistant. El motor sintetiza l
 
 Ajusta previamente el volumen del reproductor multimedia del panel si es necesario. Para hablar en varias habitaciones, proporciona una lista de entidades de reproductores multimedia de los paneles en `media_player_entity_id`.
 
-En el [modo reforzado](/es/manage/security-mode/), un comando multimedia a través de la conexión nativa requiere que alguien lo apruebe en la pantalla del panel. Una automatización no puede aprobar esa solicitud de forma remota.
+En el [modo reforzado](/es/manage/security-mode/), el texto a voz enviado al reproductor multimedia del panel a través de su conexión nativa no requiere aprobación en el panel.

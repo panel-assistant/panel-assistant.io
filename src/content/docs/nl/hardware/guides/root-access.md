@@ -17,7 +17,7 @@ De paneel-app installeert en draait zonder root. Root is alleen van belang voor 
 - **De achtergrondverlichting werkelijk uitschakelen, herstarten en de CPU-governor besturen.** Zonder rootroute vallen die terug op wat Android toestaat, bijvoorbeeld helderheid nul in plaats van de achtergrondverlichting stroomloos maken.
 - **Relais en GPIO-lijnen**, waar een paneel die alleen via root-sysfs beschikbaar stelt.
 
-De paneel-app controleert elke bevoorrechte route wanneer hij die gebruikt. Een paneel zonder root krijgt dus nog steeds het dashboard, standaardsensoren, helderheid en navigatie. Een functie die root nodig heeft, wordt als niet beschikbaar getoond in plaats van te mislukken.
+De paneelapp controleert routes met verhoogde rechten wanneer ze die gebruikt. Een paneel zonder root heeft nog steeds het dashboard, de standaardsensoren, helderheidsregeling en de ondersteunde navigatie. Sommige bedieningselementen die verhoogde rechten vereisen, blijven zichtbaar als hun status kan worden uitgelezen, maar het wijzigen ervan kan mislukken als geen enkele route met verhoogde rechten werkt.
 
 ## Routes per paneel
 

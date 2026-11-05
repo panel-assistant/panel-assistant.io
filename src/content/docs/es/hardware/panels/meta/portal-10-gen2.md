@@ -93,7 +93,7 @@ Después [añade el panel](/es/install/installing-ha-paneld/) en Panel Assistant
 - **Cámara.** Desactivada por defecto como en todos los paneles; se activa en **Cámara** de Configurar. Sirve vídeo 1280×720 e imágenes fijas a Home Assistant y enciende la luz verde mientras se usa.
 - **Micrófonos, palabra de activación y respuestas habladas.** Reconoció la palabra y el flujo de voz de Home Assistant respondió por el altavoz. Consulta [asistente de voz](/es/manage/voice-assistant/).
 - **Luz ambiental**, incluido color, mediante sensor Android normal para brillo adaptativo y Home Assistant.
-- **Apagado real sin root.** La app usa el tiempo de espera de Android: la retroiluminación se apaga por completo en vez de bajar al mínimo. Brillo cero no basta en Portal: la imagen sigue visible. Si no se aplica el tiempo de espera, recurre al mínimo brillo.
+- **Un apagado real de la pantalla sin acceso root.** La aplicación del panel apaga la pantalla mediante el tiempo de espera de suspensión del propio Android, de modo que la retroiluminación se apaga por completo en lugar de quedar en su nivel mínimo. Reducir el brillo a cero no basta en un Portal: la imagen sigue visible. Si el tiempo de espera no surte efecto, la aplicación prueba primero el bloqueo de pantalla mediante la administración de dispositivos de Android. Atenúa la pantalla si ninguno de los dos métodos funciona.
 - **Activación** con doble toque o con la detección de movimiento propia de Meta al moverse alguien cerca.
 - **Botón Lanzador** de la navegación: abre el lanzador de la app. El perfil omite el de Meta, que es un reloj, no una lista de apps.
 

@@ -17,7 +17,7 @@ L'app del pannello si installa e funziona senza root. Il root serve solo per l'h
 - **Spegnimento effettivo della retroilluminazione, riavvio e controllo del governor della CPU.** Senza un percorso root, queste funzioni ripiegano su ciò che Android consente, ad esempio luminosità zero invece di spegnere la retroilluminazione.
 - **Relè e linee GPIO**, quando un pannello li espone solo tramite sysfs con root.
 
-L'app del pannello controlla ogni percorso privilegiato quando lo usa: un pannello senza root dispone quindi comunque di plancia, sensori standard, luminosità e navigazione, e una funzionalità che richiede root viene mostrata come non disponibile invece di fallire.
+L'app del pannello verifica i percorsi privilegiati quando li usa. Un pannello senza root dispone comunque della plancia, dei sensori standard, del controllo della luminosità e delle funzioni di navigazione supportate. Alcuni controlli privilegiati rimangono visibili quando il loro stato è leggibile, ma la loro modifica può non riuscire se nessun percorso privilegiato funziona.
 
 ## Percorsi per pannello
 

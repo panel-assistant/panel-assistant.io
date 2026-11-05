@@ -17,7 +17,7 @@ La aplicación del panel se instala y funciona sin root. Root solo importa para 
 - **Apagado real de la retroiluminación, reinicio y control del gobernador de CPU.** Sin una vía root, se recurre a lo que permite Android, por ejemplo brillo cero en lugar de apagar la retroiluminación.
 - **Relés y líneas GPIO**, cuando un panel solo los expone mediante sysfs con root.
 
-La aplicación comprueba cada vía privilegiada cuando la utiliza, así que un panel sin root sigue teniendo panel de control, sensores estándar, brillo y navegación; las funciones que necesitan root se muestran como no disponibles en lugar de fallar.
+La aplicación del panel comprueba las vías con privilegios cuando las utiliza. Un panel sin acceso root sigue disponiendo del panel de control, los sensores estándar, el brillo y la navegación compatible. Algunos controles con privilegios siguen visibles cuando se puede leer su estado, pero modificarlos puede fallar si no funciona ninguna vía con privilegios.
 
 ## Vías según el panel
 

@@ -27,4 +27,4 @@ Remplacez les deux identifiants d’entité par ceux de votre Home Assistant. Le
 
 Réglez au préalable le volume du lecteur multimédia du panneau si nécessaire. Pour diffuser la voix dans plusieurs pièces, fournissez une liste d’entités de lecteurs multimédias de panneaux dans `media_player_entity_id`.
 
-En [mode renforcé](/fr/manage/security-mode/), une commande multimédia via la connexion native nécessite qu’une personne l’approuve sur l’écran du panneau. Une automatisation ne peut pas approuver cette demande à distance.
+La synthèse vocale envoyée au lecteur multimédia du panneau par sa connexion native ne nécessite pas d’approbation sur le panneau en [mode renforcé](/fr/manage/security-mode/).

@@ -27,4 +27,4 @@ Vervang beide entiteits-ID's door die in je Home Assistant. De engine zet de zin
 
 Stel zo nodig vooraf het volume van de mediaspeler van het paneel in. Om in meerdere ruimtes te spreken, geef je in `media_player_entity_id` een lijst met mediaspelerentiteiten van panelen op.
 
-In de [Hardened-modus](/nl/manage/security-mode/) vereist een mediaopdracht via de native verbinding dat iemand deze op het scherm van het paneel goedkeurt. Een automatisering kan dat verzoek niet op afstand goedkeuren.
+Tekst-naar-spraak die via de eigen verbinding naar de mediaspeler van het paneel wordt gestuurd, vereist in de [Hardened-modus](/nl/manage/security-mode/) geen goedkeuring op het paneel.

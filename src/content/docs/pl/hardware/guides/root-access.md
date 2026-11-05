@@ -17,7 +17,7 @@ Aplikacja panelu instaluje się i działa bez roota. Root ma znaczenie tylko dla
 - **Rzeczywiste wyłączanie podświetlenia, ponowne uruchamianie i sterowanie zarządcą CPU.** Bez drogi roota używane są możliwości Androida, na przykład jasność zero zamiast odłączenia zasilania podświetlenia.
 - **Przekaźniki i linie GPIO**, gdy panel udostępnia je tylko przez sysfs wymagający roota.
 
-Aplikacja panelu sprawdza każdą uprzywilejowaną drogę w chwili jej użycia, więc panel bez roota nadal oferuje pulpit, standardowe czujniki, jasność i nawigację, a funkcja wymagająca roota jest pokazywana jako niedostępna zamiast kończyć się błędem.
+Aplikacja panelu sprawdza ścieżki dostępu wymagające podwyższonych uprawnień w chwili ich użycia. Na panelu bez uprawnień roota nadal dostępne są pulpit, standardowe czujniki, regulacja jasności i obsługiwana nawigacja. Niektóre elementy sterujące wymagające podwyższonych uprawnień pozostają widoczne, gdy można odczytać ich stan, ale próba jego zmiany może się nie powieść, jeśli żadna ścieżka dostępu z podwyższonymi uprawnieniami nie działa.
 
 ## Drogi dostępu według panelu
 

@@ -17,7 +17,7 @@ L’application du panneau s’installe et fonctionne sans root. Root n’interv
 - **Extinction réelle du rétroéclairage, redémarrage et contrôle du gouverneur du processeur.** Sans voie root, ces fonctions utilisent ce qu’Android permet, par exemple une luminosité nulle au lieu de couper l’alimentation du rétroéclairage.
 - **Relais et lignes GPIO**, lorsque le panneau ne les expose que via sysfs root.
 
-L’application du panneau vérifie chaque voie privilégiée au moment de l’utiliser : un panneau sans root conserve donc le tableau de bord, les capteurs standard, la luminosité et la navigation ; une capacité nécessitant root apparaît indisponible plutôt que d’échouer.
+L’application du panneau vérifie les voies d’accès privilégiées au moment de les utiliser. Un panneau sans accès root dispose toujours du tableau de bord, des capteurs standard, du réglage de la luminosité et des fonctions de navigation prises en charge. Certaines commandes privilégiées restent visibles lorsque leur état est lisible, mais leur modification peut échouer si aucune voie d’accès privilégiée ne fonctionne.
 
 ## Méthodes par panneau
 

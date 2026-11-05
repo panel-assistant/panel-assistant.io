@@ -27,4 +27,4 @@ Zastąp oba identyfikatory encji identyfikatorami z twojej instalacji Home Assis
 
 W razie potrzeby ustaw wcześniej głośność odtwarzacza multimedialnego panelu. Aby odtwarzać mowę w kilku pomieszczeniach, podaj listę encji odtwarzaczy multimedialnych paneli w `media_player_entity_id`.
 
-W [trybie wzmocnionym](/pl/manage/security-mode/) polecenie multimedialne przesłane przez połączenie natywne wymaga, aby ktoś zatwierdził je na ekranie panelu. Automatyzacja nie może zdalnie zatwierdzić tego żądania.
+Mowa syntetyzowana z tekstu, wysyłana do odtwarzacza multimediów panelu przez jego natywne połączenie, nie wymaga zatwierdzenia na panelu w [trybie Hardened](/pl/manage/security-mode/).

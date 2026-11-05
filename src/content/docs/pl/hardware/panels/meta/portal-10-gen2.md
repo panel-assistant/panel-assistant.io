@@ -93,7 +93,7 @@ Następnie jak zwykle [dodaj panel](/pl/install/installing-ha-paneld/) w Panel A
 - **Kamera.** Domyślnie wyłączona jak na każdym panelu, włączana z karty **Kamera** w Konfiguracji. Udostępnia wtedy strumień 1280×720 i obrazy nieruchome Home Assistant, a zielona lampka Portal świeci podczas użycia.
 - **Mikrofony, hasło wybudzania i odpowiedzi głosowe.** Hasło zostało rozpoznane, a potok głosowy Home Assistant odpowiedział przez głośnik Portal. Zobacz [asystenta głosowego](/pl/manage/voice-assistant/).
 - **Światło otoczenia**, z kolorem, jako zwykły czujnik Androida do adaptacyjnej jasności i Home Assistant.
-- **Rzeczywiste wyłączenie ekranu bez root.** Aplikacja wyłącza ekran przez własny limit uśpienia Androida, więc podświetlenie całkiem gaśnie zamiast osiągać minimum. Jasność zero nie wystarcza na Portal: obraz pozostaje widoczny. Jeśli limit nie zadziała, aplikacja używa najciemniejszego ustawienia.
+- **Rzeczywiste wyłączenie ekranu bez uprawnień roota.** Aplikacja panelu wyłącza ekran za pomocą systemowego limitu czasu uśpienia w systemie Android, dzięki czemu podświetlenie gaśnie całkowicie, zamiast przechodzić na najniższy poziom. Obniżenie jasności do zera nie wystarcza na urządzeniu Portal: obraz pozostaje widoczny. Jeśli limit czasu nie zadziała, aplikacja najpierw próbuje zablokować ekran za pomocą mechanizmu administratora urządzenia w systemie Android. Jeśli żadna z tych metod nie działa, przyciemnia ekran.
 - **Wybudzanie**: podwójne dotknięcie ekranu, a także własne wykrywanie ruchu Meta, gdy ktoś porusza się w pobliżu.
 - **Przycisk programu uruchamiającego** w nawigacji aplikacji otwiera jej własny ekran uruchamiania. Profil każe pominąć ekran Meta, będący tarczą zegara zamiast listą aplikacji.
 

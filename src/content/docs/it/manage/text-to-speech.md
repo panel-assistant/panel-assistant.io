@@ -27,4 +27,4 @@ Sostituisci entrambi gli ID delle entità con quelli presenti nel tuo Home Assis
 
 Imposta prima il volume del lettore multimediale del pannello, se necessario. Per parlare in più stanze, fornisci un elenco di entità dei lettori multimediali dei pannelli in `media_player_entity_id`.
 
-In [modalità rafforzata](/it/manage/security-mode/), un comando multimediale inviato tramite la connessione nativa richiede che qualcuno lo approvi sullo schermo del pannello. Un'automazione non può approvare tale richiesta da remoto.
+La sintesi vocale inviata al lettore multimediale del pannello tramite la sua connessione nativa non richiede l'approvazione sul pannello in [modalità protetta](/it/manage/security-mode/).

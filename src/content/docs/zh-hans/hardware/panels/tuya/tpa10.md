@@ -216,7 +216,7 @@ LED **没有应用可访问的 `/dev` 节点**（对比 [WF1589T](/zh-hans/hardw
 接近和环境光通过 `SensorManager` 由应用直接访问。温度和湿度仅 root 可访问（输入子系统和 I²C），需要辅助守护进程。
 
 :::tip
-CHT8305 使此面板可作为 Home Assistant 的**室内温湿度传感器**。辅助守护进程用 `CHT8305` 动词读取它，即对驱动 `ABS_THROTTLE` 输入轴进行 `EVIOCGABS` 点读取，并按名称匹配 `temperature` 和 `humidity` 输入设备。面板应用随后在 Home Assistant 提供两个可选的**室内温度**和**室内湿度**传感器（设置、诊断；默认关闭）。高级设置**室内温度偏移**或配置文件的 `sensors.room_temp_offset_c` 可修正面板自身发热的影响。
+CHT8305 让此面板可以用作 Home Assistant 的**室内温湿度传感器**。辅助守护进程使用其 `CHT8305` 命令读取该传感器：按名称匹配 `temperature` 和 `humidity` 输入设备，并通过 `EVIOCGABS` 对驱动程序的 `ABS_THROTTLE` 输入轴进行单次读取。面板应用在 Home Assistant 中提供**室内温度**和**室内湿度**传感器。默认启用数据上报；相关控件位于“设置”的“传感器”中，需切换到“高级”视图。高级设置项**室内温度偏移**或配置文件中的 `sensors.room_temp_offset_c` 可用于修正面板自身发热带来的影响。
 :::
 
 TPA10 的飞行时间传感器使接近检测真正基于距离，但 Android HAL 会将其量化。面板上的引导接近设置采集并保存实时传感器的无遮挡和靠近端点及方向，随后面板报告所有支持面板通用的归一化刻度，不依赖固定的设备专用阈值。
