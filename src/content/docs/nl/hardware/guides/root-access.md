@@ -4,7 +4,7 @@ description: Hoe elk gedocumenteerd wandpaneel adb en root bereikt, waarvoor de 
 sidebar:
   label: adb- en roottoegang
   order: 1
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: f49bf12954ed3e89e5e32d635b4bbcb06095cf9b
 ---
 
 Elk paneel bereikt adb en, waar beschikbaar, root via een andere route. Deze pagina geeft het algemene beeld; de precieze firmwareafhankelijke stappen staan op de pagina van elk paneel.
@@ -33,6 +33,14 @@ De paneel-app controleert elke bevoorrechte route wanneer hij die gebruikt. Een 
 
 - Zorg dat adb betrouwbaar werkt, bij voorkeur via het netwerk met de sleutel van je werkstation vooraf geautoriseerd, voordat je een fabrieksapp uitschakelt. Eerst een launcher, instellingenapp of hardware-app van de fabrikant uitschakelen kan je buitensluiten.
 - Houd een manier om te navigeren. Op een paneel zonder knoppen vervangen de navigatieacties van de paneel-app Terug en Recente apps van de fabrikant.
-- Stop de updater van de fabrikant als die er is, anders kan een draadloze update je wijzigingen terugdraaien. Zie [Ongewenste updates stoppen](/nl/hardware/guides/firmware-backup-and-restore/#stop-unwanted-updates).
+- Controleer wat een update van de fabrikant verandert voordat je beslist of je die uitstelt: updates kunnen wijzigingen in de toegang terugdraaien, maar ook beveiligingslekken verhelpen. Zie [Firmware-updates en mogelijkheden](/nl/hardware/firmware/#firmware-updates-and-capabilities) en [Ongewenste updates stoppen](/nl/hardware/guides/firmware-backup-and-restore/#stop-unwanted-updates).
 - Maak een partitieback-up voordat je firmware op een geroot Rockchip-paneel wijzigt. Zie [Firmwareback-up en herstel](/nl/hardware/guides/firmware-backup-and-restore/).
 - Sommige routes vereisen `adb disable-verity`, wat het paneel herstart. Een met een pincode beveiligd paneel kan na een herstart zijn apps pas starten als iemand de pincode invoert, dus zorg dat je erbij bent.
+
+## Mogelijke routes op andere firmware
+
+[CVE-2026-43499](https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/43xxx/CVE-2026-43499.json) is een kwetsbaarheid in de Linux-kernel waarmee code die al lokaal wordt uitgevoerd hogere rechten kan verkrijgen. Het is een onderzoekskandidaat voor andere huidige en toekomstige paneelfamilies, niet alleen voor Meta Portal. Een kernelversie alleen toont niet aan dat er op een build van de fabrikant een bruikbare route bestaat: patches, de kernelconfiguratie en apparaatbeperkingen moeten worden gecontroleerd.
+
+Houd drie vragen gescheiden: kan een eigenaar eerst code installeren of uitvoeren; kan die code kernelrechten verkrijgen; en kan de paneel-app de resulterende toegang gebruiken, ook na een herstart? Tijdelijke rechten zouden kunnen helpen bij de installatie, ADB minder omslachtig maken, beheerinstellingen wijzigen of toegang tot afgeschermde hardware mogelijk maken. Op zichzelf levert dit geen blijvende roottoegang of een voor apps toegankelijke helper op.
+
+Het [onderzoek naar Meta Portal](/nl/hardware/panels/meta/#cve-2026-43499-and-community-provisioning) is een voorbeeld met exact gerapporteerde doelen en expliciete beperkingen. Het is geen algemeen installatieprogramma voor Panel Assistant en ook geen nieuw geleverde functie. De toepasbaarheid op Shelly en op gepatchte builds van fabrikanten is niet vastgesteld. Normale installatie en dagelijks gebruik blijven zonder root mogelijk waar het paneel die ondersteunt.

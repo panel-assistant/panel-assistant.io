@@ -4,7 +4,7 @@ description: Jak uzyskać adb i root na każdym opisanym panelu ściennym, do cz
 sidebar:
   label: Dostęp adb i root
   order: 1
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: f49bf12954ed3e89e5e32d635b4bbcb06095cf9b
 ---
 
 Każdy panel udostępnia adb oraz root, jeśli go ma, w inny sposób. Ta strona przedstawia ogólny obraz; dokładne kroki dla konkretnego firmware znajdują się na stronie każdego panelu.
@@ -33,6 +33,14 @@ Aplikacja panelu sprawdza każdą uprzywilejowaną drogę w chwili jej użycia, 
 
 - Zapewnij niezawodne działanie adb, najlepiej w sieci ze wstępnie autoryzowanym kluczem stacji roboczej, zanim wyłączysz aplikację producenta. Wcześniejsze wyłączenie programu uruchamiającego, ustawień lub aplikacji sprzętowej producenta może pozbawić cię dostępu do panelu.
 - Zachowaj sposób nawigacji. Na panelu bez przycisków działania nawigacyjne aplikacji panelu zastępują przyciski Wstecz i Ostatnie producenta.
-- Zatrzymaj aktualizator producenta, jeśli istnieje, inaczej aktualizacja bezprzewodowa może cofnąć twoje zmiany. Zobacz [Zatrzymywanie niechcianych aktualizacji](/pl/hardware/guides/firmware-backup-and-restore/#stop-unwanted-updates).
+- Sprawdź, co zmienia aktualizacja producenta, zanim zdecydujesz, czy ją odroczyć: aktualizacje mogą cofnąć zmiany w dostępie, ale także naprawić luki w zabezpieczeniach. Zobacz [Aktualizacje firmware i możliwości](/pl/hardware/firmware/#firmware-updates-and-capabilities) oraz [Zatrzymywanie niechcianych aktualizacji](/pl/hardware/guides/firmware-backup-and-restore/#stop-unwanted-updates).
 - Utwórz kopię partycji przed modyfikowaniem firmware na panelu Rockchip z rootem. Zobacz [Kopia zapasowa i przywracanie firmware](/pl/hardware/guides/firmware-backup-and-restore/).
 - Niektóre drogi wymagają `adb disable-verity`, co ponownie uruchamia panel. Panel chroniony kodem PIN nie może po restarcie ponownie uruchomić aplikacji, dopóki ktoś nie wpisze kodu, więc bądź przy nim osobiście.
+
+## Potencjalne drogi dostępu w innym firmware
+
+[CVE-2026-43499](https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/43xxx/CVE-2026-43499.json) to luka w jądrze Linuksa umożliwiająca eskalację uprawnień, którą może wykorzystać kod już działający lokalnie. Jest ona kandydatem do zbadania w innych obecnych i przyszłych rodzinach paneli, nie tylko w Meta Portal. Sama wersja jądra nie potwierdza istnienia użytecznej drogi dostępu w kompilacji producenta: trzeba sprawdzić poprawki, konfigurację jądra i ograniczenia urządzenia.
+
+Rozpatruj oddzielnie trzy pytania: czy właściciel może najpierw zainstalować lub uruchomić kod; czy ten kod może uzyskać uprawnienia jądra; i czy aplikacja panelu może korzystać z uzyskanego dostępu, także po ponownym uruchomieniu? Tymczasowe uprawnienia mogłyby pomóc w instalacji, ułatwić korzystanie z ADB, zmienić ustawienia administracyjne lub umożliwić dostęp do sprzętu objętego ograniczeniami. Same w sobie nie zapewniają trwałego dostępu root ani pomocnika dostępnego dla aplikacji.
+
+[Badania nad Meta Portal](/pl/hardware/panels/meta/#cve-2026-43499-and-community-provisioning) to przykład z dokładnie określonymi, zgłoszonymi celami i wyraźnymi ograniczeniami. Nie jest to uniwersalny instalator Panel Assistant ani nowo udostępniona funkcja. Nie ustalono możliwości zastosowania w Shelly ani tego, które kompilacje producentów zawierają poprawki. Zwykła instalacja i codzienne użytkowanie nadal nie wymagają dostępu root tam, gdzie panel je obsługuje.

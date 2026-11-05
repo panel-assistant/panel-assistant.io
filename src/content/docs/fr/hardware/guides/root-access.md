@@ -4,7 +4,7 @@ description: Comment chaque panneau mural documenté accède à adb et root, à 
 sidebar:
   label: Accès adb et root
   order: 1
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: f49bf12954ed3e89e5e32d635b4bbcb06095cf9b
 ---
 
 Chaque panneau accède à adb, et à root lorsqu’il le possède, par une voie différente. Cette page donne une vue générale ; les étapes exactes propres au micrologiciel figurent sur la page de chaque panneau.
@@ -33,6 +33,14 @@ L’application du panneau vérifie chaque voie privilégiée au moment de l’u
 
 - Faites fonctionner adb de façon fiable, idéalement sur le réseau avec la clé de votre poste préautorisée, avant de désactiver une application du fabricant. Désactiver d’abord un lanceur, une application de paramètres ou de matériel du fabricant peut vous bloquer l’accès au panneau.
 - Conservez un moyen de navigation. Sur un panneau sans boutons, les actions de navigation de l’application du panneau remplacent Retour et Applications récentes du fabricant.
-- Arrêtez le programme de mise à jour du fabricant s’il existe, sinon une mise à jour à distance peut annuler vos modifications. Voir [Arrêter les mises à jour indésirables](/fr/hardware/guides/firmware-backup-and-restore/#stop-unwanted-updates).
+- Vérifiez ce qu’une mise à jour du fabricant modifie avant de décider de la reporter : les mises à jour peuvent annuler les modifications d’accès, mais aussi corriger des failles de sécurité. Voir [Mises à jour du micrologiciel et capacités](/fr/hardware/firmware/#firmware-updates-and-capabilities) et [Arrêter les mises à jour indésirables](/fr/hardware/guides/firmware-backup-and-restore/#stop-unwanted-updates).
 - Sauvegardez les partitions avant de modifier le micrologiciel d’un panneau Rockchip rooté. Voir [Sauvegarde et restauration du micrologiciel](/fr/hardware/guides/firmware-backup-and-restore/).
 - Certaines méthodes nécessitent `adb disable-verity`, qui redémarre le panneau. Un panneau protégé par un code PIN ne peut pas relancer ses applications après un redémarrage tant que quelqu’un ne saisit pas le code : soyez donc devant le panneau.
+
+## Voies d’accès potentielles sur d’autres micrologiciels
+
+[CVE-2026-43499](https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/43xxx/CVE-2026-43499.json) est une faille d’élévation de privilèges du noyau Linux exploitable par du code déjà en cours d’exécution localement. Elle constitue une piste de recherche pour d’autres familles de panneaux actuelles et futures, pas seulement Meta Portal. La version du noyau ne suffit pas à elle seule à établir l’existence d’une voie d’accès utilisable sur une compilation du fabricant : les correctifs, la configuration du noyau et les restrictions de l’appareil doivent être vérifiés.
+
+Distinguez trois questions : un propriétaire peut-il d’abord installer ou exécuter du code ; ce code peut-il obtenir les privilèges du noyau ; et l’application du panneau peut-elle utiliser l’accès ainsi obtenu, y compris après un redémarrage ? Des privilèges temporaires pourraient faciliter l’installation, rendre ADB moins contraignant à utiliser, modifier des paramètres d’administration ou permettre l’accès à du matériel soumis à des restrictions. Ils ne fournissent pas à eux seuls un accès root persistant ni un assistant accessible à l’application.
+
+Les [recherches sur Meta Portal](/fr/hardware/panels/meta/#cve-2026-43499-and-community-provisioning) constituent un exemple avec des cibles exactes signalées et des limites explicites. Il ne s’agit ni d’un programme d’installation générique de Panel Assistant ni d’une capacité nouvellement fournie. L’applicabilité à Shelly et les compilations corrigées des fabricants n’ont pas été établies. L’installation normale et l’utilisation quotidienne restent sans root lorsque le panneau les prend en charge.

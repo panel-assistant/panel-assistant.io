@@ -4,7 +4,7 @@ description: Come ogni pannello a parete documentato accede ad adb e root, per c
 sidebar:
   label: Accesso adb e root
   order: 1
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: f49bf12954ed3e89e5e32d635b4bbcb06095cf9b
 ---
 
 Ogni pannello accede ad adb, e al root quando disponibile, tramite un percorso diverso. Questa pagina offre il quadro generale; i passaggi esatti specifici del firmware sono nella pagina di ciascun pannello.
@@ -33,6 +33,14 @@ L'app del pannello controlla ogni percorso privilegiato quando lo usa: un pannel
 
 - Fai funzionare adb in modo affidabile, idealmente in rete con la chiave della tua postazione già autorizzata, prima di disabilitare qualsiasi app del produttore. Disabilitare prima un launcher, l'app Impostazioni o un'app hardware del produttore può impedirti di accedere al pannello.
 - Mantieni un modo per navigare. Su un pannello senza pulsanti, le azioni di navigazione dell'app del pannello sostituiscono Indietro e Recenti del produttore.
-- Arresta il programma di aggiornamento del produttore, se presente, altrimenti un aggiornamento via rete può annullare le modifiche. Vedi [Bloccare gli aggiornamenti indesiderati](/it/hardware/guides/firmware-backup-and-restore/#stop-unwanted-updates).
+- Verifica cosa cambia con un aggiornamento del produttore prima di decidere se rimandarlo: gli aggiornamenti possono annullare le modifiche all'accesso, ma anche correggere vulnerabilità di sicurezza. Vedi [Aggiornamenti firmware e funzionalità](/it/hardware/firmware/#firmware-updates-and-capabilities) e [Bloccare gli aggiornamenti indesiderati](/it/hardware/guides/firmware-backup-and-restore/#stop-unwanted-updates).
 - Crea un backup delle partizioni prima di modificare il firmware su un pannello Rockchip con root. Vedi [Backup e ripristino del firmware](/it/hardware/guides/firmware-backup-and-restore/).
 - Alcuni percorsi richiedono `adb disable-verity`, che riavvia il pannello. Un pannello protetto da PIN non può riavviare le proprie app dopo un riavvio finché qualcuno non inserisce il PIN: devi quindi essere davanti al pannello.
+
+## Possibili percorsi su altri firmware
+
+[CVE-2026-43499](https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/43xxx/CVE-2026-43499.json) è una vulnerabilità di escalation dei privilegi nel kernel Linux, sfruttabile da codice già in esecuzione localmente. È una possibile pista di ricerca per altre famiglie di pannelli attuali e future, non solo per Meta Portal. La sola versione del kernel non dimostra l'esistenza di un percorso utilizzabile su una build del produttore: occorre verificare le patch, la configurazione del kernel e le restrizioni del dispositivo.
+
+Tieni separate tre domande: un proprietario può innanzitutto installare o eseguire codice; quel codice può ottenere privilegi del kernel; e l'app del pannello può utilizzare l'accesso così ottenuto, anche dopo un riavvio? Privilegi temporanei potrebbero facilitare l'installazione, rendere ADB meno macchinoso, modificare le impostazioni amministrative o consentire l'accesso a hardware soggetto a restrizioni. Da soli non forniscono un accesso root persistente né un helper accessibile dall'app.
+
+La [ricerca su Meta Portal](/it/hardware/panels/meta/#cve-2026-43499-and-community-provisioning) è un esempio con target segnalati in modo preciso e limiti espliciti. Non è un programma di installazione generico di Panel Assistant né una funzionalità appena resa disponibile. Non sono state accertate né l'applicabilità a Shelly né le build del produttore con la correzione. L'installazione normale e l'uso quotidiano continuano a non richiedere root laddove il pannello li supporta.
