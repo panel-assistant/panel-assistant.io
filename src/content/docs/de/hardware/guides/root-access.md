@@ -17,7 +17,7 @@ Die Panel-App lässt sich ohne Root installieren und verwenden. Root ist nur fü
 - **Echtes Ausschalten der Hintergrundbeleuchtung, Neustart und CPU-Governor-Steuerung.** Ohne Root-Zugriffsweg fallen diese auf das zurück, was Android erlaubt, etwa Helligkeit null statt Abschalten der Hintergrundbeleuchtung.
 - **Relais und GPIO-Leitungen**, wenn ein Panel sie nur über Root-Sysfs bereitstellt.
 
-Die Panel-App prüft jeden privilegierten Zugriffsweg bei seiner Verwendung. Ein Panel ohne Root erhält daher weiterhin Dashboard, Standardsensoren, Helligkeit und Navigation. Eine Funktion, die Root benötigt, wird als nicht verfügbar angezeigt, statt fehlzuschlagen.
+Die Panel-App prüft privilegierte Zugriffswege, wenn sie diese verwendet. Auf einem Panel ohne Root stehen weiterhin das Dashboard, Standardsensoren, Helligkeit und die unterstützte Navigation zur Verfügung. Einige privilegierte Bedienelemente bleiben sichtbar, wenn ihr Zustand lesbar ist. Änderungen an ihnen können jedoch fehlschlagen, wenn kein privilegierter Zugriffsweg funktioniert.
 
 ## Wege nach Panel
 
