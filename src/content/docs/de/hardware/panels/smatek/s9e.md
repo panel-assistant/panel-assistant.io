@@ -38,7 +38,7 @@ Ein 10,1-Zoll-RK3566-Unterputzpanel mit **1920×1200**, derselben SoC-Familie wi
 
 ## Erster Debugging-Zugang
 
-**Netzwerk-ADB auf TCP-Port 5555 ohne Computer: nicht nachgewiesen.** Ein Besitzer, der Panel Assistant ausführt, oder eine Firmware mit Root-Zugriff belegt nicht, wie sich Debugging auf einem neuen Panel aktivieren lässt.
+**ADB über das Netzwerk auf TCP-Port 5555 ohne Computer: nicht nachgewiesen.** Weder Panels, auf denen Panel Assistant bereits läuft, noch ein Firmware-Build, der Root bietet, zeigen, wie das Debugging auf einem neuen Panel erstmals aktiviert wird.
 
 **Auch das Verfahren für den ersten USB-Debugging-Zugang ist nicht nachgewiesen.** Frage den Lieferanten nach Debugging-Anweisungen für deine genaue Firmware und einer Bestätigung eines USB-Datenanschlusses. Bietet sie USB-Debugging, verwende den [USB-Installer](/de/install/install-over-usb/); gehe nicht davon aus, dass ein Ladeanschluss ADB bereitstellt. Hier liegt keine überprüfte Tastensequenz für ein Werksmenü vor.
 
@@ -70,7 +70,7 @@ Die folgenden Steuerungsschnittstellen sind **Root-sysfs**-Schreibzugriffe, und 
 :::
 
 :::tip
-Da das S9E die **RK3566**-Plattform des TPA10 teilt, funktionieren die bestehenden App-Funktionen der Panel-App wahrscheinlich ohne S9E-spezifischen Code; Temperatur, Feuchtigkeit und Licht könnten über `SensorManager` erscheinen. In der älteren Firmware ist das mitgelieferte **WebView sehr alt (Chromium 83)**. Aktualisiere es daher zuerst: mit Magisk OpenWebView, der Firmware vom 2025-03-24 oder einem manuell installierten SystemWebView. Die Firmware von 2025-12 enthält bereits Chromium 131. Siehe [System-WebView aktualisieren](/de/hardware/guides/update-the-webview/).
+Da das S9E dieselbe **RK3566**-Plattform wie das TPA10 nutzt, funktionieren die bestehenden appseitigen Funktionen der Panel-App wahrscheinlich ohne S9E-spezifischen Code, und Temperatur, Luftfeuchtigkeit und Licht sind möglicherweise über `SensorManager` verfügbar. Bei der älteren Firmware ist die mitgelieferte **WebView sehr alt (Chromium 83)**, daher wäre eine neuere Engine hilfreich. Auf diesem Modell wurde kein Verfahren zum Austausch verifiziert; Root und ein userdebug-Build allein belegen keine Kompatibilität. Die Firmware von 2025-12 wird mit Chromium 131 ausgeliefert, das keine Chromium-Sicherheitskorrekturen mehr erhält. Siehe [System-WebView aktualisieren](/de/hardware/guides/update-the-webview/).
 :::
 
 :::tip
