@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { runInNewContext } from 'node:vm';
 import { handleEditorAuth } from './editor-auth.js';
 import config from './editor.json' with { type: 'json' };
 import worker from './index.js';
@@ -72,11 +73,39 @@ test('callback exchanges the code and hands the token only to the site origin', 
       body: { client_id: 'client-id', client_secret: 'client-secret', code: 'abc' },
     },
   ]);
-  assert.match(body, /authorization:github:success:/);
-  assert.match(body, /gho_token/);
-  assert.match(body, /const origin = "https:\/\/panel-assistant.io"/);
-  assert.match(body, /event\.origin !== origin/);
-  assert.ok(!body.includes("'*'"), 'never posts to any origin');
+  const messages = [];
+  const popup = new EventTarget();
+  popup.opener = {
+    postMessage: (message, targetOrigin) => messages.push({ message, targetOrigin }),
+  };
+  const scripts = [...body.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+  assert.ok(scripts.length > 0, 'callback supplies executable popup code');
+  for (const [, script] of scripts) runInNewContext(script, { window: popup });
+  const hello = { message: 'authorizing:github', targetOrigin: ORIGIN };
+  assert.deepEqual(messages, [hello]);
+  popup.dispatchEvent(
+    new MessageEvent('message', {
+      origin: 'https://evil.example',
+      data: 'authorizing:github',
+    }),
+  );
+  popup.dispatchEvent(new MessageEvent('message', { origin: ORIGIN, data: 'unrelated' }));
+  assert.deepEqual(messages, [hello], 'invalid handshakes disclose no token');
+  popup.dispatchEvent(
+    new MessageEvent('message', {
+      origin: ORIGIN,
+      data: 'authorizing:github',
+    }),
+  );
+  assert.deepEqual(messages, [
+    hello,
+    {
+      message:
+        'authorization:github:success:' +
+        JSON.stringify({ provider: 'github', token: 'gho_token' }),
+      targetOrigin: ORIGIN,
+    },
+  ]);
   assert.equal(res.headers.get('cache-control'), 'no-store');
   assert.match(res.headers.get('set-cookie'), /Max-Age=0/);
   assert.ok(!body.includes('client-secret'));
@@ -129,6 +158,8 @@ test('the Worker routes /oauth/ to sign-in and nothing else there', async () => 
 });
 
 test('the editor sign-in keeps no state', async () => {
+  // Source-text reason: this bounded architectural guard checks Worker-side storage access;
+  // request/response success cannot establish the absence of durable token storage.
   const { readFileSync } = await import('node:fs');
   const source = readFileSync(new URL('./editor-auth.js', import.meta.url), 'utf8');
   assert.doesNotMatch(source, /env\.(KV|DB|R2|[A-Z_]*STORE)/);

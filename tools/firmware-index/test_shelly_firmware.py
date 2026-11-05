@@ -324,5 +324,34 @@ class ShellyFirmwareValidationTest(unittest.TestCase):
         self.assertIn("if: github.event_name == 'schedule' || inputs.mode == 'update'", monitor)
 
 
+class ShellyArchiveConfirmationTest(unittest.TestCase):
+    def test_only_successful_real_capture_is_persisted_by_archive_command(self):
+        valid = {"available": True, "status": "200", "timestamp": "20261014000000"}
+        cases = [
+            (valid, valid["timestamp"]),
+            ({**valid, "status": "404"}, ""),
+            ({**valid, "available": False}, ""),
+            ({**valid, "timestamp": "20260231000000"}, ""),
+        ]
+        for snapshot, expected in cases:
+            with self.subTest(snapshot=snapshot), tempfile.TemporaryDirectory() as tmp:
+                dat = pathlib.Path(tmp) / "firmware.dat"
+                entry = {"track": "WallDisplay", "version": "2.8.0", "build_id": "build",
+                         "bytes": 123, "discovered": "2026-10-14", "wayback_ts": "",
+                         "cdn_url": "https://fwcdn.shelly.cloud/gen2-ntest/WallDisplay/fixture"}
+                shelly.save_dat(dat, [entry])
+                response = json.dumps({"archived_snapshots": {"closest": snapshot}})
+                with mock.patch.dict(os.environ, {"WAYBACK_S3": "fixture:fixture"}), \
+                        mock.patch.object(shelly, "urlopen", side_effect=lambda *_a, **_k: io.StringIO(response)), \
+                        mock.patch.object(shelly, "spn_submit", return_value=("accepted-job", {})) as submit, \
+                        mock.patch.object(shelly.time, "sleep"):
+                    self.assertEqual(0, shelly.cmd_archive(SimpleNamespace(dat=str(dat))))
+                self.assertEqual(expected, shelly.load_dat(dat)[0]["wayback_ts"])
+                if expected:
+                    submit.assert_not_called()
+                else:
+                    submit.assert_called_once_with(entry["cdn_url"], "LOW fixture:fixture")
+
+
 if __name__ == "__main__":
     unittest.main()

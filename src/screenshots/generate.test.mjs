@@ -20,7 +20,7 @@ test('published screenshots retain nested paths, pixels and animation while drop
     // Two differently coloured frames, with non-default timing and looping.
     const pixels = Buffer.from([
       ...Array(6).fill([255, 0, 0]).flat(),
-      ...Array(6).fill([255, 0, 0]).flat(),
+      ...Array(6).fill([0, 0, 255]).flat(),
     ]);
     const gif = await sharp(pixels, { raw: { width: 3, height: 4, channels: 3, pageHeight: 2 } })
       .gif({ delay: [120, 230], loop: 3, keepDuplicateFrames: true })

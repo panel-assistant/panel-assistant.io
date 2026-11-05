@@ -276,11 +276,12 @@ test('the form uses a real Turnstile site key, not a test key', () => {
 });
 
 test('the configured limit is per address, two a minute', () => {
+  // Source-text reason: the host rate-limit binding is deployment config, outside this handler.
   const text = readFileSync(new URL('./wrangler.jsonc', import.meta.url), 'utf8');
-  assert.match(
-    text,
-    /"name": "COMMENT_RATE", "namespace_id": "\d+", "simple": \{ "limit": 2, "period": 60 \}/,
-  );
+  const workerConfig = JSON.parse(text.replace(/^\s*\/\/.*$/gm, '').replace(/,(\s*[}\]])/g, '$1'));
+  const rate = workerConfig.ratelimits.find((binding) => binding.name === 'COMMENT_RATE');
+  assert.match(rate.namespace_id, /^\d+$/);
+  assert.deepEqual(rate.simple, { limit: 2, period: 60 });
 });
 
 test('a failed Turnstile check posts nothing to GitHub', async () => {
@@ -491,9 +492,13 @@ test('the live worker routes /comments to the handler and everything else as bef
   const res = await worker.fetch(post(), env);
   assert.equal(res.status, 503);
   assert.equal((await worker.fetch(new Request(`${ORIGIN}/go/usb-install`), env)).status, 302);
+  // Source-text reason: host route precedence is not exercised by calling worker.fetch directly.
   const wrangler = readFileSync(new URL('./wrangler.jsonc', import.meta.url), 'utf8');
-  assert.match(wrangler, /"run_worker_first": \[[^\]]*"\/comments"/);
-  assert.match(wrangler, /"run_worker_first": \[[^\]]*"\/comments\/count"/);
+  const workerConfig = JSON.parse(
+    wrangler.replace(/^\s*\/\/.*$/gm, '').replace(/,(\s*[}\]])/g, '$1'),
+  );
+  assert.ok(workerConfig.assets.run_worker_first.includes('/comments'));
+  assert.ok(workerConfig.assets.run_worker_first.includes('/comments/count'));
 });
 
 // Source-text reason: these architectural privacy constraints cover bindings and persistent
