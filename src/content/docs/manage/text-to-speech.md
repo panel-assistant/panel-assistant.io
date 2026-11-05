@@ -26,4 +26,4 @@ Replace both entity IDs with the ones in your Home Assistant. The engine renders
 
 Set the panel's media player volume beforehand if needed. To speak in several rooms, supply a list of panel media player entities in `media_player_entity_id`.
 
-In [Hardened mode](/manage/security-mode/), a media command over the native connection requires someone to approve it on the panel's screen. An automation cannot approve that request remotely.
+Text-to-speech sent to the panel's media player over its native connection does not require on-panel approval in [Hardened mode](/manage/security-mode/).

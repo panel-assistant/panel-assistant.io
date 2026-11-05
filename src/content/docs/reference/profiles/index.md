@@ -58,7 +58,7 @@ ha-paneld treats profile content as immutable revisions rather than an editable 
 - **Last-known-good**: the previous proven selection retained as the recovery and manual rollback target after a new revision completes startup.
 - **Auto-rolled-back**: a candidate that failed activation and was replaced automatically by the last-known-good revision.
 
-Saving, activation and deletion all use revision hashes and generation checks. If another browser or administrator changed the catalogue after a page was opened, the stale operation is refused; refresh, compare again and act on the new state.
+Saving binds an immutable revision to the exact YAML in its validation preview. Activation and deletion also check the catalogue generation; if another browser or administrator changed the catalogue, those stale operations are refused. Refresh and compare again before acting on the new state.
 
 Deleting an inactive local revision does not change the active panel. An active or last-known-good revision must not be removed until another valid recovery path exists.
 
@@ -70,7 +70,7 @@ Deleting an inactive local revision does not change the active panel. An active 
 
 That makes Generic the right place to begin community profiling:
 
-1. Download the **device draft** from the Profiles page. It captures the exact build model, build device and product-version evidence available to ha-paneld, plus the latest bounded, sanitised passive report.
+1. Download the **device draft** from the Profiles page. It captures the exact build model, build device and product-version evidence available to ha-paneld and selected passive observations. Review the separate bounded, sanitised passive report on the Profiles page before sharing your evidence.
 2. Redact and review before sharing. The generated report is designed for support, but the author remains responsible for removing panel names, addresses, Home Assistant details, credentials and dashboard content.
 3. Add identity and provenance first. Use a stable lowercase ID with an author/organisation prefix, such as `org.example.wallpanel-x1`, plus an initial profile version, author/source/licence information, a maturity level, the tested firmware range and known limitations.
 4. Add narrow, exact fingerprint rules. A vendor model or product-version prefix is usually safer than a broad SoC alias such as `px30`, `rk3326`, `rk3566` or `rk3576`, which unrelated panels may share.

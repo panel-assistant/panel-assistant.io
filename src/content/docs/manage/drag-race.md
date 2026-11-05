@@ -48,4 +48,4 @@ Fifteen seconds is not a slow panel. It is a panel you have given up on and walk
 - Touches injected as raw screen events at the same instant on both panels. Each step recorded by the panel itself; the clock runs from the touch until the screen has stopped changing. A step that is still changing when its clip ends voids the run.
 - Three runs each way, the median run filmed. A music card that fetched lyrics from the internet was removed from the race, since no panel app can speed up an external service, and the live camera page was left out because its time is stream set-up rather than dashboard work.
 
-The same figures appear live on any Panel Assistant panel under **Performance** in its web interface; see [Performance](/manage/performance/) for how to read them on your own hardware.
+You can inspect your own panel's CPU use, dashboard responsiveness and Home Assistant state stream under **Performance** in its web interface; see [Performance](/manage/performance/) for how to read those measurements.

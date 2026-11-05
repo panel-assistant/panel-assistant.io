@@ -18,7 +18,7 @@ With that toolchain installed locally:
 
 ## Docker
 
-If you would rather not install anything but Docker, [`tools/build/`](https://github.com/panel-assistant/android/tree/main/tools/build) builds a version-pinned image with the same toolchain and runs Gradle inside it. The APK lands in your working tree, the image is cached after the first build, and Gradle caches persist in a named Docker volume.
+If you would rather not install anything but Docker, [`tools/build/`](https://github.com/panel-assistant/android/tree/main/tools/build) builds a Docker image and runs Gradle inside it. Its Dockerfile lists the SDK packages included in the image. The APK lands in your working tree, the image is cached after the first build, and Gradle caches persist in a named Docker volume.
 
 ```sh
 ./tools/build/build.sh                       # debug APK -> app/build/outputs/apk/debug/
