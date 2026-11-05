@@ -60,7 +60,7 @@ Start from the values your model's own documentation or notebook run suggests, i
 
 ### From the panel's Configure page
 
-On the **Voice** card, the wake words picker has an **import** control. Choose the model's `.json` manifest and its `.tflite` file, then press **Import trained wake word**. The panel validates the model with its own wake word engine before accepting it; if it refuses a model, nothing is installed, and if a model of the same name was already imported, that earlier model is left in place. Manifests are limited to 16 KB and models to 2 MB.
+On the **Voice** card, the wake words picker has an **import** control. Choose the model's `.json` manifest and its `.tflite` file, then press **Import**. The panel validates the model with its own wake word engine before accepting it; if it refuses a model, nothing is installed, and if a model of the same name was already imported, that earlier model is left in place. Manifests are limited to 16 KB and models to 2 MB.
 
 The wake word's id is derived from the `.tflite` file's name, lower-cased and reduced to letters, digits and underscores (it must start with a letter). It cannot reuse the id of a bundled wake word, and importing a model under a name you have already used replaces that earlier model.
 

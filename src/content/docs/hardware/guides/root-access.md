@@ -16,7 +16,7 @@ The panel app installs and runs without root. Root matters only for hardware tha
 - **True backlight-off, reboot and CPU governor control.** Without a root route these fall back to what Android allows, for example brightness zero instead of powering the backlight down.
 - **Relays and GPIO lines**, where a panel exposes them only through root sysfs.
 
-The panel app checks each privileged route when it uses it, so a panel without root still gets the dashboard, standard sensors, brightness and navigation, and a capability that needs root is shown as unavailable rather than failing.
+The panel app checks privileged routes when it uses them. A panel without root still gets the dashboard, standard sensors, brightness and supported navigation. Some privileged controls remain visible when their state is readable, but changing them can fail if no privileged route works.
 
 ## Routes by panel
 

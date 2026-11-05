@@ -89,9 +89,9 @@ This is expected while the service restarts. The Profiles page polls health and 
 
 Keep the last-known-good revision active. Export the failed candidate and inspect its activation diagnostics before editing it into a new revision. Do not repeatedly reactivate the same bytes. Reduce the change to one capability, confirm requirements and authority, and test again.
 
-### A stale save or activation is refused
+### A save preview or activation is stale
 
-Another operation changed the profile catalogue after your page loaded. Refresh, compare against the current generation, and repeat the operation using the new exact revision/hash. This refusal prevents one browser from activating different bytes than it inspected.
+If saving reports a stale preview, validate the unchanged YAML again and retry Save. Save uses a short-lived, one-use token bound to the exact YAML bytes. If activation reports a stale catalogue revision, refresh the catalogue, compare again and retry activation of the exact revision you inspected.
 
 ### The local profile catalogue is full
 

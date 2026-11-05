@@ -26,10 +26,10 @@ Use **Visit** on the panel's device page in Home Assistant, open **Install**, an
 Press **Find a package…** to open a list of the apps on the panel you might want to control, grouped to make the choice easier:
 
 - **Recommended for this panel**: the intrusive firmware apps known for your hardware, which are the safe first choices. On a panel with a known hardware profile, such as the NSPanel Pro, `com.eWeLinkControlPanel` is listed here. Each entry carries **tags** (for example `vendor` for the panel maker's apps, `chipset` for the chip maker's factory and test apps, `overlay`, `boot`) and a short **note** from the profile's author saying what it is and why it is flagged, so you can tell a Sonoff overlay app from a harmless Rockchip test app left in the image.
-- **Other apps**: apps on the panel that are not part of core Android. On a panel without a known profile, this is where to look for anything with a launcher entry, overlay permission or non-platform signature that looks like a vendor add-on.
+- **Other apps**: apps on the panel that are not part of core Android. On a panel without a known profile, this is where to look for vendor add-ons with a launcher entry or overlay permission. If a package is not listed, you can enter its name directly.
 - **Using the most CPU**: whatever is using the most CPU right now. Only tame one you recognise.
 
-Each entry has a **Tame** button, and you can also type a package name straight into the box if you know it. **Tame** acts immediately, with no separate save, and is reapplied on every boot. A tamed or already disabled package shows **Re-enable** instead, which reverses it. The card itself lists only what you have tamed, each with its state: `active`, `disabled` or `not installed`.
+Each entry has a **Tame** button, and you can also type a package name straight into the box if you know it. **Tame** acts immediately, with no separate save, and is reapplied on every boot. A tamed or already disabled package shows **Re-enable** instead, which reverses it. The card itself lists the packages you have selected to tame, each with a Re-enable button.
 
 Nothing is tamed until you press a Tame button. Without root or the helper, the card stays visible but locked, with the missing access explained.
 

@@ -26,7 +26,7 @@ Turn on **Auto-brightness** in the same Display card. The controller keeps up to
 
 **Maximum level** caps automatic brightness, from 5% to 100%, above the selected minimum. It does not limit manual brightness.
 
-**Sensitivity** is how much of a difference from the learned pattern is applied to the screen, once the controller has decided the difference is real. At 0% it ignores the difference and uses the learned pattern alone. Lower values give a steadier response, and the default of 50% leaves equal room to tune either way. It is not a raw follow-the-light control: a brief brightening is acted on only once it has lasted, or risen sharply enough to count, and while the daily pattern is still being learned the screen follows the measured light whatever this is set to.
+**Sensitivity** is how much of a difference from the learned pattern is applied to the screen, once the controller has decided the difference is real. At 0% it ignores the difference and uses the learned pattern alone. Lower values give a steadier response, and the default of 50% leaves equal room to tune either way. It is not a raw follow-the-light control: a brief brightening is acted on only once it has lasted, or risen sharply enough to count. During the initial warm-up the screen follows smoothed measured light regardless of Sensitivity; the setting takes effect while the model continues learning.
 
 The seven-day chart previews the observed range, the learned baseline and the proposed level, before or while the controller is active. Unsaved changes to Minimum level, Maximum level and Sensitivity show in the preview without rewriting the stored history.
 

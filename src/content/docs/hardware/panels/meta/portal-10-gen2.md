@@ -93,7 +93,7 @@ Then [add the panel](/install/installing-ha-paneld/) in Panel Assistant as usual
 - **Camera.** Off by default, like on every panel, and turned on from the **Camera** card in Configure. It then serves a 1280×720 stream and still images to Home Assistant, and the Portal's green camera light comes on while it is in use.
 - **Microphones, wake word and spoken replies.** The wake word was recognised and Home Assistant's voice pipeline answered through the Portal's speaker. See [voice assistant](/manage/voice-assistant/).
 - **Ambient light**, including colour, as a normal Android sensor, for adaptive brightness and Home Assistant.
-- **A real screen-off without root.** The panel app switches the screen off through Android's own sleep timeout, so the backlight goes fully dark rather than to its lowest level. Lowering the brightness to zero is not enough on a Portal: the picture stays visible. If the timeout does not take, the app falls back to its dimmest setting.
+- **A real screen-off without root.** The panel app switches the screen off through Android's own sleep timeout, so the backlight goes fully dark rather than to its lowest level. Lowering the brightness to zero is not enough on a Portal: the picture stays visible. If the timeout does not take, the app first tries Android's device-admin screen lock. It dims the screen if neither method works.
 - **Waking**: a double tap on the screen wakes it, and so does Meta's own motion detection when someone moves nearby.
 - **The Launcher button** in the panel app's navigation goes to the app's own launcher. The profile tells it to skip Meta's launcher, which is a clock face rather than an app list.
 
