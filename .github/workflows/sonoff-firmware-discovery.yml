@@ -42,6 +42,9 @@ on:
 permissions:
   contents: read
 
+env:
+  PYTHONUNBUFFERED: '1' # timestamp each search line as it happens, not all at exit
+
 concurrency:
   group: sonoff-firmware-discovery
   cancel-in-progress: false
@@ -71,7 +74,7 @@ jobs:
   discover:
     if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'update')
     runs-on: ubuntu-24.04
-    timeout-minutes: 45 # the CDN search alone takes about 26 min (October 2026)
+    timeout-minutes: 45 # the CDN search makes about 8,200 probes, 33 s locally (November 2026); the log prints its time
     permissions:
       contents: write # push the update branch
       pull-requests: write # open/update the index PR (main requires PR review)

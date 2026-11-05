@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import http.client
 import io
 import os
 import pathlib
@@ -149,12 +150,15 @@ class DiscoveryTest(unittest.TestCase):
         self.assertNotIn(newest, firmware_index.candidate_versions(newest))
 
     def test_default_windows_cover_observed_index_and_patch_gaps(self):
-        index_gaps = []
-        for d in self.devices:
-            for entries, position in ((d["apks"], 1), (d["diffs"], 2)):
-                indices = sorted({int(entry[position]) for entry in entries})
-                index_gaps.extend(later - earlier for earlier, later in zip(indices, indices[1:]))
-        self.assertGreaterEqual(firmware_index.DISCOVER_INDEX_WINDOW, max(index_gaps))
+        def widest_gap(position, kind):
+            gaps = []
+            for d in self.devices:
+                indices = sorted({int(entry[position]) for entry in d[kind]})
+                gaps.extend(later - earlier for earlier, later in zip(indices, indices[1:]))
+            return max(gaps)
+
+        self.assertGreaterEqual(firmware_index.DISCOVER_INDEX_WINDOW, widest_gap(1, "apks"))
+        self.assertGreaterEqual(firmware_index.DISCOVER_DIFF_INDEX_WINDOW, widest_gap(2, "diffs"))
         self.assertIn("3.8.7", firmware_index.candidate_versions("3.8.0"))
         self.assertIn("3.9.3", firmware_index.candidate_versions("3.8.0"))
 
@@ -217,10 +221,45 @@ class DiscoveryTest(unittest.TestCase):
                 firmware_index.discover_one("https://example.invalid/x")
         self.assertEqual(urlopen.call_count, 4)
 
+    def test_every_indexed_diff_was_within_the_search_its_predecessors_imply(self):
+        # Replay the real index: for each diff target in index order, the
+        # search computed from the diffs before it must have covered its
+        # index, and every source the old every-ROM-state search would have
+        # tried. (A source first seen in that same diff, 3.7.0 → 3.7.1 on the
+        # 86P, was never findable by either.) Full ROMs are never discovered,
+        # so all of them count as known throughout.
+        for d in self.devices:
+            targets = sorted({(int(i), to) for to, _f, i, _s in d["diffs"]})
+            for (index, target), (prev_index, _prev) in zip(targets[1:], targets):
+                earlier = dict(d, diffs=[e for e in d["diffs"] if int(e[2]) <= prev_index])
+                max_index = max(int(e[2]) for e in earlier["diffs"])
+                self.assertLessEqual(
+                    index - max_index, firmware_index.DISCOVER_DIFF_INDEX_WINDOW,
+                    f"{d['channel']} {target}: diff index {index} outside the window",
+                )
+                sources = {f for to, f, i, _s in d["diffs"] if to == target and int(i) == index}
+                missed = (sources & firmware_index.rom_states(earlier)) - firmware_index.diff_sources(earlier)
+                self.assertEqual(missed, set(), f"{d['channel']} {target}: sources outside the search")
+
+    def test_daily_search_stays_well_inside_the_job_limit(self):
+        # The full cross of every ROM state ever seen made about 70,000 probes
+        # and ran past the 45-minute limit on hosted runners (about 26 to 41
+        # probes a second there). 15,000 keeps a slow day under ten minutes.
+        probes = 0
+        with mock.patch.object(firmware_index, "discover_one", return_value=None):
+            for d in self.devices:
+                _findings, searched = firmware_index.discover_device(
+                    d, firmware_index.DISCOVER_INDEX_WINDOW, firmware_index.DISCOVER_MINOR_WINDOW
+                )
+                probes += searched["probes"]
+        self.assertLess(probes, 15000)
+
     def test_rom_diffs_are_probed_without_an_apk_hit(self):
         d = self.devices[0]
         with mock.patch.object(firmware_index, "discover_one", return_value=None):
-            findings, searched = firmware_index.discover_device(d, index_window=1, minor_window=1)
+            findings, searched = firmware_index.discover_device(
+                d, index_window=1, minor_window=1, diff_index_window=1
+            )
         self.assertEqual(findings, [])
         next_diff = max(int(index) for _to, _frm, index, _size in d["diffs"]) + 1
         self.assertEqual(searched["diff_indices"], [next_diff, next_diff])
@@ -263,6 +302,63 @@ class DiscoveryTest(unittest.TestCase):
         self.assertIn("no unindexed firmware found", text)
         for d in devices:
             self.assertIn(f"searched {d['channel']}: apk indices", text)
+
+
+
+class DroppedConnectionTest(unittest.TestCase):
+    """The CDN closing a connection without a response (2026-10-04, 10-06, 11-04)."""
+
+    URL = "https://example.invalid/x.apk"
+
+    def zip_response(self):
+        response = mock.MagicMock()
+        response.__enter__.return_value = response
+        response.status = 206
+        response.headers = {"Content-Range": "bytes 0-3/137890388"}
+        response.read.return_value = b"PK\x03\x04"
+        return response
+
+    def test_a_dropped_connection_is_retried(self):
+        dropped = http.client.RemoteDisconnected("Remote end closed connection without response")
+        with mock.patch("urllib.request.urlopen", side_effect=[dropped, self.zip_response()]) as urlopen, \
+                mock.patch("time.sleep") as sleep:
+            self.assertEqual(firmware_index.discover_one(self.URL), 137890388)
+        self.assertEqual(urlopen.call_count, 2)
+        self.assertEqual([c.args[0] for c in sleep.call_args_list], [5])
+
+    def test_a_persistently_dropping_cdn_ends_the_run_as_a_warning(self):
+        dropped = http.client.RemoteDisconnected("Remote end closed connection without response")
+        with tempfile.TemporaryDirectory() as tmp:
+            # The harness sees known objects; every search probe is dropped.
+            known = firmware_index.all_url_sizes(firmware_index.load_devices())
+            known_zip = {url for url in known}
+
+            def urlopen(request, timeout=None):
+                if request.full_url in known_zip:
+                    response = self.zip_response()
+                    response.headers = {"Content-Range": f"bytes 0-3/{known[request.full_url]}"}
+                    return response
+                raise dropped
+
+            dats = {n: pathlib.Path(firmware_index.HERE, n).read_bytes() for n in ("fw-120p.dat", "fw-86p.dat")}
+            github_output = pathlib.Path(tmp, "output")
+            output = io.StringIO()
+            with mock.patch("urllib.request.urlopen", side_effect=urlopen), \
+                    mock.patch("time.sleep") as sleep, \
+                    mock.patch.dict(os.environ, {"GITHUB_OUTPUT": str(github_output)}), \
+                    mock.patch("sys.stdout", output):
+                code = firmware_index.cmd_discover(
+                    SimpleNamespace(index_window=2, minor_window=1, json=None, apply=True)
+                )
+
+            self.assertEqual(code, 0)
+            self.assertIn("::warning::", output.getvalue())
+            self.assertIn("RemoteDisconnected", output.getvalue())
+            self.assertIn("found=false", github_output.read_text())
+            self.assertTrue(sleep.called)
+            for name, before in dats.items():
+                self.assertEqual(pathlib.Path(firmware_index.HERE, name).read_bytes(), before)
+
 
 if __name__ == "__main__":
     unittest.main()

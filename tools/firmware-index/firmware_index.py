@@ -9,10 +9,12 @@ The site generator reads the canonical data files and preserved history branches
 import argparse
 import gzip
 import hashlib
+import http.client
 import json
 import os
 import re
 import sys
+import threading
 import time
 import urllib.error
 import urllib.request
@@ -181,13 +183,32 @@ def probe_one(url, expected_size):
 # --------------------------------------------------------------------------- #
 
 ZIP_MAGIC = b"PK\x03\x04"
+# APK indices have jumped by up to 29 between releases, so their window stays
+# wide; APK probes are cheap (one per index and version). ROM diff indices have
+# never advanced by more than 4, and each diff index is crossed with every
+# candidate version and source, so its window is twice that gap.
 DISCOVER_INDEX_WINDOW = 32
+DISCOVER_DIFF_INDEX_WINDOW = 8
 DISCOVER_MINOR_WINDOW = 4
 DISCOVER_PATCH_WINDOW = 8
 # Waits before each retry of a throttled (429), unavailable (5xx) or timed-out
 # probe. Sixteen parallel workers can briefly trip the CDN's rate limit.
 DISCOVER_RETRY_DELAYS = (5, 15, 45)
 TRANSIENT_HTTP_CODES = {429, 500, 502, 503, 504}
+# A dropped or reset connection (http.client.RemoteDisconnected is both a
+# ConnectionResetError and an HTTPException), a timeout or a DNS blip.
+TRANSIENT_ERRORS = (OSError, http.client.HTTPException)
+
+# Retries and waits across one discover run, printed so a slow scheduled run
+# says where its time went.
+_discover_stats = {"probes": 0, "retries": 0, "slept": 0}
+_discover_stats_lock = threading.Lock()
+
+
+def _count(**kv):
+    with _discover_stats_lock:
+        for k, v in kv.items():
+            _discover_stats[k] += v
 
 
 def discover_one(url):
@@ -200,6 +221,7 @@ def discover_one(url):
     req = urllib.request.Request(url, method="GET")
     req.add_header("Range", "bytes=0-3")
     req.add_header("User-Agent", "ha-paneld-firmware-monitor")
+    _count(probes=1)
     for delay in DISCOVER_RETRY_DELAYS + (None,):
         try:
             with urllib.request.urlopen(req, timeout=PROBE_TIMEOUT) as r:
@@ -212,11 +234,13 @@ def discover_one(url):
                 return None         # This CDN's explicit missing-object response.
             if exc.code not in TRANSIENT_HTTP_CODES or delay is None:
                 raise
-        except (TimeoutError, urllib.error.URLError):
+        except TRANSIENT_ERRORS:
             if delay is None:
                 raise
-        # A throttled or briefly unavailable CDN is not an answer. Wait and ask
-        # again; only a persistent failure fails the run, never "not found".
+        # A throttled, briefly unavailable or disconnecting CDN is not an
+        # answer. Wait and ask again; a persistent failure ends the run as a
+        # warning (cmd_discover), never as "not found".
+        _count(retries=1, slept=delay)
         time.sleep(delay)
 
 
@@ -262,7 +286,35 @@ def rom_states(d):
     return states
 
 
-def discover_device(d, index_window, minor_window):
+def probe_all(urls):
+    """discover_one over `urls` in parallel, in order.
+
+    A probe that still fails after its retries ends the sweep at once: the
+    queued probes are cancelled rather than each waiting out its own retries
+    against a CDN that is down.
+    """
+    ex = ThreadPoolExecutor(max_workers=PROBE_WORKERS)
+    try:
+        return list(ex.map(discover_one, urls))
+    finally:
+        ex.shutdown(wait=True, cancel_futures=True)
+
+
+def diff_sources(d):
+    """ROM versions a new diff can plausibly start from.
+
+    Sonoff drops old diff sources at a ROM checkpoint and has never added one
+    older than the oldest source of its newest diff (3.5.0 and 3.0.0 gave way
+    to 4.0.12 on the two channels). Probing every ROM state ever seen crossed
+    the whole search with sources retired years ago and pushed the daily run
+    past its time limit.
+    """
+    newest = max((to for to, _f, _i, _s in d["diffs"]), key=vkey)
+    floor = min((frm for to, frm, _i, _s in d["diffs"] if to == newest), key=vkey)
+    return {v for v in rom_states(d) if vkey(v) >= vkey(floor)}
+
+
+def discover_device(d, index_window, minor_window, diff_index_window=DISCOVER_DIFF_INDEX_WINDOW):
     """Probe one channel for unindexed APKs and their inbound ROM diffs.
 
     Returns (findings, searched) where `searched` records the exact window
@@ -281,8 +333,7 @@ def discover_device(d, index_window, minor_window):
         for ver in versions:
             apk_urls[apk_url(d, idx, ver)] = (idx, ver)
 
-    with ThreadPoolExecutor(max_workers=PROBE_WORKERS) as ex:
-        sizes = list(ex.map(discover_one, apk_urls))
+    sizes = probe_all(apk_urls)
 
     findings = []
     for (url, (idx, ver)), size in zip(apk_urls.items(), sizes):
@@ -299,21 +350,21 @@ def discover_device(d, index_window, minor_window):
     # A release can be ROM-diff-only, so its diff must not depend on finding an
     # APK for the same version first. Probe every candidate target directly.
     max_diff_idx = max(int(idx) for _t, _f, idx, _s in d["diffs"])
-    diff_indices = list(range(max_diff_idx + 1, max_diff_idx + 1 + index_window))
-    froms = sorted(rom_states(d), key=vkey)
+    diff_indices = list(range(max_diff_idx + 1, max_diff_idx + 1 + diff_index_window))
+    froms = sorted(diff_sources(d), key=vkey)
     diff_urls = {}
     for idx in diff_indices:
         for ver in versions:
             for frm in froms:
                 diff_urls[diff_url(d, idx, frm, ver)] = (idx, ver, frm)
-    with ThreadPoolExecutor(max_workers=PROBE_WORKERS) as ex:
-        dsizes = list(ex.map(discover_one, diff_urls))
+    dsizes = probe_all(diff_urls)
     for (url, (idx, ver, frm)), size in zip(diff_urls.items(), dsizes):
         if size is not None:
             findings.append({"kind": "diff", "version": ver, "index": idx,
                              "from": frm, "bytes": size, "url": url})
     searched["diff_indices"] = [diff_indices[0], diff_indices[-1]]
     searched["diff_froms"] = froms
+    searched["probes"] = len(apk_urls) + len(diff_urls)
 
     return findings, searched
 
@@ -391,7 +442,25 @@ def set_github_output(**kv):
 
 def cmd_discover(args):
     devices = load_devices()
+    started = time.monotonic()
+    _discover_stats.update(probes=0, retries=0, slept=0)
+    try:
+        return _discover(devices, args)
+    except TRANSIENT_ERRORS as exc:
+        # The CDN kept failing after every retry. That is a vendor outage,
+        # not a finding and not a broken prober: leave the index unchanged
+        # and let tomorrow's run search again.
+        print(f"::warning::Sonoff CDN unreachable after retries ({type(exc).__name__}: {exc}); "
+              "index left unchanged")
+        set_github_output(found="false")
+        return 0
+    finally:
+        print(f"discover: {_discover_stats['probes']} probes, {_discover_stats['retries']} retries, "
+              f"{_discover_stats['slept']} s waiting, {time.monotonic() - started:.0f} s total",
+              flush=True)
 
+
+def _discover(devices, args):
     if not validate_harness(devices):
         print("discovery aborted: the prober could not see known-good objects, "
               "so a negative result would be meaningless.")
@@ -401,12 +470,14 @@ def cmd_discover(args):
     all_findings = []
     per_device = []
     for d in devices:
+        t0 = time.monotonic()
         findings, searched = discover_device(d, args.index_window, args.minor_window)
         per_device.append((d, findings))
         lo, hi = searched["apk_indices"]
         print(f"searched {searched['channel']}: apk indices {lo}-{hi} × "
               f"{len(searched['versions'])} candidate versions "
-              f"({', '.join(searched['versions'])})")
+              f"({', '.join(searched['versions'])}); "
+              f"{searched['probes']} probes in {time.monotonic() - t0:.0f} s")
         if searched["diff_indices"]:
             dlo, dhi = searched["diff_indices"]
             print(f"searched {searched['channel']}: rom-diff indices {dlo}-{dhi} × "
