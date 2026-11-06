@@ -59,7 +59,7 @@ ha-paneld traktuje treść profilu jako niezmienne rewizje zamiast edytowalnego 
 - **Ostatnia sprawna**: poprzedni potwierdzony wybór zachowany jako cel odzyskiwania i ręcznego wycofania po uruchomieniu nowej rewizji.
 - **Automatycznie wycofana**: proponowana rewizja, której aktywacja się nie udała i została zastąpiona ostatnią sprawną.
 
-Zapis, aktywacja i usuwanie używają skrótów rewizji i kontroli generacji. Jeśli inna przeglądarka lub administrator zmienili katalog po otwarciu strony, nieaktualna operacja jest odrzucana; odśwież, ponownie porównaj i działaj na nowym stanie.
+Zapisanie wiąże niezmienną wersję z dokładnie tym kodem YAML, który znajduje się w jej podglądzie walidacji. Aktywacja i usuwanie sprawdzają również generację katalogu; jeśli inna przeglądarka lub administrator zmienił katalog, te operacje oparte na nieaktualnym stanie są odrzucane. Odśwież stronę i ponownie porównaj, zanim podejmiesz działanie na podstawie nowego stanu.
 
 Usunięcie nieaktywnej rewizji lokalnej nie zmienia działającego panelu. Aktywnej lub ostatniej sprawnej rewizji nie wolno usuwać, dopóki nie istnieje inna poprawna ścieżka odzyskiwania.
 
@@ -71,7 +71,7 @@ Usunięcie nieaktywnej rewizji lokalnej nie zmienia działającego panelu. Aktyw
 
 Dlatego Generic jest właściwym początkiem tworzenia profilu społecznościowego:
 
-1. Pobierz **szkic urządzenia** ze strony Profile. Zapisuje dokładny model kompilacji, urządzenie kompilacji i dane wersji produktu dostępne ha-paneld oraz najnowszy ograniczony, oczyszczony raport pasywny.
+1. Pobierz **wersję roboczą urządzenia** ze strony Profiles. Zawiera ona dokładne dane o modelu kompilacji, urządzeniu kompilacji i wersji produktu dostępne dla ha-paneld oraz wybrane obserwacje pasywne. Przed udostępnieniem zebranych danych przejrzyj na stronie Profiles oddzielny raport pasywny o ograniczonym zakresie, z którego usunięto dane wrażliwe.
 2. Przejrzyj i zredaguj przed udostępnieniem. Raport jest przeznaczony do wsparcia, ale autor odpowiada za usunięcie nazw paneli, adresów, danych Home Assistant, danych uwierzytelniających i zawartości pulpitu.
 3. Najpierw dodaj tożsamość i pochodzenie. Użyj stabilnego identyfikatora małymi literami z prefiksem autora/organizacji, np. `org.example.wallpanel-x1`, oraz początkowej wersji profilu, informacji o autorze/źródle/licencji, poziomu dojrzałości, zakresu przetestowanego firmware i znanych ograniczeń.
 4. Dodaj wąskie, dokładne reguły identyfikacji. Model producenta lub prefiks wersji produktu są zwykle bezpieczniejsze niż szeroki alias SoC, taki jak `px30`, `rk3326`, `rk3566` lub `rk3576`, wspólny dla niezwiązanych paneli.

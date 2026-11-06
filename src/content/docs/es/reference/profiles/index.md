@@ -59,7 +59,7 @@ ha-paneld trata el contenido como revisiones inmutables en vez de un objeto de a
 - **Last-known-good**: selección anterior probada, conservada para recuperación y reversión manual tras completar el inicio de una revisión nueva.
 - **Auto-rolled-back**: candidato cuya activación falló y que fue sustituido automáticamente por la última revisión conocida como correcta.
 
-Guardar, activar y borrar usa hashes de revisión y comprobaciones de generación. Si otro navegador o administrador cambió el catálogo desde que abriste la página, se rechaza la operación obsoleta: actualiza, compara de nuevo y actúa sobre el estado nuevo.
+Al guardar se vincula una revisión inmutable al YAML exacto de su vista previa de validación. La activación y la eliminación también comprueban la generación del catálogo; si otro navegador o administrador ha modificado el catálogo, esas operaciones basadas en un estado obsoleto se rechazan. Actualiza la página y vuelve a comparar antes de actuar sobre el nuevo estado.
 
 Borrar una revisión local inactiva no cambia el panel activo. No retires una revisión activa o last-known-good hasta disponer de otra vía de recuperación válida.
 
@@ -71,7 +71,7 @@ Borrar una revisión local inactiva no cambia el panel activo. No retires una re
 
 Por eso es el punto de partida adecuado para crear perfiles comunitarios:
 
-1. Descarga el **device draft** desde Profiles. Recoge el modelo de compilación, dispositivo de compilación y versión de producto exactos disponibles para ha-paneld, además del último informe pasivo acotado y saneado.
+1. Descarga el **borrador del dispositivo** desde la página Profiles. Recoge los datos exactos del modelo de compilación, el dispositivo de compilación y la versión del producto disponibles para ha-paneld, además de determinadas observaciones pasivas. Revisa el informe pasivo independiente, de alcance limitado y depurado de datos sensibles, en la página Profiles antes de compartir tus evidencias.
 2. Revisa y elimina datos sensibles antes de compartir. El informe se diseña para soporte, pero el autor sigue siendo responsable de retirar nombres y direcciones de panel, datos de Home Assistant, credenciales y contenido del panel de control.
 3. Añade primero identidad y procedencia. Usa un ID estable en minúsculas con prefijo de autor u organización, como `org.example.wallpanel-x1`, una versión inicial, autor/fuente/licencia, madurez, intervalo de firmware probado y limitaciones conocidas.
 4. Añade reglas de huella estrechas y exactas. Un modelo del fabricante o prefijo de versión suele ser más seguro que un alias amplio de SoC como `px30`, `rk3326`, `rk3566` o `rk3576`, compartido por paneles no relacionados.

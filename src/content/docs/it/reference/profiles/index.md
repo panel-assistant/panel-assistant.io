@@ -59,7 +59,7 @@ ha-paneld tratta il contenuto dei profili come revisioni immutabili anziché com
 - **Ultima funzionante nota**: la selezione precedente comprovata, conservata come destinazione di recupero e ripristino manuale dopo che una nuova revisione completa l'avvio.
 - **Annullata automaticamente**: un candidato la cui attivazione è fallita e che è stato sostituito automaticamente dall'ultima revisione funzionante nota.
 
-Salvataggio, attivazione ed eliminazione usano tutti hash delle revisioni e controlli di generazione. Se un altro browser o amministratore ha cambiato il catalogo dopo l'apertura della pagina, l'operazione obsoleta viene rifiutata; aggiorna, confronta nuovamente e agisci sul nuovo stato.
+Il salvataggio vincola una revisione immutabile all’esatto YAML della relativa anteprima di convalida. L’attivazione e l’eliminazione controllano anche la generazione del catalogo; se un altro browser o amministratore ha modificato il catalogo, queste operazioni basate su uno stato obsoleto vengono rifiutate. Aggiorna la pagina e confronta di nuovo prima di agire sul nuovo stato.
 
 Eliminare una revisione locale inattiva non cambia il pannello attivo. Una revisione attiva o l'ultima funzionante nota non deve essere rimossa finché non esiste un altro percorso di ripristino valido.
 
@@ -71,7 +71,7 @@ Eliminare una revisione locale inattiva non cambia il pannello attivo. Una revis
 
 Questo rende Generic il posto giusto da cui iniziare a creare un profilo della comunità:
 
-1. Scarica la **bozza del dispositivo** dalla pagina Profili. Acquisisce il modello di build esatto, il dispositivo di build e le evidenze della versione del prodotto disponibili a ha-paneld, più l'ultimo rapporto passivo circoscritto e ripulito dai dati sensibili.
+1. Scarica la **bozza del dispositivo** dalla pagina Profiles. Raccoglie i dati esatti sul modello della build, sul dispositivo della build e sulla versione del prodotto disponibili a ha-paneld, oltre a una selezione di osservazioni passive. Esamina il rapporto passivo separato, di portata limitata e ripulito dai dati sensibili, nella pagina Profiles prima di condividere i tuoi riscontri.
 2. Oscura i dati sensibili e revisiona prima di condividere. Il rapporto generato è progettato per il supporto, ma l'autore rimane responsabile della rimozione di nomi dei pannelli, indirizzi, dettagli Home Assistant, credenziali e contenuti delle plance.
 3. Aggiungi prima identità e provenienza. Usa un ID stabile in minuscolo con prefisso dell'autore/organizzazione, come `org.example.wallpanel-x1`, più una versione iniziale del profilo, informazioni su autore/fonte/licenza, livello di maturità, intervallo di firmware testato e limiti noti.
 4. Aggiungi regole di impronta ristrette ed esatte. Un modello del produttore o un prefisso di versione del prodotto è di solito più sicuro di un alias SoC ampio come `px30`, `rk3326`, `rk3566` o `rk3576`, che pannelli non correlati possono condividere.

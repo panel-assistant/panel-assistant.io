@@ -59,7 +59,7 @@ ha-paneld behandelt profielinhoud als onveranderlijke revisies in plaats van een
 - **Laatst bekende goede**: de vorige bewezen selectie, behouden als doel voor herstel en handmatig terugdraaien nadat een nieuwe revisie is opgestart.
 - **Automatisch teruggedraaid**: een kandidaat waarvan activering mislukte en die automatisch door de laatst bekende goede revisie is vervangen.
 
-Opslaan, activeren en verwijderen gebruiken allemaal revisiehashes en generatiecontroles. Als een andere browser of beheerder de catalogus wijzigde nadat een pagina was geopend, wordt de verouderde handeling geweigerd; ververs, vergelijk opnieuw en handel op basis van de nieuwe toestand.
+Opslaan koppelt een onveranderlijke revisie aan exact de YAML uit het validatievoorbeeld. Bij activeren en verwijderen wordt ook de catalogusgeneratie gecontroleerd; als een andere browser of beheerder de catalogus heeft gewijzigd, worden die verouderde bewerkingen geweigerd. Vernieuw de pagina en vergelijk opnieuw voordat je op basis van de nieuwe toestand handelt.
 
 Een inactieve lokale revisie verwijderen verandert het actieve paneel niet. Een actieve of laatst bekende goede revisie mag niet worden verwijderd totdat een ander geldig herstelpad bestaat.
 
@@ -71,7 +71,7 @@ Een inactieve lokale revisie verwijderen verandert het actieve paneel niet. Een 
 
 Daarom is Generic het juiste beginpunt voor profilering door de gemeenschap:
 
-1. Download het **apparaatconcept** van de pagina Profielen. Dit legt het exacte buildmodel, buildapparaat en productversiebewijs vast dat ha-paneld heeft, plus het nieuwste begrensde, opgeschoonde passieve rapport.
+1. Download het **apparaatconcept** van de pagina Profiles. Het legt de exacte gegevens over buildmodel, buildapparaat en productversie vast die voor ha-paneld beschikbaar zijn, samen met geselecteerde passieve waarnemingen. Bekijk het afzonderlijke, begrensde passieve rapport waaruit gevoelige gegevens zijn verwijderd op de pagina Profiles voordat je je bewijsmateriaal deelt.
 2. Maak gegevens onleesbaar en controleer vóór delen. Het gegenereerde rapport is bedoeld voor ondersteuning, maar de auteur blijft verantwoordelijk voor het verwijderen van paneelnamen, adressen, Home Assistant-details, aanmeldgegevens en dashboardinhoud.
 3. Voeg eerst identiteit en herkomst toe. Gebruik een stabiele ID in kleine letters met een auteurs-/organisatievoorvoegsel, zoals `org.example.wallpanel-x1`, plus een eerste profielversie, informatie over auteur/bron/licentie, een volwassenheidsniveau, het geteste firmwarebereik en bekende beperkingen.
 4. Voeg smalle, exacte vingerafdrukregels toe. Een leveranciersmodel of productversievoorvoegsel is meestal veiliger dan een brede SoC-alias zoals `px30`, `rk3326`, `rk3566` of `rk3576`, die niet-gerelateerde panelen kunnen delen.

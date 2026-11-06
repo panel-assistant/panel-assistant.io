@@ -59,7 +59,7 @@ ha-paneld behandelt Profilinhalte als unveränderliche Revisionen statt als dire
 - **Letzte funktionierende Revision**: Die vorherige bewährte Auswahl, die nach erfolgreichem Start einer neuen Revision für Wiederherstellung und manuelles Zurückrollen aufbewahrt wird.
 - **Automatisch zurückgerollt**: Ein Kandidat, dessen Aktivierung fehlschlug und der automatisch durch die letzte funktionierende Revision ersetzt wurde.
 
-Speichern, Aktivieren und Löschen verwenden Revisionshashes und Generationsprüfungen. Hat ein anderer Browser oder Administrator den Katalog nach dem Öffnen einer Seite geändert, wird die veraltete Aktion verweigert. Lade neu, vergleiche erneut und handle anhand des neuen Zustands.
+Beim Speichern wird eine unveränderliche Revision an genau den YAML-Inhalt ihrer Validierungsvorschau gebunden. Aktivierung und Löschung prüfen außerdem die Kataloggeneration; wenn ein anderer Browser oder Administrator den Katalog geändert hat, werden diese veralteten Vorgänge abgelehnt. Aktualisiere die Seite und vergleiche erneut, bevor du auf Grundlage des neuen Zustands handelst.
 
 Das Löschen einer inaktiven lokalen Revision ändert das aktive Panel nicht. Eine aktive oder letzte funktionierende Revision darf erst entfernt werden, wenn ein anderer gültiger Wiederherstellungsweg existiert.
 
@@ -71,7 +71,7 @@ Das Löschen einer inaktiven lokalen Revision ändert das aktive Panel nicht. Ei
 
 Damit ist Generic der richtige Ausgangspunkt für Community-Profile:
 
-1. Lade den **Geräteentwurf** von der Profilseite herunter. Er erfasst das genaue Build-Modell, das Build-Gerät und die ha-paneld verfügbaren Produktversionsnachweise sowie den neuesten begrenzten und bereinigten passiven Bericht.
+1. Lade den **Geräteentwurf** von der Seite Profiles herunter. Er erfasst die ha-paneld verfügbaren exakten Angaben zu Build-Modell, Build-Gerät und Produktversion sowie ausgewählte passive Beobachtungen. Prüfe den separaten, im Umfang begrenzten und um sensible Angaben bereinigten passiven Bericht auf der Seite Profiles, bevor du deine Belege weitergibst.
 2. Bereinige und prüfe ihn vor dem Teilen. Der erzeugte Bericht ist für Support gedacht, aber der Autor bleibt dafür verantwortlich, Panelnamen, Adressen, Home Assistant-Details, Zugangsdaten und Dashboard-Inhalte zu entfernen.
 3. Ergänze zuerst Identität und Herkunft. Nutze eine stabile kleingeschriebene ID mit Autoren-/Organisationspräfix, etwa `org.example.wallpanel-x1`, sowie eine anfängliche Profilversion, Angaben zu Autor/Quelle/Lizenz, einen Reifegrad, den getesteten Firmwarebereich und bekannte Einschränkungen.
 4. Ergänze enge, exakte Fingerabdruckregeln. Ein Herstellermodell oder Produktversionspräfix ist meist sicherer als ein breiter SoC-Alias wie `px30`, `rk3326`, `rk3566` oder `rk3576`, den auch andere Panels verwenden können.

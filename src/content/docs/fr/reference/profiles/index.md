@@ -59,7 +59,7 @@ ha-paneld traite le contenu comme des révisions immuables plutôt qu’un objet
 - **Dernière connue comme fonctionnelle** : sélection précédente éprouvée, conservée comme cible de récupération et de retour arrière manuel après le démarrage réussi d’une nouvelle révision.
 - **Retour arrière automatique** : candidat dont l’activation a échoué et qui a été automatiquement remplacé par la dernière révision connue comme fonctionnelle.
 
-Enregistrement, activation et suppression utilisent tous des empreintes de révision et des contrôles de génération. Si un autre navigateur ou administrateur a changé le catalogue après l’ouverture de la page, l’opération périmée est refusée ; actualisez, comparez à nouveau et agissez sur le nouvel état.
+L’enregistrement lie une révision immuable au YAML exact de son aperçu de validation. L’activation et la suppression vérifient également la génération du catalogue ; si un autre navigateur ou un administrateur a modifié le catalogue, ces opérations fondées sur un état périmé sont refusées. Actualisez la page et comparez à nouveau avant d’agir sur le nouvel état.
 
 Supprimer une révision locale inactive ne change pas le panneau actif. Une révision active ou dernière connue comme fonctionnelle ne doit pas être supprimée avant qu’une autre voie de récupération valide existe.
 
@@ -71,7 +71,7 @@ Supprimer une révision locale inactive ne change pas le panneau actif. Une rév
 
 C’est donc le bon point de départ d’un profil communautaire :
 
-1. Téléchargez le **brouillon d’appareil** depuis la page Profils. Il capture le modèle, l’appareil et les éléments de version produit exacts disponibles pour ha-paneld, ainsi que le dernier rapport passif borné et assaini.
+1. Téléchargez le **brouillon pour l’appareil** depuis la page Profiles. Il recueille les informations exactes sur le modèle de compilation, l’appareil de compilation et la version du produit dont dispose ha-paneld, ainsi qu’une sélection d’observations passives. Examinez le rapport passif distinct, au contenu limité et expurgé des données sensibles, sur la page Profiles avant de partager vos éléments de preuve.
 2. Masquez les informations sensibles et relisez avant de partager. Le rapport généré est conçu pour l’assistance, mais l’auteur reste responsable de retirer noms de panneaux, adresses, détails Home Assistant, identifiants secrets et contenu des tableaux de bord.
 3. Ajoutez d’abord identité et provenance. Utilisez un identifiant stable en minuscules préfixé par l’auteur ou l’organisation, comme `org.example.wallpanel-x1`, plus une version initiale, les informations auteur/source/licence, un niveau de maturité, la plage de micrologiciels testés et les limites connues.
 4. Ajoutez des règles d’empreinte étroites et exactes. Un modèle fabricant ou préfixe de version produit est généralement plus sûr qu’un alias de SoC large comme `px30`, `rk3326`, `rk3566` ou `rk3576`, partagé par des panneaux sans rapport.
