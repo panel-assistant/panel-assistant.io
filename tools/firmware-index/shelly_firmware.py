@@ -20,6 +20,7 @@ Commands:
 """
 
 import argparse
+import datetime
 import json
 import os
 import pathlib
@@ -355,9 +356,18 @@ def spn_available(url):
             d = json.load(r)
     except Exception:
         return None
-    snap = d.get("archived_snapshots", {}).get("closest")
-    timestamp = snap.get("timestamp") if snap else None
-    return timestamp if isinstance(timestamp, str) and _WAYBACK_TS_RE.fullmatch(timestamp) and timestamp else None
+    snapshots = d.get("archived_snapshots") if isinstance(d, dict) else None
+    snap = snapshots.get("closest") if isinstance(snapshots, dict) else None
+    if not isinstance(snap, dict) or snap.get("available") is not True or str(snap.get("status")) != "200":
+        return None
+    timestamp = snap.get("timestamp")
+    if not isinstance(timestamp, str) or not re.fullmatch(r"[0-9]{14}", timestamp):
+        return None
+    try:
+        datetime.datetime.strptime(timestamp, "%Y%m%d%H%M%S")
+    except ValueError:
+        return None
+    return timestamp
 
 
 def cmd_archive(args):
