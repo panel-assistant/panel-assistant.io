@@ -7,7 +7,7 @@ soc: RK3326-S
 android: '11'
 screen: 6.9 in, 1440 × 720
 support: Full
-root: 'No root; developer mode unlocks adb, and setup needs no more than that'
+root: 'No root needed; setup requires USB debugging, whose unlock depends on firmware'
 webview_ships_with: 'Chromium 131.0.6778.200 on firmware 2.5.4'
 webview_can_reach: 'Chromium 131 — vendor only; no newer Shelly-signed provider available. This major no longer receives Chromium security fixes'
 released: '2025-12 (est.)'
@@ -44,24 +44,26 @@ Shelly Wall Display X2i, firmware codename Jenna.
 | Sensors    | Proximity and ambient light, both ordinary Android sensors needing no permission; **no temperature or humidity sensor**                                                                                                                                  |
 | Microphone | Built in; the wake word and voice commands work close to the panel, and pickup across a room is weak                                                                                                                                                     |
 | Relay      | Interchangeable base: 1 output as standard, optional 2-output base. Confirmed switching without root; direct Panel Assistant control is in development; see [Relays](#relays)                                                                            |
-| Root       | None. Developer mode unlocks adb, which is all setup needs; the privileged features below stay unavailable                                                                                                                                               |
+| Root       | None needed. Setup uses USB debugging; see the firmware-dependent [developer-mode unlock](#unlocking-developer-mode)                                                                                                                                     |
 | Released   | About December 2025 (est.); Shelly quietly released the X2i in Europe around 22 December 2025 ([launch coverage, Notebookcheck, December 2025](https://www.notebookcheck.net/Shelly-quietly-launches-new-Wall-Display-XL-smart-home-hub.1190942.0.html)) |
 
 ## Unlocking developer mode
 
-Shelly does not advertise it, but the X2i has the usual hidden developer-mode unlock. Open **Settings → General → About Device** and tap two specific labels in this order:
+The hidden unlock below was confirmed on an X2i running earlier firmware, including 2.5.4. Its availability depends on firmware: an [owner report on 2.8.4](https://github.com/RapierXbox/ShellyElevate/issues/125) says the About Device sequence no longer opens developer mode. That report does not establish permanent removal or the behaviour of every model. If it is unavailable, ask Shelly for the supported developer-mode procedure for your exact model and firmware before attempting installation.
+
+On the confirmed firmware, open **Settings → General → About Device** and tap two specific labels in this order:
 
 > **FW Version:**, **Hardware Revision:**, **FW Version:**, **FW Version:**, **Hardware Revision:**, **FW Version:**, **Hardware Revision:**, **Hardware Revision:**
 
 ![The X2i's About Device screen. A Hardware Information card lists serial number, device ID, numeric device ID and hardware revision, with the first three values blanked out in this capture; a Software Information card below it lists FW Version, FW Date, WebView and WebView Version. Two row labels are outlined: Hardware Revision in the upper card and FW Version in the lower one. Below the cards sit a crash reports switch and a Check for update button.](../../../../../assets/shelly-x2i-about-device.png)
 
-**Tap the two outlined labels themselves.** Not the values to their right, and **not the card headings** "Hardware Information" and "Software Information", which look like the obvious targets and do nothing. That distinction is the difference between the unlock working and appearing not to exist, and it is the most likely reason the sequence is reported as unreliable elsewhere.
+**Tap the two outlined labels themselves**, rather than the values to their right or the card headings "Hardware Information" and "Software Information". Correct tap targets do not guarantee that the unlock is available on your firmware.
 
 The screen returns to the home view after a few seconds of inactivity, so tap at a steady pace rather than pausing to check between taps.
 
-Developer options and USB debugging then appear in Settings as on any Android device. Connect a USB-A to USB-C cable and the panel enumerates for adb. There is **no authorisation prompt to accept on the screen**, because this firmware does not require adb authorisation.
+On the measured earlier firmware, Developer options and USB debugging then appeared in Settings. A USB-A to USB-C cable connected the panel to adb, with **no authorisation prompt to accept on the screen**. Those observations do not establish the same setup behaviour on later firmware.
 
-There is no known way to turn on network ADB on the X2i without a computer, so install it over USB with the [browser installer](/install/install-over-usb/).
+There is no known way to turn on network ADB on the X2i without a computer, so, once USB debugging is available, install it over USB with the [browser installer](/install/install-over-usb/).
 
 :::caution
 A USB-C to USB-C cable does **not** power or enumerate the panel. The USB port is wired for legacy host power, so a USB-C source never raises its supply. Use a USB-A to USB-C cable, as Shelly's own documentation specifies.
