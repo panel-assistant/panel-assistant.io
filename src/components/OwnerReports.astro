@@ -1,0 +1,96 @@
+---
+import type english from '../content/i18n/en.json';
+import { BEHAVIORS } from '../hardware/owner-reports.mjs';
+import type { z } from 'astro/zod';
+import type { ownerReportSchema } from '../hardware/owner-reports.mjs';
+type Report = z.infer<typeof ownerReportSchema>;
+const { reports } = Astro.props as { reports: Report[] };
+const t = (key: string) => Astro.locals.t(key as keyof typeof english);
+const fact = (value: string) => (value === 'unknown' ? t('reports.unknown') : value);
+---
+
+<section id="owner-reports" aria-label={t('reports.title')}>
+  <h2>{t('reports.title')}</h2>
+  <p>{t('reports.scope')}</p>
+  {reports.map((report) => (
+    <article id={`report-${report.id}`}>
+      <h3>
+        {report.model.manufacturer} {report.model.name}
+      </h3>
+      <p>
+        <strong>{t('reports.testimony')}</strong> · {fact(report.observed)} ·{' '}
+        <a href={report.source}>{t('reports.source')}</a>
+      </p>
+      <dl>
+        <dt>{t('reports.firmware')}</dt>
+        <dd>
+          {fact(report.firmware.build)} · Android {fact(report.firmware.android)}
+        </dd>
+        <dt>{t('reports.app')}</dt>
+        <dd>
+          {fact(report.software.appVersion)} / {fact(report.software.appBuild)}
+        </dd>
+        <dt>{t('reports.integration')}</dt>
+        <dd>
+          {fact(report.software.integrationVersion)} / {fact(report.software.integrationBuild)}
+        </dd>
+        <dt>{t('reports.profile')}</dt>
+        <dd>
+          {t(`reports.level.${report.profile.level}`)} · {fact(report.profile.id)} ·{' '}
+          {fact(report.profile.revision)}
+        </dd>
+      </dl>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">{t('reports.behavior')}</th>
+            <th scope="col">{t('reports.result')}</th>
+            <th scope="col">{t('reports.notes')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {BEHAVIORS.map((behavior) => {
+            const result = report.results.find((item) => item.behavior === behavior);
+            return (
+              <tr>
+                <th scope="row">{t(`reports.behavior.${behavior}`)}</th>
+                <td>{t(`reports.outcome.${result?.outcome ?? 'untested'}`)}</td>
+                <td>{result?.notes ?? ''}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      {report.limitations.length > 0 && (
+        <>
+          <h4>{t('reports.limitations')}</h4>
+          <ul>
+            {report.limitations.map((note) => (
+              <li>{note}</li>
+            ))}
+          </ul>
+        </>
+      )}
+    </article>
+  ))}
+</section>
+<style>
+  article {
+    margin-block: 1.5rem;
+  }
+  dl {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 0.25rem 1rem;
+  }
+  dt {
+    font-weight: 600;
+  }
+  dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  table {
+    width: 100%;
+  }
+</style>

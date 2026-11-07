@@ -34,6 +34,7 @@ const PAGE_KEYS = new Set([
   'sold_as_note',
   // Shown as the confidence bar (ConfidenceBar.astro), never as a text column.
   'evidence',
+  'ownerReports',
 ]);
 
 /** Panel fields across all entries: most widely used first, then first appearance. */

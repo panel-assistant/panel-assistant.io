@@ -9,6 +9,7 @@ import { rewriteAssetUrl, ASSET_BASE } from '../plugins/asset-urls.mjs';
 import TranslationNote from './TranslationNote.astro';
 import { soldAs, confidence } from '../hardware/catalogue.mjs';
 import ConfidenceBar from './ConfidenceBar.astro';
+import OwnerReports from './OwnerReports.astro';
 
 const { entry } = Astro.locals.starlightRoute;
 const isPanel = entry.id.startsWith('hardware/panels/');
@@ -39,6 +40,7 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
     <ConfidenceBar data={entry.data} wide open />
   </div>
 )}
+{isPanel && entry.data.ownerReports && <OwnerReports reports={entry.data.ownerReports} />}
 {names.length > 0 && (
   <div id="sold-as" class="sold-as">
     <p>

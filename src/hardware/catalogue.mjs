@@ -6,6 +6,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { parse } from 'yaml';
+import { dashboardReports } from './owner-reports.mjs';
 
 export const PANELS_DIR = 'src/content/docs/hardware/panels';
 
@@ -144,7 +145,12 @@ const OLD_PENALTY = 2;
 
 /** A panel's confidence, 0 to 10, and the evidence behind it, from its `evidence` front matter. */
 export function confidence(data) {
-  const have = (Array.isArray(data.evidence) ? data.evidence : []).filter((k) => EVIDENCE[k]);
+  const have = [
+    ...new Set([
+      ...(Array.isArray(data.evidence) ? data.evidence : []),
+      ...(dashboardReports(data).length ? ['owners'] : []),
+    ]),
+  ].filter((k) => EVIDENCE[k]);
   const sum = (keys) => keys.reduce((n, k) => n + EVIDENCE[k].points, 0);
   const reasons = have.map((k) => EVIDENCE[k].text);
   if (have.includes('bench')) {
@@ -166,7 +172,10 @@ export function confidence(data) {
  * confidence bar's detail list. The same facts `confidence()` scores, in short labels.
  */
 export function confidenceChecklist(data) {
-  const have = new Set(Array.isArray(data.evidence) ? data.evidence : []);
+  const have = new Set([
+    ...(Array.isArray(data.evidence) ? data.evidence : []),
+    ...(dashboardReports(data).length ? ['owners'] : []),
+  ]);
   const item = (state, text, key) => ({ state, text, key });
   const list = [
     item(have.has('bench') ? 'hit' : 'miss', 'Inspected on a unit we run', 'confidence.inspected'),

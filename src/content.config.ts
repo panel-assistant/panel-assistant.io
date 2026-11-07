@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { ownerReportsSchema } from './hardware/owner-reports.mjs';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 // Panel pages carry free front matter by convention rather than contract, so unknown keys pass
@@ -9,7 +10,7 @@ import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 export const collections = {
   docs: defineCollection({
     loader: docsLoader(),
-    schema: docsSchema({ extend: z.looseObject({}) }),
+    schema: docsSchema({ extend: z.looseObject({ ownerReports: ownerReportsSchema.optional() }) }),
   }),
   i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
 };
