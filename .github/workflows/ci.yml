@@ -29,10 +29,10 @@ concurrency:
 jobs:
   build:
     name: Format, check and build
-    # Blacksmith is for runs a person waits on: pushes made by a person use it while the Actions variable
-    # CI_RUNNER is blacksmith. Pull requests, schedules, manual dispatches and runs started by a bot (the
+    # Blacksmith is for runs a person waits on: pushes and manual runs made by a person use it while the
+    # Actions variable CI_RUNNER is blacksmith. Pull requests, schedules and runs started by a bot (the
     # firmware monitors' CI dispatch, Dependabot) stay GitHub-hosted.
-    runs-on: ${{ github.event_name == 'push' && !endsWith(github.triggering_actor, '[bot]') && !endsWith(github.actor, '[bot]') && vars.CI_RUNNER == 'blacksmith' && 'blacksmith-4vcpu-ubuntu-2404' || 'ubuntu-24.04' }}
+    runs-on: ${{ (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && !endsWith(github.triggering_actor, '[bot]') && !endsWith(github.actor, '[bot]') && vars.CI_RUNNER == 'blacksmith' && 'blacksmith-4vcpu-ubuntu-2404' || 'ubuntu-24.04' }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
