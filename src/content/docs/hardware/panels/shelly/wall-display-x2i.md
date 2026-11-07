@@ -43,7 +43,7 @@ Shelly Wall Display X2i, firmware codename Jenna.
 | WebView    | Chromium **131.0.6778.200** as shipped, above Panel Assistant's minimum; vendor only, with no newer Shelly-signed provider, and this major no longer receives Chromium security fixes                                                                    |
 | Sensors    | Proximity and ambient light, both ordinary Android sensors needing no permission; **no temperature or humidity sensor**                                                                                                                                  |
 | Microphone | Built in; the wake word and voice commands work close to the panel, and pickup across a room is weak                                                                                                                                                     |
-| Relay      | Interchangeable base: 1 output as standard, optional 2-output base. Present in software and confirmed switching, but not exposed by Panel Assistant; see [Relays](#relays)                                                                               |
+| Relay      | Interchangeable base: 1 output as standard, optional 2-output base. Confirmed switching without root; direct Panel Assistant control is in development; see [Relays](#relays)                                                                            |
 | Root       | None. Developer mode unlocks adb, which is all setup needs; the privileged features below stay unavailable                                                                                                                                               |
 | Released   | About December 2025 (est.); Shelly quietly released the X2i in Europe around 22 December 2025 ([launch coverage, Notebookcheck, December 2025](https://www.notebookcheck.net/Shelly-quietly-launches-new-Wall-Display-XL-smart-home-hub.1190942.0.html)) |
 
@@ -103,18 +103,20 @@ Proximity calibration also lets the panel stay awake while someone remains nearb
 
 Proximity and ambient light are both exposed through the standard Android sensor API and need no permission. Panel Assistant reported reading proximity through its raw Sensortek route rather than the Android sensor, which its own diagnostics name as `driver_raw16`, and reports it as a ranged signal rather than a near or far flag. Either way it reads them as an ordinary app, with no privilege involved. The proximity sensor is registered as a wake-up sensor, and it keeps reporting while the screen is fully off, which is what makes waking on a wave possible. Both parts are Sensortek STK3A5x devices on the same I²C address.
 
+The X2i has **no physical buttons**. The XL's F1–F4 front-button map does not apply to this model.
+
 The X2i has **no temperature or humidity sensor**, so no room-climate readings are available from the panel itself.
 
 ## Relays
 
-The X2i's power base carries relays, and they are genuinely reachable from software: the panel exposes them as a world-writable sysfs class, and writing to it audibly switches the contacts with no root at all. **Panel Assistant nevertheless does not offer relay controls on this panel.** Its relay support activates only for a panel whose profile names a relay class, and no Shelly profile does, so the controller stays inert and never looks. Root on its own would not change that.
+The X2i's power base exposes `/sys/class/strelay/relay1` and `relay2`, with world-readable and world-writable permissions. Unprivileged writes audibly switched the contacts on the measured unit. **Direct Panel Assistant relay control is in development**, using these files as an ordinary app when the selected profile declares the route and the running app can read and write it. This is not a capability of the current public release or a claim about every Shelly model.
 
-Two conditions would travel with any future support, and both are easy to trip over in testing:
+Two conditions apply to this measured route:
 
 - Relays are inert while the panel is powered over USB. They need mains through the power base.
 - The unprivileged write succeeds only because this firmware ships with SELinux in permissive mode. A future firmware that enforces policy would block it regardless of file permissions.
 
-Until then, drive the relays through Home Assistant's own Shelly integration.
+For the current public release, drive the relays through Home Assistant's own Shelly integration.
 
 ## What this firmware does not have
 
