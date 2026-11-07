@@ -15,7 +15,7 @@ Panel Assistant 1.0 and the 1.0 panel app move together. The 1.0 integration tal
 
 ## 1. Update the integration
 
-1.0 is offered as a release candidate first. Open **Settings**, **Devices and services**, **HACS**, and choose the **Panel Assistant** device. Expand the disabled entities and open **Pre-release**. In its settings, turn on **Enabled** and select **Update**, then turn on the **Pre-release** switch under **Diagnostic**. Return to Panel Assistant in HACS and download the 1.0 release candidate. Restart Home Assistant when HACS asks you to, or when the Repair **Restart Home Assistant to finish updating Panel Assistant** appears.
+On Home Assistant **2026.11 or newer**, install the Panel Assistant update from **Settings**, **Updates**. On supported older versions, **2026.8.3 through 2026.10**, download the update in HACS. Then restart Home Assistant to load the new integration, following the restart Repair or HACS prompt. [Install the integration](/home-assistant/custom-integration/#updates-and-pre-releases) explains how to opt in to newer pre-releases in either Marketplace or HACS.
 
 ## 2. Check the Repairs
 
@@ -37,10 +37,10 @@ There are two halves, and they differ.
 
 **The integration can go back while no panel runs 1.0.** Restore the Home Assistant backup you made before you started. That also undoes any other change made in Home Assistant since you created it. Your panels are still on their 0.9 app and reconnect to 0.9.0. Once any panel runs the 1.0 app, restoring the backup leaves that panel out of reach from Home Assistant until the integration is on 1.0 again.
 
-Do not go back by downloading 0.9.0 again in HACS over 1.0. The 1.0 update removes a setting 0.9.0 relies on, and without it 0.9.0 hands panels that were already moved back to MQTT, where the 1.0 panel app no longer answers. Restore the backup instead.
+Do not go back by installing 0.9.0 over 1.0 through Marketplace or HACS. The 1.0 update removes a setting 0.9.0 relies on, and without it 0.9.0 hands panels that were already moved back to MQTT, where the 1.0 panel app no longer answers. Restore the backup instead.
 
 ## If a move was not finished
 
-If 1.0 tells you a panel was never moved off MQTT or still runs the old app, the Repair asks you to choose **Redownload** in HACS, pick 0.9.0, finish the move there, and then install 1.0 again. Do not redownload 0.9.0 over 1.0. While none of your panels runs the 1.0 app yet, return to 0.9.0 by restoring the Home Assistant backup you made before updating, for the reason above. Then finish the move in 0.9.0 and start this page again. If other panels already run the 1.0 app, or you have no backup from before the update, ask on [Discord](https://panel-assistant.io/go/discord) or in the [issues](https://github.com/panel-assistant/ha-integration/issues) before you change anything.
+If 1.0 tells you a panel was never moved off MQTT or still runs the old app, follow the Repair’s safe recovery steps to finish the move with Panel Assistant 0.9.0, then return to 1.0. Do not install 0.9.0 over 1.0 through Marketplace or HACS. While none of your panels runs the 1.0 app yet, return to 0.9.0 by restoring the Home Assistant backup you made before updating, for the reason above. Then finish the move in 0.9.0 and start this page again. If other panels already run the 1.0 app, or you have no backup from before the update, ask on [Discord](https://panel-assistant.io/go/discord) or in the [issues](https://github.com/panel-assistant/ha-integration/issues) before you change anything.
 
 For a panel still on MQTT, the Repair also offers starting fresh: delete the panel's device under the MQTT integration and add the panel again. That creates new entities and keeps none of its history.

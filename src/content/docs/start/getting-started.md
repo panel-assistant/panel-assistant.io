@@ -9,10 +9,10 @@ The hard part of any panel is the first hour. Panel Assistant does that hour for
 
 ## 1. Install the integration
 
-Add Panel Assistant through HACS and restart Home Assistant. This is the only thing you install by hand. From here on, Home Assistant guides you. See [Install the integration](/home-assistant/custom-integration/).
+On Home Assistant **2026.11 or newer**, install Panel Assistant from **Settings**, **Marketplace**. On supported older versions, **2026.8.3 through 2026.10**, install it through HACS and restart Home Assistant. Marketplace may let you set it up immediately; follow any restart prompt first. This is the only thing you install by hand. See [Install the integration](/home-assistant/custom-integration/) for both routes and how to opt in to pre-releases.
 
 :::note
-Panel Assistant 1.0 is a release candidate. HACS offers 0.9.0 by default. To try the release candidate, enable and turn on the **Pre-release** switch on the Panel Assistant device under **Settings**, **Devices and services**, **HACS**; [Install the integration](/home-assistant/custom-integration/) walks through the disabled-entity step. A panel that runs the 1.0 app cannot go back to 0.9; [Upgrading to 1.0](/manage/upgrade-to-1-0/) explains what changes.
+If you are upgrading from 0.9, read [Upgrading to 1.0](/manage/upgrade-to-1-0/) before starting, and keep its Home Assistant and panel backups. A panel that runs the 1.0 app cannot go back to 0.9.
 :::
 
 ## 2. Switch on debugging on the panel
@@ -139,7 +139,7 @@ In the unreleased 1.0.0-rc2 version, setup can finish even when the panel's brow
 
 ## What you need
 
-- Home Assistant 2026.8.3 or newer, with HACS.
+- Home Assistant 2026.8.3 or newer. Use the built-in Marketplace on 2026.11 or newer, or HACS on supported older versions.
 - An ARM wall panel running Android 8.0 or newer, with debugging access. Most panels work with the generic hardware profile, and [Choose a panel](/install/supported-panels/) lists the models with full hardware support.
 - For the USB option, a Chromium-based browser such as Chrome or Edge.
 
