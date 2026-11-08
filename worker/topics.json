@@ -18,6 +18,7 @@
   "panel-cannot-update": "/manage/updates-and-recovery/#a-panel-that-cannot-be-updated",
   "troubleshooting": "/manage/troubleshooting/",
   "updates": "/manage/updates-and-recovery/",
+  "release-notes": "/release-notes/",
   "support-report": "/home-assistant/support-report/",
   "report-issue": "https://github.com/panel-assistant/ha-integration/issues/new",
   "voice-assistant": "/manage/voice-assistant/",
