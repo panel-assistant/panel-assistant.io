@@ -5,13 +5,19 @@ import { pathToFileURL } from 'node:url';
 const API = 'https://api.github.com/repos/panel-assistant/android/releases';
 const MAX_CATALOGUE = 1024 * 1024;
 // A release's short summary, shown in Home Assistant's update dialog for a panel. Bodies longer
-// than this are full notes from before summaries were short, so they are left out.
+// than this are full notes from before summaries were short, so they are left out, and so is a
+// body without the link to the full notes.
 export const MAX_SUMMARY = 2048;
 
 // The release body as a summary, or undefined when it is not one.
 export function summaryOf(value) {
   const body = typeof value?.body === 'string' ? value.body.replace(/\r\n/g, '\n').trim() : '';
-  return body && Buffer.byteLength(body) <= MAX_SUMMARY ? body : undefined;
+  // Only the short shape links the full notes; earlier bodies are installation boilerplate.
+  return body &&
+    Buffer.byteLength(body) <= MAX_SUMMARY &&
+    body.includes('panel-assistant.io/go/release-notes')
+    ? body
+    : undefined;
 }
 
 async function readResponse(response) {

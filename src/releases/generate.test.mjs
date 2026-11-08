@@ -121,8 +121,15 @@ test('short release bodies are published as summaries apart from the catalogue; 
     ...release('v1.0.1'),
     body: 'Faster panels.\r\n\n[Full release notes](https://panel-assistant.io/go/release-notes)',
   };
-  const long = { ...release('v1.0.0'), body: 'x'.repeat(2049) };
-  const { output, summariesOutput, execute } = await run(t, long, [short, long]);
+  const long = {
+    ...release('v1.0.0'),
+    body: 'panel-assistant.io/go/release-notes ' + 'x'.repeat(2049),
+  };
+  const boilerplate = {
+    ...release('v0.9.11'),
+    body: '## Installation\n\nInstall through Panel Assistant.',
+  };
+  const { output, summariesOutput, execute } = await run(t, long, [short, long, boilerplate]);
   await execute();
   assert.deepEqual(JSON.parse(await readFile(summariesOutput, 'utf8')), {
     schema: 1,
