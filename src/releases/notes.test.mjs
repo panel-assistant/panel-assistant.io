@@ -40,6 +40,16 @@ test('releases are newest first and app notes sit inside their Panel Assistant r
   assert.match(page, /data-prerelease="true"/);
   assert.match(page, /#### New/);
   assert.match(page, /^## Panel Assistant 1\.0\.0$/m);
+  // Stable releases link their GitHub page; pre-releases, deleted there at the promote, do not.
+  assert.match(
+    page,
+    /href="https:\/\/github\.com\/panel-assistant\/ha-integration\/releases\/tag\/1\.0\.0"/,
+  );
+  assert.match(
+    page,
+    /href="https:\/\/github\.com\/panel-assistant\/android\/releases\/tag\/v1\.0\.0"/,
+  );
+  assert.doesNotMatch(page, /releases\/tag\/v?1\.0\.1-rc1/);
   // Without JavaScript the controls stay hidden and every release is open.
   assert.match(page, /<form class="release-controls" hidden>/);
   assert.equal(page.match(/<details open>/g).length, 2);

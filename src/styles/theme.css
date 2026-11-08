@@ -363,3 +363,10 @@ section.release details[open] > summary::before {
   border-top: 1px solid var(--sl-color-gray-5);
   margin-top: 1.5rem;
 }
+
+.release-github {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--sl-text-sm);
+}
