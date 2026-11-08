@@ -121,6 +121,7 @@ export default defineConfig({
                 { ...label('sidebar.add_panel'), slug: 'install/installing-ha-paneld' },
                 { ...label('sidebar.install_usb'), slug: 'install/install-over-usb' },
                 { label: 'How installs stay safe', slug: 'manage/install-safety' },
+                { ...label('sidebar.release_notes'), slug: 'release-notes' },
               ],
             },
             {
@@ -156,7 +157,6 @@ export default defineConfig({
               ...label('sidebar.keep_running'),
               items: [
                 { ...label('sidebar.updates_recovery'), slug: 'manage/updates-and-recovery' },
-                { ...label('sidebar.release_notes'), slug: 'release-notes' },
                 { label: 'Upgrading to 1.0', slug: 'manage/upgrade-to-1-0' },
                 { label: 'Known issues in 1.0.0-rc1', slug: 'manage/known-issues' },
                 { label: 'Performance', slug: 'manage/performance' },

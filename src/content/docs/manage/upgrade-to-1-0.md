@@ -3,7 +3,7 @@ title: Upgrading to 1.0
 description: Moving Home Assistant and your panels from Panel Assistant 0.9 to 1.0, and what going back means.
 ---
 
-Panel Assistant 1.0 and the 1.0 panel app move together. The 1.0 integration talks only to the 1.0 panel app, and the 1.0 panel app talks only to the 1.0 integration, so neither works with a 0.9 partner. You update the integration first, then each panel from Home Assistant, and **a panel that runs the 1.0 app cannot go back to 0.9**. Read the whole page before you start.
+Panel Assistant 1.0 and the 1.0 panel app move together. The 1.0 integration talks only to the 1.0 panel app, and the 1.0 panel app talks only to the 1.0 integration, so neither works with a 0.9 partner. You update the integration first, then each panel from Home Assistant, and **a panel that runs the 1.0 app cannot go back to 0.9**. Read the whole page before you start. The [1.0.0 release notes](/release-notes/#panel-assistant-100) list everything that changed.
 
 ## Before you start
 
