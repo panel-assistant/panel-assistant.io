@@ -4,6 +4,15 @@ import { pathToFileURL } from 'node:url';
 
 const API = 'https://api.github.com/repos/panel-assistant/android/releases';
 const MAX_CATALOGUE = 1024 * 1024;
+// A release's short summary, shown in Home Assistant's update dialog for a panel. Bodies longer
+// than this are full notes from before summaries were short, so they are left out.
+export const MAX_SUMMARY = 2048;
+
+// The release body as a summary, or undefined when it is not one.
+export function summaryOf(value) {
+  const body = typeof value?.body === 'string' ? value.body.replace(/\r\n/g, '\n').trim() : '';
+  return body && Buffer.byteLength(body) <= MAX_SUMMARY ? body : undefined;
+}
 
 async function readResponse(response) {
   // GitHub includes release notes and other metadata that never enter the catalogue.
@@ -53,6 +62,7 @@ function minimalRelease(value) {
 export async function generate({
   fetchImpl = fetch,
   output = new URL('../../public/releases/v1.json', import.meta.url),
+  summariesOutput = new URL('../../public/releases/summaries-v1.json', import.meta.url),
   token = process.env.GITHUB_TOKEN,
   expectedTag = process.env.EXPECTED_RELEASE_TAG,
 } = {}) {
@@ -90,6 +100,11 @@ export async function generate({
     if (required.some((name) => !names.has(name)))
       throw new Error('Requested release assets incomplete');
   }
+  const summaries = {};
+  for (const value of [latestValue, ...recent]) {
+    const summary = summaryOf(value);
+    if (summary !== undefined) summaries[value.tag_name] = summary;
+  }
   const json = JSON.stringify({ schema: 1, latest, releases }) + '\n';
   if (Buffer.byteLength(json) > MAX_CATALOGUE) throw new Error('Release catalogue exceeds 1 MiB');
   const target = output instanceof URL ? output : pathToFileURL(output);
@@ -97,6 +112,11 @@ export async function generate({
   const temporary = new URL(`${target.pathname}.tmp`, target);
   await writeFile(temporary, json);
   await rename(temporary, target);
+  // Kept apart from the catalogue, which carries no prose: a client reads summaries only to show
+  // them, never to choose or trust a build.
+  const summariesTarget =
+    summariesOutput instanceof URL ? summariesOutput : pathToFileURL(summariesOutput);
+  await writeFile(summariesTarget, JSON.stringify({ schema: 1, summaries }) + '\n');
   console.log(
     `Published release catalogue: ${releases.length} recent, stable ${latest?.tag_name ?? 'none'}`,
   );
