@@ -39,6 +39,7 @@ test('releases are newest first and app notes sit inside their Panel Assistant r
   assert.ok(page.indexOf('(panel app 1.0.0)') > stable);
   assert.match(page, /data-prerelease="true"/);
   assert.match(page, /#### New/);
+  assert.match(page, /^## Panel Assistant 1\.0\.0$/m);
   // Without JavaScript the controls stay hidden and every release is open.
   assert.match(page, /<form class="release-controls" hidden>/);
   assert.equal(page.match(/<details open>/g).length, 2);
