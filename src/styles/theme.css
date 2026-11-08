@@ -322,10 +322,18 @@ section.release[hidden],
 .release-controls select {
   max-width: 100%;
 }
+/* The release notes use the whole pane; releases are separated by a rule, not boxed. */
+:root:has(section.release),
+:root[data-has-sidebar][data-has-toc]:has(section.release) {
+  --sl-content-width: var(--pa-page-max);
+}
+section.release {
+  border-top: 2px solid var(--sl-color-gray-5);
+  padding-top: 1rem;
+}
 section.release details {
-  border: 1px solid var(--sl-color-gray-5);
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  border: 0;
+  padding: 0;
 }
 section.release summary {
   cursor: pointer;
@@ -346,11 +354,6 @@ section.release summary::before {
 }
 section.release details[open] > summary::before {
   transform: rotate(90deg);
-}
-.release-title {
-  font-size: var(--sl-text-h3);
-  font-weight: 600;
-  color: var(--sl-color-white);
 }
 .release-meta {
   color: var(--sl-color-gray-3);

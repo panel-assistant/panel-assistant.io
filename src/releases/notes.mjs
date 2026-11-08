@@ -74,8 +74,11 @@ function section(component, note, inner) {
   const kind = note.prerelease ? ' · pre-release' : '';
   return [
     `<section class="release" id="${id}" data-version="${note.version}" data-prerelease="${note.prerelease}">`,
+    '',
+    `## ${label} ${note.version}`,
+    '',
     `<details open>`,
-    `<summary><span class="release-title">${label} ${note.version}</span> <span class="release-meta">${note.date}${kind}</span></summary>`,
+    `<summary><span class="release-meta">${note.date}${kind}</span></summary>`,
     '',
     inner,
     '',
@@ -88,7 +91,7 @@ function appBlock(note) {
   return [
     `<div class="release-app" id="${anchor('panel-app', note.version)}" data-component="panel-app">`,
     '',
-    `### Panel app changes (panel app ${note.version})`,
+    `<h3>Panel app changes (panel app ${note.version})</h3>`,
     '',
     demote(note.body, 1),
     '',
@@ -126,14 +129,16 @@ export function render(notes) {
   const options = entries
     .map((e) => {
       const id = e.html.match(/id="([^"]+)"/)[1];
-      return `<option value="${id}" data-prerelease="${e.version.includes('-')}">${e.html.match(/release-title">([^<]+)</)[1]}</option>`;
+      return `<option value="${id}" data-prerelease="${e.version.includes('-')}">${e.html.match(/^## (.+)$/m)[1]}</option>`;
     })
     .join('');
 
   return `---
 title: Release notes
 description: What changed in every Panel Assistant and panel app release, newest first.
-tableOfContents: false
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
 editUrl: false
 ---
 
@@ -179,6 +184,12 @@ const CLIENT = `(() => {
       if (s.querySelector(':scope > details > [data-component]') &&
           ![...s.querySelectorAll(':scope > details > [data-component]')].some((b) => !b.hidden))
         s.hidden = true;
+    // The page's own contents list follows what is shown.
+    for (const s of sections) {
+      const h = s.querySelector('h2');
+      for (const a of h ? document.querySelectorAll('a[href="#' + h.id + '"]') : [])
+        if (a.closest('li')) a.closest('li').hidden = s.hidden;
+    }
   };
   const visible = sections.filter((s) => s.dataset.prerelease !== 'true');
   for (const s of sections) s.querySelector('details').open = s === (target() ?? visible[0] ?? sections[0]);
