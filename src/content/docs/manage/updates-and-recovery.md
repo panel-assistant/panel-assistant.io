@@ -5,7 +5,7 @@ description: Keeping the app on a panel current, and what can be recovered when 
 
 ## Updating a panel
 
-**From Home Assistant.** Each panel has an update entity. When a newer version is published the entity offers it, and installing is a button press; Panel Assistant installs the update and confirms the panel came back healthy. This is the route to use.
+**From Home Assistant.** Each panel has an update entity. When a newer version is published the entity offers it, and installing is a button press; Panel Assistant installs the update and confirms the panel came back healthy. This is the route to use. The [release notes](/release-notes/) say what changed in each version.
 
 An update starts when Panel Assistant or you explicitly request it. The panel app does not install scheduled updates. Its web interface's **Install** tab also lets you choose and install a panel-app version, including a pre-release. That choice applies to the installation you start; there is no saved update channel.
 
