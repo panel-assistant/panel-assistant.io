@@ -32,6 +32,7 @@ async function run(t, latest, recent, options = {}) {
   const dir = await mkdtemp(join(tmpdir(), 'release-catalogue-'));
   t.after(() => rm(dir, { recursive: true, force: true }));
   const output = join(dir, 'v1.json');
+  const summariesOutput = join(dir, 'summaries-v1.json');
   await writeFile(output, 'previous valid catalogue');
   const fetchImpl = async (url, init) => {
     assert.equal(new URL(url).hostname, 'api.github.com');
@@ -42,7 +43,9 @@ async function run(t, latest, recent, options = {}) {
   };
   return {
     output,
-    execute: () => generate({ output, fetchImpl, token: 'fixture-token', ...options }),
+    summariesOutput,
+    execute: () =>
+      generate({ output, summariesOutput, fetchImpl, token: 'fixture-token', ...options }),
   };
 }
 
@@ -111,4 +114,22 @@ test('the complete minimized catalogue is bounded to one MiB', async (t) => {
     Array.from({ length: 5 }, (_, i) => ({ ...big, tag_name: `v${i}` })),
   );
   await assert.rejects(fixture.execute);
+});
+
+test('short release bodies are published as summaries apart from the catalogue; long ones are left out', async (t) => {
+  const short = {
+    ...release('v1.0.1'),
+    body: 'Faster panels.\r\n\n[Full release notes](https://panel-assistant.io/go/release-notes)',
+  };
+  const long = { ...release('v1.0.0'), body: 'x'.repeat(2049) };
+  const { output, summariesOutput, execute } = await run(t, long, [short, long]);
+  await execute();
+  assert.deepEqual(JSON.parse(await readFile(summariesOutput, 'utf8')), {
+    schema: 1,
+    summaries: {
+      'v1.0.1':
+        'Faster panels.\n\n[Full release notes](https://panel-assistant.io/go/release-notes)',
+    },
+  });
+  assert.doesNotMatch(await readFile(output, 'utf8'), /Faster panels/);
 });
