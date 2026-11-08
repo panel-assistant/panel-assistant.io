@@ -25,3 +25,5 @@ public/settings-versions.json
 public/screenshots/
 # Fetched from public Android release metadata before every build.
 public/releases/
+# Generated from src/releases/notes/ before each build.
+src/content/docs/release-notes.md

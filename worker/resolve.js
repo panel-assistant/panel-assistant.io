@@ -18,6 +18,25 @@ const FIRMWARE_TOPIC = 'firmware';
 // reference page for the nearest published version, at that setting. The app never learns page
 // paths; the published versions come from the build's settings-versions.json.
 const SETTINGS_TOPIC = 'settings';
+// The release-notes topic takes `v=<version>` and `component=panel-app` (default Panel Assistant)
+// and lands on that release's anchor. Anchors follow the version, so no manifest is needed; a
+// version the page does not have simply lands at the top of the page.
+const RELEASE_NOTES_TOPIC = 'release-notes';
+const RELEASE_COMPONENTS = new Set(['panel-assistant', 'panel-app']);
+
+function resolveReleaseNotesTopic(url, base) {
+  const target = new URL(base, url.origin);
+  const version = String(url.searchParams.get('v') ?? '')
+    .trim()
+    .replace(/^v/, '');
+  const requested = url.searchParams.get('component');
+  const component = RELEASE_COMPONENTS.has(requested) ? requested : 'panel-assistant';
+  for (const [key, value] of url.searchParams) {
+    if (key !== 'component') target.searchParams.append(key, value);
+  }
+  if (parseVersion(version)) target.hash = `${component}-${version.replace(/\./g, '-')}`;
+  return { location: target.toString(), known: true, topic: RELEASE_NOTES_TOPIC };
+}
 
 // The newest published version at or below the reader's, else the oldest one; a version the
 // router cannot read gets the newest. Every page is English, so `lang` needs no lookup yet.
@@ -108,6 +127,9 @@ export function resolve(requestUrl, topics, settings) {
   }
   if (topic === SETTINGS_TOPIC && typeof topics[SETTINGS_TOPIC] === 'string') {
     return resolveSettingsTopic(url, topics[SETTINGS_TOPIC], settings);
+  }
+  if (topic === RELEASE_NOTES_TOPIC && typeof topics[RELEASE_NOTES_TOPIC] === 'string') {
+    return resolveReleaseNotesTopic(url, topics[RELEASE_NOTES_TOPIC]);
   }
   if (topic === FIRMWARE_TOPIC && typeof topics[FIRMWARE_TOPIC] === 'object') {
     const device = url.searchParams.get('device');
