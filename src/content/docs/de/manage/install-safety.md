@@ -4,7 +4,7 @@ description: Die Prüfungen des eingestellten Befehlszeilen-Installers, seine Si
 sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
-Diese Seite beschreibt die Prüfungen des eingestellten [Befehlszeilen-Installers](/de/manage/command-line-install/), der Panels vor ha-paneld v0.9.9 installierte. Heute installiert und aktualisiert Panel Assistant die Panels: Es prüft ein Panel vor jeder Änderung und sichert seine Einstellungen vor jedem Update, wie unter [Updates und Wiederherstellung](/de/manage/updates-and-recovery/) beschrieben.
+Diese Seite beschreibt die Prüfungen des eingestellten [Befehlszeilen-Installers](/de/install/installing-ha-paneld/), der Panels vor ha-paneld v0.9.9 installierte. Heute installiert und aktualisiert Panel Assistant die Panels: Es prüft ein Panel vor jeder Änderung und sichert seine Einstellungen vor jedem Update, wie unter [Updates und Wiederherstellung](/de/manage/updates-and-recovery/) beschrieben.
 
 ## Vertrauens- und Zugangsdaten-Grenzen
 

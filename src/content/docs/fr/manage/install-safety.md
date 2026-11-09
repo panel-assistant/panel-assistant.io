@@ -4,7 +4,7 @@ description: Les vérifications de l’ancien installateur en ligne de commande,
 sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
-Cette page décrit les vérifications de l’ancien [installateur en ligne de commande](/fr/manage/command-line-install/), qui installait les panneaux avant ha-paneld v0.9.9. Panel Assistant installe et met désormais à jour les panneaux : il vérifie un panneau avant toute modification et sauvegarde ses réglages avant chaque mise à jour, comme décrit dans [Mises à jour et récupération](/fr/manage/updates-and-recovery/).
+Cette page décrit les vérifications de l’ancien [installateur en ligne de commande](/fr/install/installing-ha-paneld/), qui installait les panneaux avant ha-paneld v0.9.9. Panel Assistant installe et met désormais à jour les panneaux : il vérifie un panneau avant toute modification et sauvegarde ses réglages avant chaque mise à jour, comme décrit dans [Mises à jour et récupération](/fr/manage/updates-and-recovery/).
 
 ## Frontières de confiance et d’identifiants
 

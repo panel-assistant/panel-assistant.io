@@ -4,7 +4,7 @@ description: Kontrole dawnego instalatora wiersza poleceń, jego kopie zapasowe 
 sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
 ---
 
-Ta strona opisuje kontrole wycofanego [instalatora wiersza poleceń](/pl/manage/command-line-install/), który instalował panele przed ha-paneld v0.9.9. Obecnie instalacją i aktualizacjami zajmuje się Panel Assistant: sprawdza panel przed zmianami i tworzy kopię ustawień przed każdą aktualizacją, zgodnie z opisem [aktualizacji i odzyskiwania](/pl/manage/updates-and-recovery/).
+Ta strona opisuje kontrole wycofanego [instalatora wiersza poleceń](/pl/install/installing-ha-paneld/), który instalował panele przed ha-paneld v0.9.9. Obecnie instalacją i aktualizacjami zajmuje się Panel Assistant: sprawdza panel przed zmianami i tworzy kopię ustawień przed każdą aktualizacją, zgodnie z opisem [aktualizacji i odzyskiwania](/pl/manage/updates-and-recovery/).
 
 ## Granice zaufania i danych uwierzytelniających
 
