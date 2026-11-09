@@ -11,7 +11,7 @@ When you need to see what the panel is doing as it happens, the **Logs** tab on 
 
 ## The dashboard is blank, half-drawn, or full of script errors
 
-Check the system WebView first. This is the most common first-run failure by a wide margin, and an old WebView produces exactly these symptoms while looking like a fault in the panel app. The procedure is in [Updating the system WebView](/hardware/guides/update-the-webview/).
+Check the system WebView first. This is the most common first-run failure by a wide margin, and an old WebView produces exactly these symptoms while looking like a fault in the panel app. [Updating the system WebView](/hardware/guides/update-the-webview/) says which update route each panel has.
 
 If the WebView is current, the [startup and recovery](/manage/built-in-renderer/#startup-and-recovery) section covers what the panel does when a dashboard fails to load and how to see why.
 
@@ -21,7 +21,7 @@ Some of this is the panel and some of it is the dashboard. [Performance](/manage
 
 ## The installer cannot reach the panel
 
-Over the network: confirm the panel's address and that network ADB on TCP port 5555 is still turned on, because some panels turn it off again after a reboot. If the panel raises an authorisation prompt, accept it on the panel's screen. Over USB: make sure you are using a Chromium-based browser, that the cable goes to the computer running the browser, and that USB debugging is on. How to reach developer options and turn debugging on differs per model and is covered in [Prepare the panel](/install/prepare-a-panel/) and the [hardware pages](/hardware/). If the panel simply will not accept a network connection, [install over USB](/install/install-over-usb/) instead: the panel does not need network ADB, while your browser stays connected to Home Assistant for the verified release.
+Over the network: confirm the panel's address and that network debugging (network ADB on TCP port 5555) is still switched on in the panel's own Settings, because some panels turn it off again after a reboot. If the panel raises an authorisation prompt, accept it on the panel's screen. Over USB: make sure you are using a Chromium-based browser, that the cable goes to the computer running the browser, and that USB debugging is on. How to reach developer options and turn debugging on differs per model and is covered in [Prepare the panel](/install/prepare-a-panel/) and the [hardware pages](/hardware/). If the panel simply will not accept a network connection, [install over USB](/install/install-over-usb/) instead: the panel does not need network ADB, while your browser stays connected to Home Assistant for the verified release.
 
 ## A network install stopped partway
 

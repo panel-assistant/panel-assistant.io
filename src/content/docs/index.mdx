@@ -34,6 +34,18 @@ Panel Assistant is the free and open-source cure. It does one job: run your Home
 
 </Split>
 
+<Split title="Everything happens in Home Assistant">
+
+Getting an Android panel going usually means developer tools on your laptop, a terminal window and a page of commands copied from a forum. Panel Assistant needs none of it. You install, update and repair every panel from Home Assistant, in the browser you already use for it.
+
+**Install, update and repair, all in one place.** Add a panel from Settings, the way you add any other device. Install each update from the panel's update entity. When something needs your attention, Home Assistant raises a Repair that names the panel and tells you what to do.
+
+**Nothing to install on your computer.** No Android developer tools and no command line. A USB install runs from Home Assistant in Chrome or Edge, and a network install needs nothing more than the panel's address. The one thing you do on the panel itself is switch on debugging in its own Settings, and the [hardware page for your model](/hardware/) shows where that switch lives. A few panels make that first step harder: some [Sonoff NSPanel Pro](/hardware/panels/sonoff/#gaining-adb-and-root-access) firmware hides the switch, and a [Tuya TPA10](/hardware/panels/tuya/tpa10/#webview-update-this-first) needs its WebView replaced once by hand. Both can still call for a computer, and their pages show how.
+
+**The same result, every time.** An interrupted install is safe to run again: it checks what already happened on the panel before it changes anything, then carries on from there. Every update arrives the same way, through Panel Assistant, which backs up the panel's settings first and confirms the panel came back healthy.
+
+</Split>
+
 <Features
   items={[
     {

@@ -30,29 +30,7 @@ The **Likely cause** row applies these rules conservatively and reports its conf
 
 ### Comparing filtered and unfiltered from outside the panel
 
-If the unfiltered dashboard overloads its own WebView, the in-page figures may stop changing. A collector script run from a computer polls the panel app's own performance interface instead, which belongs to the deprecated REST API (see the [control reference](/reference/api/#the-rest-api-is-deprecated)), so whole-panel CPU stays observable and, where root or the helper is available, so does a native probe of the Chromium renderer thread. It also records how old the last batch of browser measurements is; anything over 15 seconds is reported as stalled rather than treated as current.
-
-The collector does not change your configuration. It never turns the entity filter on or off or rewrites it; its first request may create one private installation key in the panel app's internal state. Select the same dashboard view and workload for both runs, change the filter on the panel's web interface, wait for the dashboard to reload, then run one command from a checkout of the [ha-paneld repository](https://github.com/panel-assistant/android) for each state:
-
-```bash
-python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect filtered --label filtered --output filtered.json
-```
-
-```bash
-python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect unfiltered --label unfiltered --pair-with filtered.json --output unfiltered.json
-```
-
-Compare the two results:
-
-```bash
-python3 tools/measure-dashboard-performance.py compare filtered.json unfiltered.json --output comparison.json
-```
-
-Each run defaults to three minutes, with a 30-second warm-up and polling every 10 seconds. `--pair-with` reuses an opaque comparison ID from the first result, so the comparison can reject a different physical panel, a different configured Home Assistant or dashboard, or a changed setting that affects the measurement, without recording those private values. It cannot detect a different view chosen by hand within the same dashboard, so keep the visible view and workload the same.
-
-The collector rejects a run if the expected mode is not active, the filter revision or renderer generation changes, the build or configuration changes during collection, filtering falls back, or it keeps fewer than three samples, fewer than three whole-panel CPU samples or fewer than three native renderer CPU samples. It still writes the rejected result with the exact reasons, and it never overwrites an existing output file.
-
-The JSON leaves out the panel's URL and ID, the Home Assistant URL and dashboard path, entity IDs, process names and the filter hash. The panel computes the opaque fingerprints with a private random 256-bit installation key that never leaves it, and the fingerprints are unique to one comparison pair, so separate measurements cannot be linked through them or used to guess a panel's name. A panel that cannot store the key refuses the measurement. The unfiltered entity count is the last synchronised count from the catalogue, not a live count recovered from the overloaded WebView, and is reported as unavailable when the catalogue is empty. Network and browser traffic counters are normalised to the intervals actually observed, so a missed poll cannot skew the comparison. Browser timing and traffic rates are left out of the summaries when stale, while CPU, memory, network and renderer figures from the panel app itself keep being collected.
+If the unfiltered dashboard overloads its own WebView, the in-page figures may stop changing. Contributors who want a recorded side-by-side comparison of the two states, measured from outside the panel, can use the collector script described in [development environment](/reference/development-environment/#measuring-dashboard-performance-from-a-computer).
 
 ### Optional remote WebView debugging
 

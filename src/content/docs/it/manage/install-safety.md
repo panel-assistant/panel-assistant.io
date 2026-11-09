@@ -4,7 +4,7 @@ description: I controlli del vecchio programma di installazione da riga di coman
 sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
-Questa pagina descrive i controlli del vecchio [programma di installazione da riga di comando](/it/manage/command-line-install/), usato prima di ha-paneld v0.9.9. Ora Panel Assistant installa e aggiorna i pannelli: controlla il pannello prima di modificare qualsiasi cosa e salva le impostazioni prima di ogni aggiornamento, come descritto in [aggiornamenti e ripristino](/it/manage/updates-and-recovery/).
+Questa pagina descrive i controlli del vecchio [programma di installazione da riga di comando](/it/install/installing-ha-paneld/), usato prima di ha-paneld v0.9.9. Ora Panel Assistant installa e aggiorna i pannelli: controlla il pannello prima di modificare qualsiasi cosa e salva le impostazioni prima di ogni aggiornamento, come descritto in [aggiornamenti e ripristino](/it/manage/updates-and-recovery/).
 
 ## Confini di fiducia e credenziali
 

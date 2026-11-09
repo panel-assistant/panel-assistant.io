@@ -69,7 +69,7 @@
     "profiles/unofficial/raspberry-pi-4-konstakang": "/reference/profiles/community/",
     "profiles/unofficial/readme": "/reference/profiles/community/",
     "profiles/unofficial/sunworld-yc-sm55p-p76s01": "/reference/profiles/community/sunworld-yc-sm55p/",
-    "provisioning": "/manage/command-line-install/",
+    "provisioning": "/install/installing-ha-paneld/",
     "provisioning-safety": "/manage/install-safety/",
     "releasing": "/reference/development-environment/",
     "roadmap": "/reference/development-environment/",

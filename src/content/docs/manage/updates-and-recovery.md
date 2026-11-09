@@ -15,7 +15,7 @@ In that version, a supported rooted panel can keep network ADB off while Panel A
 
 ### Panels that need ADB
 
-When you install an update from Home Assistant, Panel Assistant uses ADB automatically for panels that cannot install the update themselves. If the panel accepts the connection without an on-screen tap, your original consent to install Panel Assistant also covers creating and storing an ADB key for future updates. If the panel requires approval on its screen, Home Assistant raises a Repair that names the panel and starts authorization. Follow the Repair to approve the prompt on that panel.
+When you install an update from Home Assistant, Panel Assistant uses ADB automatically for panels that cannot install the update themselves. If the panel accepts the connection without an on-screen tap, your original consent to install Panel Assistant also covers creating and storing an ADB key for future updates. If the panel requires approval on its screen, Home Assistant raises a Repair that names the panel and starts authorization. Follow the Repair to approve the prompt on that panel. A panel in [Hardened security mode](/manage/security-mode/) refuses network ADB, so switch it back to Relaxed mode at the panel before an update that needs ADB.
 
 ### A panel that cannot be updated
 
