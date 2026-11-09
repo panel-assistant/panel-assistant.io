@@ -7,7 +7,9 @@ import build from '../build-info/build.json';
 import Comments from './Comments.astro';
 import TranslationNote from './TranslationNote.astro';
 
-const { entry, lang, lastUpdated } = Astro.locals.starlightRoute;
+const { entry, lang, lastUpdated, locale } = Astro.locals.starlightRoute;
+// The release notes in the reader's language, which Starlight serves in English until translated.
+const releaseNotes = `${locale ? `/${locale}` : ''}/release-notes/`;
 const isDoc = entry.data.template !== 'splash';
 
 // The thanks line is one sentence per language, with the heart and the two links in its places.
@@ -44,7 +46,7 @@ const label =
     </p>
   )}
   <p class="build-info">
-    <a href="/release-notes/">{Astro.locals.t('sidebar.release_notes')}</a>
+    <a href={releaseNotes}>{Astro.locals.t('sidebar.release_notes')}</a>
     {' · '}
     <a href="/build.json">{label}</a>
   </p>
