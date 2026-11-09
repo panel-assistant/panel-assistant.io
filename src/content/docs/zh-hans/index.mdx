@@ -35,6 +35,18 @@ Panel Assistant 是免费且开源的解决办法。它只做一件事：让 Hom
 
 </Split>
 
+<Split title="一切都在 Home Assistant 中完成">
+
+让 Android 面板运行起来，通常意味着要在笔记本电脑上准备开发工具、打开终端窗口，再从论坛复制一整页命令。Panel Assistant 无需这些。你可以在平时使用 Home Assistant 的浏览器中，直接从 Home Assistant 安装、更新和修复每台面板。
+
+**安装、更新和修复，都在同一个地方。** 在“设置”中添加面板，就像添加任何其他设备一样。通过面板的更新实体安装每次更新。需要你关注时，Home Assistant 会发出修复提示，指出是哪台面板，并告诉你该怎么做。
+
+**电脑上无需安装任何东西。** 无需 Android 开发工具，也无需命令行。USB 安装从 Home Assistant 在 Chrome 或 Edge 中运行；网络安装只需要面板地址。你在面板上唯一要做的，就是在它自身的“设置”中开启调试；[对应型号的硬件页面](/zh-hans/hardware/)会告诉你开关在哪里。少数面板让这第一步更麻烦：部分 [Sonoff NSPanel Pro](/zh-hans/hardware/panels/sonoff/#获取-adb-和-root-访问权限) 固件隐藏了这个开关，而 [Tuya TPA10](/zh-hans/hardware/panels/tuya/tpa10/#webview请先更新) 需要手动更换一次 WebView。这两种情况仍可能需要电脑，对应页面会说明如何操作。
+
+**每次都得到相同结果。** 中断的安装可以安全重试：它会在更改任何内容之前检查面板上已经完成的操作，再从该处继续。每次更新都通过同样的途径，即 Panel Assistant；它会先备份面板设置，并确认面板已恢复正常运行。
+
+</Split>
+
 <Features
   items={[
     {

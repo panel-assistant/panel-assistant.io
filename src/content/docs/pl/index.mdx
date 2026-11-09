@@ -35,6 +35,18 @@ Panel Assistant to darmowe lekarstwo o otwartym kodzie źródłowym. Ma jedno za
 
 </Split>
 
+<Split title="Wszystko odbywa się w Home Assistant">
+
+Uruchomienie panelu z Androidem zwykle oznacza narzędzia programistyczne na laptopie, okno terminala i stronę poleceń skopiowanych z forum. Panel Assistant nie potrzebuje żadnej z tych rzeczy. Każdy panel instalujesz, aktualizujesz i naprawiasz z Home Assistant, w przeglądarce, której już do niego używasz.
+
+**Instalacja, aktualizacja i naprawa w jednym miejscu.** Dodaj panel w Ustawieniach, tak jak każde inne urządzenie. Każdą aktualizację instaluj przez encję aktualizacji panelu. Gdy coś wymaga Twojej uwagi, Home Assistant zgłasza naprawę, wskazując panel i opisując, co zrobić.
+
+**Nic do instalowania na komputerze.** Bez narzędzi programistycznych Androida i bez wiersza poleceń. Instalacja USB działa z Home Assistant w Chrome lub Edge, a instalacja sieciowa wymaga jedynie adresu panelu. Jedyną czynnością na samym panelu jest włączenie debugowania w jego Ustawieniach. [Strona sprzętu dla Twojego modelu](/pl/hardware/) pokazuje, gdzie znaleźć ten przełącznik. Niektóre panele utrudniają ten pierwszy krok: część wersji firmware [Sonoff NSPanel Pro](/pl/hardware/panels/sonoff/#uzyskiwanie-dostępu-adb-i-root) ukrywa przełącznik, a [Tuya TPA10](/pl/hardware/panels/tuya/tpa10/#webview-najpierw-zaktualizuj) wymaga jednorazowej ręcznej wymiany WebView. W obu przypadkach nadal może być potrzebny komputer, a odpowiednie strony pokazują, jak postępować.
+
+**Za każdym razem ten sam wynik.** Przerwaną instalację można bezpiecznie uruchomić ponownie: przed zmianą czegokolwiek sprawdza, co już wydarzyło się na panelu, i kontynuuje od tego miejsca. Każda aktualizacja trafia tą samą drogą, przez Panel Assistant, który najpierw tworzy kopię ustawień panelu i potwierdza, że panel ponownie działa prawidłowo.
+
+</Split>
+
 <Features
   items={[
     {

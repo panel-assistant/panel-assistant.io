@@ -35,6 +35,18 @@ Panel Assistant est la solution gratuite et open source. Il fait une seule chose
 
 </Split>
 
+<Split title="Tout se passe dans Home Assistant">
+
+Mettre en service un panneau Android demande généralement des outils de développement sur votre ordinateur portable, un terminal et une page de commandes copiées depuis un forum. Panel Assistant n’a besoin de rien de tout cela. Vous installez, mettez à jour et réparez chaque panneau depuis Home Assistant, dans le navigateur que vous utilisez déjà pour y accéder.
+
+**Installer, mettre à jour et réparer, au même endroit.** Ajoutez un panneau depuis les paramètres, comme n’importe quel autre appareil. Installez chaque mise à jour depuis l’entité de mise à jour du panneau. Lorsqu’une intervention est nécessaire, Home Assistant crée une réparation qui nomme le panneau et vous indique quoi faire.
+
+**Rien à installer sur votre ordinateur.** Aucun outil de développement Android, aucune ligne de commande. Une installation USB s’exécute depuis Home Assistant dans Chrome ou Edge ; une installation réseau ne demande que l’adresse du panneau. La seule chose à faire sur le panneau lui-même est d’activer le débogage dans ses propres paramètres. La [page matériel de votre modèle](/fr/hardware/) indique où se trouve ce réglage. Certains panneaux compliquent cette première étape : certains firmwares du [Sonoff NSPanel Pro](/fr/hardware/panels/sonoff/#obtenir-laccès-adb-et-root) masquent le réglage, et un [Tuya TPA10](/fr/hardware/panels/tuya/tpa10/#webview--commencer-par-sa-mise-à-jour) nécessite de remplacer manuellement sa WebView une fois. Ces deux cas peuvent encore nécessiter un ordinateur ; leurs pages expliquent la procédure.
+
+**Le même résultat, à chaque fois.** Une installation interrompue peut être relancée sans risque : elle vérifie ce qui a déjà été fait sur le panneau avant toute modification, puis reprend à cet endroit. Chaque mise à jour arrive de la même façon, via Panel Assistant, qui sauvegarde d’abord les paramètres du panneau, puis confirme qu’il fonctionne de nouveau correctement.
+
+</Split>
+
 <Features
   items={[
     {

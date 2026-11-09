@@ -35,6 +35,18 @@ Panel Assistant is het gratis en open-source medicijn. Het doet één ding: je d
 
 </Split>
 
+<Split title="Alles gebeurt in Home Assistant">
+
+Een Android-paneel werkend krijgen betekent meestal ontwikkeltools op je laptop, een terminalvenster en een pagina met opdrachten die je van een forum kopieert. Panel Assistant heeft dat allemaal niet nodig. Je installeert, actualiseert en herstelt elk paneel vanuit Home Assistant, in de browser die je daar al voor gebruikt.
+
+**Installeren, actualiseren en herstellen, alles op één plek.** Voeg een paneel toe via Instellingen, net zoals elk ander apparaat. Installeer elke update via de update-entiteit van het paneel. Als iets je aandacht nodig heeft, maakt Home Assistant een reparatiemelding aan die het paneel noemt en vertelt wat je moet doen.
+
+**Niets op je computer installeren.** Geen Android-ontwikkeltools en geen opdrachtregel. Een USB-installatie draait vanuit Home Assistant in Chrome of Edge. Voor een netwerkinstallatie heb je alleen het adres van het paneel nodig. Het enige wat je op het paneel zelf doet, is foutopsporing inschakelen in de eigen Instellingen. De [hardwarepagina voor jouw model](/nl/hardware/) laat zien waar die schakelaar staat. Een paar panelen maken die eerste stap lastiger: sommige firmware voor de [Sonoff NSPanel Pro](/nl/hardware/panels/sonoff/#adb--en-roottoegang-verkrijgen) verbergt de schakelaar, en bij een [Tuya TPA10](/nl/hardware/panels/tuya/tpa10/#webview-werk-deze-eerst-bij) moet je de WebView eenmalig handmatig vervangen. Voor beide kan nog steeds een computer nodig zijn; hun pagina's leggen uit hoe.
+
+**Elke keer hetzelfde resultaat.** Een onderbroken installatie kun je veilig opnieuw uitvoeren: het controleert wat er al op het paneel is gebeurd voordat het iets wijzigt, en gaat dan van daaruit verder. Elke update komt op dezelfde manier binnen, via Panel Assistant, dat eerst een back-up van de paneelinstellingen maakt en bevestigt dat het paneel weer gezond is opgestart.
+
+</Split>
+
 <Features
   items={[
     {
