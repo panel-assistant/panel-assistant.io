@@ -102,5 +102,6 @@
   "confidence.documented": "Задокументовано виробником або в опублікованих характеристиках",
   "confidence.platform": "Та сама платформа, що й у дослідженої нами панелі",
   "confidence.owners": "Власник використовує Panel Assistant на такій панелі",
-  "confidence.older_android": "Android {android}: старіший за 10, не досліджено"
+  "confidence.older_android": "Android {android}: старіший за 10, не досліджено",
+  "sidebar.release_notes": "Примітки до випуску"
 }

@@ -101,5 +101,6 @@
   "confidence.documented": "Dokumentacja producenta lub opublikowana specyfikacja",
   "confidence.platform": "Ta sama platforma co zbadany przez nas panel",
   "confidence.owners": "Właściciel używa na nim Panel Assistant",
-  "confidence.older_android": "Android {android}: starszy niż 10, niezbadany"
+  "confidence.older_android": "Android {android}: starszy niż 10, niezbadany",
+  "sidebar.release_notes": "Informacje o wydaniu"
 }

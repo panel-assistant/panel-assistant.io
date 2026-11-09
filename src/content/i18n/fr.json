@@ -90,5 +90,6 @@
   "error.pickles.story": "Notre panda sème la pagaille. Nous essayons de le maîtriser, mais il est lent et têtu.",
   "error.not_found": "404 — Cette page est introuvable.",
   "error.home": "Aller à la page d’accueil",
-  "error.pickles.alt": "Pickles le panda"
+  "error.pickles.alt": "Pickles le panda",
+  "sidebar.release_notes": "Notes de version"
 }

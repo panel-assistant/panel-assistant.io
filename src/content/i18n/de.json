@@ -90,5 +90,6 @@
   "error.pickles.story": "Unser Panda richtet Chaos an. Wir versuchen, ihn in den Griff zu bekommen, aber er ist langsam und stur.",
   "error.not_found": "404 — Diese Seite wurde nicht gefunden.",
   "error.home": "Zur Startseite",
-  "error.pickles.alt": "Pickles, der Panda"
+  "error.pickles.alt": "Pickles, der Panda",
+  "sidebar.release_notes": "Versionshinweise"
 }

@@ -90,5 +90,6 @@
   "error.pickles.story": "Nuestro panda está causando estragos. Intentamos controlarlo, pero es lento y cabezota.",
   "error.not_found": "404 — No se pudo encontrar esta página.",
   "error.home": "Ir a la página de inicio",
-  "error.pickles.alt": "Pickles el panda"
+  "error.pickles.alt": "Pickles el panda",
+  "sidebar.release_notes": "Notas de la versión"
 }

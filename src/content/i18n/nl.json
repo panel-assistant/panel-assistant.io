@@ -100,5 +100,6 @@
   "confidence.documented": "Gedocumenteerd door de fabrikant of in gepubliceerde specificaties",
   "confidence.platform": "Hetzelfde platform als een paneel dat we hebben onderzocht",
   "confidence.owners": "Een eigenaar draait er Panel Assistant op",
-  "confidence.older_android": "Android {android}: ouder dan 10 en niet onderzocht"
+  "confidence.older_android": "Android {android}: ouder dan 10 en niet onderzocht",
+  "sidebar.release_notes": "Releasenotities"
 }

@@ -90,5 +90,6 @@
   "error.pickles.story": "我们的熊猫正在捣乱。我们正努力把它管住，但它动作慢，还很固执。",
   "error.not_found": "404 — 找不到此页面。",
   "error.home": "返回首页",
-  "error.pickles.alt": "熊猫 Pickles"
+  "error.pickles.alt": "熊猫 Pickles",
+  "sidebar.release_notes": "发行说明"
 }
