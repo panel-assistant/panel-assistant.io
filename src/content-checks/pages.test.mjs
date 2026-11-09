@@ -320,6 +320,6 @@ test('the install, update and repair pages ask for no command line', () => {
   assert.deepEqual(offending, []);
   assert.match(
     text('/'),
-    /Everything happens in Home Assistant[\s\S]*Nothing to install on your computer[\s\S]*switch on debugging in its own Settings/,
+    /Everything happens in Home Assistant[\s\S]*Nothing to install on your computer[\s\S]*switch on debugging in its own Settings[\s\S]*Sonoff NSPanel Pro[\s\S]*Tuya TPA10[\s\S]*The same result/,
   );
 });
