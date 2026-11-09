@@ -30,7 +30,7 @@ Premi **Trova un pacchetto…** per aprire un elenco delle app sul pannello che 
 - **Altre app**: app sul pannello che non fanno parte dei componenti di base di Android. Su un pannello senza un profilo noto, è qui che puoi cercare i componenti aggiuntivi del produttore con una voce nel launcher o l'autorizzazione a mostrare contenuti in sovrapposizione. Se un pacchetto non è elencato, puoi inserirne direttamente il nome.
 - **Maggiore utilizzo della CPU**: ciò che usa più CPU in questo momento. Limita solo app che riconosci.
 
-Ogni voce ha un pulsante **Controlla**, e puoi anche digitare direttamente il nome di un pacchetto nella casella se lo conosci. **Controlla** agisce immediatamente, senza un salvataggio separato, e viene riapplicato a ogni avvio. Un pacchetto limitato o già disabilitato mostra invece **Riabilita**, che annulla l'operazione. La scheda stessa elenca solo ciò che hai limitato, ciascuno con il proprio stato: `active`, `disabled` o `not installed`.
+Ogni voce ha un pulsante **Controlla**, e puoi anche digitare direttamente il nome di un pacchetto nella casella se lo conosci. **Controlla** agisce immediatamente, senza un salvataggio separato, e viene riapplicato a ogni avvio. Un pacchetto limitato o già disabilitato mostra invece **Riabilita**, che annulla l'operazione. La scheda elenca i pacchetti che hai selezionato per limitarli, ciascuno con un pulsante **Riabilita**.
 
 Nessun pacchetto viene limitato finché non premi un pulsante Controlla. Senza root o l'helper, la scheda rimane visibile ma bloccata, con una spiegazione dell'accesso mancante.
 

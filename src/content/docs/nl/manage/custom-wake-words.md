@@ -61,7 +61,7 @@ Begin met de waarden die de documentatie van je model of je notebookrun voorstel
 
 ### Via de pagina Configureren van het paneel
 
-Op de kaart **Spraak** heeft de kiezer voor activeringswoorden een knop **Importeren**. Kies het `.json`-manifest en het `.tflite`-bestand en druk op **Getraind activeringswoord importeren**. Het paneel valideert het model met de eigen activeringswoordengine voordat het dit accepteert. Weigert het een model, dan wordt niets geïnstalleerd. Was al een model met dezelfde naam geïmporteerd, dan blijft dat eerdere model staan. Manifesten zijn beperkt tot 16 KB en modellen tot 2 MB.
+Op de kaart **Spraak** heeft de kiezer voor activeringswoorden een knop **Importeren**. Kies het `.json`-manifest en het `.tflite`-bestand en druk op **Importeren**. Het paneel valideert het model met de eigen activeringswoordengine voordat het dit accepteert. Weigert het een model, dan wordt niets geïnstalleerd. Was al een model met dezelfde naam geïmporteerd, dan blijft dat eerdere model staan. Manifesten zijn beperkt tot 16 KB en modellen tot 2 MB.
 
 De id van het activeringswoord wordt afgeleid van de `.tflite`-bestandsnaam, omgezet naar kleine letters en teruggebracht tot letters, cijfers en underscores (hij moet met een letter beginnen). De id mag niet die van een meegeleverd activeringswoord zijn. Een model importeren onder een al gebruikte naam vervangt het eerdere model.
 

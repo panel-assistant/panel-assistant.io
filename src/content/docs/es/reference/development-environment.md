@@ -19,7 +19,7 @@ Con esas herramientas instaladas localmente:
 
 ## Docker
 
-Si prefieres instalar únicamente Docker, [`tools/build/`](https://github.com/panel-assistant/android/tree/main/tools/build) crea una imagen con versiones fijadas de las mismas herramientas y ejecuta Gradle dentro de ella. El APK se guarda en tu árbol de trabajo, la imagen se almacena en caché tras la primera compilación y las cachés de Gradle persisten en un volumen Docker con nombre.
+Si prefieres instalar únicamente Docker, [`tools/build/`](https://github.com/panel-assistant/android/tree/main/tools/build) crea una imagen Docker y ejecuta Gradle dentro de ella. Su Dockerfile enumera los paquetes del SDK incluidos en la imagen. El APK se guarda en tu árbol de trabajo, la imagen se almacena en caché tras la primera compilación y las cachés de Gradle persisten en un volumen Docker con nombre.
 
 ```sh
 ./tools/build/build.sh                       # debug APK -> app/build/outputs/apk/debug/

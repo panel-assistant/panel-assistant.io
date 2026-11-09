@@ -1,10 +1,10 @@
 ---
 title: Actualizar a 1.0
 description: Migrar Home Assistant y tus paneles de Panel Assistant 0.9 a 1.0 y qué implica volver atrás.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 45ad784a56e8c07917f0c76636d2b389a610b982
 ---
 
-Panel Assistant 1.0 y la aplicación del panel 1.0 avanzan juntos. La integración 1.0 solo se comunica con la aplicación del panel 1.0, y esta solo se comunica con la integración 1.0, así que ninguno funciona con una versión 0.9 del otro. Primero actualizas la integración y después cada panel desde Home Assistant; **un panel que ejecuta la aplicación 1.0 no puede volver a 0.9**. Lee toda la página antes de empezar.
+Panel Assistant 1.0 y la aplicación del panel 1.0 avanzan juntos. La integración 1.0 solo se comunica con la aplicación del panel 1.0, y esta solo se comunica con la integración 1.0, así que ninguno funciona con una versión 0.9 del otro. Primero actualizas la integración y después cada panel desde Home Assistant; **un panel que ejecuta la aplicación 1.0 no puede volver a 0.9**. Lee toda la página antes de empezar. Las [notas de la versión 1.0.0](/es/release-notes/#panel-assistant-100) enumeran todos los cambios.
 
 ## Antes de empezar
 
@@ -16,7 +16,7 @@ Panel Assistant 1.0 y la aplicación del panel 1.0 avanzan juntos. La integraci�
 
 ## 1. Actualizar la integración
 
-1.0 se ofrece primero como versión candidata. Abre **Configuración**, **Dispositivos y servicios**, **HACS** y elige el dispositivo **Panel Assistant**. Despliega las entidades deshabilitadas y abre **Versión preliminar**. En sus ajustes, activa **Habilitado** y selecciona **Actualizar**; después activa el interruptor **Versión preliminar** en **Diagnóstico**. Vuelve a Panel Assistant en HACS y descarga la versión candidata de 1.0. Reinicia Home Assistant cuando HACS lo solicite o cuando aparezca la reparación **Reinicia Home Assistant para terminar de actualizar Panel Assistant**.
+En Home Assistant **2026.11 o posterior**, instala la actualización de Panel Assistant desde **Configuración**, **Actualizaciones**. En versiones anteriores compatibles, de **2026.8.3 a 2026.10**, descarga la actualización en HACS. Después reinicia Home Assistant para cargar la nueva integración, siguiendo la reparación de reinicio o la indicación de HACS. [Instalar la integración](/es/home-assistant/custom-integration/#updates-and-pre-releases) explica cómo activar versiones preliminares más recientes tanto en Marketplace como en HACS.
 
 ## 2. Comprobar las reparaciones
 
@@ -38,10 +38,10 @@ Hay dos partes y son diferentes.
 
 **La integración puede volver atrás mientras ningún panel ejecute 1.0.** Restaura la copia de seguridad de Home Assistant que hiciste antes de empezar. Esto también deshace cualquier otro cambio realizado en Home Assistant desde que la creaste. Tus paneles siguen usando la aplicación 0.9 y vuelven a conectarse a 0.9.0. En cuanto algún panel ejecuta la aplicación 1.0, restaurar la copia deja ese panel fuera del alcance de Home Assistant hasta que la integración vuelva a 1.0.
 
-No vuelvas atrás descargando de nuevo 0.9.0 en HACS sobre 1.0. La actualización a 1.0 elimina un ajuste del que depende 0.9.0 y, sin él, 0.9.0 devuelve a MQTT los paneles que ya se habían migrado, donde la aplicación del panel 1.0 ya no responde. Restaura la copia de seguridad en su lugar.
+No vuelvas atrás instalando 0.9.0 sobre 1.0 mediante Marketplace o HACS. La actualización a 1.0 elimina un ajuste del que depende 0.9.0 y, sin él, 0.9.0 devuelve a MQTT los paneles que ya se habían migrado, donde la aplicación del panel 1.0 ya no responde. Restaura la copia de seguridad en su lugar.
 
 ## Si una migración quedó sin terminar
 
-Si 1.0 indica que un panel nunca se migró desde MQTT o todavía ejecuta la aplicación antigua, la reparación te pide que elijas **Volver a descargar** en HACS, selecciones 0.9.0, termines la migración allí y después instales de nuevo 1.0. No descargues de nuevo 0.9.0 sobre 1.0. Mientras ninguno de tus paneles ejecute todavía la aplicación 1.0, vuelve a 0.9.0 restaurando la copia de seguridad de Home Assistant que hiciste antes de actualizar, por el motivo anterior. Después termina la migración en 0.9.0 y vuelve a empezar esta página. Si otros paneles ya ejecutan la aplicación 1.0, o no tienes una copia de seguridad anterior a la actualización, pregunta en [Discord](https://panel-assistant.io/go/discord) o en las [incidencias](https://github.com/panel-assistant/ha-integration/issues) antes de cambiar nada.
+Si 1.0 indica que un panel nunca se migró desde MQTT o aún ejecuta la aplicación antigua, sigue los pasos de recuperación segura de la reparación para terminar la migración con Panel Assistant 0.9.0 y después volver a 1.0. No instales 0.9.0 sobre 1.0 mediante Marketplace o HACS. Mientras ninguno de tus paneles ejecute todavía la aplicación 1.0, vuelve a 0.9.0 restaurando la copia de seguridad de Home Assistant que hiciste antes de actualizar, por el motivo anterior. Después termina la migración en 0.9.0 y vuelve a empezar esta página. Si otros paneles ya ejecutan la aplicación 1.0, o no tienes una copia de seguridad anterior a la actualización, pregunta en [Discord](https://panel-assistant.io/go/discord) o en las [incidencias](https://github.com/panel-assistant/ha-integration/issues) antes de cambiar nada.
 
 Para un panel que aún utiliza MQTT, la reparación también ofrece empezar desde cero: elimina el dispositivo del panel de la integración MQTT y vuelve a añadirlo. Esto crea entidades nuevas y no conserva su historial.

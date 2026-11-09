@@ -1,7 +1,7 @@
 ---
 title: 入门
 description: 只需几分钟，就能让尚未配置的 Android 墙面面板显示 Home Assistant 仪表盘，每一步都有 Home Assistant 引导。
-sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
+sourceCommit: e919a9dd655eb7095993ae5e1e3b5dbe7af600c4
 ---
 
 如果你以前设置过墙面面板或自助终端，大概还记得那套过程：侧载应用、寻找能绘制仪表盘的浏览器引擎、猜测设置项的作用，还总担心下次重启会出问题。用 Panel Assistant 设置面板，会给你一个惊喜。几分钟就能完成，即使面板已经挂在墙上，你也不用离开椅子。好吧，也许需要一次 ;-)
@@ -10,10 +10,10 @@ sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
 
 ## 1. 安装集成
 
-通过 HACS 添加 Panel Assistant，然后重启 Home Assistant。这是唯一需要你手动安装的内容。从此以后，Home Assistant 会引导你完成操作。参见 [安装集成](/zh-hans/home-assistant/custom-integration/)。
+在 Home Assistant **2026.11 或更新版本**中，通过 **设置**、**Marketplace** 安装 Panel Assistant。在受支持的较旧版本（**2026.8.3 至 2026.10**）中，通过 HACS 安装，然后重启 Home Assistant。Marketplace 可能允许立即进行配置；请先按提示完成任何必要的重启。这是唯一需要你手动安装的内容。有关两种安装方式以及如何启用预发布版本，请参见[安装集成](/zh-hans/home-assistant/custom-integration/)。
 
 :::note
-Panel Assistant 1.0 是候选发布版。HACS 默认提供 0.9.0。要试用候选发布版，请在 **设置**、**设备与服务**、**HACS** 下的 Panel Assistant 设备中启用并打开 **预发布** 开关；[安装集成](/zh-hans/home-assistant/custom-integration/)介绍了如何启用已禁用的实体。运行 1.0 应用的面板无法回退到 0.9；[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)说明了相关变化。
+如果从 0.9 升级，请在开始之前阅读[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)，并保留其中所述的 Home Assistant 和面板备份。运行 1.0 应用的面板无法回退到 0.9。
 :::
 
 ## 2. 在面板上开启调试
@@ -140,7 +140,7 @@ Panel Assistant 1.0 是候选发布版。HACS 默认提供 0.9.0。要试用候�
 
 ## 所需条件
 
-- Home Assistant 2026.8.3 或更新版本，并安装 HACS。
+- Home Assistant 2026.8.3 或更新版本。在 2026.11 或更新版本中使用内置 Marketplace，或在受支持的较旧版本中使用 HACS。
 - 一台运行 Android 8.0 或更新版本、可进行调试访问的 ARM 壁挂面板。大多数面板可使用通用硬件配置文件，[选择面板](/zh-hans/install/supported-panels/)列出了获得完整硬件支持的型号。
 - 使用 USB 方式时，需要基于 Chromium 的浏览器，例如 Chrome 或 Edge。
 

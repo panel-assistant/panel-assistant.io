@@ -30,7 +30,7 @@ Drücke **Paket suchen…**, um eine Liste von Apps auf dem Panel zu öffnen, di
 - **Andere Apps**: Apps auf dem Panel, die nicht zum Kern von Android gehören. Auf einem Panel ohne bekanntes Profil kannst du hier nach Herstellererweiterungen mit einem Launcher-Eintrag oder einer Overlay-Berechtigung suchen. Wenn ein Paket nicht aufgeführt ist, kannst du seinen Namen direkt eingeben.
 - **Höchste CPU-Auslastung**: die Apps, die gerade am meisten CPU verbrauchen. Bändige nur eine App, die du erkennst.
 
-Jeder Eintrag hat eine Schaltfläche **Einschränken**. Wenn du den Paketnamen kennst, kannst du ihn auch direkt in das Feld eingeben. **Einschränken** wirkt sofort, ohne gesondertes Speichern, und wird bei jedem Start erneut angewendet. Ein gebändigtes oder bereits deaktiviertes Paket zeigt stattdessen **Wieder aktivieren** an, womit du es rückgängig machst. Die Karte selbst listet nur die von dir gebändigten Pakete samt Zustand auf: `active`, `disabled` oder `not installed`.
+Jeder Eintrag hat eine Schaltfläche **Einschränken**. Wenn du den Paketnamen kennst, kannst du ihn auch direkt in das Feld eingeben. **Einschränken** wirkt sofort, ohne gesondertes Speichern, und wird bei jedem Start erneut angewendet. Ein gebändigtes oder bereits deaktiviertes Paket zeigt stattdessen **Wieder aktivieren** an, womit du es rückgängig machst. Die Karte selbst listet die Pakete auf, die du zum Einschränken ausgewählt hast, jeweils mit einer Schaltfläche **Wieder aktivieren**.
 
 Nichts wird gebändigt, bevor du eine Einschränken-Schaltfläche drückst. Ohne Root oder Helper bleibt die Karte sichtbar, aber gesperrt, mit einer Erklärung des fehlenden Zugriffs.
 

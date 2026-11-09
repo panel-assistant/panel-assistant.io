@@ -6,7 +6,7 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 
 ## Actualizar un panel
 
-**Desde Home Assistant.** Cada panel tiene una entidad de actualización. Cuando se publica una versión más reciente, la entidad la ofrece y basta pulsar un botón para instalarla; Panel Assistant instala la actualización y confirma que el panel ha vuelto a funcionar correctamente. Esta es la vía que debes utilizar.
+**Desde Home Assistant.** Cada panel tiene una entidad de actualización. Cuando se publica una versión más reciente, la entidad la ofrece y basta pulsar un botón para instalarla; Panel Assistant instala la actualización y confirma que el panel ha vuelto a funcionar correctamente. Esta es la vía que debes utilizar. Las [notas de la versión](/es/release-notes/) indican qué ha cambiado en cada versión.
 
 Una actualización empieza cuando Panel Assistant o tú la solicitáis expresamente. La aplicación del panel no instala actualizaciones programadas. La pestaña **Instalar** de su interfaz web también permite elegir e instalar una versión de la aplicación del panel, incluida una versión preliminar. Esa elección se aplica a la instalación que inicias; no hay ningún canal de actualización guardado.
 

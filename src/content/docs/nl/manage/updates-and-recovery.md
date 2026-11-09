@@ -6,7 +6,7 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 
 ## Een paneel bijwerken
 
-**Vanuit Home Assistant.** Elk paneel heeft een update-entiteit. Zodra een nieuwere versie is gepubliceerd, biedt de entiteit die aan en installeer je met één druk op de knop; Panel Assistant installeert de update en bevestigt dat het paneel gezond is teruggekomen. Gebruik deze route.
+**Vanuit Home Assistant.** Elk paneel heeft een update-entiteit. Zodra een nieuwere versie is gepubliceerd, biedt de entiteit die aan en installeer je met één druk op de knop; Panel Assistant installeert de update en bevestigt dat het paneel gezond is teruggekomen. Gebruik deze route. De [releasenotities](/nl/release-notes/) vermelden wat er in elke versie is veranderd.
 
 Een update begint wanneer Panel Assistant of jij er expliciet om vraagt. De paneel-app installeert geen geplande updates. Via het tabblad **Installeren** in de webinterface kun je ook een versie van de paneel-app kiezen en installeren, inclusief een prerelease. Die keuze geldt voor de installatie die je start; er is geen opgeslagen updatekanaal.
 

@@ -27,4 +27,4 @@ Ersetze beide Entitäts-IDs durch die aus deinem Home Assistant. Die Engine wand
 
 Stelle bei Bedarf vorher die Lautstärke des Mediaplayers des Panels ein. Um in mehreren Räumen zu sprechen, gib in `media_player_entity_id` eine Liste von Mediaplayer-Entitäten der Panels an.
 
-Im [gehärteten Modus](/de/manage/security-mode/) muss jemand einen über die native Verbindung gesendeten Medienbefehl auf dem Bildschirm des Panels genehmigen. Eine Automatisierung kann diese Anfrage nicht aus der Ferne genehmigen.
+Text-to-Speech, das über die native Verbindung an den Medienplayer des Panels gesendet wird, erfordert im [gehärteten Modus](/de/manage/security-mode/) keine Genehmigung auf dem Panel.

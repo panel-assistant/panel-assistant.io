@@ -138,5 +138,6 @@
   "reports.behavior.relays": "继电器",
   "reports.behavior.speaker": "扬声器",
   "reports.behavior.microphone": "麦克风",
-  "reports.behavior.restart": "重启恢复"
+  "reports.behavior.restart": "重启恢复",
+  "sidebar.release_notes": "发行说明"
 }

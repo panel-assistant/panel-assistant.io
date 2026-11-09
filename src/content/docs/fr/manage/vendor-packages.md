@@ -30,7 +30,7 @@ Appuyez sur **Rechercher un paquet…** pour ouvrir une liste des applications d
 - **Autres applications** : les applications du panneau qui ne font pas partie du système Android de base. Sur un panneau sans profil connu, c’est ici qu’il faut chercher les ajouts du fabricant disposant d’une entrée dans le lanceur ou d’une permission de superposition. Si un paquet ne figure pas dans la liste, vous pouvez saisir son nom directement.
 - **Utilisant le plus le CPU** : les applications qui utilisent le plus le processeur à cet instant. Ne maîtrisez que celles que vous reconnaissez.
 
-Chaque entrée possède un bouton **Neutraliser** ; vous pouvez aussi saisir directement un nom de paquet dans le champ si vous le connaissez. **Neutraliser** agit immédiatement, sans enregistrement distinct, et son action est réappliquée à chaque démarrage. Un paquet maîtrisé ou déjà désactivé affiche à la place **Réactiver**, qui annule l’action. La carte elle-même ne répertorie que les paquets que vous avez maîtrisés, chacun avec son état : `active`, `disabled` ou `not installed`.
+Chaque entrée possède un bouton **Neutraliser** ; vous pouvez aussi saisir directement un nom de paquet dans le champ si vous le connaissez. **Neutraliser** agit immédiatement, sans enregistrement distinct, et son action est réappliquée à chaque démarrage. Un paquet maîtrisé ou déjà désactivé affiche à la place **Réactiver**, qui annule l’action. La carte répertorie les paquets que vous avez sélectionnés pour les neutraliser, chacun avec un bouton **Réactiver**.
 
 Rien n’est maîtrisé tant que vous n’appuyez pas sur un bouton Neutraliser. Sans root ni assistant, la carte reste visible mais verrouillée, avec une explication de l’accès manquant.
 

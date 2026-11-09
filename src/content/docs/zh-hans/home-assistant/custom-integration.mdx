@@ -1,27 +1,52 @@
 ---
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 45ad784a56e8c07917f0c76636d2b389a610b982
 title: 安装集成
-description: 通过 HACS 将 Panel Assistant 添加到 Home Assistant，一切从这里开始。
+description: 在 Home Assistant 2026.11 或更新版本中通过内置 Marketplace 安装 Panel Assistant，或在受支持的较旧版本中通过 HACS 安装。
 ---
 
 import { LinkButton } from '@astrojs/starlight/components';
 
-Panel Assistant 是通过 [HACS](https://hacs.xyz/) 添加的自定义集成。您需要 Home Assistant 2026.8.3 或更高版本，以及 HACS。
+Panel Assistant 是自定义集成。您需要 Home Assistant **2026.8.3 或更新版本**。在 **2026.11 或更新版本**中，请使用内置的 [Marketplace](https://www.home-assistant.io/integrations/marketplace/)。在 **2026.8.3 至 2026.10** 中，请使用 [HACS](https://hacs.xyz/)。
 
 <LinkButton
   href="https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration"
   icon="external"
 >
-  在 HACS 中打开
+  在 Marketplace 或 HACS 中打开
 </LinkButton>
 
-此按钮会在您自己的 Home Assistant 的 HACS 中打开该仓库，供您下载。如果您更愿意手动操作：
+此按钮会在 Home Assistant 2026.11 或更新版本的 Marketplace 中打开该仓库，或在受支持的较旧版本的 HACS 中打开。它打开的是下载页面；之后您仍需安装集成并添加 Panel Assistant。
 
-1. 在 HACS 中将 `https://github.com/panel-assistant/ha-integration` 添加为自定义仓库，类别选择 **集成**。
-2. 下载 **Panel Assistant**，然后重启 Home Assistant。
-3. 前往 **设置**、**设备与服务**、**添加集成**，选择 **Panel Assistant**。
+## Home Assistant 2026.11 或更新版本：Marketplace
 
-HACS 提供最新稳定版 0.9.0。要试用 1.0 候选发布版，请打开 **设置**、**设备与服务**、**HACS**，选择 **Panel Assistant** 设备。展开已禁用的实体，打开 **预发布**。在其设置中开启 **已启用**，选择 **更新**，然后打开 **诊断** 下的 **预发布** 开关。返回 HACS 中的 Panel Assistant，下载候选发布版，然后重启 Home Assistant。请先阅读[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)，因为运行 1.0 应用的面板无法回退到 0.9。
+1. 以管理员身份登录，打开 **设置**、**Marketplace**。出现警告时，请确认接受。
+2. 选择 **通过链接添加**，输入 `https://github.com/panel-assistant/ha-integration`，然后选择 **添加**。如果 Marketplace 要求，请关联您的 GitHub 账号。
+3. 打开 **Panel Assistant**，选择 **安装**，检查版本，然后确认 **安装**。
+4. 安装后按照提示进行配置。如果 Marketplace 要求重启 Home Assistant，请先完成重启。您也可以打开 **设置**、**设备与服务**、**添加集成**，选择 **Panel Assistant**。
+
+如果您在将 Home Assistant 升级到 2026.11 之前使用 HACS，Marketplace 会保留已安装的仓库和自定义仓库。无需为此移除并重新安装 Panel Assistant。
+
+## Home Assistant 2026.8.3 至 2026.10：HACS
+
+1. 如果尚未安装，请先安装 [HACS](https://hacs.xyz/docs/use/)。
+2. 在 HACS 中将 `https://github.com/panel-assistant/ha-integration` 添加为自定义仓库，类别选择 **集成**。
+3. 下载 **Panel Assistant**，然后重启 Home Assistant。
+4. 前往 **设置**、**设备与服务**、**添加集成**，选择 **Panel Assistant**。
+
+<a id="updates-and-pre-releases"></a>
+
+## 更新与预发布版本
+
+默认提供稳定版。在 Home Assistant 2026.11 或更新版本中，集成更新会出现在 **设置**、**更新** 下。安装更新后，按照重启修复项的提示重启 Home Assistant，以加载更新。在受支持的较旧版本中，请在 HACS 中下载更新，并在提示时重启 Home Assistant。更新此集成与[更新面板应用](/zh-hans/manage/updates-and-recovery/)是独立的操作。 Home Assistant 会显示每次更新的简短摘要；[发行说明](/zh-hans/release-notes/)提供完整的变更列表。
+
+如需接收较新的预发布版本：
+
+1. 打开 **设置**、**设备与服务**，然后在 Home Assistant 2026.11 或更新版本中打开 **Marketplace**，或在受支持的较旧版本中打开 **HACS**。
+2. 选择 **Panel Assistant** 仓库设备。展开已禁用的实体，打开 **预发布**。
+3. 在实体设置中开启 **已启用**，选择 **更新**。然后打开 **诊断** 下的 **预发布** 开关。
+4. 在 Marketplace 的 **设置**、**更新** 中，或在 HACS 的 Panel Assistant 中安装提供的预发布版本，然后重启 Home Assistant。
+
+从 0.9 升级到 1.0 之前，请阅读[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)，包括备份步骤。运行 1.0 应用的面板无法回退到 0.9。关闭预发布开关并不意味着安装旧版本就安全了；如需回退，请按照指南中的备份恢复说明操作。
 
 ## 您将获得什么
 
@@ -35,8 +60,8 @@ Panel Assistant 刚刚起步，正在快速发展。已安装的面板通过 Hom
 
 ## 如果您使用过早期的 0.1.0 集成
 
-在“设备与服务”中移除旧的集成条目，然后从 HACS 中移除其下载。在首次重启之前，添加此仓库并在 HACS 中下载 Panel Assistant **0.9.0**（选择 **重新下载**，再选择版本 0.9.0）。重启 Home Assistant，然后使用面板的主机名或地址重新添加集成。
+在“设备与服务”中移除旧的集成条目，然后从 Marketplace 或 HACS 中移除其下载。在首次重启之前，添加此仓库并安装 Panel Assistant **0.9.0**。在 Marketplace 中，打开仓库的三点菜单，选择 **安装其他版本**；在 HACS 中，选择 **重新下载**。选择版本 **0.9.0**。重启 Home Assistant，然后使用面板的主机名或地址重新添加集成。
 
 如果已经安装 Panel Assistant 1.0，请在更改版本之前按照[如果迁移未完成](/zh-hans/manage/upgrade-to-1-0/#如果迁移未完成)中的说明操作。
 
-当时的面板仍运行旧的 ha-paneld 应用。Panel Assistant 1.0 无法将其迁移到新应用：请先安装 Panel Assistant 0.9.0（在 HACS 中打开 Panel Assistant，选择 **重新下载**，再选择版本 0.9.0），添加面板并使用其修复项完成迁移，然后再更新到 1.0。
+当时的面板仍运行旧的 ha-paneld 应用。Panel Assistant 1.0 无法将其迁移到新应用：请先安装 Panel Assistant 0.9.0（在 Marketplace 中，从仓库的三点菜单选择 **安装其他版本**；在 HACS 中，选择 **重新下载**；选择版本 **0.9.0**），添加面板并使用其修复项完成迁移，然后再更新到 1.0。

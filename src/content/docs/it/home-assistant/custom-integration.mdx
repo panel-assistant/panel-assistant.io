@@ -1,27 +1,52 @@
 ---
 title: Installa l'integrazione
-description: Aggiungere Panel Assistant a Home Assistant tramite HACS, il punto di partenza.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+description: Installa Panel Assistant tramite Marketplace integrato in Home Assistant 2026.11 o successivo, oppure HACS sulle versioni precedenti supportate.
+sourceCommit: 45ad784a56e8c07917f0c76636d2b389a610b982
 ---
 
 import { LinkButton } from '@astrojs/starlight/components';
 
-Panel Assistant è un'integrazione personalizzata, aggiunta tramite [HACS](https://hacs.xyz/). Sono necessari Home Assistant 2026.8.3 o successivo e HACS.
+Panel Assistant è un’integrazione personalizzata. È necessario Home Assistant **2026.8.3 o successivo**. Con **2026.11 o successivo**, usa [Marketplace](https://www.home-assistant.io/integrations/marketplace/) integrato. Da **2026.8.3 a 2026.10**, usa [HACS](https://hacs.xyz/).
 
 <LinkButton
   href="https://my.home-assistant.io/redirect/hacs_repository/?owner=panel-assistant&repository=ha-integration&category=integration"
   icon="external"
 >
-  Apri in HACS
+  Apri in Marketplace o HACS
 </LinkButton>
 
-Quel pulsante apre il repository nell'HACS della tua istanza Home Assistant, pronto per il download. Se preferisci procedere manualmente:
+Questo pulsante apre il repository in Marketplace su Home Assistant 2026.11 o successivo, oppure in HACS sulle versioni precedenti supportate. Apre la pagina di download; in seguito devi ancora installare l’integrazione e aggiungere Panel Assistant.
 
-1. In HACS, aggiungi `https://github.com/panel-assistant/ha-integration` come repository personalizzato con la categoria **Integrazione**.
-2. Scarica **Panel Assistant**, poi riavvia Home Assistant.
-3. Vai in **Impostazioni**, **Dispositivi e servizi**, **Aggiungi integrazione** e scegli **Panel Assistant**.
+## Home Assistant 2026.11 o successivo: Marketplace
 
-HACS propone l'ultima versione stabile, 0.9.0. Per provare la release candidate 1.0, apri **Impostazioni**, **Dispositivi e servizi**, **HACS** e scegli il dispositivo **Panel Assistant**. Espandi le entità disabilitate e apri **Pre-release**. Nelle sue impostazioni, attiva **Abilitata** e seleziona **Aggiorna**, poi attiva l'interruttore **Pre-release** sotto **Diagnostica**. Torna a Panel Assistant in HACS e scarica la release candidate, poi riavvia Home Assistant. Leggi prima [Aggiornare alla versione 1.0](/it/manage/upgrade-to-1-0/), perché un pannello con l'app 1.0 non può tornare alla 0.9.
+1. Accedi come amministratore e apri **Impostazioni**, **Marketplace**. Accetta l’avviso quando richiesto.
+2. Scegli **Aggiungi da link**, inserisci `https://github.com/panel-assistant/ha-integration` e seleziona **Aggiungi**. Collega il tuo account GitHub se Marketplace lo richiede.
+3. Apri **Panel Assistant**, scegli **Installa**, controlla la versione e conferma con **Installa**.
+4. Segui le istruzioni di configurazione dopo l’installazione. Se Marketplace richiede un riavvio di Home Assistant, eseguilo prima. Puoi anche aprire **Impostazioni**, **Dispositivi e servizi**, **Aggiungi integrazione** e scegliere **Panel Assistant**.
+
+Se usavi HACS prima di aggiornare Home Assistant alla 2026.11, Marketplace conserva i repository installati e personalizzati. Per questo cambiamento non devi rimuovere e reinstallare Panel Assistant.
+
+## Home Assistant da 2026.8.3 a 2026.10: HACS
+
+1. Installa [HACS](https://hacs.xyz/docs/use/) se non lo hai già.
+2. In HACS, aggiungi `https://github.com/panel-assistant/ha-integration` come repository personalizzato con la categoria **Integrazione**.
+3. Scarica **Panel Assistant**, poi riavvia Home Assistant.
+4. Vai in **Impostazioni**, **Dispositivi e servizi**, **Aggiungi integrazione** e scegli **Panel Assistant**.
+
+<a id="updates-and-pre-releases"></a>
+
+## Aggiornamenti e pre-release
+
+Per impostazione predefinita vengono proposte le versioni stabili. Su Home Assistant 2026.11 o successivo, gli aggiornamenti dell’integrazione compaiono in **Impostazioni**, **Aggiornamenti**. Installa l’aggiornamento, poi riavvia Home Assistant per caricarlo, seguendo la Riparazione di riavvio. Sulle versioni precedenti supportate, scarica l’aggiornamento in HACS e riavvia Home Assistant quando richiesto. L’aggiornamento di questa integrazione è separato dall’[aggiornamento dell’app del pannello](/it/manage/updates-and-recovery/). Home Assistant mostra un breve riepilogo di ogni aggiornamento; le [note di rilascio](/it/release-notes/) contengono l’elenco completo delle modifiche.
+
+Per ricevere una pre-release più recente:
+
+1. Apri **Impostazioni**, **Dispositivi e servizi**, poi **Marketplace** su Home Assistant 2026.11 o successivo, oppure **HACS** sulle versioni precedenti supportate.
+2. Scegli il dispositivo del repository **Panel Assistant**. Espandi le sue entità disabilitate e apri **Pre-release**.
+3. Nelle impostazioni dell’entità, attiva **Abilitata** e seleziona **Aggiorna**. Poi attiva l’interruttore **Pre-release** sotto **Diagnostica**.
+4. Installa la pre-release proposta da **Impostazioni**, **Aggiornamenti** per Marketplace, oppure da Panel Assistant in HACS, poi riavvia Home Assistant.
+
+Prima di passare dalla 0.9 alla 1.0, leggi [Aggiornare alla versione 1.0](/it/manage/upgrade-to-1-0/), compresi i passaggi di backup. Un pannello con l’app 1.0 non può tornare alla 0.9. Disattivare l’interruttore delle pre-release non rende sicura l’installazione di una versione precedente; se devi tornare indietro, segui le istruzioni di ripristino del backup nella guida.
 
 ## Cosa ottieni
 
@@ -35,8 +60,8 @@ Panel Assistant è nuovo e si evolve rapidamente. Un pannello già installato si
 
 ## Se usavi la precedente integrazione 0.1.0
 
-Rimuovi la vecchia voce dell'integrazione sotto Dispositivi e servizi, poi rimuovi il relativo download da HACS. Aggiungi questo repository e scarica Panel Assistant **0.9.0** in HACS prima del primo riavvio (scegli **Scarica di nuovo** e seleziona la versione 0.9.0). Riavvia Home Assistant, poi aggiungi nuovamente l'integrazione usando il nome host o l'indirizzo del pannello.
+Rimuovi la vecchia voce dell’integrazione sotto Dispositivi e servizi, poi rimuovi il relativo download da Marketplace o HACS. Aggiungi questo repository e installa Panel Assistant **0.9.0** prima del primo riavvio. In Marketplace, apri il menu a tre punti del repository e scegli **Installa un’altra versione**; in HACS, scegli **Scarica di nuovo**. Seleziona la versione **0.9.0**. Riavvia Home Assistant, poi aggiungi nuovamente l’integrazione usando il nome host o l’indirizzo del pannello.
 
 Se hai già installato Panel Assistant 1.0, segui [Se una migrazione non è stata completata](/it/manage/upgrade-to-1-0/#se-una-migrazione-non-è-stata-completata) prima di cambiare versione.
 
-Un pannello di quel periodo esegue ancora la vecchia app ha-paneld. Panel Assistant 1.0 non può migrarlo alla nuova app: installa prima Panel Assistant 0.9.0 (in HACS, apri Panel Assistant, scegli **Scarica di nuovo** e seleziona la versione 0.9.0), aggiungi il pannello e migralo con la sua Riparazione, poi aggiorna alla 1.0.
+Un pannello di quel periodo esegue ancora la vecchia app ha-paneld. Panel Assistant 1.0 non può migrarlo alla nuova app: installa prima Panel Assistant 0.9.0 (in Marketplace, scegli **Installa un’altra versione** dal menu a tre punti del repository; in HACS, **Scarica di nuovo**; seleziona la versione **0.9.0**), aggiungi il pannello e migralo con la sua Riparazione, poi aggiorna alla 1.0.

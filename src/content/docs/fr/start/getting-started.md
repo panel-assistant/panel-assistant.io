@@ -1,7 +1,7 @@
 ---
 title: Premiers pas
 description: En quelques minutes, passez d’un panneau mural Android non configuré à votre tableau de bord Home Assistant, avec Home Assistant pour vous guider à chaque étape.
-sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
+sourceCommit: e919a9dd655eb7095993ae5e1e3b5dbe7af600c4
 ---
 
 Si vous avez déjà configuré un panneau mural ou un kiosque, vous vous souvenez sans doute du déroulement : installer des applications manuellement, chercher un moteur de navigateur capable d’afficher un tableau de bord, tâtonner dans les réglages et ne jamais vraiment faire confiance au prochain redémarrage. Configurer un panneau avec Panel Assistant sera une agréable surprise. Vous pouvez terminer en quelques minutes et, même si le panneau est au mur, vous n’aurez pas à vous lever de votre chaise. Bon, peut-être une fois ;-)
@@ -10,10 +10,10 @@ La première heure est la partie difficile de la mise en route de tout panneau. 
 
 ## 1. Installer l’intégration
 
-Ajoutez Panel Assistant via HACS et redémarrez Home Assistant. C’est la seule chose que vous installez à la main. Ensuite, Home Assistant vous guide. Voir [Installer l’intégration](/fr/home-assistant/custom-integration/).
+Sur Home Assistant **2026.11 ou ultérieur**, installez Panel Assistant depuis **Paramètres**, **Marketplace**. Sur les versions antérieures compatibles, de **2026.8.3 à 2026.10**, installez-le via HACS et redémarrez Home Assistant. Marketplace peut permettre de le configurer immédiatement ; suivez d’abord toute demande de redémarrage. C’est la seule chose que vous installez manuellement. [Installer l’intégration](/fr/home-assistant/custom-integration/) explique les deux méthodes et comment recevoir les préversions.
 
 :::note
-Panel Assistant 1.0 est une version candidate. HACS propose la version 0.9.0 par défaut. Pour essayer la version candidate, rendez disponible puis activez l’interrupteur **Préversion** sur l’appareil Panel Assistant sous **Paramètres**, **Appareils et services**, **HACS** ; [Installer l’intégration](/fr/home-assistant/custom-integration/) détaille l’étape de l’entité désactivée. Un panneau qui exécute l’application 1.0 ne peut pas revenir à la version 0.9 ; [Passer à la version 1.0](/fr/manage/upgrade-to-1-0/) explique les changements.
+Si vous venez de la version 0.9, lisez [Passer à la version 1.0](/fr/manage/upgrade-to-1-0/) avant de commencer et conservez les sauvegardes de Home Assistant et des panneaux qui y sont décrites. Un panneau qui exécute l’application 1.0 ne peut pas revenir à la version 0.9.
 :::
 
 ## 2. Activer le débogage sur le panneau
@@ -140,7 +140,7 @@ Dans la version 1.0.0-rc2 non encore publiée, la configuration peut se terminer
 
 ## Ce qu’il vous faut
 
-- Home Assistant 2026.8.3 ou plus récent, avec HACS.
+- Home Assistant 2026.8.3 ou ultérieur. Utilisez Marketplace intégré à partir de 2026.11, ou HACS sur les versions antérieures compatibles.
 - Un panneau mural ARM sous Android 8.0 ou une version plus récente, avec un accès au débogage. La plupart des panneaux fonctionnent avec le profil matériel générique, et [Choisir un panneau](/fr/install/supported-panels/) répertorie les modèles dont le matériel est entièrement pris en charge.
 - Pour l’option USB, un navigateur basé sur Chromium, comme Chrome ou Edge.
 

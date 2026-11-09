@@ -1,7 +1,7 @@
 ---
 title: Aan de slag
 description: Van een leeg Android-wandpaneel naar je Home Assistant-dashboard in een paar minuten, waarbij Home Assistant je bij elke stap begeleidt.
-sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
+sourceCommit: e919a9dd655eb7095993ae5e1e3b5dbe7af600c4
 ---
 
 Als je al eens een wandpaneel of kiosk hebt ingericht, weet je waarschijnlijk nog hoe dat ging: apps sideloaden, zoeken naar een browser-engine die een dashboard kon tekenen, gokken naar instellingen, en de volgende herstart nooit helemaal vertrouwen. Een paneel instellen met Panel Assistant zal als een aangename schok komen. Je kunt binnen een paar minuten klaar zijn, en zelfs als het paneel al aan de muur hangt, hoef je niet uit je stoel op te staan. Oké, misschien één keer ;-)
@@ -10,10 +10,10 @@ Het lastigste deel van elk paneel is het eerste uur. Panel Assistant doet dat uu
 
 ## 1. Installeer de integratie
 
-Voeg Panel Assistant toe via HACS en start Home Assistant opnieuw op. Dit is het enige dat je handmatig moet installeren. Vanaf hier begeleidt Home Assistant je verder. Zie [De integratie installeren](/nl/home-assistant/custom-integration/).
+Installeer Panel Assistant op Home Assistant **2026.11 of nieuwer** via **Instellingen**, **Marketplace**. Installeer het op ondersteunde oudere versies, **2026.8.3 tot en met 2026.10**, via HACS en herstart Home Assistant. In Marketplace kun je de integratie mogelijk meteen instellen; volg eerst eventuele herstartmeldingen. Dit is het enige dat je handmatig installeert. Zie [De integratie installeren](/nl/home-assistant/custom-integration/) voor beide routes en het inschakelen van pre-releases.
 
 :::note
-Panel Assistant 1.0 is een release candidate. HACS biedt standaard 0.9.0. Wil je de release candidate proberen, activeer dan de schakelaar **Pre-release** op het apparaat Panel Assistant onder **Instellingen**, **Apparaten en diensten**, **HACS** en zet hem aan; [De integratie installeren](/nl/home-assistant/custom-integration/) legt de stap met de uitgeschakelde entiteit uit. Een paneel waarop de 1.0-app draait, kan niet terug naar 0.9; [Upgraden naar 1.0](/nl/manage/upgrade-to-1-0/) legt uit wat er verandert.
+Als je bijwerkt vanaf 0.9, lees dan vóór je begint [Upgraden naar 1.0](/nl/manage/upgrade-to-1-0/) en bewaar de daarin beschreven back-ups van Home Assistant en je panelen. Een paneel waarop de 1.0-app draait, kan niet terug naar 0.9.
 :::
 
 ## 2. Schakel foutopsporing in op het paneel
@@ -140,7 +140,7 @@ In de nog niet uitgebrachte versie 1.0.0-rc2 kan de configuratie worden afgerond
 
 ## Wat je nodig hebt
 
-- Home Assistant 2026.8.3 of nieuwer, met HACS.
+- Home Assistant 2026.8.3 of nieuwer. Gebruik de ingebouwde Marketplace op 2026.11 of nieuwer, of HACS op ondersteunde oudere versies.
 - Een ARM-wandpaneel met Android 8.0 of nieuwer en toegang tot foutopsporing. De meeste panelen werken met het generieke hardwareprofiel, en [Een paneel kiezen](/nl/install/supported-panels/) noemt de modellen met volledige hardware-ondersteuning.
 - Voor de USB-optie heb je een op Chromium gebaseerde browser nodig, zoals Chrome of Edge.
 

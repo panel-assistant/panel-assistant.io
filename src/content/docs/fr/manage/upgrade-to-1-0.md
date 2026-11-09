@@ -1,10 +1,10 @@
 ---
 title: Passer à la version 1.0
 description: Faire passer Home Assistant et vos panneaux de Panel Assistant 0.9 à 1.0, et comprendre ce qu’implique un retour en arrière.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 45ad784a56e8c07917f0c76636d2b389a610b982
 ---
 
-Panel Assistant 1.0 et l’application de panneau 1.0 évoluent ensemble. L’intégration 1.0 communique uniquement avec l’application de panneau 1.0, et celle-ci uniquement avec l’intégration 1.0 : aucune ne fonctionne avec un partenaire 0.9. Vous mettez d’abord à jour l’intégration, puis chaque panneau depuis Home Assistant, et **un panneau qui exécute l’application 1.0 ne peut pas revenir à la version 0.9**. Lisez toute cette page avant de commencer.
+Panel Assistant 1.0 et l’application de panneau 1.0 évoluent ensemble. L’intégration 1.0 communique uniquement avec l’application de panneau 1.0, et celle-ci uniquement avec l’intégration 1.0 : aucune ne fonctionne avec un partenaire 0.9. Vous mettez d’abord à jour l’intégration, puis chaque panneau depuis Home Assistant, et **un panneau qui exécute l’application 1.0 ne peut pas revenir à la version 0.9**. Lisez toute cette page avant de commencer. Les [notes de version de 1.0.0](/fr/release-notes/#panel-assistant-100) répertorient tous les changements.
 
 ## Avant de commencer
 
@@ -16,7 +16,7 @@ Panel Assistant 1.0 et l’application de panneau 1.0 évoluent ensemble. L’in
 
 ## 1. Mettre à jour l’intégration
 
-La version 1.0 est d’abord proposée comme version candidate. Ouvrez **Paramètres**, **Appareils et services**, **HACS**, puis choisissez l’appareil **Panel Assistant**. Développez les entités désactivées et ouvrez **Préversion**. Dans ses paramètres, activez **Activé** et sélectionnez **Mettre à jour**, puis activez l’interrupteur **Préversion** sous **Diagnostic**. Revenez à Panel Assistant dans HACS et téléchargez la version candidate 1.0. Redémarrez Home Assistant lorsque HACS vous le demande, ou lorsque la Réparation **Redémarrer Home Assistant pour terminer la mise à jour de Panel Assistant** apparaît.
+Sur Home Assistant **2026.11 ou ultérieur**, installez la mise à jour de Panel Assistant depuis **Paramètres**, **Mises à jour**. Sur les versions antérieures compatibles, de **2026.8.3 à 2026.10**, téléchargez la mise à jour dans HACS. Redémarrez ensuite Home Assistant pour charger la nouvelle intégration, en suivant la Réparation de redémarrage ou la demande de HACS. [Installer l’intégration](/fr/home-assistant/custom-integration/#updates-and-pre-releases) explique comment recevoir les préversions plus récentes dans Marketplace ou HACS.
 
 ## 2. Vérifier les Réparations
 
@@ -38,10 +38,10 @@ Les deux parties diffèrent.
 
 **L’intégration peut revenir en arrière tant qu’aucun panneau n’exécute la version 1.0.** Restaurez la sauvegarde Home Assistant créée avant de commencer. Cela annule aussi toute autre modification apportée à Home Assistant depuis sa création. Vos panneaux sont toujours sous leur application 0.9 et se reconnectent à la version 0.9.0. Dès qu’un panneau exécute l’application 1.0, restaurer la sauvegarde rend ce panneau inaccessible depuis Home Assistant jusqu’au retour de l’intégration en version 1.0.
 
-Ne revenez pas en arrière en retéléchargeant la version 0.9.0 dans HACS par-dessus la version 1.0. La mise à jour 1.0 supprime un réglage dont dépend la version 0.9.0 ; sans lui, la version 0.9.0 renvoie vers MQTT des panneaux déjà migrés, alors que l’application de panneau 1.0 n’y répond plus. Restaurez plutôt la sauvegarde.
+Ne revenez pas en arrière en installant la version 0.9.0 par-dessus la version 1.0 via Marketplace ou HACS. La mise à jour 1.0 supprime un réglage dont dépend la version 0.9.0 ; sans lui, la version 0.9.0 renvoie vers MQTT des panneaux déjà migrés, alors que l’application de panneau 1.0 n’y répond plus. Restaurez plutôt la sauvegarde.
 
 ## Si une migration n’a pas été terminée
 
-Si la version 1.0 indique qu’un panneau n’a jamais été migré depuis MQTT ou exécute encore l’ancienne application, la Réparation vous demande de choisir **Retélécharger** dans HACS, de sélectionner 0.9.0, d’y terminer la migration, puis de réinstaller la version 1.0. Ne retéléchargez pas 0.9.0 par-dessus 1.0. Tant qu’aucun de vos panneaux n’exécute encore l’application 1.0, revenez à 0.9.0 en restaurant la sauvegarde Home Assistant créée avant la mise à jour, pour la raison ci-dessus. Terminez ensuite la migration dans la version 0.9.0 et reprenez cette page depuis le début. Si d’autres panneaux exécutent déjà l’application 1.0, ou si vous n’avez pas de sauvegarde antérieure à la mise à jour, demandez de l’aide sur [Discord](https://panel-assistant.io/go/discord) ou dans les [tickets](https://github.com/panel-assistant/ha-integration/issues) avant de modifier quoi que ce soit.
+Si la version 1.0 indique qu’un panneau n’a jamais été migré depuis MQTT ou exécute encore l’ancienne application, suivez les étapes de récupération sûre de la Réparation pour terminer la migration avec Panel Assistant 0.9.0, puis revenir à la version 1.0. N’installez pas 0.9.0 par-dessus 1.0 via Marketplace ou HACS. Tant qu’aucun de vos panneaux n’exécute encore l’application 1.0, revenez à 0.9.0 en restaurant la sauvegarde Home Assistant créée avant la mise à jour, pour la raison ci-dessus. Terminez ensuite la migration dans la version 0.9.0 et reprenez cette page depuis le début. Si d’autres panneaux exécutent déjà l’application 1.0, ou si vous n’avez pas de sauvegarde antérieure à la mise à jour, demandez de l’aide sur [Discord](https://panel-assistant.io/go/discord) ou dans les [tickets](https://github.com/panel-assistant/ha-integration/issues) avant de modifier quoi que ce soit.
 
 Pour un panneau encore sur MQTT, la Réparation propose aussi de repartir de zéro : supprimez l’appareil du panneau sous l’intégration MQTT et ajoutez de nouveau le panneau. Cela crée de nouvelles entités et ne conserve aucun historique.

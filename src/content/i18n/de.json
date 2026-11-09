@@ -137,5 +137,6 @@
   "reports.behavior.relays": "Relais",
   "reports.behavior.speaker": "Lautsprecher",
   "reports.behavior.microphone": "Mikrofon",
-  "reports.behavior.restart": "Wiederherstellung nach Neustart"
+  "reports.behavior.restart": "Wiederherstellung nach Neustart",
+  "sidebar.release_notes": "Versionshinweise"
 }

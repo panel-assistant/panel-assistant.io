@@ -6,7 +6,7 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 
 ## Aggiornare un pannello
 
-**Da Home Assistant.** Ogni pannello ha un'entità di aggiornamento. Quando viene pubblicata una versione più recente, l'entità la propone e basta premere un pulsante per installarla; Panel Assistant installa l'aggiornamento e conferma che il pannello sia tornato a funzionare correttamente. Questa è la procedura da usare.
+**Da Home Assistant.** Ogni pannello ha un'entità di aggiornamento. Quando viene pubblicata una versione più recente, l'entità la propone e basta premere un pulsante per installarla; Panel Assistant installa l'aggiornamento e conferma che il pannello sia tornato a funzionare correttamente. Questa è la procedura da usare. Le [note di rilascio](/it/release-notes/) indicano cosa è cambiato in ogni versione.
 
 Un aggiornamento inizia quando Panel Assistant o tu lo richiedete esplicitamente. L'app del pannello non installa aggiornamenti pianificati. La scheda **Installa** della sua interfaccia web permette anche di scegliere e installare una versione dell'app del pannello, inclusa una versione preliminare. La scelta si applica all'installazione che avvii; non esiste un canale di aggiornamento salvato.
 

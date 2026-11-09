@@ -30,7 +30,7 @@ Pulsa **Buscar un paquete…** para abrir una lista de aplicaciones del panel qu
 - **Otras aplicaciones**: aplicaciones del panel que no forman parte de los componentes básicos de Android. En un panel sin un perfil conocido, aquí es donde debes buscar complementos del fabricante con una entrada en el lanzador o permiso de superposición. Si un paquete no aparece en la lista, puedes introducir su nombre directamente.
 - **Mayor uso de CPU**: las que más CPU consumen en ese momento. Restringe solo las que reconozcas.
 
-Cada entrada tiene un botón **Controlar**; también puedes escribir directamente el nombre de un paquete si lo conoces. **Controlar** actúa inmediatamente, sin guardar por separado, y vuelve a aplicarse en cada arranque. Un paquete restringido o ya desactivado muestra **Volver a habilitar**, que revierte la acción. La tarjeta solo enumera lo que has restringido, con su estado: `active`, `disabled` o `not installed`.
+Cada entrada tiene un botón **Controlar**; también puedes escribir directamente el nombre de un paquete si lo conoces. **Controlar** actúa inmediatamente, sin guardar por separado, y vuelve a aplicarse en cada arranque. Un paquete restringido o ya desactivado muestra **Volver a habilitar**, que revierte la acción. La tarjeta enumera los paquetes que has seleccionado para restringir, cada uno con un botón **Volver a habilitar**.
 
 No se restringe nada hasta que pulses un botón Controlar. Sin root ni el auxiliar, la tarjeta permanece visible pero bloqueada y explica qué acceso falta.
 

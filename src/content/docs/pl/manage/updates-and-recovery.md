@@ -6,7 +6,7 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 
 ## Aktualizowanie panelu
 
-**Z Home Assistant.** Każdy panel ma encję aktualizacji. Gdy opublikowana zostaje nowsza wersja, encja ją oferuje, a instalację uruchamia się przyciskiem; Panel Assistant instaluje aktualizację i potwierdza, że panel wrócił do prawidłowego działania. Używaj tej drogi.
+**Z Home Assistant.** Każdy panel ma encję aktualizacji. Gdy opublikowana zostaje nowsza wersja, encja ją oferuje, a instalację uruchamia się przyciskiem; Panel Assistant instaluje aktualizację i potwierdza, że panel wrócił do prawidłowego działania. Używaj tej drogi. [Informacje o wydaniu](/pl/release-notes/) opisują zmiany w każdej wersji.
 
 Aktualizacja rozpoczyna się, gdy Panel Assistant lub ty jawnie jej zażądacie. Aplikacja panelu nie instaluje zaplanowanych aktualizacji. Karta **Instalacja** interfejsu internetowego pozwala też wybrać i zainstalować wersję aplikacji panelu, w tym wersję wstępną. Wybór dotyczy uruchamianej instalacji; nie ma zapisanego kanału aktualizacji.
 

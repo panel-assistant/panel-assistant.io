@@ -19,7 +19,7 @@ Avec cette chaîne d’outils installée localement :
 
 ## Docker
 
-Si vous préférez n’installer que Docker, [`tools/build/`](https://github.com/panel-assistant/android/tree/main/tools/build) construit une image aux versions fixées avec la même chaîne d’outils et y exécute Gradle. L’APK est créé dans votre arbre de travail, l’image est mise en cache après la première compilation, et les caches Gradle persistent dans un volume Docker nommé.
+Si vous préférez n’installer que Docker, [`tools/build/`](https://github.com/panel-assistant/android/tree/main/tools/build) construit une image Docker et y exécute Gradle. Son Dockerfile répertorie les paquets du SDK inclus dans l’image. L’APK est créé dans votre arbre de travail, l’image est mise en cache après la première compilation, et les caches Gradle persistent dans un volume Docker nommé.
 
 ```sh
 ./tools/build/build.sh                       # debug APK -> app/build/outputs/apk/debug/

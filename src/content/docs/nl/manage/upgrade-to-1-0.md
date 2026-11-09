@@ -1,10 +1,10 @@
 ---
 title: Upgraden naar 1.0
 description: Home Assistant en je panelen overzetten van Panel Assistant 0.9 naar 1.0, en wat teruggaan betekent.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 45ad784a56e8c07917f0c76636d2b389a610b982
 ---
 
-Panel Assistant 1.0 en de 1.0-paneel-app gaan samen over. De 1.0-integratie communiceert alleen met de 1.0-paneel-app, en de 1.0-paneel-app alleen met de 1.0-integratie. Geen van beide werkt dus met een 0.9-tegenhanger. Je werkt eerst de integratie bij en daarna elk paneel vanuit Home Assistant, en **een paneel waarop de 1.0-app draait, kan niet terug naar 0.9**. Lees de hele pagina voordat je begint.
+Panel Assistant 1.0 en de 1.0-paneel-app gaan samen over. De 1.0-integratie communiceert alleen met de 1.0-paneel-app, en de 1.0-paneel-app alleen met de 1.0-integratie. Geen van beide werkt dus met een 0.9-tegenhanger. Je werkt eerst de integratie bij en daarna elk paneel vanuit Home Assistant, en **een paneel waarop de 1.0-app draait, kan niet terug naar 0.9**. Lees de hele pagina voordat je begint. De [releasenotities voor 1.0.0](/nl/release-notes/#panel-assistant-100) vermelden alles wat is veranderd.
 
 ## Voordat je begint
 
@@ -16,7 +16,7 @@ Panel Assistant 1.0 en de 1.0-paneel-app gaan samen over. De 1.0-integratie comm
 
 ## 1. Werk de integratie bij
 
-1.0 wordt eerst als release candidate aangeboden. Open **Instellingen**, **Apparaten en diensten**, **HACS** en kies het apparaat **Panel Assistant**. Vouw de uitgeschakelde entiteiten uit en open **Pre-release**. Schakel in de instellingen ervan **Ingeschakeld** in en kies **Bijwerken**. Zet daarna de schakelaar **Pre-release** onder **Diagnostisch** aan. Ga terug naar Panel Assistant in HACS en download de 1.0-release candidate. Herstart Home Assistant wanneer HACS daarom vraagt of wanneer de reparatie **Herstart Home Assistant om het bijwerken van Panel Assistant af te ronden** verschijnt.
+Installeer de Panel Assistant-update op Home Assistant **2026.11 of nieuwer** via **Instellingen**, **Updates**. Download de update op ondersteunde oudere versies, **2026.8.3 tot en met 2026.10**, in HACS. Herstart daarna Home Assistant om de nieuwe integratie te laden, volgens de reparatie voor de herstart of de HACS-melding. [De integratie installeren](/nl/home-assistant/custom-integration/#updates-and-pre-releases) legt uit hoe je nieuwere pre-releases inschakelt in Marketplace of HACS.
 
 ## 2. Controleer de reparaties
 
@@ -38,12 +38,12 @@ Er zijn twee helften, en die verschillen.
 
 **De integratie kan terug zolang geen enkel paneel 1.0 draait.** Herstel de Home Assistant-back-up die je vóór de start maakte. Daarmee draai je ook alle andere wijzigingen in Home Assistant sinds die back-up terug. Je panelen draaien nog hun 0.9-app en verbinden opnieuw met 0.9.0. Zodra een paneel de 1.0-app draait, maakt herstel van de back-up dat paneel onbereikbaar vanuit Home Assistant totdat de integratie weer op 1.0 staat.
 
-Ga niet terug door in HACS 0.9.0 opnieuw over 1.0 te downloaden. De 1.0-update verwijdert een instelling waarop 0.9.0 vertrouwt. Zonder die instelling stuurt 0.9.0 al overgezette panelen terug naar MQTT, waarop de 1.0-paneel-app niet meer antwoordt. Herstel in plaats daarvan de back-up.
+Ga niet terug door via Marketplace of HACS 0.9.0 over 1.0 te installeren. De 1.0-update verwijdert een instelling waarop 0.9.0 vertrouwt. Zonder die instelling stuurt 0.9.0 al overgezette panelen terug naar MQTT, waarop de 1.0-paneel-app niet meer antwoordt. Herstel in plaats daarvan de back-up.
 
 <a id="if-a-move-was-not-finished"></a>
 
 ## Als een overstap niet is afgerond
 
-Zegt 1.0 dat een paneel nooit van MQTT is overgezet of nog de oude app draait, dan vraagt de reparatie je **Opnieuw downloaden** te kiezen in HACS, 0.9.0 te selecteren, de overstap daar af te ronden en daarna 1.0 opnieuw te installeren. Download 0.9.0 niet opnieuw over 1.0. Zolang geen van je panelen de 1.0-app draait, ga je om de bovenstaande reden terug naar 0.9.0 door de Home Assistant-back-up van vóór de update te herstellen. Rond daarna de overstap in 0.9.0 af en begin opnieuw aan deze pagina. Draaien andere panelen al de 1.0-app of heb je geen back-up van vóór de update, vraag dan op [Discord](https://panel-assistant.io/go/discord) of in de [issues](https://github.com/panel-assistant/ha-integration/issues) om hulp voordat je iets verandert.
+Zegt 1.0 dat een paneel nooit van MQTT is overgezet of nog de oude app draait, volg dan de veilige herstelstappen van de reparatie om de overstap met Panel Assistant 0.9.0 af te ronden en daarna naar 1.0 terug te keren. Installeer 0.9.0 niet over 1.0 via Marketplace of HACS. Zolang geen van je panelen de 1.0-app draait, ga je om de bovenstaande reden terug naar 0.9.0 door de Home Assistant-back-up van vóór de update te herstellen. Rond daarna de overstap in 0.9.0 af en begin opnieuw aan deze pagina. Draaien andere panelen al de 1.0-app of heb je geen back-up van vóór de update, vraag dan op [Discord](https://panel-assistant.io/go/discord) of in de [issues](https://github.com/panel-assistant/ha-integration/issues) om hulp voordat je iets verandert.
 
 Voor een paneel dat nog op MQTT zit, biedt de reparatie ook een nieuwe start: verwijder het apparaat van het paneel onder de MQTT-integratie en voeg het paneel opnieuw toe. Dat maakt nieuwe entiteiten aan en behoudt niets van de geschiedenis.

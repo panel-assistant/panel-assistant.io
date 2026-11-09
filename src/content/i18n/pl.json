@@ -140,5 +140,6 @@
   "reports.behavior.relays": "Przekaźniki",
   "reports.behavior.speaker": "Głośnik",
   "reports.behavior.microphone": "Mikrofon",
-  "reports.behavior.restart": "Przywrócenie po restarcie"
+  "reports.behavior.restart": "Przywrócenie po restarcie",
+  "sidebar.release_notes": "Informacje o wydaniu"
 }

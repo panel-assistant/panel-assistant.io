@@ -61,7 +61,7 @@ Partez des valeurs suggérées par la documentation de votre modèle ou votre ex
 
 ### Depuis la page Configurer du panneau
 
-Sur la carte **Voix**, le sélecteur de mots de réveil comporte une commande **Importer**. Choisissez le manifeste `.json` du modèle et son fichier `.tflite`, puis appuyez sur **Importer un mot d’activation entraîné**. Le panneau valide le modèle avec son propre moteur de mots de réveil avant de l’accepter ; s’il le refuse, rien n’est installé, et si un modèle du même nom avait déjà été importé, cet ancien modèle reste en place. Les manifestes sont limités à 16 KB et les modèles à 2 MB.
+Sur la carte **Voix**, le sélecteur de mots de réveil comporte une commande **Importer**. Choisissez le manifeste `.json` du modèle et son fichier `.tflite`, puis appuyez sur **Importer**. Le panneau valide le modèle avec son propre moteur de mots de réveil avant de l’accepter ; s’il le refuse, rien n’est installé, et si un modèle du même nom avait déjà été importé, cet ancien modèle reste en place. Les manifestes sont limités à 16 KB et les modèles à 2 MB.
 
 L’identifiant du mot de réveil est dérivé du nom du fichier `.tflite`, mis en minuscules et réduit aux lettres, chiffres et traits de soulignement (il doit commencer par une lettre). Il ne peut pas réutiliser l’identifiant d’un mot de réveil intégré, et importer un modèle sous un nom déjà utilisé remplace cet ancien modèle.
 

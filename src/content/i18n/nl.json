@@ -139,5 +139,6 @@
   "reports.behavior.relays": "Relais",
   "reports.behavior.speaker": "Luidspreker",
   "reports.behavior.microphone": "Microfoon",
-  "reports.behavior.restart": "Herstel na herstart"
+  "reports.behavior.restart": "Herstel na herstart",
+  "sidebar.release_notes": "Releasenotities"
 }

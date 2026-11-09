@@ -30,7 +30,7 @@ Naciśnij **Znajdź pakiet…**, aby otworzyć listę aplikacji panelu, którymi
 - **Inne aplikacje**: aplikacje na panelu, które nie należą do podstawowych składników systemu Android. Na panelu bez znanego profilu to tutaj należy szukać dodatków producenta z pozycją w menu uruchamiania aplikacji lub uprawnieniem do wyświetlania nakładek. Jeśli pakietu nie ma na liście, możesz wpisać jego nazwę bezpośrednio.
 - **Największe użycie CPU**: to, co aktualnie najbardziej obciąża CPU. Ograniczaj tylko aplikacje, które rozpoznajesz.
 
-Każdy wpis ma przycisk **Poskrom**. Możesz też wpisać znaną nazwę pakietu bezpośrednio w polu. **Poskrom** działa natychmiast, bez osobnego zapisywania, i jest stosowane ponownie przy każdym uruchomieniu. Ograniczony lub już wyłączony pakiet pokazuje zamiast tego **Włącz ponownie**, co odwraca działanie. Sama karta pokazuje tylko ograniczone przez ciebie pakiety, każdy ze stanem: `active`, `disabled` lub `not installed`.
+Każdy wpis ma przycisk **Poskrom**. Możesz też wpisać znaną nazwę pakietu bezpośrednio w polu. **Poskrom** działa natychmiast, bez osobnego zapisywania, i jest stosowane ponownie przy każdym uruchomieniu. Ograniczony lub już wyłączony pakiet pokazuje zamiast tego **Włącz ponownie**, co odwraca działanie. Sama karta pokazuje pakiety wybrane do ograniczenia, każdy z przyciskiem **Włącz ponownie**.
 
 Nic nie jest ograniczane, dopóki nie naciśniesz przycisku Poskrom. Bez roota lub pomocnika karta pozostaje widoczna, ale zablokowana, z wyjaśnieniem brakującego dostępu.
 

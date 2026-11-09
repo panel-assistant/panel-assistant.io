@@ -19,7 +19,7 @@ Wenn diese Werkzeuge lokal installiert sind:
 
 ## Docker
 
-Wenn du außer Docker nichts installieren möchtest, baut [`tools/build/`](https://github.com/panel-assistant/android/tree/main/tools/build) ein Image mit festgelegten Versionen derselben Werkzeuge und führt Gradle darin aus. Das APK landet in deinem Arbeitsverzeichnis. Das Image wird nach dem ersten Build zwischengespeichert, und Gradle-Caches bleiben in einem benannten Docker-Volume erhalten.
+Wenn du außer Docker nichts installieren möchtest, baut [`tools/build/`](https://github.com/panel-assistant/android/tree/main/tools/build) ein Docker-Image und führt Gradle darin aus. Sein Dockerfile listet die im Image enthaltenen SDK-Pakete auf. Das APK landet in deinem Arbeitsverzeichnis. Das Image wird nach dem ersten Build zwischengespeichert, und Gradle-Caches bleiben in einem benannten Docker-Volume erhalten.
 
 ```sh
 ./tools/build/build.sh                       # debug APK -> app/build/outputs/apk/debug/

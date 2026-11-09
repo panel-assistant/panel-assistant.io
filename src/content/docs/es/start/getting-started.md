@@ -1,7 +1,7 @@
 ---
 title: Primeros pasos
 description: De un panel de pared Android sin configurar a tu panel de control de Home Assistant en minutos, con Home Assistant guiándote en cada paso.
-sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
+sourceCommit: e919a9dd655eb7095993ae5e1e3b5dbe7af600c4
 ---
 
 Si alguna vez has configurado un panel de pared o un quiosco, probablemente recuerdes cómo fue: instalar apps por tu cuenta, buscar un motor de navegador capaz de mostrar un panel de control, probar ajustes a ciegas y no acabar de fiarte del siguiente reinicio. Configurar un panel con Panel Assistant será una sorpresa agradable. Puedes terminar en minutos y, aunque el panel esté en la pared, no tendrás que levantarte de la silla. Bueno, quizá una vez ;-)
@@ -10,10 +10,10 @@ La parte difícil de cualquier panel es la primera hora. Panel Assistant se enca
 
 ## 1. Instala la integración
 
-Añade Panel Assistant mediante HACS y reinicia Home Assistant. Es lo único que instalas a mano. A partir de aquí, Home Assistant te guía. Consulta [Instalar la integración](/es/home-assistant/custom-integration/).
+En Home Assistant **2026.11 o posterior**, instala Panel Assistant desde **Configuración**, **Marketplace**. En versiones anteriores compatibles, de **2026.8.3 a 2026.10**, instálalo mediante HACS y reinicia Home Assistant. Marketplace puede permitir configurarlo inmediatamente; sigue primero cualquier indicación de reinicio. Es lo único que instalas manualmente. Consulta [Instalar la integración](/es/home-assistant/custom-integration/) para ambas vías y cómo activar las versiones preliminares.
 
 :::note
-Panel Assistant 1.0 es una versión candidata. HACS ofrece 0.9.0 de forma predeterminada. Para probar la versión candidata, habilita y activa el interruptor **Versión preliminar** en el dispositivo Panel Assistant, en **Configuración**, **Dispositivos y servicios**, **HACS**; [Instalar la integración](/es/home-assistant/custom-integration/) explica el paso de la entidad deshabilitada. Un panel que ejecuta la aplicación 1.0 no puede volver a 0.9; [Actualizar a 1.0](/es/manage/upgrade-to-1-0/) explica los cambios.
+Si actualizas desde 0.9, lee [Actualizar a 1.0](/es/manage/upgrade-to-1-0/) antes de empezar y conserva las copias de seguridad de Home Assistant y de los paneles que allí se describen. Un panel que ejecuta la aplicación 1.0 no puede volver a 0.9.
 :::
 
 ## 2. Activa la depuración en el panel
@@ -140,7 +140,7 @@ En la versión 1.0.0-rc2, aún no publicada, la configuración puede terminar au
 
 ## Qué necesitas
 
-- Home Assistant 2026.8.3 o posterior, con HACS.
+- Home Assistant 2026.8.3 o posterior. Utiliza Marketplace integrado en 2026.11 o posterior, o HACS en versiones anteriores compatibles.
 - Un panel de pared ARM con Android 8.0 o posterior y acceso de depuración. La mayoría de los paneles funcionan con el perfil de hardware genérico, y [Elegir un panel](/es/install/supported-panels/) enumera los modelos con compatibilidad completa con el hardware.
 - Para la opción USB, un navegador basado en Chromium, como Chrome o Edge.
 

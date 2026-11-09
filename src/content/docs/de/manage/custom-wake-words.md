@@ -61,7 +61,7 @@ Beginne mit den Werten aus der Dokumentation deines Modells oder deinem Notebook
 
 ### Über die Seite „Konfiguration“ des Panels
 
-Auf der Karte **Sprachassistent** bietet die Auswahl der Aktivierungswörter eine **Importfunktion**. Wähle das `.json`-Manifest des Modells und seine `.tflite`-Datei aus und drücke **Trainiertes Aktivierungswort importieren**. Das Panel prüft das Modell mit seiner eigenen Aktivierungswort-Engine, bevor es es annimmt. Lehnt es ein Modell ab, wird nichts installiert. War bereits ein Modell gleichen Namens importiert, bleibt dieses frühere Modell erhalten. Manifeste sind auf 16 KB und Modelle auf 2 MB begrenzt.
+Auf der Karte **Sprachassistent** bietet die Auswahl der Aktivierungswörter eine **Importfunktion**. Wähle das `.json`-Manifest des Modells und seine `.tflite`-Datei aus und drücke **Importieren**. Das Panel prüft das Modell mit seiner eigenen Aktivierungswort-Engine, bevor es es annimmt. Lehnt es ein Modell ab, wird nichts installiert. War bereits ein Modell gleichen Namens importiert, bleibt dieses frühere Modell erhalten. Manifeste sind auf 16 KB und Modelle auf 2 MB begrenzt.
 
 Die ID des Aktivierungsworts wird aus dem Namen der `.tflite`-Datei abgeleitet, kleingeschrieben und auf Buchstaben, Ziffern und Unterstriche beschränkt (sie muss mit einem Buchstaben beginnen). Die ID eines mitgelieferten Aktivierungsworts darf nicht wiederverwendet werden. Der Import unter einem bereits verwendeten Namen ersetzt das frühere Modell.
 

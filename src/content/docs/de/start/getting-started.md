@@ -1,7 +1,7 @@
 ---
 title: Erste Schritte
 description: In wenigen Minuten vom uneingerichteten Android-Wandpanel zum Home Assistant-Dashboard, mit Home Assistant als Begleiter bei jedem Schritt.
-sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
+sourceCommit: e919a9dd655eb7095993ae5e1e3b5dbe7af600c4
 ---
 
 Wenn du schon einmal ein Wandpanel oder einen Kiosk eingerichtet hast, erinnerst du dich wahrscheinlich an den Ablauf: Apps manuell installieren, nach einer Browser-Engine suchen, die ein Dashboard darstellen kann, Einstellungen erraten und dem nächsten Neustart nie ganz trauen. Die Einrichtung mit Panel Assistant wird dich angenehm überraschen. Du kannst in wenigen Minuten fertig sein, und selbst wenn das Panel schon an der Wand hängt, musst du nicht von deinem Stuhl aufstehen. Na gut, vielleicht einmal ;-)
@@ -10,10 +10,10 @@ Bei jedem Panel ist die erste Stunde der schwierige Teil. Panel Assistant übern
 
 ## 1. Die Integration installieren
 
-Füge Panel Assistant über HACS hinzu und starte Home Assistant neu. Das ist das Einzige, was du von Hand installierst. Ab jetzt führt dich Home Assistant durch den Ablauf. Siehe [Die Integration installieren](/de/home-assistant/custom-integration/).
+Ab Home Assistant **2026.11** installierst du Panel Assistant unter **Einstellungen**, **Marketplace**. Auf unterstützten älteren Versionen, **2026.8.3 bis 2026.10**, installierst du es über HACS und startest Home Assistant neu. Marketplace ermöglicht die Einrichtung unter Umständen sofort; befolge zuerst jede Aufforderung zum Neustart. Dies ist das Einzige, was du von Hand installierst. [Integration installieren](/de/home-assistant/custom-integration/) erklärt beide Wege und die Aktivierung von Vorabversionen.
 
 :::note
-Panel Assistant 1.0 ist ein Release Candidate. HACS bietet standardmäßig 0.9.0 an. Um den Release Candidate auszuprobieren, aktiviere die Entität und schalte den Schalter **Vorabversion** am Panel Assistant-Gerät unter **Einstellungen**, **Geräte & Dienste**, **HACS** ein; [Die Integration installieren](/de/home-assistant/custom-integration/) erklärt den Schritt für die deaktivierte Entität. Ein Panel mit der 1.0-App kann nicht zu 0.9 zurückkehren; [Upgrade auf 1.0](/de/manage/upgrade-to-1-0/) erklärt die Änderungen.
+Wenn du von 0.9 aktualisierst, lies vor Beginn [Upgrade auf 1.0](/de/manage/upgrade-to-1-0/) und bewahre die dort beschriebenen Home Assistant- und Panel-Sicherungen auf. Ein Panel mit der App 1.0 kann nicht zu 0.9 zurückkehren.
 :::
 
 ## 2. Debugging auf dem Panel einschalten
@@ -140,7 +140,7 @@ In der noch nicht veröffentlichten Version 1.0.0-rc2 kann die Einrichtung auch 
 
 ## Was du brauchst
 
-- Home Assistant 2026.8.3 oder neuer, mit HACS.
+- Home Assistant 2026.8.3 oder neuer. Verwende ab 2026.11 den integrierten Marketplace oder auf unterstützten älteren Versionen HACS.
 - Ein ARM-Wandpanel mit Android 8.0 oder neuer und Debugging-Zugang. Die meisten Panels funktionieren mit dem generischen Hardwareprofil. [Panel auswählen](/de/install/supported-panels/) listet die Modelle mit vollständiger Hardwareunterstützung auf.
 - Für die USB-Option einen Chromium-basierten Browser wie Chrome oder Edge.
 

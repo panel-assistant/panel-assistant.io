@@ -61,7 +61,7 @@ Parti dai valori suggeriti dalla documentazione del modello o dall'esecuzione de
 
 ### Dalla pagina Configura del pannello
 
-Nella scheda **Voce**, il selettore delle parole di attivazione ha un controllo di **importazione**. Scegli il manifesto `.json` del modello e il suo file `.tflite`, poi premi **Importa parola di attivazione addestrata**. Il pannello convalida il modello con il proprio motore delle parole di attivazione prima di accettarlo; se rifiuta un modello non viene installato nulla, e se era già stato importato un modello con lo stesso nome, quello precedente rimane invariato. I manifesti sono limitati a 16 KB e i modelli a 2 MB.
+Nella scheda **Voce**, il selettore delle parole di attivazione ha un controllo di **importazione**. Scegli il manifesto `.json` del modello e il suo file `.tflite`, poi premi **Importa**. Il pannello convalida il modello con il proprio motore delle parole di attivazione prima di accettarlo; se rifiuta un modello non viene installato nulla, e se era già stato importato un modello con lo stesso nome, quello precedente rimane invariato. I manifesti sono limitati a 16 KB e i modelli a 2 MB.
 
 L'ID della parola di attivazione deriva dal nome del file `.tflite`, convertito in minuscolo e ridotto a lettere, cifre e trattini bassi (deve iniziare con una lettera). Non può riutilizzare l'ID di una parola di attivazione inclusa, e importare un modello con un nome già usato sostituisce il modello precedente.
 

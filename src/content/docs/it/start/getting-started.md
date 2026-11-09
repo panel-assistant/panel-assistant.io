@@ -1,7 +1,7 @@
 ---
 title: Primi passi
 description: Da un pannello Android a parete non configurato alla tua plancia di Home Assistant in pochi minuti, con Home Assistant che ti guida a ogni passaggio.
-sourceCommit: 407e253db194d47963f8ded4df7dc5670a96c66b
+sourceCommit: e919a9dd655eb7095993ae5e1e3b5dbe7af600c4
 ---
 
 Se hai già configurato un pannello a parete o un kiosk, probabilmente ricordi com’è andata: installare app manualmente, cercare un motore del browser capace di mostrare una plancia, andare a tentativi con le impostazioni e non fidarti mai del tutto del prossimo riavvio. Configurare un pannello con Panel Assistant sarà una piacevole sorpresa. Puoi finire in pochi minuti e, anche se il pannello è già sulla parete, non dovrai alzarti dalla sedia. Va bene, forse una volta ;-)
@@ -10,10 +10,10 @@ La parte difficile di qualsiasi pannello è la prima ora. Panel Assistant se ne 
 
 ## 1. Installa l’integrazione
 
-Aggiungi Panel Assistant tramite HACS e riavvia Home Assistant. È l’unica cosa che installi a mano. Da qui in poi ti guida Home Assistant. Vedi [Installa l’integrazione](/it/home-assistant/custom-integration/).
+Su Home Assistant **2026.11 o successivo**, installa Panel Assistant da **Impostazioni**, **Marketplace**. Sulle versioni precedenti supportate, da **2026.8.3 a 2026.10**, installalo tramite HACS e riavvia Home Assistant. Marketplace potrebbe consentire la configurazione immediata; segui prima ogni richiesta di riavvio. È l’unica cosa che installi manualmente. [Installa l’integrazione](/it/home-assistant/custom-integration/) spiega entrambi i percorsi e come ricevere le pre-release.
 
 :::note
-Panel Assistant 1.0 è una release candidate. HACS propone la versione 0.9.0 per impostazione predefinita. Per provare la release candidate, abilita e attiva l'interruttore **Pre-release** sul dispositivo Panel Assistant in **Impostazioni**, **Dispositivi e servizi**, **HACS**; [Installa l'integrazione](/it/home-assistant/custom-integration/) descrive il passaggio relativo all'entità disabilitata. Un pannello con l'app 1.0 non può tornare alla 0.9; [Aggiornare alla versione 1.0](/it/manage/upgrade-to-1-0/) spiega cosa cambia.
+Se aggiorni dalla 0.9, leggi [Aggiornare alla versione 1.0](/it/manage/upgrade-to-1-0/) prima di iniziare e conserva i backup di Home Assistant e dei pannelli descritti nella guida. Un pannello che esegue l’app 1.0 non può tornare alla 0.9.
 :::
 
 ## 2. Attiva il debug sul pannello
@@ -140,7 +140,7 @@ Nella versione 1.0.0-rc2 non ancora rilasciata, la configurazione può essere co
 
 ## Cosa ti serve
 
-- Home Assistant 2026.8.3 o successivo, con HACS.
+- Home Assistant 2026.8.3 o successivo. Usa Marketplace integrato sulla 2026.11 o successiva, oppure HACS sulle versioni precedenti supportate.
 - Un pannello a parete ARM con Android 8.0 o successivo e accesso al debug. La maggior parte dei pannelli funziona con il profilo hardware generico e [Scegli un pannello](/it/install/supported-panels/) elenca i modelli con supporto hardware completo.
 - Per l’opzione USB, un browser basato su Chromium come Chrome o Edge.
 

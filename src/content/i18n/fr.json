@@ -138,5 +138,6 @@
   "reports.behavior.relays": "Relais",
   "reports.behavior.speaker": "Haut-parleur",
   "reports.behavior.microphone": "Microphone",
-  "reports.behavior.restart": "Récupération après redémarrage"
+  "reports.behavior.restart": "Récupération après redémarrage",
+  "sidebar.release_notes": "Notes de version"
 }

@@ -30,7 +30,7 @@ Druk op **Zoek een pakket…** om een lijst met mogelijk te beheren apps op het 
 - **Andere apps**: apps op het paneel die geen deel uitmaken van de kern van Android. Op een paneel zonder bekend profiel kun je hier zoeken naar toevoegingen van de fabrikant met een vermelding in de launcher of een machtiging voor overlays. Als een pakket niet in de lijst staat, kun je de naam ervan rechtstreeks invoeren.
 - **Hoogste CPU-gebruik**: wat op dat moment de meeste CPU gebruikt. Tem alleen iets dat je herkent.
 
-Elke vermelding heeft een knop **Temmen**, en als je de pakketnaam kent, kun je die ook rechtstreeks in het vak typen. **Temmen** werkt direct, zonder apart opslaan, en wordt bij elke start opnieuw toegepast. Bij een getemd of al uitgeschakeld pakket verschijnt **Opnieuw inschakelen**, waarmee je dit terugdraait. De kaart zelf vermeldt alleen wat je hebt getemd, met de toestand: `active`, `disabled` of `not installed`.
+Elke vermelding heeft een knop **Temmen**, en als je de pakketnaam kent, kun je die ook rechtstreeks in het vak typen. **Temmen** werkt direct, zonder apart opslaan, en wordt bij elke start opnieuw toegepast. Bij een getemd of al uitgeschakeld pakket verschijnt **Opnieuw inschakelen**, waarmee je dit terugdraait. De kaart zelf vermeldt de pakketten die je hebt geselecteerd om te temmen, elk met een knop **Opnieuw inschakelen**.
 
 Er wordt niets getemd totdat je op een knop Temmen drukt. Zonder root of de helper blijft de kaart zichtbaar maar vergrendeld, met uitleg over de ontbrekende toegang.
 

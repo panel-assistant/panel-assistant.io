@@ -138,5 +138,6 @@
   "reports.behavior.relays": "Relés",
   "reports.behavior.speaker": "Altavoz",
   "reports.behavior.microphone": "Micrófono",
-  "reports.behavior.restart": "Recuperación tras reinicio"
+  "reports.behavior.restart": "Recuperación tras reinicio",
+  "sidebar.release_notes": "Notas de la versión"
 }

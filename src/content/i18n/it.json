@@ -137,5 +137,6 @@
   "reports.behavior.relays": "Relè",
   "reports.behavior.speaker": "Altoparlante",
   "reports.behavior.microphone": "Microfono",
-  "reports.behavior.restart": "Ripristino dopo riavvio"
+  "reports.behavior.restart": "Ripristino dopo riavvio",
+  "sidebar.release_notes": "Note di rilascio"
 }

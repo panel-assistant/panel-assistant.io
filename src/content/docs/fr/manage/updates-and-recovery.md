@@ -6,7 +6,7 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 
 ## Mettre à jour un panneau
 
-**Depuis Home Assistant.** Chaque panneau possède une entité de mise à jour. Lorsqu’une version plus récente est publiée, l’entité la propose et un appui sur un bouton suffit à lancer l’installation ; Panel Assistant installe la mise à jour et confirme que le panneau a repris un fonctionnement normal. C’est la méthode à utiliser.
+**Depuis Home Assistant.** Chaque panneau possède une entité de mise à jour. Lorsqu’une version plus récente est publiée, l’entité la propose et un appui sur un bouton suffit à lancer l’installation ; Panel Assistant installe la mise à jour et confirme que le panneau a repris un fonctionnement normal. C’est la méthode à utiliser. Les [notes de version](/fr/release-notes/) indiquent ce qui a changé dans chaque version.
 
 Une mise à jour commence lorsque Panel Assistant ou vous-même la demandez explicitement. L’application du panneau n’installe pas de mises à jour planifiées. L’onglet **Installer** de son interface web vous permet aussi de choisir et d’installer une version de l’application du panneau, y compris une préversion. Ce choix s’applique à l’installation que vous lancez ; aucun canal de mise à jour n’est enregistré.
 

@@ -49,4 +49,4 @@ Fünfzehn Sekunden sind kein langsames Panel. Es ist ein Panel, das du aufgegebe
 - Berührungen werden als rohe Bildschirmereignisse im selben Moment auf beiden Panels eingespeist. Jeder Schritt wird vom Panel selbst aufgezeichnet. Die Uhr läuft von der Berührung bis zum Stillstand der Bildschirmänderungen. Ändert sich ein Schritt beim Ende seines Clips noch, ist der Durchlauf ungültig.
 - Drei Durchläufe je Zuordnung, der mittlere Durchlauf wird gefilmt. Eine Musikkarte, die Liedtexte aus dem Internet lud, wurde entfernt, da keine Panel-App einen externen Dienst beschleunigen kann. Die Live-Kameraseite blieb außen vor, weil ihre Zeit auf den Streamaufbau und nicht auf Dashboardarbeit entfällt.
 
-Dieselben Werte siehst du live auf jedem Panel Assistant-Panel unter **Leistung** in seiner Weboberfläche. [Leistung](/de/manage/performance/) erklärt, wie du sie auf deiner eigenen Hardware liest.
+Du kannst die CPU-Auslastung, die Reaktionsfähigkeit des Dashboards und den Home Assistant-Zustandsdatenstrom deines eigenen Panels unter **Leistung** in seiner Weboberfläche prüfen. [Leistung](/de/manage/performance/) erklärt, wie du diese Messungen liest.

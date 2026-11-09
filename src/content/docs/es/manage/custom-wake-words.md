@@ -61,7 +61,7 @@ Empieza por los valores que sugieran la documentación de tu modelo o la ejecuci
 
 ### Desde la página Configurar del panel
 
-En la tarjeta **Voz**, el selector de palabras de activación tiene un control de **importación**. Elige el manifiesto `.json` y el archivo `.tflite` del modelo y pulsa **Importar palabra de activación entrenada**. El panel valida el modelo con su propio motor de detección antes de aceptarlo; si lo rechaza, no se instala nada y, si ya había un modelo importado con el mismo nombre, se conserva el anterior. Los manifiestos están limitados a 16 KB y los modelos a 2 MB.
+En la tarjeta **Voz**, el selector de palabras de activación tiene un control de **importación**. Elige el manifiesto `.json` y el archivo `.tflite` del modelo y pulsa **Importar**. El panel valida el modelo con su propio motor de detección antes de aceptarlo; si lo rechaza, no se instala nada y, si ya había un modelo importado con el mismo nombre, se conserva el anterior. Los manifiestos están limitados a 16 KB y los modelos a 2 MB.
 
 El identificador de la palabra se deriva del nombre del archivo `.tflite`, convertido a minúsculas y reducido a letras, dígitos y guiones bajos (debe empezar por una letra). No puede reutilizar el identificador de una palabra incluida, e importar un modelo con un nombre ya utilizado sustituye al modelo anterior.
 

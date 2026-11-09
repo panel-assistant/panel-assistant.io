@@ -61,7 +61,7 @@ Zacznij od wartości sugerowanych przez dokumentację modelu lub przebieg notatn
 
 ### Ze strony Konfiguracja panelu
 
-Na karcie **Głos** selektor haseł wybudzania ma kontrolkę **importu**. Wybierz manifest `.json` modelu i jego plik `.tflite`, a następnie naciśnij **Importuj wyuczone słowo aktywujące**. Panel sprawdza model własnym silnikiem haseł przed zaakceptowaniem; jeśli go odrzuci, nic nie jest instalowane, a wcześniej zaimportowany model o tej samej nazwie pozostaje na miejscu. Limit manifestu to 16 KB, a modelu 2 MB.
+Na karcie **Głos** selektor haseł wybudzania ma kontrolkę **importu**. Wybierz manifest `.json` modelu i jego plik `.tflite`, a następnie naciśnij **Importuj**. Panel sprawdza model własnym silnikiem haseł przed zaakceptowaniem; jeśli go odrzuci, nic nie jest instalowane, a wcześniej zaimportowany model o tej samej nazwie pozostaje na miejscu. Limit manifestu to 16 KB, a modelu 2 MB.
 
 Identyfikator hasła pochodzi od nazwy pliku `.tflite`, zamienionej na małe litery i ograniczonej do liter, cyfr i podkreśleń (musi zaczynać się literą). Nie może ponownie używać identyfikatora dołączonego hasła, a import modelu pod używaną już nazwą zastępuje wcześniejszy model.
 

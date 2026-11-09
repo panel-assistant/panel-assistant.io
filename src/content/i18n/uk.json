@@ -141,5 +141,6 @@
   "reports.behavior.relays": "Реле",
   "reports.behavior.speaker": "Динамік",
   "reports.behavior.microphone": "Мікрофон",
-  "reports.behavior.restart": "Відновлення після перезапуску"
+  "reports.behavior.restart": "Відновлення після перезапуску",
+  "sidebar.release_notes": "Примітки до випуску"
 }

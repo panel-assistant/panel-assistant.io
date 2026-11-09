@@ -1,10 +1,10 @@
 ---
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 45ad784a56e8c07917f0c76636d2b389a610b982
 title: 升级到 1.0
 description: 将 Home Assistant 和面板从 Panel Assistant 0.9 迁移至 1.0，以及回退意味着什么。
 ---
 
-Panel Assistant 1.0 与 1.0 面板应用需要一同升级。1.0 集成只与 1.0 面板应用通信，1.0 面板应用也只与 1.0 集成通信，因此任一端都无法与 0.9 的另一端配合。请先更新集成，再从 Home Assistant 更新每块面板，而且**运行 1.0 应用的面板无法回退到 0.9**。开始之前，请阅读整页内容。
+Panel Assistant 1.0 与 1.0 面板应用需要一同升级。1.0 集成只与 1.0 面板应用通信，1.0 面板应用也只与 1.0 集成通信，因此任一端都无法与 0.9 的另一端配合。请先更新集成，再从 Home Assistant 更新每块面板，而且**运行 1.0 应用的面板无法回退到 0.9**。开始之前，请阅读整页内容。 [1.0.0 发行说明](/zh-hans/release-notes/#panel-assistant-100)列出了全部变更。
 
 ## 开始之前
 
@@ -16,7 +16,7 @@ Panel Assistant 1.0 与 1.0 面板应用需要一同升级。1.0 集成只与 1.
 
 ## 1. 更新集成
 
-1.0 首先以候选发布版提供。打开 **设置**、**设备与服务**、**HACS**，选择 **Panel Assistant** 设备。展开已禁用的实体，打开 **预发布**。在其设置中开启 **已启用**，选择 **更新**，然后打开 **诊断** 下的 **预发布** 开关。返回 HACS 中的 Panel Assistant，下载 1.0 候选发布版。当 HACS 要求重启，或出现 **重启 Home Assistant 以完成 Panel Assistant 更新** 修复项时，重启 Home Assistant。
+在 Home Assistant **2026.11 或更新版本**中，通过 **设置**、**更新** 安装 Panel Assistant 更新。在受支持的较旧版本（**2026.8.3 至 2026.10**）中，在 HACS 中下载更新。然后按照重启修复项或 HACS 的提示重启 Home Assistant，以加载新集成。[安装集成](/zh-hans/home-assistant/custom-integration/#updates-and-pre-releases)说明了如何在 Marketplace 或 HACS 中启用较新的预发布版本。
 
 ## 2. 检查修复项
 
@@ -38,10 +38,10 @@ Panel Assistant 1.0 与 1.0 面板应用需要一同升级。1.0 集成只与 1.
 
 **只要没有面板运行 1.0，集成就可以回退。** 恢复开始之前创建的 Home Assistant 备份。这也会撤销创建备份之后 Home Assistant 中的其他所有更改。面板仍运行 0.9 应用，并重新连接到 0.9.0。一旦任何面板运行 1.0 应用，恢复备份就会使 Home Assistant 无法访问该面板，直到集成重新升级到 1.0。
 
-不要在 HACS 中重新下载 0.9.0 来覆盖 1.0，以此进行回退。1.0 更新会移除 0.9.0 依赖的一项设置；缺少此设置时，0.9.0 会将已迁移的面板重新交回 MQTT，而 1.0 面板应用已不再响应 MQTT。请改为恢复备份。
+不要通过 Marketplace 或 HACS 安装 0.9.0 来覆盖 1.0，以此进行回退。1.0 更新会移除 0.9.0 依赖的一项设置；缺少此设置时，0.9.0 会将已迁移的面板重新交回 MQTT，而 1.0 面板应用已不再响应 MQTT。请改为恢复备份。
 
 ## 如果迁移未完成
 
-如果 1.0 提示某块面板从未从 MQTT 迁移，或仍运行旧应用，修复项会要求您在 HACS 中选择 **重新下载**、选择 0.9.0，在那里完成迁移，然后再次安装 1.0。不要重新下载 0.9.0 来覆盖 1.0。只要尚无面板运行 1.0 应用，请基于上述原因，恢复更新之前创建的 Home Assistant 备份来返回 0.9.0。然后在 0.9.0 中完成迁移，再从头执行本页步骤。如果其他面板已经运行 1.0 应用，或者没有更新前的备份，请在更改任何内容之前到 [Discord](https://panel-assistant.io/go/discord) 或 [issues](https://github.com/panel-assistant/ha-integration/issues) 求助。
+如果 1.0 提示某块面板从未从 MQTT 迁移，或仍运行旧应用，请按照修复项的安全恢复步骤，在 Panel Assistant 0.9.0 中完成迁移，然后返回 1.0。不要通过 Marketplace 或 HACS 安装 0.9.0 来覆盖 1.0。 只要尚无面板运行 1.0 应用，请基于上述原因，恢复更新之前创建的 Home Assistant 备份来返回 0.9.0。然后在 0.9.0 中完成迁移，再从头执行本页步骤。如果其他面板已经运行 1.0 应用，或者没有更新前的备份，请在更改任何内容之前到 [Discord](https://panel-assistant.io/go/discord) 或 [issues](https://github.com/panel-assistant/ha-integration/issues) 求助。
 
 对于仍使用 MQTT 的面板，修复项还提供从头开始的方式：删除 MQTT 集成下的面板设备，再重新添加面板。这会创建新实体，且不保留任何历史记录。
