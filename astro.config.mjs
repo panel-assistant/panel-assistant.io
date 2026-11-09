@@ -117,6 +117,10 @@ export default defineConfig({
               items: [
                 { ...label('sidebar.getting_started'), slug: 'start/getting-started' },
                 { ...label('sidebar.how_it_works'), slug: 'start/what-it-is' },
+                {
+                  label: 'Research and interoperability',
+                  slug: 'start/research-and-interoperability',
+                },
                 { ...label('sidebar.community'), slug: 'start/community' },
               ],
             },
