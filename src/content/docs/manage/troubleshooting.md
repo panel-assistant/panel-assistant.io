@@ -11,7 +11,7 @@ When you need to see what the panel is doing as it happens, the **Logs** tab on 
 
 ## The dashboard is blank, half-drawn, or full of script errors
 
-Check the system WebView first. This is the most common first-run failure by a wide margin, and an old WebView produces exactly these symptoms while looking like a fault in the panel app. On a supported panel, Panel Assistant installs a verified WebView when it installs or updates the panel app, and if that step did not finish, the panel's update Repair in Home Assistant offers **Try again**. [Updating the system WebView](/hardware/guides/update-the-webview/) says which route each panel has.
+Check the system WebView first. This is the most common first-run failure by a wide margin, and an old WebView produces exactly these symptoms while looking like a fault in the panel app. [Updating the system WebView](/hardware/guides/update-the-webview/) says which update route each panel has.
 
 If the WebView is current, the [startup and recovery](/manage/built-in-renderer/#startup-and-recovery) section covers what the panel does when a dashboard fails to load and how to see why.
 
