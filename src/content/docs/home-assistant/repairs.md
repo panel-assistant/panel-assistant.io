@@ -91,19 +91,19 @@ Use the existing Repair’s guarded **Try again** only after checking its report
 
 ## Panel proximity setup
 
-**What it means:** Wave-to-wake is unavailable because the panel has not saved its proximity calibration.
+**What it means:** The panel cannot wake on a wave until its proximity sensor is set up. Proximity is optional: touching the screen always wakes the panel, and only Wake on wave needs it.
 
-**Why it happens:** The panel reports calibration_required. Calibration measures this installation and needs a person in front of the panel; starting setup alone does not establish completion.
+**Why it happens:** Wake on wave is on and the panel reports that its proximity sensor has no saved calibration. Calibration measures this installation and needs a person in front of the panel.
 
-**How to fix it:** Open this panel’s Configure page at Presence & wake and choose Set up proximity on panel. Follow the physical instructions on the panel, taking about a minute. After it says calibration is saved, return to the Repair and Submit. Home Assistant reads fresh status before completing; if setup is still running or the panel cannot be read, finish setup or restore the connection and submit again. The dashboard’s Open proximity setup action is also an on-panel starting point.
+**How to fix it:** To use Wake on wave, open this panel’s Configure page at Presence & wake and choose Set up proximity on panel, then follow the instructions on the panel, taking about a minute. The dashboard’s Open proximity setup action is also an on-panel starting point. The Repair clears itself once the panel reports a saved calibration. If you don’t want to wake the panel with a wave, or setup cannot finish on your panel, turn off its Wake on wave switch or select Ignore on the Repair.
 
 ## Dashboard unfiltered
 
 **What it means:** The panel is showing its dashboard with all of Home Assistant's entities instead of only the ones its dashboard uses.
 
-**Why it happens:** While the panel learns which entities its dashboard uses, it waits behind a screen that says what it is waiting for. If that wait lasts longer than 90 seconds, the panel shows the dashboard unfiltered rather than leave you without one. Common causes are a scan Home Assistant did not answer, a sign-in Home Assistant refused, dashboard rules that need your decision, and a browser engine too old to filter. The panel keeps trying behind the dashboard.
+**Why it happens:** While the panel learns which entities its dashboard uses, it waits behind a screen that says what it is waiting for. If that wait lasts longer than 90 seconds, the panel shows the dashboard unfiltered rather than leave you without one. A short spell unfiltered is only a warning in the Home Assistant log; the Repair appears when the dashboard is still unfiltered after 30 minutes. Common causes are a scan Home Assistant did not answer, a sign-in Home Assistant refused, dashboard rules that need your decision, and a browser engine too old to filter. The panel keeps trying behind the dashboard.
 
-**How to fix it:** Open this panel in the Panel Assistant sidebar, then Entities, to see what it is waiting for. Answer a decision about flagged rules there, or sign in again from Configure if Home Assistant refused the sign-in. If Panel Assistant offers a newer browser engine for the panel, install it. The panel returns to the filtered dashboard on its own, and the Repair clears.
+**How to fix it:** Open this panel in the Panel Assistant sidebar, then Entities, to see what it is waiting for. Answer a decision about flagged rules there, or sign in again from Configure if Home Assistant refused the sign-in. If Panel Assistant offers a newer browser engine for the panel, install it. The panel returns to the filtered dashboard on its own, and the Repair clears itself.
 
 ## Voice microphone silent
 
