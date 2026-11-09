@@ -9,9 +9,19 @@ const MAX_CATALOGUE = 1024 * 1024;
 // body without the link to the full notes.
 export const MAX_SUMMARY = 2048;
 
+// The paragraph the app's release workflow puts above the CHANGELOG section on every release page.
+const INSTALLATION = /^## Installation\n\n[^\n]+\n+/;
+
 // The release body as a summary, or undefined when it is not one.
 export function summaryOf(value) {
-  const body = typeof value?.body === 'string' ? value.body.replace(/\r\n/g, '\n').trim() : '';
+  const body =
+    typeof value?.body === 'string'
+      ? value.body
+          .replace(/\r\n/g, '\n')
+          .trim()
+          // The release page opens with how to install, which the update dialog does not need.
+          .replace(INSTALLATION, '')
+      : '';
   // Only the short shape links the full notes; earlier bodies are installation boilerplate.
   return body &&
     Buffer.byteLength(body) <= MAX_SUMMARY &&
