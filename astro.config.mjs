@@ -40,6 +40,8 @@ const locales = {
   'zh-hans': { label: '简体中文', lang: 'zh-CN' },
 };
 
+const localePrefixes = Object.keys(locales).map((l) => (l === 'root' ? '' : `/${l}`));
+
 const integrationRepo = 'https://github.com/panel-assistant/ha-integration';
 
 // Images and other binaries live in one R2 bucket. Pages write `asset:<key>`.
@@ -48,7 +50,16 @@ const assetBase = ASSET_BASE;
 export default defineConfig({
   site: 'https://panel-assistant.io',
   // Old panel URLs in every language, since each language serves the English pages too.
-  redirects: panelRedirects(Object.keys(locales).map((l) => (l === 'root' ? '' : `/${l}`))),
+  redirects: {
+    ...panelRedirects(localePrefixes),
+    // Retired 2026-11: the install script page. Panel Assistant installs and updates panels.
+    ...Object.fromEntries(
+      localePrefixes.map((p) => [
+        `${p}/manage/command-line-install`,
+        `${p}/install/installing-ha-paneld/`,
+      ]),
+    ),
+  },
   markdown: {
     processor: satteri({ mdastPlugins: [assetUrls({ base: assetBase })] }),
   },
@@ -163,7 +174,6 @@ export default defineConfig({
                 { label: 'The drag race', slug: 'manage/drag-race' },
                 { ...label('sidebar.troubleshooting'), slug: 'manage/troubleshooting' },
                 { label: 'Before you remove ha-paneld', slug: 'manage/removal-risks' },
-                { label: 'Install script (retired)', slug: 'manage/command-line-install' },
               ],
             },
           ],

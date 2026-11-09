@@ -302,3 +302,24 @@ test('panel access guidance distinguishes initial debugging from root and unknow
   }
   assert.match(text('/install/prepare-a-panel/'), /USB access is also unverified/);
 });
+
+// Installing, updating and repairing a panel happens in Home Assistant, so the pages a user follows
+// for that never hand them a terminal. Hardware and reference pages document the device and the
+// source code, and may show commands.
+test('the install, update and repair pages ask for no command line', () => {
+  const pages = ['start', 'install', 'home-assistant', 'manage'].flatMap((dir) =>
+    readdirSync(`dist/${dir}`)
+      .filter((name) => existsSync(`dist/${dir}/${name}/index.html`))
+      .map((name) => `/${dir}/${name}/`),
+  );
+  assert.ok(pages.length > 20, `only ${pages.length} pages found`);
+  const shell = /<pre data-language="(sh|bash|shell|console|powershell)"/;
+  const command =
+    /\b(adb (install|shell|devices|tcpip|connect|root|push|pull|reboot)|platform-tools|fastboot)\b/i;
+  const offending = pages.filter((p) => shell.test(content(p)) || command.test(text(p)));
+  assert.deepEqual(offending, []);
+  assert.match(
+    text('/'),
+    /Everything happens in Home Assistant[\s\S]*Nothing to install on your computer[\s\S]*switch on debugging in its own Settings/,
+  );
+});

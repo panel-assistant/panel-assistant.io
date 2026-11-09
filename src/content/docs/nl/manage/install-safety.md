@@ -4,7 +4,7 @@ description: De controles van het buiten gebruik gestelde opdrachtregel-installa
 sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
-Deze pagina beschrijft de controles van het buiten gebruik gestelde [opdrachtregel-installatieprogramma](/nl/manage/command-line-install/), dat panelen installeerde vóór ha-paneld v0.9.9. Panel Assistant installeert en actualiseert nu panelen: het controleert een paneel voordat iets verandert en maakt vóór elke update een instellingenback-up, zoals beschreven in [Updates en herstel](/nl/manage/updates-and-recovery/).
+Deze pagina beschrijft de controles van het buiten gebruik gestelde [opdrachtregel-installatieprogramma](/nl/install/installing-ha-paneld/), dat panelen installeerde vóór ha-paneld v0.9.9. Panel Assistant installeert en actualiseert nu panelen: het controleert een paneel voordat iets verandert en maakt vóór elke update een instellingenback-up, zoals beschreven in [Updates en herstel](/nl/manage/updates-and-recovery/).
 
 ## Grenzen voor vertrouwen en aanmeldgegevens
 

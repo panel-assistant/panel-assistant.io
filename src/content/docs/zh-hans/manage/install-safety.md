@@ -4,7 +4,7 @@ title: 安装安全
 description: 已停用的命令行安装程序所执行的检查、更改面板前的备份，以及何时停止操作。
 ---
 
-本页介绍已停用的[命令行安装程序](/zh-hans/manage/command-line-install/)的检查机制，该程序曾在 ha-paneld v0.9.9 之前用于安装面板。现在由 Panel Assistant 安装和更新面板：更改任何内容前会检查面板，每次更新前会备份设置，详见[更新与恢复](/zh-hans/manage/updates-and-recovery/)。
+本页介绍已停用的[命令行安装程序](/zh-hans/install/installing-ha-paneld/)的检查机制，该程序曾在 ha-paneld v0.9.9 之前用于安装面板。现在由 Panel Assistant 安装和更新面板：更改任何内容前会检查面板，每次更新前会备份设置，详见[更新与恢复](/zh-hans/manage/updates-and-recovery/)。
 
 ## 信任与凭据边界
 

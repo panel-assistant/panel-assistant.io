@@ -4,7 +4,7 @@ description: Las comprobaciones del instalador de línea de comandos retirado, q
 sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
-Esta página describe las comprobaciones del [instalador de línea de comandos](/es/manage/command-line-install/) retirado, que instalaba paneles antes de ha-paneld v0.9.9. Ahora Panel Assistant instala y actualiza los paneles: los comprueba antes de cambiar nada y respalda sus ajustes antes de cada actualización, como se explica en [actualizaciones y recuperación](/es/manage/updates-and-recovery/).
+Esta página describe las comprobaciones del [instalador de línea de comandos](/es/install/installing-ha-paneld/) retirado, que instalaba paneles antes de ha-paneld v0.9.9. Ahora Panel Assistant instala y actualiza los paneles: los comprueba antes de cambiar nada y respalda sus ajustes antes de cada actualización, como se explica en [actualizaciones y recuperación](/es/manage/updates-and-recovery/).
 
 ## Límites de confianza y credenciales
 

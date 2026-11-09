@@ -35,10 +35,10 @@ Nothing is tamed until you press a Tame button. Without root or the helper, the 
 
 ## Safety
 
-- **Reversible.** Disabling is undone with `pm enable <pkg>`, or by an update of that app or the firmware. Nothing here is destructive: no uninstall and no data wipe.
+- **Reversible.** Disabling is undone with **Re-enable** on the card, or by an update of that app or the firmware. Nothing here is destructive: no uninstall and no data wipe.
 - **Critical packages are refused.** The panel app will never stop or disable the system UI, Settings, telephony, the Android framework or itself, even if you name one. Both the app and the privileged helper enforce this, so a typo cannot brick the panel.
 - **Only installed packages you name are touched.** Removing a package the panel app owns from the desired list re-enables it and restores its saved overlay permission. **Re-enable** also reverses taming.
 
 :::caution
-You are choosing packages to disable, so stick to vendor software you recognise. Disabling something the panel depends on, such as a vendor launcher you actually use or an input method, can leave the panel hard to navigate until you re-enable it over `adb`. When in doubt, leave it alone.
+You are choosing packages to disable, so stick to vendor software you recognise. Disabling something the panel depends on, such as a vendor launcher you actually use or an input method, can leave the panel hard to navigate on its own screen. You can still re-enable it from the **Vendor packages** card, which you reach from Home Assistant with **Visit**, without touching the panel. When in doubt, leave it alone.
 :::
