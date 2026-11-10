@@ -46,10 +46,10 @@ updates:
       prefix: chore
       include: scope
 
-  # The wrangler the deploy job runs (.github/wrangler), kept apart from the site's packages so
+  # The wrangler the deploy job runs (tools/wrangler), kept apart from the site's packages so
   # the build does not install it.
   - package-ecosystem: npm
-    directory: /.github/wrangler
+    directory: /tools/wrangler
     schedule:
       interval: weekly
       day: monday
