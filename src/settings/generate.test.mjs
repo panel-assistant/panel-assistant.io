@@ -125,3 +125,56 @@ test('each release is read from its own registry path across the package move', 
     rmSync(root, { recursive: true, force: true });
   }
 });
+
+test('a registry key written as another class constant resolves from that class at the same tag', () => {
+  const root = mkdtempSync(join(tmpdir(), 'settings-reference-'));
+  try {
+    const source = join(root, 'android');
+    const site = join(root, 'site');
+    const pkg = join(source, 'app/src/main/kotlin/io/panelassistant/android');
+    mkdirSync(join(pkg, 'config'), { recursive: true });
+    mkdirSync(join(source, 'app/src/main/assets/i18n'), { recursive: true });
+    mkdirSync(join(site, 'src/settings'), { recursive: true });
+    mkdirSync(join(site, 'public'), { recursive: true });
+    for (const file of ['generate.mjs', 'extract.mjs', 'render.mjs'])
+      cpSync(new URL(file, import.meta.url), join(site, 'src/settings', file));
+    writeFileSync(
+      join(pkg, 'PresenceMode.kt'),
+      `enum class PresenceMode {
+    AUTOMATIC;
+    companion object {
+        const val KEY = "presence_mode"
+    }
+}`,
+    );
+    writeFileSync(
+      join(pkg, 'config/SettingsRegistry.kt'),
+      `object SettingsRegistry {
+    const val PRESENCE_MODE_KEY = io.panelassistant.android.PresenceMode.KEY
+    val SPECS: List<SettingSpec> = listOf(
+        SettingSpec(
+            key = PRESENCE_MODE_KEY, type = SettingType.ENUM, group = "Behaviour"
+        )
+    )
+}`,
+    );
+    writeFileSync(
+      join(source, 'app/src/main/assets/i18n/en.json'),
+      JSON.stringify({ strings: { 'settings.presence_mode.label': { text: 'Presence' } } }),
+    );
+    const git = (...args) => execFileSync('git', args, { cwd: source, stdio: 'pipe' });
+    git('init', '--quiet');
+    git('add', '-A');
+    git('-c', 'user.name=Test', '-c', 'user.email=test@example.com', 'commit', '-qm', 'fixture');
+    git('tag', 'v1.0.1');
+    execFileSync(process.execPath, ['src/settings/generate.mjs'], {
+      cwd: site,
+      env: { ...process.env, SETTINGS_SOURCE: source },
+      stdio: 'pipe',
+    });
+    const manifest = JSON.parse(readFileSync(join(site, 'public/settings-versions.json'), 'utf8'));
+    assert.deepEqual(manifest.versions['1.0.1'].keys, ['presence_mode']);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
