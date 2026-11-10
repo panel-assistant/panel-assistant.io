@@ -1,0 +1,8 @@
+{
+  "name": "panel-assistant-io-deploy",
+  "private": true,
+  "description": "The wrangler the deploy job runs, pinned here so Dependabot proposes its updates and the job restores it from the cache instead of installing it on every publish.",
+  "devDependencies": {
+    "wrangler": "4.154.0"
+  }
+}

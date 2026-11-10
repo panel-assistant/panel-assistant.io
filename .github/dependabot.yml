@@ -45,3 +45,19 @@ updates:
     commit-message:
       prefix: chore
       include: scope
+
+  # The wrangler the deploy job runs (.github/wrangler), kept apart from the site's packages so
+  # the build does not install it.
+  - package-ecosystem: npm
+    directory: /.github/wrangler
+    schedule:
+      interval: weekly
+      day: monday
+      time: '04:30'
+      timezone: Etc/UTC
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: chore
+      include: scope
