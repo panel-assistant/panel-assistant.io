@@ -10,6 +10,8 @@ sidebar:
 
 The original NSPanel Pro line ships as two physically different panels, the **[86P](/hardware/panels/sonoff/nspanel-pro-86p/)** and the **[120P](/hardware/panels/sonoff/nspanel-pro-120p/)**, named for the EU 86 mm and 120 mm wall boxes. Both are built-in **Zigbee 3.0 coordinator** panels with no NFC or IR, and the lowest-power CPU of the fully supported panels. They share almost everything documented on this page (root process, WebView, LED, sensors, Zigbee gateway); each variant's own page carries only its own clean specification and the handful of facts that differ. This page was reverse-engineered primarily on a live **86P** (Android 8.1, rooted, toolbox `su`), with the 120P separately verified live where noted.
 
+The NSPanel Pro **Gen2** is different hardware (RK3326-**S**, dual relays, EFR32**MG24**). The original NSPanel Pro profile matches any panel that reports a PX30 or RK3326 board name, so a Gen2 may be matched by it until the Gen2 has a profile of its own, but that profile has not been tested on a Gen2 and does not expose the Gen2's relays.
+
 ## Also sold as
 
 Sonoff NSPanel Pro 86, NSPanel Pro 120, NSPanel Pro 86P, NSPanel Pro 120P, NSPanel120P, NSPanel Pro Gen1, px30_evb, SN_3326S, SN-RKPX30-NSP-01, nspanel-pro, nspanel-pro-ver120. Not to be confused with the NSPanel Pro Gen2 or the Tuya S6E and T6E boards, which are separate hardware.
@@ -79,7 +81,7 @@ Behaviour that changes across eWeLink firmware versions, oldest first. `ro.produ
 | **4.8.0** (August 2026)                | **No release announcement and no changelog found**; located by probing the CDN. An eWeLink staff post on 2026-07-16 in the [roadmap thread](https://forum.ewelink.cc/t/nspanel-pro-roadmap-and-co-created-future/206240) scheduled it for August and confirmed one feature: an option to auto-update the panel through the eWeLink app. CDN inspection found inbound diffs from 4.0.12, 4.4.0, 4.5.1, 4.6.0 and 4.7.0 on both models, plus 4.5.3 on the 120P only | Contents otherwise unknown, and no feedback thread has been found, so there is no report either way on stability. Treat it as unassessed rather than clean. **If the auto-update option ships enabled, a panel could take firmware unattended**, so check that setting before relying on a pinned version. |
 
 :::note
-These are quirks of the original 86P and 120P. The NSPanel Pro **Gen2** (RK3326-**S**, dual relays, EFR32**MG24**) is a different hardware target. Sonoff ships Gen1 and Gen2 on the same firmware version line (4.7.0 covers both), so do not infer a separate firmware line or assume every note about the original model carries over. The original NSPanel Pro profile matches any panel that reports a PX30 or RK3326 board name, so a Gen2 that reports one is matched by it until the Gen2 has a profile of its own; that profile has not been tested on a Gen2 and does not expose the Gen2's relays.
+These are quirks of the original 86P and 120P. The NSPanel Pro **Gen2** (RK3326-**S**, dual relays, EFR32**MG24**) is a different hardware target. Sonoff ships Gen1 and Gen2 on the same firmware version line (4.7.0 covers both), so do not infer a separate firmware line or assume every note about the original model carries over.
 :::
 
 Sibling Tuya-family boards, the **S6E** and **T6E** (relay variants; the S6E is a T6E with two relays), the [**Smatek S9E**](/hardware/panels/smatek/s9e/) and the [**Tuya TPA10**](/hardware/panels/tuya/tpa10/) (RK3566, Cortex-A55, Android 11), are separate targets and do not run NSPanel Pro firmware.
