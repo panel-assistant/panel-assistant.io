@@ -5,7 +5,7 @@ description: The things that usually go wrong with a wall panel, and where to lo
 
 Start with the panel's device in Home Assistant, which has a status sensor and a diagnostics download, and with the panel's own status page: use **Visit** on its device page in Home Assistant. Its `/diag` report answers most of the questions below without guesswork.
 
-When you need to see what the panel is doing as it happens, the **Logs** tab on that page streams the panel app's own log live, with tokens and passwords redacted.
+When you need to see what the panel is doing as it happens, the **Logs** tab on that page streams the panel app's own log live, with tokens and passwords redacted. To see lines from every connected panel in one list, open **All panels** in the Panel Assistant sidebar and choose its **Logs** tab; it can be filtered by panel, source and minimum level. Those lines appear only once you choose a destination other than Off under **Settings** on the same page, and they are kept in memory only, so a Home Assistant restart clears them.
 
 ![The Logs tab of the panel's web interface, streaming the panel app's live log with a filter box and Follow and Pause controls](/screenshots/ui-logs-dark.png)
 

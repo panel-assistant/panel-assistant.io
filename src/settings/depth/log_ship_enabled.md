@@ -36,4 +36,6 @@ With shipping on, every line of Panel Assistant's own log on the panel is sent t
 - If the collector is unreachable for long enough that the queue fills, the oldest lines are dropped rather than slowing the panel.
 - The panel's runtime diagnostics show whether shipping is connected and how many lines were sent or dropped.
 
-Nothing is sent until [Sink host](#log_ship_host) is set as well. Leave shipping off unless you have a collector to receive the logs.
+In a later panel app release these log shipping settings are removed, and panels send logs only through Panel Assistant: choose the destination under **All panels**, then **Settings**, in the Panel Assistant sidebar and read the lines under **Logs** there. See [Custom integration](/home-assistant/custom-integration/).
+
+On this version, nothing is sent until [Sink host](#log_ship_host) is set as well. Leave shipping off unless you have a collector to receive the logs.
