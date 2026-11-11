@@ -189,7 +189,7 @@ Una revisión guardada del esquema 2 puede contener `proximity_near_below`, `pro
 | `provisioning.recipes`                        | Opcional; predeterminado `[]`         | Lista de hasta 32 selecciones de recetas del núcleo.                                                                                                                                                          |
 | `provisioning.recipes[].id`                   | Obligatorio por elemento              | ID registrado único. El esquema 2 conoce `nspanel-pro.watchdog-e2big-repair` y `tpa10.vendor-stack-minimize`. Las entradas no pueden contener argumentos, comandos, URL ni definiciones de flujos de trabajo. |
 
-En la versión aún no publicada 1.0.0-rc2, los tres IDs WebView se resuelven a estas compilaciones y metadatos de compatibilidad controlados por el núcleo:
+Los tres IDs WebView se resuelven a estas compilaciones y metadatos de compatibilidad controlados por el núcleo:
 
 | ID de artefacto       | Compilación del núcleo                                                                                  |
 | --------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -197,7 +197,7 @@ En la versión aún no publicada 1.0.0-rc2, los tres IDs WebView se resuelven a 
 | `lineageos-150-arm`   | LineageOS System WebView `150.0.7871.63`; ARM ABI `armeabi-v7a`; Android 10 o posterior.                |
 | `lineageos-150-arm64` | LineageOS System WebView `150.0.7871.63`; ARM ABIs `armeabi-v7a` y `arm64-v8a`; Android 10 o posterior. |
 
-El campo de artefacto WebView elige una compilación cuya descarga, suma de comprobación, paquete, versión y firmante están compilados en el núcleo. En la versión aún no publicada 1.0.0-rc2, una actualización de la app iniciada desde Home Assistant también puede instalar un WebView compatible. Si queda incompleta, usa su reparación de actualización para reintentar. Importar o activar un perfil no inicia una actualización. Consulta [Actualizar WebView](/es/hardware/guides/update-the-webview/).
+El campo de artefacto WebView elige una compilación cuya descarga, suma de comprobación, paquete, versión y firmante están compilados en el núcleo. Una actualización de la app iniciada desde Home Assistant también puede instalar un WebView compatible. Si queda incompleta, usa su reparación de actualización para reintentar. Importar o activar un perfil no inicia una actualización. Consulta [Actualizar WebView](/es/hardware/guides/update-the-webview/).
 
 ### Requisitos condicionales de controladores
 
@@ -271,7 +271,7 @@ Crea perfiles separados si ninguna estrategia cubre la diferencia o si los produ
 
 ## Capacidades y controladores compilados
 
-Una declaración de capacidad contiene datos de hardware y, cuando hace falta, un ID de controlador con parámetros tipados. Los IDs nombran implementaciones compiladas en ha-paneld. El controlador valida rutas, intervalos, códigos de evento, nombres de paquete y otras entradas sensibles para la seguridad. Las rutas privilegiadas se eligen de listas del núcleo. Los metadatos conservados `provisioning.software.webview.artifact` nombran URL, versión, suma del artefacto y hash del firmante compilados y auditados con el núcleo; el perfil no puede redefinir esa raíz de confianza. En la versión aún no publicada 1.0.0-rc2, una actualización iniciada por el propietario comprueba el proveedor instalado y su compatibilidad antes de usar ese artefacto; el perfil no puede aportar otra descarga ni raíz de confianza.
+Una declaración de capacidad contiene datos de hardware y, cuando hace falta, un ID de controlador con parámetros tipados. Los IDs nombran implementaciones compiladas en ha-paneld. El controlador valida rutas, intervalos, códigos de evento, nombres de paquete y otras entradas sensibles para la seguridad. Las rutas privilegiadas se eligen de listas del núcleo. Los metadatos conservados `provisioning.software.webview.artifact` nombran URL, versión, suma del artefacto y hash del firmante compilados y auditados con el núcleo; el perfil no puede redefinir esa raíz de confianza. Una actualización iniciada por el propietario comprueba el proveedor instalado y su compatibilidad antes de usar ese artefacto; el perfil no puede aportar otra descarga ni raíz de confianza.
 
 Los perfiles no pueden aportar:
 

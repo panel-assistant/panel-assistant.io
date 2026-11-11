@@ -52,7 +52,7 @@ Gebruik de beveiligde actie **Opnieuw proberen** van de bestaande reparatie pas 
 
 ## Panel Assistant van &lt;panel&gt; halen
 
-**Wat het betekent:** In de nog niet uitgebrachte versie 1.0.0-rc2 heeft iemand op de apparaatpagina van dit paneel op **Van dit paneel verwijderen** gedrukt. De knop verwijdert niets; de reparatie blijft beschikbaar totdat de verwijdering is voltooid.
+**Wat het betekent:** Iemand heeft op de apparaatpagina van dit paneel op **Van dit paneel verwijderen** gedrukt. De knop verwijdert niets; de reparatie blijft beschikbaar totdat de verwijdering is voltooid.
 
 **Waarom dit gebeurt:** Panel Assistant vraagt je om bevestiging voordat het het startscherm en de apps van de fabrikant herstelt, ha-paneld verwijdert en het paneel uit Home Assistant verwijdert.
 
@@ -326,11 +326,11 @@ Importeren via de zijbalk vervangt de gedeelde kopie en kan andere panelen bijwe
 
 ## Installatiefout: update
 
-**Wat het betekent:** Home Assistant kon niet bevestigen dat de update is voltooid. In de nog niet uitgebrachte versie 1.0.0-rc2 kan de paneelapp al geïnstalleerd zijn terwijl de update van zijn browserengine nog niet is afgerond.
+**Wat het betekent:** Home Assistant kon niet bevestigen dat de update is voltooid. De paneelapp kan al geïnstalleerd zijn terwijl de update van zijn browserengine nog niet is afgerond.
 
-**Waarom dit gebeurt:** De app-update of, in die versie, de browserengine-update mislukte of kon niet worden geverifieerd. De reparatie bewaart het rapport voor de volledige poging.
+**Waarom dit gebeurt:** De app-update of de browserengine-update mislukte of kon niet worden geverifieerd. De reparatie bewaart het rapport voor de volledige poging.
 
-**Hoe je dit oplost:** Lees het Ondersteuningsrapport, herstel de gemelde verbindings- of installatievereiste en kies daarna **Opnieuw proberen**. In de nog niet uitgebrachte versie 1.0.0-rc2 gaat de procedure verder met alleen de browserengine-update, zonder de app opnieuw te installeren, als alleen die fase nog niet is afgerond en Panel Assistant bevestigt dat de gevraagde appversie is geïnstalleerd. Gebruik **Updates toestaan** eerst als dit wordt aangeboden om Home Assistant op het paneel goed te keuren. Zie de [WebView-handleiding](/nl/hardware/guides/update-the-webview/) als de browserengine niet kan worden bijgewerkt.
+**Hoe je dit oplost:** Lees het Ondersteuningsrapport, herstel de gemelde verbindings- of installatievereiste en kies daarna **Opnieuw proberen**. De procedure gaat verder met alleen de browserengine-update, zonder de app opnieuw te installeren, als alleen die fase nog niet is afgerond en Panel Assistant bevestigt dat de gevraagde appversie is geïnstalleerd. Gebruik **Updates toestaan** eerst als dit wordt aangeboden om Home Assistant op het paneel goed te keuren. Zie de [WebView-handleiding](/nl/hardware/guides/update-the-webview/) als de browserengine niet kan worden bijgewerkt.
 
 <a id="installer-failure-retry-hold"></a>
 

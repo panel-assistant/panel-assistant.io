@@ -18,9 +18,9 @@ Das Panel benötigt keine feste Adresse: Panel Assistant folgt einem Panel, dess
 
 Das Dashboard wird von der System-WebView des Panels gezeichnet, auch Browser-Engine genannt. Eine alte WebView kann dazu führen, dass ein Dashboard leer bleibt oder nur teilweise dargestellt wird.
 
-In der unveröffentlichten Version 1.0.0-rc2 können sowohl der Netzwerk- als auch der USB-Installer auf unterstützten Panels ein geprüftes, kompatibles Update der Browser-Engine anfordern. Wenn dieses Update nicht abgeschlossen werden kann, bleiben Einrichtung und Kopplung möglich. Ein unvollständiger Versuch kann über die Update-Reparatur des Panels in Home Assistant fortgesetzt werden: Wähle **Erneut versuchen**. Dabei werden vorhandene Arbeiten geprüft, bevor ein weiterer Versuch angefordert wird. Fehlgeschlagene Updates werden nicht nach einem Zeitplan erneut versucht.
+Sowohl der Netzwerk- als auch der USB-Installer können auf unterstützten Panels ein geprüftes, kompatibles Update der Browser-Engine anfordern. Wenn dieses Update nicht abgeschlossen werden kann, bleiben Einrichtung und Kopplung möglich. Ein unvollständiger Versuch kann über die Update-Reparatur des Panels in Home Assistant fortgesetzt werden: Wähle **Erneut versuchen**. Dabei werden vorhandene Arbeiten geprüft, bevor ein weiterer Versuch angefordert wird. Fehlgeschlagene Updates werden nicht nach einem Zeitplan erneut versucht.
 
-In dieser Version warnt der Einrichtungsassistent, wenn die integrierte Browser-Engine zu alt ist. Du kannst Einrichtung und Kopplung abschließen, aber das Dashboard wird möglicherweise weiterhin nicht angezeigt. Wenn das Panel das Update nicht installieren kann, befolge [System-WebView aktualisieren](/de/hardware/guides/update-the-webview/).
+Der Einrichtungsassistent warnt, wenn die integrierte Browser-Engine zu alt ist. Du kannst Einrichtung und Kopplung abschließen, aber das Dashboard wird möglicherweise weiterhin nicht angezeigt. Wenn das Panel das Update nicht installieren kann, befolge [System-WebView aktualisieren](/de/hardware/guides/update-the-webview/).
 
 ## Bevor du etwas Unumkehrbares änderst
 

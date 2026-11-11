@@ -1,14 +1,14 @@
 ---
-title: Problemas conocidos en 1.0.0-rc1
-description: Limitaciones conocidas de Panel Assistant 1.0.0-rc1 y la aplicación del panel correspondiente, y qué hacer en cada caso.
+title: Problemas conocidos en 1.0.2
+description: Limitaciones conocidas de Panel Assistant 1.0.2 y la aplicación del panel correspondiente, y qué hacer en cada caso.
 sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
-Panel Assistant 1.0.0-rc1 y la aplicación del panel correspondiente son versiones candidatas. Esta página enumera las limitaciones conocidas y qué hacer en cada caso. Lee primero [Actualizar a 1.0](/es/manage/upgrade-to-1-0/): explica los requisitos previos a la instalación y por qué un panel con 1.0 no puede volver a 0.9. Informa de cualquier otro problema en el [seguimiento de incidencias](https://github.com/panel-assistant/ha-integration/issues), indicando el modelo del panel y qué has observado.
+Panel Assistant 1.0.2 y la aplicación del panel correspondiente son versiones estables. Esta página enumera las limitaciones conocidas y qué hacer en cada caso. Lee primero [Actualizar a 1.0](/es/manage/upgrade-to-1-0/): explica los requisitos previos a la instalación y por qué un panel con 1.0 no puede volver a 0.9. Informa de cualquier otro problema en el [seguimiento de incidencias](https://github.com/panel-assistant/ha-integration/issues), indicando el modelo del panel y qué has observado.
 
 ## Un panel que aún usa la aplicación 0.9 puede necesitar que se restablezca su conexión ADB
 
-La reparación que indica que un panel necesita la aplicación 1.0.0-rc1 significa que su aplicación todavía no puede comunicarse con Panel Assistant 1.0. Si Home Assistant también indica que el panel no puede recibir actualizaciones de la aplicación, sigue esa reparación para restablecer su vía de actualización. En un panel con la depuración por red desactivada, conéctalo al ordenador e inicia el instalador USB desde Home Assistant, como se describe en [un panel que no puede actualizarse](/es/manage/updates-and-recovery/#un-panel-que-no-se-puede-actualizar). Si el panel ya tiene la aplicación, el instalador USB puede volver a conectarlo sin reinstalarla: si se solicita, marca **Permitir siempre desde este ordenador** y pulsa **Permitir** en el panel. El instalador vuelve a activar la depuración por red para que Home Assistant pueda actualizar la aplicación.
+La reparación que indica que un panel necesita la aplicación 1.0 significa que su aplicación todavía no puede comunicarse con Panel Assistant 1.0. Si Home Assistant también indica que el panel no puede recibir actualizaciones de la aplicación, sigue esa reparación para restablecer su vía de actualización. En un panel con la depuración por red desactivada, conéctalo al ordenador e inicia el instalador USB desde Home Assistant, como se describe en [un panel que no puede actualizarse](/es/manage/updates-and-recovery/#un-panel-que-no-se-puede-actualizar). Si el panel ya tiene la aplicación, el instalador USB puede volver a conectarlo sin reinstalarla: si se solicita, marca **Permitir siempre desde este ordenador** y pulsa **Permitir** en el panel. El instalador vuelve a activar la depuración por red para que Home Assistant pueda actualizar la aplicación.
 
 ## La barra lateral no puede abrir un panel hasta que ejecute la aplicación 1.0
 

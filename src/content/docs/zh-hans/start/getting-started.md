@@ -10,7 +10,7 @@ sourceCommit: e919a9dd655eb7095993ae5e1e3b5dbe7af600c4
 
 ## 1. 安装集成
 
-在 Home Assistant **2026.11 或更新版本**中，通过 **设置**、**Marketplace** 安装 Panel Assistant。在受支持的较旧版本（**2026.8.3 至 2026.10**）中，通过 HACS 安装，然后重启 Home Assistant。Marketplace 可能允许立即进行配置；请先按提示完成任何必要的重启。这是唯一需要你手动安装的内容。有关两种安装方式以及如何启用预发布版本，请参见[安装集成](/zh-hans/home-assistant/custom-integration/)。
+在 Home Assistant **2026.11 或更新版本**中，通过 **设置**、**Marketplace** 安装 Panel Assistant。在受支持的较旧版本（**2026.8.3 至 2026.10**）中，通过 HACS 安装，然后重启 Home Assistant。Marketplace 可能允许立即进行配置；请先按提示完成任何必要的重启。这是唯一需要你手动安装的内容。有关两种安装方式和更新，请参见[安装集成](/zh-hans/home-assistant/custom-integration/)。
 
 :::note
 如果从 0.9 升级，请在开始之前阅读[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)，并保留其中所述的 Home Assistant 和面板备份。运行 1.0 应用的面板无法回退到 0.9。
@@ -103,7 +103,7 @@ sourceCommit: e919a9dd655eb7095993ae5e1e3b5dbe7af600c4
 
 向导会要求为面板命名，让面板登录 Home Assistant，并询问要显示哪个仪表盘以及面板所在的区域。面板会以你登录时使用的 Home Assistant 账户连接，因此，如果浏览器已以你的身份登录，面板也可能以你的身份连接；如果希望面板使用独立账户，请改用该账户登录。启用实体筛选后，面板只加载该仪表盘使用的实体，从而保持快速响应。请参阅 [连接面板](/zh-hans/home-assistant/connect-a-panel/)。
 
-在尚未发布的 1.0.0-rc2 版本中，即使面板浏览器引擎过旧，无法使用内置渲染器显示当前 Home Assistant 仪表盘，也可以完成设置。需要处理时，向导会显示警告。在依赖仪表盘之前，请按照 [WebView 指南](/zh-hans/hardware/guides/update-the-webview/)操作；仅完成设置并不能确认仪表盘可以加载。
+即使面板浏览器引擎过旧，无法使用内置渲染器显示当前 Home Assistant 仪表盘，也可以完成设置。需要处理时，向导会显示警告。在依赖仪表盘之前，请按照 [WebView 指南](/zh-hans/hardware/guides/update-the-webview/)操作；仅完成设置并不能确认仪表盘可以加载。
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="面板设置向导的详细步骤" tabindex="0">
 <figure>

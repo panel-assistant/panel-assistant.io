@@ -9,9 +9,9 @@ description: 从面板移除 ha-paneld 会发生什么、哪些面板和固件�
 <p id="removal-this-panel-verdict"></p>
 </div>
 
-Panel Assistant 可以通过 Home Assistant 的 **配置** 下，面板的 **从此面板移除 Panel Assistant** 选项一步移除 ha-paneld（Panel Assistant 0.9 中称为“从此面板移除 ha-paneld”）。大多数面板只需如此操作。但某些面板移除后将失去进入 Android 设置或网络调试的途径；在按照厂商自身的方式恢复之前，任何工具（包括 Panel Assistant）都无法再次安装应用。在某些固件上，这意味着登录厂商账号，或通过 USB 连接计算机。
+Panel Assistant 可以通过 Home Assistant 的 **配置** 下，面板的 **从此面板移除** 选项一步移除 ha-paneld（Panel Assistant 0.9 中称为“从此面板移除 ha-paneld”）。大多数面板只需如此操作。但某些面板移除后将失去进入 Android 设置或网络调试的途径；在按照厂商自身的方式恢复之前，任何工具（包括 Panel Assistant）都无法再次安装应用。在某些固件上，这意味着登录厂商账号，或通过 USB 连接计算机。
 
-在尚未发布的 1.0.0-rc2 版本中，此选项名为**从此面板移除**，移除成功后还会从 Home Assistant 中删除该面板；没有保留其条目的选项。面板的设备页面上也有一个**从此面板移除**按钮。按下它不会移除任何内容：它会在**设置 → 系统 → 修复**下打开一个持续保留的修复项，名为**从 &lt;panel&gt; 移除 Panel Assistant**。请先阅读其中的警告，再选择一次**提交**以确认移除。如果您误按了此按钮，请关闭对话框，不要提交，并让修复项保持未确认状态。
+移除成功后还会从 Home Assistant 中删除该面板；没有保留其条目的选项。面板的设备页面上也有一个**从此面板移除**按钮。按下它不会移除任何内容：它会在**设置 → 系统 → 修复**下打开一个持续保留的修复项，名为**从 &lt;panel&gt; 移除 Panel Assistant**。请先阅读其中的警告，再选择一次**提交**以确认移除。如果您误按了此按钮，请关闭对话框，不要提交，并让修复项保持未确认状态。
 
 删除 Home Assistant 中的面板条目后，ha-paneld 仍会保持安装状态。删除条目之前，请先使用上述移除选项移除该应用。
 
@@ -24,7 +24,7 @@ Panel Assistant 可以通过 Home Assistant 的 **配置** 下，面板的 **从
 1. ha-paneld 将主屏幕交回面板自身的启动器，并重新启用此前关闭的厂商应用。
 2. Panel Assistant 在面板上检查，确认另一个启动器确实已接管主屏幕。如果没有，则停止操作，不移除任何内容。
 3. Panel Assistant 使用其管理连接卸载 ha-paneld。面板上的 ha-paneld 设置会被删除。
-4. 在 1.0.0-rc1 中，如果提交前选择了 **同时从 Home Assistant 删除此面板**，Home Assistant 也会忘记该面板。保持关闭即可保留其实体和历史记录。在尚未发布的 1.0.0-rc2 中，成功移除后始终会删除条目。
+4. 成功移除后，还会从 Home Assistant 中删除面板条目。
 
 如果移除中途停止，请再次运行：它会从停止的位置继续。
 

@@ -16,7 +16,7 @@ Para un panel que ya está en tu red. Ve a **Configuración**, **Dispositivos y 
 
 Para un panel que aún está en la caja o cuyo software del fabricante dificulta el acceso por red. Conéctalo al portátil e instala desde el navegador mediante el cable USB. El navegador permanece conectado a Home Assistant, que proporciona la versión verificada; el panel no necesita ADB por red. Inicia el proceso desde **Configuración**, **Dispositivos y servicios**, **Añadir integración**, **Panel Assistant**, **Instalar mediante USB en este ordenador**; se necesita un navegador basado en Chromium. Consulta [Instalar por USB](/es/install/install-over-usb/).
 
-En la versión 1.0.0-rc2, aún no publicada, ambos instaladores también pueden solicitar una actualización verificada y compatible del motor del navegador en los paneles compatibles. Si la actualización no puede terminar, no impide la configuración ni el emparejamiento; consulta las instrucciones de recuperación en [Preparar el panel](/es/install/prepare-a-panel/).
+Ambos instaladores también pueden solicitar una actualización verificada y compatible del motor del navegador en los paneles compatibles. Si la actualización no puede terminar, no impide la configuración ni el emparejamiento; consulta las instrucciones de recuperación en [Preparar el panel](/es/install/prepare-a-panel/).
 
 ## Qué protege el instalador
 

@@ -37,7 +37,7 @@ De meeste mensen hebben alleen een actuele Android System WebView nodig. De pane
 
 Toont het paneel **Upgrade van Home Assistant vereist**, werk Home Assistant dan bij en kies **Opnieuw proberen**. Niets op het paneel kan dit vervangen.
 
-Toont het **De webviewer van dit paneel is te oud**, volg dan [De WebView bijwerken](/nl/hardware/guides/update-the-webview/). In de nog niet uitgebrachte versie 1.0.0-rc2 kan een vanuit Home Assistant gestarte paneel-app-update ook een geverifieerde, compatibele WebView installeren wanneer het paneel dat toestaat. Andere panelen vereisen de methode in de handleiding. Kies na de WebView-update **Opnieuw proberen**.
+Toont het **De webviewer van dit paneel is te oud**, volg dan [De WebView bijwerken](/nl/hardware/guides/update-the-webview/). Een vanuit Home Assistant gestarte paneel-app-update kan ook een geverifieerde, compatibele WebView installeren wanneer het paneel dat toestaat. Andere panelen vereisen de methode in de handleiding. Kies na de WebView-update **Opnieuw proberen**.
 
 De ingebouwde renderer valt nooit terug op een minder geïsoleerde brug. Een andere renderer kan helpen als Home Assistant zelf niet kan worden bijgewerkt, maar elke dashboardapp op het paneel gebruikt dezelfde systeem-WebView en kan een verouderde dus niet omzeilen.
 

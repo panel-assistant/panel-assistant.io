@@ -24,7 +24,7 @@ Home Assistant 还会为每个用户保存默认仪表盘和主题。面板用�
 
 面板可以使用无法访问互联网的 VLAN，前提是防火墙仍允许面板与 Home Assistant 相互访问，而且需要登录时，你网络中的浏览器能够访问面板。面板使用 Home Assistant 的本地地址登录并加载仪表盘。Home Assistant 也需要访问面板，以进行管理和更新。
 
-Panel Assistant 可以在 Home Assistant 所在的机器上获取经过验证的面板应用更新，再通过本地网络发送给面板。Home Assistant 仍需能够访问更新来源。面板的版本检查以及用户从“安装”标签页主动启动的安装使用 GitHub，也需要互联网访问。没有互联网路由的 VLAN 无法执行这些检查和下载。在尚未发布的 1.0.0-rc2 版本中，从 Home Assistant 启动的应用更新还可以在受支持的面板上安装兼容的 WebView。也请规划你的面板所支持的 [WebView 更新途径](/zh-hans/hardware/guides/update-the-webview/)。
+Panel Assistant 可以在 Home Assistant 所在的机器上获取经过验证的面板应用更新，再通过本地网络发送给面板。Home Assistant 仍需能够访问更新来源。托管 WebView 更新会在面板上下载经过验证的浏览器引擎，也需要互联网访问。没有互联网路由的 VLAN 无法进行该下载。从 Home Assistant 启动的应用更新还可以在受支持的面板上安装兼容的 WebView。也请规划你的面板所支持的 [WebView 更新途径](/zh-hans/hardware/guides/update-the-webview/)。
 
 网络隔离会限制哪些设备能够访问面板的网页界面和 API，但不会降低已在面板上登录的 Home Assistant 账户权限。如果面板使用管理员账户，即使处于隔离的 VLAN 中，它仍然以管理员身份登录。请根据你对墙上面板和本地网络的信任程度，选择账户和防火墙规则。
 

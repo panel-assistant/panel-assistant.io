@@ -9,9 +9,9 @@ sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
 <p id="removal-this-panel-verdict"></p>
 </div>
 
-Panel Assistant usuwa ha-paneld w jednym kroku opcją panelu **Usuń Panel Assistant z tego panelu**, w sekcji **Konfiguruj** w Home Assistant (Panel Assistant 0.9 nazywa ją Usuń ha-paneld z tego panelu). Na większości paneli to wszystko. Na niektórych usunięcie pozostawia panel bez drogi do Ustawień Androida lub debugowania sieciowego. Wtedy nic nie może ponownie zainstalować na nim aplikacji, także Panel Assistant, dopóki nie użyjesz własnej drogi powrotu producenta. W niektórych firmware wymaga ona zalogowania na konto producenta lub podłączenia komputera przez USB.
+Panel Assistant usuwa ha-paneld w jednym kroku opcją panelu **Usuń z tego panelu**, w sekcji **Konfiguruj** w Home Assistant (Panel Assistant 0.9 nazywa ją Usuń ha-paneld z tego panelu). Na większości paneli to wszystko. Na niektórych usunięcie pozostawia panel bez drogi do Ustawień Androida lub debugowania sieciowego. Wtedy nic nie może ponownie zainstalować na nim aplikacji, także Panel Assistant, dopóki nie użyjesz własnej drogi powrotu producenta. W niektórych firmware wymaga ona zalogowania na konto producenta lub podłączenia komputera przez USB.
 
-W nieopublikowanej jeszcze wersji 1.0.0-rc2 ta opcja nosi nazwę **Usuń z tego panelu**, a pomyślne usunięcie usuwa panel również z Home Assistant; nie ma opcji zachowania jego wpisu. Na stronie urządzenia panelu znajduje się także przycisk **Usuń z tego panelu**. Naciśnięcie go niczego nie usuwa: otwiera trwałe zgłoszenie **Usuń Panel Assistant z panelu &lt;panel&gt;** w sekcji **Ustawienia → System → Problemy**. Przeczytaj jego ostrzeżenie, zanim potwierdzisz usunięcie jednym naciśnięciem **Zatwierdź**. Jeśli przycisk został naciśnięty przez pomyłkę, zamknij okno dialogowe bez zatwierdzania i pozostaw zgłoszenie niepotwierdzone.
+Pomyślne usunięcie usuwa panel również z Home Assistant; nie ma opcji zachowania jego wpisu. Na stronie urządzenia panelu znajduje się także przycisk **Usuń z tego panelu**. Naciśnięcie go niczego nie usuwa: otwiera trwałe zgłoszenie **Usuń Panel Assistant z panelu &lt;panel&gt;** w sekcji **Ustawienia → System → Problemy**. Przeczytaj jego ostrzeżenie, zanim potwierdzisz usunięcie jednym naciśnięciem **Zatwierdź**. Jeśli przycisk został naciśnięty przez pomyłkę, zamknij okno dialogowe bez zatwierdzania i pozostaw zgłoszenie niepotwierdzone.
 
 Usunięcie wpisu panelu w Home Assistant pozostawia ha-paneld zainstalowane. Przed usunięciem wpisu użyj opisanej powyżej opcji usuwania, aby usunąć aplikację.
 
@@ -24,7 +24,7 @@ Przed potwierdzeniem przeczytaj sekcję dla swojego panelu.
 1. ha-paneld oddaje ekran główny własnemu programowi uruchamiającemu panelu i ponownie włącza wyłączone przez siebie aplikacje producenta.
 2. Panel Assistant sprawdza na panelu, czy inny program uruchamiający rzeczywiście obsługuje ekran główny. Jeśli nie, zatrzymuje się i niczego nie usuwa.
 3. Panel Assistant odinstalowuje ha-paneld przez swoje połączenie zarządzania. Ustawienia ha-paneld na panelu są usuwane.
-4. W 1.0.0-rc1, jeśli przed wysłaniem zaznaczono **Usuń też ten panel z Home Assistant**, Home Assistant także zapomina panel. Pozostaw tę opcję wyłączoną, aby zachować encje i historię. W niewydanej wersji 1.0.0-rc2 pomyślne usunięcie zawsze usuwa wpis.
+4. Pomyślne usunięcie usuwa również wpis panelu z Home Assistant.
 
 Jeśli usuwanie zatrzyma się w trakcie, uruchom je ponownie: podejmie pracę w miejscu zatrzymania.
 

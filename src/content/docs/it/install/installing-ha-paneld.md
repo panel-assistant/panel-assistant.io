@@ -16,7 +16,7 @@ Per un pannello già presente sulla tua rete. Vai in **Impostazioni**, **Disposi
 
 Per un pannello ancora nella scatola, o il cui software del produttore rende difficile l'accesso tramite rete. Collegalo al portatile e installa dal browser tramite il cavo USB. Il browser rimane connesso a Home Assistant, che fornisce la versione verificata; il pannello non necessita di ADB di rete. Avvia da **Impostazioni**, **Dispositivi e servizi**, **Aggiungi integrazione**, **Panel Assistant**, **Installa tramite USB su questo computer**; serve un browser basato su Chromium. Vedi [Installa tramite USB](/it/install/install-over-usb/).
 
-Nella versione 1.0.0-rc2 non ancora rilasciata, entrambi i programmi di installazione possono anche richiedere un aggiornamento verificato e compatibile del motore del browser sui pannelli supportati. Un aggiornamento che non riesce a completarsi non impedisce la configurazione o l'associazione; per il ripristino, vedi [Prepara il pannello](/it/install/prepare-a-panel/).
+Entrambi i programmi di installazione possono anche richiedere un aggiornamento verificato e compatibile del motore del browser sui pannelli supportati. Un aggiornamento che non riesce a completarsi non impedisce la configurazione o l'associazione; per il ripristino, vedi [Prepara il pannello](/it/install/prepare-a-panel/).
 
 ## Cosa protegge il programma di installazione
 

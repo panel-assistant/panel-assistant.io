@@ -1,14 +1,14 @@
 ---
-title: Problemi noti in 1.0.0-rc1
-description: Limitazioni note di Panel Assistant 1.0.0-rc1 e della corrispondente app del pannello, e come affrontarle.
+title: Problemi noti in 1.0.2
+description: Limitazioni note di Panel Assistant 1.0.2 e della corrispondente app del pannello, e come affrontarle.
 sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
-Panel Assistant 1.0.0-rc1 e la corrispondente app del pannello sono release candidate. Questa pagina elenca le limitazioni note e come affrontarle. Leggi prima [Aggiornare alla versione 1.0](/it/manage/upgrade-to-1-0/): spiega quali condizioni devono essere soddisfatte prima di installare e perché un pannello con la versione 1.0 non può tornare alla 0.9. Segnala qualsiasi altro problema nel [registro delle segnalazioni](https://github.com/panel-assistant/ha-integration/issues), indicando il modello del pannello e cosa hai osservato.
+Panel Assistant 1.0.2 e la corrispondente app del pannello sono versioni stabili. Questa pagina elenca le limitazioni note e come affrontarle. Leggi prima [Aggiornare alla versione 1.0](/it/manage/upgrade-to-1-0/): spiega quali condizioni devono essere soddisfatte prima di installare e perché un pannello con la versione 1.0 non può tornare alla 0.9. Segnala qualsiasi altro problema nel [registro delle segnalazioni](https://github.com/panel-assistant/ha-integration/issues), indicando il modello del pannello e cosa hai osservato.
 
 ## Un pannello ancora con l'app 0.9 potrebbe richiedere il ripristino della connessione ADB
 
-La Riparazione che indica che un pannello necessita dell'app 1.0.0-rc1 significa che la sua app non può ancora comunicare con Panel Assistant 1.0. Se Home Assistant indica anche che il pannello non può ricevere aggiornamenti dell'app, segui quella Riparazione per ripristinare il percorso di aggiornamento. Per un pannello con il debug di rete disattivato, collegalo al computer e avvia il programma di installazione USB da Home Assistant, come descritto in [Un pannello che non può essere aggiornato](/it/manage/updates-and-recovery/#un-pannello-che-non-può-essere-aggiornato). Su un pannello che ha già l'app, il programma di installazione USB può riconnetterlo senza reinstallarlo: se richiesto, seleziona **Consenti sempre da questo computer** e tocca **Consenti** sul pannello. Il programma di installazione riattiva il debug di rete, così Home Assistant può aggiornare l'app.
+La Riparazione che indica che un pannello necessita dell'app 1.0 significa che la sua app non può ancora comunicare con Panel Assistant 1.0. Se Home Assistant indica anche che il pannello non può ricevere aggiornamenti dell'app, segui quella Riparazione per ripristinare il percorso di aggiornamento. Per un pannello con il debug di rete disattivato, collegalo al computer e avvia il programma di installazione USB da Home Assistant, come descritto in [Un pannello che non può essere aggiornato](/it/manage/updates-and-recovery/#un-pannello-che-non-può-essere-aggiornato). Su un pannello che ha già l'app, il programma di installazione USB può riconnetterlo senza reinstallarlo: se richiesto, seleziona **Consenti sempre da questo computer** e tocca **Consenti** sul pannello. Il programma di installazione riattiva il debug di rete, così Home Assistant può aggiornare l'app.
 
 ## La barra laterale non può aprire un pannello finché non esegue l'app 1.0
 

@@ -64,7 +64,7 @@ The built-in Home Assistant browser on the XL had rendering and layout problems 
 | `rk805 pwrkey` | `KEY_F10`          | Screen power button                                                                               |
 | `gpio_keys`    | `KEY_F5`, `KEY_F6` | Motion events; F5 near and F6 far are inferred from the traces and need a labelled physical check |
 
-**XL-specific button and proximity support is in development.** It matches the input-device names above and provides an ordinary-app route through Android's Accessibility service when that service is enabled. F5/F6 are handled separately as proximity events rather than dashboard button presses. This is not a claim about the current public release.
+**XL-specific button and proximity support is available from panel app 1.0.1.** It matches the input-device names above and provides an ordinary-app route through Android's Accessibility service when that service is enabled. F5/F6 are handled separately as proximity events rather than dashboard button presses.
 
 Raw Linux input events do not prove that Android delivers the same keys to Panel Assistant's Accessibility service. That rootless route needs an on-device capture before button actions or proximity wake can be confirmed. The [X2i](/hardware/panels/shelly/wall-display-x2i/) has no physical buttons, so it cannot validate the XL's controls.
 

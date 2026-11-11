@@ -111,7 +111,7 @@ export function index(versions) {
     'description: The settings on the Configure page, for each released version of Panel Assistant.',
     '---',
     '',
-    'Each release has its own list of settings, generated from that release. While a release candidate is being tested it has a list too, until the release replaces it.',
+    'Each release has its own list of settings, generated from that release.',
     '',
     ...versions.map((v) => `- [${v}](/reference/settings/${versionSlug(v)}/)`),
     '',

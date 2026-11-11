@@ -189,7 +189,7 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 | `provisioning.recipes`                        | 可选；默认 `[]`    | 最多 32 个核心管理的配方选择。                                                                                                                |
 | `provisioning.recipes[].id`                   | 每项必填           | 唯一注册 ID。模式 2 认识 `nspanel-pro.watchdog-e2big-repair` 和 `tpa10.vendor-stack-minimize`。配方条目不能包含参数、命令、URL 或工作流定义。 |
 
-在尚未发布的 1.0.0-rc2 中，三个 WebView ID 解析为以下核心管理的构建和兼容性元数据：
+三个 WebView ID 解析为以下核心管理的构建和兼容性元数据：
 
 | 制品 ID               | 核心管理的构建                                                                                          |
 | --------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -197,7 +197,7 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 | `lineageos-150-arm`   | LineageOS System WebView `150.0.7871.63`; ARM ABI `armeabi-v7a`; Android 10 或更新版本.                 |
 | `lineageos-150-arm64` | LineageOS System WebView `150.0.7871.63`; ARM ABIs `armeabi-v7a` 和 `arm64-v8a`; Android 10 或更新版本. |
 
-WebView 制品字段选择一个构建，其下载地址、校验和、软件包、版本和签名者均编译于核心中。在尚未发布的 1.0.0-rc2 中，从 Home Assistant 发起的面板应用更新也可安装兼容 WebView。若更新未完成，请使用其更新修复重试。导入或激活配置文件不会开始更新。参见[更新 WebView](/zh-hans/hardware/guides/update-the-webview/)。
+WebView 制品字段选择一个构建，其下载地址、校验和、软件包、版本和签名者均编译于核心中。从 Home Assistant 发起的面板应用更新也可安装兼容 WebView。若更新未完成，请使用其更新修复重试。导入或激活配置文件不会开始更新。参见[更新 WebView](/zh-hans/hardware/guides/update-the-webview/)。
 
 ### 条件驱动要求
 
@@ -271,7 +271,7 @@ WebView 制品字段选择一个构建，其下载地址、校验和、软件包
 
 ## 能力与已编译驱动
 
-能力声明包含硬件事实，必要时也包含带类型参数的驱动 ID。驱动 ID 指向编译于 ha-paneld 中的实现。驱动负责验证路径、范围、事件码、软件包名及其他安全敏感输入。特权路径从核心允许列表选择。保留的 `provisioning.software.webview.artifact` 元数据指向与核心一同编译和审计的 URL、版本、制品校验和及签名者哈希；配置文件不能重定义此信任根。在尚未发布的 1.0.0-rc2 中，由所有者发起的更新会在使用制品前检查已安装提供程序及其兼容性；配置文件不能提供其他下载地址或信任根。
+能力声明包含硬件事实，必要时也包含带类型参数的驱动 ID。驱动 ID 指向编译于 ha-paneld 中的实现。驱动负责验证路径、范围、事件码、软件包名及其他安全敏感输入。特权路径从核心允许列表选择。保留的 `provisioning.software.webview.artifact` 元数据指向与核心一同编译和审计的 URL、版本、制品校验和及签名者哈希；配置文件不能重定义此信任根。由所有者发起的更新会在使用制品前检查已安装提供程序及其兼容性；配置文件不能提供其他下载地址或信任根。
 
 配置文件不能提供：
 

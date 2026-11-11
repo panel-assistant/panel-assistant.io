@@ -18,9 +18,9 @@ Panel nie potrzebuje stałego adresu: Panel Assistant podąża za panelem, któr
 
 Pulpit nawigacyjny rysuje systemowy WebView panelu, nazywany też jego silnikiem przeglądarki. Stary WebView może pozostawić pusty lub częściowo narysowany pulpit.
 
-W niewydanej wersji 1.0.0-rc2 zarówno instalator sieciowy, jak i USB mogą zażądać zweryfikowanej, zgodnej aktualizacji silnika przeglądarki na obsługiwanych panelach. Jeśli nie uda się dokończyć aktualizacji, konfiguracja i parowanie pozostają dostępne. Niedokończoną próbę można kontynuować z naprawy aktualizacji panelu w Home Assistant: wybierz **Spróbuj ponownie**. Przed zażądaniem kolejnej próby sprawdza ona dotychczasową pracę; nieudane aktualizacje nie są ponawiane według harmonogramu.
+Zarówno instalator sieciowy, jak i USB mogą zażądać zweryfikowanej, zgodnej aktualizacji silnika przeglądarki na obsługiwanych panelach. Jeśli nie uda się dokończyć aktualizacji, konfiguracja i parowanie pozostają dostępne. Niedokończoną próbę można kontynuować z naprawy aktualizacji panelu w Home Assistant: wybierz **Spróbuj ponownie**. Przed zażądaniem kolejnej próby sprawdza ona dotychczasową pracę; nieudane aktualizacje nie są ponawiane według harmonogramu.
 
-W tej wersji kreator konfiguracji ostrzega, gdy wbudowany silnik przeglądarki jest za stary. Możesz ukończyć konfigurację i parowanie, ale pulpit nadal może się nie wyświetlać. Jeśli panel nie może zainstalować aktualizacji, wykonaj [Aktualizację systemowego WebView](/pl/hardware/guides/update-the-webview/).
+Kreator konfiguracji ostrzega, gdy wbudowany silnik przeglądarki jest za stary. Możesz ukończyć konfigurację i parowanie, ale pulpit nadal może się nie wyświetlać. Jeśli panel nie może zainstalować aktualizacji, wykonaj [Aktualizację systemowego WebView](/pl/hardware/guides/update-the-webview/).
 
 ## Zanim zmienisz coś nieodwracalnie
 

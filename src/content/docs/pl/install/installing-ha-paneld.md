@@ -16,7 +16,7 @@ Dla panelu, który jest już w twojej sieci. Przejdź do **Ustawienia**, **Urzą
 
 Dla panelu, który wciąż leży w pudełku albo którego oprogramowanie producenta utrudnia dostęp przez sieć. Podłącz go do laptopa i zainstaluj z przeglądarki przez kabel USB. Przeglądarka pozostaje połączona z Home Assistant, który dostarcza zweryfikowane wydanie; panel nie potrzebuje sieciowego ADB. Zacznij od **Ustawienia**, **Urządzenia oraz usługi**, **Dodaj integrację**, **Panel Assistant**, **Zainstaluj przez USB na tym komputerze**; potrzebna jest przeglądarka oparta na Chromium. Zobacz [Instalacja przez USB](/pl/install/install-over-usb/).
 
-W niewydanej wersji 1.0.0-rc2 oba instalatory mogą też zażądać zweryfikowanej, zgodnej aktualizacji silnika przeglądarki na obsługiwanych panelach. Aktualizacja, której nie można dokończyć, nie blokuje konfiguracji ani parowania; odzyskiwanie opisuje [Przygotowanie panelu](/pl/install/prepare-a-panel/).
+Oba instalatory mogą też zażądać zweryfikowanej, zgodnej aktualizacji silnika przeglądarki na obsługiwanych panelach. Aktualizacja, której nie można dokończyć, nie blokuje konfiguracji ani parowania; odzyskiwanie opisuje [Przygotowanie panelu](/pl/install/prepare-a-panel/).
 
 ## Przed czym chroni instalator
 

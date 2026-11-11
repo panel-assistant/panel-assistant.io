@@ -1,14 +1,14 @@
 ---
-title: Bekende problemen in 1.0.0-rc1
-description: Bekende beperkingen van Panel Assistant 1.0.0-rc1 en de bijbehorende paneel-app, en wat je eraan kunt doen.
+title: Bekende problemen in 1.0.2
+description: Bekende beperkingen van Panel Assistant 1.0.2 en de bijbehorende paneel-app, en wat je eraan kunt doen.
 sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
-Panel Assistant 1.0.0-rc1 en de bijbehorende paneel-app zijn release candidates. Deze pagina beschrijft bekende beperkingen en wat je eraan kunt doen. Lees eerst [Upgraden naar 1.0](/nl/manage/upgrade-to-1-0/): daar staat waaraan je moet voldoen vóór de installatie en waarom een paneel op 1.0 niet terug kan naar 0.9. Meld andere problemen in de [issuetracker](https://github.com/panel-assistant/ha-integration/issues), met het paneelmodel en wat je zag.
+Panel Assistant 1.0.2 en de bijbehorende paneel-app zijn stabiele releases. Deze pagina beschrijft bekende beperkingen en wat je eraan kunt doen. Lees eerst [Upgraden naar 1.0](/nl/manage/upgrade-to-1-0/): daar staat waaraan je moet voldoen vóór de installatie en waarom een paneel op 1.0 niet terug kan naar 0.9. Meld andere problemen in de [issuetracker](https://github.com/panel-assistant/ha-integration/issues), met het paneelmodel en wat je zag.
 
 ## Een paneel met de 0.9-app moet mogelijk opnieuw met ADB worden verbonden
 
-De reparatie die zegt dat een paneel app 1.0.0-rc1 nodig heeft, betekent dat de app nog niet met Panel Assistant 1.0 kan communiceren. Zegt Home Assistant ook dat het paneel geen app-updates kan ontvangen, volg dan die reparatie om de updateroute te herstellen. Is netwerkfoutopsporing uitgeschakeld, sluit het paneel dan op je computer aan en start het USB-installatieprogramma vanuit Home Assistant, zoals beschreven onder [een paneel dat niet kan worden bijgewerkt](/nl/manage/updates-and-recovery/#een-paneel-dat-niet-kan-worden-bijgewerkt). Op een paneel waarop de app al staat, kan het USB-installatieprogramma de verbinding herstellen zonder opnieuw te installeren: vink zo nodig **Altijd toestaan vanaf deze computer** aan en tik op **Toestaan** op het paneel. Het installatieprogramma zet netwerkfoutopsporing weer aan, zodat Home Assistant de app kan bijwerken.
+De reparatie die zegt dat een paneel de 1.0-app nodig heeft, betekent dat de app nog niet met Panel Assistant 1.0 kan communiceren. Zegt Home Assistant ook dat het paneel geen app-updates kan ontvangen, volg dan die reparatie om de updateroute te herstellen. Is netwerkfoutopsporing uitgeschakeld, sluit het paneel dan op je computer aan en start het USB-installatieprogramma vanuit Home Assistant, zoals beschreven onder [een paneel dat niet kan worden bijgewerkt](/nl/manage/updates-and-recovery/#een-paneel-dat-niet-kan-worden-bijgewerkt). Op een paneel waarop de app al staat, kan het USB-installatieprogramma de verbinding herstellen zonder opnieuw te installeren: vink zo nodig **Altijd toestaan vanaf deze computer** aan en tik op **Toestaan** op het paneel. Het installatieprogramma zet netwerkfoutopsporing weer aan, zodat Home Assistant de app kan bijwerken.
 
 ## De zijbalk kan een paneel pas openen als de 1.0-app erop draait
 

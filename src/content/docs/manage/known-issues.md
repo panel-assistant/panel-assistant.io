@@ -1,13 +1,13 @@
 ---
-title: Known issues in 1.0.0-rc1
-description: Known limitations of Panel Assistant 1.0.0-rc1 and the matching panel app, and what to do about each.
+title: Known issues in 1.0.2
+description: Known limitations of Panel Assistant 1.0.2 and the matching panel app, and what to do about each.
 ---
 
-Panel Assistant 1.0.0-rc1 and the matching panel app are release candidates. This page lists known limitations and what to do about each. Read [Upgrading to 1.0](/manage/upgrade-to-1-0/) first: it covers what must be true before you install and why a panel on 1.0 cannot go back to 0.9. Report anything else in the [issue tracker](https://github.com/panel-assistant/ha-integration/issues), with the panel model and what you saw.
+Panel Assistant 1.0.2 and the matching panel app are stable releases. This page lists known limitations and what to do about each. Read [Upgrading to 1.0](/manage/upgrade-to-1-0/) first: it covers what must be true before you install and why a panel on 1.0 cannot go back to 0.9. Report anything else in the [issue tracker](https://github.com/panel-assistant/ha-integration/issues), with the panel model and what you saw.
 
 ## A panel still on the 0.9 app may need its ADB connection restored
 
-The Repair saying a panel needs app 1.0.0-rc1 means its app cannot talk to Panel Assistant 1.0 yet. If Home Assistant also says the panel cannot receive app updates, follow that Repair to restore its update route. For a panel with network debugging switched off, plug it into your computer and start the USB installer from Home Assistant, as described in [a panel that cannot be updated](/manage/updates-and-recovery/#a-panel-that-cannot-be-updated). On a panel that already has the app, the USB installer can reconnect it without reinstalling: if asked, tick **Always allow from this computer** and tap **Allow** on the panel. The installer turns network debugging back on so Home Assistant can update the app.
+The Repair saying a panel needs the 1.0 app means its app cannot talk to Panel Assistant 1.0 yet. If Home Assistant also says the panel cannot receive app updates, follow that Repair to restore its update route. For a panel with network debugging switched off, plug it into your computer and start the USB installer from Home Assistant, as described in [a panel that cannot be updated](/manage/updates-and-recovery/#a-panel-that-cannot-be-updated). On a panel that already has the app, the USB installer can reconnect it without reinstalling: if asked, tick **Always allow from this computer** and tap **Allow** on the panel. The installer turns network debugging back on so Home Assistant can update the app.
 
 ## The sidebar cannot open a panel until it runs the 1.0 app
 

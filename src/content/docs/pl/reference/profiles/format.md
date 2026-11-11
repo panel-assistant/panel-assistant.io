@@ -189,7 +189,7 @@ Zapisana rewizja schematu 2 może zawierać `proximity_near_below`, `proximity_n
 | `provisioning.recipes`                        | Opcjonalne; domyślnie `[]`       | Lista najwyżej 32 wyborów procedur należących do rdzenia.                                                                                                                                                                   |
 | `provisioning.recipes[].id`                   | Wymagane dla każdego elementu    | Unikalny zarejestrowany identyfikator. Schemat 2 zna `nspanel-pro.watchdog-e2big-repair` i `tpa10.vendor-stack-minimize`. Wpisy procedur nie mogą zawierać argumentów, poleceń, adresów URL ani definicji przepływów pracy. |
 
-W niewydanej wersji 1.0.0-rc2 trzy identyfikatory WebView wskazują następujące kompilacje i metadane zgodności należące do rdzenia:
+Trzy identyfikatory WebView wskazują następujące kompilacje i metadane zgodności należące do rdzenia:
 
 | Identyfikator artefaktu | Kompilacja rdzenia                                                                                    |
 | ----------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -197,7 +197,7 @@ W niewydanej wersji 1.0.0-rc2 trzy identyfikatory WebView wskazują następując
 | `lineageos-150-arm`     | LineageOS System WebView `150.0.7871.63`; ABI ARM `armeabi-v7a`; Android 10 lub nowszy.               |
 | `lineageos-150-arm64`   | LineageOS System WebView `150.0.7871.63`; ABI ARM `armeabi-v7a` i `arm64-v8a`; Android 10 lub nowszy. |
 
-Pole artefaktu WebView wybiera kompilację, której pobieranie, suma kontrolna, pakiet, wersja i podpisujący są wkompilowane w rdzeń. W niewydanej wersji 1.0.0-rc2 aktualizacja aplikacji panelu rozpoczęta z Home Assistant może również zainstalować zgodny WebView. Jeśli aktualizacja pozostaje niedokończona, spróbuj ponownie przez jej Naprawę aktualizacji. Import lub aktywacja profilu nie rozpoczyna aktualizacji. Zobacz [Aktualizacja WebView](/pl/hardware/guides/update-the-webview/).
+Pole artefaktu WebView wybiera kompilację, której pobieranie, suma kontrolna, pakiet, wersja i podpisujący są wkompilowane w rdzeń. Aktualizacja aplikacji panelu rozpoczęta z Home Assistant może również zainstalować zgodny WebView. Jeśli aktualizacja pozostaje niedokończona, spróbuj ponownie przez jej Naprawę aktualizacji. Import lub aktywacja profilu nie rozpoczyna aktualizacji. Zobacz [Aktualizacja WebView](/pl/hardware/guides/update-the-webview/).
 
 ### Warunkowe wymagania sterowników
 
@@ -271,7 +271,7 @@ Twórz osobne profile, gdy żadna nazwana strategia nie obejmuje różnicy lub g
 
 ## Funkcje i wkompilowane sterowniki
 
-Deklaracja funkcji zawiera fakty sprzętowe oraz, gdy potrzeba, identyfikator sterownika z typowanymi parametrami. Identyfikatory sterowników nazywają implementacje wkompilowane w ha-paneld. Sterownik odpowiada za walidację ścieżek, zakresów, kodów zdarzeń, nazw pakietów i innych danych istotnych dla bezpieczeństwa. Ścieżki uprzywilejowane są wybierane z list dozwolonych w rdzeniu. Zachowane metadane `provisioning.software.webview.artifact` wskazują URL, wersję, sumę kontrolną artefaktu i skrót podpisującego wkompilowane w rdzeń i audytowane wraz z nim; profil nie może przedefiniować tej podstawy zaufania. W niewydanej wersji 1.0.0-rc2 aktualizacja rozpoczęta przez właściciela sprawdza zainstalowanego dostawcę i jego zgodność przed użyciem artefaktu; profil nie może dostarczyć innego pliku do pobrania ani podstawy zaufania.
+Deklaracja funkcji zawiera fakty sprzętowe oraz, gdy potrzeba, identyfikator sterownika z typowanymi parametrami. Identyfikatory sterowników nazywają implementacje wkompilowane w ha-paneld. Sterownik odpowiada za walidację ścieżek, zakresów, kodów zdarzeń, nazw pakietów i innych danych istotnych dla bezpieczeństwa. Ścieżki uprzywilejowane są wybierane z list dozwolonych w rdzeniu. Zachowane metadane `provisioning.software.webview.artifact` wskazują URL, wersję, sumę kontrolną artefaktu i skrót podpisującego wkompilowane w rdzeń i audytowane wraz z nim; profil nie może przedefiniować tej podstawy zaufania. Aktualizacja rozpoczęta przez właściciela sprawdza zainstalowanego dostawcę i jego zgodność przed użyciem artefaktu; profil nie może dostarczyć innego pliku do pobrania ani podstawy zaufania.
 
 Profile nie mogą dostarczać:
 

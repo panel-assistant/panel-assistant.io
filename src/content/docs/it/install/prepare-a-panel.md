@@ -18,9 +18,9 @@ Il pannello non necessita di un indirizzo fisso: Panel Assistant segue il pannel
 
 La plancia viene disegnata dal WebView di sistema del pannello, chiamato anche motore del browser. Un WebView vecchio può lasciare la plancia vuota o disegnata solo in parte.
 
-Nella versione 1.0.0-rc2 non ancora rilasciata, sia il programma di installazione di rete sia quello USB possono richiedere un aggiornamento verificato e compatibile del motore del browser sui pannelli supportati. Se l'aggiornamento non riesce a completarsi, la configurazione e l'associazione rimangono disponibili. Un tentativo incompleto può essere proseguito dalla Riparazione relativa all'aggiornamento del pannello in Home Assistant: scegli **Riprova**. Controlla il lavoro esistente prima di richiedere un nuovo tentativo; gli aggiornamenti non riusciti non vengono ritentati in modo pianificato.
+Sia il programma di installazione di rete sia quello USB possono richiedere un aggiornamento verificato e compatibile del motore del browser sui pannelli supportati. Se l'aggiornamento non riesce a completarsi, la configurazione e l'associazione rimangono disponibili. Un tentativo incompleto può essere proseguito dalla Riparazione relativa all'aggiornamento del pannello in Home Assistant: scegli **Riprova**. Controlla il lavoro esistente prima di richiedere un nuovo tentativo; gli aggiornamenti non riusciti non vengono ritentati in modo pianificato.
 
-In quella versione, la procedura guidata avvisa quando il motore del browser integrato è troppo vecchio. Puoi completare la configurazione e l'associazione, ma la plancia potrebbe comunque non essere visualizzata. Se il pannello non riesce a installare l'aggiornamento, segui [Aggiornare il WebView di sistema](/it/hardware/guides/update-the-webview/).
+La procedura guidata avvisa quando il motore del browser integrato è troppo vecchio. Puoi completare la configurazione e l'associazione, ma la plancia potrebbe comunque non essere visualizzata. Se il pannello non riesce a installare l'aggiornamento, segui [Aggiornare il WebView di sistema](/it/hardware/guides/update-the-webview/).
 
 ## Prima di modificare qualcosa di irreversibile
 

@@ -10,7 +10,7 @@ Bei jedem Panel ist die erste Stunde der schwierige Teil. Panel Assistant übern
 
 ## 1. Die Integration installieren
 
-Ab Home Assistant **2026.11** installierst du Panel Assistant unter **Einstellungen**, **Marketplace**. Auf unterstützten älteren Versionen, **2026.8.3 bis 2026.10**, installierst du es über HACS und startest Home Assistant neu. Marketplace ermöglicht die Einrichtung unter Umständen sofort; befolge zuerst jede Aufforderung zum Neustart. Dies ist das Einzige, was du von Hand installierst. [Integration installieren](/de/home-assistant/custom-integration/) erklärt beide Wege und die Aktivierung von Vorabversionen.
+Ab Home Assistant **2026.11** installierst du Panel Assistant unter **Einstellungen**, **Marketplace**. Auf unterstützten älteren Versionen, **2026.8.3 bis 2026.10**, installierst du es über HACS und startest Home Assistant neu. Marketplace ermöglicht die Einrichtung unter Umständen sofort; befolge zuerst jede Aufforderung zum Neustart. Dies ist das Einzige, was du von Hand installierst. [Integration installieren](/de/home-assistant/custom-integration/) erklärt beide Wege und Updates.
 
 :::note
 Wenn du von 0.9 aktualisierst, lies vor Beginn [Upgrade auf 1.0](/de/manage/upgrade-to-1-0/) und bewahre die dort beschriebenen Home Assistant- und Panel-Sicherungen auf. Ein Panel mit der App 1.0 kann nicht zu 0.9 zurückkehren.
@@ -103,7 +103,7 @@ Als Nächstes folgt der eigene Einrichtungsassistent des Panels. Er wird vom Pan
 
 Der Assistent fragt nach einem Namen für das Panel, meldet es bei Home Assistant an und fragt, welches Dashboard angezeigt werden soll und in welchem Bereich sich das Panel befindet. Das Panel verbindet sich als das Home Assistant-Konto, mit dem du dich anmeldest. Wenn dein Browser als du angemeldet ist, verbindet sich das Panel daher möglicherweise als du. Damit das Panel sein eigenes Konto verwendet, melde dich stattdessen als dieses Konto an. Bei aktiviertem Entitätenfilter lädt das Panel nur die Entitäten, die dieses Dashboard verwendet. Dadurch bleibt es schnell. Siehe [Panel verbinden](/de/home-assistant/connect-a-panel/).
 
-In der noch nicht veröffentlichten Version 1.0.0-rc2 kann die Einrichtung auch dann abgeschlossen werden, wenn die Browser-Engine des Panels zu alt ist, um ein aktuelles Home Assistant-Dashboard mit dem integrierten Renderer anzuzeigen. Der Assistent warnt, wenn dies Aufmerksamkeit erfordert. Folge der [WebView-Anleitung](/de/hardware/guides/update-the-webview/), bevor du dich auf das Dashboard verlässt; der Abschluss der Einrichtung allein bestätigt nicht, dass das Dashboard geladen werden kann.
+Die Einrichtung kann auch dann abgeschlossen werden, wenn die Browser-Engine des Panels zu alt ist, um ein aktuelles Home Assistant-Dashboard mit dem integrierten Renderer anzuzeigen. Der Assistent warnt, wenn dies Aufmerksamkeit erfordert. Folge der [WebView-Anleitung](/de/hardware/guides/update-the-webview/), bevor du dich auf das Dashboard verlässt; der Abschluss der Einrichtung allein bestätigt nicht, dass das Dashboard geladen werden kann.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="Der Einrichtungsassistent des Panels, Schritt für Schritt" tabindex="0">
 <figure>

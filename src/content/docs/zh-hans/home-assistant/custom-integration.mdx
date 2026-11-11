@@ -35,18 +35,13 @@ Panel Assistant 是自定义集成。您需要 Home Assistant **2026.8.3 或更�
 
 <a id="updates-and-pre-releases"></a>
 
-## 更新与预发布版本
+<a id="updates"></a>
+
+## 更新
 
 默认提供稳定版。在 Home Assistant 2026.11 或更新版本中，集成更新会出现在 **设置**、**更新** 下。安装更新后，按照重启修复项的提示重启 Home Assistant，以加载更新。在受支持的较旧版本中，请在 HACS 中下载更新，并在提示时重启 Home Assistant。更新此集成与[更新面板应用](/zh-hans/manage/updates-and-recovery/)是独立的操作。 Home Assistant 会显示每次更新的简短摘要；[发行说明](/zh-hans/release-notes/)提供完整的变更列表。
 
-如需接收较新的预发布版本：
-
-1. 打开 **设置**、**设备与服务**，然后在 Home Assistant 2026.11 或更新版本中打开 **Marketplace**，或在受支持的较旧版本中打开 **HACS**。
-2. 选择 **Panel Assistant** 仓库设备。展开已禁用的实体，打开 **预发布**。
-3. 在实体设置中开启 **已启用**，选择 **更新**。然后打开 **诊断** 下的 **预发布** 开关。
-4. 在 Marketplace 的 **设置**、**更新** 中，或在 HACS 的 Panel Assistant 中安装提供的预发布版本，然后重启 Home Assistant。
-
-从 0.9 升级到 1.0 之前，请阅读[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)，包括备份步骤。运行 1.0 应用的面板无法回退到 0.9。关闭预发布开关并不意味着安装旧版本就安全了；如需回退，请按照指南中的备份恢复说明操作。
+从 0.9 升级到 1.0 之前，请阅读[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)，包括备份步骤。运行 1.0 应用的面板无法回退到 0.9。安装旧版本并不安全；如需回退，请按照指南中的备份恢复说明操作。
 
 ## 您将获得什么
 
@@ -54,9 +49,9 @@ Panel Assistant 是自定义集成。您需要 Home Assistant **2026.8.3 或更�
 - **每块面板对应一个设备。** 每块面板都会出现在“设备与服务”中，并提供状态传感器和可下载的诊断信息。诊断信息经过脱敏，可在求助时分享。
 - **集中管理所有面板。** 管理员可以从 Panel Assistant 侧边栏中选择一块面板，在 Home Assistant 内使用面板自身的网页界面。
 
-## 后续改进
+## 帮助与反馈
 
-Panel Assistant 刚刚起步，正在快速发展。已安装的面板通过 Home Assistant 中的更新实体进行更新，详见[更新与恢复](/zh-hans/manage/updates-and-recovery/)。USB 安装程序是最新加入的部分；可以安全重试，但目前仍可能有不完善之处。欢迎通过 [issues](https://github.com/panel-assistant/ha-integration/issues) 和 [Discord](https://panel-assistant.io/go/discord) 反馈。
+Panel Assistant 刚刚起步，正在快速发展。已安装的面板通过 Home Assistant 中的更新实体进行更新，详见[更新与恢复](/zh-hans/manage/updates-and-recovery/)。欢迎通过 [issues](https://github.com/panel-assistant/ha-integration/issues) 和 [Discord](https://panel-assistant.io/go/discord) 反馈。
 
 ## 如果您使用过早期的 0.1.0 集成
 

@@ -52,7 +52,7 @@ Używaj zabezpieczonego działania **Spróbuj ponownie** w istniejącej naprawie
 
 ## Usuń Panel Assistant z panelu &lt;panel&gt;
 
-**Co to oznacza:** W niewydanej wersji 1.0.0-rc2 ktoś nacisnął **Usuń z tego panelu** na stronie urządzenia tego panelu. Przycisk niczego nie usuwa; problem pozostaje dostępny do czasu zakończenia usuwania.
+**Co to oznacza:** Ktoś nacisnął **Usuń z tego panelu** na stronie urządzenia tego panelu. Przycisk niczego nie usuwa; problem pozostaje dostępny do czasu zakończenia usuwania.
 
 **Dlaczego:** Panel Assistant prosi o potwierdzenie przed przywróceniem ekranu głównego i aplikacji producenta, odinstalowaniem ha-paneld i usunięciem panelu z Home Assistant.
 
@@ -326,11 +326,11 @@ Import przez pasek boczny zastępuje kopię współdzieloną i może zaktualizow
 
 ## Niepowodzenie instalatora: aktualizacja
 
-**Co to oznacza:** Home Assistant nie mógł potwierdzić ukończenia aktualizacji. W niewydanej wersji 1.0.0-rc2 aplikacja panelu może być już zainstalowana, podczas gdy aktualizacja silnika przeglądarki pozostaje niedokończona.
+**Co to oznacza:** Home Assistant nie mógł potwierdzić ukończenia aktualizacji. Aplikacja panelu może być już zainstalowana, podczas gdy aktualizacja silnika przeglądarki pozostaje niedokończona.
 
-**Dlaczego:** Aktualizacja aplikacji lub, w tej wersji, silnika przeglądarki nie powiodła się albo nie mogła zostać zweryfikowana. Naprawa zachowuje raport całej próby.
+**Dlaczego:** Aktualizacja aplikacji lub silnika przeglądarki nie powiodła się albo nie mogła zostać zweryfikowana. Naprawa zachowuje raport całej próby.
 
-**Jak naprawić:** Przeczytaj raport pomocy, przywróć zgłoszone połączenie lub spełnij warunek instalacji, a następnie wybierz **Spróbuj ponownie**. W niewydanej wersji 1.0.0-rc2, jeśli niedokończona pozostaje tylko aktualizacja silnika przeglądarki, a Panel Assistant potwierdzi zainstalowanie żądanej wersji aplikacji, kontynuuje ten etap bez ponownego instalowania aplikacji. Jeśli oferowane jest **Zezwól na aktualizacje**, najpierw użyj go do zatwierdzenia Home Assistant na panelu. Zobacz [przewodnik WebView](/pl/hardware/guides/update-the-webview/), jeśli silnika przeglądarki nie można zaktualizować.
+**Jak naprawić:** Przeczytaj raport pomocy, przywróć zgłoszone połączenie lub spełnij warunek instalacji, a następnie wybierz **Spróbuj ponownie**. Jeśli niedokończona pozostaje tylko aktualizacja silnika przeglądarki, a Panel Assistant potwierdzi zainstalowanie żądanej wersji aplikacji, kontynuuje ten etap bez ponownego instalowania aplikacji. Jeśli oferowane jest **Zezwól na aktualizacje**, najpierw użyj go do zatwierdzenia Home Assistant na panelu. Zobacz [przewodnik WebView](/pl/hardware/guides/update-the-webview/), jeśli silnika przeglądarki nie można zaktualizować.
 
 <a id="installer-failure-retry-hold"></a>
 

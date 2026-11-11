@@ -9,9 +9,9 @@ sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
 <p id="removal-this-panel-verdict"></p>
 </div>
 
-Panel Assistant verwijdert ha-paneld in één stap, via de paneeloptie **Panel Assistant van dit paneel verwijderen** onder **Configureren** in Home Assistant (Panel Assistant 0.9 noemt dit ha-paneld van dit paneel verwijderen). Op de meeste panelen is dat alles. Op sommige blijft na verwijdering geen route naar Android-instellingen of netwerkfoutopsporing over. Dan kan niets er opnieuw een app op installeren, ook Panel Assistant niet, totdat je de eigen herstelroute van de fabrikant gebruikt. Bij sommige firmware vereist dat aanmelden bij een fabrieksaccount of een computer aansluiten via USB.
+Panel Assistant verwijdert ha-paneld in één stap, via de paneeloptie **Van dit paneel verwijderen** onder **Configureren** in Home Assistant (Panel Assistant 0.9 noemt dit ha-paneld van dit paneel verwijderen). Op de meeste panelen is dat alles. Op sommige blijft na verwijdering geen route naar Android-instellingen of netwerkfoutopsporing over. Dan kan niets er opnieuw een app op installeren, ook Panel Assistant niet, totdat je de eigen herstelroute van de fabrikant gebruikt. Bij sommige firmware vereist dat aanmelden bij een fabrieksaccount of een computer aansluiten via USB.
 
-In de nog niet uitgebrachte versie 1.0.0-rc2 heet deze optie **Van dit paneel verwijderen** en wordt het paneel bij een geslaagde verwijdering ook uit Home Assistant verwijderd; er is geen optie om de vermelding te behouden. Op de apparaatpagina van het paneel staat ook een knop **Van dit paneel verwijderen**. Als je erop drukt, wordt er niets verwijderd: de knop opent een blijvende reparatie, **Panel Assistant van &lt;panel&gt; halen**, onder **Instellingen → Systeem → Reparaties**. Lees de waarschuwing voordat je de verwijdering bevestigt door eenmaal **Verzenden** te selecteren. Als je per ongeluk op de knop hebt gedrukt, sluit je het dialoogvenster zonder het formulier te verzenden en laat je de reparatie onbevestigd.
+Bij een geslaagde verwijdering wordt het paneel ook uit Home Assistant verwijderd; er is geen optie om de vermelding te behouden. Op de apparaatpagina van het paneel staat ook een knop **Van dit paneel verwijderen**. Als je erop drukt, wordt er niets verwijderd: de knop opent een blijvende reparatie, **Panel Assistant van &lt;panel&gt; halen**, onder **Instellingen → Systeem → Reparaties**. Lees de waarschuwing voordat je de verwijdering bevestigt door eenmaal **Verzenden** te selecteren. Als je per ongeluk op de knop hebt gedrukt, sluit je het dialoogvenster zonder het formulier te verzenden en laat je de reparatie onbevestigd.
 
 Als je de vermelding van het paneel in Home Assistant verwijdert, blijft ha-paneld geïnstalleerd. Gebruik de hierboven beschreven verwijderoptie om de app te verwijderen voordat je de vermelding verwijdert.
 
@@ -24,7 +24,7 @@ Lees het gedeelte over jouw paneel voordat je bevestigt.
 1. ha-paneld geeft het startscherm terug aan de eigen launcher van het paneel en zet de door hem uitgeschakelde fabrieksapps weer aan.
 2. Panel Assistant controleert op het paneel of een andere launcher werkelijk het startscherm beheert. Zo niet, dan stopt het en verwijdert niets.
 3. Panel Assistant verwijdert ha-paneld via zijn beheerverbinding. De ha-paneld-instellingen op het paneel worden verwijderd.
-4. Heb je in 1.0.0-rc1 vóór het verzenden **Dit paneel ook uit Home Assistant verwijderen** geselecteerd, dan vergeet Home Assistant het paneel ook. Laat dit uit om entiteiten en geschiedenis te behouden. In de nog niet uitgebrachte versie 1.0.0-rc2 verwijdert geslaagde verwijdering de vermelding altijd.
+4. Bij een geslaagde verwijdering wordt ook de vermelding van het paneel in Home Assistant verwijderd.
 
 Stopt de verwijdering halverwege, voer haar dan opnieuw uit: ze gaat verder waar ze stopte.
 

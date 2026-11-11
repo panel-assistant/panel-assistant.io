@@ -1,14 +1,14 @@
 ---
 sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
-title: 1.0.0-rc1 已知问题
-description: Panel Assistant 1.0.0-rc1 及配套面板应用的已知限制和应对方法。
+title: 1.0.2 已知问题
+description: Panel Assistant 1.0.2 及配套面板应用的已知限制和应对方法。
 ---
 
-Panel Assistant 1.0.0-rc1 和配套面板应用均为候选发布版。本页列出已知限制及应对方法。请先阅读[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)，了解安装前必须满足的条件，以及面板升级至 1.0 后为何无法回退到 0.9。其他问题请在[问题跟踪器](https://github.com/panel-assistant/ha-integration/issues)中报告，并提供面板型号和您观察到的情况。
+Panel Assistant 1.0.2 和配套面板应用均为稳定版。本页列出已知限制及应对方法。请先阅读[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)，了解安装前必须满足的条件，以及面板升级至 1.0 后为何无法回退到 0.9。其他问题请在[问题跟踪器](https://github.com/panel-assistant/ha-integration/issues)中报告，并提供面板型号和您观察到的情况。
 
 ## 仍运行 0.9 应用的面板可能需要恢复 ADB 连接
 
-提示面板需要应用 1.0.0-rc1 的修复项，表示其应用尚无法与 Panel Assistant 1.0 通信。如果 Home Assistant 还提示面板无法接收应用更新，请按照该修复项恢复更新途径。对于已关闭网络调试的面板，请将其连接到计算机，并从 Home Assistant 启动 USB 安装程序，详见[无法更新的面板](/zh-hans/manage/updates-and-recovery/#无法更新的面板)。对于已安装应用的面板，USB 安装程序可以重新连接而无需重装：出现提示时，在面板上勾选 **始终允许使用这台计算机进行调试**，然后点按 **允许**。安装程序会重新开启网络调试，让 Home Assistant 能够更新应用。
+提示面板需要 1.0 应用的修复项，表示其应用尚无法与 Panel Assistant 1.0 通信。如果 Home Assistant 还提示面板无法接收应用更新，请按照该修复项恢复更新途径。对于已关闭网络调试的面板，请将其连接到计算机，并从 Home Assistant 启动 USB 安装程序，详见[无法更新的面板](/zh-hans/manage/updates-and-recovery/#无法更新的面板)。对于已安装应用的面板，USB 安装程序可以重新连接而无需重装：出现提示时，在面板上勾选 **始终允许使用这台计算机进行调试**，然后点按 **允许**。安装程序会重新开启网络调试，让 Home Assistant 能够更新应用。
 
 ## 面板运行 1.0 应用之前，侧边栏无法打开它
 

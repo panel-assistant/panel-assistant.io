@@ -189,7 +189,7 @@ Una revisione schema 2 salvata può contenere `proximity_near_below`, `proximity
 | `provisioning.recipes`                        | Opzionale; predefinito `[]`          | Lista di massimo 32 selezioni di ricette gestite dal core.                                                                                                                                             |
 | `provisioning.recipes[].id`                   | Obbligatorio per elemento            | ID registrato unico. Lo schema 2 conosce `nspanel-pro.watchdog-e2big-repair` e `tpa10.vendor-stack-minimize`. Le voci non possono contenere argomenti, comandi, URL o definizioni di flussi di lavoro. |
 
-Nella versione 1.0.0-rc2 non ancora pubblicata, i tre ID WebView corrispondono alle seguenti build e metadati di compatibilità gestiti dal core:
+I tre ID WebView corrispondono alle seguenti build e metadati di compatibilità gestiti dal core:
 
 | ID artefatto          | Build gestita dal core                                                                                  |
 | --------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -197,7 +197,7 @@ Nella versione 1.0.0-rc2 non ancora pubblicata, i tre ID WebView corrispondono a
 | `lineageos-150-arm`   | LineageOS System WebView `150.0.7871.63`; ABI ARM `armeabi-v7a`; Android 10 o successivo.               |
 | `lineageos-150-arm64` | LineageOS System WebView `150.0.7871.63`; ABI ARM `armeabi-v7a` e `arm64-v8a`; Android 10 o successivo. |
 
-Il campo artefatto WebView seleziona una build il cui download, checksum, pacchetto, versione e firmatario sono compilati nel core. Nella versione 1.0.0-rc2 non ancora pubblicata, un aggiornamento dell'app del pannello avviato da Home Assistant può anche installare un WebView compatibile. Se resta incompleto, usa la relativa Riparazione di aggiornamento per riprovare. Importare o attivare un profilo non avvia un aggiornamento. Vedi [Aggiornare WebView](/it/hardware/guides/update-the-webview/).
+Il campo artefatto WebView seleziona una build il cui download, checksum, pacchetto, versione e firmatario sono compilati nel core. Un aggiornamento dell'app del pannello avviato da Home Assistant può anche installare un WebView compatibile. Se resta incompleto, usa la relativa Riparazione di aggiornamento per riprovare. Importare o attivare un profilo non avvia un aggiornamento. Vedi [Aggiornare WebView](/it/hardware/guides/update-the-webview/).
 
 ### Requisiti condizionali dei driver
 
@@ -271,7 +271,7 @@ Crea profili separati quando nessuna strategia denominata copre la differenza, o
 
 ## Funzionalità e driver compilati
 
-Una dichiarazione di funzionalità contiene dati hardware e, dove necessario, un ID driver con parametri tipizzati. Gli ID nominano implementazioni compilate in ha-paneld. Il driver valida percorsi, intervalli, codici evento, nomi pacchetti e altri ingressi sensibili per la sicurezza. I percorsi privilegiati sono selezionati da elenchi consentiti del core. I metadati mantenuti `provisioning.software.webview.artifact` nominano URL, versione, checksum artefatto e hash firmatario compilati e verificati insieme al core; un profilo non può ridefinire quella radice di fiducia. Nella versione 1.0.0-rc2 non ancora pubblicata, un aggiornamento avviato dal proprietario controlla il fornitore installato e la compatibilità prima di usare quell'artefatto; il profilo non può fornire un download o una radice di fiducia diversi.
+Una dichiarazione di funzionalità contiene dati hardware e, dove necessario, un ID driver con parametri tipizzati. Gli ID nominano implementazioni compilate in ha-paneld. Il driver valida percorsi, intervalli, codici evento, nomi pacchetti e altri ingressi sensibili per la sicurezza. I percorsi privilegiati sono selezionati da elenchi consentiti del core. I metadati mantenuti `provisioning.software.webview.artifact` nominano URL, versione, checksum artefatto e hash firmatario compilati e verificati insieme al core; un profilo non può ridefinire quella radice di fiducia. Un aggiornamento avviato dal proprietario controlla il fornitore installato e la compatibilità prima di usare quell'artefatto; il profilo non può fornire un download o una radice di fiducia diversi.
 
 I profili non possono fornire:
 

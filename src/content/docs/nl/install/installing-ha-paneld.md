@@ -16,7 +16,7 @@ Voor een paneel dat al op je netwerk zit. Ga naar **Instellingen**, **Apparaten 
 
 Voor een paneel dat nog in de doos zit, of waarvan de software van de fabrikant netwerktoegang lastig maakt. Sluit het aan op je laptop en installeer vanuit je browser via de USB-kabel. Je browser blijft verbonden met Home Assistant, dat de geverifieerde release levert; het paneel heeft geen netwerk-ADB nodig. Start dit via **Instellingen**, **Apparaten en diensten**, **Integratie toevoegen**, **Panel Assistant**, **Installeer via USB op deze computer**; je hebt een op Chromium gebaseerde browser nodig. Zie [Installeren via USB](/nl/install/install-over-usb/).
 
-In de nog niet uitgebrachte versie 1.0.0-rc2 kunnen beide installatieprogramma’s ook een geverifieerde, compatibele update van de browser-engine aanvragen op ondersteunde panelen. Een update die niet kan worden afgerond, houdt het instellen of koppelen niet tegen; zie [Het paneel voorbereiden](/nl/install/prepare-a-panel/) voor herstel.
+Beide installatieprogramma’s kunnen ook een geverifieerde, compatibele update van de browser-engine aanvragen op ondersteunde panelen. Een update die niet kan worden afgerond, houdt het instellen of koppelen niet tegen; zie [Het paneel voorbereiden](/nl/install/prepare-a-panel/) voor herstel.
 
 ## Wat het installatieprogramma beschermt
 

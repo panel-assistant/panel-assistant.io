@@ -8,11 +8,11 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 
 **Vanuit Home Assistant.** Elk paneel heeft een update-entiteit. Zodra een nieuwere versie is gepubliceerd, biedt de entiteit die aan en installeer je met één druk op de knop; Panel Assistant installeert de update en bevestigt dat het paneel gezond is teruggekomen. Gebruik deze route. De [releasenotities](/nl/release-notes/) vermelden wat er in elke versie is veranderd.
 
-Een update begint wanneer Panel Assistant of jij er expliciet om vraagt. De paneel-app installeert geen geplande updates. Via het tabblad **Installeren** in de webinterface kun je ook een versie van de paneel-app kiezen en installeren, inclusief een prerelease. Die keuze geldt voor de installatie die je start; er is geen opgeslagen updatekanaal.
+Een update begint wanneer Panel Assistant of jij er expliciet om vraagt. De paneel-app installeert geen geplande updates. Installeer paneel-app-updates via Home Assistant. Het tabblad **Installeren** van het paneel biedt geen afzonderlijke appversiekeuze meer.
 
-In de nog niet uitgebrachte versie 1.0.0-rc2 kan een vanuit Home Assistant gestarte paneel-app-update op ondersteunde panelen ook een geverifieerde, compatibele systeem-WebView installeren. Blijft de browser-enginefase onafgerond, gebruik dan **Opnieuw proberen** in de update-reparatie. Daarbij wordt bestaand werk gecontroleerd voordat een nieuwe poging wordt aangevraagd; er is geen geplande nieuwe poging. Andere panelen hebben nog de Play Store, firmware van de fabrikant of de handmatige route onder [De systeem-WebView bijwerken](/nl/hardware/guides/update-the-webview/) nodig.
+Een vanuit Home Assistant gestarte paneel-app-update kan op ondersteunde panelen ook een geverifieerde, compatibele systeem-WebView installeren. Blijft de browser-enginefase onafgerond, gebruik dan **Opnieuw proberen** in de update-reparatie. Daarbij wordt bestaand werk gecontroleerd voordat een nieuwe poging wordt aangevraagd; er is geen geplande nieuwe poging. Andere panelen hebben nog de Play Store, firmware van de fabrikant of de handmatige route onder [De systeem-WebView bijwerken](/nl/hardware/guides/update-the-webview/) nodig.
 
-In die versie kan een ondersteund geroot paneel netwerk-ADB uit laten terwijl Panel Assistant het via de geauthenticeerde app-verbinding beheert. App-updates en ondersteund onderhoud gebruiken die verbinding en het bevoorrechte installatieprogramma van het paneel. De lokale herstelservice kan netwerk-ADB weer openen als de app-verbinding niet meer wordt vernieuwd of herstel dat vereist.
+Een ondersteund geroot paneel kan netwerk-ADB uit laten terwijl Panel Assistant het via de geauthenticeerde app-verbinding beheert. App-updates en ondersteund onderhoud gebruiken die verbinding en het bevoorrechte installatieprogramma van het paneel. De lokale herstelservice kan netwerk-ADB weer openen als de app-verbinding niet meer wordt vernieuwd of herstel dat vereist.
 
 ### Panelen die ADB nodig hebben
 

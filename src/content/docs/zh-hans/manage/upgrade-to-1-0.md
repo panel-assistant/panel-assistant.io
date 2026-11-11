@@ -16,25 +16,25 @@ Panel Assistant 1.0 与 1.0 面板应用需要一同升级。1.0 集成只与 1.
 
 ## 1. 更新集成
 
-在 Home Assistant **2026.11 或更新版本**中，通过 **设置**、**更新** 安装 Panel Assistant 更新。在受支持的较旧版本（**2026.8.3 至 2026.10**）中，在 HACS 中下载更新。然后按照重启修复项或 HACS 的提示重启 Home Assistant，以加载新集成。[安装集成](/zh-hans/home-assistant/custom-integration/#updates-and-pre-releases)说明了如何在 Marketplace 或 HACS 中启用较新的预发布版本。
+在 Home Assistant **2026.11 或更新版本**中，通过 **设置**、**更新** 安装 Panel Assistant 更新。在受支持的较旧版本（**2026.8.3 至 2026.10**）中，在 HACS 中下载更新。然后按照重启修复项或 HACS 的提示重启 Home Assistant，以加载新集成。[安装集成](/zh-hans/home-assistant/custom-integration/#updates)说明了通过 Marketplace 或 HACS 更新的方法。
 
 ## 2. 检查修复项
 
 重启后，再次打开 **设置**、**修复**。
 
-- **“…需要应用 1.0.0-rc1”** 是所有仍运行 0.9 应用的面板都会出现的预期提示。更新之前，Home Assistant 无法查看或控制该面板，其实体显示为不可用。面板本身仍会继续工作，保留设置和历史记录。
+- **“…需要应用…”** 是所有仍运行 0.9 应用的面板都会出现的预期提示。更新之前，Home Assistant 无法查看或控制该面板，其实体显示为不可用。面板本身仍会继续工作，保留设置和历史记录。
 - **“…无法接收应用更新”** 表示 Panel Assistant 无法在该面板上安装，通常是因为面板本身发生过更改，例如固件更新或重置。按照修复项 **了解更多** 中的说明，通过 USB 将面板重新连接到 Panel Assistant，之后即可更新。不会移除任何内容：对于已安装应用的面板，USB 安装程序不会安装任何东西，只会让 Panel Assistant 重新获得访问权限。
 - **“…从未从 MQTT 迁移”** 或 **“…仍运行旧应用”** 表示在 0.9.0 中未完成迁移。参阅[如果迁移未完成](#如果迁移未完成)。
 
 ## 3. 先更新一块面板，再更新其余面板
 
-1.0 面板应用的发布版本公布后，每块面板在 Home Assistant 中的更新实体都会提供该版本。请先在一块面板上安装，使用一段时间后再安装到其他面板，因为该面板无法回退。Panel Assistant 会备份面板设置、安装更新并确认面板已恢复正常，详见[更新与恢复](/zh-hans/manage/updates-and-recovery/)。0.9 面板应用的设置会保留。
+每块面板在 Home Assistant 中的更新实体都会提供最新的 1.0 面板应用。请先在一块面板上安装，使用一段时间后再安装到其他面板，因为该面板无法回退。Panel Assistant 会备份面板设置、安装更新并确认面板已恢复正常，详见[更新与恢复](/zh-hans/manage/updates-and-recovery/)。0.9 面板应用的设置会保留。
 
 ## 回退
 
 两部分的情况不同。
 
-**使用 1.0 应用的面板会留在 1.0。** 面板应用拒绝在自身上安装旧版本，Panel Assistant 从不提供旧版本，0.9 集成也无法与其通信。如果 1.0 面板表现异常，请查看[故障排查](/zh-hans/manage/troubleshooting/)，然后附上[支持报告](/zh-hans/home-assistant/support-report/)进行反馈，以便在下一个候选发布版中修复。
+**使用 1.0 应用的面板会留在 1.0。** 面板应用拒绝在自身上安装旧版本，Panel Assistant 从不提供旧版本，0.9 集成也无法与其通信。如果 1.0 面板表现异常，请查看[故障排查](/zh-hans/manage/troubleshooting/)，然后附上[支持报告](/zh-hans/home-assistant/support-report/)进行反馈，以便在后续版本中修复。
 
 **只要没有面板运行 1.0，集成就可以回退。** 恢复开始之前创建的 Home Assistant 备份。这也会撤销创建备份之后 Home Assistant 中的其他所有更改。面板仍运行 0.9 应用，并重新连接到 0.9.0。一旦任何面板运行 1.0 应用，恢复备份就会使 Home Assistant 无法访问该面板，直到集成重新升级到 1.0。
 

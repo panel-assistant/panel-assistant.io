@@ -37,7 +37,7 @@ description: 面板应用如何自行绘制 Home Assistant 仪表盘、在失败
 
 如果面板显示 **需要升级 Home Assistant**，请升级 Home Assistant 并选择 **重试**。面板上的任何操作都无法替代该更新。
 
-如果显示 **此面板的网页查看器过旧**，请按照[更新 WebView](/zh-hans/hardware/guides/update-the-webview/)操作。在尚未发布的 1.0.0-rc2 版本中，如果面板允许，从 Home Assistant 启动的面板应用更新也可以安装经过验证且兼容的 WebView。其他面板需要采用指南中的方式。更新 WebView 后，选择 **重试**。
+如果显示 **此面板的网页查看器过旧**，请按照[更新 WebView](/zh-hans/hardware/guides/update-the-webview/)操作。如果面板允许，从 Home Assistant 启动的面板应用更新也可以安装经过验证且兼容的 WebView。其他面板需要采用指南中的方式。更新 WebView 后，选择 **重试**。
 
 内置渲染器绝不会退回隔离程度更低的桥接方式。Home Assistant 本身无法升级时，其他渲染器可能有所帮助，但面板上的任何仪表盘应用都使用同一个系统 WebView，因此没有哪种应用能绕过过时的 WebView。
 

@@ -17,9 +17,9 @@ The panel does not need a fixed address: Panel Assistant follows a panel whose a
 
 The dashboard is drawn by the panel's system WebView, also called its browser engine. An old WebView can leave a dashboard blank or partly drawn.
 
-In the unreleased 1.0.0-rc2 version, both the network and USB installers can request a verified compatible browser-engine update on supported panels. If that update cannot finish, setup and pairing remain available. An unfinished attempt can be continued from the panel's update Repair in Home Assistant: choose **Try again**. It checks existing work before requesting another attempt; failed updates are not retried on a schedule.
+Both the network and USB installers can request a verified compatible browser-engine update on supported panels. If that update cannot finish, setup and pairing remain available. An unfinished attempt can be continued from the panel's update Repair in Home Assistant: choose **Try again**. It checks existing work before requesting another attempt; failed updates are not retried on a schedule.
 
-In that version, the setup wizard warns when the built-in browser engine is too old. You can finish setup and pairing, but the dashboard may still fail to display. If the panel cannot install the update, follow [Updating the system WebView](/hardware/guides/update-the-webview/).
+The setup wizard warns when the built-in browser engine is too old. You can finish setup and pairing, but the dashboard may still fail to display. If the panel cannot install the update, follow [Updating the system WebView](/hardware/guides/update-the-webview/).
 
 ## Before you change anything irreversible
 

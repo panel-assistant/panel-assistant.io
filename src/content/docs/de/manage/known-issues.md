@@ -1,14 +1,14 @@
 ---
-title: Bekannte Probleme in 1.0.0-rc1
-description: Bekannte Einschränkungen von Panel Assistant 1.0.0-rc1 und der passenden Panel-App und was du jeweils tun kannst.
+title: Bekannte Probleme in 1.0.2
+description: Bekannte Einschränkungen von Panel Assistant 1.0.2 und der passenden Panel-App und was du jeweils tun kannst.
 sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
-Panel Assistant 1.0.0-rc1 und die passende Panel-App sind Release Candidates. Diese Seite nennt bekannte Einschränkungen und was du jeweils tun kannst. Lies zuerst [Upgrade auf 1.0](/de/manage/upgrade-to-1-0/): Dort steht, welche Voraussetzungen vor der Installation erfüllt sein müssen und warum ein Panel mit 1.0 nicht zu 0.9 zurückkehren kann. Melde alles Weitere im [Issue-Tracker](https://github.com/panel-assistant/ha-integration/issues) mit dem Panelmodell und deiner Beobachtung.
+Panel Assistant 1.0.2 und die passende Panel-App sind stabile Versionen. Diese Seite nennt bekannte Einschränkungen und was du jeweils tun kannst. Lies zuerst [Upgrade auf 1.0](/de/manage/upgrade-to-1-0/): Dort steht, welche Voraussetzungen vor der Installation erfüllt sein müssen und warum ein Panel mit 1.0 nicht zu 0.9 zurückkehren kann. Melde alles Weitere im [Issue-Tracker](https://github.com/panel-assistant/ha-integration/issues) mit dem Panelmodell und deiner Beobachtung.
 
 ## Ein Panel mit der App 0.9 benötigt möglicherweise eine wiederhergestellte ADB-Verbindung
 
-Die Reparatur, die für ein Panel die App 1.0.0-rc1 verlangt, bedeutet, dass seine App noch nicht mit Panel Assistant 1.0 kommunizieren kann. Wenn Home Assistant außerdem meldet, dass das Panel keine App-Updates empfangen kann, befolge diese Reparatur, um seinen Updateweg wiederherzustellen. Ist das Netzwerk-Debugging ausgeschaltet, schließe das Panel an deinen Computer an und starte den USB-Installer über Home Assistant, wie unter [Ein Panel, das nicht aktualisiert werden kann](/de/manage/updates-and-recovery/#ein-panel-das-sich-nicht-aktualisieren-lässt) beschrieben. Auf einem Panel, das die App bereits hat, kann der USB-Installer die Verbindung ohne Neuinstallation wiederherstellen: Aktiviere bei Aufforderung **Von diesem Computer immer zulassen** und tippe am Panel auf **Zulassen**. Der Installer schaltet das Netzwerk-Debugging wieder ein, damit Home Assistant die App aktualisieren kann.
+Die Reparatur, die für ein Panel die App 1.0 verlangt, bedeutet, dass seine App noch nicht mit Panel Assistant 1.0 kommunizieren kann. Wenn Home Assistant außerdem meldet, dass das Panel keine App-Updates empfangen kann, befolge diese Reparatur, um seinen Updateweg wiederherzustellen. Ist das Netzwerk-Debugging ausgeschaltet, schließe das Panel an deinen Computer an und starte den USB-Installer über Home Assistant, wie unter [Ein Panel, das nicht aktualisiert werden kann](/de/manage/updates-and-recovery/#ein-panel-das-sich-nicht-aktualisieren-lässt) beschrieben. Auf einem Panel, das die App bereits hat, kann der USB-Installer die Verbindung ohne Neuinstallation wiederherstellen: Aktiviere bei Aufforderung **Von diesem Computer immer zulassen** und tippe am Panel auf **Zulassen**. Der Installer schaltet das Netzwerk-Debugging wieder ein, damit Home Assistant die App aktualisieren kann.
 
 ## Die Seitenleiste kann ein Panel erst mit der App 1.0 öffnen
 

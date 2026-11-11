@@ -32,18 +32,11 @@ If you used HACS before upgrading Home Assistant to 2026.11, Marketplace keeps y
 3. Download **Panel Assistant**, then restart Home Assistant.
 4. Go to **Settings**, **Devices and services**, **Add integration**, and choose **Panel Assistant**.
 
-## Updates and pre-releases
+## Updates
 
 Stable releases are offered by default. On Home Assistant 2026.11 or newer, integration updates appear under **Settings**, **Updates**. Install the update, then restart Home Assistant to load it, following the restart Repair. On supported older versions, download the update in HACS and restart Home Assistant when asked. Updating this integration is separate from [updating the panel app](/manage/updates-and-recovery/). Home Assistant shows a short summary of each update; the [release notes](/release-notes/) have the full list of changes.
 
-To opt in to a newer pre-release:
-
-1. Open **Settings**, **Devices and services**, then **Marketplace** on Home Assistant 2026.11 or newer, or **HACS** on supported older versions.
-2. Choose the **Panel Assistant** repository device. Expand its disabled entities and open **Pre-release**.
-3. In the entity's settings, turn on **Enabled** and select **Update**. Then turn on the **Pre-release** switch under **Diagnostic**.
-4. Install the offered pre-release from **Settings**, **Updates** on Marketplace, or from Panel Assistant in HACS, then restart Home Assistant.
-
-Before moving from 0.9 to 1.0, read [Upgrading to 1.0](/manage/upgrade-to-1-0/), including its backup steps. A panel that runs the 1.0 app cannot go back to 0.9. Turning off the pre-release switch does not make an older version safe to install; use the guide's backup recovery instructions if you need to go back.
+Before moving from 0.9 to 1.0, read [Upgrading to 1.0](/manage/upgrade-to-1-0/), including its backup steps. A panel that runs the 1.0 app cannot go back to 0.9. Installing an older version is not safe; use the guide's backup recovery instructions if you need to go back.
 
 ## What you get
 
@@ -51,9 +44,9 @@ Before moving from 0.9 to 1.0, read [Upgrading to 1.0](/manage/upgrade-to-1-0/),
 - **A device per panel.** Each panel appears under Devices and services with a status sensor and downloadable diagnostics, redacted so they can be shared when you ask for help.
 - **All your panels in one place.** Administrators can choose a panel from the Panel Assistant sidebar and use its own web interface inside Home Assistant.
 
-## What is still to come
+## Help and feedback
 
-Panel Assistant is new and evolving quickly. A panel that is already installed is updated from its update entity in Home Assistant, as described in [Updates and recovery](/manage/updates-and-recovery/). The USB installer is the newest part; it is safe to retry, but expect rough edges. Feedback is welcome in the [issues](https://github.com/panel-assistant/ha-integration/issues) and on [Discord](https://panel-assistant.io/go/discord).
+Panel Assistant is new and evolving quickly. A panel that is already installed is updated from its update entity in Home Assistant, as described in [Updates and recovery](/manage/updates-and-recovery/). Feedback is welcome in the [issues](https://github.com/panel-assistant/ha-integration/issues) and on [Discord](https://panel-assistant.io/go/discord).
 
 ## If you used the earlier 0.1.0 integration
 

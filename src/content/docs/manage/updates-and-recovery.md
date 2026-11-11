@@ -7,11 +7,11 @@ description: Keeping the app on a panel current, and what can be recovered when 
 
 **From Home Assistant.** Each panel has an update entity. When a newer version is published the entity offers it, and installing is a button press; Panel Assistant installs the update and confirms the panel came back healthy. This is the route to use. The [release notes](/release-notes/) say what changed in each version.
 
-An update starts when Panel Assistant or you explicitly request it. The panel app does not install scheduled updates. Its web interface's **Install** tab also lets you choose and install a panel-app version, including a pre-release. That choice applies to the installation you start; there is no saved update channel.
+An update starts when Panel Assistant or you explicitly request it. The panel app does not install scheduled updates. Install panel-app updates through Home Assistant. The panel's **Install** tab no longer offers a separate app version picker.
 
-In the unreleased 1.0.0-rc2 version, a panel-app update started from Home Assistant can also install a verified compatible System WebView on supported panels. If the browser-engine stage remains unfinished, use the update Repair's **Try again** action. It checks existing work before requesting another attempt; there is no scheduled retry. Other panels still need the Play Store, vendor firmware or the manual route described in [updating the system WebView](/hardware/guides/update-the-webview/).
+A panel-app update started from Home Assistant can also install a verified compatible System WebView on supported panels. If the browser-engine stage remains unfinished, use the update Repair's **Try again** action. It checks existing work before requesting another attempt; there is no scheduled retry. Other panels still need the Play Store, vendor firmware or the manual route described in [updating the system WebView](/hardware/guides/update-the-webview/).
 
-In that version, a supported rooted panel can keep network ADB off while Panel Assistant manages it through its authenticated app connection. App updates and supported maintenance use that connection and the panel's privileged installer. The local recovery service can reopen network ADB if the app connection stops being renewed or recovery requires it.
+A supported rooted panel can keep network ADB off while Panel Assistant manages it through its authenticated app connection. App updates and supported maintenance use that connection and the panel's privileged installer. The local recovery service can reopen network ADB if the app connection stops being renewed or recovery requires it.
 
 ### Panels that need ADB
 

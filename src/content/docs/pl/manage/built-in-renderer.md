@@ -37,7 +37,7 @@ Większość osób potrzebuje tylko aktualnego Android System WebView. Aplikacja
 
 Jeśli panel pokazuje **Wymagana aktualizacja Home Assistant**, zaktualizuj Home Assistant i wybierz **Spróbuj ponownie**. Nic na panelu nie może zastąpić tej aktualizacji.
 
-Jeśli pokazuje **Przeglądarka internetowa tego panelu jest zbyt stara**, wykonaj [aktualizację WebView](/pl/hardware/guides/update-the-webview/). W niewydanej wersji 1.0.0-rc2 aktualizacja aplikacji panelu rozpoczęta z Home Assistant może również zainstalować zweryfikowany, zgodny WebView, jeśli panel na to pozwala. Pozostałe panele wymagają metody opisanej w przewodniku. Po aktualizacji WebView wybierz **Spróbuj ponownie**.
+Jeśli pokazuje **Przeglądarka internetowa tego panelu jest zbyt stara**, wykonaj [aktualizację WebView](/pl/hardware/guides/update-the-webview/). Aktualizacja aplikacji panelu rozpoczęta z Home Assistant może również zainstalować zweryfikowany, zgodny WebView, jeśli panel na to pozwala. Pozostałe panele wymagają metody opisanej w przewodniku. Po aktualizacji WebView wybierz **Spróbuj ponownie**.
 
 Wbudowany renderer nigdy nie przechodzi na most o słabszej izolacji. Inny renderer może pomóc, gdy nie można zaktualizować samego Home Assistant, ale każda aplikacja pulpitu na panelu korzysta z tego samego systemowego WebView, więc żadna nie omija jego przestarzałej wersji.
 

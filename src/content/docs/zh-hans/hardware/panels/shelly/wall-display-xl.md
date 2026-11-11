@@ -54,7 +54,7 @@ Shelly Wall Display XL，固件代号 Blake。
 XL 内置的 Home Assistant 浏览器在 Home Assistant 前端 2025.12 和 2026.1 预发布版上出现过渲染和布局问题（由 [home-assistant/frontend#28755](https://github.com/home-assistant/frontend/issues/28755) 和 `#28746` 跟踪；核心兼容性由 [home-assistant/core#162665](https://github.com/home-assistant/core/issues/162665) 跟踪）。同一设备上使用系统 WebView 的应用能够正确渲染，说明问题与内置浏览器的 WebView 有关，而非硬件。
 :::
 
-从 Panel Assistant 1.0 起，XL 使用共用的 Shelly 配置文件，包含 [X2i](/zh-hans/hardware/panels/shelly/wall-display-x2i/) 在此固件上展示的能力：无需 root 即可完全关闭屏幕，支持返回和主屏幕，但不支持最近任务。Panel Assistant 启动时会在面板上检查其自身传感器。尚未确认过 XL 实机，欢迎用户提供报告；请参阅 [X2i 对系列其他型号意味着什么](/zh-hans/hardware/panels/shelly/#x2i-对系列其他型号的意义)。
+从面板应用 1.0.1 起，XL 具有基于已记录输入设备名称的早期按钮和接近感应支持，需要启用 Android 无障碍服务。XL 还具有 [X2i](/zh-hans/hardware/panels/shelly/wall-display-x2i/) 在此固件上展示的 Shelly 共用能力：无需 root 即可完全关闭屏幕，支持返回和主屏幕，但不支持最近任务。Panel Assistant 启动时会在面板上检查其自身传感器。尚未确认过 XL 实机，欢迎用户提供报告；请参阅 [X2i 对系列其他型号意味着什么](/zh-hans/hardware/panels/shelly/#x2i-对系列其他型号的意义)。
 
 有关访问方式的完整分析、OTA 更新端点（`WallDisplayV2` 分支）和固件版本历史，请参阅 [Wall Display 系列页面](/zh-hans/hardware/panels/shelly/)。
 

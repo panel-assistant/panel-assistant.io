@@ -10,7 +10,7 @@ La première heure est la partie difficile de la mise en route de tout panneau. 
 
 ## 1. Installer l’intégration
 
-Sur Home Assistant **2026.11 ou ultérieur**, installez Panel Assistant depuis **Paramètres**, **Marketplace**. Sur les versions antérieures compatibles, de **2026.8.3 à 2026.10**, installez-le via HACS et redémarrez Home Assistant. Marketplace peut permettre de le configurer immédiatement ; suivez d’abord toute demande de redémarrage. C’est la seule chose que vous installez manuellement. [Installer l’intégration](/fr/home-assistant/custom-integration/) explique les deux méthodes et comment recevoir les préversions.
+Sur Home Assistant **2026.11 ou ultérieur**, installez Panel Assistant depuis **Paramètres**, **Marketplace**. Sur les versions antérieures compatibles, de **2026.8.3 à 2026.10**, installez-le via HACS et redémarrez Home Assistant. Marketplace peut permettre de le configurer immédiatement ; suivez d’abord toute demande de redémarrage. C’est la seule chose que vous installez manuellement. [Installer l’intégration](/fr/home-assistant/custom-integration/) explique les deux méthodes et les mises à jour.
 
 :::note
 Si vous venez de la version 0.9, lisez [Passer à la version 1.0](/fr/manage/upgrade-to-1-0/) avant de commencer et conservez les sauvegardes de Home Assistant et des panneaux qui y sont décrites. Un panneau qui exécute l’application 1.0 ne peut pas revenir à la version 0.9.
@@ -103,7 +103,7 @@ Vient ensuite l’assistant de configuration du panneau. Il est hébergé par le
 
 L’assistant demande un nom pour le panneau, le connecte à Home Assistant et demande quel tableau de bord afficher et dans quelle pièce se trouve le panneau. Le panneau se connecte avec le compte Home Assistant utilisé pour cette connexion : si votre navigateur est connecté avec votre compte, le panneau peut donc utiliser le vôtre ; pour lui réserver un compte distinct, connectez-vous plutôt avec ce compte. Lorsque le filtrage des entités est activé, le panneau ne charge que les entités utilisées par ce tableau de bord, ce qui lui permet de rester rapide. Voir [Connecter un panneau](/fr/home-assistant/connect-a-panel/).
 
-Dans la version 1.0.0-rc2 non encore publiée, la configuration peut se terminer même si le moteur de navigateur du panneau est trop ancien pour afficher un tableau de bord Home Assistant actuel avec le moteur de rendu intégré. L’assistant avertit lorsqu’une intervention est nécessaire. Suivez le [guide WebView](/fr/hardware/guides/update-the-webview/) avant de vous fier au tableau de bord ; terminer la configuration ne confirme pas à lui seul que le tableau de bord peut se charger.
+La configuration peut se terminer même si le moteur de navigateur du panneau est trop ancien pour afficher un tableau de bord Home Assistant actuel avec le moteur de rendu intégré. L’assistant avertit lorsqu’une intervention est nécessaire. Suivez le [guide WebView](/fr/hardware/guides/update-the-webview/) avant de vous fier au tableau de bord ; terminer la configuration ne confirme pas à lui seul que le tableau de bord peut se charger.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="L’assistant de configuration du panneau, étape par étape" tabindex="0">
 <figure>

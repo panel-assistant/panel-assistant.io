@@ -189,7 +189,7 @@ Eine gespeicherte Schema-2-Revision darf `proximity_near_below`, `proximity_near
 | `provisioning.recipes`                        | Optional; Standardwert `[]`                | Liste mit höchstens 32 vom Core verwalteten Rezeptauswahlen.                                                                                                                                              |
 | `provisioning.recipes[].id`                   | Pro Eintrag erforderlich                   | Eindeutige registrierte ID. Schema 2 kennt `nspanel-pro.watchdog-e2big-repair` und `tpa10.vendor-stack-minimize`. Rezepteinträge dürfen keine Argumente, Befehle, URLs oder Ablaufdefinitionen enthalten. |
 
-In der unveröffentlichten Version 1.0.0-rc2 verweisen die drei WebView-IDs auf folgende vom Core verwaltete Builds und Kompatibilitätsmetadaten:
+Die drei WebView-IDs verweisen auf folgende vom Core verwaltete Builds und Kompatibilitätsmetadaten:
 
 | Artefakt-ID           | Vom Core verwalteter Build                                                                               |
 | --------------------- | -------------------------------------------------------------------------------------------------------- |
@@ -197,7 +197,7 @@ In der unveröffentlichten Version 1.0.0-rc2 verweisen die drei WebView-IDs auf 
 | `lineageos-150-arm`   | LineageOS System WebView `150.0.7871.63`; ARM ABI `armeabi-v7a`; Android 10 oder neuer.                  |
 | `lineageos-150-arm64` | LineageOS System WebView `150.0.7871.63`; ARM ABIs `armeabi-v7a` und `arm64-v8a`; Android 10 oder neuer. |
 
-Das WebView-Artefaktfeld wählt einen Build, dessen Download, Prüfsumme, Paket, Version und Signierer in den Core einkompiliert sind. In der unveröffentlichten Version 1.0.0-rc2 kann ein aus Home Assistant gestartetes Panel-App-Update auch ein kompatibles WebView installieren. Bleibt dieses Update unvollständig, verwende seine Update-Reparatur für einen erneuten Versuch. Das Importieren oder Aktivieren eines Profils startet kein Update. Siehe [WebView aktualisieren](/de/hardware/guides/update-the-webview/).
+Das WebView-Artefaktfeld wählt einen Build, dessen Download, Prüfsumme, Paket, Version und Signierer in den Core einkompiliert sind. Ein aus Home Assistant gestartetes Panel-App-Update kann auch ein kompatibles WebView installieren. Bleibt dieses Update unvollständig, verwende seine Update-Reparatur für einen erneuten Versuch. Das Importieren oder Aktivieren eines Profils startet kein Update. Siehe [WebView aktualisieren](/de/hardware/guides/update-the-webview/).
 
 ### Bedingte Treiberanforderungen
 
@@ -271,7 +271,7 @@ Erstelle separate Profile, wenn keine benannte Strategie den Unterschied abdeckt
 
 ## Fähigkeiten und einkompilierte Treiber
 
-Eine Fähigkeitsdeklaration enthält Hardwaredaten und bei Bedarf eine Treiber-ID mit typisierten Parametern. Treiber-IDs bezeichnen in ha-paneld einkompilierte Implementierungen. Der Treiber validiert Pfade, Bereiche, Ereigniscodes, Paketnamen und andere sicherheitsrelevante Eingaben. Privilegierte Pfade werden aus Core-Freigabelisten ausgewählt. Die beibehaltenen Metadaten `provisioning.software.webview.artifact` benennen URL, Version, Artefaktprüfsumme und Signierer-Hash, die in den Core einkompiliert und mit ihm geprüft werden; ein Profil kann diesen Vertrauensanker nicht neu definieren. In der unveröffentlichten Version 1.0.0-rc2 prüft ein vom Besitzer gestartetes Update installierten Anbieter und Kompatibilität vor Verwendung des Artefakts; das Profil kann keinen anderen Download oder Vertrauensanker liefern.
+Eine Fähigkeitsdeklaration enthält Hardwaredaten und bei Bedarf eine Treiber-ID mit typisierten Parametern. Treiber-IDs bezeichnen in ha-paneld einkompilierte Implementierungen. Der Treiber validiert Pfade, Bereiche, Ereigniscodes, Paketnamen und andere sicherheitsrelevante Eingaben. Privilegierte Pfade werden aus Core-Freigabelisten ausgewählt. Die beibehaltenen Metadaten `provisioning.software.webview.artifact` benennen URL, Version, Artefaktprüfsumme und Signierer-Hash, die in den Core einkompiliert und mit ihm geprüft werden; ein Profil kann diesen Vertrauensanker nicht neu definieren. Ein vom Besitzer gestartetes Update prüft installierten Anbieter und Kompatibilität vor Verwendung des Artefakts; das Profil kann keinen anderen Download oder Vertrauensanker liefern.
 
 Profile dürfen Folgendes nicht liefern:
 

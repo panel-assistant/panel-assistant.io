@@ -39,7 +39,7 @@ La plupart des utilisateurs ont seulement besoin d’un Android System WebView �
 
 Si le panneau affiche **Mise à niveau de Home Assistant requise**, mettez Home Assistant à jour puis sélectionnez **Réessayer**. Rien sur le panneau ne peut remplacer cette mise à jour.
 
-S’il affiche **Le navigateur de ce panneau est trop ancien**, suivez [Mettre à jour WebView](/fr/hardware/guides/update-the-webview/). Dans la version 1.0.0-rc2 non encore publiée, une mise à jour de l’application lancée depuis Home Assistant peut aussi installer un WebView vérifié et compatible lorsque le panneau le permet. Les autres panneaux nécessitent la méthode décrite dans le guide. Après la mise à jour de WebView, sélectionnez **Réessayer**.
+S’il affiche **Le navigateur de ce panneau est trop ancien**, suivez [Mettre à jour WebView](/fr/hardware/guides/update-the-webview/). Une mise à jour de l’application lancée depuis Home Assistant peut aussi installer un WebView vérifié et compatible lorsque le panneau le permet. Les autres panneaux nécessitent la méthode décrite dans le guide. Après la mise à jour de WebView, sélectionnez **Réessayer**.
 
 Le moteur de rendu intégré ne revient jamais à un pont moins isolé. Un autre moteur de rendu peut aider lorsque Home Assistant lui-même ne peut pas être mis à jour, mais toute application de tableau de bord sur le panneau utilise le même WebView système : aucune ne peut donc contourner un WebView obsolète.
 

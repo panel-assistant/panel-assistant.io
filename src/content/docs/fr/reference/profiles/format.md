@@ -199,7 +199,7 @@ Une révision stockée de schéma 2 peut contenir `proximity_near_below`, `proxi
 | `provisioning.recipes`                        | Facultatif ; défaut `[]`        | Liste d’au plus 32 sélections de recettes du cœur.                                                                                                                                                                               |
 | `provisioning.recipes[].id`                   | Obligatoire par élément         | Identifiant enregistré unique. Le schéma 2 connaît `nspanel-pro.watchdog-e2big-repair` et `tpa10.vendor-stack-minimize`. Les entrées de recette ne peuvent contenir arguments, commandes, URL ni définitions de flux de travail. |
 
-Dans la version 1.0.0-rc2 non publiée, les trois identifiants WebView désignent les builds et métadonnées de compatibilité du cœur suivantes :
+Les trois identifiants WebView désignent les builds et métadonnées de compatibilité du cœur suivantes :
 
 | Identifiant d’artefact | Build du cœur                                                                                              |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -207,7 +207,7 @@ Dans la version 1.0.0-rc2 non publiée, les trois identifiants WebView désignen
 | `lineageos-150-arm`    | LineageOS System WebView `150.0.7871.63` ; ABI ARM `armeabi-v7a` ; Android 10 ou ultérieur.                |
 | `lineageos-150-arm64`  | LineageOS System WebView `150.0.7871.63` ; ABI ARM `armeabi-v7a` et `arm64-v8a` ; Android 10 ou ultérieur. |
 
-Le champ d’artefact WebView sélectionne une build dont téléchargement, somme de contrôle, paquet, version et signataire sont compilés dans le cœur. Dans la version 1.0.0-rc2 non publiée, une mise à jour de l’application du panneau lancée depuis Home Assistant peut aussi installer un WebView compatible. Si elle reste inachevée, utilisez sa réparation de mise à jour pour réessayer. Importer ou activer un profil ne lance pas de mise à jour. Voir [Mettre à jour le WebView](/fr/hardware/guides/update-the-webview/).
+Le champ d’artefact WebView sélectionne une build dont téléchargement, somme de contrôle, paquet, version et signataire sont compilés dans le cœur. Une mise à jour de l’application du panneau lancée depuis Home Assistant peut aussi installer un WebView compatible. Si elle reste inachevée, utilisez sa réparation de mise à jour pour réessayer. Importer ou activer un profil ne lance pas de mise à jour. Voir [Mettre à jour le WebView](/fr/hardware/guides/update-the-webview/).
 
 <a id="conditional-driver-requirements"></a>
 
@@ -293,7 +293,7 @@ Créez des profils séparés si aucune stratégie ne couvre la différence, ou s
 
 ## Capacités et pilotes compilés
 
-Une déclaration de capacité contient des faits matériels et, si nécessaire, un identifiant de pilote avec paramètres typés. Les identifiants désignent des implémentations compilées dans ha-paneld. Le pilote valide chemins, plages, codes d’événement, noms de paquet et autres entrées sensibles pour la sécurité. Les chemins privilégiés proviennent des listes autorisées du cœur. Les métadonnées conservées `provisioning.software.webview.artifact` désignent URL, version, somme de contrôle de l’artefact et empreinte du signataire compilées et auditées avec le cœur ; un profil ne peut redéfinir cette racine de confiance. Dans la version 1.0.0-rc2 non publiée, une mise à jour lancée par le propriétaire vérifie le fournisseur installé et sa compatibilité avant d’utiliser l’artefact ; le profil ne peut fournir un autre téléchargement ni une autre racine de confiance.
+Une déclaration de capacité contient des faits matériels et, si nécessaire, un identifiant de pilote avec paramètres typés. Les identifiants désignent des implémentations compilées dans ha-paneld. Le pilote valide chemins, plages, codes d’événement, noms de paquet et autres entrées sensibles pour la sécurité. Les chemins privilégiés proviennent des listes autorisées du cœur. Les métadonnées conservées `provisioning.software.webview.artifact` désignent URL, version, somme de contrôle de l’artefact et empreinte du signataire compilées et auditées avec le cœur ; un profil ne peut redéfinir cette racine de confiance. Une mise à jour lancée par le propriétaire vérifie le fournisseur installé et sa compatibilité avant d’utiliser l’artefact ; le profil ne peut fournir un autre téléchargement ni une autre racine de confiance.
 
 Les profils ne peuvent fournir :
 

@@ -52,7 +52,7 @@ Verwende das abgesicherte **Erneut versuchen** der vorhandenen Reparatur erst, n
 
 ## Panel Assistant von &lt;panel&gt; entfernen
 
-**Bedeutung:** In der unveröffentlichten Version 1.0.0-rc2 hat jemand auf der Geräteseite dieses Panels **Von diesem Panel entfernen** gedrückt. Die Schaltfläche entfernt nichts; die Reparatur bleibt verfügbar, bis die Entfernung abgeschlossen ist.
+**Bedeutung:** Jemand hat auf der Geräteseite dieses Panels **Von diesem Panel entfernen** gedrückt. Die Schaltfläche entfernt nichts; die Reparatur bleibt verfügbar, bis die Entfernung abgeschlossen ist.
 
 **Ursache:** Panel Assistant bittet dich um Bestätigung, bevor es den Startbildschirm und die Apps des Herstellers wiederherstellt, ha-paneld deinstalliert und das Panel aus Home Assistant löscht.
 
@@ -326,11 +326,11 @@ Der Import über die Seitenleiste ersetzt die gemeinsame Kopie und kann andere P
 
 ## Installationsfehler: Update
 
-**Bedeutung:** Home Assistant konnte den Abschluss des Updates nicht bestätigen. In der unveröffentlichten Version 1.0.0-rc2 kann die Panel-App bereits installiert sein, während das Update ihrer Browser-Engine noch nicht abgeschlossen ist.
+**Bedeutung:** Home Assistant konnte den Abschluss des Updates nicht bestätigen. Die Panel-App kann bereits installiert sein, während das Update ihrer Browser-Engine noch nicht abgeschlossen ist.
 
-**Ursache:** Das App-Update oder in dieser Version das Update der Browser-Engine schlug fehl oder ließ sich nicht prüfen. Die Reparatur bewahrt den Bericht für den gesamten Versuch.
+**Ursache:** Das App-Update oder das Update der Browser-Engine schlug fehl oder ließ sich nicht prüfen. Die Reparatur bewahrt den Bericht für den gesamten Versuch.
 
-**So behebst du es:** Lies den Supportbericht, stelle die gemeldete Verbindungs- oder Installationsvoraussetzung wieder her und wähle **Erneut versuchen**. In der unveröffentlichten Version 1.0.0-rc2 fährt Panel Assistant mit der Browser-Engine-Stufe fort, ohne die App erneut zu installieren, wenn nur diese Stufe offen ist und die angeforderte App-Version nachweislich installiert ist. Wird **Updates erlauben** angeboten, bestätige damit zuerst Home Assistant auf dem Panel. Siehe die [WebView-Anleitung](/de/hardware/guides/update-the-webview/), wenn die Browser-Engine nicht aktualisiert werden kann.
+**So behebst du es:** Lies den Supportbericht, stelle die gemeldete Verbindungs- oder Installationsvoraussetzung wieder her und wähle **Erneut versuchen**. Panel Assistant fährt mit der Browser-Engine-Stufe fort, ohne die App erneut zu installieren, wenn nur diese Stufe offen ist und die angeforderte App-Version nachweislich installiert ist. Wird **Updates erlauben** angeboten, bestätige damit zuerst Home Assistant auf dem Panel. Siehe die [WebView-Anleitung](/de/hardware/guides/update-the-webview/), wenn die Browser-Engine nicht aktualisiert werden kann.
 
 <a id="installer-failure-retry-hold"></a>
 

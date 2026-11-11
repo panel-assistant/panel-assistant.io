@@ -9,7 +9,7 @@ The hard part of any panel is the first hour. Panel Assistant does that hour for
 
 ## 1. Install the integration
 
-On Home Assistant **2026.11 or newer**, install Panel Assistant from **Settings**, **Marketplace**. On supported older versions, **2026.8.3 through 2026.10**, install it through HACS and restart Home Assistant. Marketplace may let you set it up immediately; follow any restart prompt first. This is the only thing you install by hand. See [Install the integration](/home-assistant/custom-integration/) for both routes and how to opt in to pre-releases.
+On Home Assistant **2026.11 or newer**, install Panel Assistant from **Settings**, **Marketplace**. On supported older versions, **2026.8.3 through 2026.10**, install it through HACS and restart Home Assistant. Marketplace may let you set it up immediately; follow any restart prompt first. This is the only thing you install by hand. See [Install the integration](/home-assistant/custom-integration/) for both routes and updates.
 
 :::note
 If you are upgrading from 0.9, read [Upgrading to 1.0](/manage/upgrade-to-1-0/) before starting, and keep its Home Assistant and panel backups. A panel that runs the 1.0 app cannot go back to 0.9.
@@ -102,7 +102,7 @@ Next comes the panel's own setup wizard. It is served by the panel and opens in 
 
 The wizard asks for a name for the panel, signs the panel in to Home Assistant, and asks which dashboard to show and which area the panel is in. The panel connects as whichever Home Assistant account you sign in with, so if your browser is signed in as you, the panel may connect as you; to keep the panel on its own account, sign in as that account instead. With entity filtering on, the panel loads only the entities that dashboard uses, which is what keeps it fast. See [Connect a panel](/home-assistant/connect-a-panel/).
 
-In the unreleased 1.0.0-rc2 version, setup can finish even when the panel's browser engine is too old to show a current Home Assistant dashboard with the built-in renderer. The wizard warns when this needs attention. Follow the [WebView guide](/hardware/guides/update-the-webview/) before relying on the dashboard; finishing setup alone does not confirm that the dashboard can load.
+Setup can finish even when the panel's browser engine is too old to show a current Home Assistant dashboard with the built-in renderer. The wizard warns when this needs attention. Follow the [WebView guide](/hardware/guides/update-the-webview/) before relying on the dashboard; finishing setup alone does not confirm that the dashboard can load.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="The panel setup wizard, step by step" tabindex="0">
 <figure>

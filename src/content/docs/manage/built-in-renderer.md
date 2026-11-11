@@ -36,7 +36,7 @@ Most people only need a current Android System WebView. The panel app checks for
 
 If the panel shows **Home Assistant upgrade required**, upgrade Home Assistant and select **Retry**. Nothing on the panel can substitute for that.
 
-If it shows **This panel's web viewer is too old**, follow [updating the WebView](/hardware/guides/update-the-webview/). In the unreleased 1.0.0-rc2 version, a panel-app update started from Home Assistant can also install a verified compatible WebView when the panel permits it. Other panels need the method described in the guide. After updating WebView, select **Retry**.
+If it shows **This panel's web viewer is too old**, follow [updating the WebView](/hardware/guides/update-the-webview/). A panel-app update started from Home Assistant can also install a verified compatible WebView when the panel permits it. Other panels need the method described in the guide. After updating WebView, select **Retry**.
 
 The built-in renderer never falls back to a less isolated bridge. Another renderer may help when Home Assistant itself cannot be upgraded, but any dashboard app on the panel uses the same system WebView, so none can get around an obsolete one.
 

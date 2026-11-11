@@ -16,7 +16,7 @@ Für ein Panel, das bereits in deinem Netzwerk ist. Gehe zu **Einstellungen**, *
 
 Für ein Panel, das noch im Karton liegt oder dessen Herstellersoftware den Netzwerkzugriff erschwert. Schließe es an deinen Laptop an und installiere über deinen Browser mit dem USB-Kabel. Dein Browser bleibt mit Home Assistant verbunden, das die geprüfte Veröffentlichung bereitstellt. Das Panel benötigt kein Netzwerk-ADB. Starte den Ablauf über **Einstellungen**, **Geräte & Dienste**, **Integration hinzufügen**, **Panel Assistant**, **Über USB auf diesem Computer installieren**. Dafür ist ein Chromium-basierter Browser erforderlich. Siehe [Über USB installieren](/de/install/install-over-usb/).
 
-In der unveröffentlichten Version 1.0.0-rc2 können beide Installer auf unterstützten Panels auch ein geprüftes, kompatibles Update der Browser-Engine anfordern. Wenn ein Update nicht abgeschlossen werden kann, verhindert das weder die Einrichtung noch die Kopplung. Hinweise zur Wiederherstellung findest du unter [Panel vorbereiten](/de/install/prepare-a-panel/).
+Beide Installer können auf unterstützten Panels auch ein geprüftes, kompatibles Update der Browser-Engine anfordern. Wenn ein Update nicht abgeschlossen werden kann, verhindert das weder die Einrichtung noch die Kopplung. Hinweise zur Wiederherstellung findest du unter [Panel vorbereiten](/de/install/prepare-a-panel/).
 
 ## Was der Installer schützt
 

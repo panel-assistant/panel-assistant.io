@@ -10,7 +10,7 @@ La parte difficile di qualsiasi pannello è la prima ora. Panel Assistant se ne 
 
 ## 1. Installa l’integrazione
 
-Su Home Assistant **2026.11 o successivo**, installa Panel Assistant da **Impostazioni**, **Marketplace**. Sulle versioni precedenti supportate, da **2026.8.3 a 2026.10**, installalo tramite HACS e riavvia Home Assistant. Marketplace potrebbe consentire la configurazione immediata; segui prima ogni richiesta di riavvio. È l’unica cosa che installi manualmente. [Installa l’integrazione](/it/home-assistant/custom-integration/) spiega entrambi i percorsi e come ricevere le pre-release.
+Su Home Assistant **2026.11 o successivo**, installa Panel Assistant da **Impostazioni**, **Marketplace**. Sulle versioni precedenti supportate, da **2026.8.3 a 2026.10**, installalo tramite HACS e riavvia Home Assistant. Marketplace potrebbe consentire la configurazione immediata; segui prima ogni richiesta di riavvio. È l’unica cosa che installi manualmente. [Installa l’integrazione](/it/home-assistant/custom-integration/) spiega entrambi i percorsi e gli aggiornamenti.
 
 :::note
 Se aggiorni dalla 0.9, leggi [Aggiornare alla versione 1.0](/it/manage/upgrade-to-1-0/) prima di iniziare e conserva i backup di Home Assistant e dei pannelli descritti nella guida. Un pannello che esegue l’app 1.0 non può tornare alla 0.9.
@@ -103,7 +103,7 @@ Poi si passa alla procedura guidata di configurazione del pannello. È fornita d
 
 La procedura guidata chiede un nome per il pannello, lo fa accedere a Home Assistant e chiede quale plancia mostrare e in quale area si trovi il pannello. Il pannello si connette con l’account Home Assistant con cui accedi, quindi se il browser è connesso con il tuo account, anche il pannello potrebbe connettersi con quello; per usare un account dedicato al pannello, accedi invece con quell’account. Con il filtro delle entità abilitato, il pannello carica solo le entità usate da quella plancia, ed è questo che lo mantiene veloce. Vedi [Connetti un pannello](/it/home-assistant/connect-a-panel/).
 
-Nella versione 1.0.0-rc2 non ancora rilasciata, la configurazione può essere completata anche quando il motore del browser del pannello è troppo vecchio per mostrare una plancia Home Assistant attuale con il renderer integrato. La procedura guidata avvisa quando è necessario intervenire. Segui la [guida WebView](/it/hardware/guides/update-the-webview/) prima di fare affidamento sulla plancia; completare la sola configurazione non conferma che la plancia possa caricarsi.
+La configurazione può essere completata anche quando il motore del browser del pannello è troppo vecchio per mostrare una plancia Home Assistant attuale con il renderer integrato. La procedura guidata avvisa quando è necessario intervenire. Segui la [guida WebView](/it/hardware/guides/update-the-webview/) prima di fare affidamento sulla plancia; completare la sola configurazione non conferma che la plancia possa caricarsi.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="La procedura guidata di configurazione del pannello, passo dopo passo" tabindex="0">
 <figure>

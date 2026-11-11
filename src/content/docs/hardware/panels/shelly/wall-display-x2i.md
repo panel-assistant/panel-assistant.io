@@ -24,12 +24,12 @@ sidebar:
 ---
 
 :::note
-**This is the one Shelly Wall Display that has been examined on real hardware.** Historical measurements come from a single retail unit on factory firmware 2.5.4 and then 2.7.4. Selected operations have since been checked on 2.8.2 in development testing for the forthcoming 1.0 release; the [firmware section](#firmware-and-why-the-shipped-version-matters) records their limits. The specification table mixes those measurements with Shelly's own product data. What the X2i taught us about Shelly's firmware also shapes the [X1i](/hardware/panels/shelly/wall-display-x1i/) and [XL](/hardware/panels/shelly/wall-display-xl/) support, as the [family page](/hardware/panels/shelly/#what-the-x2i-means-for-the-rest-of-the-line) explains; the hardware details here belong to the X2i alone.
+**This is the one Shelly Wall Display that has been examined on real hardware.** Historical measurements come from a single retail unit on factory firmware 2.5.4 and then 2.7.4. Selected operations have since been checked on 2.8.2 during development of the 1.0 release; the [firmware section](#firmware-and-why-the-shipped-version-matters) records their limits. The specification table mixes those measurements with Shelly's own product data. What the X2i taught us about Shelly's firmware also shapes the [X1i](/hardware/panels/shelly/wall-display-x1i/) and [XL](/hardware/panels/shelly/wall-display-xl/) support, as the [family page](/hardware/panels/shelly/#what-the-x2i-means-for-the-rest-of-the-line) explains; the hardware details here belong to the X2i alone.
 :::
 
 The Wall Display X2i, firmware codename **Jenna**, is a 6.9 in 1440×720 panel on a Rockchip RK3326 (four Cortex-A35), Android 11, arm64-v8a. Shelly's specification names the RK3326-S variant; the chip itself reports only the RK3326 family, which is consistent with that. It is on the modern **WallDisplayV2** OTA track alongside the X1i, XL, Maverick and Dayna, and has access to the built-in AppStore.
 
-Panel Assistant runs on it as an ordinary Android app. **The measured setup and everyday controls work without root**: installing, granting its own permissions, the sensors, brightness, taking over the home screen and, in the forthcoming Panel Assistant 1.0 release, switching the screen fully off and waking it again. The [2.8.2 development checks](#firmware-and-why-the-shipped-version-matters) cover only the operations listed there. Root would still buy a few privileged extras, listed under [What this firmware does not have](#what-this-firmware-does-not-have). That makes the X2i the least restrictive Shelly Wall Display documented here and the only one with a confirmed installation path.
+Panel Assistant runs on it as an ordinary Android app. **The measured setup and everyday controls work without root**: installing, granting its own permissions, the sensors, brightness, taking over the home screen and switching the screen fully off and waking it again. The [2.8.2 development checks](#firmware-and-why-the-shipped-version-matters) cover only the operations listed there. Root would still buy a few privileged extras, listed under [What this firmware does not have](#what-this-firmware-does-not-have). That makes the X2i the least restrictive Shelly Wall Display documented here and the only one with a confirmed installation path.
 
 ## Also sold as
 
@@ -43,7 +43,7 @@ Shelly Wall Display X2i, firmware codename Jenna.
 | WebView    | Chromium **131.0.6778.200** as shipped, above Panel Assistant's minimum; vendor only, with no newer Shelly-signed provider, and this major no longer receives Chromium security fixes                                                                    |
 | Sensors    | Proximity and ambient light, both ordinary Android sensors needing no permission; **no temperature or humidity sensor**                                                                                                                                  |
 | Microphone | Built in; the wake word and voice commands work close to the panel, and pickup across a room is weak                                                                                                                                                     |
-| Relay      | Interchangeable base: 1 output as standard, optional 2-output base. Confirmed switching without root; direct Panel Assistant control is in development; see [Relays](#relays)                                                                            |
+| Relay      | Interchangeable base: 1 output as standard, optional 2-output base. Confirmed switching without root; direct Panel Assistant control is available from panel app 1.0.1; see [Relays](#relays)                                                            |
 | Root       | None needed. Setup uses USB debugging; see the firmware-dependent [developer-mode unlock](#unlocking-developer-mode)                                                                                                                                     |
 | Released   | About December 2025 (est.); Shelly quietly released the X2i in Europe around 22 December 2025 ([launch coverage, Notebookcheck, December 2025](https://www.notebookcheck.net/Shelly-quietly-launches-new-Wall-Display-XL-smart-home-hub.1190942.0.html)) |
 
@@ -89,7 +89,7 @@ Two setup details are worth knowing before you start:
 
 ## Screen off and waking
 
-The forthcoming Panel Assistant **1.0** release switches the X2i's backlight fully off through Shelly's local Stargate API without root, while Android stays awake. The first wake gesture is consumed so it does not also operate the dashboard. Earlier releases could only dim the screen.
+From Panel Assistant **1.0**, the panel app switches the X2i's backlight fully off through Shelly's local Stargate API without root, while Android stays awake. The first wake gesture is consumed so it does not also operate the dashboard. Earlier releases could only dim the screen.
 
 **If Shelly's password protection is enabled**, its screen API requires Digest authentication. The current implementation falls back to Android's own screen timeout. Home Assistant can turn the screen on again through that fallback.
 
@@ -111,14 +111,14 @@ The X2i has **no temperature or humidity sensor**, so no room-climate readings a
 
 ## Relays
 
-The X2i's power base exposes `/sys/class/strelay/relay1` and `relay2`, with world-readable and world-writable permissions. Unprivileged writes audibly switched the contacts on the measured unit. **Direct Panel Assistant relay control is in development**, using these files as an ordinary app when the selected profile declares the route and the running app can read and write it. This is not a capability of the current public release or a claim about every Shelly model.
+The X2i's power base exposes `/sys/class/strelay/relay1` and `relay2`, with world-readable and world-writable permissions. Unprivileged writes audibly switched the contacts on the measured unit. **Direct Panel Assistant relay control is available from panel app 1.0.1**, using these files as an ordinary app when the selected profile declares the route and the running app can read and write it. This does not establish relay control on every Shelly model.
 
 Two conditions apply to this measured route:
 
 - Relays are inert while the panel is powered over USB. They need mains through the power base.
 - The unprivileged write succeeds only because this firmware ships with SELinux in permissive mode. A future firmware that enforces policy would block it regardless of file permissions.
 
-For the current public release, drive the relays through Home Assistant's own Shelly integration.
+The relay controls appear in Home Assistant when the panel's profile and running firmware support them.
 
 ## What this firmware does not have
 
@@ -134,14 +134,14 @@ The unit examined here arrived factory-fresh on **2.5.4**, was later updated to 
 - **2.7.4 installs Shelly's launcher as the device owner.** On the unit examined here that took nothing from Panel Assistant: it stayed the home screen, kept running and stayed online in Home Assistant, and the device owner imposes no restrictions on other apps. Shelly's launcher cannot be disabled on either firmware.
 - **2.8.3 keeps the same device owner, still with no restrictions.** Its ownership files are unchanged from 2.7.4, and Shelly's launcher does not stop other apps from being installed, using adb or running an accessibility service. On **2026-10-15** a fresh install of a Panel Assistant 1.0 preview build through Home Assistant's network route completed on 2.8.3, and the panel went on to show its Home Assistant dashboard.
 
-As checked on **2026-10-12**, both firmware tracks offer **stable 2.8.3**, build `20261012-141904/2.8.3-48174502c`, with no beta offered. On **2026-10-13**, one X2i running **2.8.3**, build `20261012-141904/2.8.3-48174502c`, was checked with a signed development build for the forthcoming Panel Assistant **1.0** release. The vendor firmware update preserved the app settings, home-screen selection and Home Assistant connection. The measured operations below were also checked on 2.8.2, build `20261008-101206/2.8.2-7bb488885`:
+As checked on **2026-10-12**, both firmware tracks offer **stable 2.8.3**, build `20261012-141904/2.8.3-48174502c`, with no beta offered. On **2026-10-13**, one X2i running **2.8.3**, build `20261012-141904/2.8.3-48174502c`, was checked with a signed build during development of Panel Assistant **1.0**. The vendor firmware update preserved the app settings, home-screen selection and Home Assistant connection. The measured operations below were also checked on 2.8.2, build `20261008-101206/2.8.2-7bb488885`:
 
 - **Settings restore:** 84 supported settings restored, with boot-chime suppression and network ADB explicitly unavailable and skipped. No restore failure or rollback failure was reported. An actual restore was checked on 2.8.3 after the vendor update.
 - **Updating through Panel Assistant, on 2.8.2 only:** a normal in-place update completed through Home Assistant, with Android's Install confirmation accepted. The app kept its settings and remained the home screen, and Home Assistant reported it healthy afterwards. No reboot, reset or uninstall was needed. This route has not been qualified on 2.8.3.
 - **Startup and reboot brightness:** the requested brightness survived startup and reboot. After API screen-off and an injected wake, brightness held at 5 and 30 seconds; when brightness commands overlapped, the newest command won. The first injected gesture was consumed rather than opening the dashboard menu beneath it.
 - **Screen control:** API screen-off worked with Shelly authentication disabled. With password protection enabled, Android sleep provided the fallback and Home Assistant screen-on recovered the panel after password protection was removed. An injected tap did not wake the sleeping panel in that test; physical touch wake with password protection remains unqualified.
 
-These tests cover those operations only, and the fixes belong to the forthcoming 1.0 release. They do not establish full compatibility with either firmware or availability in the current public release. Real-finger touch and paired near/far proximity and ambient-light measurements remain to be qualified. The proximity driver was healthy, but still required calibration. Include your firmware version when reporting a problem after an update.
+These tests cover those operations only; the screen-control fixes shipped in 1.0. They do not establish full compatibility with either firmware. Real-finger touch and paired near/far proximity and ambient-light measurements remain to be qualified. The proximity driver was healthy, but still required calibration. Include your firmware version when reporting a problem after an update.
 
 Since **2.8.0**, modern models offer **Uninstall all updates** to return to their shipped vendor-app version. This unit's shipped 2.5.4 is older than 2.6.2, so Shelly says that operation also resets factory defaults. Keep separate Panel Assistant and Shelly settings backups first; neither is a complete Android restore image. Preservation of Panel Assistant through the operation has not been verified. See the [family recovery notes](/hardware/panels/shelly/#returning-to-the-shipped-version) for the exact limits.
 

@@ -37,7 +37,7 @@ La mayoría de las personas solo necesita un Android System WebView actualizado.
 
 Si el panel muestra **Es necesario actualizar Home Assistant**, actualiza Home Assistant y selecciona **Reintentar**. Ninguna acción en el panel puede sustituir esa actualización.
 
-Si muestra **El visor web de este panel es demasiado antiguo**, sigue [la guía para actualizar WebView](/es/hardware/guides/update-the-webview/). En la versión 1.0.0-rc2, aún no publicada, una actualización de la app iniciada desde Home Assistant también puede instalar un WebView compatible verificado si el panel lo permite. Los demás paneles necesitan el método de la guía. Después de actualizar WebView, selecciona **Reintentar**.
+Si muestra **El visor web de este panel es demasiado antiguo**, sigue [la guía para actualizar WebView](/es/hardware/guides/update-the-webview/). Una actualización de la app iniciada desde Home Assistant también puede instalar un WebView compatible verificado si el panel lo permite. Los demás paneles necesitan el método de la guía. Después de actualizar WebView, selecciona **Reintentar**.
 
 El renderizador integrado nunca recurre a un puente con menos aislamiento. Otro renderizador puede servir si no puedes actualizar Home Assistant, pero todas las apps de panel de control del dispositivo usan el mismo WebView del sistema y ninguna puede evitar que esté obsoleto.
 

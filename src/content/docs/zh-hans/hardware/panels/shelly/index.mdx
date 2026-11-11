@@ -103,7 +103,7 @@ Wall Display XL 的内置浏览器在 Home Assistant 前端 2025.12 和某个 20
 **缺少 root 对面板应用意味着什么：**
 
 - 辅助守护进程（`hapaneld-helper`）需要通往 `/system` 的特权途径，没有带 root 的 adb 立足点就无法获得，因此每个配置文件声明 `platform.app_can_su: false`。旧平台 `userdebug` 基础构建是否改变这一点，列在下方未知项中。
-- 真正需要 root 的操作因此不可用。X2i 的日常操作不在其中：亮度使用 Android 自身设置，传感器是普通 Android 传感器，即将发布的 1.0 通过 Shelly 本地 API 完全关闭屏幕，并以 Android 超时作为备用；Panel Assistant 通过 adb 安装、更新和配置应用，包括显示大小和文字大小。失去的是少量特权功能：从面板重启或切回厂商启动器。Android 11 或更新版本还可通过已启用的无障碍服务提供无 root 截图和点击；远程点击仍受安全设置约束。
+- 真正需要 root 的操作因此不可用。X2i 的日常操作不在其中：亮度使用 Android 自身设置，传感器是普通 Android 传感器，面板应用通过 Shelly 本地 API 完全关闭屏幕，并以 Android 超时作为备用；Panel Assistant 通过 adb 安装、更新和配置应用，包括显示大小和文字大小。失去的是少量特权功能：从面板重启或切回厂商启动器。Android 11 或更新版本还可通过已启用的无障碍服务提供无 root 截图和点击；远程点击仍受安全设置约束。
 - 现代内置 AppStore 表明 Shelly 可分发获批应用，但面板应用不在其中。安装需旁加载；X2i 需先按上述步骤解锁开发者模式。旧设备仍无已确认安装途径。
 - **设备所有者行为取决于固件。** X2i 原厂 2.5.4 没有设备所有者，甚至没有设备管理员。更新到 2.7.4 后，Shelly 启动器成为设备所有者，但该设备上 Panel Assistant 未因此失去功能：两版固件均可无 root 将它设为主屏幕应用并保持，设备所有者也不限制其他应用。两版固件均无法停用 Shelly 启动器。从 2.8.0 起，现代型号可恢复出厂时的应用版本；使用前须了解下方[恢复限制](#恢复出厂时的版本)。
 
@@ -119,20 +119,20 @@ Wall Display XL 的内置浏览器在 Home Assistant 前端 2025.12 和某个 20
 
 传感器和继电器细节因型号而异。根据固件和产品页面：
 
-| 元件       | 说明                                                                                                                                                                                                                        |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 温度和湿度 | 原版和 X2 有记录。X1i、X2i 和 XL 没有内置温湿度传感器。Android API 可见性未验证。                                                                                                                                           |
-| 环境光     | 原版、X2、X1i、X2i 和 XL 均有记录。X2i 实测为无需权限的普通 Android 传感器；其他型号均未验证。                                                                                                                              |
-| 运动和接近 | X2、X1i 和 X2i 记录有接近检测；XL 官方记录为运动传感器。X2i 实测为无需权限的普通 Android 唤醒传感器；其他型号未验证。                                                                                                       |
-| 继电器     | 原版、X2 和 XL 为一路输出。X1i 和 X2i 出厂带一路输出底座，并支持单独出售的两路输出底座。X2i 有无特权 sysfs 控制途径，但未使用；见[继电器](/zh-hans/hardware/panels/shelly/wall-display-x2i/#relays)。其他型号均未确认途径。 |
+| 元件       | 说明                                                                                                                                                                                                                                                     |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 温度和湿度 | 原版和 X2 有记录。X1i、X2i 和 XL 没有内置温湿度传感器。Android API 可见性未验证。                                                                                                                                                                        |
+| 环境光     | 原版、X2、X1i、X2i 和 XL 均有记录。X2i 实测为无需权限的普通 Android 传感器；其他型号均未验证。                                                                                                                                                           |
+| 运动和接近 | X2、X1i 和 X2i 记录有接近检测；XL 官方记录为运动传感器。X2i 实测为无需权限的普通 Android 唤醒传感器；其他型号未验证。                                                                                                                                    |
+| 继电器     | 原版、X2 和 XL 为一路输出。X1i 和 X2i 出厂带一路输出底座，并支持单独出售的两路输出底座。X2i 已测得无需特权的 sysfs 控制途径，面板应用从 1.0.1 起可直接控制；见[继电器](/zh-hans/hardware/panels/shelly/wall-display-x2i/#relays)。其他型号均未确认途径。 |
 
-请通过 Home Assistant 的 Shelly 集成处理继电器实体，不要假定面板应用可直接控制。除 X2i 外，普通 Android 应用能否看到传感器仍未验证。
+从面板应用 1.0.1 起，X2i 可在其配置文件和固件支持时直接控制继电器。其他型号可以使用 Home Assistant 的 Shelly 集成。除 X2i 外，普通 Android 应用能否看到传感器仍未验证。
 
 ## X2i 对系列其他型号的意义
 
 已有一台 [X2i](/zh-hans/hardware/panels/shelly/wall-display-x2i/) 完成台架检查。X1i、XL、Maverick 和 Dayna 在同一 OTA 通道运行相同 Shelly 固件，X1i 也属于同一处理器系列。**从 Panel Assistant 1.0 起，它们共用一个 Shelly 配置文件，包含 X2i 所证明的固件本身的行为**，而非 X2i 主板特性：
 
-- **无 root 完全关闭屏幕。** 即将发布的 1.0 使用 Shelly 本地 API 关闭背光，同时保持 Android 唤醒。启用 Shelly 密码后，因 API 需要 Digest 认证，当前实现回退到 Android 屏幕超时。仅在 X2i 上测试。
+- **无 root 完全关闭屏幕。** 面板应用使用 Shelly 本地 API 关闭背光，同时保持 Android 唤醒。启用 Shelly 密码后，因 API 需要 Digest 认证，当前实现回退到 Android 屏幕超时。仅在 X2i 上测试。
 - **仅返回和主屏幕。** 现代配置文件依据 X2i 固件证据，推定其他现代型号同样不提供最近任务。仅 X2i 已检查实机。
 - **将 Panel Assistant 作为主屏幕。** Shelly 启动器保持安装且无法停用，但不会夺回主屏幕。
 - **干净的仪表盘。** Panel Assistant 关闭 Shelly 固件在每个应用上绘制的角落覆盖层，同时仍可从导航栏进入 Shelly 自身界面。
@@ -141,7 +141,7 @@ Wall Display XL 的内置浏览器在 Home Assistant 前端 2025.12 和某个 20
 
 - **挥手唤醒**需要接近传感器。X1i 记录有该传感器，可能与 X2i 使用相同部件。XL 最可能不同，因为 Shelly 记录其为运动传感器而非接近传感器。
 - 从完全黑屏状态**触摸唤醒**仅在 X2i 上测量。
-- X2i 的**继电器**可通过所有用户可写的软件控件访问，但 Panel Assistant 不驱动任何 Shelly 型号的继电器。请使用 Home Assistant 自带的 Shelly 集成。
+- X2i 的**继电器**已有测得的无需特权的 sysfs 控制途径；从面板应用 1.0.1 起，在使用其精确配置文件且运行时访问检查成功时，可直接控制继电器。家族通用配置文件不启用继电器控制。XL 继电器切换仍未验证。继电器需要通过电源底座连接市电。
 
 **这些行为尚未在其他型号确认。** 如果你有运行 Panel Assistant 的 X1i 或 XL，报告哪些功能正常，是提升其在[支持面板列表](/zh-hans/install/supported-panels/)中等级的最快方法。隐藏的开发者模式解锁是测量这些行为的前提，目前仅 X2i 已确认，[其页面提供确切步骤](/zh-hans/hardware/panels/shelly/wall-display-x2i/#unlocking-developer-mode)。
 
@@ -159,7 +159,7 @@ Wall Display XL 的内置浏览器在 Home Assistant 前端 2025.12 和某个 20
 
 [下方发行说明表](#厂商发行说明)列出厂商自 2.4.0 起的已记录版本，包括 2.8.4。2.8.4 修复设置恢复、Shelly Cloud 服务器验证和本地 Web 界面的安全问题。[目录](https://panel-assistant.io/go/firmware?device=shelly)显示各 OTA 通道已索引软件包。厂商发行说明与此处所述开发测试是两回事。
 
-X2i 已为即将发布的 Panel Assistant **1.0** 进行 **2.8.2 和 2.8.3** 开发测试。已检查设置恢复、通过 Panel Assistant 原位更新、启动亮度、API 关屏和软件注入唤醒；[X2i 页面](/zh-hans/hardware/panels/shelly/wall-display-x2i/#firmware-and-why-the-shipped-version-matters)记录其限制。**这是部分验证，不代表完整兼容性。** Panel Assistant 原位更新在 2.8.2 检查过，尚未在 2.8.3 检查。2.8.3 的实体触摸及配对接近/光照测量仍未验证。这些结果不能证明 X1i、XL 或其他 Shelly 型号的行为。
+X2i 已在 Panel Assistant **1.0** 开发期间运行 **2.8.2 和 2.8.3** 进行测试。已检查设置恢复、通过 Panel Assistant 原位更新、启动亮度、API 关屏和软件注入唤醒；[X2i 页面](/zh-hans/hardware/panels/shelly/wall-display-x2i/#firmware-and-why-the-shipped-version-matters)记录其限制。**这是部分验证，不代表完整兼容性。** Panel Assistant 原位更新在 2.8.2 检查过，尚未在 2.8.3 检查。2.8.3 的实体触摸及配对接近/光照测量仍未验证。这些结果不能证明 X1i、XL 或其他 Shelly 型号的行为。
 
 报告问题时请记录型号和固件版本，尤其是厂商更新后开始的问题。更新前保存 Panel Assistant 备份，并另存 Shelly 配置备份。两种设置备份都不是完整 Android 固件镜像。
 
@@ -350,7 +350,7 @@ import releaseNotes from '../../../../../../../tools/firmware-index/shelly-relea
 
 ## 设备配置文件：已知与未知
 
-两个家族配置文件对应两个 OTA 通道，另有精确的 [X2i 配置文件](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display-x2i.yaml)：[`shelly-wall-display.yaml`](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display.yaml) 和 [`shelly-wall-display-v2.yaml`](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display-v2.yaml)。OTA 通道范围过广，不能表示各型号专属 SoC、显示屏和继电器信息，因此两者刻意保持通用，字段仍属初步信息。下表描述这两个文件。X2i 实际报告的内容见[其独立页面](/zh-hans/hardware/panels/shelly/wall-display-x2i/)。
+两个家族配置文件对应两个 OTA 通道，另有从面板应用 1.0.1 起提供的 XL 专属支持和精确的 [X2i 配置文件](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display-x2i.yaml)：[`shelly-wall-display.yaml`](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display.yaml) 和 [`shelly-wall-display-v2.yaml`](https://github.com/panel-assistant/android/blob/main/app/src/main/assets/device-profiles/shelly-wall-display-v2.yaml)。OTA 通道范围过广，不能表示各型号专属 SoC、显示屏和继电器信息，因此两者刻意保持通用，字段仍属初步信息。下表描述这两个文件。X2i 实际报告的内容见[其独立页面](/zh-hans/hardware/panels/shelly/wall-display-x2i/)。
 
 ### 固件中已知或可推导的信息
 

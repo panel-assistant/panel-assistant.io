@@ -39,7 +39,7 @@ Die meisten benötigen nur eine aktuelle Android System WebView. Die Panel-App p
 
 Zeigt das Panel **Home Assistant-Aktualisierung erforderlich**, aktualisiere Home Assistant und wähle **Erneut versuchen**. Nichts auf dem Panel kann das ersetzen.
 
-Zeigt es **Die Webanzeige dieses Panels ist zu alt**, befolge [WebView aktualisieren](/de/hardware/guides/update-the-webview/). In der unveröffentlichten Version 1.0.0-rc2 kann ein über Home Assistant gestartetes Update der Panel-App auch eine geprüfte, kompatible WebView installieren, wenn das Panel es erlaubt. Andere Panels benötigen den im Leitfaden beschriebenen Weg. Wähle nach dem WebView-Update **Erneut versuchen**.
+Zeigt es **Die Webanzeige dieses Panels ist zu alt**, befolge [WebView aktualisieren](/de/hardware/guides/update-the-webview/). Ein über Home Assistant gestartetes Update der Panel-App kann auch eine geprüfte, kompatible WebView installieren, wenn das Panel es erlaubt. Andere Panels benötigen den im Leitfaden beschriebenen Weg. Wähle nach dem WebView-Update **Erneut versuchen**.
 
 Der integrierte Renderer fällt niemals auf eine weniger isolierte Bridge zurück. Ein anderer Renderer kann helfen, wenn Home Assistant selbst nicht aktualisiert werden kann. Jede Dashboard-App auf dem Panel verwendet jedoch dieselbe System-WebView. Keine kann daher eine veraltete WebView umgehen.
 

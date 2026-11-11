@@ -18,9 +18,9 @@ El panel no necesita una dirección fija: Panel Assistant sigue encontrándolo s
 
 El WebView del sistema del panel, también llamado motor del navegador, dibuja el panel de control. Un WebView antiguo puede dejarlo en blanco o dibujarlo solo parcialmente.
 
-En la versión 1.0.0-rc2, aún no publicada, tanto el instalador de red como el USB pueden solicitar una actualización verificada y compatible del motor del navegador en los paneles compatibles. Si la actualización no puede terminar, la configuración y el emparejamiento siguen disponibles. Un intento incompleto puede continuarse desde la reparación de actualización del panel en Home Assistant: elige **Reintentar**. Comprueba el trabajo existente antes de solicitar otro intento; las actualizaciones fallidas no se reintentan de forma programada.
+Tanto el instalador de red como el USB pueden solicitar una actualización verificada y compatible del motor del navegador en los paneles compatibles. Si la actualización no puede terminar, la configuración y el emparejamiento siguen disponibles. Un intento incompleto puede continuarse desde la reparación de actualización del panel en Home Assistant: elige **Reintentar**. Comprueba el trabajo existente antes de solicitar otro intento; las actualizaciones fallidas no se reintentan de forma programada.
 
-En esa versión, el asistente de configuración avisa si el motor del navegador integrado es demasiado antiguo. Puedes terminar la configuración y el emparejamiento, pero el panel de control puede seguir sin mostrarse. Si el panel no puede instalar la actualización, sigue [Actualizar el WebView del sistema](/es/hardware/guides/update-the-webview/).
+El asistente de configuración avisa si el motor del navegador integrado es demasiado antiguo. Puedes terminar la configuración y el emparejamiento, pero el panel de control puede seguir sin mostrarse. Si el panel no puede instalar la actualización, sigue [Actualizar el WebView del sistema](/es/hardware/guides/update-the-webview/).
 
 ## Antes de hacer un cambio irreversible
 

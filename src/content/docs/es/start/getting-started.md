@@ -10,7 +10,7 @@ La parte difícil de cualquier panel es la primera hora. Panel Assistant se enca
 
 ## 1. Instala la integración
 
-En Home Assistant **2026.11 o posterior**, instala Panel Assistant desde **Configuración**, **Marketplace**. En versiones anteriores compatibles, de **2026.8.3 a 2026.10**, instálalo mediante HACS y reinicia Home Assistant. Marketplace puede permitir configurarlo inmediatamente; sigue primero cualquier indicación de reinicio. Es lo único que instalas manualmente. Consulta [Instalar la integración](/es/home-assistant/custom-integration/) para ambas vías y cómo activar las versiones preliminares.
+En Home Assistant **2026.11 o posterior**, instala Panel Assistant desde **Configuración**, **Marketplace**. En versiones anteriores compatibles, de **2026.8.3 a 2026.10**, instálalo mediante HACS y reinicia Home Assistant. Marketplace puede permitir configurarlo inmediatamente; sigue primero cualquier indicación de reinicio. Es lo único que instalas manualmente. Consulta [Instalar la integración](/es/home-assistant/custom-integration/) para ambas vías y las actualizaciones.
 
 :::note
 Si actualizas desde 0.9, lee [Actualizar a 1.0](/es/manage/upgrade-to-1-0/) antes de empezar y conserva las copias de seguridad de Home Assistant y de los paneles que allí se describen. Un panel que ejecuta la aplicación 1.0 no puede volver a 0.9.
@@ -103,7 +103,7 @@ A continuación viene el asistente de configuración del propio panel. El panel 
 
 El asistente pide un nombre para el panel, inicia su sesión en Home Assistant y pregunta qué panel de control mostrar y en qué área está el panel. El panel se conecta con la cuenta de Home Assistant con la que inicies sesión, así que, si tu navegador tiene iniciada tu sesión, el panel puede conectarse con tu cuenta; para que utilice su propia cuenta, inicia sesión con ella. Con el filtrado de entidades habilitado, el panel carga solo las entidades que utiliza ese panel de control, lo que lo mantiene ágil. Consulta [Conectar un panel](/es/home-assistant/connect-a-panel/).
 
-En la versión 1.0.0-rc2, aún no publicada, la configuración puede terminar aunque el motor del navegador del panel sea demasiado antiguo para mostrar un panel de control actual de Home Assistant con el renderizador integrado. El asistente avisa cuando esto requiere atención. Sigue la [guía de WebView](/es/hardware/guides/update-the-webview/) antes de depender del panel de control; terminar la configuración por sí solo no confirma que pueda cargarse.
+La configuración puede terminar aunque el motor del navegador del panel sea demasiado antiguo para mostrar un panel de control actual de Home Assistant con el renderizador integrado. El asistente avisa cuando esto requiere atención. Sigue la [guía de WebView](/es/hardware/guides/update-the-webview/) antes de depender del panel de control; terminar la configuración por sí solo no confirma que pueda cargarse.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="El asistente de configuración del panel, paso a paso" tabindex="0">
 <figure>

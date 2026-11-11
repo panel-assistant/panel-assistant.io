@@ -10,7 +10,7 @@ Het lastigste deel van elk paneel is het eerste uur. Panel Assistant doet dat uu
 
 ## 1. Installeer de integratie
 
-Installeer Panel Assistant op Home Assistant **2026.11 of nieuwer** via **Instellingen**, **Marketplace**. Installeer het op ondersteunde oudere versies, **2026.8.3 tot en met 2026.10**, via HACS en herstart Home Assistant. In Marketplace kun je de integratie mogelijk meteen instellen; volg eerst eventuele herstartmeldingen. Dit is het enige dat je handmatig installeert. Zie [De integratie installeren](/nl/home-assistant/custom-integration/) voor beide routes en het inschakelen van pre-releases.
+Installeer Panel Assistant op Home Assistant **2026.11 of nieuwer** via **Instellingen**, **Marketplace**. Installeer het op ondersteunde oudere versies, **2026.8.3 tot en met 2026.10**, via HACS en herstart Home Assistant. In Marketplace kun je de integratie mogelijk meteen instellen; volg eerst eventuele herstartmeldingen. Dit is het enige dat je handmatig installeert. Zie [De integratie installeren](/nl/home-assistant/custom-integration/) voor beide routes en updates.
 
 :::note
 Als je bijwerkt vanaf 0.9, lees dan vóór je begint [Upgraden naar 1.0](/nl/manage/upgrade-to-1-0/) en bewaar de daarin beschreven back-ups van Home Assistant en je panelen. Een paneel waarop de 1.0-app draait, kan niet terug naar 0.9.
@@ -103,7 +103,7 @@ Daarna volgt de eigen installatiewizard van het paneel. Die wordt door het panee
 
 De wizard vraagt om een naam voor het paneel, meldt het paneel aan bij Home Assistant en vraagt welk dashboard het moet tonen en in welke ruimte het staat. Het paneel maakt verbinding met het Home Assistant-account waarmee je je aanmeldt. Als je browser als jou is aangemeld, kan het paneel dus als jou verbinden; wil je voor het paneel een eigen account gebruiken, meld je dan met dat account aan. Als entiteitsfiltering is ingeschakeld, laadt het paneel alleen de entiteiten die dat dashboard gebruikt, en daardoor blijft het snel. Zie [Een paneel verbinden](/nl/home-assistant/connect-a-panel/).
 
-In de nog niet uitgebrachte versie 1.0.0-rc2 kan de configuratie worden afgerond, ook als de browser-engine van het paneel te oud is om een actueel Home Assistant-dashboard met de ingebouwde renderer weer te geven. De wizard waarschuwt als dit aandacht nodig heeft. Volg de [WebView-handleiding](/nl/hardware/guides/update-the-webview/) voordat je op het dashboard vertrouwt; alleen het afronden van de configuratie bevestigt niet dat het dashboard kan laden.
+De configuratie kan worden afgerond, ook als de browser-engine van het paneel te oud is om een actueel Home Assistant-dashboard met de ingebouwde renderer weer te geven. De wizard waarschuwt als dit aandacht nodig heeft. Volg de [WebView-handleiding](/nl/hardware/guides/update-the-webview/) voordat je op het dashboard vertrouwt; alleen het afronden van de configuratie bevestigt niet dat het dashboard kan laden.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="De installatiewizard voor het paneel, stap voor stap" tabindex="0">
 <figure>

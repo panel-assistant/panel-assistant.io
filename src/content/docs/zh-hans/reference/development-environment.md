@@ -40,7 +40,7 @@ Gradle 会在构建应用之前自动构建并验证两种 ABI 对应的 root �
 
 构建和运行 ha-paneld 无需配置签名。未配置签名的检出副本使用仓库中提交的 `debug.keystore` 签署调试构建。如果 `keystore.properties` 提供签名配置，调试构建则改用该密钥。官方发布版本使用项目私有的发布密钥签名，该密钥从不存放在仓库中。
 
-Android 拒绝使用签名密钥不同的 APK 更新已安装应用。因此，在官方发布版本、您自己的发布密钥和调试构建之间切换时，需要先卸载。在操作之前，请从 **安装 → 备份** 创建完整的加密 `.hpb` 备份，并确认文件已保存；否则卸载会删除配置文件、已学习的状态和历史记录。Panel Assistant 会将面板应用设为设备管理员，而 Android 拒绝卸载设备管理员，因此请先解除该权限。可以在 Home Assistant 的 **配置** 中，使用面板的 **从此面板移除 Panel Assistant** 选项（尚未发布的 1.0.0-rc2 中称为 **从此面板移除**）移除应用，也可以通过 ADB 解除设备管理员权限并卸载：
+Android 拒绝使用签名密钥不同的 APK 更新已安装应用。因此，在官方发布版本、您自己的发布密钥和调试构建之间切换时，需要先卸载。在操作之前，请从 **安装 → 备份** 创建完整的加密 `.hpb` 备份，并确认文件已保存；否则卸载会删除配置文件、已学习的状态和历史记录。Panel Assistant 会将面板应用设为设备管理员，而 Android 拒绝卸载设备管理员，因此请先解除该权限。可以在 Home Assistant 的 **配置** 中，使用面板的 **从此面板移除** 选项移除应用，也可以通过 ADB 解除设备管理员权限并卸载：
 
 ```sh
 adb shell am broadcast --include-stopped-packages -n io.panelassistant.android/io.panelassistant.android.platform.ReleaseDeviceAdminReceiver

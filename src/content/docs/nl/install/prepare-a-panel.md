@@ -18,9 +18,9 @@ Het paneel heeft geen vast adres nodig: Panel Assistant volgt een paneel waarvan
 
 Het dashboard wordt getekend door de systeem-WebView van het paneel, ook wel de browser-engine genoemd. Een oude WebView kan een leeg of gedeeltelijk getekend dashboard opleveren.
 
-In de nog niet uitgebrachte versie 1.0.0-rc2 kunnen zowel het netwerk- als het USB-installatieprogramma een geverifieerde, compatibele update van de browser-engine aanvragen op ondersteunde panelen. Als die update niet kan worden afgerond, blijven instellen en koppelen beschikbaar. Een onafgeronde poging kun je voortzetten via de update-reparatie van het paneel in Home Assistant: kies **Opnieuw proberen**. Er wordt gecontroleerd welk werk al is gedaan voordat een nieuwe poging wordt aangevraagd; mislukte updates worden niet volgens een schema opnieuw geprobeerd.
+Zowel het netwerk- als het USB-installatieprogramma kunnen een geverifieerde, compatibele update van de browser-engine aanvragen op ondersteunde panelen. Als die update niet kan worden afgerond, blijven instellen en koppelen beschikbaar. Een onafgeronde poging kun je voortzetten via de update-reparatie van het paneel in Home Assistant: kies **Opnieuw proberen**. Er wordt gecontroleerd welk werk al is gedaan voordat een nieuwe poging wordt aangevraagd; mislukte updates worden niet volgens een schema opnieuw geprobeerd.
 
-In die versie waarschuwt de installatiewizard wanneer de ingebouwde browser-engine te oud is. Je kunt het instellen en koppelen afronden, maar het dashboard wordt mogelijk nog steeds niet weergegeven. Als het paneel de update niet kan installeren, volg dan [De systeem-WebView bijwerken](/nl/hardware/guides/update-the-webview/).
+De installatiewizard waarschuwt wanneer de ingebouwde browser-engine te oud is. Je kunt het instellen en koppelen afronden, maar het dashboard wordt mogelijk nog steeds niet weergegeven. Als het paneel de update niet kan installeren, volg dan [De systeem-WebView bijwerken](/nl/hardware/guides/update-the-webview/).
 
 ## Voordat je iets onomkeerbaars verandert
 

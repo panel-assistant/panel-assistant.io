@@ -18,9 +18,9 @@ Le panneau n’a pas besoin d’une adresse fixe : Panel Assistant suit un panne
 
 Le tableau de bord est dessiné par le WebView système du panneau, aussi appelé moteur de navigateur. Un ancien WebView peut laisser le tableau de bord vide ou partiellement affiché.
 
-Dans la version 1.0.0-rc2 non encore publiée, les installateurs réseau et USB peuvent demander une mise à jour vérifiée et compatible du moteur de navigateur sur les panneaux pris en charge. Si cette mise à jour n’aboutit pas, la configuration et l’association restent disponibles. Une tentative inachevée peut être poursuivie depuis la Réparation de mise à jour du panneau dans Home Assistant : choisissez **Réessayer**. Elle vérifie le travail existant avant de demander une nouvelle tentative ; les mises à jour en échec ne sont pas relancées automatiquement selon un calendrier.
+Les installateurs réseau et USB peuvent demander une mise à jour vérifiée et compatible du moteur de navigateur sur les panneaux pris en charge. Si cette mise à jour n’aboutit pas, la configuration et l’association restent disponibles. Une tentative inachevée peut être poursuivie depuis la Réparation de mise à jour du panneau dans Home Assistant : choisissez **Réessayer**. Elle vérifie le travail existant avant de demander une nouvelle tentative ; les mises à jour en échec ne sont pas relancées automatiquement selon un calendrier.
 
-Dans cette version, l’assistant de configuration avertit lorsque le moteur de navigateur intégré est trop ancien. Vous pouvez terminer la configuration et l’association, mais le tableau de bord peut toujours ne pas s’afficher. Si le panneau ne peut pas installer la mise à jour, suivez [Mettre à jour le WebView système](/fr/hardware/guides/update-the-webview/).
+L’assistant de configuration avertit lorsque le moteur de navigateur intégré est trop ancien. Vous pouvez terminer la configuration et l’association, mais le tableau de bord peut toujours ne pas s’afficher. Si le panneau ne peut pas installer la mise à jour, suivez [Mettre à jour le WebView système](/fr/hardware/guides/update-the-webview/).
 
 ## Avant toute modification irréversible
 

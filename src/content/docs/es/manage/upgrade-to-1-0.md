@@ -16,25 +16,25 @@ Panel Assistant 1.0 y la aplicación del panel 1.0 avanzan juntos. La integraci�
 
 ## 1. Actualizar la integración
 
-En Home Assistant **2026.11 o posterior**, instala la actualización de Panel Assistant desde **Configuración**, **Actualizaciones**. En versiones anteriores compatibles, de **2026.8.3 a 2026.10**, descarga la actualización en HACS. Después reinicia Home Assistant para cargar la nueva integración, siguiendo la reparación de reinicio o la indicación de HACS. [Instalar la integración](/es/home-assistant/custom-integration/#updates-and-pre-releases) explica cómo activar versiones preliminares más recientes tanto en Marketplace como en HACS.
+En Home Assistant **2026.11 o posterior**, instala la actualización de Panel Assistant desde **Configuración**, **Actualizaciones**. En versiones anteriores compatibles, de **2026.8.3 a 2026.10**, descarga la actualización en HACS. Después reinicia Home Assistant para cargar la nueva integración, siguiendo la reparación de reinicio o la indicación de HACS. [Instalar la integración](/es/home-assistant/custom-integration/#updates) explica las actualizaciones a través de Marketplace o HACS.
 
 ## 2. Comprobar las reparaciones
 
 Después del reinicio, vuelve a abrir **Configuración**, **Reparaciones**.
 
-- **«… necesita la aplicación 1.0.0-rc1»** es normal en todos los paneles que aún ejecutan una aplicación 0.9. Hasta que se actualicen, Home Assistant no puede verlos ni controlarlos y sus entidades aparecen como no disponibles. El propio panel sigue funcionando con sus ajustes y su historial.
+- **«… necesita la aplicación …»** es normal en todos los paneles que aún ejecutan una aplicación 0.9. Hasta que se actualicen, Home Assistant no puede verlos ni controlarlos y sus entidades aparecen como no disponibles. El propio panel sigue funcionando con sus ajustes y su historial.
 - **«… no puede recibir actualizaciones de la aplicación»** significa que Panel Assistant no tiene una vía para instalar en ese panel, normalmente tras un cambio realizado en el propio panel, como una actualización de firmware o un restablecimiento. Vuelve a conectar el panel a Panel Assistant por USB, como describe **Más información** de la reparación, y la actualización estará disponible. No se elimina nada: en un panel que ya tiene la aplicación, el instalador USB no instala nada y solo permite que Panel Assistant vuelva a acceder a él.
 - **«… nunca se migró desde MQTT»** o **«… todavía ejecuta la aplicación antigua»** significa que una migración no terminó en 0.9.0. Consulta [Si una migración quedó sin terminar](#si-una-migración-quedó-sin-terminar).
 
 ## 3. Actualizar un panel y después los demás
 
-Cuando se publique la versión de la aplicación del panel 1.0, la entidad de actualización de cada panel en Home Assistant la ofrecerá. Instálala primero en un panel y úsalo durante un tiempo antes de instalarla en los demás, porque ese panel no podrá volver atrás. Panel Assistant guarda una copia de los ajustes, instala la actualización y confirma que el panel vuelve a funcionar correctamente, como se describe en [Actualizaciones y recuperación](/es/manage/updates-and-recovery/). Se conservan los ajustes de la aplicación del panel 0.9.
+La entidad de actualización de cada panel en Home Assistant ofrece la última aplicación del panel 1.0. Instálala primero en un panel y úsalo durante un tiempo antes de instalarla en los demás, porque ese panel no podrá volver atrás. Panel Assistant guarda una copia de los ajustes, instala la actualización y confirma que el panel vuelve a funcionar correctamente, como se describe en [Actualizaciones y recuperación](/es/manage/updates-and-recovery/). Se conservan los ajustes de la aplicación del panel 0.9.
 
 ## Volver atrás
 
 Hay dos partes y son diferentes.
 
-**Un panel con la aplicación 1.0 permanece en 1.0.** La aplicación del panel rechaza instalar una versión anterior sobre sí misma, Panel Assistant nunca la ofrece y una integración 0.9 no puede comunicarse con ella. Si un panel 1.0 funciona mal, consulta [Resolución de problemas](/es/manage/troubleshooting/) y después informa del problema con un [informe de soporte](/es/home-assistant/support-report/) para que pueda corregirse en la siguiente versión candidata.
+**Un panel con la aplicación 1.0 permanece en 1.0.** La aplicación del panel rechaza instalar una versión anterior sobre sí misma, Panel Assistant nunca la ofrece y una integración 0.9 no puede comunicarse con ella. Si un panel 1.0 funciona mal, consulta [Resolución de problemas](/es/manage/troubleshooting/) y después informa del problema con un [informe de soporte](/es/home-assistant/support-report/) para que pueda corregirse en una versión futura.
 
 **La integración puede volver atrás mientras ningún panel ejecute 1.0.** Restaura la copia de seguridad de Home Assistant que hiciste antes de empezar. Esto también deshace cualquier otro cambio realizado en Home Assistant desde que la creaste. Tus paneles siguen usando la aplicación 0.9 y vuelven a conectarse a 0.9.0. En cuanto algún panel ejecuta la aplicación 1.0, restaurar la copia deja ese panel fuera del alcance de Home Assistant hasta que la integración vuelva a 1.0.
 

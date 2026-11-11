@@ -52,7 +52,7 @@ N’utilisez **Réessayer**, avec les contrôles de la réparation existante, qu
 
 ## Retirer Panel Assistant de &lt;panneau&gt;
 
-**Signification :** Dans la version 1.0.0-rc2, non encore publiée, quelqu’un a appuyé sur **Retirer de ce panneau** sur la page de l’appareil de ce panneau. Le bouton ne supprime rien ; la réparation reste disponible jusqu’à la fin du retrait.
+**Signification :** Quelqu’un a appuyé sur **Retirer de ce panneau** sur la page de l’appareil de ce panneau. Le bouton ne supprime rien ; la réparation reste disponible jusqu’à la fin du retrait.
 
 **Cause :** Panel Assistant vous demande de confirmer avant de restaurer l’écran d’accueil et les applications du fabricant, de désinstaller ha-paneld et de supprimer le panneau de Home Assistant.
 
@@ -326,11 +326,11 @@ L’importation via la barre latérale remplace la copie partagée et peut mettr
 
 ## Échec de l’installateur : mise à jour
 
-**Signification :** Home Assistant n’a pas pu confirmer l’achèvement. En 1.0.0-rc2 non encore publiée, l’application peut déjà être installée alors que la mise à jour du moteur de navigateur reste inachevée.
+**Signification :** Home Assistant n’a pas pu confirmer l’achèvement. L’application peut déjà être installée alors que la mise à jour du moteur de navigateur reste inachevée.
 
-**Cause :** La mise à jour de l’application ou, dans cette version, de son moteur a échoué ou n’a pas pu être vérifiée. La réparation conserve le rapport de toute la tentative.
+**Cause :** La mise à jour de l’application ou de son moteur de navigateur a échoué ou n’a pas pu être vérifiée. La réparation conserve le rapport de toute la tentative.
 
-**Solution :** Lisez le rapport, rétablissez la connexion ou la condition d’installation signalée, puis choisissez **Réessayer**. En 1.0.0-rc2 non publiée, si seul le moteur reste inachevé et que Panel Assistant confirme la version d’application demandée installée, il reprend cette étape sans réinstaller l’application. Si **Autoriser les mises à jour** est proposé, utilisez-le d’abord pour approuver Home Assistant sur le panneau. Voir le [guide WebView](/fr/hardware/guides/update-the-webview/) si le moteur ne peut pas être mis à jour.
+**Solution :** Lisez le rapport, rétablissez la connexion ou la condition d’installation signalée, puis choisissez **Réessayer**. Si seul le moteur reste inachevé et que Panel Assistant confirme la version d’application demandée installée, il reprend cette étape sans réinstaller l’application. Si **Autoriser les mises à jour** est proposé, utilisez-le d’abord pour approuver Home Assistant sur le panneau. Voir le [guide WebView](/fr/hardware/guides/update-the-webview/) si le moteur ne peut pas être mis à jour.
 
 <a id="installer-failure-retry-hold"></a>
 

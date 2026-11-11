@@ -16,7 +16,7 @@ Pour un panneau déjà connecté à votre réseau. Allez dans **Paramètres**, *
 
 Pour un panneau encore dans sa boîte, ou dont le logiciel du fabricant complique l’accès réseau. Branchez-le à votre ordinateur portable et installez-le depuis votre navigateur avec le câble USB. Votre navigateur reste connecté à Home Assistant, qui fournit la version vérifiée ; le panneau n’a pas besoin d’ADB réseau. Lancez le parcours depuis **Paramètres**, **Appareils et services**, **Ajouter une intégration**, **Panel Assistant**, **Installer par USB sur cet ordinateur** ; il nécessite un navigateur basé sur Chromium. Voir [Installer par USB](/fr/install/install-over-usb/).
 
-Dans la version 1.0.0-rc2 non encore publiée, les deux installateurs peuvent aussi demander une mise à jour vérifiée et compatible du moteur de navigateur sur les panneaux pris en charge. Une mise à jour qui n’aboutit pas n’empêche ni la configuration ni l’association ; voir [Préparer le panneau](/fr/install/prepare-a-panel/) pour la récupération.
+Les deux installateurs peuvent aussi demander une mise à jour vérifiée et compatible du moteur de navigateur sur les panneaux pris en charge. Une mise à jour qui n’aboutit pas n’empêche ni la configuration ni l’association ; voir [Préparer le panneau](/fr/install/prepare-a-panel/) pour la récupération.
 
 ## Les protections de l’installateur
 

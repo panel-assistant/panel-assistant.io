@@ -52,7 +52,7 @@ Usa **Riprova**, con le sue verifiche di sicurezza, nella Riparazione esistente 
 
 ## Rimuovi Panel Assistant da &lt;pannello&gt;
 
-**Cosa significa:** Nella versione 1.0.0-rc2 non ancora pubblicata, qualcuno ha premuto **Rimuovi da questo pannello** nella pagina del dispositivo di questo pannello. Il pulsante non rimuove nulla; la Riparazione resta disponibile fino al completamento della rimozione.
+**Cosa significa:** Qualcuno ha premuto **Rimuovi da questo pannello** nella pagina del dispositivo di questo pannello. Il pulsante non rimuove nulla; la Riparazione resta disponibile fino al completamento della rimozione.
 
 **Perché accade:** Panel Assistant ti chiede conferma prima di ripristinare la schermata iniziale e le app del produttore, disinstallare ha-paneld ed eliminare il pannello da Home Assistant.
 
@@ -326,11 +326,11 @@ L'importazione dalla barra laterale sostituisce la copia condivisa e può aggior
 
 ## Installazione non riuscita: aggiornamento
 
-**Cosa significa:** Home Assistant non ha potuto confermare il completamento dell'aggiornamento. Nella versione 1.0.0-rc2 non ancora pubblicata, l'app del pannello potrebbe essere già installata mentre l'aggiornamento del motore del browser resta incompleto.
+**Cosa significa:** Home Assistant non ha potuto confermare il completamento dell'aggiornamento. L'app del pannello potrebbe essere già installata mentre l'aggiornamento del motore del browser resta incompleto.
 
-**Perché accade:** L'aggiornamento dell'app o, in quella versione, del motore del browser è fallito o non è stato verificabile. La Riparazione conserva il rapporto dell'intero tentativo.
+**Perché accade:** L'aggiornamento dell'app o del motore del browser è fallito o non è stato verificabile. La Riparazione conserva il rapporto dell'intero tentativo.
 
-**Come risolvere:** Leggi il Rapporto di assistenza, ripristina la connessione o il requisito di installazione segnalato, poi scegli **Riprova**. Nella versione 1.0.0-rc2 non ancora pubblicata, se resta incompleto solo l'aggiornamento del motore del browser e Panel Assistant conferma che la versione richiesta dell'app è installata, continua quella fase senza reinstallare l'app. Se viene offerto **Consenti aggiornamenti**, usalo prima per approvare Home Assistant sul pannello. Vedi la [guida WebView](/it/hardware/guides/update-the-webview/) se il motore del browser non può essere aggiornato.
+**Come risolvere:** Leggi il Rapporto di assistenza, ripristina la connessione o il requisito di installazione segnalato, poi scegli **Riprova**. Se resta incompleto solo l'aggiornamento del motore del browser e Panel Assistant conferma che la versione richiesta dell'app è installata, continua quella fase senza reinstallare l'app. Se viene offerto **Consenti aggiornamenti**, usalo prima per approvare Home Assistant sul pannello. Vedi la [guida WebView](/it/hardware/guides/update-the-webview/) se il motore del browser non può essere aggiornato.
 
 <a id="installer-failure-retry-hold"></a>
 

@@ -189,7 +189,7 @@ Een opgeslagen schema-2-revisie kan `proximity_near_below`, `proximity_near_raw`
 | `provisioning.recipes`                        | Optioneel; standaard `[]`            | Lijst met maximaal 32 geselecteerde recepten van de kern.                                                                                                                                                |
 | `provisioning.recipes[].id`                   | Verplicht per item                   | Uniek geregistreerd ID. Schema 2 kent `nspanel-pro.watchdog-e2big-repair` en `tpa10.vendor-stack-minimize`. Receptvermeldingen kunnen geen argumenten, opdrachten, URL’s of workflowdefinities bevatten. |
 
-In de nog niet uitgebrachte versie 1.0.0-rc2 verwijzen de drie WebView-ID's naar de volgende door de kern beheerde builds en compatibiliteitsmetadata:
+De drie WebView-ID's verwijzen naar de volgende door de kern beheerde builds en compatibiliteitsmetadata:
 
 | Artefact-ID           | Build van de kern                                                                                       |
 | --------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -197,7 +197,7 @@ In de nog niet uitgebrachte versie 1.0.0-rc2 verwijzen de drie WebView-ID's naar
 | `lineageos-150-arm`   | LineageOS System WebView `150.0.7871.63`; ARM ABI `armeabi-v7a`; Android 10 of nieuwer.                 |
 | `lineageos-150-arm64` | LineageOS System WebView `150.0.7871.63`; ARM ABIs `armeabi-v7a` en `arm64-v8a`; Android 10 of nieuwer. |
 
-Het WebView-artefactveld selecteert een build waarvan download, controlesom, pakket, versie en ondertekenaar in de kern zijn ingebouwd. In de nog niet uitgebrachte versie 1.0.0-rc2 kan een vanuit Home Assistant gestarte update van de paneel-app ook een compatibele WebView installeren. Blijft die update onvoltooid, gebruik dan de bijbehorende update-Repair om opnieuw te proberen. Importeren of activeren van een profiel start geen update. Zie [De WebView bijwerken](/nl/hardware/guides/update-the-webview/).
+Het WebView-artefactveld selecteert een build waarvan download, controlesom, pakket, versie en ondertekenaar in de kern zijn ingebouwd. Een vanuit Home Assistant gestarte update van de paneel-app kan ook een compatibele WebView installeren. Blijft die update onvoltooid, gebruik dan de bijbehorende update-Repair om opnieuw te proberen. Importeren of activeren van een profiel start geen update. Zie [De WebView bijwerken](/nl/hardware/guides/update-the-webview/).
 
 ### Voorwaardelijke driververeisten
 
@@ -271,7 +271,7 @@ Maak afzonderlijke profielen wanneer geen benoemde strategie het verschil dekt, 
 
 ## Functies en ingebouwde drivers
 
-Een functiedeclaratie bevat hardwarefeiten en waar nodig een driver-ID met getypeerde parameters. Driver-ID's benoemen implementaties die in ha-paneld zijn ingebouwd. De driver valideert paden, bereiken, gebeurteniscodes, pakketnamen en andere beveiligingsgevoelige invoer. Paden met verhoogde rechten worden gekozen uit toestemmingslijsten in de kern. De behouden metadata `provisioning.software.webview.artifact` benoemen een URL, versie, artefactcontrolesom en ondertekenaarhash die in de kern zijn ingebouwd en daarmee gecontroleerd; een profiel kan die vertrouwensbasis niet herdefiniëren. In de nog niet uitgebrachte versie 1.0.0-rc2 controleert een door de eigenaar gestarte update de geïnstalleerde provider en diens compatibiliteit voordat het artefact wordt gebruikt; het profiel kan geen andere download of vertrouwensbasis leveren.
+Een functiedeclaratie bevat hardwarefeiten en waar nodig een driver-ID met getypeerde parameters. Driver-ID's benoemen implementaties die in ha-paneld zijn ingebouwd. De driver valideert paden, bereiken, gebeurteniscodes, pakketnamen en andere beveiligingsgevoelige invoer. Paden met verhoogde rechten worden gekozen uit toestemmingslijsten in de kern. De behouden metadata `provisioning.software.webview.artifact` benoemen een URL, versie, artefactcontrolesom en ondertekenaarhash die in de kern zijn ingebouwd en daarmee gecontroleerd; een profiel kan die vertrouwensbasis niet herdefiniëren. Een door de eigenaar gestarte update controleert de geïnstalleerde provider en diens compatibiliteit voordat het artefact wordt gebruikt; het profiel kan geen andere download of vertrouwensbasis leveren.
 
 Profielen kunnen niet het volgende leveren:
 

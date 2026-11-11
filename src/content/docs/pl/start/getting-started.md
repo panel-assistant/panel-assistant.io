@@ -10,7 +10,7 @@ Najtrudniejsza przy każdym panelu jest pierwsza godzina. Panel Assistant przejd
 
 ## 1. Instalacja integracji
 
-W Home Assistant **2026.11 lub nowszym** zainstaluj Panel Assistant przez **Ustawienia**, **Marketplace**. W obsługiwanych starszych wersjach, **od 2026.8.3 do 2026.10**, zainstaluj go przez HACS i uruchom ponownie Home Assistant. Marketplace może pozwolić na natychmiastową konfigurację; najpierw wykonaj ewentualne polecenie ponownego uruchomienia. To jedyna rzecz, którą instalujesz ręcznie. Zobacz [Instalacja integracji](/pl/home-assistant/custom-integration/), aby poznać obie ścieżki i sposób włączania wersji wstępnych.
+W Home Assistant **2026.11 lub nowszym** zainstaluj Panel Assistant przez **Ustawienia**, **Marketplace**. W obsługiwanych starszych wersjach, **od 2026.8.3 do 2026.10**, zainstaluj go przez HACS i uruchom ponownie Home Assistant. Marketplace może pozwolić na natychmiastową konfigurację; najpierw wykonaj ewentualne polecenie ponownego uruchomienia. To jedyna rzecz, którą instalujesz ręcznie. Zobacz [Instalacja integracji](/pl/home-assistant/custom-integration/), aby poznać obie ścieżki i aktualizacje.
 
 :::note
 Jeśli aktualizujesz z 0.9, przed rozpoczęciem przeczytaj [Aktualizacja do 1.0](/pl/manage/upgrade-to-1-0/) i zachowaj opisane tam kopie zapasowe Home Assistant i paneli. Panel z aplikacją 1.0 nie może wrócić do 0.9.
@@ -103,7 +103,7 @@ Następnie przychodzi czas na kreator konfiguracji samego panelu. Udostępnia go
 
 Kreator prosi o nazwę panelu, loguje go do Home Assistant i pyta, który pulpit nawigacyjny wyświetlać oraz w którym obszarze znajduje się panel. Panel łączy się jako konto Home Assistant, którym się zalogujesz, więc jeśli twoja przeglądarka jest zalogowana jako ty, panel może połączyć się jako ty; aby panel korzystał z własnego konta, zaloguj się zamiast tego na to konto. Przy włączonym filtrowaniu encji panel ładuje tylko encje używane przez ten pulpit, dzięki czemu działa szybko. Zobacz [Podłączanie panelu](/pl/home-assistant/connect-a-panel/).
 
-W niewydanej wersji 1.0.0-rc2 konfiguracja może się zakończyć nawet wtedy, gdy silnik przeglądarki panelu jest za stary, aby wyświetlić aktualny pulpit Home Assistant we wbudowanym rendererze. Kreator ostrzega, gdy wymaga to uwagi. Wykonaj instrukcje [przewodnika WebView](/pl/hardware/guides/update-the-webview/), zanim zaczniesz polegać na pulpicie; samo ukończenie konfiguracji nie potwierdza, że pulpit może się załadować.
+Konfiguracja może się zakończyć nawet wtedy, gdy silnik przeglądarki panelu jest za stary, aby wyświetlić aktualny pulpit Home Assistant we wbudowanym rendererze. Kreator ostrzega, gdy wymaga to uwagi. Wykonaj instrukcje [przewodnika WebView](/pl/hardware/guides/update-the-webview/), zanim zaczniesz polegać na pulpicie; samo ukończenie konfiguracji nie potwierdza, że pulpit może się załadować.
 
 <div class="pa-steps pa-steps--panel" role="region" aria-label="Kreator konfiguracji panelu – krok po kroku" tabindex="0">
 <figure>
