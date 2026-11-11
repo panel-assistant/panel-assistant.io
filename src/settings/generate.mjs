@@ -39,6 +39,21 @@ const exists = (object) => {
   }
 };
 
+// A registry constant may name another class's constant (`const val X = io.pkg.Class.KEY`, from
+// v1.0.1). Read that class's file at the same tag and use its literal, so the key resolves.
+const inlineQualifiedConstants = (text, tag) =>
+  text.replace(
+    /\bconst val (\w+) = ((?:[a-z]\w*\.)+)([A-Z]\w*)\.(\w+)\b/g,
+    (whole, name, pkg, cls, field) => {
+      const path = `app/src/main/kotlin/${pkg.slice(0, -1).replaceAll('.', '/')}/${cls}.kt`;
+      if (!exists(`${tag}:${path}`)) return whole;
+      const value = new RegExp(`\\bconst val ${field} = "([^"]*)"`).exec(
+        git('show', `${tag}:${path}`),
+      )?.[1];
+      return value === undefined ? whole : `const val ${name} = "${value}"`;
+    },
+  );
+
 if (!existsSync(cache)) execFileSync('git', ['init', '--quiet', '--bare', cache]);
 const tags = git('ls-remote', '--tags', '--refs', source)
   .split('\n')
@@ -69,7 +84,7 @@ for (const version of versions) {
   const registry = registries.find((path) => exists(`${tag}:${path}`));
   if (!registry) throw new Error(`${tag} has no settings registry at a known path`);
   const groups = extractSettings(
-    git('show', `${tag}:${registry}`),
+    inlineQualifiedConstants(git('show', `${tag}:${registry}`), tag),
     git('show', `${tag}:${strings}`),
   );
   // Retired settings stay out of the reference, including pages for older releases.

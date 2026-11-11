@@ -115,14 +115,26 @@ jobs:
           name: site
           path: dist
 
-      - name: Publish
-        uses: cloudflare/wrangler-action@953926a2e2182532811c01a25e53647d93bf07c0 # v4.1.3
+      # The wrangler this job runs is pinned in tools/wrangler (Dependabot proposes its
+      # updates) and restored from the cache: installing it took about 15 s of every publish.
+      - name: Restore the pinned wrangler
+        id: wrangler
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # Workers Static Assets, which Cloudflare recommends over Pages for new
-          # projects. The name and the assets directory come from worker/wrangler.jsonc.
-          command: deploy --config worker/wrangler.jsonc
+          path: tools/wrangler/node_modules
+          key: wrangler-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tools/wrangler/package-lock.json') }}
+
+      - name: Install the pinned wrangler
+        if: steps.wrangler.outputs.cache-hit != 'true'
+        run: npm ci --prefix tools/wrangler --ignore-scripts --no-audit --no-fund
+
+      - name: Publish
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        # Workers Static Assets, which Cloudflare recommends over Pages for new
+        # projects. The name and the assets directory come from worker/wrangler.jsonc.
+        run: tools/wrangler/node_modules/.bin/wrangler deploy --config worker/wrangler.jsonc
 
       # A data-branch rebuild keeps the same main SHA, so verify both data refs
       # as well as the code commit before calling the daily publish complete.

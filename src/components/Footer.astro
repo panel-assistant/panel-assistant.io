@@ -35,7 +35,9 @@ const label =
 {isDoc && <Comments />}
 {!isDoc && <TranslationNote />}
 <Default />
-<div class="site-foot">
+<!-- Out of the search index: this line names the build, so indexing it changed every page's search
+     fragment on every build, and each deploy re-uploaded about 2,990 unchanged fragments. -->
+<div class="site-foot" data-pagefind-ignore>
   <p class="thanks" set:html={thanks} />
   {lastUpdated && (
     <p class="updated">
