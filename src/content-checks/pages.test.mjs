@@ -6,15 +6,13 @@ import { join } from 'node:path';
 
 const LOCALES = ['de', 'es', 'fr', 'it', 'nl', 'pl', 'uk', 'zh-hans'];
 
-// Public label contract: this pinned English subset keeps rc2 guidance aligned with Panel Assistant.
+// Public label contract: this pinned English subset keeps removal guidance aligned with Panel Assistant.
 const removalStrings = JSON.parse(
   readFileSync(new URL('./fixtures/pa-removal-strings.json', import.meta.url), 'utf8'),
 );
 const REMOVE_BUTTON = removalStrings.entity.button.remove_from_panel.name;
 const REMOVE_MENU = removalStrings.options.step.init.menu_options.remove_app;
 const REMOVE_REPAIR = removalStrings.issues.remove_from_panel.title.replace('{panel}', '<panel>');
-// The published rc1 removal label; rc2 is documented separately until released.
-const REMOVE_OPTION = 'Remove Panel Assistant from this panel';
 // The broadcast that frees an ADB uninstall of the panel app, as Panel Assistant's own removal sends it.
 const RELEASE_RECEIVER = 'ReleaseDeviceAdminReceiver';
 
@@ -60,27 +58,27 @@ test('a page that tells the reader to uninstall the panel app names how to relea
   );
   const missing = instructing.filter((path) => {
     const t = text(path);
-    return !t.includes(RELEASE_RECEIVER) && !t.includes(REMOVE_OPTION);
+    return !t.includes(RELEASE_RECEIVER) && !t.includes(REMOVE_MENU);
   });
   assert.deepEqual(missing, []);
 });
 
-test('the removal guide distinguishes the published rc1 and unreleased rc2 removal options', () => {
+test('the removal guide names the current removal option, confirmation and entry deletion', () => {
   const labels = [
     ...content('/manage/removal-risks/').matchAll(/<strong>([^<]*from this panel)<\/strong>/g),
   ].map((m) => m[1]);
-  assert.deepEqual(labels, [REMOVE_OPTION, REMOVE_MENU, REMOVE_BUTTON]);
+  assert.deepEqual(labels, [REMOVE_MENU, REMOVE_BUTTON]);
   const guidance = text('/manage/removal-risks/');
-  assert.ok(
-    guidance.includes(`unreleased 1.0.0-rc2 version, this option is called ${REMOVE_MENU}`),
-  );
   assert.ok(guidance.includes(`device page also has a ${REMOVE_BUTTON} button`));
   assert.ok(guidance.includes(`Repair, ${REMOVE_REPAIR}`));
   assert.match(guidance, /one Submit/);
   const repairs = text('/home-assistant/repairs/');
   assert.ok(repairs.includes(REMOVE_REPAIR));
   assert.match(content('/home-assistant/repairs/'), /href="\/manage\/removal-risks\/"/);
-  assert.match(guidance, /In 1\.0\.0-rc1[^.]*Also delete this panel from Home Assistant/);
+  assert.match(
+    guidance,
+    /Successful removal also deletes the panel from Home Assistant; there is no option to keep its entry/,
+  );
 });
 
 test('the removal guide explains entry deletion and how to recover if it happened first', () => {
@@ -211,14 +209,13 @@ test('the update-webview topic the panel app links from its browser engine step 
     assert.ok(page.includes(`id="${id}"`), `${topics['update-webview']} has no #${id}`);
 });
 
-test('the Sonoff WebView section gives the unreleased managed route and manual fallback', () => {
+test('the Sonoff WebView section gives the managed route and manual fallback', () => {
   const section = content('/hardware/panels/sonoff/')
     .split('id="webview-update-this-first"')[1]
     ?.split('<h2')[0];
   assert.ok(section, 'the existing WebView section anchor must resolve');
   const guidance = plain(section);
-  assert.match(guidance, /unreleased 1\.0\.0-rc2/);
-  assert.match(guidance, /installation and panel-app updates started from Home Assistant/);
+  assert.match(guidance, /installation and panel-app updates started from Home Assistant/i);
   assert.match(guidance, /verified compatible WebView/);
   assert.match(guidance, /unfinished[^.]*Try again[^.]*update Repair/);
   assert.match(guidance, /manual fallback[^.]*adb/i);
