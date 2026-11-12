@@ -184,8 +184,10 @@ async function copyDerivative(privateStore, publicStore, image, name) {
     check(
       existing &&
         existing.size === bytes.length &&
+        existing.httpMetadata?.contentType === 'image/webp' &&
+        existing.httpMetadata.cacheControl === 'public, max-age=31536000, immutable' &&
         (await digest(await existing.arrayBuffer())) === sha,
-      'An immutable public rendition has different bytes.',
+      'An immutable public rendition has inconsistent bytes or serving metadata.',
       409,
     );
   }

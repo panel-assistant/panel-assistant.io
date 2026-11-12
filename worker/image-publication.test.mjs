@@ -333,6 +333,15 @@ test('corrupt or private-metadata derivatives never activate, including preexist
   derivative.size = originalBytes.length;
   derivative.customMetadata.sha256 = sha(originalBytes);
   const publicKey = `published-images/${sha(webp)}.webp`;
+  const publicObject = f.env.PUBLIC_IMAGES.objects.get(publicKey);
+  for (const metadata of [
+    { ...publicObject.httpMetadata, contentType: 'text/plain' },
+    { ...publicObject.httpMetadata, cacheControl: 'no-store' },
+  ]) {
+    publicObject.httpMetadata = metadata;
+    assert.equal((await f.publish(library, first.revision)).status, 409);
+    assert.deepEqual(f.env.PUBLIC_IMAGES.objects.get(CURRENT).bytes, before);
+  }
   await f.env.PUBLIC_IMAGES.put(publicKey, 'corrupt existing object');
   assert.equal((await f.publish(library, first.revision)).status, 409);
   assert.equal(
