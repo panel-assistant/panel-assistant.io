@@ -81,6 +81,21 @@ const png = await sharp({ create: { width: 120, height: 80, channels: 3, backgro
   .toBuffer();
 const jpg = await sharp(png).jpeg().toBuffer();
 const webp = await sharp(png).webp().toBuffer();
+// FFmpeg libjxl lossless RGBA fixtures: raw, full container, split SizeHeader container.
+const jxlSamples = [
+  Buffer.from(
+    '/woTwUoICBAA9AErWZGCgsI9SwDnyq12CQpQ+3dK3quPeHfQwXCH4EloN/RpEo3rRQ/a1R8fD8aGY26+BJdHyP4hej1Ls9TX6bEOeejSE0fP/8VZSIH0jRtj8Loxbowx7u5CDAYACPTUAgAAdB54DsgdlRDt+Xb8KA5Y+EGAXcYoV9/uu8sYAA==',
+    'base64',
+  ),
+  Buffer.from(
+    'AAAADEpYTCANCocKAAAAFGZ0eXBqeGwgAAAAAGp4bCAAAACQanhsY/8KE8FKCAgQAPQBK1mRgoLCPUsA58qtdgkKUPt3St6rj3h30MFwh+BJaDf0aRKN60UP2tUfHw/GhmNuvgSXR8j+IXo9S7PU1+mxDnno0hNHz//FWUiB9I0bY/C6MW6MMe7uQgwGAAj01AIAAHQeeA7IHZUQ7fl2/CgOWPhBgF3GKFff7rvLGAA=',
+    'base64',
+  ),
+  Buffer.from(
+    'AAAADEpYTCANCocKAAAAFGZ0eXBqeGwgAAAAAGp4bCAAAAAPanhscAAAAAD/ChMAAACRanhscIAAAAHBSggIEAD0AStZkYKCwj1LAOfKrXYJClD7d0req494d9DBcIfgSWg39GkSjetFD9rVHx8PxoZjbr4El0fI/iF6PUuz1NfpsQ556NITR8//xVlIgfSNG2PwujFujDHu7kIMBgAI9NQCAAB0HngOyB2VEO35dvwoDlj4QYBdxihX3+67yxgA',
+    'base64',
+  ),
+];
 const meta = {
   id: 'sample-panel-front',
   alt: 'Panel front',
@@ -313,6 +328,98 @@ test('upload rejects unsupported, truncated and oversized derivative images befo
   );
   assert.equal(response.status, 413);
   assert.equal(env.IMAGE_STORE.objects.size, 0);
+});
+
+test('JPEG XL raw and container masters retain exact private bytes and verified dimensions with ordinary previews', async () => {
+  for (const original of jxlSamples) {
+    const env = environment(),
+      cookie = await session(env);
+    const response = await upload(env, cookie, { original, thumb: png, large: webp });
+    assert.equal(response.status, 201, await response.clone().text());
+    const image = await response.json();
+    const hash = createHash('sha256').update(original).digest('hex');
+    assert.deepEqual(image.original, {
+      key: `originals/${hash}.jxl`,
+      sha256: hash,
+      extension: 'jxl',
+      width: 120,
+      height: 80,
+      bytes: original.length,
+    });
+    const archived = await send(
+      env,
+      `/admin/api/file?key=${encodeURIComponent(image.original.key)}`,
+      { cookie },
+    );
+    assert.equal(archived.headers.get('content-type'), 'image/jxl');
+    assert.deepEqual(Buffer.from(await archived.arrayBuffer()), original);
+    const saved = await save(env, cookie, { revision: null, models: modelWith([image]) });
+    assert.equal(saved.status, 200, await saved.clone().text());
+    assert.deepEqual((await saved.json()).models[0].images[0].original, image.original);
+    assert.match(image.delivery.thumb, /thumb\.png$/);
+    assert.match(image.delivery.large, /large\.webp$/);
+  }
+});
+
+test('JPEG XL truncated size headers, oversized boxes and incomplete or reordered fragments cannot be archived', async () => {
+  const badSize = Buffer.from(jxlSamples[1]);
+  badSize.writeUInt32BE(0xffffffff, 32);
+  const badOrder = Buffer.from(jxlSamples[2]);
+  badOrder.writeUInt32BE(1, 40);
+  const unfinished = Buffer.from(jxlSamples[2]);
+  unfinished.writeUInt32BE(1, 55);
+  const badExtended = Buffer.concat([
+    jxlSamples[1].subarray(0, 32),
+    Buffer.from([0, 0, 0, 1]),
+    Buffer.from('jxlc'),
+    Buffer.alloc(8, 255),
+  ]);
+  for (const original of [
+    jxlSamples[0].subarray(0, 2),
+    jxlSamples[0].subarray(0, 3),
+    jxlSamples[1].subarray(0, -1),
+    badSize,
+    badOrder,
+    unfinished,
+    badExtended,
+  ]) {
+    const env = environment(),
+      cookie = await session(env);
+    const response = await upload(env, cookie, { original });
+    assert.equal(response.status, 400, await response.clone().text());
+    assert.equal(env.IMAGE_STORE.objects.size, 0);
+  }
+});
+
+test('PNG fallback previews keep detected MIME, alpha and format-specific immutable keys through private save and reload', async () => {
+  const env = environment(),
+    cookie = await session(env);
+  const alphaPNG = await sharp({
+    create: { width: 120, height: 80, channels: 4, background: '#12345688' },
+  })
+    .png()
+    .toBuffer();
+  const response = await upload(env, cookie, { original: alphaPNG, thumb: alphaPNG, large: webp });
+  assert.equal(response.status, 201, await response.clone().text());
+  const image = await response.json();
+  assert.equal(image.delivery.thumb, `derivatives/${image.original.sha256}/v1/thumb.png`);
+  assert.equal(image.delivery.large, `derivatives/${image.original.sha256}/v1/large.webp`);
+  const preview = await send(
+    env,
+    `/admin/api/file?key=${encodeURIComponent(image.delivery.thumb)}`,
+    { cookie },
+  );
+  assert.equal(preview.headers.get('content-type'), 'image/png');
+  const bytes = Buffer.from(await preview.arrayBuffer());
+  assert.deepEqual(bytes, alphaPNG);
+  assert.equal((await sharp(bytes).metadata()).hasAlpha, true);
+  const saved = await save(env, cookie, { revision: null, models: modelWith([image]) });
+  assert.equal(saved.status, 200, await saved.clone().text());
+  const library = await (await send(env, '/admin/api/library', { cookie })).json();
+  assert.deepEqual(library.models[0].images[0].delivery, image.delivery);
+  const again = await upload(env, cookie, { original: alphaPNG, thumb: alphaPNG, large: webp });
+  assert.equal(again.status, 201);
+  assert.deepEqual(env.IMAGE_STORE.objects.get(image.delivery.thumb).bytes, alphaPNG);
 });
 
 test('the first derivative bytes stay immutable when another browser encodes the same original differently', async () => {

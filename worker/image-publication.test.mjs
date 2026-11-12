@@ -51,6 +51,16 @@ const png = await sharp({
   .png()
   .toBuffer();
 const webp = await sharp(png).webp().toBuffer();
+// Real Chromium Canvas.toBlob('image/webp', .82), 120×80 transparent sRGB image.
+const canvasWebp = Buffer.from(
+  'UklGRlYCAABXRUJQVlA4WAoAAAAwAAAAdwAATwAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZBTFBIEAAAAAEHUMSICAAJ4f9+IaL/qStWUDggUAAAADAFAJ0BKngAUAA+YTCWSKQjIiEgyACADAlpAHYAAAyXFgH1S1jahzjKAe6m+jahzgAAAP735J//UREFJal/9fAFPJuO8TSh6gLSEAAAAAAA',
+  'base64',
+);
+// Real WebKit Canvas PNG fallback: transparency, sRGB and significant-bit colour metadata.
+const canvasPng = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAHgAAABQCAYAAADSm7GJAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAADYSURBVHic7dEBCcAgAADBuQpWMYuZjL0UQ3juEjz8mGufh6z3dgD/MjjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4DiD4wyOMzjO4LgPohgBxVKe3AsAAAAASUVORK5CYII=',
+  'base64',
+);
 const source = {
   page: 'http://vendor.example/product',
   url: 'https://private.example/original?token=private',
@@ -92,12 +102,12 @@ function fixture() {
     assert.equal(response.status, 200);
     cookie = response.headers.get('set-cookie').split(';')[0];
   };
-  const upload = async (id) => {
+  const upload = async (id, derivative = webp, original = png) => {
     const form = new FormData();
     for (const [name, bytes] of [
-      ['original', png],
-      ['thumb', webp],
-      ['large', webp],
+      ['original', original],
+      ['thumb', derivative],
+      ['large', derivative],
     ])
       form.set(name, new Blob([bytes]), name);
     form.set('meta', JSON.stringify({ id, alt: `Panel ${id}`, credit: `Credit ${id}`, source }));
@@ -117,10 +127,10 @@ function fixture() {
     assert.equal(response.status, 200, await response.clone().text());
     return response.json();
   };
-  const prepare = async () => {
+  const prepare = async (derivative = webp, original = png) => {
     await login();
-    const first = await upload('front'),
-      second = await upload('rear');
+    const first = await upload('front', derivative, original),
+      second = await upload('rear', derivative, original);
     return save({
       revision: null,
       models: [
@@ -191,6 +201,106 @@ test('selected publication preserves exact alpha renditions and exposes ordered 
     ),
     snapshot,
   );
+});
+
+test('browser Canvas WebP colour profile and transparency survive publication with exact bytes', async () => {
+  const f = fixture(),
+    library = await f.prepare(canvasWebp);
+  const response = await f.publish(library);
+  assert.equal(response.status, 200, await response.clone().text());
+  const snapshot = await response.json();
+  const publicBytes = f.env.PUBLIC_IMAGES.objects.get(
+    `published-images/${sha(canvasWebp)}.webp`,
+  ).bytes;
+  assert.deepEqual(publicBytes, canvasWebp);
+  const decoded = await sharp(publicBytes).metadata();
+  assert.equal(decoded.hasAlpha, true);
+  assert.deepEqual(decoded.icc, (await sharp(canvasWebp).metadata()).icc);
+  assert.equal(decoded.icc.length, 456);
+  assert.equal(
+    snapshot.models[0].images[0].large,
+    `https://assets.panel-assistant.io/published-images/${sha(canvasWebp)}.webp`,
+  );
+
+  const derivative = f.env.IMAGE_STORE.objects.get(library.models[0].images[0].delivery.thumb);
+  const profile = canvasWebp.subarray(30, 494);
+  const variants = [
+    Buffer.concat([canvasWebp.subarray(0, 494), profile, canvasWebp.subarray(494)]), // Duplicate profile.
+    Buffer.concat([canvasWebp.subarray(0, 30), canvasWebp.subarray(494), profile]), // After frame.
+    Buffer.concat([canvasWebp.subarray(0, 30), canvasWebp.subarray(494)]), // Missing flagged profile.
+  ];
+  const oversized = Buffer.alloc(256 * 1024 + 2);
+  oversized.writeUInt32BE(oversized.length, 0);
+  oversized.write('acsp', 36);
+  const chunk = Buffer.alloc(8);
+  chunk.write('ICCP');
+  chunk.writeUInt32LE(oversized.length, 4);
+  variants.push(
+    Buffer.concat([canvasWebp.subarray(0, 30), chunk, oversized, canvasWebp.subarray(494)]),
+  );
+  for (const bytes of variants) {
+    bytes.writeUInt32LE(bytes.length - 8, 4);
+    derivative.bytes = bytes;
+    derivative.size = bytes.length;
+    derivative.customMetadata.sha256 = sha(bytes);
+    assert.equal((await f.publish(library, snapshot.revision)).status, 400);
+    assert.deepEqual(await (await f.send('publication')).json(), snapshot);
+  }
+});
+
+test('PNG fallback previews publish exact transparent bytes and reject private PNG text and animation chunks', async () => {
+  const f = fixture(),
+    library = await f.prepare(canvasPng);
+  const privateImage = library.models[0].images[0];
+  assert.match(privateImage.delivery.thumb, /\/thumb\.png$/);
+  assert.match(privateImage.delivery.large, /\/large\.png$/);
+  const response = await f.publish(library);
+  assert.equal(response.status, 200, await response.clone().text());
+  const snapshot = await response.json();
+  const publicKey = `published-images/${sha(canvasPng)}.png`;
+  const publicObject = f.env.PUBLIC_IMAGES.objects.get(publicKey);
+  assert.deepEqual(publicObject.bytes, canvasPng);
+  assert.equal(publicObject.httpMetadata.contentType, 'image/png');
+  assert.equal((await sharp(publicObject.bytes).metadata()).hasAlpha, true);
+  assert.equal(
+    snapshot.models[0].images[0].large,
+    `https://assets.panel-assistant.io/${publicKey}`,
+  );
+  assert.ok(!JSON.stringify(snapshot).includes('originals/'));
+  const derivative = f.env.IMAGE_STORE.objects.get(privateImage.delivery.thumb);
+  for (const type of ['tEXt', 'iTXt', 'zTXt', 'eXIf', 'acTL']) {
+    const chunk = Buffer.alloc(18);
+    chunk.writeUInt32BE(6);
+    chunk.write(type, 4);
+    chunk.write('secret', 8);
+    const bytes = Buffer.concat([canvasPng.subarray(0, 33), chunk, canvasPng.subarray(33)]);
+    derivative.bytes = bytes;
+    derivative.size = bytes.length;
+    derivative.customMetadata.sha256 = sha(bytes);
+    assert.equal((await f.publish(library, snapshot.revision)).status, 400);
+    assert.deepEqual(await (await f.send('publication')).json(), snapshot);
+  }
+});
+
+test('JPEG XL master stays private when its ordinary PNG previews are published', async () => {
+  const original = Buffer.from(
+    '/woTwUoICBAA9AErWZGCgsI9SwDnyq12CQpQ+3dK3quPeHfQwXCH4EloN/RpEo3rRQ/a1R8fD8aGY26+BJdHyP4hej1Ls9TX6bEOeejSE0fP/8VZSIH0jRtj8Loxbowx7u5CDAYACPTUAgAAdB54DsgdlRDt+Xb8KA5Y+EGAXcYoV9/uu8sYAA==',
+    'base64',
+  );
+  const f = fixture(),
+    library = await f.prepare(canvasPng, original);
+  const master = library.models[0].images[0].original;
+  assert.equal(master.extension, 'jxl');
+  assert.deepEqual(f.env.IMAGE_STORE.objects.get(master.key).bytes, original);
+  const response = await f.publish(library);
+  assert.equal(response.status, 200, await response.clone().text());
+  const snapshot = await response.json();
+  assert.match(snapshot.models[0].images[0].thumb, /\.png$/);
+  assert.match(snapshot.models[0].images[0].large, /\.png$/);
+  assert.ok(!JSON.stringify(snapshot).includes('.jxl'));
+  assert.ok(!JSON.stringify(snapshot).includes(master.sha256));
+  assert.ok([...f.env.PUBLIC_IMAGES.objects.keys()].every((key) => !key.endsWith('.jxl')));
+  assert.deepEqual(f.env.IMAGE_STORE.objects.get(master.key).bytes, original);
 });
 
 test('publishing another model preserves previous selections and an explicit empty list removes only the chosen gallery', async () => {
@@ -274,6 +384,46 @@ test('an intervening publication wins the activation CAS without being overwritt
   assert.deepEqual(await (await f.send('publication')).json(), winner);
 });
 
+test('a selected model cannot activate a snapshot larger than the public reader accepts', async () => {
+  const f = fixture(),
+    library = await f.prepare();
+  const first = await (await f.publish(library)).json();
+  const example = first.models[0].images[0];
+  for (let group = 0; group < 4; group++)
+    first.models.push({
+      id: `archive/model-${group}`,
+      title: 'Previously published',
+      images: Array.from({ length: 100 }, (_, index) => ({
+        ...example,
+        id: `archive-${group}-${index}`,
+        credit: 'x'.repeat(4000),
+      })),
+    });
+  const before = JSON.stringify(first);
+  assert.ok(before.length < 2 * 1024 * 1024);
+  await f.env.PUBLIC_IMAGES.put(CURRENT, before);
+  library.models[0].images = Array.from({ length: 100 }, (_, index) => ({
+    ...library.models[0].images[0],
+    id: `expanded-${index}`,
+    credit: 'y'.repeat(4000),
+  }));
+  library.models[0].heroImageId = null;
+  const saved = await f.save(library);
+  const histories = [...f.env.PUBLIC_IMAGES.objects.keys()].filter((key) =>
+    key.startsWith('published-images/revisions/'),
+  );
+  const response = await f.publish(saved, first.revision);
+  assert.equal(response.status, 413, await response.clone().text());
+  assert.match((await response.json()).error, /2 MiB/);
+  assert.equal(f.env.PUBLIC_IMAGES.objects.get(CURRENT).bytes.toString(), before);
+  assert.deepEqual(
+    [...f.env.PUBLIC_IMAGES.objects.keys()].filter((key) =>
+      key.startsWith('published-images/revisions/'),
+    ),
+    histories,
+  );
+});
+
 test('copy failures and draft changes during preparation leave the previous active publication untouched', async () => {
   const f = fixture(),
     library = await f.prepare();
@@ -313,22 +463,24 @@ test('corrupt or private-metadata derivatives never activate, including preexist
   derivative.customMetadata.sha256 = '0'.repeat(64);
   assert.equal((await f.publish(library, first.revision)).status, 400);
   derivative.customMetadata.sha256 = sha(originalBytes);
-  const privateChunk = Buffer.concat([
-    Buffer.from('EXIF'),
-    Buffer.from([6, 0, 0, 0]),
-    Buffer.from('secret'),
-  ]);
-  const metadataWebp = Buffer.concat([webp, privateChunk]);
-  metadataWebp.writeUInt32LE(metadataWebp.length - 8, 4);
-  derivative.bytes = metadataWebp;
-  derivative.size = metadataWebp.length;
-  derivative.customMetadata.sha256 = sha(metadataWebp);
-  assert.equal(
-    (await f.publish(library, first.revision)).status,
-    400,
-    'public derivatives must not contain private EXIF metadata',
-  );
-  assert.deepEqual(f.env.PUBLIC_IMAGES.objects.get(CURRENT).bytes, before);
+  for (const type of ['EXIF', 'XMP ']) {
+    const privateChunk = Buffer.concat([
+      Buffer.from(type),
+      Buffer.from([6, 0, 0, 0]),
+      Buffer.from('secret'),
+    ]);
+    const metadataWebp = Buffer.concat([webp, privateChunk]);
+    metadataWebp.writeUInt32LE(metadataWebp.length - 8, 4);
+    derivative.bytes = metadataWebp;
+    derivative.size = metadataWebp.length;
+    derivative.customMetadata.sha256 = sha(metadataWebp);
+    assert.equal(
+      (await f.publish(library, first.revision)).status,
+      400,
+      `public derivatives must not contain private ${type} metadata`,
+    );
+    assert.deepEqual(f.env.PUBLIC_IMAGES.objects.get(CURRENT).bytes, before);
+  }
   derivative.bytes = originalBytes;
   derivative.size = originalBytes.length;
   derivative.customMetadata.sha256 = sha(originalBytes);

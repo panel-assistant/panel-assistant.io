@@ -1,5 +1,10 @@
 // Private drafts stay private; an explicit per-model action publishes verified web renditions.
-import { PublicationError, publicationObject, publishModel } from './image-publication.js';
+import {
+  PublicationError,
+  publicationObject,
+  publishModel,
+  renditionDetails,
+} from './image-publication.js';
 
 const PREFIX = '/admin/';
 const IMAGE_PREFIX = '/images/';
@@ -181,10 +186,104 @@ function metadata(value) {
   };
 }
 const ascii = (bytes, start, count) => String.fromCharCode(...bytes.subarray(start, start + count));
+
+// JPEG XL SizeHeader/container rules: libjxl v0.11.1 headers.cc and decode.cc.
+// Read dimensions only; browser Image.decode() establishes complete image decodability.
+function jxlDimensions(bytes) {
+  let stream = bytes,
+    streamLength = bytes.length;
+  if (hex(bytes.subarray(0, 12)) === '0000000c4a584c200d0a870a') {
+    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    const prefix = [];
+    let position = 12,
+      boxes = 0,
+      fragments = 0,
+      kind,
+      final = false;
+    streamLength = 0;
+    while (position < bytes.length) {
+      check(++boxes <= 4096 && position + 8 <= bytes.length, 'Invalid JPEG XL container.');
+      let size = view.getUint32(position),
+        header = 8;
+      const type = ascii(bytes, position + 4, 4);
+      if (size === 1) {
+        check(position + 16 <= bytes.length, 'Truncated JPEG XL box.');
+        const extended = view.getBigUint64(position + 8);
+        check(extended <= BigInt(bytes.length - position), 'Invalid JPEG XL box size.');
+        size = Number(extended);
+        header = 16;
+      } else if (size === 0) size = bytes.length - position;
+      check(size >= header && size <= bytes.length - position, 'Truncated JPEG XL box.');
+      let start = position + header;
+      const end = position + size;
+      if (boxes === 1) {
+        check(
+          type === 'ftyp' &&
+            end - start >= 12 &&
+            (end - start - 8) % 4 === 0 &&
+            ascii(bytes, start, 4) === 'jxl ',
+          'Invalid JPEG XL file type.',
+        );
+        let compatible = false;
+        for (let at = start + 8; at < end; at += 4) compatible ||= ascii(bytes, at, 4) === 'jxl ';
+        check(compatible, 'Missing JPEG XL compatible brand.');
+      } else if (type === 'jxlc' || type === 'jxlp') {
+        check(!final && (!kind || kind === type), 'Invalid JPEG XL codestream sequence.');
+        kind = type;
+        if (type === 'jxlp') {
+          check(end - start >= 4, 'Truncated JPEG XL fragment.');
+          const index = view.getUint32(start);
+          check((index & 0x7fffffff) === fragments++, 'Invalid JPEG XL fragment order.');
+          final = Boolean(index & 0x80000000);
+          start += 4;
+        } else final = true;
+        streamLength += end - start;
+        for (let at = start; at < end && prefix.length < 16; at++) prefix.push(bytes[at]);
+      } else check(type !== 'ftyp' && type !== 'JXL ', 'Duplicate JPEG XL header.');
+      position = end;
+    }
+    check(final && streamLength > 2, 'Incomplete JPEG XL codestream.');
+    stream = Uint8Array.from(prefix);
+  }
+  check(stream[0] === 0xff && stream[1] === 0x0a, 'Invalid JPEG XL codestream signature.');
+  let position = 16;
+  const read = (count) => {
+    check(position + count <= stream.length * 8, 'Truncated JPEG XL size header.');
+    let value = 0;
+    for (let bit = 0; bit < count; bit++, position++)
+      value += ((stream[position >> 3] >> (position & 7)) & 1) * 2 ** bit;
+    return value;
+  };
+  const small = read(1);
+  const dimension = () => (small ? (read(5) + 1) * 8 : read([9, 13, 18, 30][read(2)]) + 1);
+  const height = dimension(),
+    ratio = read(3);
+  const ratios = [
+    [1, 1],
+    [12, 10],
+    [4, 3],
+    [3, 2],
+    [16, 9],
+    [5, 4],
+    [2, 1],
+  ];
+  const width = ratio
+    ? Math.floor((height * ratios[ratio - 1][0]) / ratios[ratio - 1][1])
+    : dimension();
+  check(streamLength > Math.ceil(position / 8), 'Incomplete JPEG XL image header.');
+  return { width, height };
+}
+
 function dimensions(bytes) {
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   let width, height, extension;
   if (
+    (bytes[0] === 0xff && bytes[1] === 0x0a) ||
+    hex(bytes.subarray(0, 12)) === '0000000c4a584c200d0a870a'
+  ) {
+    ({ width, height } = jxlDimensions(bytes));
+    extension = 'jxl';
+  } else if (
     bytes.length >= 33 &&
     hex(bytes.subarray(0, 8)) === '89504e470d0a1a0a' &&
     ascii(bytes, 12, 4) === 'IHDR'
@@ -267,7 +366,7 @@ function dimensions(bytes) {
   }
   check(
     width > 0 && height > 0 && width <= 20000 && height <= 20000 && width * height <= 100000000,
-    'Use a valid static JPEG, PNG or WebP image (maximum 100 megapixels).',
+    'Use a valid JPEG, PNG, WebP or JPEG XL image (maximum 100 megapixels).',
   );
   return { width, height, extension };
 }
@@ -316,7 +415,11 @@ async function upload(request, store) {
     check(file && typeof file.arrayBuffer === 'function' && file.size > 0, `Missing ${name} file.`);
     check(file.size <= (name === 'original' ? 25 : 5) * MiB, `${name} file is too large.`, 413);
     const bytes = new Uint8Array(await file.arrayBuffer());
-    parts[name] = { bytes, ...dimensions(bytes), sha256: await digest(bytes) };
+    parts[name] = {
+      bytes,
+      ...(name === 'original' ? dimensions(bytes) : renditionDetails(bytes)),
+      sha256: await digest(bytes),
+    };
   }
   const original = parts.original;
   for (const [name, bound] of [
@@ -325,7 +428,7 @@ async function upload(request, store) {
   ]) {
     const part = parts[name];
     check(
-      part.extension === 'webp' &&
+      ['webp', 'png'].includes(part.extension) &&
         Math.max(part.width, part.height) <= bound &&
         Math.max(part.width, part.height) <= Math.max(original.width, original.height),
       `Invalid ${name} derivative dimensions or format.`,
@@ -340,7 +443,10 @@ async function upload(request, store) {
     bytes: original.bytes.length,
   };
   image.delivery = Object.fromEntries(
-    ['thumb', 'large'].map((name) => [name, `derivatives/${original.sha256}/v1/${name}.webp`]),
+    ['thumb', 'large'].map((name) => [
+      name,
+      `derivatives/${original.sha256}/v1/${name}.${parts[name].extension}`,
+    ]),
   );
   image.review = 'pending';
   image.history = [];
@@ -365,7 +471,7 @@ async function upload(request, store) {
       if (!saved) {
         const existing = await store.head(image.delivery[name]);
         check(
-          existing?.customMetadata?.extension === 'webp' &&
+          existing?.customMetadata?.extension === part.extension &&
             Number(existing.customMetadata.width) > 0 &&
             Number(existing.customMetadata.height) > 0 &&
             Math.max(
@@ -435,7 +541,7 @@ async function validateLibrary(input, old, store) {
       check(
         original &&
           hashPattern.test(original.sha256) &&
-          ['jpg', 'png', 'webp'].includes(original.extension) &&
+          ['jpg', 'png', 'webp', 'jxl'].includes(original.extension) &&
           original.key === `originals/${original.sha256}.${original.extension}` &&
           ['width', 'height', 'bytes'].every(
             (key) => Number.isSafeInteger(original[key]) && original[key] > 0,
@@ -445,8 +551,11 @@ async function validateLibrary(input, old, store) {
       const delivery = candidate.delivery;
       check(
         delivery &&
-          ['thumb', 'large'].every(
-            (name) => delivery[name] === `derivatives/${original.sha256}/v1/${name}.webp`,
+          ['thumb', 'large'].every((name) =>
+            ['webp', 'png'].some(
+              (extension) =>
+                delivery[name] === `derivatives/${original.sha256}/v1/${name}.${extension}`,
+            ),
           ),
         'Invalid derivative keys.',
       );
@@ -488,7 +597,8 @@ async function validateLibrary(input, old, store) {
           const part = await store.head(delivery[name]);
           check(
             part &&
-              part.customMetadata?.extension === 'webp' &&
+              ['webp', 'png'].includes(part.customMetadata?.extension) &&
+              delivery[name].endsWith(`.${part.customMetadata.extension}`) &&
               Number(part.customMetadata?.width) > 0 &&
               Number(part.customMetadata?.height) > 0 &&
               Math.max(Number(part.customMetadata.width), Number(part.customMetadata.height)) <=

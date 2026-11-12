@@ -1,7 +1,9 @@
 const $ = (id) => document.getElementById(id);
 const adminBase = new URL('./', import.meta.url);
 const MAX_FILE = 25 * 1024 * 1024;
-const TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+const MAX_PREVIEW = 5 * 1024 * 1024;
+const TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/jxl']);
+const ACCEPT = 'image/jpeg,image/png,image/webp,image/jxl,.jxl';
 let library;
 let selected;
 let dirty = false;
@@ -451,7 +453,7 @@ function renderPanel() {
       const editLabel = element('label', 'button', 'Upload edited master');
       const edit = element('input', 'visually-hidden');
       edit.type = 'file';
-      edit.accept = 'image/jpeg,image/png,image/webp';
+      edit.accept = ACCEPT;
       edit.setAttribute('aria-label', `Upload edited master for image ${index + 1}`);
       edit.addEventListener('change', () => {
         if (edit.files[0]) uploadFiles([edit.files[0]], entry, index, true);
@@ -487,7 +489,7 @@ function renderPanel() {
       const replaceLabel = element('label', 'button', 'Replace original');
       const replace = element('input', 'visually-hidden');
       replace.type = 'file';
-      replace.accept = 'image/jpeg,image/png,image/webp';
+      replace.accept = ACCEPT;
       replace.setAttribute('aria-label', `Replace original for image ${index + 1}`);
       replace.addEventListener('change', () => {
         if (replace.files[0]) uploadFiles([replace.files[0]], entry, index);
@@ -547,7 +549,11 @@ function advancePreview(direction) {
 }
 
 async function renditions(file) {
-  if (!TYPES.has(file.type)) throw new Error(`${file.name}: choose a JPEG, PNG or WebP original.`);
+  const isJxl =
+    file.type === 'image/jxl' ||
+    ((!file.type || file.type === 'application/octet-stream') && /\.jxl$/i.test(file.name));
+  if (!TYPES.has(file.type) && !isJxl)
+    throw new Error(`${file.name}: choose a JPEG, PNG, WebP or JPEG XL original.`);
   if (file.size === 0 || file.size > MAX_FILE)
     throw new Error(`${file.name}: originals must be between 1 byte and 25 MiB.`);
   const url = URL.createObjectURL(file);
@@ -556,22 +562,43 @@ async function renditions(file) {
     image.src = url;
     await image.decode();
     const encode = async (maximum, quality) => {
-      const scale = Math.min(1, maximum / Math.max(image.naturalWidth, image.naturalHeight));
       const canvas = document.createElement('canvas');
-      canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
-      canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
       const context = canvas.getContext('2d');
       if (!context) throw new Error('This browser could not prepare the image previews.');
-      context.drawImage(image, 0, 0, canvas.width, canvas.height);
-      const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/webp', quality));
-      if (!blob || blob.type !== 'image/webp')
-        throw new Error('This browser cannot encode WebP previews. Try a current browser.');
-      return blob;
+      const toBlob = (type) =>
+        new Promise((resolve) => {
+          try {
+            canvas.toBlob(resolve, type, quality);
+          } catch {
+            resolve(null);
+          }
+        });
+      let edge = Math.min(maximum, Math.max(image.naturalWidth, image.naturalHeight));
+      while (true) {
+        const scale = edge / Math.max(image.naturalWidth, image.naturalHeight);
+        canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+        canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        let blob = await toBlob('image/webp');
+        if (!blob || blob.type !== 'image/webp' || blob.size === 0) {
+          blob = await toBlob('image/png');
+          if (!blob || blob.type !== 'image/png')
+            throw new Error('This browser could not prepare WebP or PNG image previews.');
+        }
+        if (blob.size > 0 && blob.size <= MAX_PREVIEW) return blob;
+        if (blob.size === 0 || edge <= 1)
+          throw new Error(`${file.name}: each image preview must be between 1 byte and 5 MiB.`);
+        edge = Math.max(1, Math.floor(edge * 0.8));
+      }
     };
     return { thumb: await encode(480, 0.82), large: await encode(2400, 0.9) };
   } catch (error) {
     if (error instanceof DOMException)
-      throw new Error(`${file.name}: the browser could not decode this image.`);
+      throw new Error(
+        isJxl
+          ? `${file.name}: this browser could not decode the JPEG XL master. JPEG XL decoder support is required to prepare its previews; the master has not been uploaded.`
+          : `${file.name}: the browser could not decode this image.`,
+      );
     throw error;
   } finally {
     URL.revokeObjectURL(url);
@@ -609,8 +636,16 @@ async function uploadFiles(files, entry, replacing, editedMaster = false) {
         meta.source.notes = `Replaces archived image ${previous.id} (SHA-256 ${previous.original.sha256}). Source and permission details for this replacement have not been established.`;
       const form = new FormData();
       form.append('original', file, file.name);
-      form.append('thumb', views.thumb, 'thumb.webp');
-      form.append('large', views.large, 'large.webp');
+      form.append(
+        'thumb',
+        views.thumb,
+        `thumb.${views.thumb.type === 'image/png' ? 'png' : 'webp'}`,
+      );
+      form.append(
+        'large',
+        views.large,
+        `large.${views.large.type === 'image/png' ? 'png' : 'webp'}`,
+      );
       form.append('meta', JSON.stringify(meta));
       const result = await api('api/upload', { method: 'POST', body: form });
       const image = result.image ?? result;

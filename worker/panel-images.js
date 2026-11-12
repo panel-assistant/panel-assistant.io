@@ -2,7 +2,8 @@ import { renderHero, renderGallery, renderThumbnail } from '../src/product-image
 import legacyImages from '../src/product-images/legacy-images.json' with { type: 'json' };
 
 const page = /^\/(?:de\/|es\/|fr\/|it\/|nl\/|pl\/|uk\/|zh-hans\/)?hardware(?:\/?$|\/panels\/)/;
-const asset = /^https:\/\/assets\.panel-assistant\.io\/published-images\/[a-f0-9]{64}\.webp$/;
+const asset =
+  /^https:\/\/assets\.panel-assistant\.io\/published-images\/[a-f0-9]{64}\.(?:webp|png)$/;
 
 export function hasPanelImages(pathname) {
   return page.test(pathname);

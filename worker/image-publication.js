@@ -36,7 +36,7 @@ export async function publicationObject(store) {
   return { object, snapshot };
 }
 
-// Check the actual container, dimensions and absence of metadata; retain alpha bytes exactly.
+// Check the static container and dimensions; preserve colour profiles and alpha, reject EXIF/XMP.
 function webpDimensions(bytes) {
   const ascii = (at, length) => String.fromCharCode(...bytes.subarray(at, at + length));
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
@@ -49,22 +49,38 @@ function webpDimensions(bytes) {
   );
   let position = 12,
     frame,
-    canvas;
+    canvas,
+    flags = 0,
+    profile = false;
   while (position + 8 <= bytes.length) {
     const type = ascii(position, 4);
     const size = view.getUint32(position + 4, true);
     const at = position + 8;
     check(at + size + (size % 2) <= bytes.length, 'Truncated public WebP.');
     check(
-      ['VP8X', 'ALPH', 'VP8 ', 'VP8L'].includes(type),
-      'Public WebP must be static and metadata-free.',
+      ['VP8X', 'ICCP', 'ALPH', 'VP8 ', 'VP8L'].includes(type),
+      'Public WebP must be static and contain no EXIF/XMP metadata.',
     );
     if (type === 'VP8X') {
-      check(position === 12 && size === 10 && !(bytes[at] & ~0x10), 'Invalid public WebP flags.');
+      check(position === 12 && size === 10 && !(bytes[at] & ~0x30), 'Invalid public WebP flags.');
+      flags = bytes[at];
       canvas = {
         width: 1 + bytes[at + 4] + (bytes[at + 5] << 8) + (bytes[at + 6] << 16),
         height: 1 + bytes[at + 7] + (bytes[at + 8] << 8) + (bytes[at + 9] << 16),
       };
+    } else if (type === 'ICCP') {
+      check(
+        canvas &&
+          flags & 0x20 &&
+          !profile &&
+          !frame &&
+          size >= 128 &&
+          size <= 256 * 1024 &&
+          view.getUint32(at, false) === size &&
+          ascii(at + 36, 4) === 'acsp',
+        'Invalid public WebP colour profile.',
+      );
+      profile = true;
     } else if (type === 'VP8 ' || type === 'VP8L') {
       check(!frame, 'Public WebP must have one frame.');
       if (type === 'VP8 ') {
@@ -86,10 +102,87 @@ function webpDimensions(bytes) {
     position === bytes.length &&
       frame?.width > 0 &&
       frame?.height > 0 &&
+      Boolean(flags & 0x20) === profile &&
       (!canvas || (canvas.width === frame.width && canvas.height === frame.height)),
     'Incomplete public WebP or inconsistent dimensions.',
   );
   return frame;
+}
+
+function pngDimensions(bytes) {
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const ascii = (at, length) => String.fromCharCode(...bytes.subarray(at, at + length));
+  check(bytes.length >= 45 && ascii(12, 4) === 'IHDR', 'Invalid public PNG container.');
+  const width = view.getUint32(16),
+    height = view.getUint32(20);
+  const depths = { 0: [1, 2, 4, 8, 16], 2: [8, 16], 3: [1, 2, 4, 8], 4: [8, 16], 6: [8, 16] };
+  check(
+    width > 0 &&
+      height > 0 &&
+      depths[bytes[25]]?.includes(bytes[24]) &&
+      bytes[26] === 0 &&
+      bytes[27] === 0 &&
+      bytes[28] <= 1,
+    'Invalid public PNG header.',
+  );
+  let position = 8,
+    data = false,
+    palette = false;
+  while (position + 12 <= bytes.length) {
+    const length = view.getUint32(position),
+      type = ascii(position + 4, 4);
+    check(position + length + 12 <= bytes.length, 'Truncated public PNG.');
+    check(
+      [
+        'IHDR',
+        'PLTE',
+        'tRNS',
+        'IDAT',
+        'IEND',
+        'cHRM',
+        'gAMA',
+        'iCCP',
+        'sRGB',
+        'sBIT',
+        'pHYs',
+        'cICP',
+        'mDCV',
+        'cLLI',
+      ].includes(type),
+      'Public PNG must be static and contain no EXIF/text metadata.',
+    );
+    if (type === 'IHDR') check(position === 8 && length === 13, 'Invalid public PNG header.');
+    else if (type === 'IDAT') data = true;
+    else if (type === 'IEND') {
+      check(
+        data && length === 0 && position + 12 === bytes.length && (bytes[25] !== 3 || palette),
+        'Incomplete public PNG.',
+      );
+      return { width, height };
+    } else {
+      check(!data && length <= 256 * 1024, 'Invalid public PNG colour metadata.');
+      if (type === 'PLTE') {
+        check(
+          !palette && length > 0 && length <= 768 && length % 3 === 0,
+          'Invalid public PNG palette.',
+        );
+        palette = true;
+      }
+      if (type === 'tRNS') check(length > 0 && length <= 256, 'Invalid public PNG transparency.');
+    }
+    position += length + 12;
+  }
+  throw new PublicationError('Incomplete public PNG.');
+}
+
+export function renditionDetails(bytes) {
+  const png =
+    bytes.length >= 8 &&
+    bytes[0] === 137 &&
+    String.fromCharCode(...bytes.subarray(1, 8)) === 'PNG\r\n\x1a\n';
+  return png
+    ? { ...pngDimensions(bytes), extension: 'png' }
+    : { ...webpDimensions(bytes), extension: 'webp' };
 }
 
 function sourcePage(value) {
@@ -133,9 +226,12 @@ function validateModel(model) {
         image.original.width > 0 &&
         Number.isSafeInteger(image.original.height) &&
         image.original.height > 0 &&
-        ['thumb', 'large'].every(
-          (name) =>
-            image.delivery?.[name] === `derivatives/${image.original.sha256}/v1/${name}.webp`,
+        ['thumb', 'large'].every((name) =>
+          ['webp', 'png'].some(
+            (extension) =>
+              image.delivery?.[name] ===
+              `derivatives/${image.original.sha256}/v1/${name}.${extension}`,
+          ),
         ),
       'Invalid saved image identity.',
     );
@@ -156,13 +252,15 @@ async function copyDerivative(privateStore, publicStore, image, name) {
     'A saved derivative is missing or too large.',
   );
   const bytes = new Uint8Array(await object.arrayBuffer());
-  const dimensions = webpDimensions(bytes);
+  const dimensions = renditionDetails(bytes);
+  const contentType = `image/${dimensions.extension}`;
   const sha = await digest(bytes);
   check(
     object.size === bytes.length &&
-      object.httpMetadata?.contentType === 'image/webp' &&
+      object.httpMetadata?.contentType === contentType &&
       object.customMetadata?.sha256 === sha &&
-      object.customMetadata?.extension === 'webp' &&
+      object.customMetadata?.extension === dimensions.extension &&
+      image.delivery[name].endsWith(`.${dimensions.extension}`) &&
       Number(object.customMetadata.width) === dimensions.width &&
       Number(object.customMetadata.height) === dimensions.height &&
       Math.max(dimensions.width, dimensions.height) <= (name === 'thumb' ? 480 : 2400) &&
@@ -170,11 +268,11 @@ async function copyDerivative(privateStore, publicStore, image, name) {
         Math.max(image.original.width, image.original.height),
     'A saved derivative does not match its verified metadata.',
   );
-  const key = `published-images/${sha}.webp`;
+  const key = `published-images/${sha}.${dimensions.extension}`;
   const saved = await publicStore.put(key, bytes, {
     onlyIf: { etagDoesNotMatch: '*' },
     httpMetadata: {
-      contentType: 'image/webp',
+      contentType,
       cacheControl: 'public, max-age=31536000, immutable',
     },
     customMetadata: { sha256: sha },
@@ -184,7 +282,7 @@ async function copyDerivative(privateStore, publicStore, image, name) {
     check(
       existing &&
         existing.size === bytes.length &&
-        existing.httpMetadata?.contentType === 'image/webp' &&
+        existing.httpMetadata?.contentType === contentType &&
         existing.httpMetadata.cacheControl === 'public, max-age=31536000, immutable' &&
         (await digest(await existing.arrayBuffer())) === sha,
       'An immutable public rendition has inconsistent bytes or serving metadata.',
@@ -269,6 +367,11 @@ export async function publishModel(input, privateStore, publicStore) {
   if (!models.some((existing) => existing.id === model.id)) models.push(publishedModel);
   const next = { revision: crypto.randomUUID(), publishedAt: new Date().toISOString(), models };
   const body = JSON.stringify(next);
+  check(
+    body.length <= 2 * 1024 * 1024,
+    'Published image metadata exceeds the 2 MiB snapshot limit.',
+    413,
+  );
   const metadata = { httpMetadata: { contentType: 'application/json', cacheControl: 'no-store' } };
   const archived = await publicStore.put(`published-images/revisions/${next.revision}.json`, body, {
     ...metadata,
