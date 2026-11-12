@@ -9,11 +9,25 @@ export function hasPanelImages(pathname) {
   return page.test(pathname);
 }
 
+// HTMLRewriter exposes Astro's escaped attribute bytes, unlike a browser DOM. Decode
+// once so literal entity text (for example &amp;quot;) is not interpreted a second time.
+function attributeText(value) {
+  const named = { amp: '&', quot: '"', lt: '<', gt: '>', apos: "'" };
+  return value.replace(/&(?:amp|quot|lt|gt|apos|#\d+|#x[a-f0-9]+);/gi, (entity) => {
+    const name = entity.slice(1, -1).toLowerCase();
+    if (name[0] !== '#') return named[name];
+    const point = name[1] === 'x' ? parseInt(name.slice(2), 16) : Number(name.slice(1));
+    return String.fromCodePoint(
+      point > 0 && point <= 0x10ffff && !(point >= 0xd800 && point <= 0xdfff) ? point : 0xfffd,
+    );
+  });
+}
+
 function localized(model, element) {
   if (element.getAttribute('data-panel-locale') === 'en') return model;
   let texts;
   try {
-    texts = JSON.parse(element.getAttribute('data-panel-texts') ?? '[]');
+    texts = JSON.parse(attributeText(element.getAttribute('data-panel-texts') ?? '[]'));
   } catch {
     return model;
   }
