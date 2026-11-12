@@ -503,11 +503,12 @@ test('the live worker routes /comments to the handler and everything else as bef
 
 // Source-text reason: these architectural privacy constraints cover bindings and persistent
 // module state that successful request/response tests alone cannot rule out.
-test('the Worker declares only the curated WebView storage bucket', () => {
+test('the public Worker storage excludes private image masters and comment persistence', () => {
   const wrangler = readFileSync(new URL('./wrangler.jsonc', import.meta.url), 'utf8');
   const config = JSON.parse(wrangler.replace(/^\s*\/\/.*$/gm, '').replace(/,(\s*[}\]])/g, '$1'));
   assert.deepEqual(config.r2_buckets, [
     { binding: 'WEBVIEWS', bucket_name: 'panel-assistant-webviews' },
+    { binding: 'PUBLIC_IMAGES', bucket_name: 'panel-assistant-assets' },
   ]);
   for (const binding of [
     'kv_namespaces',
