@@ -1,0 +1,31 @@
+{
+  "$schema": "../tools/wrangler/node_modules/wrangler/config-schema.json",
+  "name": "panel-image-admin-review",
+  "main": "image-admin.js",
+  "compatibility_date": "2026-11-11",
+  "workers_dev": true,
+  "preview_urls": false,
+  "routes": [
+    {
+      "pattern": "panel-assistant.io/images*",
+      "zone_name": "panel-assistant.io",
+    },
+  ],
+  "assets": {
+    "directory": "../src/image-admin",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none",
+    "not_found_handling": "none",
+  },
+  "r2_buckets": [
+    {
+      "binding": "IMAGE_STORE",
+      "bucket_name": "panel-assistant-image-admin-review",
+    },
+    {
+      "binding": "PUBLIC_IMAGES",
+      "bucket_name": "panel-assistant-assets",
+    },
+  ],
+}

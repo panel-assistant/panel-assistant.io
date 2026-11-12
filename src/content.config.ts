@@ -10,7 +10,25 @@ import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 export const collections = {
   docs: defineCollection({
     loader: docsLoader(),
-    schema: docsSchema({ extend: z.looseObject({ ownerReports: ownerReportsSchema.optional() }) }),
+    schema: docsSchema({
+      extend: z.looseObject({
+        ownerReports: ownerReportsSchema.optional(),
+        heroImageId: z.string().optional(),
+        photos: z
+          .array(
+            z.looseObject({
+              src: z.string(),
+              alt: z.string(),
+              id: z.string().optional(),
+              full: z.string().optional(),
+              credit: z.string().optional(),
+              source: z.string().optional(),
+            }),
+          )
+          .optional(),
+        photoCredit: z.string().optional(),
+      }),
+    }),
   }),
   i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
 };

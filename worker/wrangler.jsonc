@@ -16,13 +16,25 @@
       "/comments",
       "/comments/count",
       "/oauth/*",
+      "/hardware*",
+      "/de/hardware*",
+      "/es/hardware*",
+      "/fr/hardware*",
+      "/it/hardware*",
+      "/nl/hardware*",
+      "/pl/hardware*",
+      "/uk/hardware*",
+      "/zh-hans/hardware*",
     ],
   },
   // Anonymous comments are limited per address. Cloudflare keeps and expires the counter; the
   // Worker stores nothing. Worker secrets: GITHUB_APP_ID, GITHUB_APP_PRIVATE_KEY (PKCS#8) and
   // TURNSTILE_SECRET_KEY for comments; GITHUB_OAUTH_CLIENT_ID and GITHUB_OAUTH_CLIENT_SECRET for
   // editor sign-in at /oauth/.
-  "r2_buckets": [{ "binding": "WEBVIEWS", "bucket_name": "panel-assistant-webviews" }],
+  "r2_buckets": [
+    { "binding": "WEBVIEWS", "bucket_name": "panel-assistant-webviews" },
+    { "binding": "PUBLIC_IMAGES", "bucket_name": "panel-assistant-assets" },
+  ],
   "ratelimits": [
     { "name": "COMMENT_RATE", "namespace_id": "1001", "simple": { "limit": 2, "period": 60 } },
   ],

@@ -8,6 +8,7 @@ import { handleComment, handleCommentCount } from './comments.js';
 import commentConfig from './comments.json' with { type: 'json' };
 import { handleEditorAuth } from './editor-auth.js';
 import editorConfig from './editor.json' with { type: 'json' };
+import { handlePanelImages } from './panel-images.js';
 // The build facts come from the published directory, which is what the deploy
 // job has in hand; the source copy is not part of a checkout.
 import build from '../dist/build.json' with { type: 'json' };
@@ -26,6 +27,9 @@ export default {
     if (pathname.startsWith(`${editorConfig.authBase}/`)) {
       return handleEditorAuth(request, env, editorConfig);
     }
+
+    const images = await handlePanelImages(request, env);
+    if (images) return images;
 
     const hit = resolve(request.url, topics, settings);
     if (!hit) return env.ASSETS.fetch(request);
