@@ -109,6 +109,23 @@ function webpDimensions(bytes) {
   return frame;
 }
 
+const PNG_DISPLAY_CHUNKS = [
+  'IHDR',
+  'PLTE',
+  'tRNS',
+  'IDAT',
+  'IEND',
+  'cHRM',
+  'gAMA',
+  'iCCP',
+  'sRGB',
+  'sBIT',
+  'pHYs',
+  'cICP',
+  'mDCV',
+  'cLLI',
+];
+
 function pngDimensions(bytes) {
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   const ascii = (at, length) => String.fromCharCode(...bytes.subarray(at, at + length));
@@ -133,22 +150,7 @@ function pngDimensions(bytes) {
       type = ascii(position + 4, 4);
     check(position + length + 12 <= bytes.length, 'Truncated public PNG.');
     check(
-      [
-        'IHDR',
-        'PLTE',
-        'tRNS',
-        'IDAT',
-        'IEND',
-        'cHRM',
-        'gAMA',
-        'iCCP',
-        'sRGB',
-        'sBIT',
-        'pHYs',
-        'cICP',
-        'mDCV',
-        'cLLI',
-      ].includes(type),
+      PNG_DISPLAY_CHUNKS.includes(type),
       'Public PNG must be static and contain no EXIF/text metadata.',
     );
     if (type === 'IHDR') check(position === 8 && length === 13, 'Invalid public PNG header.');
@@ -173,6 +175,67 @@ function pngDimensions(bytes) {
     position += length + 12;
   }
   throw new PublicationError('Incomplete public PNG.');
+}
+
+// Browser canvas encoders may add metadata. Clean only display copies on the server;
+// the private master remains byte-for-byte intact for subsequent editing.
+export function sanitizeRendition(input) {
+  const bytes = new Uint8Array(input);
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const ascii = (at, length) => String.fromCharCode(...bytes.subarray(at, at + length));
+  const chunks = [];
+  let count = 0;
+  if (bytes.length >= 8 && ascii(0, 8) === '\x89PNG\r\n\x1a\n') {
+    chunks.push(bytes.subarray(0, 8));
+    let position = 8;
+    while (position + 12 <= bytes.length) {
+      check(++count <= 4096, 'Too many PNG preview chunks.');
+      const length = view.getUint32(position),
+        type = ascii(position + 4, 4),
+        end = position + length + 12;
+      check(end <= bytes.length, 'Truncated PNG preview.');
+      check(!['acTL', 'fcTL', 'fdAT'].includes(type), 'Image previews must be static.');
+      if (PNG_DISPLAY_CHUNKS.includes(type)) chunks.push(bytes.subarray(position, end));
+      else {
+        check(/^[A-Za-z]{4}$/.test(type) && bytes[position + 4] & 32, 'Unknown PNG image chunk.');
+      }
+      position = end;
+      if (type === 'IEND') break;
+    }
+    check(position === bytes.length, 'Incomplete PNG preview.');
+  } else {
+    check(
+      bytes.length >= 30 &&
+        ascii(0, 4) === 'RIFF' &&
+        ascii(8, 4) === 'WEBP' &&
+        view.getUint32(4, true) + 8 === bytes.length,
+      'Invalid WebP preview container.',
+    );
+    chunks.push(bytes.subarray(0, 12));
+    let position = 12;
+    while (position + 8 <= bytes.length) {
+      check(++count <= 4096, 'Too many WebP preview chunks.');
+      const length = view.getUint32(position + 4, true),
+        type = ascii(position, 4),
+        end = position + 8 + length + (length % 2);
+      check(end <= bytes.length, 'Truncated WebP preview.');
+      if (!['EXIF', 'XMP '].includes(type)) {
+        const chunk = bytes.subarray(position, end);
+        if (type === 'VP8X' && length === 10) chunk[8] &= ~0x0c;
+        chunks.push(chunk);
+      }
+      position = end;
+    }
+    check(position === bytes.length, 'Incomplete WebP preview.');
+  }
+  const clean = new Uint8Array(chunks.reduce((size, chunk) => size + chunk.length, 0));
+  let at = 0;
+  for (const chunk of chunks) {
+    clean.set(chunk, at);
+    at += chunk.length;
+  }
+  if (ascii(0, 4) === 'RIFF') new DataView(clean.buffer).setUint32(4, clean.length - 8, true);
+  return { bytes: clean, ...renditionDetails(clean) };
 }
 
 export function renditionDetails(bytes) {

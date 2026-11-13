@@ -366,7 +366,7 @@ async function downloadMaster(image) {
 
 function masterFacts(image) {
   const original = image.original;
-  return `${original.width} × ${original.height} · ${original.extension.toUpperCase()} · ${(original.bytes / 1024 / 1024).toFixed(2)} MiB`;
+  return `${original.width} × ${original.height} · ${original.extension.toUpperCase()} · ${(original.bytes / 1024 / 1024).toFixed(2)} MiB. The private master is unchanged and may contain location, software and Photoshop editing metadata. Public previews have nonvisual metadata removed by the server; colour profiles and transparency are kept.`;
 }
 
 function sourceUrl(value) {
@@ -753,8 +753,14 @@ async function uploadFiles(files, entry, replacing, editedMaster = false) {
         $('upload-notice').textContent = editedMaster
           ? 'Edited master archived. Caption, credit and source details were kept, and the previous master is retained. Save the private draft to use this version.'
           : 'Replacement archived. Its caption was kept; credit, source and licence start unknown. Enter this photograph’s details before saving. The previous original is retained.';
-        $('upload-notice').hidden = false;
       }
+      const archived =
+        replacing === undefined
+          ? 'Master archived. Save the private draft to use this image.'
+          : $('upload-notice').textContent;
+      $('upload-notice').textContent =
+        `${archived} Editing metadata is retained in the exact private master, which may also contain location or software details. The server removes nonvisual metadata from public previews.`;
+      $('upload-notice').hidden = false;
       dirty = true;
     }
   } catch (error) {

@@ -4,6 +4,7 @@ import {
   publicationObject,
   publishModel,
   renditionDetails,
+  sanitizeRendition,
 } from './image-publication.js';
 import {
   ImageAuthError,
@@ -370,12 +371,12 @@ async function upload(request, store) {
     const file = form.get(name);
     check(file && typeof file.arrayBuffer === 'function' && file.size > 0, `Missing ${name} file.`);
     check(file.size <= (name === 'original' ? 25 : 5) * MiB, `${name} file is too large.`, 413);
-    const bytes = new Uint8Array(await file.arrayBuffer());
-    parts[name] = {
-      bytes,
-      ...(name === 'original' ? dimensions(bytes) : renditionDetails(bytes)),
-      sha256: await digest(bytes),
-    };
+    const uploaded = new Uint8Array(await file.arrayBuffer());
+    const part =
+      name === 'original'
+        ? { bytes: uploaded, ...dimensions(uploaded) }
+        : sanitizeRendition(uploaded);
+    parts[name] = { ...part, sha256: await digest(part.bytes) };
   }
   const original = parts.original;
   for (const [name, bound] of [

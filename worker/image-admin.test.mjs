@@ -440,6 +440,121 @@ test('PNG fallback previews keep detected MIME, alpha and format-specific immuta
   assert.deepEqual(env.IMAGE_STORE.objects.get(image.delivery.thumb).bytes, alphaPNG);
 });
 
+// Valid ancillary chunks reproduce canvas output without changing compressed pixels.
+function pngChunk(type, payload) {
+  const body = Buffer.concat([Buffer.from(type), Buffer.from(payload)]);
+  let crc = 0xffffffff;
+  for (const byte of body) {
+    crc ^= byte;
+    for (let bit = 0; bit < 8; bit++) crc = (crc >>> 1) ^ (crc & 1 ? 0xedb88320 : 0);
+  }
+  const chunk = Buffer.alloc(body.length + 8);
+  chunk.writeUInt32BE(payload.length);
+  body.copy(chunk, 4);
+  chunk.writeUInt32BE((crc ^ 0xffffffff) >>> 0, chunk.length - 4);
+  return chunk;
+}
+function withPNGChunks(bytes, chunks) {
+  return Buffer.concat([bytes.subarray(0, 33), ...chunks, bytes.subarray(33)]);
+}
+
+test('server cleans PNG previews for PNG and JPEG XL uploads while retaining exact editable private masters', async () => {
+  const alpha = await sharp({
+    create: {
+      width: 120,
+      height: 80,
+      channels: 4,
+      background: { r: 20, g: 40, b: 80, alpha: 0.5 },
+    },
+  })
+    .png()
+    .toBuffer();
+  const metadata = [
+    pngChunk('tEXt', Buffer.from('Software\0Private editor')),
+    pngChunk('iTXt', Buffer.from('XML:com.adobe.xmp\0\0\0\0\0Photoshop editing resources')),
+    pngChunk('eXIf', Buffer.from('private-location')),
+    pngChunk('tIME', Buffer.alloc(7)),
+    pngChunk('vpAg', Buffer.from('private application metadata')),
+  ];
+  const preview = withPNGChunks(alpha, metadata);
+  const pngMaster = withPNGChunks(alpha, [metadata[1]]);
+  const jxlBox = Buffer.alloc(8 + 26);
+  jxlBox.writeUInt32BE(jxlBox.length);
+  jxlBox.write('xml ', 4);
+  jxlBox.write('Photoshop editing resources', 8);
+  const jxlMaster = Buffer.concat([jxlSamples[1], jxlBox]);
+  for (const original of [pngMaster, jxlMaster]) {
+    const env = environment(),
+      cookie = await session(env);
+    const response = await upload(env, cookie, { original, thumb: preview, large: preview });
+    assert.equal(response.status, 201, await response.clone().text());
+    const image = await response.json();
+    const master = await send(env, `/admin/api/file?key=${image.original.key}`, { cookie });
+    assert.deepEqual(
+      Buffer.from(await master.arrayBuffer()),
+      original,
+      'Photoshop and all other original data remain recoverable',
+    );
+    for (const key of Object.values(image.delivery)) {
+      const stored = env.IMAGE_STORE.objects.get(key);
+      assert.deepEqual(stored.bytes, alpha, 'server strips metadata before storage');
+      assert.equal(stored.customMetadata.sha256, createHash('sha256').update(alpha).digest('hex'));
+      assert.deepEqual(
+        await sharp(stored.bytes).raw().toBuffer(),
+        await sharp(alpha).raw().toBuffer(),
+      );
+    }
+    const saved = await save(env, cookie, { revision: null, models: modelWith([image]) });
+    assert.equal(saved.status, 200, await saved.clone().text());
+    assert.deepEqual(env.IMAGE_STORE.objects.get(image.original.key).bytes, original);
+  }
+});
+
+test('server removes WebP EXIF and XMP while retaining alpha, colour profile and pixels', async () => {
+  const alpha = await sharp({
+    create: {
+      width: 120,
+      height: 80,
+      channels: 4,
+      background: { r: 20, g: 40, b: 80, alpha: 0.5 },
+    },
+  });
+  const preview = await alpha
+    .clone()
+    .withMetadata({ exif: { IFD0: { Software: 'Private editor' } } })
+    .withXmp('<x:xmpmeta>Photoshop editing resources</x:xmpmeta>')
+    .webp()
+    .toBuffer();
+  const env = environment(),
+    cookie = await session(env);
+  const response = await upload(env, cookie, { original: png, thumb: preview, large: preview });
+  assert.equal(response.status, 201, await response.clone().text());
+  const image = await response.json();
+  const stored = env.IMAGE_STORE.objects.get(image.delivery.large).bytes;
+  const details = await sharp(stored).metadata();
+  assert.equal(details.exif, undefined);
+  assert.equal(details.xmp, undefined);
+  assert.equal(details.hasAlpha, true);
+  assert.deepEqual(details.icc, (await sharp(preview).metadata()).icc);
+  assert.deepEqual(await sharp(stored).raw().toBuffer(), await sharp(preview).raw().toBuffer());
+});
+
+test('preview cleanup still refuses animation, unknown critical chunks and truncation before image writes', async () => {
+  for (const preview of [
+    withPNGChunks(png, [pngChunk('acTL', Buffer.alloc(8))]),
+    withPNGChunks(png, [pngChunk('fcTL', Buffer.alloc(26))]),
+    withPNGChunks(png, [pngChunk('fdAT', Buffer.alloc(4))]),
+    withPNGChunks(png, [pngChunk('ABCD', Buffer.from('unknown critical'))]),
+    withPNGChunks(png, [pngChunk('tEXt', Buffer.from('private'))]).subarray(0, 42),
+  ]) {
+    const env = environment(),
+      cookie = await session(env);
+    const response = await upload(env, cookie, { thumb: preview });
+    assert.equal(response.status, 400);
+    assert.ok([...env.IMAGE_STORE.objects.keys()].every((key) => key.startsWith('sessions/')));
+  }
+});
+
 test('the first derivative bytes stay immutable when another browser encodes the same original differently', async () => {
   const env = environment(),
     cookie = await session(env);
