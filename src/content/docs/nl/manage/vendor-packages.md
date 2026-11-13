@@ -1,7 +1,7 @@
 ---
 title: Pakketten van de fabrikant
 description: Voorkomen dat een opdringerige fabrieksapp bij het opstarten terugkomt en over je dashboard tekent, omkeerbaar en alleen voor de gekozen pakketten.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 Een firmware-update kan een app van de fabrikant achterlaten die zichzelf bij het opstarten opnieuw start en een zwevende widget over je dashboard tekent. Op de Sonoff NSPanel Pro 120 liet een firmware-update bijvoorbeeld `com.eWeLinkControlPanel` bij het opstarten starten en een bedieningswidget over alles heen leggen wat het paneel toonde. De paneel-app kan zulke pakketten neutraliseren, maar alleen degene die je noemt.
@@ -36,10 +36,10 @@ Er wordt niets getemd totdat je op een knop Temmen drukt. Zonder root of de help
 
 ## Veiligheid
 
-- **Omkeerbaar.** Uitschakelen wordt teruggedraaid met `pm enable <pkg>` of door een update van die app of de firmware. Niets hier is destructief: geen verwijdering en geen gegevenswissing.
+- **Omkeerbaar.** Uitschakelen wordt teruggedraaid met **Opnieuw inschakelen** op de kaart of door een update van die app of de firmware. Niets hier is destructief: geen verwijdering en geen gegevenswissing.
 - **Kritieke pakketten worden geweigerd.** De paneel-app zal nooit de systeeminterface, Instellingen, telefonie, het Android-framework of zichzelf stoppen of uitschakelen, ook niet als je die noemt. Zowel de app als de bevoorrechte helper dwingen dit af, zodat een typefout het paneel niet onbruikbaar kan maken.
 - **Alleen geïnstalleerde pakketten die je noemt, worden aangepast.** Verwijder je een pakket dat de paneel-app beheert uit de gewenste lijst, dan wordt het weer ingeschakeld en krijgt het zijn opgeslagen overlaytoestemming terug. **Opnieuw inschakelen** draait het temmen ook terug.
 
 :::caution
-Je kiest pakketten om uit te schakelen, dus houd het bij software van de fabrikant die je herkent. Schakel je iets uit waarop het paneel vertrouwt, zoals een launcher die je werkelijk gebruikt of een invoermethode, dan kan navigeren lastig worden totdat je het via `adb` weer inschakelt. Laat het bij twijfel met rust.
+Je kiest pakketten om uit te schakelen, dus houd het bij software van de fabrikant die je herkent. Schakel je iets uit waarop het paneel vertrouwt, zoals een launcher die je werkelijk gebruikt of een invoermethode, dan kan navigeren op het eigen scherm van het paneel lastig worden. Je kunt het nog steeds opnieuw inschakelen via de kaart **Pakketten van leveranciers**, die je vanuit Home Assistant met **Bezoeken** opent, zonder het paneel aan te raken. Laat het bij twijfel met rust.
 :::

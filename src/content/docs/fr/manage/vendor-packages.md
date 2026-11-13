@@ -1,7 +1,7 @@
 ---
 title: Paquets du fabricant
 description: Empêcher une application intrusive du fabricant de se relancer au démarrage et de recouvrir votre tableau de bord, de façon réversible et uniquement pour les paquets choisis.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 Une mise à jour du micrologiciel peut laisser sur le panneau une application du fabricant qui se relance au démarrage et affiche un widget flottant par-dessus votre tableau de bord. Sur le Sonoff NSPanel Pro 120, par exemple, une mise à jour du micrologiciel a laissé `com.eWeLinkControlPanel` démarrer au lancement et superposer un widget de commande à tout ce qu’affichait le panneau. L’application du panneau peut neutraliser de tels paquets, mais uniquement ceux que vous nommez.
@@ -36,10 +36,10 @@ Rien n’est maîtrisé tant que vous n’appuyez pas sur un bouton Neutraliser.
 
 ## Sécurité
 
-- **Réversible.** La désactivation s’annule avec `pm enable <pkg>`, ou par une mise à jour de cette application ou du micrologiciel. Aucune action n’est destructive : ni désinstallation ni effacement de données.
+- **Réversible.** La désactivation s’annule avec **Réactiver** sur la carte, ou par une mise à jour de cette application ou du micrologiciel. Aucune action n’est destructive : ni désinstallation ni effacement de données.
 - **Les paquets critiques sont refusés.** L’application du panneau n’arrête ni ne désactive jamais l’interface système, les paramètres, la téléphonie, le framework Android ou elle-même, même si vous les nommez. L’application et l’assistant privilégié imposent tous deux cette protection : une faute de frappe ne peut donc pas rendre le panneau inutilisable.
 - **Seuls les paquets installés que vous nommez sont modifiés.** Retirer de la liste souhaitée un paquet pris en charge par l’application du panneau le réactive et restaure sa permission de superposition enregistrée. **Réactiver** annule aussi sa maîtrise.
 
 :::caution
-Vous choisissez les paquets à désactiver : limitez-vous donc aux logiciels du fabricant que vous reconnaissez. Désactiver un élément dont dépend le panneau, comme un lanceur du fabricant que vous utilisez réellement ou une méthode de saisie, peut rendre la navigation difficile jusqu’à sa réactivation via `adb`. En cas de doute, n’y touchez pas.
+Vous choisissez les paquets à désactiver : limitez-vous donc aux logiciels du fabricant que vous reconnaissez. Désactiver un élément dont dépend le panneau, comme un lanceur du fabricant que vous utilisez réellement ou une méthode de saisie, peut rendre la navigation difficile sur son propre écran. Vous pouvez toujours le réactiver depuis la carte **Paquets du fabricant**, accessible depuis Home Assistant avec **Visiter**, sans toucher au panneau. En cas de doute, n’y touchez pas.
 :::

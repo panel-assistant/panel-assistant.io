@@ -1,7 +1,7 @@
 ---
 title: Pacchetti del produttore
 description: Impedire a un'app invasiva del produttore di riavviarsi all'avvio e sovrapporsi alla plancia, in modo reversibile e solo per i pacchetti che scegli.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 Un aggiornamento del firmware può lasciare sul pannello un'app del produttore che si riavvia all'accensione e disegna un widget mobile sopra la plancia. Sul Sonoff NSPanel Pro 120, ad esempio, un aggiornamento del firmware ha lasciato `com.eWeLinkControlPanel` in avvio automatico, con un widget di controllo sovrapposto a qualsiasi contenuto mostrato dal pannello. L'app del pannello può neutralizzare pacchetti di questo tipo, ma solo quelli che indichi.
@@ -36,10 +36,10 @@ Nessun pacchetto viene limitato finché non premi un pulsante Controlla. Senza r
 
 ## Sicurezza
 
-- **Reversibile.** La disabilitazione viene annullata con `pm enable <pkg>`, oppure da un aggiornamento di quell'app o del firmware. Qui nulla è distruttivo: nessuna disinstallazione e nessuna cancellazione dei dati.
+- **Reversibile.** La disabilitazione viene annullata con **Riabilita** nella scheda, oppure da un aggiornamento di quell'app o del firmware. Qui nulla è distruttivo: nessuna disinstallazione e nessuna cancellazione dei dati.
 - **I pacchetti critici vengono rifiutati.** L'app del pannello non arresterà né disabiliterà mai l'interfaccia di sistema, Impostazioni, la telefonia, il framework Android o sé stessa, anche se ne indichi uno. Sia l'app sia l'helper privilegiato impongono questo vincolo, quindi un errore di battitura non può rendere inutilizzabile il pannello.
 - **Vengono modificati solo i pacchetti installati che indichi.** Rimuovere dall'elenco desiderato un pacchetto gestito dall'app del pannello lo riabilita e ripristina il permesso di sovrapposizione salvato. Anche **Riabilita** annulla la limitazione.
 
 :::caution
-Stai scegliendo pacchetti da disabilitare, quindi limitati al software del produttore che riconosci. Disabilitare qualcosa da cui dipende il pannello, come un launcher del produttore che usi davvero o un metodo di inserimento, può rendere difficile navigare nel pannello finché non lo riabiliti tramite `adb`. In caso di dubbio, non modificarlo.
+Stai scegliendo pacchetti da disabilitare, quindi limitati al software del produttore che riconosci. Disabilitare qualcosa da cui dipende il pannello, come un launcher del produttore che usi davvero o un metodo di inserimento, può rendere difficile navigare sullo schermo del pannello. Puoi comunque riabilitarlo dalla scheda **Pacchetti del produttore**, accessibile da Home Assistant con **Visita**, senza toccare il pannello. In caso di dubbio, non modificarlo.
 :::
