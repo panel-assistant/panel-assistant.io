@@ -18,6 +18,7 @@
       <aside class="sidebar" aria-label="Panel models">
         <a class="wordmark" href="./">Panel Assistant<span>Image library</span></a>
         <small id="manager-build">Build unavailable</small>
+        <button id="all-images-link" type="button" disabled>All images</button>
         <label class="search-label" for="model-search">Find a panel</label>
         <input id="model-search" type="search" placeholder="Search models…" autocomplete="off" />
         <p id="model-count" class="muted"></p>
@@ -78,6 +79,42 @@
           >
           <button id="session-sign-in" type="button">Sign in with GitHub</button>
           <p id="session-status" role="status" aria-live="polite"></p>
+        </section>
+        <section id="all-images" aria-label="All images and master storage" hidden>
+          <p class="eyebrow">Master storage</p>
+          <p id="master-storage" class="storage-total"></p>
+          <p class="muted storage-note">
+            Unique original bytes referenced by the current private draft, counted once per master
+            hash. Excludes previews, removed images and saved archives; this is not total bucket
+            usage. Unsaved edits are included.
+          </p>
+          <div class="storage-filters">
+            <label for="image-search"
+              >Find an image
+              <input
+                id="image-search"
+                type="search"
+                placeholder="Panel name, model or caption…"
+                autocomplete="off"
+              />
+            </label>
+            <label for="image-sort"
+              >Sort by
+              <select id="image-sort">
+                <option value="largest">Master size · largest first</option>
+                <option value="smallest">Master size · smallest first</option>
+                <option value="panel">Panel · catalogue order</option>
+              </select>
+            </label>
+          </div>
+          <p id="image-results" class="muted" role="status" aria-live="polite"></p>
+          <p class="storage-note muted">
+            Open a panel to replace or remove an image. Removing images currently retains original
+            bytes and saved history; it does not reclaim object storage. Preview an image for its
+            credit and source. Downloads contain the full-resolution original.
+          </p>
+          <div id="all-images-grid" class="gallery"></div>
+          <p id="all-images-empty" class="empty" hidden>No images match this search.</p>
         </section>
         <section id="panel" hidden>
           <div class="section-heading">

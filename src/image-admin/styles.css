@@ -46,6 +46,7 @@ body {
 }
 button,
 input,
+select,
 textarea {
   font: inherit;
 }
@@ -82,6 +83,7 @@ button:disabled {
   background: var(--accent-hover);
 }
 input,
+select,
 textarea {
   display: block;
   width: 100%;
@@ -97,6 +99,7 @@ textarea {
   min-height: 4.5rem;
 }
 input:focus-visible,
+select:focus-visible,
 textarea:focus-visible,
 button:focus-visible,
 .button:focus-within,
@@ -200,6 +203,7 @@ small,
   padding: 0.7rem 0.6rem;
   gap: 0.5rem;
 }
+#all-images-link[aria-current='page'],
 #models button[aria-current='page'] {
   background: #e5f1eb;
   color: #155b47;
@@ -665,6 +669,7 @@ body.busy .button {
     color: #c0e6d4;
     border-color: #315346;
   }
+  #all-images-link[aria-current='page'],
   #models button[aria-current='page'] {
     background: #23453a;
     color: #a6e8ce;
@@ -745,4 +750,58 @@ body.busy .button {
     width: 100%;
     height: 180px;
   }
+}
+
+#all-images-link {
+  justify-content: flex-start;
+}
+.storage-total {
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.storage-note,
+#image-results {
+  font-size: 0.85rem;
+}
+.storage-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0 1rem;
+}
+.storage-filters label {
+  flex: 1 1 240px;
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+.storage-filters input,
+.storage-filters select {
+  margin-top: 0.4rem;
+}
+.storage-card {
+  display: flex;
+  flex-direction: column;
+}
+.storage-card .image-preview {
+  flex-shrink: 0;
+  height: 170px;
+}
+.storage-details {
+  padding: 1rem;
+  overflow-wrap: anywhere;
+}
+.storage-details h3 {
+  margin-bottom: 0.3rem;
+}
+.storage-details p {
+  margin-bottom: 0.5rem;
+}
+.storage-size {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.storage-card .card-actions {
+  margin-top: auto;
 }

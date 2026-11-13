@@ -13,6 +13,8 @@ let busy = false;
 let conflict = false;
 let savedAt;
 let previewIndex = 0;
+let previewModelId;
+let allImages = false;
 let publication;
 let publicationError = '';
 let publicationLoading = false;
@@ -85,6 +87,7 @@ function publicModel() {
 function publishable() {
   return Boolean(
     !busy &&
+    !allImages &&
     !dirty &&
     !conflict &&
     !publicationLoading &&
@@ -262,12 +265,13 @@ function model() {
 function controls() {
   document.body.classList.toggle('busy', busy);
   $('main').setAttribute('aria-busy', String(busy));
-  document.querySelectorAll('input, textarea, button').forEach((node) => {
+  document.querySelectorAll('input, textarea, select, button').forEach((node) => {
     node.disabled = busy;
   });
   document.querySelectorAll('[data-master-download]').forEach((node) => {
     node.setAttribute('aria-disabled', String(busy));
   });
+  $('all-images-link').disabled = busy || !library;
   $('save').disabled = busy || !library || !dirty || conflict;
   $('export').disabled = busy || !library;
   $('add-files').disabled = busy || !model();
@@ -404,16 +408,115 @@ function renderModels() {
           `${entry.images.filter((image) => !image.archiveOnly).length} gallery · ${entry.images.filter((image) => image.archiveOnly).length} sources`,
         ),
       );
-      if (entry.id === selected) button.setAttribute('aria-current', 'page');
+      if (!allImages && entry.id === selected) button.setAttribute('aria-current', 'page');
       button.addEventListener('click', () => {
-        if (selected !== entry.id) selectedSources.clear();
-        selected = entry.id;
-        if ($('preview').open) $('preview').close();
-        renderModels();
-        renderPanel();
-        controls();
+        openPanel(entry);
       });
       return button;
+    }),
+  );
+}
+
+function openPanel(entry, image) {
+  if (busy) return;
+  if (selected !== entry.id) selectedSources.clear();
+  selected = entry.id;
+  allImages = false;
+  if ($('preview').open) $('preview').close();
+  renderModels();
+  renderPanel();
+  controls();
+  if (image) {
+    const card = [...document.querySelectorAll('#panel [data-image-id]')].find(
+      (node) => node.dataset.imageId === image.id,
+    );
+    card?.querySelector('.image-preview').focus();
+    card?.scrollIntoView({ block: 'center' });
+  }
+}
+
+function storageSize(bytes) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(2)} KiB`;
+  return `${(bytes / 1024 / 1024).toFixed(2)} MiB`;
+}
+
+function renderAllImages() {
+  const rows = library.models.flatMap((entry) =>
+    entry.images.map((image, index) => ({ entry, image, index })),
+  );
+  const unique = new Map(rows.map(({ image }) => [image.original.sha256, image.original.bytes]));
+  const total = [...unique.values()].reduce((sum, bytes) => sum + bytes, 0);
+  $('panel-title').textContent = 'All images';
+  $('panel-subtitle').textContent =
+    `${rows.length} images across ${library.models.length} panels in this private draft`;
+  $('master-storage').textContent = `${storageSize(total)} · ${unique.size} unique masters`;
+  $('master-storage').title =
+    `${total.toLocaleString()} bytes; duplicate master hashes counted once`;
+  const search = $('image-search').value.trim().toLowerCase();
+  const filtered = rows.filter(({ entry, image }) =>
+    `${entry.title} ${entry.id} ${image.alt}`.toLowerCase().includes(search),
+  );
+  const order = $('image-sort').value;
+  if (order !== 'panel')
+    filtered.sort((a, b) =>
+      order === 'smallest'
+        ? a.image.original.bytes - b.image.original.bytes
+        : b.image.original.bytes - a.image.original.bytes,
+    );
+  const filteredUnique = new Map(
+    filtered.map(({ image }) => [image.original.sha256, image.original.bytes]),
+  );
+  $('image-results').textContent =
+    `Showing ${filtered.length} of ${rows.length} images · ${storageSize([...filteredUnique.values()].reduce((sum, bytes) => sum + bytes, 0))} in ${filteredUnique.size} unique matching masters`;
+  $('all-images-empty').hidden = filtered.length !== 0;
+  $('all-images-grid').replaceChildren(
+    ...filtered.map(({ entry, image, index }) => {
+      const card = element('article', 'image-card storage-card');
+      card.dataset.imageId = image.id;
+      card.dataset.modelId = entry.id;
+      const role = image.archiveOnly
+        ? 'Source master'
+        : image.id === entry.heroImageId
+          ? 'Hero'
+          : 'Gallery';
+      const top = element('div', 'image-top');
+      top.append(element('span', 'thumbnail-label', role));
+      const preview = action('', `Preview ${image.alt || image.id} · ${entry.title}`, () =>
+        openPreview(index, entry),
+      );
+      preview.className = 'image-preview';
+      const img = element('img');
+      img.src = fileUrl(image.delivery.thumb);
+      img.alt = image.alt;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      preview.append(img);
+      const details = element('div', 'storage-details');
+      const size = element('p', 'storage-size', storageSize(image.original.bytes));
+      size.title = `${image.original.bytes.toLocaleString()} bytes`;
+      details.append(
+        element('h3', '', entry.title),
+        element('p', 'image-facts', entry.id),
+        element('p', '', image.alt || 'No caption recorded'),
+        size,
+        element(
+          'p',
+          'image-facts',
+          `${image.original.width} × ${image.original.height} · ${image.original.extension.toUpperCase()} · original master`,
+        ),
+      );
+      const actions = element('div', 'card-actions');
+      const download = element('a', 'button', '↓ Download original');
+      masterDownload(download, image);
+      actions.append(
+        download,
+        action('Open panel', `Open ${entry.title} at ${image.alt || image.id}`, () =>
+          openPanel(entry, image),
+        ),
+      );
+      card.append(top, preview, details, actions);
+      return card;
     }),
   );
 }
@@ -483,7 +586,15 @@ function removeSelectedSources() {
 
 function renderPanel() {
   const entry = model();
-  $('panel').hidden = !entry;
+  $('panel').hidden = allImages || !entry;
+  $('all-images').hidden = !allImages || !library;
+  $('all-images-link').setAttribute('aria-current', allImages ? 'page' : 'false');
+  $('publish-review').hidden = allImages;
+  document.querySelector('.publication-line').hidden = allImages;
+  if (allImages && library) {
+    renderAllImages();
+    return;
+  }
   if (!entry) return;
   $('panel-title').textContent = entry.title;
   const gallery = entry.images.filter((image) => !image.archiveOnly);
@@ -714,14 +825,15 @@ function renderPanel() {
   sourceSelectionControls();
 }
 
-function openPreview(index) {
+function openPreview(index, entry = model()) {
+  previewModelId = entry.id;
   previewIndex = index;
   updatePreview();
   $('preview').showModal();
 }
 
 function updatePreview() {
-  const entry = model();
+  const entry = library.models.find((entry) => entry.id === previewModelId);
   const image = entry.images[previewIndex];
   $('preview-title').textContent = entry.title;
   $('preview-image').src = fileUrl(image.delivery.large);
@@ -740,7 +852,8 @@ function updatePreview() {
 }
 
 function advancePreview(direction) {
-  previewIndex = (previewIndex + direction + model().images.length) % model().images.length;
+  const entry = library.models.find((entry) => entry.id === previewModelId);
+  previewIndex = (previewIndex + direction + entry.images.length) % entry.images.length;
   updatePreview();
 }
 
@@ -955,6 +1068,16 @@ async function load() {
 }
 
 $('model-search').addEventListener('input', renderModels);
+$('all-images-link').addEventListener('click', () => {
+  if (busy || !library) return;
+  allImages = true;
+  if ($('preview').open) $('preview').close();
+  renderModels();
+  renderPanel();
+  controls();
+});
+$('image-search').addEventListener('input', renderAllImages);
+$('image-sort').addEventListener('change', renderAllImages);
 $('sources-select-all').addEventListener('change', () => {
   selectedSources.clear();
   if ($('sources-select-all').checked)
