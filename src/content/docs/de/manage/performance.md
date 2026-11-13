@@ -1,7 +1,7 @@
 ---
 title: Leistung
 description: Warum ein Wandpanel bei einem auf dem Telefon flüssigen Dashboard langsam wirken kann, wie du das misst und welche Maßnahmen am meisten helfen.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 396e908e6370b88a9fd555abcb67b0816c4cd6f4
 ---
 
 Ein günstiges Android-Wandpanel kann träge reagieren, beim Scrollen ruckeln, leer werden oder keine Aktualisierungen mehr zeigen, obwohl dasselbe Dashboard auf einem Telefon oder Desktop gut funktioniert. Beginne bei der Arbeit, die Home Assistant an das Panel sendet, und miss danach die verbleibenden Dashboard- und Hardwaregrenzen, bevor du von einem nötigen Austausch ausgehst.
@@ -31,29 +31,7 @@ Die Zeile **Vermutliche Ursache** wendet diese Regeln zurückhaltend an und nenn
 
 ### Gefiltert und ungefiltert von außerhalb des Panels vergleichen
 
-Überlastet das ungefilterte Dashboard seine eigene WebView, können die Werte auf der Seite stehen bleiben. Ein auf einem Computer ausgeführtes Erfassungsskript fragt stattdessen die eigene Leistungsschnittstelle der Panel-App ab. Sie gehört zur veralteten REST-API (siehe [Steuerungsreferenz](/de/reference/api/#the-rest-api-is-deprecated)). So bleibt die Gesamt-CPU des Panels beobachtbar und mit Root oder Helper auch eine native Messung des Chromium-Rendererthreads. Das Skript erfasst außerdem das Alter des letzten Browsermesswertpakets. Alles über 15 Sekunden wird als festgefahren statt als aktuell gemeldet.
-
-Das Skript ändert deine Konfiguration nicht. Es schaltet den Entitätenfilter weder ein noch aus und schreibt ihn nicht um. Seine erste Anfrage kann einen privaten Installationsschlüssel im internen Zustand der Panel-App erzeugen. Wähle für beide Durchläufe dieselbe Dashboardansicht und Arbeitslast, ändere den Filter in der Weboberfläche, warte auf das Neuladen und führe pro Zustand einen Befehl aus einem Checkout des [ha-paneld-Repositorys](https://github.com/panel-assistant/android) aus:
-
-```bash
-python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect filtered --label filtered --output filtered.json
-```
-
-```bash
-python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect unfiltered --label unfiltered --pair-with filtered.json --output unfiltered.json
-```
-
-Vergleiche die beiden Ergebnisse:
-
-```bash
-python3 tools/measure-dashboard-performance.py compare filtered.json unfiltered.json --output comparison.json
-```
-
-Jeder Durchlauf dauert standardmäßig drei Minuten mit 30 Sekunden Aufwärmzeit und Abfragen alle 10 Sekunden. `--pair-with` verwendet eine undurchsichtige Vergleichs-ID aus dem ersten Ergebnis wieder. So kann der Vergleich ein anderes physisches Panel, einen anderen konfigurierten Home Assistant oder ein anderes Dashboard sowie geänderte messungsrelevante Einstellungen ablehnen, ohne diese privaten Werte zu speichern. Eine von Hand ausgewählte andere Ansicht innerhalb desselben Dashboards kann er nicht erkennen. Halte daher sichtbare Ansicht und Arbeitslast gleich.
-
-Das Skript lehnt einen Durchlauf ab, wenn der erwartete Modus nicht aktiv ist, sich Filterrevision oder Renderergeneration ändern, Build oder Konfiguration während der Erfassung wechseln, die Filterung zurückfällt oder weniger als drei Stichproben, drei Gesamt-CPU-Stichproben oder drei native Renderer-CPU-Stichproben verbleiben. Es schreibt das abgelehnte Ergebnis trotzdem mit den genauen Gründen und überschreibt nie eine vorhandene Ausgabedatei.
-
-Das JSON lässt URL und ID des Panels, Home Assistant-URL und Dashboardpfad, Entitäts-IDs, Prozessnamen und Filterhash weg. Das Panel berechnet die undurchsichtigen Fingerabdrücke mit einem privaten zufälligen 256-Bit-Installationsschlüssel, der es niemals verlässt. Die Fingerabdrücke sind für jedes Vergleichspaar einzigartig. Separate Messungen lassen sich darüber weder verknüpfen noch zum Erraten eines Panelnamens verwenden. Kann ein Panel den Schlüssel nicht speichern, verweigert es die Messung. Die ungefilterte Entitätenanzahl ist die zuletzt synchronisierte Kataloganzahl, kein aus der überlasteten WebView ermittelter Live-Wert. Bei leerem Katalog wird sie als nicht verfügbar gemeldet. Netzwerk- und Browserverkehrszähler werden auf die tatsächlich beobachteten Intervalle normiert, damit eine verpasste Abfrage den Vergleich nicht verzerrt. Veraltete Browserzeit- und Verkehrsraten fehlen in den Zusammenfassungen. CPU-, Speicher-, Netzwerk- und Rendererwerte der Panel-App selbst werden weiter erfasst.
+Überlastet das ungefilterte Dashboard seine eigene WebView, können die Werte auf der Seite stehen bleiben. Mitwirkende, die einen aufgezeichneten Vergleich der beiden Zustände nebeneinander mit Messungen von außerhalb des Panels möchten, können das unter [Entwicklungsumgebung](/de/reference/development-environment/#dashboardleistung-von-einem-computer-aus-messen) beschriebene Erfassungsskript verwenden.
 
 ### Optionales WebView-Ferndebugging
 

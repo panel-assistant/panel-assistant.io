@@ -1,7 +1,7 @@
 ---
 title: Entwicklungsumgebung
 description: Die Werkzeuge zum Bauen der Panel-App, die Wege über Docker und Devcontainer und was ein Fork über Signierung wissen muss.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 396e908e6370b88a9fd555abcb67b0816c4cd6f4
 ---
 
 Du musst ha-paneld nicht bauen, um es zu verwenden: Die Installation eines Panels lädt eine signierte Veröffentlichung herunter. Diese Seite richtet sich an Mitwirkende und alle, die einen Fork pflegen. Eine geführte Tour durch den Quellcode bietet der [Code-Rundgang auf DeepWiki](https://deepwiki.com/panel-assistant/android).
@@ -35,6 +35,34 @@ Wenn du das Skript in einem Container ausführst, der mit einem äußeren Docker
 ## Der Root-Helper
 
 Gradle baut und prüft beide ABI-spezifischen Root-Helper automatisch vor dem App-Build. App und Helper betten dieselbe Identität ein, die aus jeder Helper-Quelldatei, jedem Header und jeder Befehlsdefinition abgeleitet wird. Ein lokaler App-Build kann dadurch nicht unbemerkt von veraltetem privilegiertem Code abhängen.
+
+## Dashboardleistung von einem Computer aus messen
+
+Die eigene Statusseite des Panels deckt die Leistung im Alltag ab; siehe [Leistung](/de/manage/performance/). Für einen aufgezeichneten Vergleich eines Dashboards mit und ohne Entitätenfilter, gemessen von außerhalb des Panels, enthält das Repository ein Erfassungsskript.
+
+Überlastet das ungefilterte Dashboard seine eigene WebView, können die Werte auf der Seite stehen bleiben. Ein auf einem Computer ausgeführtes Erfassungsskript fragt stattdessen die eigene Leistungsschnittstelle der Panel-App ab. Sie gehört zur veralteten REST-API (siehe [Steuerungsreferenz](/de/reference/api/#the-rest-api-is-deprecated)). So bleibt die Gesamt-CPU des Panels beobachtbar und mit Root oder Helper auch eine native Messung des Chromium-Rendererthreads. Das Skript erfasst außerdem das Alter des letzten Browsermesswertpakets. Alles über 15 Sekunden wird als festgefahren statt als aktuell gemeldet.
+
+Das Skript ändert deine Konfiguration nicht. Es schaltet den Entitätenfilter weder ein noch aus und schreibt ihn nicht um. Seine erste Anfrage kann einen privaten Installationsschlüssel im internen Zustand der Panel-App erzeugen. Wähle für beide Durchläufe dieselbe Dashboardansicht und Arbeitslast, ändere den Filter in der Weboberfläche, warte auf das Neuladen und führe pro Zustand einen Befehl aus einem Checkout des [ha-paneld-Repositorys](https://github.com/panel-assistant/android) aus:
+
+```bash
+python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect filtered --label filtered --output filtered.json
+```
+
+```bash
+python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect unfiltered --label unfiltered --pair-with filtered.json --output unfiltered.json
+```
+
+Vergleiche die beiden Ergebnisse:
+
+```bash
+python3 tools/measure-dashboard-performance.py compare filtered.json unfiltered.json --output comparison.json
+```
+
+Jeder Durchlauf dauert standardmäßig drei Minuten mit 30 Sekunden Aufwärmzeit und Abfragen alle 10 Sekunden. `--pair-with` verwendet eine undurchsichtige Vergleichs-ID aus dem ersten Ergebnis wieder. So kann der Vergleich ein anderes physisches Panel, einen anderen konfigurierten Home Assistant oder ein anderes Dashboard sowie geänderte messungsrelevante Einstellungen ablehnen, ohne diese privaten Werte zu speichern. Eine von Hand ausgewählte andere Ansicht innerhalb desselben Dashboards kann er nicht erkennen. Halte daher sichtbare Ansicht und Arbeitslast gleich.
+
+Das Skript lehnt einen Durchlauf ab, wenn der erwartete Modus nicht aktiv ist, sich Filterrevision oder Renderergeneration ändern, Build oder Konfiguration während der Erfassung wechseln, die Filterung zurückfällt oder weniger als drei Stichproben, drei Gesamt-CPU-Stichproben oder drei native Renderer-CPU-Stichproben verbleiben. Es schreibt das abgelehnte Ergebnis trotzdem mit den genauen Gründen und überschreibt nie eine vorhandene Ausgabedatei.
+
+Das JSON lässt URL und ID des Panels, Home Assistant-URL und Dashboardpfad, Entitäts-IDs, Prozessnamen und Filterhash weg. Das Panel berechnet die undurchsichtigen Fingerabdrücke mit einem privaten zufälligen 256-Bit-Installationsschlüssel, der es niemals verlässt. Die Fingerabdrücke sind für jedes Vergleichspaar einzigartig. Separate Messungen lassen sich darüber weder verknüpfen noch zum Erraten eines Panelnamens verwenden. Kann ein Panel den Schlüssel nicht speichern, verweigert es die Messung. Die ungefilterte Entitätenanzahl ist die zuletzt synchronisierte Kataloganzahl, kein aus der überlasteten WebView ermittelter Live-Wert. Bei leerem Katalog wird sie als nicht verfügbar gemeldet. Netzwerk- und Browserverkehrszähler werden auf die tatsächlich beobachteten Intervalle normiert, damit eine verpasste Abfrage den Vergleich nicht verzerrt. Veraltete Browserzeit- und Verkehrsraten fehlen in den Zusammenfassungen. CPU-, Speicher-, Netzwerk- und Rendererwerte der Panel-App selbst werden weiter erfasst.
 
 ## Signierung
 

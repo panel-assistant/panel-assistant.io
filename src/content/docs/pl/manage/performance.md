@@ -1,7 +1,7 @@
 ---
 title: Wydajność
 description: Dlaczego panel ścienny może działać wolno z pulpitem sprawnym na telefonie, jak to zmierzyć i jakie poprawki mają największy wpływ.
-sourceCommit: 2ef99e6f646c9c16596e51ebee3c239cce4ec471
+sourceCommit: 396e908e6370b88a9fd555abcb67b0816c4cd6f4
 ---
 
 Niedrogi panel ścienny z Androidem może reagować ospale, zacinać się podczas przewijania, wyświetlać pusty ekran lub przestać aktualizować dane, choć ten sam pulpit działa dobrze na telefonie lub komputerze. Zacznij od pracy wysyłanej panelowi przez Home Assistant, następnie zmierz pozostałe ograniczenia pulpitu i sprzętu, zanim uznasz, że panel trzeba wymienić.
@@ -31,29 +31,7 @@ Wiersz **Prawdopodobna przyczyna** stosuje te reguły zachowawczo i podaje pewno
 
 ### Porównanie filtrowania i jego braku spoza panelu
 
-Jeśli niefiltrowany pulpit przeciąża własny WebView, pomiary na stronie mogą przestać się zmieniać. Skrypt kolektora uruchomiony na komputerze odpytuje zamiast tego interfejs wydajności samej aplikacji panelu, należący do przestarzałego REST API (zobacz [dokumentację sterowania](/pl/reference/api/#the-rest-api-is-deprecated)). CPU całego panelu pozostaje więc widoczne, a przy root lub pomocniku także natywny pomiar wątku renderera Chromium. Skrypt zapisuje też wiek ostatniej partii pomiarów przeglądarki; ponad 15 sekund oznacza zatrzymany pomiar, a nie bieżący wynik.
-
-Kolektor nie zmienia konfiguracji. Nigdy nie włącza, nie wyłącza ani nie przepisuje filtra encji; pierwsze żądanie może utworzyć jeden prywatny klucz instalacji w wewnętrznym stanie aplikacji. Wybierz ten sam widok i obciążenie dla obu pomiarów, zmień filtr w interfejsie panelu, poczekaj na przeładowanie pulpitu i wykonaj jedno polecenie z lokalnego [repozytorium ha-paneld](https://github.com/panel-assistant/android) dla każdego stanu:
-
-```bash
-python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect filtered --label filtered --output filtered.json
-```
-
-```bash
-python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect unfiltered --label unfiltered --pair-with filtered.json --output unfiltered.json
-```
-
-Porównaj wyniki:
-
-```bash
-python3 tools/measure-dashboard-performance.py compare filtered.json unfiltered.json --output comparison.json
-```
-
-Każdy pomiar domyślnie trwa trzy minuty, z 30-sekundową rozgrzewką i odpytywaniem co 10 sekund. `--pair-with` używa niejawnego identyfikatora porównania z pierwszego wyniku, aby odrzucić inny fizyczny panel, inny skonfigurowany Home Assistant lub pulpit albo zmianę ustawienia wpływającą na pomiar bez zapisywania tych prywatnych wartości. Nie wykrywa ręcznej zmiany widoku w tym samym pulpicie, dlatego zachowaj ten sam widoczny widok i obciążenie.
-
-Kolektor odrzuca pomiar, gdy oczekiwany tryb nie jest aktywny, zmienia się rewizja filtra lub generacja renderera, kompilacja lub konfiguracja podczas zbierania, następuje awaryjne wycofanie filtrowania albo pozostają mniej niż trzy próbki, mniej niż trzy próbki CPU całego panelu lub mniej niż trzy natywne próbki CPU renderera. Nadal zapisuje odrzucony wynik z dokładnymi powodami i nigdy nie nadpisuje istniejącego pliku.
-
-JSON pomija URL i identyfikator panelu, URL Home Assistant i ścieżkę pulpitu, identyfikatory encji, nazwy procesów i skrót filtra. Panel oblicza niejawne odciski prywatnym losowym 256-bitowym kluczem instalacji, który go nie opuszcza; odciski są unikalne dla jednej pary porównania, więc nie można łączyć oddzielnych pomiarów ani zgadywać nazwy panelu. Panel, który nie może zapisać klucza, odmawia pomiaru. Liczba niefiltrowanych encji jest ostatnią zsynchronizowaną liczbą z katalogu, a nie odczytem na żywo z przeciążonego WebView; przy pustym katalogu jest niedostępna. Liczniki ruchu sieciowego i przeglądarki są normalizowane do rzeczywiście obserwowanych odstępów, więc pominięte odpytanie nie zniekształca porównania. Nieaktualne czasy i tempo ruchu przeglądarki są pomijane w podsumowaniach, podczas gdy CPU, pamięć, sieć i dane renderera z samej aplikacji nadal są zbierane.
+Jeśli niefiltrowany pulpit przeciąża własny WebView, wartości na stronie mogą przestać się zmieniać. Współtwórcy, którzy chcą zarejestrować porównanie obu stanów obok siebie, mierzone spoza panelu, mogą użyć skryptu zbierającego pomiary opisanego w [środowisku programistycznym](/pl/reference/development-environment/#pomiar-wydajności-pulpitu-z-komputera).
 
 ### Opcjonalne zdalne debugowanie WebView
 

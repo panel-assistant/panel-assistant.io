@@ -1,7 +1,7 @@
 ---
 title: Prestaties
 description: Waarom een wandpaneel traag kan aanvoelen met een dashboard dat prima op een telefoon werkt, hoe je het meet en de oplossingen op volgorde van effect.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 396e908e6370b88a9fd555abcb67b0816c4cd6f4
 ---
 
 Een goedkoop Android-wandpaneel kan traag aanvoelen, haperen bij scrollen, leeg worden of niet meer bijwerken, terwijl hetzelfde dashboard goed op een telefoon of computer werkt. Begin bij het werk dat Home Assistant naar het paneel stuurt en meet daarna de resterende dashboard- en hardwarebeperkingen, voordat je aanneemt dat het paneel vervangen moet worden.
@@ -31,29 +31,7 @@ De rij **Waarschijnlijke oorzaak** past deze regels voorzichtig toe en vermeldt 
 
 ### Gefilterd en ongefilterd van buiten het paneel vergelijken
 
-Overbelast het ongefilterde dashboard zijn eigen WebView, dan kunnen de cijfers op de pagina stoppen. Een verzamelscript op een computer bevraagt in plaats daarvan de eigen prestatie-interface van de paneel-app, onderdeel van de verouderde REST-API (zie de [bedieningsreferentie](/nl/reference/api/#de-rest-api-wordt-uitgefaseerd)). Daardoor blijft de totale paneel-CPU zichtbaar en, met root of helper, een native meting van de Chromium-renderthread. Het registreert ook hoe oud de laatste browsermetingen zijn; boven 15 seconden gelden ze als vastgelopen in plaats van actueel.
-
-Het verzamelscript verandert je configuratie niet. Het zet het entiteitsfilter nooit aan of uit en herschrijft het niet; het eerste verzoek kan één private installatiesleutel in de interne toestand aanmaken. Kies voor beide runs dezelfde dashboardweergave en belasting, wijzig het filter op de webinterface, wacht op herladen en voer vanuit een checkout van de [ha-paneld-repository](https://github.com/panel-assistant/android) voor elke toestand één opdracht uit:
-
-```bash
-python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect filtered --label filtered --output filtered.json
-```
-
-```bash
-python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect unfiltered --label unfiltered --pair-with filtered.json --output unfiltered.json
-```
-
-Vergelijk de twee resultaten:
-
-```bash
-python3 tools/measure-dashboard-performance.py compare filtered.json unfiltered.json --output comparison.json
-```
-
-Elke run duurt standaard drie minuten, met 30 seconden opwarmen en elke 10 seconden een meting. `--pair-with` hergebruikt een ondoorzichtige vergelijkings-ID uit het eerste resultaat. Zo kan de vergelijking een ander fysiek paneel, een andere ingestelde Home Assistant of dashboard, of een gewijzigde relevante instelling weigeren zonder die private waarden vast te leggen. Een handmatig gekozen andere weergave binnen hetzelfde dashboard wordt niet ontdekt, dus houd zichtbare weergave en belasting gelijk.
-
-Het script weigert een run als de verwachte modus niet actief is, de filterrevisie of renderergeneratie wijzigt, de build of configuratie tijdens verzamelen verandert, filtering terugvalt of minder dan drie monsters, drie totale paneel-CPU-monsters of drie native renderer-CPU-monsters overblijven. Het schrijft het geweigerde resultaat met de exacte redenen toch en overschrijft nooit een bestaand uitvoerbestand.
-
-De JSON laat paneel-URL en -ID, Home Assistant-URL en dashboardpad, entiteits-ID’s, procesnamen en filterhash weg. Het paneel berekent ondoorzichtige vingerafdrukken met een private willekeurige 256-bits installatiesleutel die het nooit verlaat. De vingerafdrukken zijn uniek per vergelijkingspaar, zodat afzonderlijke metingen niet kunnen worden gekoppeld of gebruikt om een paneelnaam te raden. Kan het paneel de sleutel niet opslaan, dan weigert het de meting. Het ongefilterde entiteitsaantal is het laatst gesynchroniseerde catalogusaantal, geen live aantal uit de overbelaste WebView, en geldt als niet beschikbaar bij een lege catalogus. Netwerk- en browserverkeertellers worden genormaliseerd naar werkelijk waargenomen intervallen, zodat een gemiste meting de vergelijking niet vertekent. Verouderde browsertijden en verkeerssnelheden worden uit samenvattingen weggelaten, terwijl CPU-, geheugen-, netwerk- en renderercijfers uit de paneel-app wel verzameld blijven worden.
+Als het ongefilterde dashboard zijn eigen WebView overbelast, kunnen de cijfers op de pagina stoppen met veranderen. Bijdragers die een vastgelegde vergelijking van beide toestanden naast elkaar willen, gemeten van buiten het paneel, kunnen het verzamelscript gebruiken dat wordt beschreven onder [Ontwikkelomgeving](/nl/reference/development-environment/#dashboardprestaties-meten-vanaf-een-computer).
 
 ### Optionele externe WebView-foutopsporing
 
