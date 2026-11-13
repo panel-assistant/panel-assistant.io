@@ -1,27 +1,28 @@
 /* Unscoped: the same renderer also supplies HTML at request time. */
 .product-hero {
   margin: 1.25rem 0 1.5rem;
-  max-width: 48rem;
+  width: 100%;
 }
 .photo-hero {
   display: block;
   width: 100%;
-  padding: 1rem;
-  border: 1px solid var(--sl-color-hairline);
-  border-radius: 0.75rem;
-  background: var(--sl-color-gray-6, var(--sl-color-gray-7));
+  padding: 0;
+  border: 0;
+  background: transparent;
   cursor: zoom-in;
   line-height: 0;
 }
-.photo-hero:hover,
 .photo-hero:focus-visible {
-  border-color: var(--sl-color-gray-3);
+  outline: 2px solid var(--sl-color-gray-3);
+  outline-offset: 4px;
 }
 .photo-hero img {
   display: block;
   width: 100%;
-  height: clamp(16rem, 42vw, 28rem);
+  height: auto;
+  max-height: 50vh;
   object-fit: contain;
+  object-position: center;
 }
 .hardware-photos {
   margin: 1rem 0 1.5rem;
