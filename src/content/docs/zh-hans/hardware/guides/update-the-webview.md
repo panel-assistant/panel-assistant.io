@@ -1,5 +1,5 @@
 ---
-sourceCommit: 1e7b416eee2ae3b96338c0dc138457fd5da097f0
+sourceCommit: ea70be33df90d51557b5dacf3b78b2bc72a3b494
 title: 更新系统 WebView
 description: 为什么大多数墙面板需要较新的 Android System WebView 才能显示 Home Assistant 仪表盘，以及各面板的安装方法。
 sidebar:
@@ -7,15 +7,15 @@ sidebar:
   order: 2
 ---
 
-请先阅读本页：WebView 过旧是这些面板首次运行失败的最常见原因。
+WebView 过旧是这些面板首次运行失败的最常见原因，因此仪表盘无法显示时，应首先检查 WebView。
 
-面板应用的内置渲染器依赖 Android **系统 WebView**，而多数面板出厂版本太旧，无法运行当前 Home Assistant 前端。因此开箱后可能出现空白或损坏的仪表盘、卡片缺失或“浏览器不受支持”。**没有** Google Play 的面板（Sonoff NSPanel Pro、Tuya TPA10）需要其他更新途径。**Electron WF1589T 和 ZHICAI SMT1019 带有 Google Play**，请从 Play 商店更新 _Android System WebView_，或使用 Play WebView 开发通道。
+面板应用的内置渲染器依赖 Android **系统 WebView**，而多数面板出厂版本太旧，无法运行当前 Home Assistant 前端。因此开箱后可能出现空白或损坏的仪表盘、卡片缺失或“浏览器不受支持”。受支持的面板可以从 Home Assistant 获取经过验证的 WebView，如下一段所述。**Electron WF1589T 和 ZHICAI SMT1019 带有 Google Play**，请从面板上的 Play 商店更新 _Android System WebView_，或使用 Play WebView 开发通道。
 
 从 Home Assistant 启动的安装和面板应用更新也可以安装经过验证且兼容的 WebView。这需要受支持的配置文件、未由 Play 管理且与所选构建包名和签名者相同的提供程序，以及允许的安装途径。如果更新仍未完成，请在面板的更新修复中选择**重试**。它会先检查现有工作，再请求另一次尝试；没有计划重试。旧引擎不会阻止设置和配对，但仪表盘仍可能无法显示。TPA10 的原装提供程序受签名锁定，仍需先执行文档中的 root 替换流程，才能使用不同签名的替代版本。
 
 ## 手动备用方法
 
-托管更新途径不可用时，请使用下方适合面板的现有方法。通过 adb 直接侧载标准 Android System WebView（包名 **`com.android.webview`**）时，需要与面板 Android 版本和 ABI 匹配的构建，无需第三方应用商店。
+托管更新途径不可用时，请使用下方适合面板的现有方法。这是硬件操作：与安装和更新 Panel Assistant 不同，它需要一台装有 Android `adb` 工具的电脑。通过 adb 直接侧载标准 Android System WebView（包名 **`com.android.webview`**）时，需要与面板 Android 版本和 ABI 匹配的构建，无需第三方应用商店。
 
 :::tip
 系统要自动选择提供程序，包名必须为 `com.android.webview`。Cromite 和 LineageOS 的 **SystemWebView** 构建使用 `com.android.webview`，能注册为提供程序；普通 Cromite **浏览器**应用的包名不同，不能注册。请使用 SystemWebView 构建，而非浏览器 APK。
