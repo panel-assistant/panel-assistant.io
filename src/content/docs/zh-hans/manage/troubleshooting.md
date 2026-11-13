@@ -1,7 +1,7 @@
 ---
 title: 故障排查
 description: 壁挂面板常见的问题，以及应先检查什么。
-sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
+sourceCommit: 03a4ef94d2f13624feee19f2a8df41935d3bc2ac
 ---
 
 先查看 Home Assistant 中的面板设备，它提供状态传感器和可下载的诊断信息；同时查看面板自身的状态页面：在 Home Assistant 中该面板的设备页面上使用 **访问**。该页面的 `/diag` 报告无需猜测就能回答下方大多数问题。
@@ -12,7 +12,7 @@ sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
 
 ## 仪表盘空白、只显示一部分，或出现大量脚本错误
 
-先检查系统 WebView。这是首次运行时最常见的故障，远超其他原因。旧版 WebView 恰好会造成这些症状，却看起来像面板应用出错。操作步骤见 [更新系统 WebView](/zh-hans/hardware/guides/update-the-webview/)。
+先检查系统 WebView。这是首次运行时最常见的故障，远超其他原因。旧版 WebView 恰好会造成这些症状，却看起来像面板应用出错。[更新系统 WebView](/zh-hans/hardware/guides/update-the-webview/)说明了各款面板可用的更新方式。
 
 如果 WebView 已是最新版本，[启动与恢复](/zh-hans/manage/built-in-renderer/#启动与恢复)一节说明了仪表盘加载失败时面板会如何处理，以及如何查看原因。
 
@@ -22,7 +22,7 @@ sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
 
 ## 安装程序无法访问面板
 
-通过网络安装时：确认面板地址，并确认 TCP 端口 5555 上的网络 ADB 仍然开启，因为有些面板会在重启后再次关闭它。如果面板出现授权提示，请在面板屏幕上接受。通过 USB 安装时：确认使用的是基于 Chromium 的浏览器，线缆连接的是运行浏览器的电脑，并且已开启 USB 调试。各型号进入开发者选项和开启调试的方式不同，详见 [准备面板](/zh-hans/install/prepare-a-panel/)和 [硬件页面](/zh-hans/hardware/)。如果面板始终无法接受网络连接，请改为 [通过 USB 安装](/zh-hans/install/install-over-usb/)：面板无需网络 ADB，但浏览器仍需连接到 Home Assistant 以获取经过验证的发布版本。
+通过网络安装时：确认面板地址，并确认面板自身的 **设置** 中仍开启了网络调试（TCP 端口 5555 上的网络 ADB），因为有些面板会在重启后再次关闭它。如果面板出现授权提示，请在面板屏幕上接受。通过 USB 安装时：确认使用的是基于 Chromium 的浏览器，线缆连接的是运行浏览器的电脑，并且已开启 USB 调试。各型号进入开发者选项和开启调试的方式不同，详见 [准备面板](/zh-hans/install/prepare-a-panel/)和 [硬件页面](/zh-hans/hardware/)。如果面板始终无法接受网络连接，请改为 [通过 USB 安装](/zh-hans/install/install-over-usb/)：面板无需网络 ADB，但浏览器仍需连接到 Home Assistant 以获取经过验证的发布版本。
 
 ## 网络安装中途停止
 

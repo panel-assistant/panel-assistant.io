@@ -1,7 +1,7 @@
 ---
 title: Solución de problemas
 description: Los problemas habituales de un panel de pared y dónde mirar primero.
-sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
+sourceCommit: 03a4ef94d2f13624feee19f2a8df41935d3bc2ac
 ---
 
 Empieza por el dispositivo del panel en Home Assistant, que tiene un sensor de estado y una descarga de diagnóstico, y por la página de estado del propio panel: usa **Visitar** en la página de su dispositivo en Home Assistant. Su informe `/diag` responde a la mayoría de las preguntas siguientes sin necesidad de hacer conjeturas.
@@ -12,7 +12,7 @@ Cuando necesites ver qué está haciendo el panel en ese momento, la pestaña **
 
 ## El panel de control está en blanco, se muestra a medias o está lleno de errores de scripts
 
-Comprueba primero el WebView del sistema. Es, con mucha diferencia, el fallo más habitual en el primer inicio, y un WebView antiguo produce exactamente estos síntomas, aunque parezca un fallo de la aplicación del panel. El procedimiento está en [Actualizar el WebView del sistema](/es/hardware/guides/update-the-webview/).
+Comprueba primero el WebView del sistema. Es, con mucha diferencia, el fallo más habitual en el primer inicio, y un WebView antiguo produce exactamente estos síntomas, aunque parezca un fallo de la aplicación del panel. [Actualizar el WebView del sistema](/es/hardware/guides/update-the-webview/) indica qué vía de actualización tiene cada panel.
 
 Si el WebView está actualizado, la sección [Inicio y recuperación](/es/manage/built-in-renderer/#inicio-y-recuperación) explica qué hace el panel cuando un panel de control no se carga y cómo averiguar el motivo.
 
@@ -22,7 +22,7 @@ Parte del problema está en el panel y parte en el panel de control. [Rendimient
 
 ## El instalador no puede acceder al panel
 
-Por red: confirma la dirección del panel y que ADB por red en el puerto TCP 5555 siga habilitado, porque algunos paneles vuelven a deshabilitarlo tras un reinicio. Si el panel muestra una solicitud de autorización, acéptala en su pantalla. Por USB: asegúrate de utilizar un navegador basado en Chromium, de que el cable esté conectado al ordenador que ejecuta el navegador y de que la depuración USB esté habilitada. La forma de acceder a las opciones para desarrolladores y habilitar la depuración varía según el modelo y se explica en [Preparar el panel](/es/install/prepare-a-panel/) y en las [páginas de hardware](/es/hardware/). Si el panel simplemente no acepta una conexión por red, [instala por USB](/es/install/install-over-usb/): el panel no necesita ADB por red, mientras que tu navegador permanece conectado a Home Assistant para obtener la versión verificada.
+Por red: confirma la dirección del panel y que la depuración por red (ADB por red en el puerto TCP 5555) siga activada en los Ajustes del propio panel, porque algunos paneles vuelven a deshabilitarlo tras un reinicio. Si el panel muestra una solicitud de autorización, acéptala en su pantalla. Por USB: asegúrate de utilizar un navegador basado en Chromium, de que el cable esté conectado al ordenador que ejecuta el navegador y de que la depuración USB esté habilitada. La forma de acceder a las opciones para desarrolladores y habilitar la depuración varía según el modelo y se explica en [Preparar el panel](/es/install/prepare-a-panel/) y en las [páginas de hardware](/es/hardware/). Si el panel simplemente no acepta una conexión por red, [instala por USB](/es/install/install-over-usb/): el panel no necesita ADB por red, mientras que tu navegador permanece conectado a Home Assistant para obtener la versión verificada.
 
 ## Una instalación por red se detuvo a mitad del proceso
 

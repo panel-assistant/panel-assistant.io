@@ -1,7 +1,7 @@
 ---
 title: Dépannage
 description: Les problèmes courants d’un panneau mural et les premiers points à vérifier.
-sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
+sourceCommit: 03a4ef94d2f13624feee19f2a8df41935d3bc2ac
 ---
 
 Commencez par l’appareil correspondant au panneau dans Home Assistant, qui propose un capteur d’état et un téléchargement des diagnostics, ainsi que par la page d’état du panneau : utilisez **Visiter** sur la page de son appareil dans Home Assistant. Son rapport `/diag` répond à la plupart des questions ci-dessous sans devoir deviner.
@@ -12,7 +12,7 @@ Pour voir ce que fait le panneau au moment où cela se produit, l’onglet **Jou
 
 ## Le tableau de bord est vide, partiellement affiché ou rempli d’erreurs de script
 
-Vérifiez d’abord le WebView système. C’est de loin la cause la plus fréquente d’échec lors de la première utilisation, et un ancien WebView produit exactement ces symptômes tout en donnant l’impression que l’application du panneau est en cause. La procédure figure dans [Mettre à jour le WebView système](/fr/hardware/guides/update-the-webview/).
+Vérifiez d’abord le WebView système. C’est de loin la cause la plus fréquente d’échec lors de la première utilisation, et un ancien WebView produit exactement ces symptômes tout en donnant l’impression que l’application du panneau est en cause. [Mettre à jour le WebView système](/fr/hardware/guides/update-the-webview/) indique quelle méthode de mise à jour est disponible pour chaque panneau.
 
 Si le WebView est à jour, la section [démarrage et récupération](/fr/manage/built-in-renderer/#startup-and-recovery) explique ce que fait le panneau lorsqu’un tableau de bord ne se charge pas et comment en connaître la raison.
 
@@ -22,7 +22,7 @@ Cela tient en partie au panneau et en partie au tableau de bord. [Performances](
 
 ## L’installateur ne peut pas joindre le panneau
 
-Sur le réseau : vérifiez l’adresse du panneau et que l’accès ADB sur le réseau, sur le port TCP 5555, est toujours activé, car certains panneaux le désactivent à nouveau après un redémarrage. Si le panneau affiche une demande d’autorisation, acceptez-la sur son écran. Par USB : assurez-vous d’utiliser un navigateur basé sur Chromium, que le câble est relié à l’ordinateur qui exécute le navigateur et que le débogage USB est activé. L’accès aux options pour les développeurs et l’activation du débogage varient selon le modèle et sont décrits dans [Préparer le panneau](/fr/install/prepare-a-panel/) et les [pages consacrées au matériel](/fr/hardware/). Si le panneau refuse toute connexion réseau, [installez par USB](/fr/install/install-over-usb/) à la place : le panneau n’a pas besoin d’ADB sur le réseau, tandis que votre navigateur reste connecté à Home Assistant pour obtenir la version vérifiée.
+Sur le réseau : vérifiez l’adresse du panneau et que le débogage réseau (ADB réseau sur le port TCP 5555) est toujours activé dans les paramètres du panneau lui-même, car certains panneaux le désactivent à nouveau après un redémarrage. Si le panneau affiche une demande d’autorisation, acceptez-la sur son écran. Par USB : assurez-vous d’utiliser un navigateur basé sur Chromium, que le câble est relié à l’ordinateur qui exécute le navigateur et que le débogage USB est activé. L’accès aux options pour les développeurs et l’activation du débogage varient selon le modèle et sont décrits dans [Préparer le panneau](/fr/install/prepare-a-panel/) et les [pages consacrées au matériel](/fr/hardware/). Si le panneau refuse toute connexion réseau, [installez par USB](/fr/install/install-over-usb/) à la place : le panneau n’a pas besoin d’ADB sur le réseau, tandis que votre navigateur reste connecté à Home Assistant pour obtenir la version vérifiée.
 
 ## Une installation réseau s’est arrêtée en cours de route
 

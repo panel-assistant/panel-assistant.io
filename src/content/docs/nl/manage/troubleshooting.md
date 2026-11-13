@@ -1,7 +1,7 @@
 ---
 title: Problemen oplossen
 description: Wat er meestal misgaat met een wandpaneel en waar je het eerst moet kijken.
-sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
+sourceCommit: 03a4ef94d2f13624feee19f2a8df41935d3bc2ac
 ---
 
 Begin bij het apparaat van het paneel in Home Assistant, met zijn statussensor en downloadbare diagnostiek, en de eigen statuspagina van het paneel: kies **Bezoeken** op de apparaatpagina in Home Assistant. Het rapport `/diag` beantwoordt de meeste onderstaande vragen zonder giswerk.
@@ -12,7 +12,7 @@ Wil je zien wat het paneel op dit moment doet, dan streamt het tabblad **Logs** 
 
 ## Het dashboard is leeg, half getekend of vol scriptfouten
 
-Controleer eerst de systeem-WebView. Dit is verreweg de meest voorkomende fout bij de eerste start, en een oude WebView veroorzaakt precies deze verschijnselen terwijl het op een fout in de paneel-app lijkt. De procedure staat in [De systeem-WebView bijwerken](/nl/hardware/guides/update-the-webview/).
+Controleer eerst de systeem-WebView. Dit is verreweg de meest voorkomende fout bij de eerste start, en een oude WebView veroorzaakt precies deze verschijnselen terwijl het op een fout in de paneel-app lijkt. [De systeem-WebView bijwerken](/nl/hardware/guides/update-the-webview/) beschrijft welke updateroute elk paneel heeft.
 
 Is de WebView actueel, dan beschrijft [Opstarten en herstel](/nl/manage/built-in-renderer/#opstarten-en-herstel) wat het paneel doet wanneer een dashboard niet laadt en hoe je de oorzaak kunt zien.
 
@@ -22,7 +22,7 @@ Dit ligt deels aan het paneel en deels aan het dashboard. [Prestaties](/nl/manag
 
 ## Het installatieprogramma kan het paneel niet bereiken
 
-Via het netwerk: controleer het paneeladres en of netwerk-ADB op TCP-poort 5555 nog aan staat, want sommige panelen zetten dat na een herstart weer uit. Toont het paneel een autorisatiemelding, keur die dan op het paneelscherm goed. Via USB: zorg dat je een op Chromium gebaseerde browser gebruikt, de kabel naar de computer met de browser loopt en USB-foutopsporing aan staat. Hoe je ontwikkelaarsopties bereikt en foutopsporing inschakelt, verschilt per model en staat in [Het paneel voorbereiden](/nl/install/prepare-a-panel/) en de [hardwarepagina’s](/nl/hardware/). Accepteert het paneel geen netwerkverbinding, [installeer dan via USB](/nl/install/install-over-usb/): het paneel heeft geen netwerk-ADB nodig, terwijl je browser met Home Assistant verbonden blijft voor de geverifieerde release.
+Via het netwerk: controleer het paneeladres en of netwerkfoutopsporing (netwerk-ADB op TCP-poort 5555) in de eigen Instellingen van het paneel nog aan staat, want sommige panelen zetten dat na een herstart weer uit. Toont het paneel een autorisatiemelding, keur die dan op het paneelscherm goed. Via USB: zorg dat je een op Chromium gebaseerde browser gebruikt, de kabel naar de computer met de browser loopt en USB-foutopsporing aan staat. Hoe je ontwikkelaarsopties bereikt en foutopsporing inschakelt, verschilt per model en staat in [Het paneel voorbereiden](/nl/install/prepare-a-panel/) en de [hardwarepagina’s](/nl/hardware/). Accepteert het paneel geen netwerkverbinding, [installeer dan via USB](/nl/install/install-over-usb/): het paneel heeft geen netwerk-ADB nodig, terwijl je browser met Home Assistant verbonden blijft voor de geverifieerde release.
 
 ## Een netwerkinstallatie stopte halverwege
 

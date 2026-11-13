@@ -1,7 +1,7 @@
 ---
 title: Rozwiązywanie problemów
 description: Typowe problemy z panelem ściennym i miejsca, od których warto zacząć.
-sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
+sourceCommit: 03a4ef94d2f13624feee19f2a8df41935d3bc2ac
 ---
 
 Zacznij od urządzenia panelu w Home Assistant, które ma czujnik stanu i możliwość pobrania diagnostyki, oraz od strony stanu samego panelu: użyj **Odwiedź** na stronie jego urządzenia w Home Assistant. Raport `/diag` odpowiada na większość poniższych pytań bez zgadywania.
@@ -12,7 +12,7 @@ Gdy potrzebujesz obserwować bieżące działanie panelu, karta **Logi** na tej 
 
 ## Pulpit jest pusty, częściowo narysowany lub pełen błędów skryptów
 
-Najpierw sprawdź systemowy WebView. To zdecydowanie najczęstszy problem przy pierwszym uruchomieniu, a stary WebView daje dokładnie te objawy, wyglądające jak usterka aplikacji panelu. Procedurę opisuje [Aktualizacja systemowego WebView](/pl/hardware/guides/update-the-webview/).
+Najpierw sprawdź systemowy WebView. To zdecydowanie najczęstszy problem przy pierwszym uruchomieniu, a stary WebView daje dokładnie te objawy, wyglądające jak usterka aplikacji panelu. [Aktualizacja systemowego WebView](/pl/hardware/guides/update-the-webview/) opisuje dostępne metody aktualizacji dla poszczególnych paneli.
 
 Jeśli WebView jest aktualny, sekcja [uruchamiania i odzyskiwania](/pl/manage/built-in-renderer/#uruchamianie-i-odzyskiwanie) opisuje, co panel robi, gdy pulpit się nie ładuje, i jak ustalić przyczynę.
 
@@ -22,7 +22,7 @@ Częściowo odpowiada za to panel, a częściowo pulpit. [Wydajność](/pl/manag
 
 ## Instalator nie może dotrzeć do panelu
 
-Przez sieć: potwierdź adres panelu i to, że sieciowe ADB na porcie TCP 5555 nadal jest włączone, ponieważ niektóre panele wyłączają je po ponownym uruchomieniu. Jeśli panel wyświetla monit autoryzacji, zaakceptuj go na ekranie panelu. Przez USB: upewnij się, że używasz przeglądarki opartej na Chromium, kabel prowadzi do komputera uruchamiającego przeglądarkę, a debugowanie USB jest włączone. Dostęp do opcji programisty i włączanie debugowania różnią się między modelami; opisują je [Przygotowanie panelu](/pl/install/prepare-a-panel/) i [strony sprzętu](/pl/hardware/). Jeśli panel po prostu nie przyjmuje połączenia sieciowego, zamiast tego [zainstaluj przez USB](/pl/install/install-over-usb/): panel nie potrzebuje sieciowego ADB, a przeglądarka pozostaje połączona z Home Assistant w celu pobrania zweryfikowanego wydania.
+Przez sieć: potwierdź adres panelu i to, że debugowanie sieciowe (sieciowe ADB na porcie TCP 5555) nadal jest włączone w Ustawieniach samego panelu, ponieważ niektóre panele wyłączają je po ponownym uruchomieniu. Jeśli panel wyświetla monit autoryzacji, zaakceptuj go na ekranie panelu. Przez USB: upewnij się, że używasz przeglądarki opartej na Chromium, kabel prowadzi do komputera uruchamiającego przeglądarkę, a debugowanie USB jest włączone. Dostęp do opcji programisty i włączanie debugowania różnią się między modelami; opisują je [Przygotowanie panelu](/pl/install/prepare-a-panel/) i [strony sprzętu](/pl/hardware/). Jeśli panel po prostu nie przyjmuje połączenia sieciowego, zamiast tego [zainstaluj przez USB](/pl/install/install-over-usb/): panel nie potrzebuje sieciowego ADB, a przeglądarka pozostaje połączona z Home Assistant w celu pobrania zweryfikowanego wydania.
 
 ## Instalacja sieciowa zatrzymała się w trakcie
 
