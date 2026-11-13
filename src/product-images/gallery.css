@@ -18,9 +18,11 @@
 }
 .photo-hero img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
-  max-height: 50vh;
+  max-height: 40vh;
+  margin-inline: auto;
   object-fit: contain;
   object-position: center;
 }
