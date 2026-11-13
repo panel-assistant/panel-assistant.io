@@ -1,7 +1,7 @@
 ---
 title: Herstellerpakete
 description: Eine aufdringliche Hersteller-App daran hindern, beim Start erneut zu starten und dein Dashboard zu überlagern – rückgängig machbar und nur für die von dir ausgewählten Pakete.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 Ein Firmware-Update kann eine Hersteller-App auf dem Panel hinterlassen, die bei jedem Start erneut startet und ein schwebendes Widget über dein Dashboard zeichnet. Auf dem Sonoff NSPanel Pro 120 sorgte ein Firmware-Update beispielsweise dafür, dass `com.eWeLinkControlPanel` beim Start ausgeführt wurde und ein Steuerungswidget über den jeweiligen Bildschirminhalt legte. Die Panel-App kann solche Pakete neutralisieren, aber nur diejenigen, die du angibst.
@@ -36,10 +36,10 @@ Nichts wird gebändigt, bevor du eine Einschränken-Schaltfläche drückst. Ohne
 
 ## Sicherheit
 
-- **Rückgängig machbar.** Die Deaktivierung wird mit `pm enable <pkg>` oder durch ein Update dieser App oder der Firmware aufgehoben. Hier wird nichts zerstört: keine Deinstallation und keine Datenlöschung.
+- **Rückgängig machbar.** Die Deaktivierung wird mit **Wieder aktivieren** auf der Karte oder durch ein Update dieser App oder der Firmware aufgehoben. Hier wird nichts zerstört: keine Deinstallation und keine Datenlöschung.
 - **Kritische Pakete werden abgelehnt.** Die Panel-App stoppt oder deaktiviert niemals die Systemoberfläche, Einstellungen, Telefonie, das Android-Framework oder sich selbst, auch wenn du eines davon angibst. Sowohl die App als auch der privilegierte Helper erzwingen dies, sodass ein Tippfehler das Panel nicht unbrauchbar machen kann.
 - **Nur installierte Pakete, die du angibst, werden berührt.** Wenn du ein von der Panel-App verwaltetes Paket aus der gewünschten Liste entfernst, wird es wieder aktiviert und seine gespeicherte Overlay-Berechtigung wiederhergestellt. Auch **Wieder aktivieren** hebt das Bändigen auf.
 
 :::caution
-Du wählst Pakete zum Deaktivieren aus. Bleibe daher bei Herstellersoftware, die du erkennst. Wenn du etwas deaktivierst, von dem das Panel abhängt, etwa einen tatsächlich verwendeten Hersteller-Launcher oder eine Eingabemethode, kann die Navigation schwierig werden, bis du es über `adb` wieder aktivierst. Lass es im Zweifel unverändert.
+Du wählst Pakete zum Deaktivieren aus. Bleibe daher bei Herstellersoftware, die du erkennst. Wenn du etwas deaktivierst, von dem das Panel abhängt, etwa einen tatsächlich verwendeten Hersteller-Launcher oder eine Eingabemethode, kann die Navigation auf dem eigenen Bildschirm des Panels schwierig werden. Du kannst es weiterhin über die Karte **Herstellerpakete** wieder aktivieren, die du aus Home Assistant mit **Besuchen** erreichst, ohne das Panel zu berühren. Lass es im Zweifel unverändert.
 :::

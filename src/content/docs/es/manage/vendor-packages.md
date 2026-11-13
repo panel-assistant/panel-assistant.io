@@ -1,7 +1,7 @@
 ---
 title: Paquetes del fabricante
 description: Impedir de forma reversible que una aplicación intrusiva del fabricante vuelva a iniciarse al arrancar y se superponga al panel de control, solo para los paquetes que elijas.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 Una actualización de firmware puede dejar en el panel una aplicación del fabricante que vuelve a iniciarse al arrancar y muestra un widget flotante sobre el panel de control. En el Sonoff NSPanel Pro 120, por ejemplo, una actualización dejó `com.eWeLinkControlPanel` iniciándose al arrancar y superponiendo un widget de control sobre cualquier contenido. La aplicación del panel puede neutralizar paquetes como este, pero solo los que indiques.
@@ -36,10 +36,10 @@ No se restringe nada hasta que pulses un botón Controlar. Sin root ni el auxili
 
 ## Seguridad
 
-- **Reversible.** La desactivación se revierte con `pm enable <pkg>` o mediante una actualización de esa aplicación o del firmware. Nada aquí es destructivo: no se desinstala ni se borran datos.
+- **Reversible.** La desactivación se revierte con **Volver a habilitar** en la tarjeta o mediante una actualización de esa aplicación o del firmware. Nada aquí es destructivo: no se desinstala ni se borran datos.
 - **Se rechazan los paquetes críticos.** La aplicación del panel nunca detendrá ni desactivará la interfaz del sistema, Ajustes, telefonía, el framework de Android ni a sí misma, aunque indiques sus nombres. Tanto la aplicación como el auxiliar privilegiado imponen esta protección, de modo que un error de escritura no inutilice el panel.
 - **Solo se modifican los paquetes instalados que indiques.** Quitar de la lista deseada un paquete gestionado por la aplicación lo vuelve a habilitar y restaura su permiso de superposición guardado. **Volver a habilitar** también revierte la restricción.
 
 :::caution
-Estás eligiendo qué paquetes desactivar, así que limita la selección a software del fabricante que reconozcas. Desactivar algo de lo que depende el panel, como un lanzador del fabricante que utilices o un método de entrada, puede dificultar la navegación hasta que lo vuelvas a habilitar por `adb`. En caso de duda, déjalo como está.
+Estás eligiendo qué paquetes desactivar, así que limita la selección a software del fabricante que reconozcas. Desactivar algo de lo que depende el panel, como un lanzador del fabricante que utilices o un método de entrada, puede dificultar la navegación en la propia pantalla del panel. Aún puedes volver a habilitarlo desde la tarjeta **Paquetes del fabricante**, a la que accedes desde Home Assistant con **Visitar**, sin tocar el panel. En caso de duda, déjalo como está.
 :::

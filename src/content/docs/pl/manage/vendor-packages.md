@@ -1,7 +1,7 @@
 ---
 title: Pakiety producenta
 description: Odwracalne zatrzymywanie natrętnej aplikacji producenta uruchamianej przy starcie i rysującej nad pulpitem, wyłącznie dla wybranych pakietów.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 Aktualizacja firmware może pozostawić na panelu aplikację producenta, która uruchamia się przy starcie i rysuje pływający widżet nad pulpitem. Na przykład aktualizacja firmware Sonoff NSPanel Pro 120 pozostawiła `com.eWeLinkControlPanel` uruchamiający się przy starcie i nakładający widżet sterowania na wszystko, co panel wyświetlał. Aplikacja panelu może neutralizować takie pakiety, ale tylko te, które wskażesz.
@@ -36,10 +36,10 @@ Nic nie jest ograniczane, dopóki nie naciśniesz przycisku Poskrom. Bez roota l
 
 ## Bezpieczeństwo
 
-- **Odwracalne.** Wyłączenie cofa się przez `pm enable <pkg>` albo aktualizację danej aplikacji lub firmware. Nic tutaj nie jest destrukcyjne: nie ma odinstalowania ani czyszczenia danych.
+- **Odwracalne.** Wyłączenie cofa się przyciskiem **Włącz ponownie** na karcie albo przez aktualizację danej aplikacji lub firmware. Nic tutaj nie jest destrukcyjne: nie ma odinstalowania ani czyszczenia danych.
 - **Pakiety krytyczne są odrzucane.** Aplikacja panelu nigdy nie zatrzyma ani nie wyłączy interfejsu systemowego, Ustawień, telefonii, szkieletu Androida ani siebie samej, nawet jeśli je wskażesz. Egzekwują to zarówno aplikacja, jak i uprzywilejowany pomocnik, więc literówka nie może unieruchomić panelu.
 - **Zmiany dotyczą tylko zainstalowanych, wskazanych pakietów.** Usunięcie pakietu zarządzanego przez aplikację panelu z listy docelowej ponownie go włącza i przywraca zapisane uprawnienie nakładki. **Włącz ponownie** także cofa ograniczenie.
 
 :::caution
-Wybierasz pakiety do wyłączenia, więc ogranicz się do oprogramowania producenta, które rozpoznajesz. Wyłączenie elementu, od którego zależy panel, takiego jak rzeczywiście używany program uruchamiający producenta lub metoda wprowadzania, może utrudnić nawigację, dopóki nie włączysz go ponownie przez `adb`. W razie wątpliwości zostaw go bez zmian.
+Wybierasz pakiety do wyłączenia, więc ogranicz się do oprogramowania producenta, które rozpoznajesz. Wyłączenie elementu, od którego zależy panel, takiego jak rzeczywiście używany program uruchamiający producenta lub metoda wprowadzania, może utrudnić nawigację na własnym ekranie panelu. Nadal możesz włączyć go ponownie z karty **Pakiety dostawców**, do której przejdziesz z Home Assistant przyciskiem **Odwiedź**, bez dotykania panelu. W razie wątpliwości zostaw go bez zmian.
 :::
