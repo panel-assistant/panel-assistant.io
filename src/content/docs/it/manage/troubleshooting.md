@@ -1,7 +1,7 @@
 ---
 title: Risoluzione dei problemi
 description: I problemi più comuni di un pannello a parete e dove cercare per prima cosa.
-sourceCommit: 3c2d618c24d3ddd2baf1868792ee3e46ad57f8de
+sourceCommit: 03a4ef94d2f13624feee19f2a8df41935d3bc2ac
 ---
 
 Inizia dal dispositivo del pannello in Home Assistant, che ha un sensore di stato e consente di scaricare la diagnostica, e dalla pagina di stato del pannello stesso: usa **Visita** nella sua pagina del dispositivo in Home Assistant. Il suo rapporto `/diag` risponde alla maggior parte delle domande qui sotto senza dover fare supposizioni.
@@ -12,7 +12,7 @@ Quando devi vedere cosa sta facendo il pannello in tempo reale, la scheda **Regi
 
 ## La plancia è vuota, disegnata solo in parte o piena di errori degli script
 
-Controlla prima la WebView di sistema. È di gran lunga il problema più comune al primo avvio e una WebView vecchia produce esattamente questi sintomi, che sembrano un guasto dell'app del pannello. La procedura è in [Aggiornamento della WebView di sistema](/it/hardware/guides/update-the-webview/).
+Controlla prima la WebView di sistema. È di gran lunga il problema più comune al primo avvio e una WebView vecchia produce esattamente questi sintomi, che sembrano un guasto dell'app del pannello. [Aggiornamento della WebView di sistema](/it/hardware/guides/update-the-webview/) indica quale percorso di aggiornamento è disponibile per ciascun pannello.
 
 Se la WebView è aggiornata, la sezione [avvio e ripristino](/it/manage/built-in-renderer/#avvio-e-recupero) spiega cosa fa il pannello quando una plancia non si carica e come scoprirne il motivo.
 
@@ -22,7 +22,7 @@ In parte dipende dal pannello e in parte dalla plancia. [Prestazioni](/it/manage
 
 ## Il programma di installazione non riesce a raggiungere il pannello
 
-Via rete: conferma l'indirizzo del pannello e che ADB di rete sulla porta TCP 5555 sia ancora attivo, perché alcuni pannelli lo disattivano dopo un riavvio. Se il pannello mostra una richiesta di autorizzazione, accettala sul suo schermo. Via USB: assicurati di usare un browser basato su Chromium, che il cavo sia collegato al computer su cui è in esecuzione il browser e che il debug USB sia attivo. Il modo per raggiungere le opzioni sviluppatore e attivare il debug varia a seconda del modello ed è descritto in [Prepara il pannello](/it/install/prepare-a-panel/) e nelle [pagine hardware](/it/hardware/). Se il pannello non accetta proprio una connessione di rete, [installa via USB](/it/install/install-over-usb/): il pannello non necessita di ADB di rete, mentre il browser rimane connesso a Home Assistant per ottenere la versione verificata.
+Via rete: conferma l'indirizzo del pannello e che il debug di rete (ADB di rete sulla porta TCP 5555) sia ancora attivo nelle Impostazioni del pannello stesso, perché alcuni pannelli lo disattivano dopo un riavvio. Se il pannello mostra una richiesta di autorizzazione, accettala sul suo schermo. Via USB: assicurati di usare un browser basato su Chromium, che il cavo sia collegato al computer su cui è in esecuzione il browser e che il debug USB sia attivo. Il modo per raggiungere le opzioni sviluppatore e attivare il debug varia a seconda del modello ed è descritto in [Prepara il pannello](/it/install/prepare-a-panel/) e nelle [pagine hardware](/it/hardware/). Se il pannello non accetta proprio una connessione di rete, [installa via USB](/it/install/install-over-usb/): il pannello non necessita di ADB di rete, mentre il browser rimane connesso a Home Assistant per ottenere la versione verificata.
 
 ## Un’installazione di rete si è interrotta
 
