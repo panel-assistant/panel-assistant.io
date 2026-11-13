@@ -19,6 +19,7 @@ let publicationLoading = false;
 let savedModelHashes = new Map();
 let publishReview;
 let sessionRequired = false;
+const selectedSources = new Set();
 
 function signedIn(session) {
   $('session-identity').textContent =
@@ -271,6 +272,7 @@ function controls() {
   $('export').disabled = busy || !library;
   $('add-files').disabled = busy || !model();
   $('add-sources').disabled = busy || !model();
+  sourceSelectionControls();
   publicationControls();
   document.querySelectorAll('[data-boundary="true"]').forEach((node) => {
     node.disabled = true;
@@ -404,6 +406,7 @@ function renderModels() {
       );
       if (entry.id === selected) button.setAttribute('aria-current', 'page');
       button.addEventListener('click', () => {
+        if (selected !== entry.id) selectedSources.clear();
         selected = entry.id;
         if ($('preview').open) $('preview').close();
         renderModels();
@@ -436,6 +439,46 @@ function action(text, label, callback) {
   button.setAttribute('aria-label', label);
   button.addEventListener('click', callback);
   return button;
+}
+
+function sourceSelectionControls() {
+  const sources = model()?.images.filter((image) => image.archiveOnly) ?? [];
+  const ids = new Set(sources.map((image) => image.id));
+  for (const id of selectedSources) if (!ids.has(id)) selectedSources.delete(id);
+  const count = selectedSources.size;
+  $('sources-select-all').disabled = busy || !sources.length;
+  $('sources-select-all').checked = sources.length > 0 && count === sources.length;
+  $('sources-select-all').indeterminate = count > 0 && count < sources.length;
+  $('sources-selected-count').textContent = `${count} of ${sources.length} selected`;
+  $('sources-remove-selected').disabled = busy || !count;
+  document.querySelectorAll('[data-source-select]').forEach((checkbox) => {
+    checkbox.checked = selectedSources.has(checkbox.dataset.sourceSelect);
+    checkbox.closest('.image-card').classList.toggle('source-selected', checkbox.checked);
+  });
+}
+
+function removeSelectedSources() {
+  if (busy || !selectedSources.size) return;
+  const entry = model();
+  const count = entry.images.filter(
+    (image) => image.archiveOnly && selectedSources.has(image.id),
+  ).length;
+  if (
+    !count ||
+    !confirm(
+      `Remove ${count} selected source ${count === 1 ? 'master' : 'masters'} from ${entry.title}? Their bytes and previous saved history stay in storage. Save the private draft to keep this change.`,
+    )
+  )
+    return;
+  entry.images = entry.images.filter(
+    (image) => !image.archiveOnly || !selectedSources.has(image.id),
+  );
+  selectedSources.clear();
+  dirty = true;
+  renderModels();
+  renderPanel();
+  controls();
+  ($('sources').querySelector('[data-source-select]') ?? $('sources-empty')).focus();
 }
 
 function renderPanel() {
@@ -474,6 +517,20 @@ function renderPanel() {
       ),
       element('span', '', 'Private draft'),
     );
+    if (image.archiveOnly) {
+      const label = element('label', 'source-select', 'Select');
+      const checkbox = element('input');
+      checkbox.type = 'checkbox';
+      checkbox.dataset.sourceSelect = image.id;
+      checkbox.setAttribute('aria-label', `Select source image ${position + 1}`);
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) selectedSources.add(image.id);
+        else selectedSources.delete(image.id);
+        sourceSelectionControls();
+      });
+      label.prepend(checkbox);
+      top.append(label);
+    }
     const preview = action('', `Enlarge image ${index + 1}`, () => openPreview(index));
     preview.className = 'image-preview';
     const img = element('img');
@@ -654,6 +711,7 @@ function renderPanel() {
     card.append(top, preview, master, fields, actions);
     container.append(card);
   });
+  sourceSelectionControls();
 }
 
 function openPreview(index) {
@@ -876,6 +934,7 @@ async function load() {
     if (!data.revision || !Array.isArray(data.models))
       throw new Error('The catalogue response was incomplete. Reload to try again.');
     library = data;
+    selectedSources.clear();
     await rememberSavedModels();
     selected = library.models.some((entry) => entry.id === selected)
       ? selected
@@ -896,6 +955,13 @@ async function load() {
 }
 
 $('model-search').addEventListener('input', renderModels);
+$('sources-select-all').addEventListener('change', () => {
+  selectedSources.clear();
+  if ($('sources-select-all').checked)
+    for (const image of model().images) if (image.archiveOnly) selectedSources.add(image.id);
+  sourceSelectionControls();
+});
+$('sources-remove-selected').addEventListener('click', removeSelectedSources);
 $('session-sign-in').addEventListener('click', renewSession);
 $('save').addEventListener('click', save);
 $('publish-review').addEventListener('click', reviewPublication);

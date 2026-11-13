@@ -132,6 +132,15 @@
                 multiple
             /></label>
           </div>
+          <div class="source-selection" role="group" aria-label="Select source masters">
+            <label class="source-select">
+              <input id="sources-select-all" type="checkbox" /> Select all source masters
+            </label>
+            <span id="sources-selected-count" class="muted" role="status">0 of 0 selected</span>
+            <button id="sources-remove-selected" type="button" disabled>
+              Remove selected sources
+            </button>
+          </div>
           <p id="sources-empty" class="muted" tabindex="-1">
             No source masters stored for this product.
           </p>

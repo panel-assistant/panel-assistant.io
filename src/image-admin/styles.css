@@ -332,6 +332,34 @@ main {
   min-width: 0;
   box-shadow: 0 2px 4px #172b3805;
 }
+.image-card.source-selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.source-selection {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin: 0.75rem 0 1.25rem;
+  font-size: 0.8rem;
+}
+.source-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+.source-select input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--accent);
+}
+#sources-remove-selected {
+  color: var(--danger);
+}
 .image-top {
   display: flex;
   justify-content: space-between;
