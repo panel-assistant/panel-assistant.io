@@ -1,11 +1,26 @@
-import { test } from 'node:test';
+import { test, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import worker from './image-admin.js';
 
 const ORIGIN = 'https://review.example';
-const SECRET = 'local-publication-fixture-secret-longer-than-32-characters';
+const TOKEN = 'github-publication-test-token';
+const originalFetch = globalThis.fetch;
+beforeEach(() => {
+  globalThis.fetch = async (url, options) => {
+    assert.equal(new URL(url).origin, 'https://api.github.com', 'No external test requests');
+    assert.equal(options.headers.authorization, `Bearer ${TOKEN}`);
+    return Response.json(
+      new URL(url).pathname === '/user'
+        ? { id: 42, login: 'maintainer' }
+        : { permissions: { push: true } },
+    );
+  };
+});
+afterEach(() => {
+  globalThis.fetch = originalFetch;
+});
 const CURRENT = 'published-images/current.json';
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 
@@ -26,6 +41,9 @@ class Bucket {
     const stored = { bytes, size: bytes.length, etag: String(++this.serial), ...options };
     this.objects.set(key, stored);
     return { etag: stored.etag };
+  }
+  async delete(key) {
+    this.objects.delete(key);
   }
   async head(key) {
     this.operations++;
@@ -71,7 +89,6 @@ const source = {
 
 function fixture() {
   const env = {
-    ADMIN_REVIEW_SECRET: SECRET,
     IMAGE_STORE: new Bucket(),
     PUBLIC_IMAGES: new Bucket(),
   };
@@ -95,7 +112,7 @@ function fixture() {
       new Request(`${ORIGIN}/images/session`, {
         method: 'POST',
         headers: { origin: ORIGIN, 'content-type': 'application/json' },
-        body: JSON.stringify({ secret: SECRET }),
+        body: JSON.stringify({ token: TOKEN, remember: false }),
       }),
       env,
     );
@@ -154,6 +171,7 @@ test('selected publication preserves exact alpha renditions and exposes ordered 
   assert.equal(response.status, 200, await response.clone().text());
   const snapshot = await response.json(),
     model = snapshot.models[0];
+  assert.equal(JSON.stringify(snapshot).includes(TOKEN), false);
   assert.deepEqual(
     snapshot.models.map((model) => model.id),
     ['vendor/panel'],

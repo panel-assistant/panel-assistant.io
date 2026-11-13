@@ -5,11 +5,17 @@ import {
   publishModel,
   renditionDetails,
 } from './image-publication.js';
+import {
+  ImageAuthError,
+  createSession,
+  readSession,
+  deleteSession,
+  imageSessionCookie,
+  sessionDetails,
+} from './image-auth.js';
 
 const PREFIX = '/admin/';
 const IMAGE_PREFIX = '/images/';
-const COOKIE = '__Host-image-review';
-const TTL = 8 * 60 * 60;
 const MiB = 1024 * 1024;
 const encoder = new TextEncoder();
 const slug = /^[a-z0-9-]{1,100}$/;
@@ -38,64 +44,14 @@ const json = (value, status = 200, headers = {}) =>
 const hex = (bytes) =>
   [...new Uint8Array(bytes)].map((b) => b.toString(16).padStart(2, '0')).join('');
 const digest = async (bytes) => hex(await crypto.subtle.digest('SHA-256', bytes));
-const equal = (a, b) => {
-  let different = a.length ^ b.length;
-  for (let i = 0; i < Math.max(a.length, b.length); i++) different |= (a[i] ?? 0) ^ (b[i] ?? 0);
-  return different === 0;
-};
-const sign = async (text, secret) => {
-  const key = await crypto.subtle.importKey(
-    'raw',
-    encoder.encode(secret),
-    { name: 'HMAC', hash: 'SHA-256' },
-    false,
-    ['sign'],
-  );
-  return hex(await crypto.subtle.sign('HMAC', key, encoder.encode(text)));
-};
-const cookie = (value, age) =>
-  `${COOKIE}=${value}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${age}`;
-
-async function authenticated(request, secret) {
-  if (!secret) return false;
-  const value = request.headers
-    .get('cookie')
-    ?.split(';')
-    .map((s) => s.trim())
-    .find((s) => s.startsWith(`${COOKIE}=`))
-    ?.slice(COOKIE.length + 1);
-  const match = value?.match(/^(\d+)\.([a-f0-9]{32})\.([a-f0-9]{64})$/);
-  if (!match) return false;
-  const now = Math.floor(Date.now() / 1000);
-  if (+match[1] <= now || +match[1] > now + TTL + 5) return false;
-  return equal(
-    encoder.encode(match[3]),
-    encoder.encode(await sign(`${match[1]}.${match[2]}`, secret)),
-  );
-}
-
 function loginPage(prefix) {
-  const nonce = crypto.randomUUID();
   return new Response(
-    `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex"><title>Private image review</title><body><h1>Private image review</h1><form id="login"><label>Review access key <input name="secret" type="password" autocomplete="off" required></label><button>Sign in</button><p id="status" role="status"></p></form><script nonce="${nonce}">
-const form = document.querySelector('#login');
-const supplied = new URLSearchParams(location.hash.slice(1)).get('access');
-history.replaceState(null, '', location.pathname + location.search);
-async function login(secret) {
-  document.querySelector('#status').textContent = 'Signing in…';
-  try {
-    const response = await fetch('${prefix}session', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({secret})});
-    if (!response.ok) throw new Error('Access key was not accepted.');
-    location.replace('${prefix}');
-  } catch (error) { document.querySelector('#status').textContent = error.message; }
-}
-form.addEventListener('submit', event => {event.preventDefault();login(form.elements.secret.value);});
-if (supplied) login(supplied);
-</script></body></html>`,
+    `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex"><title>Sign in · Panel images</title><body><main><h1>Panel images</h1><p>Sign in with GitHub to manage panel images. Write access to the Panel Assistant website repository is required.</p><label><input id="remember" type="checkbox"> Remember this device for 30 days</label><p><button id="github-sign-in" type="button">Sign in with GitHub</button></p><p id="status" role="status"></p></main><script type="module" src="${prefix}auth.js"></script></body></html>`,
     {
       headers: {
         'content-type': 'text/html;charset=UTF-8',
-        'content-security-policy': `default-src 'none'; script-src 'nonce-${nonce}'; connect-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'`,
+        'content-security-policy':
+          "default-src 'none'; script-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
       },
     },
   );
@@ -696,6 +652,25 @@ async function api(request, url, store, publicStore) {
 
 async function handle(request, env) {
   const url = new URL(request.url);
+  if (
+    url.hostname.endsWith('.workers.dev') &&
+    request.method === 'GET' &&
+    [
+      '/',
+      '/admin',
+      '/admin/',
+      '/admin/index.html',
+      '/images',
+      '/images/',
+      '/images/index.html',
+    ].includes(url.pathname) &&
+    (request.headers.get('sec-fetch-dest') === 'document' ||
+      request.headers.get('accept')?.includes('text/html'))
+  )
+    return new Response(null, {
+      status: 302,
+      headers: { location: 'https://panel-assistant.io/images/' + url.search },
+    });
   if (url.pathname === '/')
     return new Response(null, { status: 302, headers: { location: PREFIX } });
   if (url.pathname === IMAGE_PREFIX.slice(0, -1))
@@ -705,13 +680,9 @@ async function handle(request, env) {
     });
   const prefix = url.pathname.startsWith(IMAGE_PREFIX) ? IMAGE_PREFIX : PREFIX;
   check(url.pathname.startsWith(prefix), 'Not found.', 404);
-  // Keep one internal API namespace while each browser mount retains its own URLs.
+  // Both mounts use one API namespace; browser documents use the canonical host.
   url.pathname = PREFIX + url.pathname.slice(prefix.length);
-  check(
-    typeof env.ADMIN_REVIEW_SECRET === 'string' && env.ADMIN_REVIEW_SECRET.length >= 32,
-    'Review access is not configured.',
-    503,
-  );
+  check(env.IMAGE_STORE, 'Image session storage is not configured.', 503);
   if (!['GET', 'HEAD'].includes(request.method)) {
     check(
       request.headers.get('origin') === url.origin &&
@@ -721,34 +692,33 @@ async function handle(request, env) {
     );
   }
   if (url.pathname === '/admin/session' && request.method === 'POST') {
-    const input = await readJSON(request, 8192);
-    check(
-      typeof input?.secret === 'string' &&
-        input.secret.length <= 4096 &&
-        equal(
-          encoder.encode(await digest(encoder.encode(input.secret))),
-          encoder.encode(await digest(encoder.encode(env.ADMIN_REVIEW_SECRET))),
-        ),
-      'Access key was not accepted.',
-      401,
-    );
-    const payload = `${Math.floor(Date.now() / 1000) + TTL}.${crypto.randomUUID().replaceAll('-', '')}`;
-    return json({ authenticated: true }, 200, {
-      'set-cookie': cookie(`${payload}.${await sign(payload, env.ADMIN_REVIEW_SECRET)}`, TTL),
-    });
+    const session = await createSession(await readJSON(request, 8192), env.IMAGE_STORE);
+    return json(session.details, 200, { 'set-cookie': session.cookie });
   }
-  if (!(await authenticated(request, env.ADMIN_REVIEW_SECRET))) {
+  if (url.pathname === '/admin/session' && request.method === 'DELETE') {
+    await deleteSession(request, env.IMAGE_STORE);
+    return json({ authenticated: false }, 200, { 'set-cookie': imageSessionCookie('', 0) });
+  }
+  // The sign-in module contains no private data and must load before a session exists.
+  if (url.pathname === '/admin/auth.js' && ['GET', 'HEAD'].includes(request.method)) {
+    check(env.ASSETS, 'Sign-in assets are not configured.', 503);
+    url.pathname = '/auth.js';
+    return env.ASSETS.fetch(new Request(url, request));
+  }
+  const session = await readSession(request, env.IMAGE_STORE);
+  if (!session) {
     if (
       request.method === 'GET' &&
       !url.pathname.startsWith('/admin/api/') &&
+      url.pathname !== '/admin/session' &&
       (request.headers.get('sec-fetch-dest') === 'document' ||
         request.headers.get('accept')?.includes('text/html'))
     )
       return loginPage(prefix);
-    throw new Problem(401, 'Sign in to review images.');
+    throw new Problem(401, 'Sign in with GitHub to manage images.');
   }
-  if (url.pathname === '/admin/session' && request.method === 'DELETE')
-    return json({ authenticated: false }, 200, { 'set-cookie': cookie('', 0) });
+  if (url.pathname === '/admin/session' && request.method === 'GET')
+    return json(sessionDetails(session));
   if (url.pathname.startsWith('/admin/api/'))
     return api(request, url, env.IMAGE_STORE, env.PUBLIC_IMAGES);
   check(['GET', 'HEAD'].includes(request.method), 'Method not allowed.', 405);
@@ -772,7 +742,10 @@ export default {
     try {
       response = await handle(request, env);
     } catch (error) {
-      const known = error instanceof Problem || error instanceof PublicationError;
+      const known =
+        error instanceof Problem ||
+        error instanceof PublicationError ||
+        error instanceof ImageAuthError;
       response = json(
         {
           error: known ? error.message : 'The review request could not be completed.',

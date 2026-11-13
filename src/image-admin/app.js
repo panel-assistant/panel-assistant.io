@@ -1,3 +1,5 @@
+import { sessionInfo, signIn } from './auth.js';
+
 const $ = (id) => document.getElementById(id);
 const adminBase = new URL('./', import.meta.url);
 const MAX_FILE = 25 * 1024 * 1024;
@@ -16,6 +18,49 @@ let publicationError = '';
 let publicationLoading = false;
 let savedModelHashes = new Map();
 let publishReview;
+let sessionRequired = false;
+
+function signedIn(session) {
+  $('session-identity').textContent =
+    `Signed in as @${session.login}${session.remembered ? ' · remembered device' : ''}`;
+  $('session-identity').title = session.expiresAt
+    ? `Session expires ${new Date(session.expiresAt).toLocaleString()}`
+    : '';
+  $('session-remember').checked = Boolean(session.remembered);
+  sessionRequired = false;
+  $('session-recovery').hidden = true;
+}
+
+function requireSession() {
+  sessionRequired = true;
+  $('session-identity').textContent = 'GitHub sign-in has expired';
+  $('session-recovery').hidden = false;
+}
+
+async function renewSession() {
+  if (busy) return;
+  busy = true;
+  message();
+  controls();
+  try {
+    signedIn(
+      await signIn({
+        remember: $('session-remember').checked,
+        onStatus: (text) => ($('session-status').textContent = text),
+      }),
+    );
+    message(
+      library
+        ? 'Signed in with GitHub. Your edits are still here. Retry your previous action when ready.'
+        : 'Signed in with GitHub. Choose Reload saved draft to load the catalogue.',
+    );
+  } catch (error) {
+    $('session-status').textContent = error.message;
+  } finally {
+    busy = false;
+    controls();
+  }
+}
 
 async function rememberSavedModels() {
   savedModelHashes = new Map(
@@ -237,7 +282,7 @@ function controls() {
   else if (savedAt)
     status.textContent = `Private draft saved at ${savedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
   else if (library) status.textContent = 'Saved private draft · no website changes';
-  $('reload').hidden = !conflict;
+  $('reload').hidden = !conflict && Boolean(library);
 }
 
 function changed() {
@@ -262,9 +307,10 @@ async function api(path, options = {}) {
 }
 
 function responseError(response, data = {}, path = '') {
+  if (response.status === 401) requireSession();
   const error = new Error(
     response.status === 401
-      ? 'Your session has expired. Export any unsaved changes, then reload to sign in again.'
+      ? 'Your session has expired. Sign in again with GitHub below; your edits stay in this tab.'
       : response.status === 409 && path !== 'api/publish'
         ? 'Someone saved a newer draft. Your changes have not been overwritten. Export your work, then reload the saved draft to reconcile it.'
         : data.message ||
@@ -794,6 +840,7 @@ async function load() {
 }
 
 $('model-search').addEventListener('input', renderModels);
+$('session-sign-in').addEventListener('click', renewSession);
 $('save').addEventListener('click', save);
 $('publish-review').addEventListener('click', reviewPublication);
 $('publish-confirm').addEventListener('click', publishPanel);
@@ -850,4 +897,12 @@ window.addEventListener('beforeunload', (event) => {
     event.returnValue = '';
   }
 });
+sessionInfo()
+  .then((session) => {
+    if (!sessionRequired) signedIn(session);
+  })
+  .catch((error) => {
+    if (error.status === 401) requireSession();
+    else $('session-identity').textContent = 'Could not check GitHub sign-in';
+  });
 load();

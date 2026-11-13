@@ -22,6 +22,7 @@
         <p id="model-count" class="muted"></p>
         <nav id="models" aria-label="Choose a panel"></nav>
         <div class="sidebar-footer">
+          <span id="session-identity" role="status">Checking GitHub sign-in…</span>
           <span>Originals are retained privately.</span
           ><button id="logout" class="text-button" type="button">Sign out</button>
         </div>
@@ -63,6 +64,20 @@
           </div>
         </div>
         <div id="error" class="error" role="alert" hidden></div>
+        <section
+          id="session-recovery"
+          class="session-recovery"
+          aria-labelledby="session-title"
+          hidden
+        >
+          <h2 id="session-title">Sign in again with GitHub</h2>
+          <p>Your edits stay in this tab. After signing in, retry the action you were taking.</p>
+          <label class="remember-device"
+            ><input id="session-remember" type="checkbox" /> Remember this device for 30 days</label
+          >
+          <button id="session-sign-in" type="button">Sign in with GitHub</button>
+          <p id="session-status" role="status" aria-live="polite"></p>
+        </section>
         <section id="panel" hidden>
           <div class="section-heading">
             <div>

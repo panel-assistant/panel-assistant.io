@@ -25,6 +25,25 @@
 body {
   margin: 0;
 }
+.session-recovery {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+.remember-device {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.remember-device input {
+  width: auto;
+}
+#session-status {
+  margin: 0.75rem 0 0;
+}
 button,
 input,
 textarea {

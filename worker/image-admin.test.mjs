@@ -1,11 +1,37 @@
-import { test } from 'node:test';
+import { test, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import worker from './image-admin.js';
 
 const ORIGIN = 'https://review.example';
-const SECRET = 'private-review-test-secret-of-at-least-32-characters';
+const TOKEN = 'valid-github-oauth-token';
+const originalFetch = globalThis.fetch;
+let githubState;
+beforeEach(() => {
+  githubState = { push: true, userStatus: 200, repoStatus: 200, calls: [] };
+  globalThis.fetch = async (url, options) => {
+    assert.equal(
+      new URL(url).origin,
+      'https://api.github.com',
+      'Tests never contact external services',
+    );
+    assert.equal(options.headers.authorization, `Bearer ${TOKEN}`);
+    githubState.calls.push(new URL(url).pathname);
+    if (githubState.networkError) throw new Error('Offline');
+    const user = new URL(url).pathname === '/user';
+    return Response.json(
+      user ? { id: 42, login: 'maintainer' } : { permissions: { push: githubState.push } },
+      {
+        status: user ? githubState.userStatus : githubState.repoStatus,
+        headers: githubState.headers,
+      },
+    );
+  };
+});
+afterEach(() => {
+  globalThis.fetch = originalFetch;
+});
 
 // Exercise the real request handler against R2's conditional-write and metadata contract.
 class Bucket {
@@ -21,6 +47,9 @@ class Bucket {
     const record = { bytes, size: bytes.length, etag: String(++this.serial), ...options };
     this.objects.set(key, record);
     return { etag: record.etag };
+  }
+  async delete(key) {
+    this.objects.delete(key);
   }
   async head(key) {
     const record = this.objects.get(key);
@@ -39,7 +68,6 @@ class Bucket {
 }
 function environment() {
   return {
-    ADMIN_REVIEW_SECRET: SECRET,
     IMAGE_STORE: new Bucket(),
     ASSETS: {
       fetch: async (request) => new Response(`private asset ${new URL(request.url).pathname}`),
@@ -67,13 +95,10 @@ const asJSON = (body) => ({
 async function session(env, prefix = '/admin/') {
   const response = await send(env, `${prefix}session`, {
     method: 'POST',
-    ...asJSON({ secret: SECRET }),
+    ...asJSON({ token: TOKEN, remember: false }),
   });
   assert.equal(response.status, 200);
-  assert.match(
-    response.headers.get('set-cookie'),
-    /HttpOnly; Secure; SameSite=Strict; Max-Age=28800/,
-  );
+  assert.match(response.headers.get('set-cookie'), /HttpOnly; Secure; SameSite=Lax; Max-Age=28800/);
   return response.headers.get('set-cookie').split(';')[0];
 }
 const png = await sharp({ create: { width: 120, height: 80, channels: 3, background: '#5e84ae' } })
@@ -125,11 +150,11 @@ async function save(env, cookie, library) {
 }
 const modelWith = (images) => [{ id: 'vendor/model', title: 'Example panel', images }];
 
-test('all private documents, scripts, images and APIs require the signed session', async () => {
+test('private documents, scripts, images and APIs require a revocable GitHub session', async () => {
   const env = environment();
   const document = await send(env, '/admin/', { document: true });
   assert.equal(document.status, 200);
-  assert.match(await document.text(), /Private image review/);
+  assert.match(await document.text(), /Sign in with GitHub/);
   for (const path of [
     '/admin/app.js',
     '/admin/api/library',
@@ -145,7 +170,7 @@ test('all private documents, scripts, images and APIs require the signed session
   }
   // A forged bearer/cookie value must not bypass the gate.
   assert.equal(
-    (await send(env, '/admin/api/library', { cookie: '__Host-image-review=forged' })).status,
+    (await send(env, '/admin/api/library', { cookie: '__Host-image-session=forged' })).status,
     401,
   );
   const cookie = await session(env);
@@ -162,7 +187,7 @@ test('all private documents, scripts, images and APIs require the signed session
   assert.match(logout.headers.get('set-cookie'), /Max-Age=0/);
 });
 
-test('login and mutation requests reject other origins, bad credentials and tampered or expired sessions', async () => {
+test('login and mutation requests reject other origins, old keys and tampered or expired sessions', async (t) => {
   const env = environment();
   assert.equal(
     (await send(env, '/admin/session', { method: 'POST', ...asJSON({ secret: 'wrong' }) })).status,
@@ -172,7 +197,7 @@ test('login and mutation requests reject other origins, bad credentials and tamp
     (
       await send(env, '/admin/session', {
         method: 'POST',
-        ...asJSON({ secret: SECRET }),
+        ...asJSON({ token: TOKEN, remember: false }),
         headers: { 'content-type': 'application/json', origin: 'https://untrusted.example' },
       })
     ).status,
@@ -193,25 +218,9 @@ test('login and mutation requests reject other origins, bad credentials and tamp
     headers: { 'content-type': 'application/json', origin: 'https://untrusted.example' },
   });
   assert.equal(publish.status, 403);
-  const key = await crypto.subtle.importKey(
-    'raw',
-    new TextEncoder().encode(SECRET),
-    { name: 'HMAC', hash: 'SHA-256' },
-    false,
-    ['sign'],
-  );
-  const payload = `${Math.floor(Date.now() / 1000) - 1}.${'a'.repeat(32)}`;
-  const signature = Buffer.from(
-    await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload)),
-  ).toString('hex');
-  assert.equal(
-    (
-      await send(env, '/admin/api/library', {
-        cookie: `__Host-image-review=${payload}.${signature}`,
-      })
-    ).status,
-    401,
-  );
+  const currentTime = Date.now();
+  t.mock.method(Date, 'now', () => currentTime + 8 * 60 * 60 * 1000 + 1000);
+  assert.equal((await send(env, '/admin/api/library', { cookie })).status, 401);
 });
 
 test('publication endpoints report missing public storage while private saves remain available', async () => {
@@ -308,7 +317,10 @@ test('upload rejects unsupported, truncated and oversized derivative images befo
   ]) {
     const response = await upload(env, cookie, options);
     assert.equal(response.status, 400, await response.clone().text());
-    assert.equal(env.IMAGE_STORE.objects.size, 0);
+    assert.equal(
+      [...env.IMAGE_STORE.objects.keys()].filter((key) => !key.startsWith('sessions/')).length,
+      0,
+    );
   }
   // The streaming bound applies even when no Content-Length header was supplied.
   const body = new ReadableStream({
@@ -327,7 +339,10 @@ test('upload rejects unsupported, truncated and oversized derivative images befo
     env,
   );
   assert.equal(response.status, 413);
-  assert.equal(env.IMAGE_STORE.objects.size, 0);
+  assert.equal(
+    [...env.IMAGE_STORE.objects.keys()].filter((key) => !key.startsWith('sessions/')).length,
+    0,
+  );
 });
 
 test('JPEG XL raw and container masters retain exact private bytes and verified dimensions with ordinary previews', async () => {
@@ -387,7 +402,10 @@ test('JPEG XL truncated size headers, oversized boxes and incomplete or reordere
       cookie = await session(env);
     const response = await upload(env, cookie, { original });
     assert.equal(response.status, 400, await response.clone().text());
-    assert.equal(env.IMAGE_STORE.objects.size, 0);
+    assert.equal(
+      [...env.IMAGE_STORE.objects.keys()].filter((key) => !key.startsWith('sessions/')).length,
+      0,
+    );
   }
 });
 
@@ -577,8 +595,8 @@ test('canonical image address preserves authenticated assets, upload, master dow
   assert.equal(redirect.headers.get('location'), '/images/?return=review');
   const login = await send(env, prefix, { document: true });
   const html = await login.text();
-  assert.match(html, /fetch\('\/images\/session'/);
-  assert.match(html, /location.replace\('\/images\/'\)/);
+  assert.match(html, /id="github-sign-in"/);
+  assert.match(html, /src="\/images\/auth.js"/);
   for (const path of [
     'app.js',
     'styles.css',
@@ -594,7 +612,7 @@ test('canonical image address preserves authenticated assets, upload, master dow
     (
       await send(env, prefix + 'session', {
         method: 'POST',
-        ...asJSON({ secret: SECRET }),
+        ...asJSON({ token: TOKEN, remember: false }),
         headers: { 'content-type': 'application/json', origin: 'https://other.example' },
       })
     ).status,
@@ -659,4 +677,274 @@ test('apex CMS and image-prefix lookalikes pass through without changing website
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test('GitHub sessions report the verified account, fixed lifetime and remembered choice without exposing credentials', async (t) => {
+  const clock = Date.now();
+  t.mock.method(Date, 'now', () => clock);
+  for (const [remember, seconds] of [
+    [false, 28800],
+    [true, 2592000],
+  ]) {
+    const env = environment();
+    const response = await send(env, '/images/session', {
+      method: 'POST',
+      ...asJSON({ token: TOKEN, remember, login: 'unverified-client' }),
+    });
+    assert.equal(response.status, 200);
+    const setCookie = response.headers.get('set-cookie');
+    assert.match(
+      setCookie,
+      /^__Host-image-session=[a-f0-9]{64}; Path=\/; HttpOnly; Secure; SameSite=Lax;/,
+    );
+    assert.match(setCookie, new RegExp(`Max-Age=${seconds}$`));
+    const cookie = setCookie.split(';')[0];
+    const details = await response.json();
+    assert.deepEqual(details, {
+      authenticated: true,
+      login: 'maintainer',
+      expiresAt: new Date((Math.floor(clock / 1000) + seconds) * 1000).toISOString(),
+      remembered: remember,
+    });
+    assert.deepEqual(await (await send(env, '/images/session', { cookie })).json(), details);
+    assert.equal(JSON.stringify(details).includes(TOKEN), false);
+    const logout = await send(env, '/images/session', { method: 'DELETE', cookie });
+    assert.equal(logout.status, 200);
+    assert.equal(
+      (await send(env, '/images/api/library', { cookie })).status,
+      401,
+      'A copied cookie cannot replay a logged-out session',
+    );
+    assert.equal(env.IMAGE_STORE.objects.size, 0, 'Logout removes the retained GitHub token');
+  }
+});
+
+test('GitHub identity and repository write permission are checked server-side and old shared keys cannot sign in', async () => {
+  const env = environment();
+  env.ADMIN_REVIEW_SECRET = 'previous-valid-review-secret-longer-than-thirty-two';
+  assert.equal(
+    (
+      await send(env, '/images/session', {
+        method: 'POST',
+        ...asJSON({ secret: env.ADMIN_REVIEW_SECRET }),
+      })
+    ).status,
+    401,
+  );
+  githubState.userStatus = 401;
+  assert.equal(
+    (await send(env, '/images/session', { method: 'POST', ...asJSON({ token: TOKEN }) })).status,
+    401,
+  );
+  githubState.userStatus = 200;
+  githubState.push = false;
+  assert.equal(
+    (
+      await send(env, '/images/session', {
+        method: 'POST',
+        ...asJSON({ token: TOKEN, login: 'maintainer', permissions: { push: true } }),
+      })
+    ).status,
+    403,
+  );
+  assert.equal(env.IMAGE_STORE.objects.size, 0, 'Denied identities cannot create sessions');
+});
+
+test('GitHub outages and primary or secondary rate limits fail closed without creating sessions', async () => {
+  for (const state of [
+    { networkError: true },
+    { userStatus: 429 },
+    { repoStatus: 403, headers: { 'x-ratelimit-remaining': '0' } },
+    { repoStatus: 403, headers: { 'retry-after': '30' } },
+  ]) {
+    const env = environment();
+    Object.assign(
+      githubState,
+      { push: true, userStatus: 200, repoStatus: 200, headers: undefined, networkError: false },
+      state,
+    );
+    const response = await send(env, '/images/session', {
+      method: 'POST',
+      ...asJSON({ token: TOKEN }),
+    });
+    assert.equal(response.status, 503);
+    assert.equal(response.headers.get('set-cookie'), null);
+    assert.equal(env.IMAGE_STORE.objects.size, 0);
+  }
+});
+
+test('repository write authorization is cached for at most five minutes and denial revokes the session', async (t) => {
+  let clock = Date.now();
+  t.mock.method(Date, 'now', () => clock);
+  const env = environment(),
+    cookie = await session(env);
+  githubState.push = false;
+  clock += 299000;
+  assert.equal((await send(env, '/images/api/library', { cookie })).status, 200);
+  clock += 1000;
+  assert.equal((await send(env, '/images/api/library', { cookie })).status, 403);
+  assert.equal((await send(env, '/images/session', { cookie })).status, 401);
+  assert.equal(env.IMAGE_STORE.objects.size, 0);
+});
+
+test('a failed authorization refresh denies private data while keeping logout and later retry available', async (t) => {
+  let clock = Date.now();
+  t.mock.method(Date, 'now', () => clock);
+  const env = environment(),
+    cookie = await session(env);
+  clock += 300000;
+  githubState.networkError = true;
+  assert.equal((await send(env, '/images/api/library', { cookie })).status, 503);
+  githubState.networkError = false;
+  assert.equal((await send(env, '/images/api/library', { cookie })).status, 200);
+  githubState.networkError = true;
+  clock += 300000;
+  assert.equal((await send(env, '/images/session', { method: 'DELETE', cookie })).status, 200);
+  assert.equal((await send(env, '/images/api/library', { cookie })).status, 401);
+});
+
+test('expired sessions discard retained tokens and cannot be extended by private reads', async (t) => {
+  let clock = Date.now();
+  t.mock.method(Date, 'now', () => clock);
+  const env = environment(),
+    cookie = await session(env);
+  clock += 28800000;
+  assert.equal((await send(env, '/images/session', { cookie })).status, 401);
+  assert.equal(env.IMAGE_STORE.objects.size, 0);
+});
+
+test('a GitHub authorization refresh cannot recreate a session revoked while the request was in flight', async (t) => {
+  let clock = Date.now();
+  t.mock.method(Date, 'now', () => clock);
+  const env = environment(),
+    cookie = await session(env);
+  clock += 300000;
+  const original = globalThis.fetch;
+  let release, reached;
+  const pending = new Promise((resolve) => {
+    release = resolve;
+  });
+  const githubReached = new Promise((resolve) => {
+    reached = resolve;
+  });
+  globalThis.fetch = async (url, options) => {
+    if (new URL(url).pathname.startsWith('/repos/')) {
+      reached();
+      await pending;
+    }
+    return original(url, options);
+  };
+  const refresh = send(env, '/images/api/library', { cookie });
+  await githubReached;
+  assert.equal((await send(env, '/images/session', { method: 'DELETE', cookie })).status, 200);
+  release();
+  assert.equal((await refresh).status, 401);
+  assert.equal((await send(env, '/images/api/library', { cookie })).status, 401);
+  assert.equal(env.IMAGE_STORE.objects.size, 0);
+});
+
+test('concurrent successful GitHub authorization refreshes keep both private requests signed in', async (t) => {
+  let clock = Date.now();
+  t.mock.method(Date, 'now', () => clock);
+  const env = environment(),
+    cookie = await session(env);
+  clock += 300000;
+  const original = globalThis.fetch;
+  let release,
+    reached,
+    count = 0;
+  const pending = new Promise((resolve) => {
+    release = resolve;
+  });
+  const bothReached = new Promise((resolve) => {
+    reached = resolve;
+  });
+  globalThis.fetch = async (url, options) => {
+    if (new URL(url).pathname.startsWith('/repos/')) {
+      if (++count === 2) reached();
+      await pending;
+    }
+    return original(url, options);
+  };
+  const requests = [
+    send(env, '/images/api/library', { cookie }),
+    send(env, '/images/api/library', { cookie }),
+  ];
+  await bothReached;
+  release();
+  assert.deepEqual(
+    (await Promise.all(requests)).map((response) => response.status),
+    [200, 200],
+  );
+  assert.equal((await send(env, '/images/session', { cookie })).status, 200);
+  assert.equal((await send(env, '/images/session', { method: 'DELETE', cookie })).status, 200);
+  assert.equal((await send(env, '/images/session', { cookie })).status, 401);
+});
+
+test('unexpected GitHub redirects fail closed instead of forwarding the token', async () => {
+  const env = environment();
+  let requests = 0;
+  globalThis.fetch = async (url, options) => {
+    requests++;
+    assert.equal(new URL(url).origin, 'https://api.github.com');
+    assert.equal(options.redirect, 'manual');
+    return new Response('{}', { status: 302, headers: { location: 'https://other.example/user' } });
+  };
+  const response = await send(env, '/images/session', {
+    method: 'POST',
+    ...asJSON({ token: TOKEN }),
+  });
+  assert.equal(response.status, 503);
+  assert.equal(requests, 1);
+  assert.equal(response.headers.get('set-cookie'), null);
+  assert.equal(env.IMAGE_STORE.objects.size, 0);
+});
+
+test('session credentials remain outside downloadable files and library exports', async () => {
+  const env = environment(),
+    cookie = await session(env);
+  const key = [...env.IMAGE_STORE.objects.keys()][0];
+  for (const path of [key, `archives/../${key}`, `originals/../${key}`]) {
+    assert.equal(
+      (await send(env, '/images/api/file?key=' + encodeURIComponent(path), { cookie })).status,
+      400,
+    );
+  }
+  const exported = await (await send(env, '/images/api/export', { cookie })).text();
+  assert.deepEqual(JSON.parse(exported), { revision: null, models: [] });
+  assert.equal(exported.includes(TOKEN), false);
+  assert.equal(exported.includes(cookie.split('=')[1]), false);
+  assert.equal(await (await send(env, '/images/auth.js')).text(), 'private asset /auth.js');
+  assert.equal((await send(env, '/images/app.js')).status, 401);
+});
+
+test('legacy Worker document navigation uses the canonical host without redirecting private file or mutation requests', async () => {
+  const env = environment();
+  const origin = 'https://panel-image-admin-review.example.workers.dev';
+  for (const path of ['/admin/', '/images/', '/admin/index.html']) {
+    const response = await worker.fetch(
+      new Request(origin + path + '?view=panel', { headers: { accept: 'text/html' } }),
+      env,
+    );
+    assert.equal(response.status, 302);
+    assert.equal(response.headers.get('location'), 'https://panel-assistant.io/images/?view=panel');
+  }
+  const file = await worker.fetch(
+    new Request(origin + '/admin/api/file?key=originals/test.png', {
+      headers: { accept: 'text/html' },
+    }),
+    env,
+  );
+  assert.equal(file.status, 401);
+  assert.equal(file.headers.get('location'), null);
+  const mutation = await worker.fetch(
+    new Request(origin + '/admin/api/library', {
+      method: 'PUT',
+      headers: { origin, 'content-type': 'application/json' },
+      body: '{}',
+    }),
+    env,
+  );
+  assert.equal(mutation.status, 401);
+  assert.equal(mutation.headers.get('location'), null);
 });
