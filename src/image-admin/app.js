@@ -217,6 +217,9 @@ function controls() {
   document.querySelectorAll('input, textarea, button').forEach((node) => {
     node.disabled = busy;
   });
+  document.querySelectorAll('[data-master-download]').forEach((node) => {
+    node.setAttribute('aria-disabled', String(busy));
+  });
   $('save').disabled = busy || !library || !dirty || conflict;
   $('export').disabled = busy || !library;
   $('add-files').disabled = busy || !model();
@@ -254,20 +257,22 @@ async function api(path, options = {}) {
   } catch {
     data = {};
   }
-  if (!response.ok) {
-    const error = new Error(
-      response.status === 401
-        ? 'Your session has expired. Export any unsaved changes, then reload to sign in again.'
-        : response.status === 409 && path !== 'api/publish'
-          ? 'Someone saved a newer draft. Your changes have not been overwritten. Export your work, then reload the saved draft to reconcile it.'
-          : data.message ||
-            data.error ||
-            `The request failed (${response.status}). Please try again.`,
-    );
-    error.status = response.status;
-    throw error;
-  }
+  if (!response.ok) throw responseError(response, data, path);
   return data;
+}
+
+function responseError(response, data = {}, path = '') {
+  const error = new Error(
+    response.status === 401
+      ? 'Your session has expired. Export any unsaved changes, then reload to sign in again.'
+      : response.status === 409 && path !== 'api/publish'
+        ? 'Someone saved a newer draft. Your changes have not been overwritten. Export your work, then reload the saved draft to reconcile it.'
+        : data.message ||
+          data.error ||
+          `The request failed (${response.status}). Please try again.`,
+  );
+  error.status = response.status;
+  return error;
 }
 
 function fileUrl(key) {
@@ -277,6 +282,40 @@ function fileUrl(key) {
 function masterDownload(link, image) {
   link.href = fileUrl(image.original.key);
   link.download = `${image.id}.${image.original.extension}`;
+  link.dataset.masterDownload = '';
+  link.setAttribute('aria-disabled', String(busy));
+  link.onclick = (event) => {
+    event.preventDefault();
+    downloadMaster(image);
+  };
+}
+
+async function downloadMaster(image) {
+  if (busy) return;
+  busy = true;
+  message();
+  controls();
+  $('save-status').textContent = 'Downloading full-resolution master…';
+  try {
+    const response = await fetch(fileUrl(image.original.key), { credentials: 'same-origin' });
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw responseError(response, data, 'api/file');
+    }
+    const url = URL.createObjectURL(await response.blob());
+    const link = element('a');
+    link.href = url;
+    link.download = `${image.id}.${image.original.extension}`;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch (error) {
+    if ($('preview').open) $('preview').close();
+    message(error.message);
+    $('error').scrollIntoView({ block: 'nearest' });
+  } finally {
+    busy = false;
+    controls();
+  }
 }
 
 function masterFacts(image) {
@@ -481,11 +520,19 @@ function renderPanel() {
         dirty = true;
         renderPanel();
         controls();
+        const card = $('gallery').children[to];
+        (
+          card.querySelector(`[data-move="${to < index ? 'earlier' : 'later'}"]:not(:disabled)`) ??
+          card.querySelector('[data-move]:not(:disabled)') ??
+          card.querySelector('[aria-pressed]')
+        ).focus();
       };
       const up = action('↑', `Move image ${index + 1} earlier`, () => move(index - 1));
       const down = action('↓', `Move image ${index + 1} later`, () => move(index + 1));
       up.dataset.boundary = String(index === 0);
       down.dataset.boundary = String(index === entry.images.length - 1);
+      up.dataset.move = 'earlier';
+      down.dataset.move = 'later';
       const replaceLabel = element('label', 'button', 'Replace original');
       const replace = element('input', 'visually-hidden');
       replace.type = 'file';
@@ -509,6 +556,8 @@ function renderPanel() {
         renderModels();
         renderPanel();
         controls();
+        const neighbor = $('gallery').children[Math.min(index, entry.images.length - 1)];
+        (neighbor?.querySelector('.remove') ?? $('add-files')).focus();
       });
       remove.className = 'remove';
       actions.append(hero, up, down, replaceLabel, remove);
