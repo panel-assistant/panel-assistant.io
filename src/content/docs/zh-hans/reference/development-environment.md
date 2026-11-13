@@ -1,5 +1,5 @@
 ---
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 396e908e6370b88a9fd555abcb67b0816c4cd6f4
 title: 开发环境
 description: 构建面板应用所需的工具链、Docker 和开发容器方式，以及 fork 项目需要了解的签名事项。
 ---
@@ -19,7 +19,7 @@ description: 构建面板应用所需的工具链、Docker 和开发容器方式
 
 ## Docker
 
-如果您只想安装 Docker，[`tools/build/`](https://github.com/panel-assistant/android/tree/main/tools/build) 会使用同一工具链构建版本固定的镜像，并在其中运行 Gradle。APK 会生成在工作树中，镜像在首次构建后会被缓存，Gradle 缓存保存在具名 Docker 卷中。
+如果您只想安装 Docker，[`tools/build/`](https://github.com/panel-assistant/android/tree/main/tools/build) 会构建 Docker 镜像并在其中运行 Gradle。其 Dockerfile 列出了镜像包含的 SDK 软件包。APK 会生成在工作树中，镜像在首次构建后会被缓存，Gradle 缓存保存在具名 Docker 卷中。
 
 ```sh
 ./tools/build/build.sh                       # debug APK -> app/build/outputs/apk/debug/
@@ -35,6 +35,34 @@ description: 构建面板应用所需的工具链、Docker 和开发容器方式
 ## root 辅助程序
 
 Gradle 会在构建应用之前自动构建并验证两种 ABI 对应的 root 辅助程序。应用与辅助程序嵌入相同的身份标识，该标识根据所有辅助程序源文件、头文件和命令定义生成，因此本地构建的应用不会悄然依赖过时的特权代码。
+
+## 从电脑测量仪表盘性能
+
+面板自身的状态页面提供日常使用所需的性能信息；请参阅[性能](/zh-hans/manage/performance/)。对于从面板外部测量并记录启用与禁用实体筛选的仪表盘对比，仓库提供了采集脚本。
+
+如果未过滤仪表盘使自身 WebView 过载，页面内数值可能停止变化。电脑上运行的采集脚本改为轮询面板应用自身性能接口，该接口属于已弃用 REST API（参阅[控制参考](/zh-hans/reference/api/#rest-api-已弃用)），因此整体面板 CPU 仍可观察；有 root 或辅助进程时，还可原生探测 Chromium 渲染器线程。它也记录最后一批浏览器测量的时间龄；超过 15 秒会报告为停滞，而非视为当前数值。
+
+采集器不更改配置。它绝不会开启、关闭或重写实体筛选；首次请求可能在面板应用内部状态创建一个私有安装密钥。两次运行请选择相同仪表盘视图和工作负载，在面板 Web 界面更改筛选，等待仪表盘重新加载，然后在 [ha-paneld 仓库](https://github.com/panel-assistant/android)检出中，分别为两种状态运行命令：
+
+```bash
+python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect filtered --label filtered --output filtered.json
+```
+
+```bash
+python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect unfiltered --label unfiltered --pair-with filtered.json --output unfiltered.json
+```
+
+比较结果：
+
+```bash
+python3 tools/measure-dashboard-performance.py compare filtered.json unfiltered.json --output comparison.json
+```
+
+每次运行默认三分钟，预热 30 秒，每 10 秒轮询。`--pair-with` 复用首次结果中的不透明比较 ID，使比较可拒绝不同实机、不同配置的 Home Assistant 或仪表盘，以及影响测量的设置变化，而不记录这些私有值。它无法检测同一仪表盘内手动选择了不同视图，因此请保持可见视图和工作负载相同。
+
+预期模式未激活、筛选修订或渲染器代次变化、采集期间构建或配置改变、筛选回退，或保留的样本少于三个、整体面板 CPU 样本少于三个、原生渲染器 CPU 样本少于三个时，采集器会拒绝运行结果。它仍会写出被拒绝结果及准确原因，绝不覆盖现有输出文件。
+
+JSON 不包含面板 URL 和 ID、Home Assistant URL 和仪表盘路径、实体 ID、进程名称或筛选哈希。面板使用永不离开本机的私有随机 256 位安装密钥计算不透明指纹，且指纹仅属于一对比较，因此不能关联不同测量或猜测面板名称。无法存储密钥的面板会拒绝测量。未过滤实体数是目录最后同步的数量，而非从过载 WebView 获取的实时数量；目录为空时报告不可用。网络和浏览器流量计数按实际观察间隔归一化，因此漏掉一次轮询不会扭曲比较。浏览器时序和流量速率过期时不计入摘要，但继续收集面板应用自身的 CPU、内存、网络和渲染器数据。
 
 ## 签名
 

@@ -1,7 +1,7 @@
 ---
 title: Ambiente di sviluppo
 description: Gli strumenti per compilare l'app del pannello, i percorsi Docker e devcontainer e cosa deve sapere un fork riguardo alla firma.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 396e908e6370b88a9fd555abcb67b0816c4cd6f4
 ---
 
 Non serve compilare ha-paneld per usarlo: l'installazione di un pannello scarica una versione firmata. Questa pagina è per chi contribuisce e per chi mantiene un fork. Per una visita guidata del sorgente, vedi il [percorso nel codice su DeepWiki](https://deepwiki.com/panel-assistant/android).
@@ -35,6 +35,34 @@ Se esegui lo script da un container che comunica con un daemon Docker esterno, l
 ## L'helper root
 
 Gradle compila e verifica automaticamente entrambi gli helper root specifici per ABI prima di compilare l'app. L'app e gli helper incorporano la stessa identità, derivata da ogni file sorgente, header e definizione di comando dell'helper: una compilazione locale dell'app non può quindi dipendere silenziosamente da codice privilegiato obsoleto.
+
+## Misurare le prestazioni della plancia da un computer
+
+La pagina di stato del pannello copre le prestazioni per l’uso quotidiano; vedi [Prestazioni](/it/manage/performance/). Per un confronto registrato della plancia con e senza filtro entità, misurato dall’esterno del pannello, il repository include uno script di raccolta.
+
+Se la plancia senza filtro sovraccarica la propria WebView, i valori nella pagina possono smettere di cambiare. Uno script di raccolta eseguito da un computer interroga invece l'interfaccia prestazioni dell'app stessa, che appartiene all'API REST deprecata (vedi il [riferimento dei controlli](/it/reference/api/#lapi-rest-è-deprecata)): la CPU dell'intero pannello rimane quindi osservabile e, dove root o helper sono disponibili, anche una misura nativa del thread del renderer Chromium. Registra inoltre l'età dell'ultimo gruppo di misure del browser; oltre 15 secondi viene riportato come bloccato anziché attuale.
+
+Il programma di raccolta non cambia la configurazione. Non attiva, disattiva o riscrive mai il filtro entità; la prima richiesta può creare una chiave privata di installazione nello stato interno dell'app. Seleziona la stessa vista e lo stesso carico per entrambe le esecuzioni, cambia il filtro nell'interfaccia web, attendi il ricaricamento, poi esegui un comando da un checkout del [repository ha-paneld](https://github.com/panel-assistant/android) per ogni stato:
+
+```bash
+python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect filtered --label filtered --output filtered.json
+```
+
+```bash
+python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect unfiltered --label unfiltered --pair-with filtered.json --output unfiltered.json
+```
+
+Confronta i due risultati:
+
+```bash
+python3 tools/measure-dashboard-performance.py compare filtered.json unfiltered.json --output comparison.json
+```
+
+Ogni esecuzione dura per impostazione predefinita tre minuti, con 30 secondi di riscaldamento e interrogazioni ogni 10 secondi. `--pair-with` riusa un ID di confronto opaco del primo risultato, così il confronto può rifiutare un pannello fisico diverso, un diverso Home Assistant o plancia configurati o un'impostazione cambiata che influenza la misura, senza registrare quei valori privati. Non può rilevare una diversa vista scelta manualmente nella stessa plancia: mantieni quindi uguali vista visibile e carico.
+
+Il programma rifiuta un'esecuzione se la modalità prevista non è attiva, cambiano revisione del filtro o generazione del renderer, build o configurazione cambiano durante la raccolta, il filtro ripiega su un'alternativa oppure rimangono meno di tre campioni, meno di tre campioni CPU dell'intero pannello o meno di tre campioni CPU nativi del renderer. Scrive comunque il risultato rifiutato con le ragioni esatte e non sovrascrive mai un file di uscita esistente.
+
+Il JSON omette URL e ID del pannello, URL Home Assistant e percorso della plancia, ID delle entità, nomi dei processi e hash del filtro. Il pannello calcola le impronte opache con una chiave privata casuale di installazione a 256 bit che non lo lascia mai; le impronte sono uniche per una coppia di confronto, così misure separate non possono essere collegate attraverso esse o usate per indovinare il nome del pannello. Un pannello che non può memorizzare la chiave rifiuta la misura. Il numero di entità senza filtro è l'ultimo numero sincronizzato dal catalogo, non un conteggio dal vivo recuperato dalla WebView sovraccarica, e viene riportato non disponibile quando il catalogo è vuoto. I contatori di traffico di rete e browser sono normalizzati agli intervalli realmente osservati, così un'interrogazione mancata non altera il confronto. Tempi e velocità di traffico del browser vengono omessi dai riepiloghi quando obsoleti, mentre CPU, memoria, rete e dati del renderer dall'app continuano a essere raccolti.
 
 ## Firma
 

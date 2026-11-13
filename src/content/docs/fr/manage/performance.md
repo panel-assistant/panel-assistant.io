@@ -1,7 +1,7 @@
 ---
 title: Performances
 description: Pourquoi un panneau mural peut sembler lent avec un tableau de bord fluide sur téléphone, comment le mesurer et quelles corrections privilégier.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 396e908e6370b88a9fd555abcb67b0816c4cd6f4
 ---
 
 Un panneau mural Android économique peut sembler lent, saccader au défilement, devenir vide ou cesser de s’actualiser alors que le même tableau de bord fonctionne bien sur téléphone ou ordinateur. Commencez par le travail envoyé par Home Assistant au panneau, puis mesurez les limites restantes du tableau de bord et du matériel avant de supposer qu’il faut remplacer le panneau.
@@ -31,29 +31,7 @@ La ligne **Cause probable** applique ces règles prudemment et indique son degr�
 
 ### Comparer avec et sans filtre depuis l’extérieur du panneau
 
-Si le tableau de bord non filtré surcharge son propre WebView, les chiffres dans la page peuvent se figer. Un collecteur lancé sur ordinateur interroge plutôt l’interface de performances propre à l’application, appartenant à l’API REST obsolète (voir la [référence des commandes](/fr/reference/api/#the-rest-api-is-deprecated)). Le CPU du panneau reste ainsi observable, ainsi qu’une sonde native du fil du moteur Chromium si root ou l’auxiliaire est disponible. Il consigne aussi l’âge du dernier lot de mesures navigateur ; au-delà de 15 secondes, il le signale bloqué au lieu de le considérer comme actuel.
-
-Le collecteur ne change pas la configuration. Il n’active ni ne désactive ou réécrit le filtre ; sa première requête peut créer une clé privée d’installation dans l’état interne de l’application. Sélectionnez la même vue et la même charge pour les deux essais, changez le filtre dans l’interface web, attendez le rechargement, puis exécutez une commande depuis une copie du [dépôt ha-paneld](https://github.com/panel-assistant/android) pour chaque état :
-
-```bash
-python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect filtered --label filtered --output filtered.json
-```
-
-```bash
-python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect unfiltered --label unfiltered --pair-with filtered.json --output unfiltered.json
-```
-
-Comparez les deux résultats :
-
-```bash
-python3 tools/measure-dashboard-performance.py compare filtered.json unfiltered.json --output comparison.json
-```
-
-Chaque essai dure par défaut trois minutes, avec 30 secondes de préchauffage et une interrogation toutes les 10 secondes. `--pair-with` réutilise un identifiant opaque du premier résultat afin de refuser un panneau physique différent, une autre configuration Home Assistant ou de tableau de bord, ou un réglage influençant la mesure modifié, sans enregistrer ces valeurs privées. Il ne détecte pas une autre vue choisie manuellement dans le même tableau de bord : gardez donc la même vue et la même charge.
-
-Le collecteur refuse un essai si le mode attendu est inactif, si la révision du filtre ou la génération du moteur change, si la version ou la configuration change pendant la collecte, si le filtrage revient au repli ou s’il conserve moins de trois échantillons, moins de trois mesures CPU du panneau ou moins de trois mesures CPU natives du moteur. Il écrit tout de même le résultat refusé avec les raisons exactes et n’écrase jamais un fichier existant.
-
-Le JSON omet URL et identifiant du panneau, URL Home Assistant et chemin du tableau de bord, identifiants d’entités, noms de processus et empreinte du filtre. Le panneau calcule les empreintes opaques avec une clé aléatoire privée de 256 bits qui ne le quitte jamais ; elles sont propres à une paire de comparaison, donc on ne peut ni relier des mesures distinctes ni deviner le nom du panneau grâce à elles. Un panneau incapable de stocker la clé refuse la mesure. Le nombre d’entités non filtrées est le dernier nombre synchronisé du catalogue, pas un nombre récupéré en direct du WebView surchargé ; il est indisponible si le catalogue est vide. Les compteurs réseau et navigateur sont normalisés aux intervalles réellement observés, pour qu’une interrogation manquée ne fausse pas la comparaison. Délais et débits navigateur sont exclus des résumés lorsqu’ils sont périmés, tandis que CPU, mémoire, réseau et chiffres du moteur fournis par l’application continuent d’être collectés.
+Si le tableau de bord non filtré surcharge son propre WebView, les chiffres dans la page peuvent se figer. Les contributeurs qui souhaitent enregistrer une comparaison côte à côte des deux états, mesurée depuis l’extérieur du panneau, peuvent utiliser le script de collecte décrit dans [l’environnement de développement](/fr/reference/development-environment/#mesurer-les-performances-du-tableau-de-bord-depuis-un-ordinateur).
 
 ### Débogage distant WebView facultatif
 

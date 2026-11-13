@@ -1,7 +1,7 @@
 ---
 title: Ontwikkelomgeving
 description: De toolchain voor de paneel-app, de Docker- en devcontainerroutes en wat een fork moet weten over ondertekenen.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: 396e908e6370b88a9fd555abcb67b0816c4cd6f4
 ---
 
 Je hoeft ha-paneld niet te bouwen om het te gebruiken: bij het installeren van een paneel wordt een ondertekende release opgehaald. Deze pagina is voor bijdragers en iedereen die een fork onderhoudt. Zie de [codeverkenning op DeepWiki](https://deepwiki.com/panel-assistant/android) voor een rondleiding door de broncode.
@@ -35,6 +35,34 @@ Voer je het script uit vanuit een container die met een buitenliggende Docker-da
 ## De root-helper
 
 Gradle bouwt en verifieert automatisch beide ABI-specifieke root-helpers voordat het de app bouwt. De app en helpers bevatten dezelfde identiteit, afgeleid van elk helperbronbestand, elke header en elke opdrachtdefinitie. Zo kan een lokale app-build niet ongemerkt afhankelijk zijn van verouderde bevoorrechte code.
+
+## Dashboardprestaties meten vanaf een computer
+
+De eigen statuspagina van het paneel behandelt prestaties voor dagelijks gebruik; zie [Prestaties](/nl/manage/performance/). Voor een vastgelegde vergelijking van een dashboard met en zonder entiteitsfilter, gemeten van buiten het paneel, heeft de repository een verzamelscript.
+
+Overbelast het ongefilterde dashboard zijn eigen WebView, dan kunnen de cijfers op de pagina stoppen. Een verzamelscript op een computer bevraagt in plaats daarvan de eigen prestatie-interface van de paneel-app, onderdeel van de verouderde REST-API (zie de [bedieningsreferentie](/nl/reference/api/#de-rest-api-wordt-uitgefaseerd)). Daardoor blijft de totale paneel-CPU zichtbaar en, met root of helper, een native meting van de Chromium-renderthread. Het registreert ook hoe oud de laatste browsermetingen zijn; boven 15 seconden gelden ze als vastgelopen in plaats van actueel.
+
+Het verzamelscript verandert je configuratie niet. Het zet het entiteitsfilter nooit aan of uit en herschrijft het niet; het eerste verzoek kan één private installatiesleutel in de interne toestand aanmaken. Kies voor beide runs dezelfde dashboardweergave en belasting, wijzig het filter op de webinterface, wacht op herladen en voer vanuit een checkout van de [ha-paneld-repository](https://github.com/panel-assistant/android) voor elke toestand één opdracht uit:
+
+```bash
+python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect filtered --label filtered --output filtered.json
+```
+
+```bash
+python3 tools/measure-dashboard-performance.py collect --panel http://192.168.1.50:8888 --expect unfiltered --label unfiltered --pair-with filtered.json --output unfiltered.json
+```
+
+Vergelijk de twee resultaten:
+
+```bash
+python3 tools/measure-dashboard-performance.py compare filtered.json unfiltered.json --output comparison.json
+```
+
+Elke run duurt standaard drie minuten, met 30 seconden opwarmen en elke 10 seconden een meting. `--pair-with` hergebruikt een ondoorzichtige vergelijkings-ID uit het eerste resultaat. Zo kan de vergelijking een ander fysiek paneel, een andere ingestelde Home Assistant of dashboard, of een gewijzigde relevante instelling weigeren zonder die private waarden vast te leggen. Een handmatig gekozen andere weergave binnen hetzelfde dashboard wordt niet ontdekt, dus houd zichtbare weergave en belasting gelijk.
+
+Het script weigert een run als de verwachte modus niet actief is, de filterrevisie of renderergeneratie wijzigt, de build of configuratie tijdens verzamelen verandert, filtering terugvalt of minder dan drie monsters, drie totale paneel-CPU-monsters of drie native renderer-CPU-monsters overblijven. Het schrijft het geweigerde resultaat met de exacte redenen toch en overschrijft nooit een bestaand uitvoerbestand.
+
+De JSON laat paneel-URL en -ID, Home Assistant-URL en dashboardpad, entiteits-ID’s, procesnamen en filterhash weg. Het paneel berekent ondoorzichtige vingerafdrukken met een private willekeurige 256-bits installatiesleutel die het nooit verlaat. De vingerafdrukken zijn uniek per vergelijkingspaar, zodat afzonderlijke metingen niet kunnen worden gekoppeld of gebruikt om een paneelnaam te raden. Kan het paneel de sleutel niet opslaan, dan weigert het de meting. Het ongefilterde entiteitsaantal is het laatst gesynchroniseerde catalogusaantal, geen live aantal uit de overbelaste WebView, en geldt als niet beschikbaar bij een lege catalogus. Netwerk- en browserverkeertellers worden genormaliseerd naar werkelijk waargenomen intervallen, zodat een gemiste meting de vergelijking niet vertekent. Verouderde browsertijden en verkeerssnelheden worden uit samenvattingen weggelaten, terwijl CPU-, geheugen-, netwerk- en renderercijfers uit de paneel-app wel verzameld blijven worden.
 
 ## Ondertekenen
 
