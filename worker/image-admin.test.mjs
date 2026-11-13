@@ -613,6 +613,60 @@ test('library saves retain removed masters and full previous provenance while en
   assert.deepEqual((await exported.json()).models, modelWith([]));
 });
 
+test('private source masters survive save, reload and export with exact downloadable originals', async () => {
+  const env = environment(),
+    cookie = await session(env);
+  const image = await (await upload(env, cookie)).json();
+  image.archiveOnly = true;
+  const response = await save(env, cookie, { revision: null, models: modelWith([image]) });
+  assert.equal(response.status, 200, await response.clone().text());
+  const saved = await response.json();
+  assert.equal(saved.models[0].images[0].archiveOnly, true);
+  assert.deepEqual(await (await send(env, '/admin/api/library', { cookie })).json(), saved);
+  assert.deepEqual(await (await send(env, '/admin/api/export', { cookie })).json(), saved);
+  const download = await send(
+    env,
+    `/admin/api/file?key=${encodeURIComponent(image.original.key)}`,
+    { cookie },
+  );
+  assert.equal(download.status, 200);
+  assert.deepEqual(Buffer.from(await download.arrayBuffer()), png);
+  const restored = structuredClone(saved);
+  restored.models[0].images[0].archiveOnly = false;
+  const gallery = await save(env, cookie, restored);
+  assert.equal(gallery.status, 200, await gallery.clone().text());
+  assert.equal((await gallery.json()).models[0].images[0].archiveOnly, false);
+});
+
+test('private source selection rejects ambiguous flags without changing the stored draft', async () => {
+  const env = environment(),
+    cookie = await session(env);
+  const image = await (await upload(env, cookie)).json();
+  const response = await save(env, cookie, { revision: null, models: modelWith([image]) });
+  assert.equal(response.status, 200);
+  const saved = await response.json();
+  for (const archiveOnly of [null, 0, 1, 'false', [], {}]) {
+    const invalid = structuredClone(saved);
+    invalid.models[0].images[0].archiveOnly = archiveOnly;
+    assert.equal((await save(env, cookie, invalid)).status, 400, JSON.stringify(archiveOnly));
+  }
+  assert.deepEqual(await (await send(env, '/admin/api/library', { cookie })).json(), saved);
+});
+
+test('private source masters cannot be designated as a product hero', async () => {
+  const env = environment(),
+    cookie = await session(env);
+  const image = await (await upload(env, cookie)).json();
+  const response = await save(env, cookie, { revision: null, models: modelWith([image]) });
+  assert.equal(response.status, 200);
+  const saved = await response.json();
+  const invalidHero = structuredClone(saved);
+  invalidHero.models[0].images[0].archiveOnly = true;
+  invalidHero.models[0].heroImageId = image.id;
+  assert.equal((await save(env, cookie, invalidHero)).status, 400);
+  assert.deepEqual(await (await send(env, '/admin/api/library', { cookie })).json(), saved);
+});
+
 test('an intervening R2 write wins even after the incoming revision was checked', async () => {
   const env = environment(),
     cookie = await session(env);

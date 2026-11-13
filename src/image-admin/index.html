@@ -104,8 +104,8 @@
           </p>
           <p class="upload-note">
             Download a full-resolution master, edit it in Photoshop, then upload the edited master
-            to keep its credit and source. Transparent PNGs keep their transparency. Use Replace
-            original for a different photograph.
+            to keep its credit and source. The previous master stays in Source masters. Transparent
+            PNGs keep their transparency. Use Replace original for a different photograph.
           </p>
           <p id="upload-notice" class="upload-note" role="status" hidden></p>
           <div id="gallery" class="gallery"></div>
@@ -114,9 +114,32 @@
             <h3>No images selected</h3>
             <p>Add an original photograph to start this panel’s gallery.</p>
           </div>
+          <div class="section-heading">
+            <div>
+              <h2>Source masters</h2>
+              <p class="muted">
+                Canonical originals kept privately for future editing. These images are excluded
+                from publication. Download a source and upload an edited version to create a gallery
+                image while keeping the source.
+              </p>
+            </div>
+            <label class="button" for="add-sources"
+              >＋ Add source masters<input
+                id="add-sources"
+                class="visually-hidden"
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/jxl,.jxl"
+                multiple
+            /></label>
+          </div>
+          <p id="sources-empty" class="muted" tabindex="-1">
+            No source masters stored for this product.
+          </p>
+          <div id="sources" class="gallery"></div>
           <div class="archive-note">
-            <strong>Removing an image changes the panel selection.</strong> Its archived original
-            and replacement history are retained. Publication requires a separate review.
+            <strong>Source masters stay private when publishing the gallery.</strong> Move a gallery
+            image to Source masters to keep it available for later edits. Removing a source from
+            this list retains its bytes and previous saved history in storage.
           </div>
         </section>
       </main>

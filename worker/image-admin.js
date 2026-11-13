@@ -578,6 +578,10 @@ async function validateLibrary(input, old, store) {
         ['pending', 'reviewed'].includes(candidate.review ?? 'pending'),
         'Invalid review status.',
       );
+      check(
+        candidate.archiveOnly === undefined || typeof candidate.archiveOnly === 'boolean',
+        'Source master status must be a boolean.',
+      );
       images.push({
         id: candidate.id,
         ...metadata(candidate),
@@ -585,14 +589,16 @@ async function validateLibrary(input, old, store) {
         delivery,
         review: candidate.review ?? 'pending',
         history,
+        ...(candidate.archiveOnly === undefined ? {} : { archiveOnly: candidate.archiveOnly }),
       });
     }
     const heroImageId = model.heroImageId;
     check(
       heroImageId === undefined ||
         heroImageId === null ||
-        (typeof heroImageId === 'string' && images.some((image) => image.id === heroImageId)),
-      'Hero image must belong to this model; clear the hero before removing its image.',
+        (typeof heroImageId === 'string' &&
+          images.some((image) => image.id === heroImageId && !image.archiveOnly)),
+      'Hero image must belong to this model’s gallery; clear the hero before archiving or removing its image.',
     );
     models.push({
       id: model.id,

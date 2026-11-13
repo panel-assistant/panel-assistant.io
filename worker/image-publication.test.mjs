@@ -158,7 +158,7 @@ function fixture() {
   };
   const publish = (library, publishedRevision = null, modelId = 'vendor/panel') =>
     send('publish', { modelId, draftRevision: library.revision, publishedRevision });
-  return { env, send, login, save, prepare, publish };
+  return { env, send, login, upload, save, prepare, publish };
 }
 
 test('selected publication preserves exact alpha renditions and exposes ordered credits without private masters or provenance', async () => {
@@ -338,6 +338,108 @@ test('publishing another model preserves previous selections and an explicit emp
   assert.equal(cleared.models[0].heroImageId, null);
   assert.deepEqual(cleared.models[1], second.models[1]);
   assert.ok(f.env.IMAGE_STORE.objects.has(library.models[0].images[0].original.key));
+});
+
+test('private canonical sources and their distinct renditions never cross the publication boundary', async () => {
+  const f = fixture(),
+    library = await f.prepare();
+  const original = await f.upload('canonical-source', canvasPng, canvasPng);
+  original.archiveOnly = true;
+  original.alt = 'PRIVATE CANONICAL SOURCE CAPTION';
+  original.credit = 'PRIVATE CANONICAL SOURCE CREDIT';
+  original.source.page = 'https://private-source.example/canonical';
+  library.models[0].images.splice(1, 0, original);
+  const saved = await f.save(library);
+  f.env.IMAGE_STORE.reads.length = 0;
+  const response = await f.publish(saved);
+  assert.equal(response.status, 200, await response.clone().text());
+  const snapshot = await response.json();
+  assert.deepEqual(
+    snapshot.models[0].images.map((image) => image.id),
+    ['rear', 'front'],
+  );
+  assert.equal(snapshot.models[0].heroImageId, 'front');
+  const published = JSON.stringify(snapshot);
+  for (const privateText of [original.id, original.alt, original.credit, original.source.page])
+    assert.equal(published.includes(privateText), false, privateText);
+  for (const key of Object.values(original.delivery))
+    assert.equal(f.env.IMAGE_STORE.reads.includes(key), false, key);
+  assert.equal(
+    f.env.PUBLIC_IMAGES.objects.has(`published-images/${sha(canvasPng)}.png`),
+    false,
+    'the distinct private source rendition was never copied into public storage',
+  );
+  assert.deepEqual(f.env.IMAGE_STORE.objects.get(original.original.key).bytes, canvasPng);
+  const reloaded = await (await f.send('library')).json();
+  assert.equal(reloaded.models[0].images[1].archiveOnly, true);
+});
+
+test('publishing a source-only product clears its public gallery while retaining all private masters', async () => {
+  const f = fixture(),
+    library = await f.prepare();
+  const active = await (await f.publish(library)).json();
+  for (const image of library.models[0].images) image.archiveOnly = true;
+  library.models[0].heroImageId = null;
+  const saved = await f.save(library);
+  f.env.IMAGE_STORE.reads.length = 0;
+  const response = await f.publish(saved, active.revision);
+  assert.equal(response.status, 200, await response.clone().text());
+  const snapshot = await response.json();
+  assert.deepEqual(snapshot.models[0].images, []);
+  assert.equal(snapshot.models[0].heroImageId, null);
+  assert.equal(
+    f.env.IMAGE_STORE.reads.some((key) => key.startsWith('derivatives/')),
+    false,
+  );
+  for (const image of saved.models[0].images)
+    assert.deepEqual(f.env.IMAGE_STORE.objects.get(image.original.key).bytes, png);
+  assert.equal((await (await f.send('library')).json()).models[0].images.length, 2);
+});
+
+test('private source masters do not consume the one hundred public image allowance', async () => {
+  const f = fixture(),
+    library = await f.prepare();
+  const image = library.models[0].images[0];
+  library.models[0].images = Array.from({ length: 200 }, (_, index) => ({
+    ...image,
+    id: `photo-${index}`,
+    archiveOnly: index >= 100,
+  }));
+  library.models[0].heroImageId = 'photo-99';
+  const saved = await f.save(library);
+  const response = await f.publish(saved);
+  assert.equal(response.status, 200, await response.clone().text());
+  const snapshot = await response.json();
+  assert.deepEqual(
+    snapshot.models[0].images.map((image) => image.id),
+    Array.from({ length: 100 }, (_, index) => `photo-${index}`),
+  );
+  assert.equal(snapshot.models[0].heroImageId, 'photo-99');
+});
+
+test('publication independently rejects malformed source flags', async () => {
+  const f = fixture(),
+    library = await f.prepare();
+  for (const archiveOnly of [null, 0, 1, 'false', [], {}]) {
+    const invalid = structuredClone(library);
+    invalid.models[0].images[0].archiveOnly = archiveOnly;
+    await f.env.IMAGE_STORE.put('library.json', JSON.stringify(invalid));
+    const response = await f.publish(invalid);
+    assert.equal(response.status, 400, JSON.stringify(archiveOnly));
+    assert.equal(f.env.PUBLIC_IMAGES.objects.has(CURRENT), false);
+  }
+});
+
+test('publication independently rejects a source-only hero', async () => {
+  const f = fixture(),
+    library = await f.prepare();
+  const invalidHero = structuredClone(library);
+  invalidHero.models[0].images.find(
+    (image) => image.id === invalidHero.models[0].heroImageId,
+  ).archiveOnly = true;
+  await f.env.IMAGE_STORE.put('library.json', JSON.stringify(invalidHero));
+  assert.equal((await f.publish(invalidHero)).status, 400);
+  assert.equal(f.env.PUBLIC_IMAGES.objects.has(CURRENT), false);
 });
 
 test('stale draft/public revisions and requests without one explicit model cannot publish', async () => {

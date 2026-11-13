@@ -150,11 +150,13 @@ function reviewPublication() {
     publishedRevision: publication.revision,
   };
   $('publish-model').textContent = entry.title;
-  const hero = entry.images.findIndex((image) => image.id === entry.heroImageId);
+  const images = entry.images.filter((image) => !image.archiveOnly);
+  const hero = images.findIndex((image) => image.id === entry.heroImageId);
+  const sources = entry.images.length - images.length;
   $('publish-summary').textContent =
-    `${entry.images.length} ${entry.images.length === 1 ? 'image' : 'images'} in the order below. ${hero < 0 ? 'No hero image selected.' : `Image ${hero + 1} is the hero.`}${entry.images.length ? '' : ' Publishing this empty selection removes all public images for this panel.'}`;
+    `${images.length} ${images.length === 1 ? 'image' : 'images'} in the order below. ${hero < 0 ? 'No hero image selected.' : `Image ${hero + 1} is the hero.`} ${sources} source ${sources === 1 ? 'master stays' : 'masters stay'} private and excluded.${images.length ? '' : ' Publishing this empty selection removes all public images for this panel.'}`;
   $('publish-images').replaceChildren(
-    ...entry.images.map((image, index) => {
+    ...images.map((image, index) => {
       const card = element('li', 'publish-image');
       const img = element('img');
       img.src = fileUrl(image.delivery.thumb);
@@ -268,6 +270,7 @@ function controls() {
   $('save').disabled = busy || !library || !dirty || conflict;
   $('export').disabled = busy || !library;
   $('add-files').disabled = busy || !model();
+  $('add-sources').disabled = busy || !model();
   publicationControls();
   document.querySelectorAll('[data-boundary="true"]').forEach((node) => {
     node.disabled = true;
@@ -393,7 +396,11 @@ function renderModels() {
       button.type = 'button';
       button.append(
         element('span', '', entry.title),
-        element('span', 'model-badge', entry.images.length),
+        element(
+          'span',
+          'model-badge',
+          `${entry.images.filter((image) => !image.archiveOnly).length} gallery · ${entry.images.filter((image) => image.archiveOnly).length} sources`,
+        ),
       );
       if (entry.id === selected) button.setAttribute('aria-current', 'page');
       button.addEventListener('click', () => {
@@ -436,181 +443,217 @@ function renderPanel() {
   $('panel').hidden = !entry;
   if (!entry) return;
   $('panel-title').textContent = entry.title;
+  const gallery = entry.images.filter((image) => !image.archiveOnly);
+  const sourceMasters = entry.images.filter((image) => image.archiveOnly);
   $('panel-subtitle').textContent =
-    `${entry.id} · ${entry.images.length} ${entry.images.length === 1 ? 'image' : 'images'} selected`;
-  const heroIndex = entry.images.findIndex((image) => image.id === entry.heroImageId);
+    `${entry.id} · ${gallery.length} gallery images · ${sourceMasters.length} private source masters`;
+  const heroIndex = gallery.findIndex((image) => image.id === entry.heroImageId);
   $('hero-status').textContent =
     heroIndex < 0
       ? 'No hero selected. Choose the image that best represents this product.'
       : `Image ${heroIndex + 1} is the hero for this private draft. Gallery order is unchanged.`;
-  $('empty').hidden = entry.images.length !== 0;
-  $('gallery').replaceChildren(
-    ...entry.images.map((image, index) => {
-      const card = element('article', 'image-card');
-      card.setAttribute('aria-label', `Image ${index + 1}: ${image.alt || image.id}`);
-      const top = element('div', 'image-top');
-      top.append(
-        element(
-          'span',
-          image.id === entry.heroImageId ? 'thumbnail-label' : '',
-          `${String(index + 1).padStart(2, '0')} · ${image.id === entry.heroImageId ? 'Hero image' : 'Gallery image'}`,
-        ),
-        element('span', '', 'Private draft'),
-      );
-      const preview = action('', `Enlarge image ${index + 1}`, () => openPreview(index));
-      preview.className = 'image-preview';
-      const img = element('img');
-      img.src = fileUrl(image.delivery.thumb);
-      img.alt = image.alt;
-      img.loading = 'lazy';
-      preview.append(img);
-      const fields = element('div', 'image-fields');
-      fields.append(
-        field(
-          'Caption / alternative text',
-          image.alt,
-          (value) => {
-            image.alt = value;
-            img.alt = value;
-          },
-          { multiline: true },
-        ),
-        field(
-          'Photo credit',
-          image.credit,
-          (value) => {
-            image.credit = value;
-          },
-          { placeholder: 'Who created or supplied this image?' },
-        ),
-      );
-      const details = element('details');
-      details.append(element('summary', '', 'Source, licence & archive details'));
-      const sources = element('div', 'source-fields');
-      image.source ??= { page: '', url: '', licence: 'unknown', notes: '' };
-      for (const [key, label, options] of [
-        ['page', 'Source page URL', { url: true, placeholder: 'https://… or unknown' }],
-        ['url', 'Original image URL', { url: true, placeholder: 'https://… or unknown' }],
-        [
-          'licence',
-          'Licence / permission evidence',
-          {
-            multiline: true,
-            placeholder: 'Record the permission or licence; use unknown when unestablished.',
-          },
-        ],
-        ['notes', 'Provenance notes', { multiline: true }],
-      ])
-        sources.append(
-          field(
-            label,
-            image.source[key],
-            (value) => {
-              image.source[key] = value;
-            },
-            options,
-          ),
-        );
-      const original = image.original;
-      sources.append(
-        element(
-          'p',
-          'image-facts',
-          `Archived original: ${original.width} × ${original.height} · ${(original.bytes / 1024 / 1024).toFixed(2)} MiB · ${original.extension.toUpperCase()}`,
-        ),
-        element('p', 'image-facts', `SHA-256: ${original.sha256}`),
-        element(
-          'p',
-          'image-facts',
-          `Publication review: ${image.review || 'pending'}. Saving does not approve publication.`,
-        ),
-      );
-      if (image.source.discovered)
-        sources.append(
-          element('p', 'image-facts', `Discovery recorded: ${image.source.discovered}`),
-        );
-      details.append(sources);
-      fields.append(details);
-      const master = element('div', 'master-tools');
-      const download = element('a', 'button', '↓ Download full-resolution master');
-      download.setAttribute('aria-label', `Download full-resolution master for image ${index + 1}`);
-      masterDownload(download, image);
-      const editLabel = element('label', 'button', 'Upload edited master');
-      const edit = element('input', 'visually-hidden');
-      edit.type = 'file';
-      edit.accept = ACCEPT;
-      edit.setAttribute('aria-label', `Upload edited master for image ${index + 1}`);
-      edit.addEventListener('change', () => {
-        if (edit.files[0]) uploadFiles([edit.files[0]], entry, index, true);
-        edit.value = '';
-      });
-      editLabel.append(edit);
-      master.append(download, element('p', 'image-facts', masterFacts(image)), editLabel);
-      const actions = element('div', 'card-actions');
-      const isHero = image.id === entry.heroImageId;
-      const hero = action(
-        isHero ? '★ Hero · Clear' : '☆ Use as hero',
-        isHero ? `Clear hero image ${index + 1}` : `Use image ${index + 1} as hero`,
-        () => {
-          entry.heroImageId = isHero ? null : image.id;
-          dirty = true;
-          renderPanel();
-          controls();
-          $('gallery').children[index].querySelector('[aria-pressed]').focus();
+  $('empty').hidden = gallery.length !== 0;
+  $('sources-empty').hidden = sourceMasters.length !== 0;
+  $('gallery').replaceChildren();
+  $('sources').replaceChildren();
+  entry.images.forEach((image, index) => {
+    const container = image.archiveOnly ? $('sources') : $('gallery');
+    const group = image.archiveOnly ? sourceMasters : gallery;
+    const position = group.indexOf(image);
+    const focusCard = () =>
+      [...container.children].find((card) => card.dataset.imageId === image.id);
+    const card = element('article', 'image-card');
+    card.dataset.imageId = image.id;
+    card.setAttribute('aria-label', `Image ${index + 1}: ${image.alt || image.id}`);
+    const top = element('div', 'image-top');
+    top.append(
+      element(
+        'span',
+        image.id === entry.heroImageId ? 'thumbnail-label' : '',
+        `${String(position + 1).padStart(2, '0')} · ${image.archiveOnly ? 'Private source master' : image.id === entry.heroImageId ? 'Hero image' : 'Gallery image'}`,
+      ),
+      element('span', '', 'Private draft'),
+    );
+    const preview = action('', `Enlarge image ${index + 1}`, () => openPreview(index));
+    preview.className = 'image-preview';
+    const img = element('img');
+    img.src = fileUrl(image.delivery.thumb);
+    img.alt = image.alt;
+    img.loading = 'lazy';
+    preview.append(img);
+    const fields = element('div', 'image-fields');
+    fields.append(
+      field(
+        'Caption / alternative text',
+        image.alt,
+        (value) => {
+          image.alt = value;
+          img.alt = value;
         },
+        { multiline: true },
+      ),
+      field(
+        'Photo credit',
+        image.credit,
+        (value) => {
+          image.credit = value;
+        },
+        { placeholder: 'Who created or supplied this image?' },
+      ),
+    );
+    const details = element('details');
+    details.append(element('summary', '', 'Source, licence & archive details'));
+    const sources = element('div', 'source-fields');
+    image.source ??= { page: '', url: '', licence: 'unknown', notes: '' };
+    for (const [key, label, options] of [
+      ['page', 'Source page URL', { url: true, placeholder: 'https://… or unknown' }],
+      ['url', 'Original image URL', { url: true, placeholder: 'https://… or unknown' }],
+      [
+        'licence',
+        'Licence / permission evidence',
+        {
+          multiline: true,
+          placeholder: 'Record the permission or licence; use unknown when unestablished.',
+        },
+      ],
+      ['notes', 'Provenance notes', { multiline: true }],
+    ])
+      sources.append(
+        field(
+          label,
+          image.source[key],
+          (value) => {
+            image.source[key] = value;
+          },
+          options,
+        ),
       );
-      hero.setAttribute('aria-pressed', String(isHero));
-      const move = (to) => {
-        entry.images.splice(index, 1);
-        entry.images.splice(to, 0, image);
+    const original = image.original;
+    sources.append(
+      element(
+        'p',
+        'image-facts',
+        `Archived original: ${original.width} × ${original.height} · ${(original.bytes / 1024 / 1024).toFixed(2)} MiB · ${original.extension.toUpperCase()}`,
+      ),
+      element('p', 'image-facts', `SHA-256: ${original.sha256}`),
+      element(
+        'p',
+        'image-facts',
+        `Publication review: ${image.review || 'pending'}. Saving does not approve publication.`,
+      ),
+    );
+    if (image.source.discovered)
+      sources.append(element('p', 'image-facts', `Discovery recorded: ${image.source.discovered}`));
+    details.append(sources);
+    fields.append(details);
+    const master = element('div', 'master-tools');
+    const download = element('a', 'button', '↓ Download full-resolution master');
+    download.setAttribute('aria-label', `Download full-resolution master for image ${index + 1}`);
+    masterDownload(download, image);
+    const editLabel = element(
+      'label',
+      'button',
+      image.archiveOnly ? 'Upload edited version to gallery' : 'Upload edited master',
+    );
+    const edit = element('input', 'visually-hidden');
+    edit.type = 'file';
+    edit.accept = ACCEPT;
+    edit.setAttribute('aria-label', `Upload edited master for image ${index + 1}`);
+    edit.addEventListener('change', () => {
+      if (edit.files[0]) uploadFiles([edit.files[0]], entry, index, true);
+      edit.value = '';
+    });
+    editLabel.append(edit);
+    master.append(download, element('p', 'image-facts', masterFacts(image)), editLabel);
+    const actions = element('div', 'card-actions');
+    const isHero = image.id === entry.heroImageId;
+    const hero = action(
+      isHero ? '★ Hero · Clear' : '☆ Use as hero',
+      isHero ? `Clear hero image ${index + 1}` : `Use image ${index + 1} as hero`,
+      () => {
+        entry.heroImageId = isHero ? null : image.id;
         dirty = true;
         renderPanel();
         controls();
-        const card = $('gallery').children[to];
-        (
-          card.querySelector(`[data-move="${to < index ? 'earlier' : 'later'}"]:not(:disabled)`) ??
-          card.querySelector('[data-move]:not(:disabled)') ??
-          card.querySelector('[aria-pressed]')
-        ).focus();
-      };
-      const up = action('↑', `Move image ${index + 1} earlier`, () => move(index - 1));
-      const down = action('↓', `Move image ${index + 1} later`, () => move(index + 1));
-      up.dataset.boundary = String(index === 0);
-      down.dataset.boundary = String(index === entry.images.length - 1);
-      up.dataset.move = 'earlier';
-      down.dataset.move = 'later';
-      const replaceLabel = element('label', 'button', 'Replace original');
-      const replace = element('input', 'visually-hidden');
-      replace.type = 'file';
-      replace.accept = ACCEPT;
-      replace.setAttribute('aria-label', `Replace original for image ${index + 1}`);
-      replace.addEventListener('change', () => {
-        if (replace.files[0]) uploadFiles([replace.files[0]], entry, index);
-        replace.value = '';
-      });
-      replaceLabel.append(replace);
-      const remove = action('Remove', `Remove image ${index + 1} from this panel`, () => {
+        focusCard().querySelector('[aria-pressed]').focus();
+      },
+    );
+    hero.setAttribute('aria-pressed', String(isHero));
+    const move = (neighbor) => {
+      const to = entry.images.indexOf(neighbor);
+      entry.images.splice(index, 1);
+      entry.images.splice(to, 0, image);
+      dirty = true;
+      renderPanel();
+      controls();
+      const card = focusCard();
+      (
+        card.querySelector(`[data-move="${to < index ? 'earlier' : 'later'}"]:not(:disabled)`) ??
+        card.querySelector('[data-move]:not(:disabled)') ??
+        card.querySelector('[aria-pressed]')
+      ).focus();
+    };
+    const up = action('↑', `Move image ${index + 1} earlier`, () => move(group[position - 1]));
+    const down = action('↓', `Move image ${index + 1} later`, () => move(group[position + 1]));
+    up.dataset.boundary = String(position === 0);
+    down.dataset.boundary = String(position === group.length - 1);
+    up.dataset.move = 'earlier';
+    down.dataset.move = 'later';
+    const replaceLabel = element('label', 'button', 'Replace original');
+    const replace = element('input', 'visually-hidden');
+    replace.type = 'file';
+    replace.accept = ACCEPT;
+    replace.setAttribute('aria-label', `Replace original for image ${index + 1}`);
+    replace.addEventListener('change', () => {
+      if (replace.files[0]) uploadFiles([replace.files[0]], entry, index);
+      replace.value = '';
+    });
+    replaceLabel.append(replace);
+    const remove = action(
+      'Remove source',
+      `Remove source image ${index + 1} from this panel`,
+      () => {
         if (
           !confirm(
-            'Remove this image from the panel gallery? Its archived original and replacement history will be retained. Save the private draft to keep this selection change.',
+            'Remove this source master from the browsable library? Its bytes and previous saved history stay in storage. Save the private draft to keep this change.',
           )
         )
           return;
         entry.images.splice(index, 1);
+        dirty = true;
+        renderModels();
+        renderPanel();
+        controls();
+        const neighbor = $('sources').children[Math.min(position, sourceMasters.length - 2)];
+        (neighbor?.querySelector('[data-gallery-toggle]') ?? $('sources-empty')).focus();
+      },
+    );
+    remove.className = 'remove';
+    const toggle = action(
+      image.archiveOnly ? 'Add to gallery' : 'Keep as source master',
+      image.archiveOnly
+        ? `Add source image ${index + 1} to gallery`
+        : `Keep image ${index + 1} as a private source master`,
+      () => {
+        image.archiveOnly = !image.archiveOnly;
         if (entry.heroImageId === image.id) entry.heroImageId = null;
         dirty = true;
         renderModels();
         renderPanel();
         controls();
-        const neighbor = $('gallery').children[Math.min(index, entry.images.length - 1)];
-        (neighbor?.querySelector('.remove') ?? $('add-files')).focus();
-      });
-      remove.className = 'remove';
-      actions.append(hero, up, down, replaceLabel, remove);
-      card.append(top, preview, master, fields, actions);
-      return card;
-    }),
-  );
+        const destination = image.archiveOnly ? $('sources') : $('gallery');
+        [...destination.children]
+          .find((node) => node.dataset.imageId === image.id)
+          .querySelector('[data-gallery-toggle]')
+          .focus();
+      },
+    );
+    toggle.dataset.galleryToggle = '';
+    if (image.archiveOnly) actions.append(toggle, up, down, remove);
+    else actions.append(hero, up, down, replaceLabel, toggle);
+    card.append(top, preview, master, fields, actions);
+    container.append(card);
+  });
 }
 
 function openPreview(index) {
@@ -634,7 +677,7 @@ function updatePreview() {
   if (source) $('preview-source').href = source;
   else $('preview-source').removeAttribute('href');
   $('preview-position').textContent =
-    `${previewIndex + 1} of ${entry.images.length} · Private preview`;
+    `${previewIndex + 1} of ${entry.images.length} · ${image.archiveOnly ? 'Private source master · excluded from publication' : 'Private gallery preview'}`;
   $('preview-previous').hidden = $('preview-next').hidden = entry.images.length < 2;
 }
 
@@ -700,7 +743,7 @@ async function renditions(file) {
   }
 }
 
-async function uploadFiles(files, entry, replacing, editedMaster = false) {
+async function uploadFiles(files, entry, replacing, editedMaster = false, archiveOnly = false) {
   if (busy || !files.length) return;
   busy = true;
   message();
@@ -746,17 +789,24 @@ async function uploadFiles(files, entry, replacing, editedMaster = false) {
       const image = result.image ?? result;
       if (!image.id || !image.original?.key || !image.delivery?.thumb || !image.delivery?.large)
         throw new Error('The archive response was incomplete. Reload before trying again.');
+      if (archiveOnly) image.archiveOnly = true;
       if (replacing === undefined) entry.images.push(image);
       else {
-        entry.images.splice(replacing, 1, image);
-        if (entry.heroImageId === previous.id) entry.heroImageId = image.id;
+        if (previous.archiveOnly && editedMaster) entry.images.push(image);
+        else {
+          previous.archiveOnly = true;
+          entry.images.splice(replacing, 1, image, previous);
+          if (entry.heroImageId === previous.id) entry.heroImageId = image.id;
+        }
         $('upload-notice').textContent = editedMaster
-          ? 'Edited master archived. Caption, credit and source details were kept, and the previous master is retained. Save the private draft to use this version.'
-          : 'Replacement archived. Its caption was kept; credit, source and licence start unknown. Enter this photograph’s details before saving. The previous original is retained.';
+          ? 'Edited version added to the gallery. Caption, credit and source details were kept. The previous master remains in Source masters for future edits. Save the private draft to keep both.'
+          : 'Replacement added to the gallery. Its caption was kept; credit, source and licence start unknown. Enter this photograph’s details before saving. The previous original remains in Source masters.';
       }
       const archived =
         replacing === undefined
-          ? 'Master archived. Save the private draft to use this image.'
+          ? archiveOnly
+            ? 'Source master archived privately and excluded from publication. Save the private draft to keep it in the source library.'
+            : 'Master archived. Save the private draft to use this image.'
           : $('upload-notice').textContent;
       $('upload-notice').textContent =
         `${archived} Editing metadata is retained in the exact private master, which may also contain location or software details. The server removes nonvisual metadata from public previews.`;
@@ -871,6 +921,10 @@ $('reload').addEventListener('click', () => {
 $('add-files').addEventListener('change', () => {
   uploadFiles([...$('add-files').files], model());
   $('add-files').value = '';
+});
+$('add-sources').addEventListener('change', () => {
+  uploadFiles([...$('add-sources').files], model(), undefined, false, true);
+  $('add-sources').value = '';
 });
 $('logout').addEventListener('click', async () => {
   if (

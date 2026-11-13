@@ -387,7 +387,16 @@ export async function publishModel(input, privateStore, publicStore) {
   );
   const model = library.models?.find((model) => model.id === input.modelId);
   check(model, 'Model not found in the saved draft.', 404);
-  validateModel(model);
+  check(Array.isArray(model.images), 'Invalid saved image list.');
+  check(
+    model.images.every(
+      (image) =>
+        image && (image.archiveOnly === undefined || typeof image.archiveOnly === 'boolean'),
+    ),
+    'Invalid source master status.',
+  );
+  const gallery = { ...model, images: model.images.filter((image) => !image.archiveOnly) };
+  validateModel(gallery);
   const { object, snapshot } = await publicationObject(publicStore);
   check(
     snapshot.revision === input.publishedRevision,
@@ -404,7 +413,7 @@ export async function publishModel(input, privateStore, publicStore) {
   };
   // Sequential processing keeps memory bounded to one derivative (at most 5 MiB) plus metadata.
   // At most 100 images use fewer than 610 R2 operations, including immutable-object collisions.
-  for (const image of model.images) {
+  for (const image of gallery.images) {
     const thumb = await copyDerivative(privateStore, publicStore, image, 'thumb');
     const large = await copyDerivative(privateStore, publicStore, image, 'large');
     const source = sourcePage(image.source?.page);
