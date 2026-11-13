@@ -1,7 +1,7 @@
 ---
 title: Aggiornamenti e ripristino
 description: Mantenere aggiornata l'app su un pannello e cosa è possibile ripristinare quando qualcosa va storto.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 ## Aggiornare un pannello
@@ -16,7 +16,7 @@ Un pannello con root supportato può mantenere ADB di rete disattivato mentre Pa
 
 ### Pannelli che necessitano di ADB
 
-Quando installi un aggiornamento da Home Assistant, Panel Assistant usa automaticamente ADB per i pannelli che non possono installare l'aggiornamento da soli. Se il pannello accetta la connessione senza un tocco sullo schermo, il tuo consenso iniziale a installare Panel Assistant comprende anche la creazione e la memorizzazione di una chiave ADB per gli aggiornamenti futuri. Se il pannello richiede l'approvazione sul suo schermo, Home Assistant crea una Riparazione che indica il pannello e avvia l'autorizzazione. Segui la Riparazione per approvare la richiesta su quel pannello.
+Quando installi un aggiornamento da Home Assistant, Panel Assistant usa automaticamente ADB per i pannelli che non possono installare l'aggiornamento da soli. Se il pannello accetta la connessione senza un tocco sullo schermo, il tuo consenso iniziale a installare Panel Assistant comprende anche la creazione e la memorizzazione di una chiave ADB per gli aggiornamenti futuri. Se il pannello richiede l'approvazione sul suo schermo, Home Assistant crea una Riparazione che indica il pannello e avvia l'autorizzazione. Segui la Riparazione per approvare la richiesta su quel pannello. Un pannello in [modalità di sicurezza Hardened](/it/manage/security-mode/) rifiuta ADB di rete, quindi riportalo alla modalità Relaxed sul pannello prima di un aggiornamento che richiede ADB.
 
 ### Un pannello che non può essere aggiornato
 

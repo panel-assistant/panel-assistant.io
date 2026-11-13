@@ -1,7 +1,7 @@
 ---
 title: Updates und Wiederherstellung
 description: Die App auf einem Panel aktuell halten und was sich wiederherstellen lässt, wenn etwas schiefgeht.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 ## Ein Panel aktualisieren
@@ -16,7 +16,7 @@ Ein unterstütztes gerootetes Panel kann Netzwerk-ADB ausgeschaltet lassen, wäh
 
 ### Panels, die ADB benötigen
 
-Wenn du ein Update aus Home Assistant installierst, verwendet Panel Assistant automatisch ADB für Panels, die das Update nicht selbst installieren können. Wenn das Panel die Verbindung ohne Antippen auf dem Bildschirm annimmt, umfasst deine ursprüngliche Zustimmung zur Installation von Panel Assistant auch das Erstellen und Speichern eines ADB-Schlüssels für zukünftige Updates. Wenn das Panel eine Bestätigung auf seinem Bildschirm verlangt, zeigt Home Assistant eine Reparatur an, die das Panel nennt und die Autorisierung startet. Folge der Reparatur, um die Aufforderung auf diesem Panel zu bestätigen.
+Wenn du ein Update aus Home Assistant installierst, verwendet Panel Assistant automatisch ADB für Panels, die das Update nicht selbst installieren können. Wenn das Panel die Verbindung ohne Antippen auf dem Bildschirm annimmt, umfasst deine ursprüngliche Zustimmung zur Installation von Panel Assistant auch das Erstellen und Speichern eines ADB-Schlüssels für zukünftige Updates. Wenn das Panel eine Bestätigung auf seinem Bildschirm verlangt, zeigt Home Assistant eine Reparatur an, die das Panel nennt und die Autorisierung startet. Folge der Reparatur, um die Aufforderung auf diesem Panel zu bestätigen. Ein Panel im [gehärteten Sicherheitsmodus](/de/manage/security-mode/) verweigert Netzwerk-ADB. Schalte es deshalb vor einem Update, das ADB benötigt, am Panel wieder in den entspannten Modus.
 
 ### Ein Panel, das sich nicht aktualisieren lässt
 
@@ -38,7 +38,7 @@ Erstelle vor einer Änderung, bei der du unsicher bist, selbst eine Sicherung: �
 
 ## Wiederherstellung
 
-Wenn ein Dashboard nach einem Update nicht lädt, liegt das meist an der System-WebView oder am Dashboard selbst. Das Panel hat dafür sein eigenes Verhalten für [Start und Wiederherstellung](/de/manage/built-in-renderer/#startup-and-recovery). [Fehlerbehebung](/de/manage/troubleshooting/) beschreibt die üblichen Ursachen. Ein Panel mit der Panel-App 1.0 kann nicht zu einer früheren Version zurückkehren. [Upgrade auf 1.0](/de/manage/upgrade-to-1-0/#zurückkehren) erklärt, was möglich ist.
+Wenn ein Dashboard nach einem Update nicht lädt, liegt das meist an der System-WebView oder am Dashboard selbst. Das Panel hat dafür sein eigenes Verhalten für [Start und Wiederherstellung](/de/manage/built-in-renderer/#start-und-wiederherstellung). [Fehlerbehebung](/de/manage/troubleshooting/) beschreibt die üblichen Ursachen. Ein Panel mit der Panel-App 1.0 kann nicht zu einer früheren Version zurückkehren. [Upgrade auf 1.0](/de/manage/upgrade-to-1-0/#zurückkehren) erklärt, was möglich ist.
 
 Die Wiederherstellung unterhalb der App-Ebene ist eine andere Sache. Panel Assistant rührt die Firmware eines Panels niemals an. Bei manchen gerooteten Panels lassen sich jedoch die Firmwarepartitionen von Hand sichern und wiederherstellen. Das ist unter [Firmware sichern und wiederherstellen](/de/hardware/guides/firmware-backup-and-restore/) dokumentiert.
 

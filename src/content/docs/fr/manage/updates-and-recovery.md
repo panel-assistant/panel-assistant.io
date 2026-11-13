@@ -1,7 +1,7 @@
 ---
 title: Mises à jour et récupération
 description: Maintenir l’application du panneau à jour et savoir ce qui peut être récupéré en cas de problème.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 ## Mettre à jour un panneau
@@ -16,7 +16,7 @@ Un panneau rooté pris en charge peut garder ADB réseau désactivé pendant que
 
 ### Panneaux qui ont besoin d’ADB
 
-Lorsque vous installez une mise à jour depuis Home Assistant, Panel Assistant utilise automatiquement ADB pour les panneaux qui ne peuvent pas installer eux-mêmes la mise à jour. Si le panneau accepte la connexion sans appui sur son écran, votre consentement initial à l’installation de Panel Assistant couvre également la création et le stockage d’une clé ADB pour les futures mises à jour. Si le panneau exige une approbation sur son écran, Home Assistant affiche une réparation qui nomme le panneau et lance l’autorisation. Suivez cette réparation pour approuver la demande sur ce panneau.
+Lorsque vous installez une mise à jour depuis Home Assistant, Panel Assistant utilise automatiquement ADB pour les panneaux qui ne peuvent pas installer eux-mêmes la mise à jour. Si le panneau accepte la connexion sans appui sur son écran, votre consentement initial à l’installation de Panel Assistant couvre également la création et le stockage d’une clé ADB pour les futures mises à jour. Si le panneau exige une approbation sur son écran, Home Assistant affiche une réparation qui nomme le panneau et lance l’autorisation. Suivez cette réparation pour approuver la demande sur ce panneau. Un panneau en [mode de sécurité renforcé](/fr/manage/security-mode/) refuse ADB réseau ; repassez donc en mode Relaxed sur le panneau avant une mise à jour qui nécessite ADB.
 
 ### Un panneau qui ne peut pas être mis à jour
 

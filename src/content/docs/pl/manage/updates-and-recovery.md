@@ -1,7 +1,7 @@
 ---
 title: Aktualizacje i odzyskiwanie
 description: Utrzymywanie aktualnej aplikacji na panelu i możliwości odzyskiwania po problemach.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 ## Aktualizowanie panelu
@@ -16,7 +16,7 @@ Obsługiwany panel z rootem może utrzymywać sieciowe ADB wyłączone, podczas 
 
 ### Panele wymagające ADB
 
-Gdy instalujesz aktualizację z Home Assistant, Panel Assistant automatycznie używa ADB dla paneli, które nie mogą same jej zainstalować. Jeśli panel przyjmuje połączenie bez dotknięcia ekranu, pierwotna zgoda na instalację Panel Assistant obejmuje też utworzenie i zapisanie klucza ADB do przyszłych aktualizacji. Jeśli panel wymaga zatwierdzenia na ekranie, Home Assistant zgłasza naprawę wskazującą panel i rozpoczynającą autoryzację. Wykonaj naprawę, aby zatwierdzić monit na tym panelu.
+Gdy instalujesz aktualizację z Home Assistant, Panel Assistant automatycznie używa ADB dla paneli, które nie mogą same jej zainstalować. Jeśli panel przyjmuje połączenie bez dotknięcia ekranu, pierwotna zgoda na instalację Panel Assistant obejmuje też utworzenie i zapisanie klucza ADB do przyszłych aktualizacji. Jeśli panel wymaga zatwierdzenia na ekranie, Home Assistant zgłasza naprawę wskazującą panel i rozpoczynającą autoryzację. Wykonaj naprawę, aby zatwierdzić monit na tym panelu. Panel w [trybie zabezpieczeń Hardened](/pl/manage/security-mode/) odmawia połączeń przez sieciowe ADB, więc przed aktualizacją wymagającą ADB przełącz go na panelu z powrotem w tryb Relaxed.
 
 ### Panel, którego nie można zaktualizować
 

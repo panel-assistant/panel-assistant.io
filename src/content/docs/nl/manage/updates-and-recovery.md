@@ -1,7 +1,7 @@
 ---
 title: Updates en herstel
 description: De app op een paneel actueel houden en wat je kunt herstellen wanneer er iets misgaat.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 ## Een paneel bijwerken
@@ -16,7 +16,7 @@ Een ondersteund geroot paneel kan netwerk-ADB uit laten terwijl Panel Assistant 
 
 ### Panelen die ADB nodig hebben
 
-Installeer je vanuit Home Assistant een update, dan gebruikt Panel Assistant automatisch ADB voor panelen die de update niet zelf kunnen installeren. Accepteert het paneel de verbinding zonder aanraking op het scherm, dan dekt je oorspronkelijke toestemming om Panel Assistant te installeren ook het aanmaken en opslaan van een ADB-sleutel voor toekomstige updates. Vereist het paneel goedkeuring op zijn scherm, dan maakt Home Assistant een reparatie aan die het paneel noemt en de autorisatie start. Volg die reparatie om de melding op dat paneel goed te keuren.
+Installeer je vanuit Home Assistant een update, dan gebruikt Panel Assistant automatisch ADB voor panelen die de update niet zelf kunnen installeren. Accepteert het paneel de verbinding zonder aanraking op het scherm, dan dekt je oorspronkelijke toestemming om Panel Assistant te installeren ook het aanmaken en opslaan van een ADB-sleutel voor toekomstige updates. Vereist het paneel goedkeuring op zijn scherm, dan maakt Home Assistant een reparatie aan die het paneel noemt en de autorisatie start. Volg die reparatie om de melding op dat paneel goed te keuren. Een paneel in [de beveiligingsmodus Hardened](/nl/manage/security-mode/) weigert netwerk-ADB, dus schakel het op het paneel terug naar Relaxed voordat je een update uitvoert die ADB nodig heeft.
 
 ### Een paneel dat niet kan worden bijgewerkt
 

@@ -1,7 +1,7 @@
 ---
 title: 更新与恢复
 description: 让面板上的应用保持最新，以及出问题时可以恢复哪些内容。
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 ## 更新面板
@@ -16,7 +16,7 @@ sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 
 ### 需要 ADB 的面板
 
-从 Home Assistant 安装更新时，对于无法自行安装更新的面板，Panel Assistant 会自动使用 ADB。如果面板接受连接时无需在屏幕上点击，你最初同意安装 Panel Assistant 的授权也涵盖了创建和保存 ADB 密钥，以供今后更新使用。如果面板要求在屏幕上批准，Home Assistant 会创建一个注明该面板名称并启动授权的修复条目。请按照该修复条目的指引，在对应面板上批准提示。
+从 Home Assistant 安装更新时，对于无法自行安装更新的面板，Panel Assistant 会自动使用 ADB。如果面板接受连接时无需在屏幕上点击，你最初同意安装 Panel Assistant 的授权也涵盖了创建和保存 ADB 密钥，以供今后更新使用。如果面板要求在屏幕上批准，Home Assistant 会创建一个注明该面板名称并启动授权的修复条目。请按照该修复条目的指引，在对应面板上批准提示。 处于[强化安全模式](/zh-hans/manage/security-mode/)的面板会拒绝网络 ADB，因此在执行需要 ADB 的更新前，请在面板上切回 Relaxed 模式。
 
 ### 无法更新的面板
 

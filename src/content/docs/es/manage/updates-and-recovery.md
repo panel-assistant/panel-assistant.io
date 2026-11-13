@@ -1,7 +1,7 @@
 ---
 title: Actualizaciones y recuperación
 description: Cómo mantener actualizada la aplicación de un panel y qué se puede recuperar cuando algo falla.
-sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
+sourceCommit: c767698ee466b6058bbede6cc7674de3040b2854
 ---
 
 ## Actualizar un panel
@@ -16,7 +16,7 @@ Un panel compatible con root puede mantener ADB por red desactivado mientras Pan
 
 ### Paneles que necesitan ADB
 
-Cuando instalas una actualización desde Home Assistant, Panel Assistant utiliza ADB automáticamente en los paneles que no pueden instalarla por sí mismos. Si el panel acepta la conexión sin pulsar en su pantalla, tu consentimiento original para instalar Panel Assistant también incluye crear y guardar una clave ADB para futuras actualizaciones. Si el panel requiere aprobación en su pantalla, Home Assistant muestra una reparación que identifica el panel e inicia la autorización. Sigue la reparación para aprobar la solicitud en ese panel.
+Cuando instalas una actualización desde Home Assistant, Panel Assistant utiliza ADB automáticamente en los paneles que no pueden instalarla por sí mismos. Si el panel acepta la conexión sin pulsar en su pantalla, tu consentimiento original para instalar Panel Assistant también incluye crear y guardar una clave ADB para futuras actualizaciones. Si el panel requiere aprobación en su pantalla, Home Assistant muestra una reparación que identifica el panel e inicia la autorización. Sigue la reparación para aprobar la solicitud en ese panel. Un panel en [modo de seguridad reforzada](/es/manage/security-mode/) rechaza ADB por red, por lo que debes volver al modo relajado en el panel antes de una actualización que necesite ADB.
 
 ### Un panel que no se puede actualizar
 
