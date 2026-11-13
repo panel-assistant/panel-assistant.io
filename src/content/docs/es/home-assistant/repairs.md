@@ -1,7 +1,7 @@
 ---
 title: Reparaciones
 description: Qué significa cada reparación de Panel Assistant, por qué aparece y cómo resolverla.
-sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
+sourceCommit: 909b9380c8cfacc743c099e74e56e8ef2524d3b8
 ---
 
 Abre **Configuración → Sistema → Reparaciones** en Home Assistant y elige el mensaje de Panel Assistant. Su primer enlace abre el ajuste o los pasos de recuperación pertinentes. Usa **Más información** para consultar la explicación siguiente.
@@ -104,11 +104,11 @@ Usa **Reintentar** en la reparación existente, con sus comprobaciones de seguri
 
 ## Configuración de proximidad del panel
 
-**Qué significa:** La activación al pasar la mano no está disponible porque el panel no ha guardado su calibración de proximidad.
+**Qué significa:** El panel no puede activarse al pasar la mano hasta que se configure su sensor de proximidad. La proximidad es opcional: tocar la pantalla siempre activa el panel y solo la función Activar al pasar la mano la necesita.
 
-**Por qué ocurre:** El panel informa de calibration_required. La calibración mide esta instalación y necesita una persona delante del panel; iniciar la configuración por sí solo no demuestra que haya terminado.
+**Por qué ocurre:** Activar al pasar la mano está activado y el panel informa de que su sensor de proximidad no tiene una calibración guardada. La calibración mide esta instalación y necesita una persona delante del panel.
 
-**Cómo resolverlo:** Abre Configurar en este panel, ve a Presencia y activación y elige Configurar proximidad en el panel. Sigue las instrucciones físicas en el panel, que tardan aproximadamente un minuto. Cuando indique que la calibración se ha guardado, vuelve a la reparación y pulsa Enviar. Home Assistant lee el estado actualizado antes de completarla; si la configuración sigue en curso o no puede leer el panel, termínala o restablece la conexión y vuelve a enviar. La acción Abrir configuración de proximidad del panel de control también permite empezar en el propio panel.
+**Cómo resolverlo:** Para usar Activar al pasar la mano, abre Configurar en este panel, ve a Presencia y activación y elige Configurar proximidad en el panel. Sigue las instrucciones del panel, que tardan aproximadamente un minuto. La acción Abrir configuración de proximidad del panel de control también permite empezar en el propio panel. La reparación desaparece por sí sola cuando el panel informa de una calibración guardada. Si no quieres activar el panel al pasar la mano o la configuración no puede completarse en tu panel, desactiva su interruptor Activar al pasar la mano o selecciona Ignorar en la reparación.
 
 <a id="dashboard-unfiltered"></a>
 
@@ -116,7 +116,7 @@ Usa **Reintentar** en la reparación existente, con sus comprobaciones de seguri
 
 **Qué significa:** El panel muestra su panel de control con todas las entidades de Home Assistant, en lugar de solo las que utiliza.
 
-**Por qué ocurre:** Mientras aprende qué entidades utiliza su panel de control, el panel espera tras una pantalla que explica qué está esperando. Si espera más de 90 segundos, muestra el panel de control sin filtrar para no dejarte sin él. Entre las causas habituales están un análisis sin respuesta de Home Assistant, un inicio de sesión rechazado por Home Assistant, reglas del panel de control que necesitan tu decisión y un motor de navegador demasiado antiguo para filtrar. El panel sigue intentándolo en segundo plano.
+**Por qué ocurre:** Mientras aprende qué entidades utiliza su panel de control, el panel espera tras una pantalla que explica qué está esperando. Si espera más de 90 segundos, muestra el panel de control sin filtrar para no dejarte sin él. Un breve período sin filtrar solo genera una advertencia en el registro de Home Assistant; la reparación aparece cuando el panel de control sigue sin filtrar después de 30 minutos. Entre las causas habituales están un análisis sin respuesta de Home Assistant, un inicio de sesión rechazado por Home Assistant, reglas del panel de control que necesitan tu decisión y un motor de navegador demasiado antiguo para filtrar. El panel sigue intentándolo en segundo plano.
 
 **Cómo resolverlo:** Abre este panel en la barra lateral de Panel Assistant y después Entidades para ver qué está esperando. Responde allí a la decisión sobre las reglas señaladas, o vuelve a iniciar sesión desde Configurar si Home Assistant lo rechazó. Si Panel Assistant ofrece un motor de navegador más reciente para el panel, instálalo. El panel vuelve por sí solo al panel de control filtrado y la reparación desaparece.
 

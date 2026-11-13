@@ -1,7 +1,7 @@
 ---
 title: Réparations
 description: Signification de chaque réparation Panel Assistant, raison de son apparition et solution.
-sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
+sourceCommit: 909b9380c8cfacc743c099e74e56e8ef2524d3b8
 ---
 
 Ouvrez **Paramètres → Système → Réparations** dans Home Assistant et choisissez le message Panel Assistant. Son premier lien ouvre le réglage ou les étapes de récupération utiles. Utilisez **En savoir plus** pour l’explication ci-dessous.
@@ -102,11 +102,11 @@ N’utilisez **Réessayer**, avec les contrôles de la réparation existante, qu
 
 ## Configuration de proximité du panneau
 
-**Signification :** Le réveil par geste est indisponible car le panneau n’a pas enregistré son étalonnage de proximité.
+**Signification :** Le panneau ne peut pas se réveiller par geste tant que son capteur de proximité n’est pas configuré. La proximité est facultative : toucher l’écran réveille toujours le panneau, et seul le Réveil par geste en a besoin.
 
-**Cause :** Le panneau signale calibration_required. L’étalonnage mesure cette installation et exige une personne devant le panneau ; lancer la configuration ne prouve pas son achèvement.
+**Cause :** Le Réveil par geste est activé et le panneau indique qu’aucun étalonnage n’est enregistré pour son capteur de proximité. L’étalonnage mesure cette installation et exige une personne devant le panneau.
 
-**Solution :** Ouvrez Configurer pour ce panneau, dans Présence et réveil, puis choisissez de configurer la proximité sur le panneau. Suivez les instructions physiques, environ une minute. Après confirmation de l’enregistrement, revenez à la réparation et validez. Home Assistant lit un état frais avant de terminer ; si la configuration continue ou si le panneau est illisible, terminez-la ou rétablissez la connexion puis validez à nouveau. L’action du tableau de bord ouvrant la configuration de proximité est aussi un point de départ sur le panneau.
+**Solution :** Pour utiliser le Réveil par geste, ouvrez Configurer pour ce panneau, dans Présence et réveil, puis choisissez Configurer la proximité sur le panneau. Suivez ensuite les instructions sur le panneau, pendant environ une minute. L’action Ouvrir la configuration de proximité du tableau de bord permet également de démarrer sur le panneau. La réparation disparaît d’elle-même dès que le panneau signale un étalonnage enregistré. Si vous ne souhaitez pas réveiller le panneau par geste, ou si la configuration ne peut pas aboutir sur votre panneau, désactivez son interrupteur Réveil par geste ou sélectionnez Ignorer dans la réparation.
 
 <a id="dashboard-unfiltered"></a>
 
@@ -114,7 +114,7 @@ N’utilisez **Réessayer**, avec les contrôles de la réparation existante, qu
 
 **Signification :** Le panneau affiche le tableau avec toutes les entités Home Assistant plutôt que seulement celles qu’il utilise.
 
-**Cause :** Pendant l’apprentissage des entités, le panneau attend derrière un écran expliquant l’attente. Après plus de 90 secondes, il affiche le tableau sans filtre plutôt que de vous en priver. Les causes courantes sont une analyse sans réponse Home Assistant, une connexion refusée, des règles nécessitant votre décision ou un moteur de navigateur trop ancien. Le panneau continue d’essayer derrière le tableau.
+**Cause :** Pendant l’apprentissage des entités, le panneau attend derrière un écran expliquant l’attente. Après plus de 90 secondes, il affiche le tableau sans filtre plutôt que de vous en priver. Une courte période sans filtrage produit seulement un avertissement dans le journal de Home Assistant ; la réparation apparaît lorsque le tableau de bord n’est toujours pas filtré après 30 minutes. Les causes courantes sont une analyse sans réponse Home Assistant, une connexion refusée, des règles nécessitant votre décision ou un moteur de navigateur trop ancien. Le panneau continue d’essayer derrière le tableau.
 
 **Solution :** Ouvrez ce panneau dans la barre latérale Panel Assistant, puis Entités, pour voir ce qu’il attend. Répondez aux décisions sur les règles signalées ou reconnectez-vous depuis Configurer si Home Assistant a refusé la connexion. Si Panel Assistant propose un moteur plus récent, installez-le. Le panneau revient seul au tableau filtré et la réparation disparaît.
 

@@ -1,7 +1,7 @@
 ---
 title: Riparazioni
 description: Significato di ogni Riparazione di Panel Assistant, perché compare e come risolverla.
-sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
+sourceCommit: 909b9380c8cfacc743c099e74e56e8ef2524d3b8
 ---
 
 Apri **Impostazioni → Sistema → Riparazioni** in Home Assistant e scegli il messaggio di Panel Assistant. Il primo link apre l'impostazione o i passaggi di recupero pertinenti. Usa **Ulteriori informazioni** per la spiegazione seguente.
@@ -102,11 +102,11 @@ Usa **Riprova**, con le sue verifiche di sicurezza, nella Riparazione esistente 
 
 ## Configurazione della prossimità del pannello
 
-**Cosa significa:** Il risveglio con un gesto non è disponibile perché il pannello non ha salvato la calibrazione della prossimità.
+**Cosa significa:** Il pannello non può risvegliarsi con un gesto finché il sensore di prossimità non è configurato. La prossimità è facoltativa: toccare lo schermo risveglia sempre il pannello e solo il Risveglio con un gesto ne ha bisogno.
 
-**Perché accade:** Il pannello segnala calibration_required. La calibrazione misura questa installazione e richiede una persona davanti al pannello; avviare la configurazione non ne dimostra il completamento.
+**Perché accade:** Il Risveglio con un gesto è attivo e il pannello segnala che il sensore di prossimità non ha una calibrazione salvata. La calibrazione misura questa installazione e richiede una persona davanti al pannello.
 
-**Come risolvere:** Apri la pagina Configura del pannello in Presenza e riattivazione e scegli Configura prossimità sul pannello. Segui le istruzioni fisiche sul pannello, per circa un minuto. Quando indica che la calibrazione è stata salvata, torna alla Riparazione e premi Invia. Home Assistant legge lo stato aggiornato prima di completare; se la configurazione è ancora in corso o il pannello non è leggibile, completa la configurazione o ripristina la connessione e invia di nuovo. Anche l'azione Apri configurazione di prossimità nella Dashboard avvia la procedura sul pannello.
+**Come risolvere:** Per usare il Risveglio con un gesto, apri la pagina Configura del pannello in Presenza e riattivazione e scegli Configura prossimità sul pannello. Segui quindi le istruzioni sul pannello, per circa un minuto. Anche l’azione Apri configurazione di prossimità nella Dashboard avvia la procedura sul pannello. La Riparazione scompare da sola quando il pannello segnala una calibrazione salvata. Se non vuoi risvegliare il pannello con un gesto, oppure la configurazione non può essere completata sul tuo pannello, disattiva il suo interruttore Risveglio con un gesto oppure seleziona Ignora nella Riparazione.
 
 <a id="dashboard-unfiltered"></a>
 
@@ -114,7 +114,7 @@ Usa **Riprova**, con le sue verifiche di sicurezza, nella Riparazione esistente 
 
 **Cosa significa:** Il pannello mostra la plancia con tutte le entità di Home Assistant anziché solo quelle che la plancia utilizza.
 
-**Perché accade:** Mentre impara quali entità usa la plancia, il pannello attende dietro una schermata che spiega cosa sta aspettando. Se l'attesa supera 90 secondi, mostra la plancia non filtrata per non lasciarti senza plancia. Le cause comuni sono una scansione a cui Home Assistant non ha risposto, un accesso rifiutato da Home Assistant, regole della plancia che richiedono una tua decisione e un motore del browser troppo vecchio per filtrare. Il pannello continua a tentare dietro la plancia.
+**Perché accade:** Mentre impara quali entità usa la plancia, il pannello attende dietro una schermata che spiega cosa sta aspettando. Se l'attesa supera 90 secondi, mostra la plancia non filtrata per non lasciarti senza plancia. Un breve periodo senza filtraggio genera solo un avviso nel registro di Home Assistant; la Riparazione appare quando la plancia è ancora non filtrata dopo 30 minuti. Le cause comuni sono una scansione a cui Home Assistant non ha risposto, un accesso rifiutato da Home Assistant, regole della plancia che richiedono una tua decisione e un motore del browser troppo vecchio per filtrare. Il pannello continua a tentare dietro la plancia.
 
 **Come risolvere:** Apri il pannello nella barra laterale di Panel Assistant, poi Entità, per vedere cosa sta aspettando. Rispondi lì alla richiesta di decisione sulle regole segnalate, oppure accedi di nuovo da Configura se Home Assistant ha rifiutato l'accesso. Se Panel Assistant offre un motore del browser più recente per il pannello, installalo. Il pannello torna automaticamente alla plancia filtrata e la Riparazione scompare.
 

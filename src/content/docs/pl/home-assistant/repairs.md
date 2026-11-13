@@ -1,7 +1,7 @@
 ---
 title: Naprawy
 description: Co oznacza każda naprawa Panel Assistant, dlaczego się pojawia i jak ją rozwiązać.
-sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
+sourceCommit: 909b9380c8cfacc743c099e74e56e8ef2524d3b8
 ---
 
 Otwórz **Ustawienia → System → Naprawy** w Home Assistant i wybierz komunikat Panel Assistant. Pierwszy odnośnik otwiera odpowiednie ustawienie lub kroki odzyskiwania. Wybierz **Dowiedz się więcej**, aby przeczytać wyjaśnienie poniżej.
@@ -102,11 +102,11 @@ Używaj zabezpieczonego działania **Spróbuj ponownie** w istniejącej naprawie
 
 ## Konfiguracja zbliżenia panelu
 
-**Co to oznacza:** Wybudzanie gestem jest niedostępne, ponieważ panel nie zapisał kalibracji zbliżenia.
+**Co to oznacza:** Panel nie może wybudzać się gestem, dopóki jego czujnik zbliżeniowy nie zostanie skonfigurowany. Zbliżenie jest opcjonalne: dotknięcie ekranu zawsze wybudza panel i tylko Wybudzanie gestem go wymaga.
 
-**Dlaczego:** Panel zgłasza calibration_required. Kalibracja mierzy tę instalację i wymaga osoby przed panelem; samo rozpoczęcie konfiguracji nie oznacza jej ukończenia.
+**Dlaczego:** Wybudzanie gestem jest włączone, a panel zgłasza, że jego czujnik zbliżeniowy nie ma zapisanej kalibracji. Kalibracja mierzy tę instalację i wymaga osoby przed panelem.
 
-**Jak naprawić:** Otwórz stronę Konfiguracja tego panelu, sekcję Obecność i wybudzanie, i wybierz konfigurację zbliżenia na panelu. Wykonaj fizyczne instrukcje na panelu; trwa to około minuty. Gdy panel potwierdzi zapisanie kalibracji, wróć do naprawy i wybierz Wyślij. Home Assistant odczytuje świeży stan przed zakończeniem; jeśli konfiguracja nadal trwa lub nie można odczytać panelu, zakończ ją albo przywróć połączenie i wyślij ponownie. Działanie otwarcia konfiguracji zbliżenia na pulpicie także rozpoczyna konfigurację na panelu.
+**Jak naprawić:** Aby korzystać z Wybudzania gestem, otwórz stronę Konfiguracja tego panelu, sekcję Obecność i wybudzanie, i wybierz Konfiguruj zbliżenie na panelu. Następnie wykonaj instrukcje na panelu; trwa to około minuty. Działanie Otwórz konfigurację zbliżenia na pulpicie także rozpoczyna konfigurację na panelu. Naprawa znika sama, gdy panel zgłosi zapisaną kalibrację. Jeśli nie chcesz wybudzać panelu gestem lub konfiguracji nie da się ukończyć na Twoim panelu, wyłącz jego przełącznik Wybudzanie gestem albo wybierz Ignoruj w naprawie.
 
 <a id="dashboard-unfiltered"></a>
 
@@ -114,7 +114,7 @@ Używaj zabezpieczonego działania **Spróbuj ponownie** w istniejącej naprawie
 
 **Co to oznacza:** Panel pokazuje pulpit ze wszystkimi encjami Home Assistant zamiast tylko tych, których pulpit używa.
 
-**Dlaczego:** Gdy panel uczy się, których encji używa jego pulpit, czeka za ekranem wyjaśniającym, na co oczekuje. Jeśli trwa to ponad 90 sekund, pokazuje niefiltrowany pulpit, aby nie pozostawić Cię bez niego. Typowe przyczyny to skan, na który Home Assistant nie odpowiedział, odrzucone logowanie, reguły pulpitu wymagające Twojej decyzji i zbyt stary silnik przeglądarki do filtrowania. Panel nadal próbuje w tle pulpitu.
+**Dlaczego:** Gdy panel uczy się, których encji używa jego pulpit, czeka za ekranem wyjaśniającym, na co oczekuje. Jeśli trwa to ponad 90 sekund, pokazuje niefiltrowany pulpit, aby nie pozostawić Cię bez niego. Krótki okres bez filtrowania powoduje jedynie ostrzeżenie w dzienniku Home Assistant; naprawa pojawia się, gdy po 30 minutach pulpit nadal nie jest filtrowany. Typowe przyczyny to skan, na który Home Assistant nie odpowiedział, odrzucone logowanie, reguły pulpitu wymagające Twojej decyzji i zbyt stary silnik przeglądarki do filtrowania. Panel nadal próbuje w tle pulpitu.
 
 **Jak naprawić:** Otwórz ten panel na pasku bocznym Panel Assistant, a następnie Encje, aby sprawdzić, na co oczekuje. Rozstrzygnij tam decyzję dotyczącą oznaczonych reguł albo zaloguj się ponownie w Konfiguracji, jeśli Home Assistant odrzucił logowanie. Jeśli Panel Assistant oferuje nowszy silnik przeglądarki dla panelu, zainstaluj go. Panel sam powróci do filtrowanego pulpitu, a naprawa zniknie.
 

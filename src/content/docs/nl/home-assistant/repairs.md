@@ -1,7 +1,7 @@
 ---
 title: Reparaties
 description: Wat elke Panel Assistant-reparatie betekent, waarom die verschijnt en hoe je die oplost.
-sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
+sourceCommit: 909b9380c8cfacc743c099e74e56e8ef2524d3b8
 ---
 
 Open **Instellingen → Systeem → Reparaties** in Home Assistant en kies het Panel Assistant-bericht. De eerste link opent de betreffende instelling of herstelstappen. Gebruik **Meer informatie** voor de onderstaande uitleg.
@@ -102,11 +102,11 @@ Gebruik de beveiligde actie **Opnieuw proberen** van de bestaande reparatie pas 
 
 ## Nabijheid van paneel instellen
 
-**Wat het betekent:** Activeren met een handgebaar is niet beschikbaar omdat het paneel zijn nabijheidskalibratie niet heeft opgeslagen.
+**Wat het betekent:** Het paneel kan pas met een handgebaar worden gewekt als de nabijheidssensor is ingesteld. Nabijheid is optioneel: aanraken van het scherm wekt het paneel altijd, en alleen Wekken met handgebaar heeft de sensor nodig.
 
-**Waarom dit gebeurt:** Het paneel meldt calibration_required. Kalibratie meet deze installatie en vereist iemand voor het paneel; alleen de configuratie starten bewijst niet dat die is voltooid.
+**Waarom dit gebeurt:** Wekken met handgebaar staat aan en het paneel meldt dat zijn nabijheidssensor geen opgeslagen kalibratie heeft. Kalibratie meet deze installatie en vereist iemand voor het paneel.
 
-**Hoe je dit oplost:** Open de pagina Configureren van dit paneel bij Aanwezigheid & wekken en kies Nabijheid instellen op paneel. Volg de fysieke instructies op het paneel; dit duurt ongeveer een minuut. Nadat het meldt dat de kalibratie is opgeslagen, ga je terug naar de reparatie en kies je Verzenden. Home Assistant leest een nieuwe status voordat het afrondt; als de configuratie nog loopt of het paneel niet kan worden uitgelezen, voltooi je de configuratie of herstel je de verbinding en verzend je opnieuw. De dashboardactie Nabijheidsinstelling openen is ook een startpunt op het paneel.
+**Hoe je dit oplost:** Om Wekken met handgebaar te gebruiken, open je de pagina Configureren van dit paneel bij Aanwezigheid & wekken en kies je Nabijheid instellen op paneel. Volg daarna de instructies op het paneel; dit duurt ongeveer een minuut. De dashboardactie Nabijheidsinstelling openen is ook een startpunt op het paneel. De reparatie verdwijnt vanzelf zodra het paneel een opgeslagen kalibratie meldt. Als je het paneel niet met een handgebaar wilt wekken of de configuratie op jouw paneel niet kan worden voltooid, zet je de schakelaar Wekken met handgebaar uit of kies je Negeren bij de reparatie.
 
 <a id="dashboard-unfiltered"></a>
 
@@ -114,7 +114,7 @@ Gebruik de beveiligde actie **Opnieuw proberen** van de bestaande reparatie pas 
 
 **Wat het betekent:** Het paneel toont zijn dashboard met alle entiteiten van Home Assistant in plaats van alleen de entiteiten die zijn dashboard gebruikt.
 
-**Waarom dit gebeurt:** Terwijl het paneel leert welke entiteiten zijn dashboard gebruikt, wacht het achter een scherm dat uitlegt waarop het wacht. Duurt dit langer dan 90 seconden, dan toont het paneel het dashboard ongefilterd in plaats van je zonder dashboard te laten. Veelvoorkomende oorzaken zijn een scan waarop Home Assistant niet antwoordde, een geweigerde aanmelding, dashboardregels die jouw keuze vereisen en een browserengine die te oud is om te filteren. Het paneel blijft achter het dashboard proberen.
+**Waarom dit gebeurt:** Terwijl het paneel leert welke entiteiten zijn dashboard gebruikt, wacht het achter een scherm dat uitlegt waarop het wacht. Duurt dit langer dan 90 seconden, dan toont het paneel het dashboard ongefilterd in plaats van je zonder dashboard te laten. Een korte periode zonder filtering geeft alleen een waarschuwing in het Home Assistant-logboek; de reparatie verschijnt als het dashboard na 30 minuten nog steeds ongefilterd is. Veelvoorkomende oorzaken zijn een scan waarop Home Assistant niet antwoordde, een geweigerde aanmelding, dashboardregels die jouw keuze vereisen en een browserengine die te oud is om te filteren. Het paneel blijft achter het dashboard proberen.
 
 **Hoe je dit oplost:** Open dit paneel in de Panel Assistant-zijbalk en vervolgens Entiteiten om te zien waarop het wacht. Beantwoord daar een keuze over gemarkeerde regels, of meld je opnieuw aan via Configureren als Home Assistant de aanmelding heeft geweigerd. Installeer een nieuwere browserengine als Panel Assistant die voor het paneel aanbiedt. Het paneel keert vanzelf terug naar het gefilterde dashboard en de reparatie verdwijnt.
 

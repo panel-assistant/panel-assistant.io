@@ -1,7 +1,7 @@
 ---
 title: Reparaturen
 description: Was jede Panel Assistant-Reparatur bedeutet, warum sie erscheint und wie du sie behebst.
-sourceCommit: 8fecd1a461bf69f6e831d11b1f9f01993c603b1f
+sourceCommit: 909b9380c8cfacc743c099e74e56e8ef2524d3b8
 ---
 
 Öffne in Home Assistant **Einstellungen → System → Reparaturen** und wähle die Panel Assistant-Meldung. Ihr erster Link öffnet die betreffende Einstellung oder die Wiederherstellungsschritte. Verwende **Mehr erfahren** für die folgende Erklärung.
@@ -102,11 +102,11 @@ Verwende das abgesicherte **Erneut versuchen** der vorhandenen Reparatur erst, n
 
 ## Näherungseinrichtung des Panels
 
-**Bedeutung:** Aufwecken durch Winken ist nicht verfügbar, weil das Panel seine Näherungskalibrierung nicht gespeichert hat.
+**Bedeutung:** Das Panel kann erst durch Winken aufgeweckt werden, wenn sein Näherungssensor eingerichtet ist. Näherung ist optional: Durch Berühren des Bildschirms wird das Panel immer aufgeweckt; nur Aufwecken durch Winken benötigt sie.
 
-**Ursache:** Das Panel meldet calibration_required. Die Kalibrierung misst diese Installation und benötigt eine Person vor dem Panel; allein der Start der Einrichtung belegt keinen Abschluss.
+**Ursache:** Aufwecken durch Winken ist eingeschaltet, und das Panel meldet, dass für seinen Näherungssensor keine Kalibrierung gespeichert ist. Die Kalibrierung misst diese Installation und benötigt eine Person vor dem Panel.
 
-**So behebst du es:** Öffne die Seite Konfiguration dieses Panels unter Anwesenheit & Aufwecken und wähle Näherung auf dem Panel einrichten. Folge den Anweisungen am physischen Panel, was ungefähr eine Minute dauert. Sobald es die gespeicherte Kalibrierung bestätigt, kehre zur Reparatur zurück und wähle Absenden. Home Assistant liest vor dem Abschluss den aktuellen Status; läuft die Einrichtung noch oder ist das Panel nicht lesbar, schließe sie ab oder stelle die Verbindung wieder her und sende erneut ab. Die Dashboard-Aktion Näherungssensor einrichten bietet ebenfalls einen Startpunkt auf dem Panel.
+**So behebst du es:** Um Aufwecken durch Winken zu verwenden, öffne die Seite Konfiguration dieses Panels unter Anwesenheit & Aufwecken und wähle Näherung auf dem Panel einrichten. Folge dann den Anweisungen auf dem Panel; dies dauert ungefähr eine Minute. Die Dashboard-Aktion Näherungssensor einrichten bietet ebenfalls einen Startpunkt auf dem Panel. Die Reparatur verschwindet von selbst, sobald das Panel eine gespeicherte Kalibrierung meldet. Wenn du das Panel nicht durch Winken aufwecken möchtest oder die Einrichtung auf deinem Panel nicht abgeschlossen werden kann, schalte Aufwecken durch Winken aus oder wähle bei der Reparatur Ignorieren.
 
 <a id="dashboard-unfiltered"></a>
 
@@ -114,7 +114,7 @@ Verwende das abgesicherte **Erneut versuchen** der vorhandenen Reparatur erst, n
 
 **Bedeutung:** Das Panel zeigt sein Dashboard mit allen Entitäten von Home Assistant statt nur den vom Dashboard verwendeten.
 
-**Ursache:** Während das Panel lernt, welche Entitäten sein Dashboard verwendet, wartet es hinter einem Bildschirm, der den Wartegrund anzeigt. Dauert dies länger als 90 Sekunden, zeigt es das Dashboard ungefiltert, statt dich ohne Dashboard zu lassen. Häufige Ursachen sind eine unbeantwortete Abfrage an Home Assistant, eine abgelehnte Anmeldung, Dashboard-Regeln, die deine Entscheidung benötigen, und eine zum Filtern zu alte Browser-Engine. Das Panel versucht es hinter dem Dashboard weiter.
+**Ursache:** Während das Panel lernt, welche Entitäten sein Dashboard verwendet, wartet es hinter einem Bildschirm, der den Wartegrund anzeigt. Dauert dies länger als 90 Sekunden, zeigt es das Dashboard ungefiltert, statt dich ohne Dashboard zu lassen. Ein kurzzeitig ungefiltertes Dashboard erzeugt nur eine Warnung im Home Assistant-Protokoll; die Reparatur erscheint, wenn das Dashboard nach 30 Minuten weiterhin ungefiltert ist. Häufige Ursachen sind eine unbeantwortete Abfrage an Home Assistant, eine abgelehnte Anmeldung, Dashboard-Regeln, die deine Entscheidung benötigen, und eine zum Filtern zu alte Browser-Engine. Das Panel versucht es hinter dem Dashboard weiter.
 
 **So behebst du es:** Öffne dieses Panel in der Panel Assistant-Seitenleiste und dann Entitäten, um den Wartegrund zu sehen. Beantworte dort die Entscheidung zu markierten Regeln oder melde dich über Konfiguration erneut an, wenn Home Assistant die Anmeldung abgelehnt hat. Bietet Panel Assistant eine neuere Browser-Engine an, installiere sie. Das Panel kehrt selbstständig zum gefilterten Dashboard zurück, und die Reparatur verschwindet.
 
