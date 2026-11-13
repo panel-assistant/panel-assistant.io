@@ -225,6 +225,17 @@ small,
   display: grid;
   gap: 0.5rem;
 }
+#manager-build {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+#manager-build summary {
+  cursor: pointer;
+}
+#manager-build code {
+  user-select: all;
+}
 .text-button {
   background: transparent;
   border-color: transparent;

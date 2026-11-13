@@ -4,6 +4,7 @@
   "main": "image-admin.js",
   "compatibility_date": "2026-11-11",
   "workers_dev": true,
+  "version_metadata": { "binding": "IMAGE_MANAGER_VERSION" },
   "preview_urls": false,
   "routes": [
     {

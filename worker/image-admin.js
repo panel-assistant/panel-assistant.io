@@ -45,9 +45,19 @@ const json = (value, status = 200, headers = {}) =>
 const hex = (bytes) =>
   [...new Uint8Array(bytes)].map((b) => b.toString(16).padStart(2, '0')).join('');
 const digest = async (bytes) => hex(await crypto.subtle.digest('SHA-256', bytes));
-function loginPage(prefix) {
+function buildNotice(env) {
+  const version = env.IMAGE_MANAGER_VERSION;
+  if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(version?.id ?? ''))
+    return '<small id="manager-build">Build unavailable</small>';
+  const created = new Date(version.timestamp);
+  const date = Number.isNaN(created.getTime())
+    ? ''
+    : `<br>Created <time datetime="${created.toISOString()}">${created.toISOString().slice(0, 16).replace('T', ' ')} UTC</time>`;
+  return `<details id="manager-build"><summary title="${version.id}">Build ${version.id.slice(0, 8)}</summary><code>${version.id}</code>${date}</details>`;
+}
+function loginPage(prefix, env) {
   return new Response(
-    `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex"><title>Sign in · Panel images</title><body><main><h1>Panel images</h1><p>Sign in with GitHub to manage panel images. Write access to the Panel Assistant website repository is required.</p><label><input id="remember" type="checkbox"> Remember this device for 30 days</label><p><button id="github-sign-in" type="button">Sign in with GitHub</button></p><p id="status" role="status"></p></main><script type="module" src="${prefix}auth.js"></script></body></html>`,
+    `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex"><title>Sign in · Panel images</title><body><main><h1>Panel images</h1><p>Sign in with GitHub to manage panel images. Write access to the Panel Assistant website repository is required.</p><label><input id="remember" type="checkbox"> Remember this device for 30 days</label><p><button id="github-sign-in" type="button">Sign in with GitHub</button></p><p id="status" role="status"></p>${buildNotice(env)}</main><script type="module" src="${prefix}auth.js"></script></body></html>`,
     {
       headers: {
         'content-type': 'text/html;charset=UTF-8',
@@ -715,7 +725,7 @@ async function handle(request, env) {
       (request.headers.get('sec-fetch-dest') === 'document' ||
         request.headers.get('accept')?.includes('text/html'))
     )
-      return loginPage(prefix);
+      return loginPage(prefix, env);
     throw new Problem(401, 'Sign in with GitHub to manage images.');
   }
   if (url.pathname === '/admin/session' && request.method === 'GET')
@@ -725,7 +735,21 @@ async function handle(request, env) {
   check(['GET', 'HEAD'].includes(request.method), 'Method not allowed.', 405);
   check(env.ASSETS, 'Review assets are not configured.', 503);
   url.pathname = url.pathname === PREFIX ? '/index.html' : url.pathname.slice('/admin'.length);
-  return env.ASSETS.fetch(new Request(url, request));
+  const assetRequest = new Request(url, request);
+  if (url.pathname !== '/index.html') return env.ASSETS.fetch(assetRequest);
+  // The same static HTML can be reused across different Worker versions.
+  assetRequest.headers.delete('if-none-match');
+  assetRequest.headers.delete('if-modified-since');
+  const response = await env.ASSETS.fetch(assetRequest);
+  if (!response.ok || request.method === 'HEAD') return response;
+  const html = (await response.text()).replace(
+    '<small id="manager-build">Build unavailable</small>',
+    buildNotice(env),
+  );
+  const headers = new Headers(response.headers);
+  headers.delete('content-length');
+  headers.delete('etag');
+  return new Response(html, { status: response.status, headers });
 }
 
 export default {
