@@ -19,10 +19,17 @@
         <a class="wordmark" href="./">Panel Assistant<span>Image library</span></a>
         <small id="manager-build">Build unavailable</small>
         <button id="all-images-link" type="button" disabled>All images</button>
+        <button id="pending-panels" type="button" aria-pressed="false" disabled>
+          Awaiting publication (…)
+        </button>
+        <p id="publication-summary" class="muted" role="status" aria-live="polite">
+          Checking publication status for all panels…
+        </p>
         <label class="search-label" for="model-search">Find a panel</label>
         <input id="model-search" type="search" placeholder="Search models…" autocomplete="off" />
         <p id="model-count" class="muted"></p>
         <nav id="models" aria-label="Choose a panel"></nav>
+        <p id="models-empty" class="muted" hidden></p>
         <div class="sidebar-footer">
           <span id="session-identity" role="status">Checking GitHub sign-in…</span>
           <span>Originals are retained privately.</span
@@ -40,7 +47,7 @@
             <button id="export" type="button" disabled>Export JSON</button
             ><button id="save" type="button" disabled>Save private draft</button
             ><button id="publish-review" class="primary" type="button" disabled>
-              Review publication
+              Review this panel
             </button>
           </div>
         </header>

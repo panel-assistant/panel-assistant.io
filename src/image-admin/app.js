@@ -17,6 +17,7 @@ let savedAt;
 let previewIndex = 0;
 let previewModelId;
 let allImages = false;
+let pendingOnly = false;
 let publication;
 let publicationError = '';
 let publicationLoading = false;
@@ -86,6 +87,42 @@ function publicModel() {
   return publication?.models.find((entry) => entry.id === selected);
 }
 
+// Asset identity is immutable for saved image IDs. Uploading a replacement creates
+// a new ID, so only gallery membership/order and these public fields can change.
+function publicFields(entry, published = false) {
+  return JSON.stringify({
+    title: entry.title,
+    hero: entry.heroImageId ?? null,
+    images: entry.images
+      .filter((image) => published || !image.archiveOnly)
+      .map((image) => ({
+        id: image.id,
+        alt: image.alt,
+        credit: image.credit,
+        source: sourceUrl(published ? image.source : image.source?.page),
+      })),
+  });
+}
+
+function publicationState(id) {
+  if (publicationLoading) return 'Checking…';
+  const saved = savedLibrary?.models.find((entry) => entry.id === id);
+  if (!publication || !saved) return 'Status unavailable';
+  const published = publication.models.find((entry) => entry.id === id);
+  if (!published)
+    return saved.images.some((image) => !image.archiveOnly)
+      ? 'Awaiting publication'
+      : 'Private sources only';
+  return publicFields(saved) === publicFields(published, true)
+    ? 'Published'
+    : 'Awaiting publication';
+}
+
+function hasUnsavedChanges(entry) {
+  const saved = savedLibrary?.models.find((saved) => saved.id === entry.id);
+  return saved && JSON.stringify(entry) !== JSON.stringify(saved);
+}
+
 function publishable() {
   return Boolean(
     !busy &&
@@ -96,13 +133,13 @@ function publishable() {
     publication &&
     model() &&
     savedModelHashes.has(selected) &&
-    publicModel()?.draftHash !== savedModelHashes.get(selected),
+    (publicationState(selected) === 'Awaiting publication' || !publicModel()),
   );
 }
 
 function publicationControls() {
   const published = publicModel();
-  const current = published && published.draftHash === savedModelHashes.get(selected);
+  const state = publicationState(selected);
   $('publish-review').disabled = !publishable();
   $('publication-retry').disabled = busy || publicationLoading || !library;
   $('publication-retry').hidden = !publicationError;
@@ -111,15 +148,24 @@ function publicationControls() {
   if (publicationLoading) status.textContent = 'Checking published panel images…';
   else if (publicationError) status.textContent = publicationError;
   else if (!publication) status.textContent = 'Publication status is not available yet.';
+  else if (allImages)
+    status.textContent =
+      'Choose a panel to review its saved changes. Each panel is published separately.';
   else if (dirty || conflict)
     status.textContent =
       'Save and reconcile your private draft before publishing. The website is unchanged.';
-  else if (current) status.textContent = 'Published images match this saved panel draft.';
+  else if (state === 'Published')
+    status.textContent =
+      'Published images match this panel’s saved gallery. Source masters stay private.';
+  else if (state === 'Private sources only')
+    status.textContent =
+      'No gallery images selected. Source masters stay private. You can review this panel to publish an empty gallery and remove any existing website images.';
   else if (published) status.textContent = 'This panel has saved changes that are not published.';
   else
     status.textContent =
       'This panel has no image publication yet. Its existing website images are unchanged.';
-  $('public-page').hidden = !published;
+  renderModels();
+  $('public-page').hidden = allImages || !published;
   if (published)
     $('public-page').href =
       `https://panel-assistant.io/hardware/panels/${selected.split('/').map(encodeURIComponent).join('/')}/`;
@@ -394,17 +440,57 @@ function sourceUrl(value) {
 
 function renderModels() {
   if (!library) return;
+  const ready = Boolean(publication && !publicationLoading && savedLibrary);
+  const pending = ready
+    ? library.models.filter((entry) => publicationState(entry.id) === 'Awaiting publication')
+    : [];
+  const unsaved = library.models.filter(hasUnsavedChanges).length;
+  const filtering = pendingOnly && ready;
+  $('pending-panels').disabled = busy || !ready;
+  $('pending-panels').setAttribute('aria-pressed', String(filtering));
+  $('pending-panels').textContent = ready
+    ? `Awaiting publication (${pending.length})`
+    : 'Awaiting publication (…)';
+  $('publication-summary').textContent =
+    (publicationLoading
+      ? 'Checking publication status for all panels…'
+      : !ready
+        ? 'Publication status unavailable. Retry below to check all panels.'
+        : `${pending.length} ${pending.length === 1 ? 'panel has' : 'panels have'} saved gallery changes awaiting publication.`) +
+    (unsaved
+      ? ` ${unsaved} ${unsaved === 1 ? 'panel has' : 'panels have'} unsaved edits; save to update this list.`
+      : '');
   const search = $('model-search').value.toLowerCase().trim();
-  const entries = library.models.filter((entry) =>
-    `${entry.title} ${entry.id}`.toLowerCase().includes(search),
+  const entries = library.models.filter(
+    (entry) =>
+      `${entry.title} ${entry.id}`.toLowerCase().includes(search) &&
+      (!filtering || pending.includes(entry)),
   );
   $('model-count').textContent = `${entries.length} of ${library.models.length} models`;
+  $('models-empty').hidden = entries.length > 0;
+  $('models-empty').textContent = search
+    ? 'No panels match this search. Clear the search to see more.'
+    : 'No panels are awaiting publication.';
   $('models').replaceChildren(
     ...entries.map((entry) => {
       const button = element('button');
       button.type = 'button';
-      button.append(
+      button.disabled = busy;
+      button.dataset.modelId = entry.id;
+      const label = element('span', 'model-label');
+      const state = publicationState(entry.id);
+      label.append(
         element('span', '', entry.title),
+        element(
+          'small',
+          state === 'Awaiting publication' ? 'model-publication pending' : 'model-publication',
+          state,
+        ),
+      );
+      if (hasUnsavedChanges(entry))
+        label.append(element('small', 'model-unsaved', 'Unsaved edits'));
+      button.append(
+        label,
         element(
           'span',
           'model-badge',
@@ -1106,6 +1192,12 @@ async function load() {
 }
 
 $('model-search').addEventListener('input', renderModels);
+$('pending-panels').addEventListener('click', () => {
+  if (busy || !publication || publicationLoading) return;
+  pendingOnly = !pendingOnly;
+  if (pendingOnly) $('model-search').value = '';
+  renderModels();
+});
 $('all-images-link').addEventListener('click', () => {
   if (busy || !library) return;
   allImages = true;

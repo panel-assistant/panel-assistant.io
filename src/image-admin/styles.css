@@ -805,3 +805,29 @@ body.busy .button {
 .storage-card .card-actions {
   margin-top: auto;
 }
+
+#pending-panels[aria-pressed='true'] {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--soft);
+}
+#publication-summary,
+#models-empty {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin: 0;
+}
+.model-label {
+  display: grid;
+  gap: 0.25rem;
+}
+.model-publication,
+.model-unsaved {
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+.model-publication.pending,
+.model-unsaved {
+  color: var(--ink);
+  font-weight: 700;
+}
