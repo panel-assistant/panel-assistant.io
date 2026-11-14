@@ -137,23 +137,10 @@ small,
 .muted {
   color: var(--muted);
 }
-.review-banner {
-  padding: 0.75rem 1.5rem;
-  background: #e5f1eb;
-  color: #205441;
-  border-bottom: 1px solid #cee2d7;
-  text-align: center;
-  font-size: 0.85rem;
-  line-height: 1.5;
-}
-.review-banner strong {
-  display: inline-block;
-  margin-right: 0.65rem;
-}
 .workspace {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
-  min-height: calc(100vh - 46px);
+  min-height: 100vh;
 }
 .sidebar {
   padding: 2rem 1.25rem;
@@ -616,10 +603,6 @@ body.busy .button {
   main {
     padding: 1.4rem 1rem;
   }
-  .review-banner {
-    padding: 0.6rem 1rem;
-    font-size: 0.75rem;
-  }
   .section-heading {
     flex-direction: column;
   }
@@ -663,11 +646,6 @@ body.busy .button {
     background: #236c59;
     border-color: #2b826c;
     color: #fff;
-  }
-  .review-banner {
-    background: #193b30;
-    color: #c0e6d4;
-    border-color: #315346;
   }
   #all-images-link[aria-current='page'],
   #models button[aria-current='page'] {
