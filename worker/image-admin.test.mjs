@@ -585,10 +585,16 @@ test('library saves retain removed masters and full previous provenance while en
   const updated = await (await save(env, cookie, edited)).json();
   env.IMAGE_STORE.head = head;
   assert.notEqual(updated.revision, first.revision);
-  assert.equal((await save(env, cookie, first)).status, 409);
+  const stale = await save(env, cookie, first);
+  assert.equal(stale.status, 409);
+  assert.equal((await stale.json()).code, 'library_revision_conflict');
   const forged = structuredClone(updated);
   forged.models[0].images[0].original.width += 1;
-  assert.equal((await save(env, cookie, forged)).status, 409);
+  const immutable = await save(env, cookie, forged);
+  assert.equal(immutable.status, 409);
+  const immutableError = await immutable.json();
+  assert.equal(immutableError.code, undefined);
+  assert.match(immutableError.error, /immutable/);
   const invented = structuredClone(updated);
   invented.models[0].images[0].history = [{ id: 'fabricated' }];
   assert.equal((await save(env, cookie, invented)).status, 409);
@@ -683,6 +689,7 @@ test('an intervening R2 write wins even after the incoming revision was checked'
   };
   const response = await save(env, cookie, first);
   assert.equal(response.status, 409);
+  assert.equal((await response.json()).code, 'library_revision_conflict');
   const stored = JSON.parse(await (await env.IMAGE_STORE.get('library.json')).text());
   assert.equal(stored.revision, 'concurrent-winner');
 });

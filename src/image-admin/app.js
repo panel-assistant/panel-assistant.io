@@ -1,4 +1,5 @@
 import { sessionInfo, signIn } from './auth.js';
+import { reconcileDraft } from './merge.js';
 
 const $ = (id) => document.getElementById(id);
 const adminBase = new URL('./', import.meta.url);
@@ -7,6 +8,7 @@ const MAX_PREVIEW = 5 * 1024 * 1024;
 const TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/jxl']);
 const ACCEPT = 'image/jpeg,image/png,image/webp,image/jxl,.jxl';
 let library;
+let savedLibrary;
 let selected;
 let dirty = false;
 let busy = false;
@@ -320,13 +322,14 @@ function responseError(response, data = {}, path = '') {
   const error = new Error(
     response.status === 401
       ? 'Your session has expired. Sign in again with GitHub below; your edits stay in this tab.'
-      : response.status === 409 && path !== 'api/publish'
+      : data.code === 'library_revision_conflict' && path === 'api/library'
         ? 'Someone saved a newer draft. Your changes have not been overwritten. Export your work, then reload the saved draft to reconcile it.'
         : data.message ||
           data.error ||
           `The request failed (${response.status}). Please try again.`,
   );
   error.status = response.status;
+  error.code = data.code;
   return error;
 }
 
@@ -1001,23 +1004,57 @@ async function save() {
   message();
   $('save-status').textContent = 'Saving your private draft…';
   try {
-    const updated = await api('api/library', {
-      method: 'PUT',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(library),
-    });
-    if (!updated.revision || !Array.isArray(updated.models))
+    let pending = library;
+    let baseline = savedLibrary;
+    let reconciled = false;
+    let updated;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        updated = await api('api/library', {
+          method: 'PUT',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(pending),
+        });
+        break;
+      } catch (error) {
+        if (error.code !== 'library_revision_conflict') throw error;
+        if (attempt === 2)
+          throw new Error(
+            'The catalogue is still changing. Your edits are kept in this tab. Try Save private draft again shortly.',
+          );
+        const latest = await api('api/library');
+        if (!latest.revision || !Array.isArray(latest.models))
+          throw new Error(
+            'The saved draft response was incomplete. Your edits are kept in this tab; try saving again.',
+          );
+        const result = reconcileDraft(baseline, pending, latest);
+        if (result.conflicts.length) {
+          conflict = true;
+          throw new Error(
+            `Both drafts changed the same information (${result.conflicts.slice(0, 3).join('; ')}). Nothing from this tab was saved. Your edits are still here; export them before reloading the saved draft.`,
+          );
+        }
+        pending = result.library;
+        baseline = latest;
+        reconciled = true;
+      }
+    }
+    if (!updated?.revision || !Array.isArray(updated.models))
       throw new Error(
         'The save response was incomplete. Reload the saved draft before making further changes.',
       );
     library = updated;
+    savedLibrary = structuredClone(updated);
+    if (reconciled)
+      message(
+        'Private draft saved. Independent changes from the newer saved draft were kept. No website images were published.',
+      );
     await rememberSavedModels();
     dirty = false;
     savedAt = new Date();
     renderModels();
     renderPanel();
   } catch (error) {
-    conflict = error.status === 409;
     message(error.message);
   } finally {
     busy = false;
@@ -1047,6 +1084,7 @@ async function load() {
     if (!data.revision || !Array.isArray(data.models))
       throw new Error('The catalogue response was incomplete. Reload to try again.');
     library = data;
+    savedLibrary = structuredClone(data);
     selectedSources.clear();
     await rememberSavedModels();
     selected = library.models.some((entry) => entry.id === selected)

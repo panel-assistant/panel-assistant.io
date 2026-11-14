@@ -29,9 +29,10 @@ const security = {
 };
 
 class Problem extends Error {
-  constructor(status, message) {
+  constructor(status, message, code) {
     super(message);
     this.status = status;
+    this.code = code;
   }
 }
 const check = (condition, message, status = 400) => {
@@ -646,7 +647,12 @@ async function api(request, url, store, publicStore) {
       );
     if (request.method === 'PUT' && url.pathname.endsWith('/library')) {
       const input = await readJSON(request);
-      check(input?.revision === library.revision, 'Library changed. Reload before saving.', 409);
+      if (input?.revision !== library.revision)
+        throw new Problem(
+          409,
+          'Library changed. Reload before saving.',
+          'library_revision_conflict',
+        );
       const models = await validateLibrary(input, library, store);
       const next = { revision: crypto.randomUUID(), models };
       if (object)
@@ -660,7 +666,12 @@ async function api(request, url, store, publicStore) {
         httpMetadata: { contentType: 'application/json' },
         onlyIf: object ? { etagMatches: object.etag } : { etagDoesNotMatch: '*' },
       });
-      check(saved, 'Library changed. Reload before saving.', 409);
+      if (!saved)
+        throw new Problem(
+          409,
+          'Library changed. Reload before saving.',
+          'library_revision_conflict',
+        );
       return json(next);
     }
   }
@@ -780,6 +791,7 @@ export default {
       response = json(
         {
           error: known ? error.message : 'The review request could not be completed.',
+          ...(error instanceof Problem && error.code ? { code: error.code } : {}),
         },
         known ? error.status : 500,
       );
