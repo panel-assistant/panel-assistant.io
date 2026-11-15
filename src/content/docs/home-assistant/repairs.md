@@ -13,7 +13,7 @@ Use the existing Repair’s guarded **Try again** only after checking its report
 
 - [Remove Panel Assistant from &lt;panel&gt;](#remove-panel-assistant-from-panel)
 - [Panel app too old](#panel-app-too-old)
-- [Old app needs 0.9.0](#old-app-needs-090)
+- [Panel still runs the old app](#old-app-needs-090)
 - [Mqtt panel needs 0.9.0](#mqtt-panel-needs-090)
 - [Panel permissions](#panel-permissions)
 - [Panel proximity setup](#panel-proximity-setup)
@@ -65,13 +65,15 @@ Use the existing Repair’s guarded **Try again** only after checking its report
 
 **How to fix it:** Open Home Assistant Updates and install a compatible app update for this panel if one is offered. Wait for it to reconnect. If none is offered, use the update recovery guide; do not downgrade blindly.
 
-## Old app needs 0.9.0
+<a id="old-app-needs-090"></a>
 
-**What it means:** Panel Assistant 1.0 cannot install or update this old-app panel.
+## Panel still runs the old app
 
-**Why it happens:** The move from the old ha-paneld app was removed in 1.0.
+**What it means:** This panel still runs the old ha-paneld app. Current Panel Assistant cannot move it automatically.
 
-**How to fix it:** Do not redownload Panel Assistant 0.9.0 over a running 1.0 installation: a setting removed by 1.0 can make 0.9.0 return migrated panels to MQTT. Only if no panel has the 1.0 app yet, restore a Home Assistant backup from before the upgrade, finish every move in 0.9.0, then return to 1.0. If any panel already has the 1.0 app, or there is no suitable backup, ask for support before changing versions. See the [1.0 upgrade recovery guide](/manage/upgrade-to-1-0/).
+**Why it happens:** Automatic migration from the old ha-paneld app was removed in 1.0. The 0.9.0 move remains the supported route for panels it handles.
+
+**How to fix it:** If that move cannot finish, follow the [manual route](/manage/upgrade-to-1-0/#a-panel-still-runs-the-old-app) with the current Panel Assistant: export the old app’s settings, restore the vendor home screen if you quietened vendor apps, keep network ADB on port 5555, then uninstall the old app and add the panel again. Finish setup and Submit in Home Assistant, preview and apply the settings import, then sign in again using Browser sign-in → Reconnect. The guide covers the settings that do not carry over and the checks afterwards. Do not downgrade Panel Assistant for this route.
 
 ## Mqtt panel needs 0.9.0
 
