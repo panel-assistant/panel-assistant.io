@@ -52,6 +52,7 @@ const texts = JSON.stringify(
 );
 // Every brand and product name that leads to this page, with how each differs.
 const names = isPanel ? soldAs(entry.data) : [];
+const hasNameNotes = names.some((name: { note?: string }) => name.note?.trim());
 const evidence =
   isPanel && Array.isArray(entry.data.evidence) ? confidence(entry.data).reasons : null;
 const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
@@ -59,6 +60,43 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
 
 <Default />
 <TranslationNote />
+{names.length > 0 && (
+  <div id="sold-as" class="sold-as">
+    <p>
+      {brands > 1
+        ? 'This hardware is sold by several brands. This page covers every name below.'
+        : 'This page covers every name below.'}
+    </p>
+    {hasNameNotes ? (
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Brand</th>
+            <th scope="col">Name</th>
+            <th scope="col">How it differs</th>
+          </tr>
+        </thead>
+        <tbody>
+          {names.map((n: { brand: string; name: string; note?: string }, i: number) => (
+            <tr>
+              <td>{n.brand}</td>
+              <td class="name">{n.name}</td>
+              <td>{n.note ?? (i === 0 ? 'Main name' : 'Same hardware')}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <ul class="sold-as-names">
+        {names.map((n: { brand: string; name: string }) => (
+          <li>
+            <strong>{n.brand}</strong> {n.name}
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+)}
 {identity && (
   <div
     data-panel-images="hero"
@@ -85,33 +123,6 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
   </div>
 )}
 {isPanel && entry.data.ownerReports && <OwnerReports reports={entry.data.ownerReports} />}
-{names.length > 0 && (
-  <div id="sold-as" class="sold-as">
-    <p>
-      {brands > 1
-        ? 'This hardware is sold by several brands. This page covers every name below.'
-        : 'This page covers every name below.'}
-    </p>
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">Brand</th>
-          <th scope="col">Name</th>
-          <th scope="col">How it differs</th>
-        </tr>
-      </thead>
-      <tbody>
-        {names.map((n: { brand: string; name: string; note?: string }, i: number) => (
-          <tr>
-            <td>{n.brand}</td>
-            <td class="name">{n.name}</td>
-            <td>{n.note ?? (i === 0 ? 'Main name' : 'Same hardware')}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-)}
 {identity && (
   <div
     data-panel-images="gallery"
@@ -139,6 +150,18 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
   }
   .sold-as p {
     margin: 0 0 0.5rem;
+  }
+  .sold-as-names {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--sl-text-sm);
+  }
+  .sold-as-names li {
+    margin: 0;
   }
   .sold-as table {
     border-collapse: collapse;

@@ -11,10 +11,12 @@ import {
   OLD_PANEL_URLS,
   PANELS_DIR,
   panelRedirects,
+  soldAs,
 } from './catalogue.mjs';
 
 const page = (path) => readFileSync(`dist${path}index.html`, 'utf8');
 const isRedirect = (html) => html.includes('http-equiv="refresh"');
+const soldAsSection = (html) => html.match(/<div id="sold-as"[^>]*>([\s\S]*?)<\/div>/)?.[1] ?? '';
 
 // Every language the built site serves the hardware pages under.
 const prefixes = [
@@ -66,10 +68,7 @@ test('a board sold under other names lists them on its page and under each brand
   assert.ok(oem.length >= 5);
   for (const { slug, data } of oem) {
     const html = page(slug);
-    const statement = (html.match(/<div id="sold-as"[^>]*>([\s\S]*?)<\/table>/)?.[1] ?? '').replace(
-      /<[^>]+>/g,
-      ' ',
-    );
+    const statement = soldAsSection(html).replace(/<[^>]+>/g, ' ');
     for (const { brand, name } of data.sold_as) {
       assert.match(
         statement,
@@ -95,12 +94,44 @@ test('a page that several menu entries lead to says how those models differ', ()
   const covering = panels.filter((p) => p.data.covers?.length);
   assert.ok(covering.length >= 1);
   for (const { slug, data } of covering) {
-    const table = (
-      page(slug).match(/<div id="sold-as"[^>]*>([\s\S]*?)<\/table>/)?.[1] ?? ''
-    ).replace(/<[^>]+>/g, ' ');
+    const table = soldAsSection(page(slug)).replace(/<[^>]+>/g, ' ');
     for (const { name, note } of data.covers) {
       assert.ok(note, `${slug}: ${name} has no note saying how it differs`);
       assert.ok(table.includes(name) && table.includes(note), `${slug} does not describe ${name}`);
+    }
+  }
+});
+
+test('alias links land before product images with compact names or explicit differences', () => {
+  for (const { slug, data } of panels) {
+    if (!soldAs(data).length) continue;
+    for (const prefix of prefixes) {
+      const localizedPath = `src/content/docs${prefix}${slug.slice(0, -1)}.md`;
+      const localData = existsSync(localizedPath)
+        ? parse(readFileSync(localizedPath, 'utf8').split(/^---$/m)[1])
+        : data;
+      const names = soldAs(localData);
+      const html = page(prefix + slug);
+      const section = soldAsSection(html);
+      assert.ok(section, `${prefix}${slug}: missing alias section`);
+      assert.ok(
+        html.indexOf('id="sold-as"') < html.indexOf('data-panel-images="hero"'),
+        `${prefix}${slug}: aliases skip past product hero`,
+      );
+      if (names.some((name) => name.note?.trim())) {
+        assert.match(section, /<table[\s>]/, `${prefix}${slug}: missing comparison`);
+        for (const { note } of names) {
+          if (note)
+            assert.ok(
+              section.replaceAll('&#39;', "'").replaceAll('&amp;', '&').includes(note),
+              `${prefix}${slug}: missing name note`,
+            );
+        }
+      } else {
+        assert.match(section, /<ul class="sold-as-names"/, `${prefix}${slug}: missing names list`);
+        assert.doesNotMatch(section, /<table[\s>]/, `${prefix}${slug}: redundant names table`);
+        assert.equal((section.match(/<li[\s>]/g) ?? []).length, names.length);
+      }
     }
   }
 });
