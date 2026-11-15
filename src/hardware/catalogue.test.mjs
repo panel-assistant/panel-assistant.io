@@ -128,7 +128,11 @@ test('alias links land before product images with compact names or explicit diff
             );
         }
       } else {
-        assert.match(section, /<ul class="sold-as-names"/, `${prefix}${slug}: missing names list`);
+        assert.match(
+          section,
+          /<ul\b[^>]*\bclass="[^"]*\bsold-as-names\b/,
+          `${prefix}${slug}: missing names list`,
+        );
         assert.doesNotMatch(section, /<table[\s>]/, `${prefix}${slug}: redundant names table`);
         assert.equal((section.match(/<li[\s>]/g) ?? []).length, names.length);
       }

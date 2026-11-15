@@ -51,7 +51,7 @@ const texts = JSON.stringify(
   }),
 );
 // Every brand and product name that leads to this page, with how each differs.
-const names = isPanel ? soldAs(entry.data) : [];
+const names = identity ? soldAs(entry.data) : [];
 const hasNameNotes = names.some((name: { note?: string }) => name.note?.trim());
 const evidence =
   isPanel && Array.isArray(entry.data.evidence) ? confidence(entry.data).reasons : null;
@@ -87,7 +87,7 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
         </tbody>
       </table>
     ) : (
-      <ul class="sold-as-names">
+      <ul class="sold-as-names" role="list">
         {names.map((n: { brand: string; name: string }) => (
           <li>
             <strong>{n.brand}</strong> {n.name}
