@@ -300,10 +300,9 @@ test('panel access guidance distinguishes initial debugging from root and unknow
   assert.match(text('/install/prepare-a-panel/'), /USB access is also unverified/);
 });
 
-// Installing, updating and repairing a panel happens in Home Assistant, so the pages a user follows
-// for that never hand them a terminal. Hardware and reference pages document the device and the
-// source code, and may show commands.
-test('the install, update and repair pages ask for no command line', () => {
+// Routine installation, updates and Repairs happen in Home Assistant. Only the documented manual
+// replacement of the retired old app needs a terminal; hardware and reference pages may show commands.
+test('routine install, update and repair guidance needs no command line outside old-app replacement', () => {
   const pages = ['start', 'install', 'home-assistant', 'manage'].flatMap((dir) =>
     readdirSync(`dist/${dir}`)
       .filter((name) => existsSync(`dist/${dir}/${name}/index.html`))
@@ -313,7 +312,15 @@ test('the install, update and repair pages ask for no command line', () => {
   const shell = /<pre data-language="(sh|bash|shell|console|powershell)"/;
   const command =
     /\b(adb (install|shell|devices|tcpip|connect|root|push|pull|reboot)|platform-tools|fastboot)\b/i;
-  const offending = pages.filter((p) => shell.test(content(p)) || command.test(text(p)));
+  const offending = pages.filter((p) => {
+    let body = content(p);
+    if (p === '/manage/upgrade-to-1-0/') {
+      const manualSection = /<h3 id="a-panel-still-runs-the-old-app">[\s\S]*?<\/ol>/;
+      assert.match(body, manualSection, 'the old-app manual route must remain identifiable');
+      body = body.replace(manualSection, '');
+    }
+    return shell.test(body) || command.test(plain(body));
+  });
   assert.deepEqual(offending, []);
   assert.match(
     text('/'),
