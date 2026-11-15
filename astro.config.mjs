@@ -146,6 +146,7 @@ export default defineConfig({
                 { ...label('sidebar.connect_panel'), slug: 'home-assistant/connect-a-panel' },
                 { ...label('sidebar.support_report'), slug: 'home-assistant/support-report' },
                 { label: 'Repairs', slug: 'home-assistant/repairs' },
+                { label: 'Startup cost', slug: 'home-assistant/startup-cost' },
                 { ...label('sidebar.move_from_mqtt'), slug: 'home-assistant/move-from-mqtt' },
               ],
             },
