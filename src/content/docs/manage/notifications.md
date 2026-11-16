@@ -14,7 +14,7 @@ Send a notification from a Home Assistant automation to a panel and it appears o
 
 On the panel's **Configure** page, open the advanced settings and turn on **Panel notifications** in the System section. The dashboard reloads once.
 
-Each panel has its own notify action in Home Assistant, named after the panel, for example `notify.panel_assistant_living_room_panel`.
+Each panel has its own notify action in Home Assistant: its name starts with `notify.panel_assistant_`, then the panel's name and a code. To find it, open **Developer tools → Actions** and type `panel_assistant`. The examples below use `notify.panel_assistant_living_room_panel`; use your panel's action in its place.
 
 ## How a message appears
 
