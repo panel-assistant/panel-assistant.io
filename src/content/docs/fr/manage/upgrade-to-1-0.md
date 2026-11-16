@@ -24,7 +24,8 @@ Après le redémarrage, ouvrez à nouveau **Paramètres**, **Réparations**.
 
 - **« … a besoin de l’application … »** est normal pour chaque panneau qui exécute encore une application 0.9. Tant qu’il n’est pas mis à jour, Home Assistant ne peut ni voir ni contrôler ce panneau, et ses entités apparaissent indisponibles. Le panneau lui-même continue de fonctionner, avec ses réglages et son historique.
 - **« … ne peut pas recevoir de mises à jour de l’application »** signifie que Panel Assistant n’a aucun moyen d’installer sur ce panneau, généralement après une modification du panneau lui-même, comme une mise à jour du micrologiciel ou une réinitialisation. Reconnectez le panneau à Panel Assistant par USB, comme l’explique **En savoir plus** dans la Réparation : la mise à jour devient alors disponible. Rien n’est supprimé : sur un panneau où l’application est déjà présente, l’installateur USB n’installe rien et permet uniquement à Panel Assistant de le joindre à nouveau.
-- **« … n’a jamais été migré depuis MQTT »** ou **« … exécute encore l’ancienne application »** signifie qu’une migration n’a pas été terminée dans la version 0.9.0. Voir [si une migration n’a pas été terminée](#si-une-migration-na-pas-été-terminée).
+- **« … n’a jamais été migré depuis MQTT »** signifie que sa migration MQTT n’a pas été terminée dans la version 0.9.0. Voir [si une migration n’a pas été terminée](#si-une-migration-na-pas-été-terminée).
+- **« … exécute encore l’ancienne application »** signifie que l’ancienne application ha-paneld doit être remplacée. Suivez la [procédure manuelle](#a-panel-still-runs-the-old-app).
 
 ## 3. Mettre à jour un panneau, puis les autres
 
@@ -42,6 +43,27 @@ Ne revenez pas en arrière en installant la version 0.9.0 par-dessus la version 
 
 ## Si une migration n’a pas été terminée
 
-Si la version 1.0 indique qu’un panneau n’a jamais été migré depuis MQTT ou exécute encore l’ancienne application, suivez les étapes de récupération sûre de la Réparation pour terminer la migration avec Panel Assistant 0.9.0, puis revenir à la version 1.0. N’installez pas 0.9.0 par-dessus 1.0 via Marketplace ou HACS. Tant qu’aucun de vos panneaux n’exécute encore l’application 1.0, revenez à 0.9.0 en restaurant la sauvegarde Home Assistant créée avant la mise à jour, pour la raison ci-dessus. Terminez ensuite la migration dans la version 0.9.0 et reprenez cette page depuis le début. Si d’autres panneaux exécutent déjà l’application 1.0, ou si vous n’avez pas de sauvegarde antérieure à la mise à jour, demandez de l’aide sur [Discord](https://panel-assistant.io/go/discord) ou dans les [tickets](https://github.com/panel-assistant/ha-integration/issues) avant de modifier quoi que ce soit.
+Si la version 1.0 indique qu’un panneau n’a jamais été migré depuis MQTT, suivez les étapes de récupération sûre de la Réparation pour terminer la migration avec Panel Assistant 0.9.0, puis revenir à la version 1.0. N’installez pas 0.9.0 par-dessus 1.0 via Marketplace ou HACS. Tant qu’aucun de vos panneaux n’exécute encore l’application 1.0, revenez à 0.9.0 en restaurant la sauvegarde Home Assistant créée avant la mise à jour, pour la raison ci-dessus. Terminez ensuite la migration dans la version 0.9.0 et reprenez cette page depuis le début. Si d’autres panneaux exécutent déjà l’application 1.0, ou si vous n’avez pas de sauvegarde antérieure à la mise à jour, demandez de l’aide sur [Discord](https://panel-assistant.io/go/discord) ou dans les [tickets](https://github.com/panel-assistant/ha-integration/issues) avant de modifier quoi que ce soit.
 
 Pour un panneau encore sur MQTT, la Réparation propose aussi de repartir de zéro : supprimez l’appareil du panneau sous l’intégration MQTT et ajoutez de nouveau le panneau. Cela crée de nouvelles entités et ne conserve aucun historique.
+
+<a id="a-panel-still-runs-the-old-app"></a>
+
+### Un panneau exécute encore l’ancienne application
+
+La migration avec 0.9.0 reste la procédure prise en charge pour les panneaux qu’elle sait traiter. Si un panneau exécute encore l’ancienne application ha-paneld et que cette migration ne peut pas aboutir, utilisez la procédure manuelle ci-dessous avec la version actuelle de Panel Assistant. Elle remplace l’application et crée un nouvel appareil Home Assistant ; l’historique repart de zéro et les automatisations utilisant les anciennes entités doivent être vérifiées. Elle ne nécessite pas de rétrograder Panel Assistant.
+
+1. Dans l’interface web de l’ancienne application, ouvrez **Installer** et utilisez **Exporter les paramètres**. Conservez le fichier avant de supprimer l’application. L’exportation exclut par défaut les mots de passe et les jetons ; conservez donc les identifiants qu’il faudra saisir à nouveau.
+2. Si vous avez utilisé l’ancienne application pour désactiver les applications du fabricant, utilisez **Restaurer l’écran d’accueil** sur sa page **Installer** avant de la supprimer. Gardez ADB réseau activé sur le port **5555** pour que Panel Assistant puisse installer la nouvelle application.
+3. Connectez-vous au panneau avec ADB et supprimez uniquement l’ancienne application :
+
+   ```sh
+   adb connect PANEL_IP:5555
+   adb uninstall io.github.maxlyth.hapaneld
+   ```
+
+   Remplacez `PANEL_IP` par l’adresse du panneau. Ne réinitialisez pas le panneau.
+
+4. Supprimez l’entrée existante de ce panneau dans Panel Assistant dans Home Assistant, si elle existe. Avec la version actuelle de Panel Assistant installée, [ajoutez le panneau](/fr/install/installing-ha-paneld/) pour installer l’application actuelle. Terminez la page de configuration du panneau indiquée par le lien, notamment son nom, l’adresse Home Assistant, la connexion et le tableau de bord, puis revenez dans Home Assistant et sélectionnez **Valider**.
+5. Dans l’interface web de la nouvelle application, ouvrez **Installer**, choisissez **Importer les paramètres…** et sélectionnez votre exportation. Vérifiez la liste des modifications avant de les appliquer. Les paramètres MQTT ne sont pas transférés. Les paramètres enregistrés avec les valeurs par défaut de l’ancienne application peuvent remplacer celles de la nouvelle ; vérifiez donc ensuite l’assistant vocal et le filtre d’entités dans **Configurer**.
+6. Après l’importation, ouvrez **Configurer → Connexion Home Assistant** et utilisez **Reconnecter** à côté de **Connexion du navigateur** pour vous reconnecter. L’importation peut effacer une partie de la connexion et provoquer **Connexion Home Assistant refusée** au prochain renouvellement du jeton. Vérifiez que le tableau de bord se charge et que le panneau se connecte dans Home Assistant, puis contrôlez vos paramètres et automatisations.

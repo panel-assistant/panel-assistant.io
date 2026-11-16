@@ -6,7 +6,7 @@ sourceCommit: 03a4ef94d2f13624feee19f2a8df41935d3bc2ac
 
 Zacznij od urządzenia panelu w Home Assistant, które ma czujnik stanu i możliwość pobrania diagnostyki, oraz od strony stanu samego panelu: użyj **Odwiedź** na stronie jego urządzenia w Home Assistant. Raport `/diag` odpowiada na większość poniższych pytań bez zgadywania.
 
-Gdy potrzebujesz obserwować bieżące działanie panelu, karta **Logi** na tej stronie przesyła na żywo dziennik aplikacji panelu, z ukrytymi tokenami i hasłami.
+Gdy potrzebujesz obserwować bieżące działanie panelu, karta **Logi** na tej stronie przesyła na żywo dziennik aplikacji panelu, z ukrytymi tokenami i hasłami. Aby zobaczyć wiersze ze wszystkich połączonych paneli na jednej liście, otwórz **Wszystkie panele** w panelu bocznym Panel Assistant i wybierz **Logi**; można filtrować według panelu, źródła i minimalnego poziomu. Wiersze pojawiają się dopiero po wybraniu celu innego niż Wyłączone w **Ustawieniach** na tej samej stronie. Są przechowywane tylko w pamięci, więc ponowne uruchomienie Home Assistant je usuwa.
 
 ![Karta Logi interfejsu internetowego panelu przesyłająca dziennik aplikacji na żywo, z polem filtrowania i przyciskami Śledź oraz Wstrzymaj](/screenshots/ui-logs-dark.png)
 

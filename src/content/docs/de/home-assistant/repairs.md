@@ -14,7 +14,7 @@ Verwende das abgesicherte **Erneut versuchen** der vorhandenen Reparatur erst, n
 
 - [Panel Assistant von &lt;panel&gt; entfernen](#panel-assistant-von-panel-entfernen)
 - [Panel-App zu alt](#panel-app-too-old)
-- [Alte App benötigt 0.9.0](#old-app-needs-090)
+- [Panel verwendet noch die alte App](#old-app-needs-090)
 - [MQTT-Panel benötigt 0.9.0](#mqtt-panel-needs-090)
 - [Panelberechtigungen](#panel-permissions)
 - [Näherungseinrichtung des Panels](#panel-proximity-setup)
@@ -69,14 +69,15 @@ Verwende das abgesicherte **Erneut versuchen** der vorhandenen Reparatur erst, n
 **So behebst du es:** Öffne die Updates in Home Assistant und installiere ein kompatibles App-Update für dieses Panel, falls eines angeboten wird. Warte auf die erneute Verbindung. Wird keines angeboten, verwende die Update-Wiederherstellungsanleitung; führe kein unüberlegtes Downgrade durch.
 
 <a id="old-app-needs-090"></a>
+<a id="alte-app-benötigt-090"></a>
 
-## Alte App benötigt 0.9.0
+## Panel verwendet noch die alte App
 
-**Bedeutung:** Panel Assistant 1.0 kann dieses Panel mit alter App weder installieren noch aktualisieren.
+**Bedeutung:** Dieses Panel verwendet noch die alte ha-paneld-App. Der aktuelle Panel Assistant kann es nicht automatisch umstellen.
 
-**Ursache:** Der Umzug von der alten ha-paneld-App wurde in 1.0 entfernt.
+**Ursache:** Die automatische Migration von der alten ha-paneld-App wurde in 1.0 entfernt. Der Umzug mit 0.9.0 bleibt der unterstützte Weg für Panels, die diese Version umstellen kann.
 
-**So behebst du es:** Lade Panel Assistant 0.9.0 nicht erneut über eine laufende 1.0-Installation herunter: Eine von 1.0 entfernte Einstellung kann dazu führen, dass 0.9.0 bereits umgezogene Panels zu MQTT zurückführt. Nur wenn noch kein Panel die 1.0-App hat, stelle eine Home Assistant-Sicherung von vor dem Upgrade wieder her, schließe jeden Umzug in 0.9.0 ab und kehre dann zu 1.0 zurück. Hat bereits irgendein Panel die 1.0-App oder gibt es keine geeignete Sicherung, frage vor einem Versionswechsel nach Unterstützung. Siehe die [Wiederherstellungsanleitung zum 1.0-Upgrade](/de/manage/upgrade-to-1-0/).
+**So behebst du es:** Wenn dieser Umzug nicht abgeschlossen werden kann, folge dem [manuellen Weg](/de/manage/upgrade-to-1-0/#a-panel-still-runs-the-old-app) mit dem aktuellen Panel Assistant: Exportiere die Einstellungen der alten App, stelle den Hersteller-Startbildschirm wieder her, falls du Hersteller-Apps ruhiggestellt hast, lass Netzwerk-ADB auf Port 5555 aktiviert, deinstalliere dann die alte App und füge das Panel erneut hinzu. Schließe die Einrichtung ab und wähle Absenden in Home Assistant, prüfe die Vorschau des Einstellungsimports und wende ihn an. Melde dich dann über Browser-Anmeldung → Erneut verbinden erneut an. Die Anleitung behandelt auch nicht übernommene Einstellungen und die anschließenden Prüfungen. Führe für diesen Weg kein Downgrade von Panel Assistant durch.
 
 <a id="mqtt-panel-needs-090"></a>
 

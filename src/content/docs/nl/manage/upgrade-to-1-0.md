@@ -24,7 +24,8 @@ Open na de herstart opnieuw **Instellingen**, **Reparaties**.
 
 - **'… heeft app … nodig'** is te verwachten op elk paneel met een 0.9-app. Tot de update kan Home Assistant dat paneel niet zien of bedienen en worden de entiteiten als niet beschikbaar getoond. Het paneel zelf blijft werken, met zijn instellingen en geschiedenis.
 - **'… kan geen app-updates ontvangen'** betekent dat Panel Assistant geen installatie op dat paneel kan uitvoeren, meestal na een wijziging op het paneel zelf, zoals een firmware-update of reset. Verbind het paneel opnieuw via USB met Panel Assistant, zoals **Meer informatie** in de reparatie beschrijft, waarna de update beschikbaar wordt. Er wordt niets verwijderd: op een paneel waarop de app al staat, installeert het USB-installatieprogramma niets en zorgt het alleen dat Panel Assistant het weer kan bereiken.
-- **'… is nooit van MQTT overgezet'** of **'… draait nog de oude app'** betekent dat een overstap in 0.9.0 niet is afgerond. Zie [Als een overstap niet is afgerond](#als-een-overstap-niet-is-afgerond).
+- **'… is nooit van MQTT overgezet'** betekent dat de MQTT-overstap in 0.9.0 niet is afgerond. Zie [Als een overstap niet is afgerond](#als-een-overstap-niet-is-afgerond).
+- **'… draait nog de oude app'** betekent dat de oude ha-paneld-app moet worden vervangen. Volg de [handmatige route](#a-panel-still-runs-the-old-app).
 
 ## 3. Werk één paneel bij en daarna de rest
 
@@ -44,6 +45,27 @@ Ga niet terug door via Marketplace of HACS 0.9.0 over 1.0 te installeren. De 1.0
 
 ## Als een overstap niet is afgerond
 
-Zegt 1.0 dat een paneel nooit van MQTT is overgezet of nog de oude app draait, volg dan de veilige herstelstappen van de reparatie om de overstap met Panel Assistant 0.9.0 af te ronden en daarna naar 1.0 terug te keren. Installeer 0.9.0 niet over 1.0 via Marketplace of HACS. Zolang geen van je panelen de 1.0-app draait, ga je om de bovenstaande reden terug naar 0.9.0 door de Home Assistant-back-up van vóór de update te herstellen. Rond daarna de overstap in 0.9.0 af en begin opnieuw aan deze pagina. Draaien andere panelen al de 1.0-app of heb je geen back-up van vóór de update, vraag dan op [Discord](https://panel-assistant.io/go/discord) of in de [issues](https://github.com/panel-assistant/ha-integration/issues) om hulp voordat je iets verandert.
+Zegt 1.0 dat een paneel nooit van MQTT is overgezet, volg dan de veilige herstelstappen van de reparatie om de overstap met Panel Assistant 0.9.0 af te ronden en daarna naar 1.0 terug te keren. Installeer 0.9.0 niet over 1.0 via Marketplace of HACS. Zolang geen van je panelen de 1.0-app draait, ga je om de bovenstaande reden terug naar 0.9.0 door de Home Assistant-back-up van vóór de update te herstellen. Rond daarna de overstap in 0.9.0 af en begin opnieuw aan deze pagina. Draaien andere panelen al de 1.0-app of heb je geen back-up van vóór de update, vraag dan op [Discord](https://panel-assistant.io/go/discord) of in de [issues](https://github.com/panel-assistant/ha-integration/issues) om hulp voordat je iets verandert.
 
 Voor een paneel dat nog op MQTT zit, biedt de reparatie ook een nieuwe start: verwijder het apparaat van het paneel onder de MQTT-integratie en voeg het paneel opnieuw toe. Dat maakt nieuwe entiteiten aan en behoudt niets van de geschiedenis.
+
+<a id="a-panel-still-runs-the-old-app"></a>
+
+### Een paneel draait nog de oude app
+
+De overstap via 0.9.0 blijft de ondersteunde route voor panelen die daarmee kunnen worden overgezet. Draait een paneel nog de oude ha-paneld-app en kan die overstap niet worden afgerond, gebruik dan onderstaande handmatige route met de huidige Panel Assistant. Dit vervangt de app en maakt een nieuw Home Assistant-apparaat: de geschiedenis begint opnieuw en automatiseringen met de oude entiteiten moeten worden gecontroleerd. Panel Assistant hoeft hiervoor niet te worden gedowngraded.
+
+1. Open in de webinterface van de oude app **Installeren** en gebruik **Instellingen exporteren**. Bewaar het bestand voordat je de app verwijdert. De export bevat standaard geen wachtwoorden en tokens; bewaar dus de inloggegevens die je opnieuw moet invoeren.
+2. Heb je met de oude app de apps van de fabrikant stilgelegd, gebruik dan **Startscherm herstellen** op de pagina **Installeren** voordat je de app verwijdert. Houd netwerk-ADB ingeschakeld op poort **5555**, zodat Panel Assistant de nieuwe app kan installeren.
+3. Verbind via ADB met het paneel en verwijder alleen de oude app:
+
+   ```sh
+   adb connect PANEL_IP:5555
+   adb uninstall io.github.maxlyth.hapaneld
+   ```
+
+   Vervang `PANEL_IP` door het adres van je paneel. Reset het paneel niet.
+
+4. Verwijder de bestaande vermelding van dit paneel uit Panel Assistant in Home Assistant, als die er is. Met de huidige Panel Assistant geïnstalleerd [voeg je het paneel toe](/nl/install/installing-ha-paneld/) om de huidige app te installeren. Rond de gekoppelde instelpagina van het paneel af, inclusief naam, Home Assistant-adres, aanmelden en dashboard; keer daarna terug naar Home Assistant en kies **Verzenden**.
+5. Open in de webinterface van de nieuwe app **Installeren**, kies **Instellingen importeren…** en selecteer je export. Controleer de lijst met wijzigingen voordat je ze toepast. MQTT-instellingen worden niet overgenomen. Opgeslagen standaardwaarden van de oude app kunnen de standaardwaarden van de nieuwe app vervangen; controleer daarom daarna de spraakassistent en het entiteitsfilter op **Configureren**.
+6. Open na het importeren **Configureren → Home Assistant-verbinding** en gebruik **Opnieuw verbinden** naast **Browseraanmelding** om opnieuw in te loggen. De import kan een deel van de aanmelding wissen en **Home Assistant-aanmelding geweigerd** veroorzaken wanneer het token opnieuw wordt vernieuwd. Controleer of het dashboard laadt en het paneel in Home Assistant verbinding maakt, en controleer daarna je instellingen en automatiseringen.

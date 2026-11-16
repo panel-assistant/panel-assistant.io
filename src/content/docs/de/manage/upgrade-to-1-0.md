@@ -24,7 +24,8 @@ Ab Home Assistant **2026.11** installierst du das Panel Assistant-Update unter *
 
 - **„… benötigt App …“** ist bei jedem Panel zu erwarten, auf dem noch eine App 0.9 läuft. Bis zum Update kann Home Assistant dieses Panel weder sehen noch steuern, und seine Entitäten erscheinen als nicht verfügbar. Das Panel selbst funktioniert mit seinen Einstellungen und seinem Verlauf weiter.
 - **„… kann keine App-Updates empfangen“** bedeutet, dass Panel Assistant keine Möglichkeit hat, auf diesem Panel zu installieren. Das folgt meist auf eine Änderung am Panel selbst, etwa ein Firmware-Update oder ein Zurücksetzen. Verbinde das Panel erneut über USB mit Panel Assistant, wie unter **Mehr erfahren** in der Reparatur beschrieben. Danach wird das Update verfügbar. Es wird nichts entfernt: Auf einem Panel, das die App bereits hat, installiert der USB-Installer nichts und macht es nur wieder für Panel Assistant erreichbar.
-- **„… wurde nie von MQTT umgestellt“** oder **„… verwendet noch die alte App“** bedeutet, dass eine Umstellung unter 0.9.0 nicht abgeschlossen wurde. Siehe [Wenn ein Umzug nicht abgeschlossen wurde](#wenn-ein-umzug-nicht-abgeschlossen-wurde).
+- **„… wurde nie von MQTT umgestellt“** bedeutet, dass die MQTT-Umstellung unter 0.9.0 nicht abgeschlossen wurde. Siehe [Wenn ein Umzug nicht abgeschlossen wurde](#wenn-ein-umzug-nicht-abgeschlossen-wurde).
+- **„… verwendet noch die alte App“** bedeutet, dass die alte ha-paneld-App ersetzt werden muss. Folge dem [manuellen Weg](#a-panel-still-runs-the-old-app).
 
 ## 3. Erst ein Panel aktualisieren, dann die übrigen
 
@@ -42,6 +43,27 @@ Kehre nicht zurück, indem du über Marketplace oder HACS 0.9.0 über 1.0 instal
 
 ## Wenn ein Umzug nicht abgeschlossen wurde
 
-Wenn 1.0 meldet, dass ein Panel nie von MQTT umgestellt wurde oder noch die alte App verwendet, befolge die sicheren Wiederherstellungsschritte der Reparatur, um die Umstellung mit Panel Assistant 0.9.0 abzuschließen und anschließend zu 1.0 zurückzukehren. Installiere 0.9.0 nicht über Marketplace oder HACS über 1.0. Solange noch keines deiner Panels die App 1.0 verwendet, kehre aus dem oben genannten Grund durch Wiederherstellen der vor dem Update erstellten Home Assistant-Sicherung zu 0.9.0 zurück. Schließe dann die Umstellung unter 0.9.0 ab und beginne diese Seite erneut. Wenn andere Panels bereits die App 1.0 verwenden oder du keine Sicherung von vor dem Update hast, frage auf [Discord](https://panel-assistant.io/go/discord) oder in den [Issues](https://github.com/panel-assistant/ha-integration/issues), bevor du etwas änderst.
+Wenn 1.0 meldet, dass ein Panel nie von MQTT umgestellt wurde, befolge die sicheren Wiederherstellungsschritte der Reparatur, um die Umstellung mit Panel Assistant 0.9.0 abzuschließen und anschließend zu 1.0 zurückzukehren. Installiere 0.9.0 nicht über Marketplace oder HACS über 1.0. Solange noch keines deiner Panels die App 1.0 verwendet, kehre aus dem oben genannten Grund durch Wiederherstellen der vor dem Update erstellten Home Assistant-Sicherung zu 0.9.0 zurück. Schließe dann die Umstellung unter 0.9.0 ab und beginne diese Seite erneut. Wenn andere Panels bereits die App 1.0 verwenden oder du keine Sicherung von vor dem Update hast, frage auf [Discord](https://panel-assistant.io/go/discord) oder in den [Issues](https://github.com/panel-assistant/ha-integration/issues), bevor du etwas änderst.
 
 Für ein Panel, das noch MQTT verwendet, bietet die Reparatur auch einen Neuanfang an: Lösche das Gerät des Panels unter der MQTT-Integration und füge das Panel erneut hinzu. Dadurch entstehen neue Entitäten, und sein gesamter Verlauf geht verloren.
+
+<a id="a-panel-still-runs-the-old-app"></a>
+
+### Ein Panel verwendet noch die alte App
+
+Der Umzug mit 0.9.0 bleibt der unterstützte Weg für Panels, die diese Version umstellen kann. Wenn ein Panel noch die alte ha-paneld-App verwendet und dieser Umzug nicht abgeschlossen werden kann, nutze den folgenden manuellen Weg mit dem aktuellen Panel Assistant. Er ersetzt die App und erstellt ein neues Home Assistant-Gerät; der Verlauf beginnt neu, und Automationen mit den alten Entitäten müssen geprüft werden. Ein Downgrade von Panel Assistant ist dafür nicht nötig.
+
+1. Öffne in der Weboberfläche der alten App **Installation** und wähle **Einstellungen exportieren**. Bewahre die Datei auf, bevor du die App entfernst. Der Export lässt Passwörter und Tokens standardmäßig aus; halte deshalb die Zugangsdaten bereit, die du erneut eingeben musst.
+2. Wenn du mit der alten App Hersteller-Apps ruhiggestellt hast, verwende vor dem Entfernen **Startbildschirm wiederherstellen** auf ihrer Seite **Installation**. Lass Netzwerk-ADB auf Port **5555** aktiviert, damit Panel Assistant die neue App installieren kann.
+3. Verbinde dich über ADB mit dem Panel und entferne nur die alte App:
+
+   ```sh
+   adb connect PANEL_IP:5555
+   adb uninstall io.github.maxlyth.hapaneld
+   ```
+
+   Ersetze `PANEL_IP` durch die Adresse deines Panels. Setze das Panel nicht zurück.
+
+4. Entferne den vorhandenen Eintrag dieses Panels aus Panel Assistant in Home Assistant, falls vorhanden. Mit dem aktuellen Panel Assistant [fügst du das Panel hinzu](/de/install/installing-ha-paneld/), um die aktuelle App zu installieren. Schließe die verlinkte Einrichtung des Panels einschließlich Name, Home Assistant-Adresse, Anmeldung und Dashboard ab. Kehre dann zu Home Assistant zurück und wähle **Absenden**.
+5. Öffne in der Weboberfläche der neuen App **Installation**, wähle **Einstellungen importieren…** und deine Exportdatei. Prüfe die Änderungsliste, bevor du sie anwendest. MQTT-Einstellungen werden nicht übernommen. Mit den Standardwerten der alten App gespeicherte Einstellungen können die neuen Standardwerte ersetzen. Prüfe deshalb anschließend Sprachassistent und Entitätsfilter unter **Konfiguration**.
+6. Öffne nach dem Import **Konfiguration → Home Assistant-Verbindung** und wähle **Erneut verbinden** neben **Browser-Anmeldung**, um dich erneut anzumelden. Der Import kann einen Teil der Anmeldung löschen und beim nächsten Aktualisieren des Tokens **Home Assistant-Anmeldung abgelehnt** verursachen. Prüfe, ob das Dashboard lädt und sich das Panel in Home Assistant verbindet, und kontrolliere dann Einstellungen und Automationen.

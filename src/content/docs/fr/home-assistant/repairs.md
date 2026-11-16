@@ -14,7 +14,7 @@ N’utilisez **Réessayer**, avec les contrôles de la réparation existante, qu
 
 - [Retirer Panel Assistant de &lt;panneau&gt;](#retirer-panel-assistant-de-panneau)
 - [Application du panneau trop ancienne](#panel-app-too-old)
-- [L’ancienne application nécessite 0.9.0](#old-app-needs-090)
+- [Le panneau exécute encore l’ancienne application](#old-app-needs-090)
 - [Le panneau MQTT nécessite 0.9.0](#mqtt-panel-needs-090)
 - [Autorisations du panneau](#panel-permissions)
 - [Configuration de proximité du panneau](#panel-proximity-setup)
@@ -69,14 +69,15 @@ N’utilisez **Réessayer**, avec les contrôles de la réparation existante, qu
 **Solution :** Ouvrez les mises à jour Home Assistant et installez une mise à jour compatible si proposée. Attendez la reconnexion. Sinon, utilisez le guide de récupération des mises à jour ; ne rétrogradez pas aveuglément.
 
 <a id="old-app-needs-090"></a>
+<a id="lancienne-application-nécessite-090"></a>
 
-## L’ancienne application nécessite 0.9.0
+## Le panneau exécute encore l’ancienne application
 
-**Signification :** Panel Assistant 1.0 ne peut pas installer ou mettre à jour ce panneau utilisant l’ancienne application.
+**Signification :** Ce panneau exécute encore l’ancienne application ha-paneld. La version actuelle de Panel Assistant ne peut pas le migrer automatiquement.
 
-**Cause :** La migration depuis l’ancienne application ha-paneld a été retirée en 1.0.
+**Cause :** La migration automatique depuis l’ancienne application ha-paneld a été retirée en 1.0. La migration avec 0.9.0 reste la procédure prise en charge pour les panneaux qu’elle sait traiter.
 
-**Solution :** Ne retéléchargez pas Panel Assistant 0.9.0 par-dessus une installation 1.0 active : un réglage supprimé par 1.0 peut faire revenir les panneaux migrés à MQTT en 0.9.0. Uniquement si aucun panneau ne possède encore l’application 1.0, restaurez une sauvegarde Home Assistant antérieure à la mise à niveau, terminez toutes les migrations en 0.9.0, puis revenez à 1.0. Si un panneau possède déjà l’application 1.0 ou sans sauvegarde adaptée, demandez de l’aide avant de changer de version. Voir le [guide de récupération de mise à niveau 1.0](/fr/manage/upgrade-to-1-0/).
+**Solution :** Si cette migration ne peut pas aboutir, suivez la [procédure manuelle](/fr/manage/upgrade-to-1-0/#a-panel-still-runs-the-old-app) avec la version actuelle de Panel Assistant : exportez les paramètres de l’ancienne application, restaurez l’écran d’accueil du fabricant si vous avez désactivé ses applications, gardez ADB réseau sur le port 5555, puis désinstallez l’ancienne application et ajoutez à nouveau le panneau. Terminez la configuration et validez dans Home Assistant, vérifiez l’aperçu et appliquez l’importation des paramètres, puis reconnectez-vous avec Connexion du navigateur → Reconnecter. Le guide couvre les paramètres non transférés et les vérifications à effectuer ensuite. Ne rétrogradez pas Panel Assistant pour cette procédure.
 
 <a id="mqtt-panel-needs-090"></a>
 

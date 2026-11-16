@@ -24,7 +24,8 @@ Panel Assistant 1.0 与 1.0 面板应用需要一同升级。1.0 集成只与 1.
 
 - **“…需要应用…”** 是所有仍运行 0.9 应用的面板都会出现的预期提示。更新之前，Home Assistant 无法查看或控制该面板，其实体显示为不可用。面板本身仍会继续工作，保留设置和历史记录。
 - **“…无法接收应用更新”** 表示 Panel Assistant 无法在该面板上安装，通常是因为面板本身发生过更改，例如固件更新或重置。按照修复项 **了解更多** 中的说明，通过 USB 将面板重新连接到 Panel Assistant，之后即可更新。不会移除任何内容：对于已安装应用的面板，USB 安装程序不会安装任何东西，只会让 Panel Assistant 重新获得访问权限。
-- **“…从未从 MQTT 迁移”** 或 **“…仍运行旧应用”** 表示在 0.9.0 中未完成迁移。参阅[如果迁移未完成](#如果迁移未完成)。
+- **“…从未从 MQTT 迁移”** 表示在 0.9.0 中未完成 MQTT 迁移。参阅[如果迁移未完成](#如果迁移未完成)。
+- **“…仍运行旧应用”** 表示需要替换旧 ha-paneld 应用。请按照[手动步骤](#a-panel-still-runs-the-old-app)操作。
 
 ## 3. 先更新一块面板，再更新其余面板
 
@@ -42,6 +43,27 @@ Panel Assistant 1.0 与 1.0 面板应用需要一同升级。1.0 集成只与 1.
 
 ## 如果迁移未完成
 
-如果 1.0 提示某块面板从未从 MQTT 迁移，或仍运行旧应用，请按照修复项的安全恢复步骤，在 Panel Assistant 0.9.0 中完成迁移，然后返回 1.0。不要通过 Marketplace 或 HACS 安装 0.9.0 来覆盖 1.0。 只要尚无面板运行 1.0 应用，请基于上述原因，恢复更新之前创建的 Home Assistant 备份来返回 0.9.0。然后在 0.9.0 中完成迁移，再从头执行本页步骤。如果其他面板已经运行 1.0 应用，或者没有更新前的备份，请在更改任何内容之前到 [Discord](https://panel-assistant.io/go/discord) 或 [issues](https://github.com/panel-assistant/ha-integration/issues) 求助。
+如果 1.0 提示某块面板从未从 MQTT 迁移，请按照修复项的安全恢复步骤，在 Panel Assistant 0.9.0 中完成迁移，然后返回 1.0。不要通过 Marketplace 或 HACS 安装 0.9.0 来覆盖 1.0。 只要尚无面板运行 1.0 应用，请基于上述原因，恢复更新之前创建的 Home Assistant 备份来返回 0.9.0。然后在 0.9.0 中完成迁移，再从头执行本页步骤。如果其他面板已经运行 1.0 应用，或者没有更新前的备份，请在更改任何内容之前到 [Discord](https://panel-assistant.io/go/discord) 或 [issues](https://github.com/panel-assistant/ha-integration/issues) 求助。
 
 对于仍使用 MQTT 的面板，修复项还提供从头开始的方式：删除 MQTT 集成下的面板设备，再重新添加面板。这会创建新实体，且不保留任何历史记录。
+
+<a id="a-panel-still-runs-the-old-app"></a>
+
+### 面板仍运行旧应用
+
+对于 0.9.0 能处理的面板，通过它迁移仍是受支持的方式。如果面板仍运行旧 ha-paneld 应用，而且无法完成该迁移，请使用当前 Panel Assistant 按照以下手动步骤操作。这会替换应用并创建新的 Home Assistant 设备：历史记录会重新开始，使用旧实体的自动化需要检查。此方式无需降级 Panel Assistant。
+
+1. 在旧应用的网页界面中打开**安装**，使用**导出设置**。移除应用前先保存文件。导出默认不包含密码和令牌，因此请保留需要重新输入的凭据。
+2. 如果曾使用旧应用停用厂商应用，请先在其**安装**页面使用**恢复主屏幕**，再移除旧应用。保持端口 **5555** 上的网络 ADB 启用，以便 Panel Assistant 安装新应用。
+3. 通过 ADB 连接面板，仅移除旧应用：
+
+   ```sh
+   adb connect PANEL_IP:5555
+   adb uninstall io.github.maxlyth.hapaneld
+   ```
+
+   将 `PANEL_IP` 替换为面板地址。不要重置面板。
+
+4. 如果此面板在 Home Assistant 的 Panel Assistant 中已有条目，请移除该条目。安装当前 Panel Assistant 后，[添加面板](/zh-hans/install/installing-ha-paneld/)以安装当前应用。完成链接指向的面板设置页面，包括名称、Home Assistant 地址、登录和仪表盘，然后返回 Home Assistant 并选择**提交**。
+5. 在新应用的网页界面中打开**安装**，选择**导入设置…**，再选择导出的文件。应用前先查看变更列表。MQTT 设置不会迁移。保存为旧应用默认值的设置可能覆盖新应用的默认值，因此之后请在**设置**页面检查语音助手和实体过滤器。
+6. 导入后，打开**设置 → Home Assistant 连接**，使用**浏览器登录**旁的**重新连接**再次登录。导入可能清除部分登录信息，导致下次刷新令牌时出现 **Home Assistant 登录被拒绝**。确认仪表盘可以加载、面板在 Home Assistant 中可以连接，然后检查设置和自动化。

@@ -6,7 +6,7 @@ sourceCommit: 03a4ef94d2f13624feee19f2a8df41935d3bc2ac
 
 Commencez par l’appareil correspondant au panneau dans Home Assistant, qui propose un capteur d’état et un téléchargement des diagnostics, ainsi que par la page d’état du panneau : utilisez **Visiter** sur la page de son appareil dans Home Assistant. Son rapport `/diag` répond à la plupart des questions ci-dessous sans devoir deviner.
 
-Pour voir ce que fait le panneau au moment où cela se produit, l’onglet **Journaux** de cette page diffuse en direct le journal de l’application du panneau, en masquant les jetons et les mots de passe.
+Pour voir ce que fait le panneau au moment où cela se produit, l’onglet **Journaux** de cette page diffuse en direct le journal de l’application du panneau, en masquant les jetons et les mots de passe. Pour voir dans une liste les lignes de tous les panneaux connectés, ouvrez **Tous les panneaux** dans la barre latérale de Panel Assistant et choisissez **Journaux** ; vous pouvez filtrer par panneau, source et niveau minimal. Ces lignes n’apparaissent qu’après avoir choisi une destination autre que Désactivé dans **Paramètres** sur la même page et restent uniquement en mémoire : un redémarrage de Home Assistant les efface.
 
 ![L’onglet Journaux de l’interface web du panneau, qui diffuse en direct le journal de l’application du panneau avec un champ de filtrage et les commandes Suivre et Pause](/screenshots/ui-logs-dark.png)
 

@@ -6,7 +6,7 @@ sourceCommit: 03a4ef94d2f13624feee19f2a8df41935d3bc2ac
 
 Inizia dal dispositivo del pannello in Home Assistant, che ha un sensore di stato e consente di scaricare la diagnostica, e dalla pagina di stato del pannello stesso: usa **Visita** nella sua pagina del dispositivo in Home Assistant. Il suo rapporto `/diag` risponde alla maggior parte delle domande qui sotto senza dover fare supposizioni.
 
-Quando devi vedere cosa sta facendo il pannello in tempo reale, la scheda **Registri** di quella pagina trasmette in diretta il registro dell'app del pannello, con token e password oscurati.
+Quando devi vedere cosa sta facendo il pannello in tempo reale, la scheda **Registri** di quella pagina trasmette in diretta il registro dell'app del pannello, con token e password oscurati. Per vedere in un elenco le righe di tutti i pannelli connessi, apri **Tutti i pannelli** nella barra laterale di Panel Assistant e scegli **Registri**; puoi filtrare per pannello, origine e livello minimo. Le righe compaiono soltanto dopo aver scelto una destinazione diversa da Disattivato in **Impostazioni** sulla stessa pagina e restano solo in memoria: un riavvio di Home Assistant le cancella.
 
 ![La scheda Registri dell'interfaccia web del pannello, che trasmette in diretta il registro dell'app del pannello con una casella di filtro e i comandi Segui e Pausa](/screenshots/ui-logs-dark.png)
 

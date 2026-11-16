@@ -6,7 +6,7 @@ sourceCommit: 03a4ef94d2f13624feee19f2a8df41935d3bc2ac
 
 Begin bij het apparaat van het paneel in Home Assistant, met zijn statussensor en downloadbare diagnostiek, en de eigen statuspagina van het paneel: kies **Bezoeken** op de apparaatpagina in Home Assistant. Het rapport `/diag` beantwoordt de meeste onderstaande vragen zonder giswerk.
 
-Wil je zien wat het paneel op dit moment doet, dan streamt het tabblad **Logs** op die pagina het eigen logboek van de paneel-app live, met tokens en wachtwoorden onleesbaar gemaakt.
+Wil je zien wat het paneel op dit moment doet, dan streamt het tabblad **Logs** op die pagina het eigen logboek van de paneel-app live, met tokens en wachtwoorden onleesbaar gemaakt. Om regels van alle verbonden panelen in één lijst te zien, open je **Alle panelen** in de Panel Assistant-zijbalk en kies je **Logs**; je kunt filteren op paneel, bron en minimumniveau. De regels verschijnen pas nadat je onder **Instellingen** op dezelfde pagina een andere bestemming dan Uit kiest. Ze blijven alleen in het geheugen en worden dus bij een herstart van Home Assistant gewist.
 
 ![Het tabblad Logs in de webinterface van het paneel, met het live logboek van de paneel-app, een filtervak en bediening voor Volgen en Pauzeren](/screenshots/ui-logs-dark.png)
 

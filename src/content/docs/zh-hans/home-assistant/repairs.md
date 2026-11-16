@@ -14,7 +14,7 @@ description: Panel Assistant 各项修复提示的含义、出现原因以及解
 
 - [从 &lt;面板&gt; 移除 Panel Assistant](#从-面板-移除-panel-assistant)
 - [面板应用过旧](#panel-app-too-old)
-- [旧版应用需要 0.9.0](#old-app-needs-090)
+- [面板仍运行旧应用](#old-app-needs-090)
 - [MQTT 面板需要 0.9.0](#mqtt-panel-needs-090)
 - [面板权限](#panel-permissions)
 - [面板接近感应设置](#panel-proximity-setup)
@@ -69,14 +69,15 @@ description: Panel Assistant 各项修复提示的含义、出现原因以及解
 **解决方法：**打开 Home Assistant 更新，为此面板安装可用的兼容应用更新，然后等待重新连接。如果没有可用更新，请使用更新恢复指南；不要盲目降级。
 
 <a id="old-app-needs-090"></a>
+<a id="旧版应用需要-090"></a>
 
-## 旧版应用需要 0.9.0
+## 面板仍运行旧应用
 
-**含义：**Panel Assistant 1.0 无法为此旧版应用面板安装或更新。
+**含义：**此面板仍运行旧 ha-paneld 应用。当前 Panel Assistant 无法自动迁移它。
 
-**原因：**1.0 移除了从旧版 ha-paneld 应用迁移的功能。
+**原因：**1.0 移除了从旧 ha-paneld 应用自动迁移的功能。对于 0.9.0 能处理的面板，通过它迁移仍是受支持的方式。
 
-**解决方法：**不要在运行中的 1.0 安装上重新下载 Panel Assistant 0.9.0：1.0 移除的一项设置可能导致 0.9.0 将已迁移面板恢复为 MQTT。只有在所有面板都尚未安装 1.0 应用时，才可恢复升级前的 Home Assistant 备份，在 0.9.0 中完成所有迁移，然后返回 1.0。如果已有任何面板安装了 1.0 应用，或没有合适的备份，请先寻求支持，再更改版本。请参阅 [1.0 升级恢复指南](/zh-hans/manage/upgrade-to-1-0/)。
+**解决方法：**如果无法完成该迁移，请使用当前 Panel Assistant 按照[手动步骤](/zh-hans/manage/upgrade-to-1-0/#a-panel-still-runs-the-old-app)操作：导出旧应用的设置，如果停用过厂商应用则恢复厂商主屏幕，保持端口 5555 上的网络 ADB 启用，然后卸载旧应用并重新添加面板。完成设置并在 Home Assistant 中提交，预览并应用设置导入，然后通过浏览器登录 → 重新连接再次登录。指南说明了不会迁移的设置以及之后的检查。不要为此方式降级 Panel Assistant。
 
 <a id="mqtt-panel-needs-090"></a>
 

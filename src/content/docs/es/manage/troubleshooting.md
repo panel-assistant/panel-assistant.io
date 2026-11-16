@@ -6,7 +6,7 @@ sourceCommit: 03a4ef94d2f13624feee19f2a8df41935d3bc2ac
 
 Empieza por el dispositivo del panel en Home Assistant, que tiene un sensor de estado y una descarga de diagnóstico, y por la página de estado del propio panel: usa **Visitar** en la página de su dispositivo en Home Assistant. Su informe `/diag` responde a la mayoría de las preguntas siguientes sin necesidad de hacer conjeturas.
 
-Cuando necesites ver qué está haciendo el panel en ese momento, la pestaña **Registros** de esa página transmite en directo el registro de la aplicación del panel, con los tokens y las contraseñas ocultos.
+Cuando necesites ver qué está haciendo el panel en ese momento, la pestaña **Registros** de esa página transmite en directo el registro de la aplicación del panel, con los tokens y las contraseñas ocultos. Para ver en una lista las líneas de todos los paneles conectados, abre **Todos los paneles** en la barra lateral de Panel Assistant y elige **Registros**; puedes filtrar por panel, origen y nivel mínimo. Estas líneas solo aparecen después de elegir un destino distinto de Desactivado en **Ajustes** de la misma página y solo se mantienen en memoria, por lo que reiniciar Home Assistant las borra.
 
 ![La pestaña Registros de la interfaz web del panel, que transmite el registro en directo de la aplicación del panel con un cuadro de filtro y controles de Seguir y Pausar](/screenshots/ui-logs-dark.png)
 

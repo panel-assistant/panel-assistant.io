@@ -6,7 +6,7 @@ sourceCommit: 03a4ef94d2f13624feee19f2a8df41935d3bc2ac
 
 Beginne beim Gerät des Panels in Home Assistant, das einen Statussensor und einen Diagnose-Download bietet, und bei der eigenen Statusseite des Panels: Wähle dazu **Besuchen** auf seiner Geräteseite in Home Assistant. Ihr Bericht unter `/diag` beantwortet die meisten der folgenden Fragen ohne Rätselraten.
 
-Wenn du unmittelbar sehen möchtest, was das Panel gerade tut, überträgt die Registerkarte **Protokolle** auf dieser Seite das eigene Protokoll der Panel-App live. Tokens und Passwörter sind dabei unkenntlich gemacht.
+Wenn du unmittelbar sehen möchtest, was das Panel gerade tut, überträgt die Registerkarte **Protokolle** auf dieser Seite das eigene Protokoll der Panel-App live. Tokens und Passwörter sind dabei unkenntlich gemacht. Um Zeilen aller verbundenen Panels in einer Liste zu sehen, öffne **Alle Panels** in der Panel Assistant-Seitenleiste und wähle **Protokolle**; du kannst nach Panel, Quelle und Mindeststufe filtern. Diese Zeilen erscheinen erst, wenn du unter **Einstellungen** auf derselben Seite ein anderes Ziel als Aus wählst. Sie bleiben nur im Arbeitsspeicher und werden bei einem Neustart von Home Assistant gelöscht.
 
 ![Die Registerkarte „Protokolle“ der Weboberfläche des Panels überträgt das Live-Protokoll der Panel-App, mit einem Filterfeld und Steuerelementen zum Folgen und Pausieren](/screenshots/ui-logs-dark.png)
 

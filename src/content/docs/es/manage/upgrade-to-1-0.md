@@ -24,7 +24,8 @@ Después del reinicio, vuelve a abrir **Configuración**, **Reparaciones**.
 
 - **«… necesita la aplicación …»** es normal en todos los paneles que aún ejecutan una aplicación 0.9. Hasta que se actualicen, Home Assistant no puede verlos ni controlarlos y sus entidades aparecen como no disponibles. El propio panel sigue funcionando con sus ajustes y su historial.
 - **«… no puede recibir actualizaciones de la aplicación»** significa que Panel Assistant no tiene una vía para instalar en ese panel, normalmente tras un cambio realizado en el propio panel, como una actualización de firmware o un restablecimiento. Vuelve a conectar el panel a Panel Assistant por USB, como describe **Más información** de la reparación, y la actualización estará disponible. No se elimina nada: en un panel que ya tiene la aplicación, el instalador USB no instala nada y solo permite que Panel Assistant vuelva a acceder a él.
-- **«… nunca se migró desde MQTT»** o **«… todavía ejecuta la aplicación antigua»** significa que una migración no terminó en 0.9.0. Consulta [Si una migración quedó sin terminar](#si-una-migración-quedó-sin-terminar).
+- **«… nunca se migró desde MQTT»** significa que su migración desde MQTT no terminó en 0.9.0. Consulta [Si una migración quedó sin terminar](#si-una-migración-quedó-sin-terminar).
+- **«… todavía ejecuta la aplicación antigua»** significa que hay que sustituir la antigua aplicación ha-paneld. Sigue la [ruta manual](#a-panel-still-runs-the-old-app).
 
 ## 3. Actualizar un panel y después los demás
 
@@ -42,6 +43,27 @@ No vuelvas atrás instalando 0.9.0 sobre 1.0 mediante Marketplace o HACS. La act
 
 ## Si una migración quedó sin terminar
 
-Si 1.0 indica que un panel nunca se migró desde MQTT o aún ejecuta la aplicación antigua, sigue los pasos de recuperación segura de la reparación para terminar la migración con Panel Assistant 0.9.0 y después volver a 1.0. No instales 0.9.0 sobre 1.0 mediante Marketplace o HACS. Mientras ninguno de tus paneles ejecute todavía la aplicación 1.0, vuelve a 0.9.0 restaurando la copia de seguridad de Home Assistant que hiciste antes de actualizar, por el motivo anterior. Después termina la migración en 0.9.0 y vuelve a empezar esta página. Si otros paneles ya ejecutan la aplicación 1.0, o no tienes una copia de seguridad anterior a la actualización, pregunta en [Discord](https://panel-assistant.io/go/discord) o en las [incidencias](https://github.com/panel-assistant/ha-integration/issues) antes de cambiar nada.
+Si 1.0 indica que un panel nunca se migró desde MQTT, sigue los pasos de recuperación segura de la reparación para terminar la migración con Panel Assistant 0.9.0 y después volver a 1.0. No instales 0.9.0 sobre 1.0 mediante Marketplace o HACS. Mientras ninguno de tus paneles ejecute todavía la aplicación 1.0, vuelve a 0.9.0 restaurando la copia de seguridad de Home Assistant que hiciste antes de actualizar, por el motivo anterior. Después termina la migración en 0.9.0 y vuelve a empezar esta página. Si otros paneles ya ejecutan la aplicación 1.0, o no tienes una copia de seguridad anterior a la actualización, pregunta en [Discord](https://panel-assistant.io/go/discord) o en las [incidencias](https://github.com/panel-assistant/ha-integration/issues) antes de cambiar nada.
 
 Para un panel que aún utiliza MQTT, la reparación también ofrece empezar desde cero: elimina el dispositivo del panel de la integración MQTT y vuelve a añadirlo. Esto crea entidades nuevas y no conserva su historial.
+
+<a id="a-panel-still-runs-the-old-app"></a>
+
+### Un panel todavía ejecuta la aplicación antigua
+
+La migración con 0.9.0 sigue siendo la ruta compatible para los paneles que puede gestionar. Si un panel aún ejecuta la antigua aplicación ha-paneld y esa migración no puede terminar, usa la siguiente ruta manual con el Panel Assistant actual. Sustituye la aplicación y crea un dispositivo nuevo en Home Assistant; el historial empieza de nuevo y hay que revisar las automatizaciones que usaban las entidades antiguas. No requiere volver a una versión anterior de Panel Assistant.
+
+1. En la interfaz web de la aplicación antigua, abre **Instalar** y usa **Exportar ajustes**. Guarda el archivo antes de eliminar la aplicación. Por defecto, la exportación excluye contraseñas y tokens, así que conserva las credenciales que tendrás que introducir de nuevo.
+2. Si usaste la aplicación antigua para silenciar aplicaciones del fabricante, usa **Restaurar la pantalla de inicio** en su página **Instalar** antes de eliminarla. Mantén ADB por red activado en el puerto **5555** para que Panel Assistant pueda instalar la nueva aplicación.
+3. Conecta al panel con ADB y elimina solo la aplicación antigua:
+
+   ```sh
+   adb connect PANEL_IP:5555
+   adb uninstall io.github.maxlyth.hapaneld
+   ```
+
+   Sustituye `PANEL_IP` por la dirección del panel. No restablezcas el panel.
+
+4. Elimina la entrada existente de este panel de Panel Assistant en Home Assistant, si tiene una. Con el Panel Assistant actual instalado, [añade el panel](/es/install/installing-ha-paneld/) para instalar la aplicación actual. Completa la página de configuración enlazada del panel, incluidos nombre, dirección de Home Assistant, inicio de sesión y panel de control; después vuelve a Home Assistant y selecciona **Enviar**.
+5. En la interfaz web de la nueva aplicación, abre **Instalar**, elige **Importar ajustes…** y selecciona la exportación. Revisa la lista de cambios antes de aplicarlos. Los ajustes de MQTT no se transfieren. Los ajustes guardados con los valores predeterminados de la aplicación antigua pueden sustituir los nuevos valores predeterminados; revisa después el asistente de voz y el filtro de entidades en **Configurar**.
+6. Tras importar, abre **Configurar → Conexión con Home Assistant** y usa **Reconectar** junto a **Inicio de sesión del navegador** para iniciar sesión de nuevo. La importación puede borrar parte del inicio de sesión y causar **Inicio de sesión de Home Assistant rechazado** en la siguiente renovación del token. Comprueba que carga el panel de control y que el panel se conecta en Home Assistant; revisa después los ajustes y las automatizaciones.

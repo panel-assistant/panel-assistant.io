@@ -24,7 +24,8 @@ Dopo il riavvio, apri nuovamente **Impostazioni**, **Riparazioni**.
 
 - **«… richiede l'app …»** è previsto per ogni pannello che esegue ancora un'app 0.9. Finché non viene aggiornato, Home Assistant non può vedere o controllare quel pannello e le sue entità risultano non disponibili. Il pannello stesso continua a funzionare, con le proprie impostazioni e la propria cronologia.
 - **«… non può ricevere aggiornamenti dell'app»** significa che Panel Assistant non dispone di un modo per installare su quel pannello, solitamente dopo una modifica sul pannello stesso, come un aggiornamento del firmware o un ripristino. Riconnetti il pannello a Panel Assistant tramite USB, come descritto in **Scopri di più** nella Riparazione, e l'aggiornamento diventa disponibile. Non viene rimosso nulla: su un pannello che ha già l'app, il programma di installazione USB non installa nulla e consente soltanto a Panel Assistant di raggiungerlo nuovamente.
-- **«… non è mai stato migrato da MQTT»** o **«… esegue ancora la vecchia app»** significa che una migrazione non è stata completata nella versione 0.9.0. Vedi [Se una migrazione non è stata completata](#se-una-migrazione-non-è-stata-completata).
+- **«… non è mai stato migrato da MQTT»** significa che la migrazione MQTT non è stata completata nella versione 0.9.0. Vedi [Se una migrazione non è stata completata](#se-una-migrazione-non-è-stata-completata).
+- **«… esegue ancora la vecchia app»** significa che la vecchia app ha-paneld deve essere sostituita. Segui la [procedura manuale](#a-panel-still-runs-the-old-app).
 
 ## 3. Aggiorna un pannello, poi gli altri
 
@@ -42,6 +43,27 @@ Non tornare indietro installando la 0.9.0 sulla 1.0 tramite Marketplace o HACS. 
 
 ## Se una migrazione non è stata completata
 
-Se la versione 1.0 ti dice che un pannello non è mai stato migrato da MQTT o esegue ancora la vecchia app, segui i passaggi di ripristino sicuro della Riparazione per completare la migrazione con Panel Assistant 0.9.0 e poi tornare alla 1.0. Non installare la 0.9.0 sulla 1.0 tramite Marketplace o HACS. Finché nessuno dei pannelli esegue ancora l'app 1.0, torna alla 0.9.0 ripristinando il backup di Home Assistant creato prima dell'aggiornamento, per il motivo indicato sopra. Poi completa la migrazione nella 0.9.0 e ricomincia questa pagina. Se altri pannelli eseguono già l'app 1.0, o non hai un backup precedente all'aggiornamento, chiedi su [Discord](https://panel-assistant.io/go/discord) o nelle [segnalazioni](https://github.com/panel-assistant/ha-integration/issues) prima di cambiare qualsiasi cosa.
+Se la versione 1.0 ti dice che un pannello non è mai stato migrato da MQTT, segui i passaggi di ripristino sicuro della Riparazione per completare la migrazione con Panel Assistant 0.9.0 e poi tornare alla 1.0. Non installare la 0.9.0 sulla 1.0 tramite Marketplace o HACS. Finché nessuno dei pannelli esegue ancora l'app 1.0, torna alla 0.9.0 ripristinando il backup di Home Assistant creato prima dell'aggiornamento, per il motivo indicato sopra. Poi completa la migrazione nella 0.9.0 e ricomincia questa pagina. Se altri pannelli eseguono già l'app 1.0, o non hai un backup precedente all'aggiornamento, chiedi su [Discord](https://panel-assistant.io/go/discord) o nelle [segnalazioni](https://github.com/panel-assistant/ha-integration/issues) prima di cambiare qualsiasi cosa.
 
 Per un pannello ancora su MQTT, la Riparazione offre anche di ricominciare da zero: elimina il dispositivo del pannello nell'integrazione MQTT e aggiungi nuovamente il pannello. Questo crea nuove entità e non conserva alcuna cronologia.
+
+<a id="a-panel-still-runs-the-old-app"></a>
+
+### Un pannello esegue ancora la vecchia app
+
+La migrazione con 0.9.0 resta la procedura supportata per i pannelli che può gestire. Se un pannello esegue ancora la vecchia app ha-paneld e quella migrazione non può essere completata, usa la procedura manuale seguente con il Panel Assistant attuale. Sostituisce l’app e crea un nuovo dispositivo Home Assistant; la cronologia ricomincia e le automazioni che usano le vecchie entità devono essere controllate. Non richiede di tornare a una versione precedente di Panel Assistant.
+
+1. Nell’interfaccia web della vecchia app, apri **Installa** e usa **Esporta impostazioni**. Conserva il file prima di rimuovere l’app. Per impostazione predefinita l’esportazione esclude password e token, quindi conserva le credenziali che dovrai inserire nuovamente.
+2. Se hai usato la vecchia app per disattivare le app del produttore, usa **Ripristina la schermata iniziale** nella sua pagina **Installa** prima di rimuoverla. Mantieni ADB di rete attivo sulla porta **5555**, così Panel Assistant può installare la nuova app.
+3. Connettiti al pannello con ADB e rimuovi soltanto la vecchia app:
+
+   ```sh
+   adb connect PANEL_IP:5555
+   adb uninstall io.github.maxlyth.hapaneld
+   ```
+
+   Sostituisci `PANEL_IP` con l’indirizzo del pannello. Non ripristinare il pannello.
+
+4. Rimuovi la voce esistente di questo pannello da Panel Assistant in Home Assistant, se presente. Con il Panel Assistant attuale installato, [aggiungi il pannello](/it/install/installing-ha-paneld/) per installare l’app attuale. Completa la pagina di configurazione del pannello collegata, inclusi nome, indirizzo Home Assistant, accesso e plancia, poi torna in Home Assistant e seleziona **Invia**.
+5. Nell’interfaccia web della nuova app, apri **Installa**, scegli **Importa impostazioni…** e seleziona l’esportazione. Controlla l’elenco delle modifiche prima di applicarle. Le impostazioni MQTT non vengono trasferite. Le impostazioni salvate con i valori predefiniti della vecchia app possono sostituire i nuovi valori predefiniti: controlla quindi l’assistente vocale e il filtro delle entità in **Configura**.
+6. Dopo l’importazione, apri **Configura → Connessione Home Assistant** e usa **Riconnetti** accanto ad **Accesso del browser** per accedere nuovamente. L’importazione può cancellare parte dell’accesso e causare **Accesso a Home Assistant rifiutato** al successivo rinnovo del token. Verifica che la plancia si carichi e che il pannello si connetta in Home Assistant, poi controlla impostazioni e automazioni.
