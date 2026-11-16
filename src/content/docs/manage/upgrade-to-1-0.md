@@ -42,7 +42,9 @@ Do not go back by installing 0.9.0 over 1.0 through Marketplace or HACS. The 1.0
 
 ## If a move was not finished
 
-If 1.0 tells you a panel was never moved off MQTT, follow the Repair’s safe recovery steps to finish the move with Panel Assistant 0.9.0, then return to 1.0. Do not install 0.9.0 over 1.0 through Marketplace or HACS. While none of your panels runs the 1.0 app yet, return to 0.9.0 by restoring the Home Assistant backup you made before updating, for the reason above. Then finish the move in 0.9.0 and start this page again. If other panels already run the 1.0 app, or you have no backup from before the update, ask on [Discord](https://panel-assistant.io/go/discord) or in the [issues](https://github.com/panel-assistant/ha-integration/issues) before you change anything.
+If 1.0 tells you a panel was never moved off MQTT, follow the Repair’s safe recovery steps to finish the move with Panel Assistant 0.9.0, then return to 1.0. Do not install 0.9.0 over 1.0 through Marketplace or HACS.
+
+While none of your panels runs the 1.0 app yet, return to 0.9.0 by restoring the Home Assistant backup you made before updating, for the reason above. Then finish the move in 0.9.0 and start this page again. If other panels already run the 1.0 app, or you have no backup from before the update, ask on [Discord](https://panel-assistant.io/go/discord) or in the [issues](https://github.com/panel-assistant/ha-integration/issues) before you change anything.
 
 For a panel still on MQTT, the Repair also offers starting fresh: delete the panel's device under the MQTT integration and add the panel again. That creates new entities and keeps none of its history.
 
