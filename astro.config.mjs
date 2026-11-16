@@ -157,6 +157,7 @@ export default defineConfig({
                 { label: 'Adaptive brightness', slug: 'manage/adaptive-brightness' },
                 { label: 'Adaptive proximity', slug: 'manage/adaptive-proximity' },
                 { ...label('sidebar.display_sizing'), slug: 'manage/display-sizing' },
+                { label: 'Notifications', slug: 'manage/notifications' },
                 { label: 'Text-to-speech', slug: 'manage/text-to-speech' },
                 { label: 'Voice assistant', slug: 'manage/voice-assistant' },
                 { label: 'Custom wake words', slug: 'manage/custom-wake-words' },
