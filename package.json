@@ -37,21 +37,21 @@
     ]
   },
   "dependencies": {
-    "@astrojs/markdown-satteri": "0.4.6",
-    "@astrojs/starlight": "^0.42.8",
+    "@astrojs/markdown-satteri": "0.4.7",
+    "@astrojs/starlight": "^0.42.10",
     "@fontsource-variable/manrope": "^5.3.0",
     "@fontsource-variable/source-sans-3": "^5.3.1",
-    "astro": "^7.4.5",
+    "astro": "^7.4.7",
     "sharp": "^0.35.5",
     "yaml": "^2.9.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
-    "@sveltia/cms": "0.256.1",
-    "playwright-core": "1.64.1",
+    "@sveltia/cms": "0.262.1",
+    "playwright-core": "1.65.0",
     "prettier": "^3.9.10",
     "prettier-plugin-astro": "^1.1.2",
-    "satteri": "^0.11.6",
+    "satteri": "^0.11.7",
     "starlight-links-validator": "^0.27.0",
     "typescript": "^5.9.3"
   }
