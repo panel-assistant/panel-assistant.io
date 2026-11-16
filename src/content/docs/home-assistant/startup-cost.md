@@ -25,7 +25,7 @@ On a large production Home Assistant, with about 200 integrations and ten panels
 - **A panel that does not answer cannot hold the start.** Setup waits at most 2.5 s for a panel's first answer, about twice the slowest first answer measured from a Home Assistant host to a real panel. In 1.0, a panel that accepted the connection and never answered held Home Assistant's start for 11.7 s. The read carries on in the background, and the panel's entities update the moment it answers.
 - **A connected panel is never shown as unavailable.** A panel that opens its connection to Home Assistant while its first read is still waiting shows as connected straight away.
 - **Release checks wait for nobody.** Looking up new releases runs in the background, not during setup.
-- **A test keeps it that way.** Panel Assistant's test suite sets up 30 panels and fails if setup takes more than 2.5 s with panels that answer, or more than the bounded wait plus that budget with panels that never answer.
+- **A test keeps it that way.** Panel Assistant's test suite sets up 30 panels and fails if a panel that never answers holds setup, or if setup reaches Home Assistant's own 10 second slow-setup warning, with panels that answer or with panels that never answer.
 
 Each time Home Assistant starts, Panel Assistant writes one line to the log at the info level with its own setup time, the number of panels, the slowest panel and how many had not answered within the wait. Home Assistant hides info lines by default; to see it, add this to `configuration.yaml`:
 
