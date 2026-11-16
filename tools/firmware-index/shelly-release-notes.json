@@ -187,5 +187,12 @@
     "review_required": false,
     "wayback_ts": "20261023225221",
     "raw_wayback_ts": "20261023225146"
+  },
+  "2.8.5": {
+    "commit": "016c5cbb52e6d786e0972553d198f18ed162cb85",
+    "summary": "Changes to security, dashboard browsing, settings recovery and firmware updates.",
+    "review_required": false,
+    "wayback_ts": "20261111173504",
+    "raw_wayback_ts": "20261111173502"
   }
 }
