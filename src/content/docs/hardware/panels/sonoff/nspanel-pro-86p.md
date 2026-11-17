@@ -29,7 +29,7 @@ The **86P** is the square variant of the [Sonoff NSPanel Pro](/hardware/panels/s
 
 ## Also sold as
 
-NSPanel Pro 86, NSPanel Pro 86P, NSPanel120P (86P listings occasionally reuse this string), NSPanel Pro Gen1, px30_evb, SN-RKPX30-NSP-01, nspanel-pro. Not to be confused with the NSPanel Pro Gen2 or the Tuya S6E and T6E boards, which are separate hardware.
+NSPanel Pro 86, NSPanel Pro 86P, NSPanel120P (86P listings occasionally reuse this string), NSPanel Pro Gen1, px30_evb, SN-RKPX30-NSP-01, nspanel-pro. The [NSPanel Pro Gen2 86](/hardware/panels/sonoff/nspanel-pro-gen2-86/) has its own page; not to be confused with the Tuya S6E and T6E boards, which are separate hardware.
 
 |          |                                                                                                                                                                                                                                                                                             |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
