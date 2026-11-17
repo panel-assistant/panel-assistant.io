@@ -44,6 +44,14 @@ Once the voice assistant is on, `assist_satellite.announce` speaks a message on 
 
 If two satellites on the same Home Assistant instance hear the same wake word phrase within two seconds of each other, Home Assistant suppresses the duplicate so only one of them answers. This applies across every satellite on that Home Assistant instance, not just panels in the same Home Assistant area, so it also covers a panel and any other satellite you already have. If you want to choose which device answers in a shared room, give them different wake words.
 
+## The dashboard's own Assist button
+
+From app 1.1.0, Home Assistant's own Assist button, and any other dashboard card that records through the browser, works on a panel with a microphone with no setup. The panel lets Home Assistant's own pages use the microphone; a site a dashboard links to or embeds cannot. While a page records, the panel's wake word pauses, and it listens again as soon as the page stops, for example when you close the Assist dialog.
+
+Home Assistant only offers its microphone on a secure address. If the panel reaches Home Assistant over `https://` (Home Assistant Cloud or your own certificate), nothing more is needed. If it uses a plain `http://` address, turn on **Secure local address** under Configure → Dashboard: the panel then shows Home Assistant at its own local address and passes the traffic through unchanged, which the browser treats as secure. It is off by default while it is new.
+
+To stop dashboard pages recording, turn off **Dashboard microphone** under Configure → Dashboard. The panel's own voice assistant is a separate setting.
+
 ## Settings
 
 The Voice card has a few tuning options beyond the wake word list:
