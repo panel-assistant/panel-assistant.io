@@ -224,3 +224,93 @@ export function confidenceChecklist(data) {
   }
   return list;
 }
+
+// A row of the supported-panels page holds three cards on a laptop, so a brand needs three names
+// to fill a shelf of its own. Smaller brands share the last shelf.
+const SHELF_MIN = 3;
+const runsPanelAssistant = (data) =>
+  !data.panelIndex && !(parseFloat(String(data.android ?? '99')) < 8);
+const anchorFor = (brand) =>
+  `brand-${brand
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')}`;
+
+/**
+ * The supported-panels page: every name a panel that runs Panel Assistant is sold under, as one
+ * card each, on a shelf per brand. Brands come in order of confidence (each brand's best panel,
+ * then the confidence across its range), so the page opens on its strongest evidence. A brand with
+ * fewer than three names has no shelf of its own: its cards go on the last shelf, `brand: null`,
+ * still side by side. `index` is every brand, alphabetical, with the anchor that reaches it.
+ */
+export function supportedPanels(pages) {
+  const brands = catalogueGroups(pages)
+    .map(({ brand, entries }) => ({
+      brand,
+      cards: entries
+        .filter((e) => runsPanelAssistant(e.data))
+        // Another model the same page covers is named on that page's card, under the same picture.
+        .filter((e) => !e.anchor || maker(e.data.vendor) !== brand)
+        .map((e) => {
+          const own = maker(e.data.vendor);
+          const strip = (label, from) =>
+            label.startsWith(`${from} `) ? label.slice(from.length + 1) : label;
+          const name = strip(e.label, brand);
+          const android = parseFloat(String(e.data.android));
+          const alias = own !== brand;
+          const also = alias
+            ? []
+            : (e.data.sold_as ?? []).filter((n) => n.brand === brand).map((n) => n.name);
+          const covers = alias ? [] : (e.data.covers ?? []).map((n) => n.name);
+          return {
+            brand,
+            name,
+            slug: e.slug,
+            anchor: e.anchor,
+            data: e.data,
+            score: confidence(e.data).score,
+            facts: [
+              e.data.screen ? String(e.data.screen).split(',')[0] : '',
+              Number.isFinite(android) ? `Android ${e.data.android}` : '',
+            ].filter(Boolean),
+            also,
+            covers,
+            // The maker's own name for hardware listed here under another brand.
+            sameAs: alias
+              ? `${own} ${strip(e.data.sidebar?.label ?? e.data.title, own)}`
+              : undefined,
+            search: [brand, name, e.data.model, ...also, ...covers].filter(Boolean).join(' '),
+          };
+        })
+        // Equal confidence keeps the order the brand's menu lists its panels in.
+        .sort((a, b) => b.score - a.score),
+    }))
+    .filter((b) => b.cards.length > 0);
+  const total = (cards) => cards.reduce((n, c) => n + c.score, 0);
+  brands.sort(
+    (a, b) =>
+      b.cards[0].score - a.cards[0].score ||
+      total(b.cards) - total(a.cards) ||
+      a.brand.localeCompare(b.brand),
+  );
+  const own = brands.filter((b) => b.cards.length >= SHELF_MIN);
+  const shared = brands.filter((b) => b.cards.length < SHELF_MIN);
+  const shelves = own.map((b) => ({ brand: b.brand, id: anchorFor(b.brand), cards: b.cards }));
+  if (shared.length > 0) {
+    shelves.push({
+      brand: null,
+      id: 'more-brands',
+      // A brand's first card carries its anchor, since it has no heading here.
+      cards: shared.flatMap((b) =>
+        b.cards.map((card, i) => (i === 0 ? { ...card, id: anchorFor(b.brand) } : card)),
+      ),
+    });
+  }
+  return {
+    names: brands.reduce((n, b) => n + b.cards.reduce((m, c) => m + 1 + c.covers.length, 0), 0),
+    shelves,
+    index: brands
+      .map((b) => ({ brand: b.brand, id: anchorFor(b.brand) }))
+      .sort((a, b) => a.brand.localeCompare(b.brand)),
+  };
+}

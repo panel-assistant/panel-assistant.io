@@ -6,6 +6,7 @@ import {
   renderHero,
   renderGallery,
   renderThumbnail,
+  renderTile,
 } from './gallery.mjs';
 
 const front = {
@@ -117,4 +118,24 @@ test('only exact model entry IDs produce canonical identity across locales', () 
     'guides/hardware/panels/electron/wf1589t',
   ])
     assert.equal(panelIdentity(page), null);
+});
+
+test('a list picture is the chosen hero, named by the caller, and nothing when there is no image', () => {
+  const model = { images: [{ ...front, width: 800, height: 600 }, rear], heroImageId: 'rear' };
+  const hero = renderTile(model, 'Vendor Panel');
+  assert.match(hero, /src="https:\/\/assets.example\/rear-small.webp"/);
+  assert.match(hero, /alt="Vendor Panel"/);
+  assert.doesNotMatch(hero, /alt="Rear"|width=/);
+  // No hero chosen: the first image, with its proportions so the page does not shift.
+  const first = renderTile({ images: model.images }, 'Vendor Panel');
+  assert.match(
+    first,
+    /front-small.webp" alt="Vendor Panel" width="800" height="600" loading="lazy"/,
+  );
+  assert.equal(renderTile({ images: [] }, 'Vendor Panel'), '');
+  assert.equal(renderTile({ images: [{ ...front, thumb: 'javascript:alert(1)' }] }, 'x'), '');
+  assert.match(
+    renderTile({ images: [{ ...front, width: '1" onload="x', height: 2 }] }, '"><script>'),
+    /^<img src="[^"]+" alt="&quot;&gt;&lt;script&gt;" loading="lazy" decoding="async">$/,
+  );
 });

@@ -1,7 +1,14 @@
-import { renderHero, renderGallery, renderThumbnail } from '../src/product-images/gallery.mjs';
+import {
+  renderHero,
+  renderGallery,
+  renderThumbnail,
+  renderTile,
+} from '../src/product-images/gallery.mjs';
 import legacyImages from '../src/product-images/legacy-images.json' with { type: 'json' };
 
-const page = /^\/(?:de\/|es\/|fr\/|it\/|nl\/|pl\/|uk\/|zh-hans\/)?hardware(?:\/?$|\/panels\/)/;
+// The hardware overview, every panel page, and the list of panels to choose from.
+const page =
+  /^\/(?:de\/|es\/|fr\/|it\/|nl\/|pl\/|uk\/|zh-hans\/)?(?:hardware(?:\/?$|\/panels\/)|install\/supported-panels\/?$)/;
 const asset =
   /^https:\/\/assets\.panel-assistant\.io\/published-images\/[a-f0-9]{64}\.(?:webp|png)$/;
 
@@ -118,7 +125,9 @@ export async function handlePanelImages(request, env) {
               ? renderGallery(model)
               : slot === 'thumbnail'
                 ? renderThumbnail(model, element.getAttribute('data-panel-href'))
-                : null;
+                : slot === 'tile'
+                  ? renderTile(model, attributeText(element.getAttribute('data-panel-alt') ?? ''))
+                  : null;
         if (html !== null) element.setInnerContent(html, { html: true });
       },
     })

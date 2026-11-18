@@ -102,3 +102,18 @@ export function renderThumbnail(model, href) {
     return '';
   return `<a href="${escape(href)}" tabindex="-1" aria-hidden="true"><img src="${escape(photo.thumb)}" alt="" loading="lazy" width="48" height="48"></a>`;
 }
+
+/**
+ * One picture for a model in a list of panels: the chosen hero, else the first image. The caller
+ * names the panel in `alt`, because a photo's own caption describes the shot, not the product.
+ * Empty when the model has no image, so the slot's own placeholder shows.
+ */
+export function renderTile(model, alt) {
+  const photos = images(model);
+  const photo = photos[heroIndex(model, photos)] || photos[0];
+  if (!photo) return '';
+  const size = (value) => (Number.isInteger(value) && value > 0 ? value : 0);
+  const [width, height] = [size(photo.width), size(photo.height)];
+  const box = width && height ? ` width="${width}" height="${height}"` : '';
+  return `<img src="${escape(photo.thumb)}" alt="${escape(alt)}"${box} loading="lazy" decoding="async">`;
+}
