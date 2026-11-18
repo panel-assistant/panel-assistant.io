@@ -5,6 +5,11 @@ vendor: Lenovo
 model: ThinkSmart View
 android: '8.1'
 support: Community-tested
+sold_as:
+  - brand: Lenovo
+    name: 'ThinkSmart View for Zoom'
+  - brand: Lenovo
+    name: 'ThinkSmart View for Microsoft Teams'
 evidence: []
 ownerReports:
   - schemaVersion: 1
@@ -75,4 +80,4 @@ ownerReports:
       - Do not set a PIN, pattern or password on the panel; the screen-off route dims a secured panel instead of sleeping it.
 ---
 
-Basic dashboard compatibility is reported by one owner on a ThinkSmart View reflashed with LineageOS 8.1. Screen off and wake need the import-only [community profile](/reference/profiles/community/lenovo-thinksmart-view/); its page has the activation steps and the full evidence. Individual controls and sensors have separate results in the owner reports; this is not a bench inspection or a claim about Lenovo's own firmware.
+The ThinkSmart View was sold in Microsoft Teams and Zoom editions; they are the same hardware with different meeting software, so this page covers both. Basic dashboard compatibility is reported by one owner on a ThinkSmart View reflashed with LineageOS 8.1. Screen off and wake need the import-only [community profile](/reference/profiles/community/lenovo-thinksmart-view/); its page has the activation steps and the full evidence. Individual controls and sensors have separate results in the owner reports; this is not a bench inspection or a claim about Lenovo's own firmware.

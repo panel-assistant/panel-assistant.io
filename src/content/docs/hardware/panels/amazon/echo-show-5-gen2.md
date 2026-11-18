@@ -5,6 +5,9 @@ vendor: Amazon
 model: Echo Show 5 (2nd generation)
 android: '11'
 support: Community-tested
+sold_as:
+  - brand: Amazon
+    name: 'Echo Show 5 Kids (2nd generation)'
 evidence: []
 ownerReports:
   - schemaVersion: 1
@@ -72,4 +75,4 @@ ownerReports:
       - Covers only the 2021 second generation (codename cronos). It says nothing about the first or third generation Echo Show 5 or any Echo Show 8.
 ---
 
-Basic dashboard compatibility is reported by one owner on a 2021 Echo Show 5 reflashed with LineageOS 18.1. It does not apply to other Echo Show models or to Amazon's own Fire OS. The import-only [community profile](/reference/profiles/community/echo-show-5-gen2/) page has the full evidence. Individual controls and sensors have separate results in the owner reports; this is not a bench inspection.
+The Echo Show 5 Kids (2nd generation) is the same 2021 device sold with a children's case and subscription, so this page covers it too. Basic dashboard compatibility is reported by one owner on a 2021 Echo Show 5 reflashed with LineageOS 18.1. It does not apply to other Echo Show models or to Amazon's own Fire OS. The import-only [community profile](/reference/profiles/community/echo-show-5-gen2/) page has the full evidence. Individual controls and sensors have separate results in the owner reports; this is not a bench inspection.
