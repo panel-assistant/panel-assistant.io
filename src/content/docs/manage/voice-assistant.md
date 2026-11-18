@@ -48,7 +48,7 @@ If two satellites on the same Home Assistant instance hear the same wake word ph
 
 From app 1.1.0, Home Assistant's own Assist button, and any other dashboard card that records through the browser, works on a panel with a microphone with no setup. The panel lets Home Assistant's own pages use the microphone; a site a dashboard links to or embeds cannot. While a page records, the panel's wake word pauses, and it listens again as soon as the page stops, for example when you close the Assist dialog.
 
-Home Assistant only offers its microphone on a secure address. If the panel reaches Home Assistant over `https://` (Home Assistant Cloud or your own certificate), nothing more is needed. If it uses a plain `http://` address, turn on **Secure local address** under Configure → Dashboard: the panel then shows Home Assistant at its own local address and passes the traffic through unchanged, which the browser treats as secure. It is off by default while it is new.
+Home Assistant only offers its microphone on a secure address. If the panel reaches Home Assistant over `https://` (Home Assistant Cloud or your own certificate), nothing more is needed. On a plain `http://` address the browser keeps the microphone from dashboard pages.
 
 To stop dashboard pages recording, turn off **Dashboard microphone** under Configure → Dashboard. The panel's own voice assistant is a separate setting.
 
