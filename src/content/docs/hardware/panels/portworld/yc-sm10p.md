@@ -3,7 +3,13 @@ title: Portworld YC-SM10P
 description: Owner-reported dashboard compatibility and scoped test evidence for the Portworld YC-SM10P.
 vendor: Portworld
 model: YC-SM10P
+soc: Rockchip RK3566; RK3576 on the 2026 Android 14 version
 android: '11'
+screen: 10.1 in, 1280 × 800
+sold_as:
+  - brand: Sunworld
+    name: 'YC-SM10P'
+    note: 'Listed under the Sunworld name by some sellers'
 support: Community-tested
 evidence: []
 ownerReports:
@@ -80,3 +86,7 @@ ownerReports:
 ---
 
 Basic dashboard compatibility is reported by an owner on Generic. Individual controls and sensors have separate results below; this is not a bench inspection or a claim about every firmware version.
+
+## Published specifications
+
+Portworld's own listings give a 10.1 inch IPS screen at 1280 × 800, with RJ45, RS485 and USB Type-C, and power over Ethernet. Two versions are on sale under the same model name: the original on a Rockchip RK3566 with Android 11, which is the version the owner reports above come from, and a 2026 version on an RK3576 with Android 14 and 4 GB of RAM. Some sellers list the panel as the Sunworld YC-SM10P. These are sellers' statements read in November 2026, not measurements: [RK3566 listing](https://www.aliexpress.com/item/1005011952795896.html), [RK3576 listing](https://www.aliexpress.com/item/1005012371267912.html).
