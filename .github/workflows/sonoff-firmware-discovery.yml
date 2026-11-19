@@ -55,7 +55,7 @@ jobs:
   report:
     if: github.event_name == 'workflow_dispatch' && inputs.mode == 'report'
     runs-on: ubuntu-24.04
-    timeout-minutes: 45 # the same CDN search as discover
+    timeout-minutes: 10 # the same CDN search as discover
     permissions:
       contents: read
 
@@ -74,7 +74,10 @@ jobs:
   discover:
     if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'update')
     runs-on: ubuntu-24.04
-    timeout-minutes: 45 # the CDN search makes about 8,200 probes, 33 s locally (November 2026); the log prints its time
+    # The CDN search makes about 8,900 probes. With a new connection per probe it
+    # took 200 to 280 s here (November 2026); kept-alive connections roughly halve
+    # that. Ten minutes also covers a run of retry waits. The log prints its time.
+    timeout-minutes: 10
     permissions:
       contents: write # push the update branch
       pull-requests: write # open/update the index PR (main requires PR review)
