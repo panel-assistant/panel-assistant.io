@@ -10,12 +10,6 @@ support: 完整支持
 root: 带有 su；LED、温湿度和第五个按键需辅助程序
 webview: Chrome 83；通过 root 替换为 LineageOS 150
 released: '2023-08（估计）'
-photos:
-  - src: 'asset:hardware-tuya-tpa10-front.jpg'
-    alt: Tuya TPA10 正面及侧边按键条
-  - src: 'asset:hardware-tuya-tpa10-front-flat.jpg'
-    alt: Tuya TPA10 正面平视图，展示侧边按键条和边框边缘
-photoCredit: '照片：Tuya'
 sold_as:
   - brand: Tuya
     name: 'TPA10-M2'

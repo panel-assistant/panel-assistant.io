@@ -11,14 +11,6 @@ root: Not established on this model
 webview_ships_with: 'Not established'
 webview_can_reach: 'Not established — no verified provider update route for this model'
 released: '2026-07 (est.)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x1i-front.jpg'
-    alt: Shelly Wall Display X1i, front
-  - src: 'asset:hardware-shelly-wall-display-x1i-silver.jpg'
-    alt: Shelly Wall Display X1i, silver finish, front
-  - src: 'asset:hardware-shelly-wall-display-x1i-rear-label.jpg'
-    alt: Shelly Wall Display X1i, rear, showing the model label SAWD-6A1XX10EU0
-photoCredit: 'Photo: Shelly'
 evidence: [firmware, documented, platform]
 sidebar:
   label: Wall Display X1i

@@ -3,36 +3,15 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { handlePanelImages, hasPanelImages } from './panel-images.js';
 
-test('raw HTMLRewriter attributes preserve localized text and current credits without decoding literal entities twice', async () => {
+test('each slot is filled from the published image set, and a list picture is named by its page', async () => {
   const originalRewriter = globalThis.HTMLRewriter;
-  const rawTexts = JSON.stringify([
-    {
-      id: 'front',
-      alt: `H&T <Panel> "quoted" 'apostrophe' &quot; © 😀`,
-      credit: 'Foto: H&T',
-      canonicalCredit: 'Photo: H&T',
-    },
-    {
-      id: 'rear',
-      alt: 'Rückseite',
-      credit: 'Veralteter Anbieter',
-      canonicalCredit: 'Old provider',
-    },
-  ])
-    .replace(
-      /[&"'<>]/g,
-      (char) => ({ '&': '&amp;', '"': '&quot;', "'": '&#39;', '<': '&lt;', '>': '&gt;' })[char],
-    )
-    .replace('&#39;apostrophe&#39;', '&#39;apostrophe&#x27;')
-    .replace('©', '&#169;')
-    .replace('😀', '&#x1F600;');
   const url = `https://assets.panel-assistant.io/published-images/${'a'.repeat(64)}.png`;
   const model = {
     id: 'vendor/panel',
-    heroImageId: 'front',
+    heroImageId: 'rear',
     images: [
-      { id: 'front', alt: 'English front', credit: 'Photo: H&T', thumb: url, large: url },
-      { id: 'rear', alt: 'English rear', credit: 'Corrected provider', thumb: url, large: url },
+      { id: 'front', alt: 'Front & "side"', credit: 'Photo: H&T', thumb: url, large: url },
+      { id: 'rear', alt: 'Rear', credit: 'Corrected provider', thumb: url, large: url },
     ],
   };
   const replacements = new Map();
@@ -42,18 +21,25 @@ test('raw HTMLRewriter attributes preserve localized text and current credits wi
       return this;
     }
     transform(response) {
-      for (const slot of ['hero', 'gallery', 'thumbnail', 'tile']) {
+      for (const [slot, id] of [
+        ['hero', model.id],
+        ['gallery', model.id],
+        ['thumbnail', model.id],
+        ['tile', model.id],
+        ['tile', 'vendor/unpublished'],
+        ['other', model.id],
+      ]) {
+        // HTMLRewriter hands over the attribute as written in the page, entities included.
         const attributes = {
           'data-panel-images': slot,
-          'data-panel-model': model.id,
+          'data-panel-model': id,
           'data-panel-locale': 'de',
-          'data-panel-texts': rawTexts,
           'data-panel-href': '/hardware/panels/vendor/panel/',
-          'data-panel-alt': 'H&amp;T &quot;Panel&quot; &amp;lt;',
+          'data-panel-alt': 'H&amp;T &quot;Panel&quot; &amp;lt; &#169; &#x1F600;',
         };
         this.handler.element({
           getAttribute: (name) => attributes[name] ?? null,
-          setInnerContent: (html) => replacements.set(slot, html),
+          setInnerContent: (html) => replacements.set(`${slot} ${id}`, html),
         });
       }
       return response;
@@ -65,7 +51,7 @@ test('raw HTMLRewriter attributes preserve localized text and current credits wi
       {
         ASSETS: {
           fetch: async () =>
-            new Response('<main>Static slots</main>', {
+            new Response('<main>Empty slots</main>', {
               headers: { 'content-type': 'text/html' },
             }),
         },
@@ -77,22 +63,27 @@ test('raw HTMLRewriter attributes preserve localized text and current credits wi
       },
     );
     assert.equal(response.headers.get('x-panel-images-revision'), 'r1');
-    const escapedAlt =
-      'H&amp;T &lt;Panel&gt; &quot;quoted&quot; &#39;apostrophe&#39; &amp;quot; © 😀';
-    assert.ok(replacements.get('hero').includes(`alt="${escapedAlt}"`));
-    const gallery = replacements.get('gallery');
-    assert.ok(gallery.includes(`alt="${escapedAlt}"`));
-    assert.ok(gallery.includes('Foto: H&amp;T'));
-    assert.ok(gallery.includes('Rückseite'));
-    assert.ok(gallery.includes('Corrected provider'));
-    assert.ok(!gallery.includes('Veralteter Anbieter'));
-    assert.ok(!gallery.includes('English front'));
-    assert.ok(replacements.get('thumbnail').includes(url));
-    // A list picture is named by the page, not by the photo's caption in any language.
-    assert.equal(
-      replacements.get('tile'),
-      `<img src="${url}" alt="H&amp;T &quot;Panel&quot; &amp;lt;" loading="lazy" decoding="async">`,
+    assert.match(
+      replacements.get('hero vendor/panel'),
+      /data-open-photo="1"[^>]*>\s*<img[^>]*alt="Rear"/,
     );
+    const gallery = replacements.get('gallery vendor/panel');
+    assert.ok(gallery.includes('alt="Front &amp; &quot;side&quot;"'));
+    assert.ok(gallery.includes('Photo: H&amp;T'));
+    assert.ok(gallery.includes('Corrected provider'));
+    assert.ok(replacements.get('thumbnail vendor/panel').includes(url));
+    // A list picture is named by the page, decoded once: a literal "&lt;" stays text.
+    assert.equal(
+      replacements.get('tile vendor/panel'),
+      `<img src="${url}" alt="H&amp;T &quot;Panel&quot; &amp;lt; © 😀" loading="lazy" decoding="async">`,
+    );
+    // A model with nothing published, and a slot this Worker does not know, are left as built.
+    assert.deepEqual([...replacements.keys()].sort(), [
+      'gallery vendor/panel',
+      'hero vendor/panel',
+      'thumbnail vendor/panel',
+      'tile vendor/panel',
+    ]);
   } finally {
     if (originalRewriter === undefined) delete globalThis.HTMLRewriter;
     else globalThis.HTMLRewriter = originalRewriter;

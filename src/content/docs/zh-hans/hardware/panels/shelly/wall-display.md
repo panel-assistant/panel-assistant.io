@@ -11,12 +11,6 @@ support: 研究阶段
 root: 尚未确认；基础构建为 userdebug，未经实机确认
 webview: '通过官方 ZIP 安装 com.google.android.webview 119.0.6045.194'
 released: '2023-09（估计）'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-front.jpg'
-    alt: 初代 Shelly Wall Display 及其 H&T 传感器配件
-  - src: 'asset:hardware-shelly-wall-display-rear-label.jpg'
-    alt: Shelly Wall Display 背面，显示型号标签和墙盒
-photoCredit: '照片：Shelly'
 evidence: [firmware, documented]
 sidebar:
   label: Wall Display（初代）

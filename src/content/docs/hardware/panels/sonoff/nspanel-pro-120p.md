@@ -11,10 +11,6 @@ root: userdebug, no adb password; su for backlight-off
 webview_ships_with: 'Chromium 129.0.6668.70 on firmware 4.0.12; other firmware not established'
 webview_can_reach: 'Chromium 138 — verified sideload on open userdebug firmware; Android 8/9 major ceiling'
 released: '2024-08 (est.)'
-photos:
-  - src: 'asset:hardware-sonoff-nspanel-pro-120p-front.jpg'
-    alt: Sonoff NSPanel Pro 120P, white and black finishes, front, wall-mounted
-photoCredit: 'Photo: Sonoff'
 evidence: [bench, open, firmware, documented, owners]
 sidebar:
   label: NSPanel Pro 120P

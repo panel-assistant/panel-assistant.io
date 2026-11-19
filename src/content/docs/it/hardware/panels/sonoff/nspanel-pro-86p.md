@@ -10,14 +10,6 @@ support: Completo
 root: userdebug, nessuna password adb; su per spegnere la retroilluminazione
 webview: Chromium 107 su 3.5.1; installazione manuale di LineageOS 138
 released: '2022-09 (stima)'
-photos:
-  - src: 'asset:hardware-sonoff-nspanel-pro-front.jpg'
-    alt: Sonoff NSPanel Pro 86P, vista frontale, montato a parete
-  - src: 'asset:hardware-sonoff-nspanel-pro-86p-angle-black-trim.jpg'
-    alt: Sonoff NSPanel Pro 86P, finitura nera, vista angolata che mostra la profondità di montaggio
-  - src: 'asset:hardware-sonoff-nspanel-pro-86p-angle-white-trim.jpg'
-    alt: Sonoff NSPanel Pro 86P, finitura bianca, vista angolata che mostra la profondità di montaggio
-photoCredit: 'Foto: Sonoff'
 evidence: [bench, open, firmware, documented, owners]
 sidebar:
   label: NSPanel Pro 86P

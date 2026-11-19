@@ -11,14 +11,6 @@ root: Not established on this model
 webview_ships_with: 'Google WebView 131.0.6778.105 on reporter firmware'
 webview_can_reach: 'Not established — installed signer and update route remain unverified'
 released: '2025-09 (est.)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-xl-front.jpg'
-    alt: Shelly Wall Display XL, front
-  - src: 'asset:hardware-shelly-wall-display-xl-screen-trim.jpg'
-    alt: Shelly Wall Display XL, straight-on view of the screen
-  - src: 'asset:hardware-shelly-wall-display-xl-profile-trim.jpg'
-    alt: Shelly Wall Display XL, side profile, showing the mounting depth
-photoCredit: 'Photo: Shelly'
 evidence: [owners, firmware, documented, platform]
 sidebar:
   label: Wall Display XL

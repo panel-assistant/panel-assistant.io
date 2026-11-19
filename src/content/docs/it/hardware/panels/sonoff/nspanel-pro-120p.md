@@ -10,10 +10,6 @@ support: Completo
 root: userdebug, nessuna password adb; su per spegnere la retroilluminazione
 webview: Chromium 107 su 3.5.1; installazione manuale di LineageOS 138
 released: '2024-08 (stima)'
-photos:
-  - src: 'asset:hardware-sonoff-nspanel-pro-120p-front.jpg'
-    alt: Sonoff NSPanel Pro 120P, finiture bianca e nera, vista frontale, montato a parete
-photoCredit: 'Foto: Sonoff'
 evidence: [bench, open, firmware, documented, owners]
 sidebar:
   label: NSPanel Pro 120P

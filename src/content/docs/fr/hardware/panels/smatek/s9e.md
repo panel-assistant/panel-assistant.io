@@ -10,10 +10,6 @@ support: Testé par la communauté
 root: Relais, LED des boutons, proximité (su applicatif signalé fonctionnel)
 webview: Chromium 83 en 2024-07 ; 131 en 2025-12
 released: 'pas avant 2021 (est., SoC RK3566)'
-photos:
-  - src: 'asset:hardware-smatek-s9e-front.jpg'
-    alt: Smatek S9E, avant et arrière, montrant le câblage des relais et des borniers
-photoCredit: 'Photo: Smatek'
 sold_as_note: 'Version Zigbee (Tuya) avec deux relais secteur, AC 100-240 V'
 sold_as:
   - brand: Smatek

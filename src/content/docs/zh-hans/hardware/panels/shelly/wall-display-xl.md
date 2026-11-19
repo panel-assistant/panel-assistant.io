@@ -11,14 +11,6 @@ support: 未测试
 root: 此型号尚未确认
 webview: '尚未确认（WallDisplayV2 更新分支未提供 OTA WebView 软件包）'
 released: '2025-09（估计）'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-xl-front.jpg'
-    alt: Shelly Wall Display XL 正面
-  - src: 'asset:hardware-shelly-wall-display-xl-screen-trim.jpg'
-    alt: Shelly Wall Display XL 屏幕正视图
-  - src: 'asset:hardware-shelly-wall-display-xl-profile-trim.jpg'
-    alt: Shelly Wall Display XL 侧面，显示安装深度
-photoCredit: '照片：Shelly'
 evidence: [firmware, documented, platform]
 sidebar:
   label: Wall Display XL

@@ -10,10 +10,6 @@ support: Probado por la comunidad
 root: Relés, LED de botones, proximidad (su de la app comunicado como operativo)
 webview: Chromium 83 en 2024-07; 131 en 2025-12
 released: 'no antes de 2021 (estimado, SoC RK3566)'
-photos:
-  - src: 'asset:hardware-smatek-s9e-front.jpg'
-    alt: Frontal y parte posterior del Smatek S9E, con cableado de relés y terminales
-photoCredit: 'Foto: Smatek'
 sold_as_note: 'Versión Zigbee (Tuya) con dos relés de red eléctrica, CA 100-240 V'
 sold_as:
   - brand: Smatek

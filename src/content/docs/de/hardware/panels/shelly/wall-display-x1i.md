@@ -10,14 +10,6 @@ support: Ungetestet
 root: Bei diesem Modell nicht nachgewiesen
 webview: 'Nicht nachgewiesen (der WallDisplayV2-Zweig enthält kein OTA-WebView-Paket)'
 released: '2026-07 (geschätzt)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x1i-front.jpg'
-    alt: Shelly Wall Display X1i, Vorderseite
-  - src: 'asset:hardware-shelly-wall-display-x1i-silver.jpg'
-    alt: Shelly Wall Display X1i, silberne Ausführung, Vorderseite
-  - src: 'asset:hardware-shelly-wall-display-x1i-rear-label.jpg'
-    alt: Shelly Wall Display X1i, Rückseite mit dem Modelletikett SAWD-6A1XX10EU0
-photoCredit: 'Foto: Shelly'
 evidence: [firmware, documented, platform]
 sidebar:
   label: Wall Display X1i

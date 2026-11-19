@@ -1,55 +1,19 @@
 ---
-// Starlight's page title, with a small photo gallery below it on hardware panel pages that carry
-// vendor product photos. The hardware is sold under many OEM rebrand names (see "Also sold as" on
-// each panel page); a photo lets a reader confirm what they own far faster than a product code.
-// Gallery slots have a static fallback and can receive the current public image set at request time.
+// Starlight's page title, with the panel's published pictures on hardware panel pages. The
+// hardware is sold under many OEM rebrand names (see "Also sold as" on each panel page); a photo
+// lets a reader confirm what they own far faster than a product code. The picture slots are empty
+// in the built page: the site fills them with the current published image set as it serves it.
 import Default from '@astrojs/starlight/components/PageTitle.astro';
-import { getEntry } from 'astro:content';
-import { rewriteAssetUrl, ASSET_BASE } from '../plugins/asset-urls.mjs';
 import TranslationNote from './TranslationNote.astro';
 import { soldAs, confidence } from '../hardware/catalogue.mjs';
 import ConfidenceBar from './ConfidenceBar.astro';
 import OwnerReports from './OwnerReports.astro';
-import {
-  panelIdentity,
-  staticGallery,
-  renderHero,
-  renderGallery,
-} from '../product-images/gallery.mjs';
+import { panelIdentity } from '../product-images/gallery.mjs';
 import '../product-images/gallery.css';
 
 const { entry } = Astro.locals.starlightRoute;
 const isPanel = entry.id.startsWith('hardware/panels/');
 const identity = entry.data.panelIndex ? null : panelIdentity(entry.id);
-const photos = identity && Array.isArray(entry.data.photos) ? entry.data.photos : [];
-const canonicalEntry =
-  identity && identity.locale !== 'en'
-    ? await getEntry('docs', `hardware/panels/${identity.id}`)
-    : undefined;
-const canonicalPhotos = Array.isArray(canonicalEntry?.data.photos)
-  ? canonicalEntry.data.photos
-  : [];
-const model = staticGallery(entry.data, (url: string) => rewriteAssetUrl(url, ASSET_BASE));
-const texts = JSON.stringify(
-  photos.map((photo) => {
-    const credit = photo.credit || entry.data.photoCredit;
-    const canonicalPhoto = canonicalPhotos.find((candidate) =>
-      photo.id && candidate.id ? photo.id === candidate.id : photo.src === candidate.src,
-    );
-    return {
-      id: photo.id,
-      src: photo.src,
-      alt: photo.alt,
-      credit,
-      canonicalCredit:
-        identity?.locale === 'en'
-          ? credit
-          : canonicalPhoto
-            ? canonicalPhoto.credit || canonicalEntry?.data.photoCredit
-            : undefined,
-    };
-  }),
-);
 // Every brand and product name that leads to this page, with how each differs.
 const names = identity ? soldAs(entry.data) : [];
 const hasNameNotes = names.some((name: { note?: string }) => name.note?.trim());
@@ -102,8 +66,6 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
     data-panel-images="hero"
     data-panel-model={identity.id}
     data-panel-locale={identity.locale}
-    data-panel-texts={texts}
-    set:html={renderHero(model)}
   />
 )}
 {isPanel && entry.data.webview_can_reach && (
@@ -128,8 +90,6 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
     data-panel-images="gallery"
     data-panel-model={identity.id}
     data-panel-locale={identity.locale}
-    data-panel-texts={texts}
-    set:html={renderGallery(model)}
   />
 )}
 
@@ -214,7 +174,7 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
     return dialog;
   }
 
-  // Delegation also covers a runtime gallery on a page whose static image set was empty.
+  // Delegated, because the gallery arrives with the page rather than from this component.
   document.addEventListener('click', (event) => {
     if (!(event.target instanceof Element)) return;
     const target = event.target;

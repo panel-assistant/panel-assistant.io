@@ -10,10 +10,6 @@ support: Provato dalla comunità
 root: Relè, LED dei pulsanti, prossimità (su dall'app segnalato funzionante)
 webview: Chromium 83 su 2024-07; 131 su 2025-12
 released: 'non prima del 2021 (stima, SoC RK3566)'
-photos:
-  - src: 'asset:hardware-smatek-s9e-front.jpg'
-    alt: Smatek S9E, davanti e dietro, con cablaggio dei relè e dei morsetti
-photoCredit: 'Foto: Smatek'
 sold_as_note: 'Versione Zigbee (Tuya) con due relè di rete, AC 100-240 V'
 sold_as:
   - brand: Smatek

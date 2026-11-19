@@ -10,14 +10,6 @@ support: Ungetestet
 root: Bei diesem Modell nicht nachgewiesen
 webview: 'Nicht nachgewiesen (der WallDisplayV2-Zweig enthält kein OTA-WebView-Paket)'
 released: '2025-09 (geschätzt)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-xl-front.jpg'
-    alt: Shelly Wall Display XL, Vorderseite
-  - src: 'asset:hardware-shelly-wall-display-xl-screen-trim.jpg'
-    alt: Shelly Wall Display XL, gerade Ansicht des Bildschirms
-  - src: 'asset:hardware-shelly-wall-display-xl-profile-trim.jpg'
-    alt: Shelly Wall Display XL, Seitenansicht mit der Einbautiefe
-photoCredit: 'Foto: Shelly'
 evidence: [firmware, documented, platform]
 sidebar:
   label: Wall Display XL

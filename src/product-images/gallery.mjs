@@ -41,23 +41,6 @@ export function panelIdentity(entryId) {
   return { id: `${match[2]}/${match[3]}`, locale: match[1] || 'en' };
 }
 
-/** Adapt legacy page metadata without changing localized captions or provenance. */
-export function staticGallery(data, resolveAsset) {
-  return {
-    heroImageId: data.heroImageId,
-    images: (Array.isArray(data.photos) ? data.photos : []).map((photo) => ({
-      id: photo.id,
-      alt: photo.alt,
-      credit: photo.credit?.trim() || data.photoCredit || '',
-      source: photo.source,
-      thumb: resolveAsset(photo.src),
-      large: resolveAsset(photo.full?.trim() || photo.src),
-      width: photo.width,
-      height: photo.height,
-    })),
-  };
-}
-
 export function renderHero(model) {
   const photos = images(model);
   const index = heroIndex(model, photos);

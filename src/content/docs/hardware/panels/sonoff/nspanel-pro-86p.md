@@ -11,14 +11,6 @@ root: userdebug, no adb password; su for backlight-off
 webview_ships_with: 'Chromium 107 on firmware 1.5.0 and 3.5.1; 131 on 4.0.12'
 webview_can_reach: 'Chromium 138 — verified sideload on open userdebug firmware; Android 8/9 major ceiling'
 released: '2022-09 (est.)'
-photos:
-  - src: 'asset:hardware-sonoff-nspanel-pro-front.jpg'
-    alt: Sonoff NSPanel Pro 86P, front, wall-mounted
-  - src: 'asset:hardware-sonoff-nspanel-pro-86p-angle-black-trim.jpg'
-    alt: Sonoff NSPanel Pro 86P, black finish, angled to show the mounting depth
-  - src: 'asset:hardware-sonoff-nspanel-pro-86p-angle-white-trim.jpg'
-    alt: Sonoff NSPanel Pro 86P, white finish, angled to show the mounting depth
-photoCredit: 'Photo: Sonoff'
 evidence: [bench, open, firmware, documented, owners]
 sidebar:
   label: NSPanel Pro 86P

@@ -11,10 +11,6 @@ support: Volledig
 root: userdebug, geen adb-wachtwoord; su voor uitschakelen achtergrondverlichting
 webview: Chromium 107 op 3.5.1; LineageOS 138 handmatig installeren
 released: '2024-08 (schatting)'
-photos:
-  - src: 'asset:hardware-sonoff-nspanel-pro-120p-front.jpg'
-    alt: Sonoff NSPanel Pro 120P, witte en zwarte uitvoering, voorkant, aan de muur
-photoCredit: 'Foto: Sonoff'
 evidence: [bench, open, firmware, documented, owners]
 sidebar:
   label: NSPanel Pro 120P

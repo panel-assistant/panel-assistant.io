@@ -4,7 +4,6 @@ import {
   renderThumbnail,
   renderTile,
 } from '../src/product-images/gallery.mjs';
-import legacyImages from '../src/product-images/legacy-images.json' with { type: 'json' };
 
 // The hardware overview, every panel page, and the list of panels to choose from.
 const page =
@@ -28,32 +27,6 @@ function attributeText(value) {
       point > 0 && point <= 0x10ffff && !(point >= 0xd800 && point <= 0xdfff) ? point : 0xfffd,
     );
   });
-}
-
-function localized(model, element) {
-  if (element.getAttribute('data-panel-locale') === 'en') return model;
-  let texts;
-  try {
-    texts = JSON.parse(attributeText(element.getAttribute('data-panel-texts') ?? '[]'));
-  } catch {
-    return model;
-  }
-  if (!Array.isArray(texts)) return model;
-  const byId = new Map(texts.map((photo) => [photo.id ?? legacyImages[photo.src], photo]));
-  return {
-    ...model,
-    images: model.images.map((image) => {
-      const text = byId.get(image.id);
-      if (!text) return image;
-      return {
-        ...image,
-        ...(typeof text.alt === 'string' ? { alt: text.alt } : {}),
-        ...(typeof text.credit === 'string' && text.canonicalCredit === image.credit
-          ? { credit: text.credit }
-          : {}),
-      };
-    }),
-  };
 }
 
 function validModel(model) {
@@ -114,9 +87,8 @@ export async function handlePanelImages(request, env) {
   const transformed = new HTMLRewriter()
     .on('[data-panel-images][data-panel-model]', {
       element(element) {
-        const saved = models.get(element.getAttribute('data-panel-model'));
-        if (!saved) return;
-        const model = localized(saved, element);
+        const model = models.get(element.getAttribute('data-panel-model'));
+        if (!model) return;
         const slot = element.getAttribute('data-panel-images');
         const html =
           slot === 'hero'

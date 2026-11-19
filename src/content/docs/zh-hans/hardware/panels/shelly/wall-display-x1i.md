@@ -11,14 +11,6 @@ support: 未测试
 root: 此型号尚未确认
 webview: '尚未确认（WallDisplayV2 更新分支未提供 OTA WebView 软件包）'
 released: '2026-07（估计）'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x1i-front.jpg'
-    alt: Shelly Wall Display X1i 正面
-  - src: 'asset:hardware-shelly-wall-display-x1i-silver.jpg'
-    alt: 银色 Shelly Wall Display X1i 正面
-  - src: 'asset:hardware-shelly-wall-display-x1i-rear-label.jpg'
-    alt: Shelly Wall Display X1i 背面，显示型号标签 SAWD-6A1XX10EU0
-photoCredit: '照片：Shelly'
 evidence: [firmware, documented, platform]
 sidebar:
   label: Wall Display X1i

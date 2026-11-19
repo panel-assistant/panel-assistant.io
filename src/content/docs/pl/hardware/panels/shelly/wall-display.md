@@ -10,12 +10,6 @@ support: Badania
 root: Nie ustalono; bazowa kompilacja userdebug, niepotwierdzone
 webview: 'com.google.android.webview 119.0.6045.194 przez oficjalny ZIP'
 released: '2023-09 (szac.)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-front.jpg'
-    alt: Shelly Wall Display, oryginalny model, z akcesoryjnym czujnikiem H&T
-  - src: 'asset:hardware-shelly-wall-display-rear-label.jpg'
-    alt: Shelly Wall Display, tył z etykietą modelu i puszką ścienną
-photoCredit: 'Zdjęcie: Shelly'
 evidence: [firmware, documented]
 sidebar:
   label: Wall Display (oryginalny)

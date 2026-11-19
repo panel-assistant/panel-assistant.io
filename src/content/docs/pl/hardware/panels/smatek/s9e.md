@@ -10,10 +10,6 @@ support: Przetestowany przez społeczność
 root: Przekaźniki, LED przycisków, zbliżenie (zgłoszono działające su aplikacji)
 webview: Chromium 83 w 2024-07; 131 w 2025-12
 released: 'nie wcześniej niż 2021 (szac., SoC RK3566)'
-photos:
-  - src: 'asset:hardware-smatek-s9e-front.jpg'
-    alt: Smatek S9E, przód i tył, z przekaźnikami i zaciskami przewodów
-photoCredit: 'Zdjęcie: Smatek'
 sold_as_note: 'Wersja Zigbee (Tuya) z dwoma przekaźnikami sieciowymi, AC 100-240 V'
 sold_as:
   - brand: Smatek

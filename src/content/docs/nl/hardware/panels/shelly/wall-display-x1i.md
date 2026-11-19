@@ -11,14 +11,6 @@ support: Niet getest
 root: Niet vastgesteld voor dit model
 webview: 'Niet vastgesteld (het WallDisplayV2-kanaal bevat geen OTA-WebView-pakket)'
 released: '2026-07 (schatting)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x1i-front.jpg'
-    alt: Shelly Wall Display X1i, voorkant
-  - src: 'asset:hardware-shelly-wall-display-x1i-silver.jpg'
-    alt: Shelly Wall Display X1i, zilveren uitvoering, voorkant
-  - src: 'asset:hardware-shelly-wall-display-x1i-rear-label.jpg'
-    alt: Shelly Wall Display X1i, achterkant met modelaanduiding SAWD-6A1XX10EU0
-photoCredit: 'Foto: Shelly'
 evidence: [firmware, documented, platform]
 sidebar:
   label: Wall Display X1i

@@ -2,7 +2,6 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   panelIdentity,
-  staticGallery,
   renderHero,
   renderGallery,
   renderThumbnail,
@@ -74,31 +73,6 @@ test('untrusted image text is escaped and unsafe URLs cannot become executable m
   ])
     assert.equal(renderGallery({ images: [{ ...front, thumb }] }), '');
   assert.equal(renderThumbnail({ images: [front] }, 'javascript:alert(1)'), '');
-});
-
-test('legacy localized page images retain their own text and fallback credit', () => {
-  const model = staticGallery(
-    {
-      heroImageId: 'front',
-      photoCredit: 'Legacy photographer',
-      photos: [
-        {
-          id: 'front',
-          src: 'asset:front.jpg',
-          full: 'asset:full.jpg',
-          alt: 'Vorne',
-          credit: 'Eigener Fotograf',
-        },
-        { src: 'asset:rear.jpg', alt: 'Hinten' },
-      ],
-    },
-    (src) => src.replace('asset:', 'https://assets.example/'),
-  );
-  assert.equal(model.images[0].large, 'https://assets.example/full.jpg');
-  assert.equal(model.images[0].credit, 'Eigener Fotograf');
-  assert.equal(model.images[1].credit, 'Legacy photographer');
-  assert.match(renderGallery(model), /alt="Vorne"/);
-  assert.match(renderHero(model), /full.jpg/);
 });
 
 test('only exact model entry IDs produce canonical identity across locales', () => {

@@ -11,10 +11,6 @@ support: Перевірено спільнотою
 root: Реле, світлодіоди кнопок, наближення (повідомлено про робочий su із застосунку)
 webview: Chromium 83 на 2024-07; 131 на 2025-12
 released: 'не раніше 2021 (прибл., SoC RK3566)'
-photos:
-  - src: 'asset:hardware-smatek-s9e-front.jpg'
-    alt: Smatek S9E, спереду й ззаду, з реле та клемним підключенням
-photoCredit: 'Фото: Smatek'
 sold_as_note: 'Версія Zigbee (Tuya) із двома мережевими реле, AC 100-240 V'
 sold_as:
   - brand: Smatek

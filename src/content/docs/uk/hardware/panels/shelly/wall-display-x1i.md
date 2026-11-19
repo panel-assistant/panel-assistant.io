@@ -10,14 +10,6 @@ support: Не перевірено
 root: Не встановлено для цієї моделі
 webview: 'Не встановлено (гілка WallDisplayV2 не містить OTA-пакета WebView)'
 released: '2026-07 (прибл.)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x1i-front.jpg'
-    alt: Shelly Wall Display X1i, вигляд спереду
-  - src: 'asset:hardware-shelly-wall-display-x1i-silver.jpg'
-    alt: Shelly Wall Display X1i, сріблясте оздоблення, вигляд спереду
-  - src: 'asset:hardware-shelly-wall-display-x1i-rear-label.jpg'
-    alt: Shelly Wall Display X1i, вигляд ззаду з етикеткою моделі SAWD-6A1XX10EU0
-photoCredit: 'Фото: Shelly'
 evidence: [firmware, documented, platform]
 sidebar:
   label: Wall Display X1i

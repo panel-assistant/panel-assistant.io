@@ -11,12 +11,6 @@ root: su present; helper for LED, climate, 5th button
 webview_ships_with: 'Chromium 83'
 webview_can_reach: 'Chromium 156.0.8078.47 verified after the initial root swap and a same-signer update; no final ceiling established'
 released: '2023-08 (est.)'
-photos:
-  - src: 'asset:hardware-tuya-tpa10-front.jpg'
-    alt: Tuya TPA10, front, with its side button strip
-  - src: 'asset:hardware-tuya-tpa10-front-flat.jpg'
-    alt: Tuya TPA10, flat front view, showing the side button strip and bezel edge
-photoCredit: 'Photo: Tuya'
 sold_as:
   - brand: Tuya
     name: 'TPA10-M2'
