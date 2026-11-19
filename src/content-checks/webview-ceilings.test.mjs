@@ -8,9 +8,9 @@ const text = (path) =>
     .replace(/<(script|style)\b[\s\S]*?<\/\1>/g, '')
     .replace(/<[^>]+>/g, ' ')
     .replace(/\s+/g, ' ');
+// The choose-a-panel list leaves this to each panel's own page (maintainer, 2026-11-19).
 for (const path of [
   'hardware',
-  'install/supported-panels',
   'hardware/panels/shelly/wall-display-x2i',
   'hardware/panels/meta/portal-10-gen2',
 ]) {

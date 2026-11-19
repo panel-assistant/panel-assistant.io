@@ -94,15 +94,6 @@ const {
                   </span>
                 )}
               </span>
-              {c.data.webview_can_reach && (
-                <details class="webview">
-                  <summary>
-                    <span class="webview-label">WebView — Can reach:</span>{' '}
-                    {String(c.data.webview_can_reach).split(/\s[—–]\s|;/)[0]}
-                  </summary>
-                  {String(c.data.webview_can_reach)}
-                </details>
-              )}
               <span class="evidence">
                 <span class="evidence-label">{t('confidence.title')}</span>
                 <ConfidenceBar data={c.data} />
@@ -298,20 +289,6 @@ const {
   .also {
     font-size: var(--sl-text-xs);
     color: var(--sl-color-gray-3);
-  }
-  /* The newest browser engine the panel can run: the short answer shows, the conditions open. */
-  .webview {
-    position: relative;
-    z-index: 1;
-    font-size: var(--sl-text-xs);
-    line-height: 1.4;
-    color: var(--sl-color-gray-2);
-  }
-  .webview summary {
-    cursor: pointer;
-  }
-  .webview-label {
-    font-weight: 600;
   }
   .evidence {
     display: flex;
