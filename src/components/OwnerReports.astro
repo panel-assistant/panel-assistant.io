@@ -80,9 +80,11 @@ const fact = (value: string) => (value === 'unknown' ? t('reports.unknown') : va
   article {
     margin-block: 1.5rem;
   }
+  /* The labels wrap before the values get narrower than 7rem: a long translated label on a phone
+     otherwise left the value column a few pixels wide. */
   dl {
     display: grid;
-    grid-template-columns: max-content minmax(0, 1fr);
+    grid-template-columns: minmax(min-content, max-content) minmax(7rem, 1fr);
     gap: 0.25rem 1rem;
   }
   dt {
