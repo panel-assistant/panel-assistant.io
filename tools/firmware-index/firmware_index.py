@@ -17,6 +17,7 @@ import sys
 import threading
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from html.parser import HTMLParser
 from concurrent.futures import ThreadPoolExecutor
@@ -215,6 +216,68 @@ def _count(**kv):
             _discover_stats[k] += v
 
 
+# Each discover worker keeps one HTTPS connection open and reuses it. A
+# fresh connection per probe (urllib's behaviour) spends a TCP and TLS
+# handshake on every one of ~8,900 probes, which is most of a probe's time
+# from a hosted runner. The CDN keeps 403 and 206 responses alive.
+_connections = threading.local()
+# How a server's close of an idle kept-alive connection surfaces on reuse.
+STALE_CONNECTION_ERRORS = (http.client.RemoteDisconnected, ConnectionResetError,
+                           BrokenPipeError, ConnectionAbortedError)
+
+
+class _Buffered:
+    """A fully read response: the connection can serve the next probe."""
+
+    def __init__(self, status, headers, body):
+        self.status, self.headers, self._body = status, headers, body
+
+    def read(self, n=-1):
+        return self._body if n is None or n < 0 else self._body[:n]
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *_exc):
+        return False
+
+
+def _open(req, timeout):
+    """urlopen's contract for a discover probe, over this thread's connection.
+
+    Returns a response for 2xx and raises urllib.error.HTTPError for 4xx/5xx,
+    exactly as urlopen does. Anything urlopen would treat differently (a
+    proxy, a redirect, a non-HTTPS URL) is handed to urlopen itself.
+    """
+    parts = urllib.parse.urlsplit(req.full_url)
+    if parts.scheme != "https" or urllib.request.getproxies().get("https"):
+        return urllib.request.urlopen(req, timeout=timeout)
+    path = parts.path + (f"?{parts.query}" if parts.query else "")
+    pool = _connections.__dict__.setdefault("by_host", {})
+    reused = parts.netloc in pool
+    conn = pool.get(parts.netloc) or http.client.HTTPSConnection(parts.netloc, timeout=timeout)
+    pool[parts.netloc] = conn
+    try:
+        conn.request("GET", path, headers=dict(req.header_items()))
+        response = conn.getresponse()
+        body = response.read()
+    except TRANSIENT_ERRORS as exc:
+        conn.close()
+        del pool[parts.netloc]
+        if not reused or not isinstance(exc, STALE_CONNECTION_ERRORS):
+            raise
+        # The CDN closed an idle kept-alive connection: that is not an
+        # answer about the object, so ask once more on a new connection.
+        # A failure there is a real one and gets discover_one's retries.
+        return _open(req, timeout)
+    if 300 <= response.status < 400:
+        return urllib.request.urlopen(req, timeout=timeout)
+    if response.status >= 400:
+        raise urllib.error.HTTPError(req.full_url, response.status, response.reason,
+                                     response.headers, None)
+    return _Buffered(response.status, response.headers, body)
+
+
 def discover_one(url):
     """Return the object's total size if `url` is a real ZIP, else None.
 
@@ -228,7 +291,7 @@ def discover_one(url):
     _count(probes=1)
     for delay in DISCOVER_RETRY_DELAYS + (None,):
         try:
-            with urllib.request.urlopen(req, timeout=PROBE_TIMEOUT) as r:
+            with _open(req, timeout=PROBE_TIMEOUT) as r:
                 total = response_total_size(r)
                 if total is None or r.read(4) != ZIP_MAGIC:
                     return None
