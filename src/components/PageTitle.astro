@@ -32,24 +32,26 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
         : 'This page covers every name below.'}
     </p>
     {hasNameNotes ? (
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Brand</th>
-            <th scope="col">Name</th>
-            <th scope="col">How it differs</th>
-          </tr>
-        </thead>
-        <tbody>
-          {names.map((n: { brand: string; name: string; note?: string }, i: number) => (
+      <div class="sold-as-table">
+        <table>
+          <thead>
             <tr>
-              <td>{n.brand}</td>
-              <td class="name">{n.name}</td>
-              <td>{n.note ?? (i === 0 ? 'Main name' : 'Same hardware')}</td>
+              <th scope="col">Brand</th>
+              <th scope="col">Name</th>
+              <th scope="col">How it differs</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {names.map((n: { brand: string; name: string; note?: string }, i: number) => (
+              <tr>
+                <td>{n.brand}</td>
+                <td class="name">{n.name}</td>
+                <td>{n.note ?? (i === 0 ? 'Main name' : 'Same hardware')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     ) : (
       <ul class="sold-as-names" role="list">
         {names.map((n: { brand: string; name: string }) => (
@@ -122,6 +124,11 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
   }
   .sold-as-names li {
     margin: 0;
+  }
+  /* Names stay on one line, so a long one can make the table wider than a phone: it then scrolls in
+     place like the site's other tables instead of widening the page. */
+  .sold-as-table {
+    overflow-x: auto;
   }
   .sold-as table {
     border-collapse: collapse;

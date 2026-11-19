@@ -40,27 +40,29 @@ const fact = (value: string) => (value === 'unknown' ? t('reports.unknown') : va
           {fact(report.profile.revision)}
         </dd>
       </dl>
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">{t('reports.behavior')}</th>
-            <th scope="col">{t('reports.result')}</th>
-            <th scope="col">{t('reports.notes')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {BEHAVIORS.map((behavior) => {
-            const result = report.results.find((item) => item.behavior === behavior);
-            return (
-              <tr>
-                <th scope="row">{t(`reports.behavior.${behavior}`)}</th>
-                <td>{t(`reports.outcome.${result?.outcome ?? 'untested'}`)}</td>
-                <td>{result?.notes ?? ''}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div class="results">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">{t('reports.behavior')}</th>
+              <th scope="col">{t('reports.result')}</th>
+              <th scope="col">{t('reports.notes')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {BEHAVIORS.map((behavior) => {
+              const result = report.results.find((item) => item.behavior === behavior);
+              return (
+                <tr>
+                  <th scope="row">{t(`reports.behavior.${behavior}`)}</th>
+                  <td>{t(`reports.outcome.${result?.outcome ?? 'untested'}`)}</td>
+                  <td>{result?.notes ?? ''}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       {report.limitations.length > 0 && (
         <>
           <h4>{t('reports.limitations')}</h4>
@@ -89,6 +91,12 @@ const fact = (value: string) => (value === 'unknown' ? t('reports.unknown') : va
   dd {
     margin: 0;
     overflow-wrap: anywhere;
+  }
+  /* Owner notes carry identifiers that cannot wrap, such as permission names; with long labels in
+     some languages the table can be wider than a phone, so it scrolls in place like the site's other
+     tables instead of widening the page. */
+  .results {
+    overflow-x: auto;
   }
   table {
     width: 100%;
