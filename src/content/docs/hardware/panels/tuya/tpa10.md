@@ -22,8 +22,8 @@ sold_as:
     name: 'T2E'
     note: 'Model name on trade and marketplace listings'
   - brand: MOES
-    name: 'Control Panel MAX 10.1 inch'
-    note: "MOES's retail name for the TPA10-M2E"
+    name: '10.1-Inch Smart Control Panel Max'
+    note: 'MOES retail listing, SKU CCP-TY10; an owner reports the unit inside as a TPA10-M2E'
 evidence: [bench, mostly-open, firmware, documented, owners]
 sidebar:
   label: TPA10
@@ -35,7 +35,7 @@ A roomy **10.1 in 1920×1200** rk3566 panel with a single front RGB LED, a monoc
 
 ## Also sold as
 
-Tuya TPA10, TPA10, TPA10-M2 (M2A, M2E, M2U, M2X), TPA10 Control Panel MAX, Control Panel MAX, Panel MAX, T2E, MOES Control Panel MAX 10.1 inch, rk3566 Tuya panel, SmartOS Xinch (vendor packages `com.smartos.xinch.setting`, `com.smartos.xinch.hardware`, `com.smartos.xinch.platform.ethernet`), `com.tuya.devicetest`.
+Tuya TPA10, TPA10, TPA10-M2 (M2A, M2E, M2U, M2X), TPA10 Control Panel MAX, Control Panel MAX, Panel MAX, T2E, MOES 10.1-Inch Smart Control Panel Max (CCP-TY10), rk3566 Tuya panel, SmartOS Xinch (vendor packages `com.smartos.xinch.setting`, `com.smartos.xinch.hardware`, `com.smartos.xinch.platform.ethernet`), `com.tuya.devicetest`.
 
 :::tip
 The most-needed facts: adb is **password-protected**, so use the USB diagnostics-app backdoor. The LED and the root-only sensors need the **`hapaneld-helper` root helper daemon**. The front LED's `custom_animation` write can **reboot the panel** (see the warning below). Update the **WebView first**; see [WebView: update this first](#webview-update-this-first).
