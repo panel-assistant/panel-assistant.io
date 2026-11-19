@@ -372,6 +372,21 @@ class DroppedConnectionTest(unittest.TestCase):
                 self.assertEqual(pathlib.Path(firmware_index.HERE, name).read_bytes(), before)
 
 
+class FakeResponse:
+    """An http.client response that records how much of its body was read."""
+
+    def __init__(self, status, headers, body):
+        self.status, self.reason, self.headers, self.body, self.consumed = status, "", headers, body, 0
+
+    def read(self, n=None):
+        end = len(self.body) if n is None or n < 0 else min(len(self.body), self.consumed + n)
+        chunk, self.consumed = self.body[self.consumed:end], end
+        return chunk
+
+    def isclosed(self):
+        return self.consumed >= len(self.body)
+
+
 class FakeConnection:
     """http.client.HTTPSConnection stand-in: answers from a script of outcomes."""
 
@@ -391,9 +406,12 @@ class FakeConnection:
     def getresponse(self):
         status, total, body = self.outcome
         headers = http.client.HTTPMessage()
-        if total is not None:
+        if status == 200:
+            headers["Content-Length"] = str(total)
+        elif total is not None:
             headers["Content-Range"] = f"bytes 0-3/{total}"
-        return SimpleNamespace(status=status, reason="", headers=headers, read=lambda: body)
+        self.response = FakeResponse(status, headers, body)
+        return self.response
 
     def close(self):
         self.closed = True
@@ -428,6 +446,20 @@ class KeptAliveConnectionTest(unittest.TestCase):
         self.assertEqual(len(FakeConnection.made), 1)
         method, path, headers = FakeConnection.made[0].requests[0]
         self.assertEqual((method, path, headers["Range"]), ("GET", "/nspanel-pro/apk/1/x.apk", "bytes=0-3"))
+
+    def test_a_response_that_ignores_the_range_is_not_downloaded(self):
+        # An edge that ignores Range answers 200 with the whole ZIP. Only the
+        # start is read; the unread connection is dropped, never reused.
+        size = 4 * firmware_index.PROBE_READ_LIMIT
+        whole_zip = b"PK\x03\x04" + bytes(size - 4)
+        FakeConnection.script = [(200, size, whole_zip), (403, None, b"<Error/>")]
+        self.assertEqual(firmware_index.discover_one(self.URL), size)
+        first = FakeConnection.made[0]
+        self.assertLessEqual(first.response.consumed, firmware_index.PROBE_READ_LIMIT)
+        self.assertTrue(first.closed)
+        self.assertIsNone(firmware_index.discover_one(self.URL))
+        self.assertEqual(len(FakeConnection.made), 2)
+        self.sleep.assert_not_called()
 
     def test_a_closed_idle_connection_is_reopened_without_a_retry(self):
         FakeConnection.script = [(403, None, b""),

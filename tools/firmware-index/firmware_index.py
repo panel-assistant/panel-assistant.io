@@ -35,6 +35,9 @@ WINDOW_HOURS = 24 * 7    # 7-day rolling window
 MAX_POINTS = 7           # one dot per day
 PROBE_TIMEOUT = 20
 PROBE_WORKERS = 16
+# A discover probe reads at most this much of a body. A ranged 206 or a 403
+# is far smaller; an edge that ignores Range would otherwise send a whole ZIP.
+PROBE_READ_LIMIT = 64 * 1024
 # --------------------------------------------------------------------------- #
 # data parsing + URL builders (shared by discovery, probe and archive)
 # --------------------------------------------------------------------------- #
@@ -260,7 +263,7 @@ def _open(req, timeout):
     try:
         conn.request("GET", path, headers=dict(req.header_items()))
         response = conn.getresponse()
-        body = response.read()
+        body = response.read(PROBE_READ_LIMIT)
     except TRANSIENT_ERRORS as exc:
         conn.close()
         del pool[parts.netloc]
@@ -270,6 +273,11 @@ def _open(req, timeout):
         # answer about the object, so ask once more on a new connection.
         # A failure there is a real one and gets discover_one's retries.
         return _open(req, timeout)
+    if not response.isclosed():
+        # Part of the body is still unread, so the connection cannot carry
+        # another request. Drop it; the next probe opens a fresh one.
+        conn.close()
+        del pool[parts.netloc]
     if 300 <= response.status < 400:
         return urllib.request.urlopen(req, timeout=timeout)
     if response.status >= 400:
