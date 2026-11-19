@@ -228,6 +228,9 @@ export function confidenceChecklist(data) {
 // A row of the supported-panels page holds three cards on a laptop, so a brand needs three names
 // to fill a shelf of its own. Smaller brands share the last shelf.
 const SHELF_MIN = 3;
+// Brands a visitor looks for by name keep a shelf of their own however few panels they have
+// (maintainer, 2026-11-19: "they are big brands so should have their own section").
+const PROMINENT_BRANDS = new Set(['Amazon', 'Smatek', 'Tuya']);
 const runsPanelAssistant = (data) =>
   !data.panelIndex && !(parseFloat(String(data.android ?? '99')) < 8);
 const anchorFor = (brand) =>
@@ -240,8 +243,9 @@ const anchorFor = (brand) =>
  * The supported-panels page: every name a panel that runs Panel Assistant is sold under, as one
  * card each, on a shelf per brand. Brands come in order of confidence (each brand's best panel,
  * then the confidence across its range), so the page opens on its strongest evidence. A brand with
- * fewer than three names has no shelf of its own: its cards go on the last shelf, `brand: null`,
- * still side by side. `index` is every brand, alphabetical, with the anchor that reaches it.
+ * fewer than three names has no shelf of its own, unless it is one visitors look for by name: its
+ * cards go on the last shelf, `brand: null`, still side by side. `span` is how many cards wide a
+ * shelf is. `index` is every brand, alphabetical, with the anchor that reaches it.
  */
 export function supportedPanels(pages) {
   const brands = catalogueGroups(pages)
@@ -293,13 +297,22 @@ export function supportedPanels(pages) {
       total(b.cards) - total(a.cards) ||
       a.brand.localeCompare(b.brand),
   );
-  const own = brands.filter((b) => b.cards.length >= SHELF_MIN);
-  const shared = brands.filter((b) => b.cards.length < SHELF_MIN);
-  const shelves = own.map((b) => ({ brand: b.brand, id: anchorFor(b.brand), cards: b.cards }));
+  const full = brands.filter((b) => b.cards.length >= SHELF_MIN);
+  // A prominent brand's short shelf is as wide as its cards, and the short shelves follow the
+  // full ones so that they sit side by side instead of each leaving most of a row empty.
+  const short = brands.filter((b) => b.cards.length < SHELF_MIN && PROMINENT_BRANDS.has(b.brand));
+  const shared = brands.filter((b) => b.cards.length < SHELF_MIN && !PROMINENT_BRANDS.has(b.brand));
+  const shelves = [...full, ...short].map((b) => ({
+    brand: b.brand,
+    id: anchorFor(b.brand),
+    span: Math.min(b.cards.length, SHELF_MIN),
+    cards: b.cards,
+  }));
   if (shared.length > 0) {
     shelves.push({
       brand: null,
       id: 'more-brands',
+      span: SHELF_MIN,
       // A brand's first card carries its anchor, since it has no heading here.
       cards: shared.flatMap((b) =>
         b.cards.map((card, i) => (i === 0 ? { ...card, id: anchorFor(b.brand) } : card)),

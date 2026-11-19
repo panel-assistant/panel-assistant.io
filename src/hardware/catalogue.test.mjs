@@ -221,6 +221,7 @@ const sample = (vendor, label, evidence, extra = {}) => ({
 test('brands are shelved by confidence, small brands share the last shelf, and nothing is lost', () => {
   const { names, shelves, index } = supportedPanels([
     sample('Zed', 'One', ['documented']),
+    sample('Tuya', 'Solo', ['documented']),
     sample('Big', 'M', ['documented'], { sidebar: { label: 'M', order: 1 } }),
     sample('Big', 'B', ['bench', 'open'], {
       sold_as: [
@@ -239,23 +240,29 @@ test('brands are shelved by confidence, small brands share the last shelf, and n
       // Equal confidence keeps the order of the brand's menu, not the alphabet.
       ['Big', ['Big B', 'Big M', 'Big C']],
       // A relabelled panel is as sure as the hardware it is, so it leads the shared shelf.
+      // A brand visitors look for by name keeps a shelf of its own, one card wide.
+      ['Tuya', ['Tuya Solo']],
       [null, ['Relabel B2', 'Zed One']],
     ],
   );
+  assert.deepEqual(
+    shelves.map((s) => s.span),
+    [3, 1, 3],
+  );
   const [best] = shelves[0].cards;
   assert.deepEqual([best.also, best.covers, best.sameAs], [['B Plus'], ['B Mini'], undefined]);
-  const [relabel, zed] = shelves[1].cards;
+  const [relabel, zed] = shelves[2].cards;
   assert.deepEqual(
     [relabel.sameAs, relabel.anchor, relabel.id],
     ['Big B', 'sold-as', 'brand-relabel'],
   );
   assert.equal(zed.id, 'brand-zed');
   assert.match(best.search, /Big B .*B Plus B Mini/);
-  // Six names: five cards and the model one of them also covers.
-  assert.equal(names, 6);
+  // Seven names: six cards and the model one of them also covers.
+  assert.equal(names, 7);
   assert.deepEqual(
     index.map((i) => i.brand),
-    ['Big', 'Relabel', 'Zed'],
+    ['Big', 'Relabel', 'Tuya', 'Zed'],
   );
 });
 
