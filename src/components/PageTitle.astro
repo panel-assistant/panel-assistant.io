@@ -32,7 +32,12 @@ const brands = new Set(names.map((n: { brand: string }) => n.brand)).size;
         : 'This page covers every name below.'}
     </p>
     {hasNameNotes ? (
-      <div class="sold-as-table">
+      <div
+        class="sold-as-table"
+        tabindex="0"
+        role="region"
+        aria-label="Names this hardware is sold under"
+      >
         <table>
           <thead>
             <tr>

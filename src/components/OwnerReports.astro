@@ -14,7 +14,7 @@ const fact = (value: string) => (value === 'unknown' ? t('reports.unknown') : va
   <p>{t('reports.scope')}</p>
   {reports.map((report) => (
     <article id={`report-${report.id}`}>
-      <h3>
+      <h3 id={`report-${report.id}-title`}>
         {report.model.manufacturer} {report.model.name}
       </h3>
       <p>
@@ -40,7 +40,7 @@ const fact = (value: string) => (value === 'unknown' ? t('reports.unknown') : va
           {fact(report.profile.revision)}
         </dd>
       </dl>
-      <div class="results">
+      <div class="results" tabindex="0" role="region" aria-labelledby={`report-${report.id}-title`}>
         <table>
           <thead>
             <tr>
@@ -79,6 +79,7 @@ const fact = (value: string) => (value === 'unknown' ? t('reports.unknown') : va
 <style>
   article {
     margin-block: 1.5rem;
+    container-type: inline-size;
   }
   /* The labels wrap before the values get narrower than 7rem: a long translated label on a phone
      otherwise left the value column a few pixels wide. */
@@ -99,6 +100,16 @@ const fact = (value: string) => (value === 'unknown' ? t('reports.unknown') : va
      tables instead of widening the page. */
   .results {
     overflow-x: auto;
+  }
+  /* On the narrowest phones with enlarged text even the minimum label and value columns are wider than
+     the report, so each value goes below its label instead. */
+  @container (width < 20rem) {
+    dl {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    dt {
+      margin-top: 0.25rem;
+    }
   }
   table {
     width: 100%;
