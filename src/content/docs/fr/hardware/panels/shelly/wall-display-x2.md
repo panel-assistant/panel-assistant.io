@@ -10,10 +10,6 @@ support: Non testé
 root: Non établi sur ce modèle
 webview: 'Non établi (la branche WallDisplay ne contient aucun paquet WebView OTA pour ce modèle)'
 released: '2025-01 (est.)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x2-front.jpg'
-    alt: Shelly Wall Display X2, vue de face
-photoCredit: 'Photo: Shelly'
 evidence: [firmware, documented]
 sidebar:
   label: Wall Display X2

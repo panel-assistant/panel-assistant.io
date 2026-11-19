@@ -40,7 +40,7 @@ test('model pages show scoped owner evidence and supported panels counts only wo
   assert.match(second, /issuecomment-5570358840/);
 
   const guide =
-    page('/install/supported-panels').match(/<div class="brands[\s\S]*?<\/div>/)?.[0] ?? '';
+    page('/install/supported-panels').match(/data-panel-list[\s\S]*?<p class="none/)?.[0] ?? '';
   assert.ok(guide, 'Supported-panels list missing');
   for (const [brand, model] of [
     ['sunworld', 'yc-sm55p'],

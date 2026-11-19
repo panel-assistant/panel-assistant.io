@@ -11,12 +11,6 @@ root: 'No root needed; setup requires USB debugging, whose unlock depends on fir
 webview_ships_with: 'Chromium 131.0.6778.200 on firmware 2.5.4'
 webview_can_reach: 'Chromium 131 — vendor only; no newer Shelly-signed provider available. This major no longer receives Chromium security fixes'
 released: '2025-12 (est.)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x2i-front.jpg'
-    alt: Shelly Wall Display X2i, front
-  - src: 'asset:hardware-shelly-wall-display-x2i-on-wall.jpg'
-    alt: Shelly Wall Display X2i, mounted, showing a different dashboard layout
-photoCredit: 'Photo: Shelly'
 evidence: [bench, mostly-open, firmware, documented]
 sidebar:
   label: Wall Display X2i

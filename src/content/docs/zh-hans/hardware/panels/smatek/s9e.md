@@ -10,10 +10,6 @@ support: 社区测试
 root: 继电器、按键 LED、接近检测（据报告，应用可使用 su）
 webview: 2024-07 固件为 Chromium 83；2025-12 为 131
 released: '不早于 2021 年（根据 RK3566 SoC 估计）'
-photos:
-  - src: 'asset:hardware-smatek-s9e-front.jpg'
-    alt: Smatek S9E 正面和背面，展示继电器和端子接线
-photoCredit: '照片：Smatek'
 sold_as_note: 'Zigbee（Tuya）版本，带两个市电继电器，AC 100-240 V'
 sold_as:
   - brand: Smatek

@@ -12,6 +12,7 @@ import {
   PANELS_DIR,
   panelRedirects,
   soldAs,
+  supportedPanels,
 } from './catalogue.mjs';
 
 const page = (path) => readFileSync(`dist${path}index.html`, 'utf8');
@@ -146,9 +147,13 @@ test('the panel menu carries no badges', () => {
   assert.doesNotMatch(sidebar, /sl-badge/);
 });
 
+// The list on the supported-panels page, up to the section that follows it.
+const panelList = (html) => html.match(/data-panel-list[\s\S]*?<p class="none/)?.[0] ?? '';
+
 test('the supported-panels page lists every brand and model that runs Panel Assistant', () => {
   const html = page('/install/supported-panels/');
-  const listed = html.match(/<div class="brands[\s\S]*?<\/div>/)?.[0] ?? '';
+  const listed = panelList(html);
+  assert.ok(listed, 'no panel list on the page');
   for (const { slug, data } of panels) {
     const href = `href="${slug}`;
     if (data.panelIndex) continue;
@@ -157,9 +162,101 @@ test('the supported-panels page lists every brand and model that runs Panel Assi
       continue;
     }
     assert.ok(listed.includes(`${href}"`), `${slug} is missing`);
-    for (const { brand } of data.sold_as ?? [])
-      assert.ok(listed.includes(`>${brand}<`), `${brand} is missing`);
+    // Another brand's name for the hardware has a card of its own, leading to the same page.
+    for (const { brand } of data.sold_as ?? []) {
+      if (brand === maker(data.vendor)) continue;
+      assert.match(
+        listed,
+        new RegExp(`data-search="${brand} [^"]*"[\\s\\S]{0,600}?href="${slug}#sold-as"`),
+        `${brand} has no card for ${slug}`,
+      );
+    }
   }
+});
+
+test('every card has a picture slot for its page, named by brand and model', () => {
+  const cards = panelList(page('/install/supported-panels/')).split('<li class="card').slice(1);
+  assert.ok(cards.length > 20, `only ${cards.length} cards`);
+  for (const card of cards) {
+    const model = card.match(/data-panel-images="tile" data-panel-model="([^"]+)"/)?.[1];
+    assert.ok(model, `a card has no picture slot: ${card.slice(0, 120)}`);
+    assert.match(card, new RegExp(`href="/hardware/panels/${model}/(#sold-as)?"`));
+    assert.match(card, /data-panel-alt="[^"]{4,}"/);
+  }
+});
+
+test('the page menu lists every brand alphabetically, each reaching its shelf or first card', () => {
+  for (const prefix of prefixes) {
+    const html = page(`${prefix}/install/supported-panels/`);
+    const menu = html.match(/<starlight-toc[\s\S]*?<\/starlight-toc>/)?.[0] ?? '';
+    const brands = [...menu.matchAll(/href="#(brand-[a-z0-9-]+)"[^>]*>\s*<span[^>]*>([^<]+)</g)];
+    assert.ok(brands.length > 10, `${prefix}: ${brands.length} brands in the menu`);
+    const names = brands.map((b) => b[2].trim());
+    assert.deepEqual(
+      names,
+      [...names].sort((a, b) => a.localeCompare(b)),
+      prefix,
+    );
+    for (const [, id] of brands)
+      assert.equal(
+        html.split(` id="${id}"`).length,
+        2,
+        `${prefix}: #${id} is not on the page once`,
+      );
+  }
+});
+
+const sample = (vendor, label, evidence, extra = {}) => ({
+  slug: `hardware/panels/${vendor.toLowerCase()}/${label.toLowerCase()}`,
+  data: {
+    vendor,
+    title: `${vendor} ${label}`,
+    sidebar: { label },
+    android: '11',
+    evidence,
+    ...extra,
+  },
+});
+
+test('brands are shelved by confidence, small brands share the last shelf, and nothing is lost', () => {
+  const { names, shelves, index } = supportedPanels([
+    sample('Zed', 'One', ['documented']),
+    sample('Big', 'M', ['documented'], { sidebar: { label: 'M', order: 1 } }),
+    sample('Big', 'B', ['bench', 'open'], {
+      sold_as: [
+        { brand: 'Relabel', name: 'B2' },
+        { brand: 'Big', name: 'B Plus' },
+      ],
+      covers: [{ name: 'B Mini' }],
+    }),
+    sample('Big', 'C', ['documented'], { sidebar: { label: 'C', order: 2 } }),
+    sample('Old', 'Seven', ['documented'], { android: '7.0' }),
+    { slug: 'hardware/panels/big', data: { vendor: 'Big', title: 'Big', panelIndex: true } },
+  ]);
+  assert.deepEqual(
+    shelves.map((s) => [s.brand, s.cards.map((c) => `${c.brand} ${c.name}`)]),
+    [
+      // Equal confidence keeps the order of the brand's menu, not the alphabet.
+      ['Big', ['Big B', 'Big M', 'Big C']],
+      // A relabelled panel is as sure as the hardware it is, so it leads the shared shelf.
+      [null, ['Relabel B2', 'Zed One']],
+    ],
+  );
+  const [best] = shelves[0].cards;
+  assert.deepEqual([best.also, best.covers, best.sameAs], [['B Plus'], ['B Mini'], undefined]);
+  const [relabel, zed] = shelves[1].cards;
+  assert.deepEqual(
+    [relabel.sameAs, relabel.anchor, relabel.id],
+    ['Big B', 'sold-as', 'brand-relabel'],
+  );
+  assert.equal(zed.id, 'brand-zed');
+  assert.match(best.search, /Big B .*B Plus B Mini/);
+  // Six names: five cards and the model one of them also covers.
+  assert.equal(names, 6);
+  assert.deepEqual(
+    index.map((i) => i.brand),
+    ['Big', 'Relabel', 'Zed'],
+  );
 });
 
 test('every panel records its evidence, and its confidence bar shows on its page and in the guide', () => {
@@ -180,7 +277,7 @@ test('every panel records its evidence, and its confidence bar shows on its page
     if (parseFloat(String(data.android)) >= 8) {
       assert.match(
         guide,
-        new RegExp(`href="${slug}"[\\s\\S]{0,400}?aria-label="Confidence: `),
+        new RegExp(`href="${slug}"[\\s\\S]{0,1200}?aria-label="Confidence: `),
         `${slug} has no bar in the guide`,
       );
     }

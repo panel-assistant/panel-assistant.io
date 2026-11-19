@@ -11,10 +11,6 @@ root: Relays, button LEDs, proximity (app su reported working)
 webview_ships_with: 'Chromium 83 on 2024-07 firmware; 131 on 2025-12 firmware'
 webview_can_reach: 'Not established — root and userdebug alone do not verify a replacement'
 released: 'not before 2021 (est., RK3566 SoC)'
-photos:
-  - src: 'asset:hardware-smatek-s9e-front.jpg'
-    alt: Smatek S9E, front and rear, showing the relay and terminal wiring
-photoCredit: 'Photo: Smatek'
 sold_as_note: 'Zigbee (Tuya) version with two mains relays, AC 100-240 V'
 sold_as:
   - brand: Smatek

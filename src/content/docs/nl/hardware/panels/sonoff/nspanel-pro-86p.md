@@ -11,14 +11,6 @@ support: Volledig
 root: userdebug, geen adb-wachtwoord; su voor uitschakelen achtergrondverlichting
 webview: Chromium 107 op 3.5.1; LineageOS 138 handmatig installeren
 released: '2022-09 (schatting)'
-photos:
-  - src: 'asset:hardware-sonoff-nspanel-pro-front.jpg'
-    alt: Sonoff NSPanel Pro 86P, voorkant, aan de muur
-  - src: 'asset:hardware-sonoff-nspanel-pro-86p-angle-black-trim.jpg'
-    alt: Sonoff NSPanel Pro 86P, zwarte uitvoering, schuin zicht op montagediepte
-  - src: 'asset:hardware-sonoff-nspanel-pro-86p-angle-white-trim.jpg'
-    alt: Sonoff NSPanel Pro 86P, witte uitvoering, schuin zicht op montagediepte
-photoCredit: 'Foto: Sonoff'
 evidence: [bench, open, firmware, documented, owners]
 sidebar:
   label: NSPanel Pro 86P

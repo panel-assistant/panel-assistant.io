@@ -11,10 +11,6 @@ support: 完整支持
 root: userdebug，无 adb 密码；关闭背光需要 su
 webview: 固件 3.5.1 为 Chromium 107；可侧载 LineageOS 138
 released: '2024-08（估计）'
-photos:
-  - src: 'asset:hardware-sonoff-nspanel-pro-120p-front.jpg'
-    alt: 墙上安装的白色和黑色 Sonoff NSPanel Pro 120P 正面
-photoCredit: '照片：Sonoff'
 evidence: [bench, open, firmware, documented, owners]
 sidebar:
   label: NSPanel Pro 120P

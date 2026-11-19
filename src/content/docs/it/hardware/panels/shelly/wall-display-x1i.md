@@ -10,14 +10,6 @@ support: Non testato
 root: Non accertato su questo modello
 webview: 'Non accertato (il canale WallDisplayV2 non contiene un pacchetto WebView OTA)'
 released: '2026-07 (stima)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x1i-front.jpg'
-    alt: Shelly Wall Display X1i, vista frontale
-  - src: 'asset:hardware-shelly-wall-display-x1i-silver.jpg'
-    alt: Shelly Wall Display X1i, finitura argento, vista frontale
-  - src: 'asset:hardware-shelly-wall-display-x1i-rear-label.jpg'
-    alt: Shelly Wall Display X1i, retro con etichetta del modello SAWD-6A1XX10EU0
-photoCredit: 'Foto: Shelly'
 evidence: [firmware, documented, platform]
 sidebar:
   label: Wall Display X1i

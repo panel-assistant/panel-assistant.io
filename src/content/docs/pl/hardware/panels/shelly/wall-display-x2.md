@@ -10,10 +10,6 @@ support: Nieprzetestowany
 root: Nie ustalono dla tego modelu
 webview: 'Nie ustalono (ścieżka WallDisplay nie zawiera pakietu OTA WebView dla tego modelu)'
 released: '2025-01 (szac.)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x2-front.jpg'
-    alt: Shelly Wall Display X2, przód
-photoCredit: 'Zdjęcie: Shelly'
 evidence: [firmware, documented]
 sidebar:
   label: Wall Display X2

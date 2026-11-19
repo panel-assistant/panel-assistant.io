@@ -11,12 +11,6 @@ root: Not established; userdebug base build, unconfirmed
 webview_ships_with: 'Factory version not established'
 webview_can_reach: 'Chromium 119.0.6045.194 through Shelly’s official WebView ZIP; Android 7 major ceiling'
 released: '2023-09 (est.)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-front.jpg'
-    alt: Shelly Wall Display, original model, with its H&T sensor accessory
-  - src: 'asset:hardware-shelly-wall-display-rear-label.jpg'
-    alt: Shelly Wall Display, rear, showing the model label and wall box
-photoCredit: 'Photo: Shelly'
 evidence: [firmware, documented]
 sidebar:
   label: Wall Display (original)

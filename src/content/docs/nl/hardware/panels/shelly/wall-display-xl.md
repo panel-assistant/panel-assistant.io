@@ -11,14 +11,6 @@ support: Niet getest
 root: Niet vastgesteld voor dit model
 webview: 'Niet vastgesteld (het WallDisplayV2-kanaal bevat geen OTA-WebView-pakket)'
 released: '2025-09 (schatting)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-xl-front.jpg'
-    alt: Shelly Wall Display XL, voorkant
-  - src: 'asset:hardware-shelly-wall-display-xl-screen-trim.jpg'
-    alt: Shelly Wall Display XL, recht van voren gezien scherm
-  - src: 'asset:hardware-shelly-wall-display-xl-profile-trim.jpg'
-    alt: Shelly Wall Display XL, zijaanzicht met montagediepte
-photoCredit: 'Foto: Shelly'
 evidence: [firmware, documented, platform]
 sidebar:
   label: Wall Display XL

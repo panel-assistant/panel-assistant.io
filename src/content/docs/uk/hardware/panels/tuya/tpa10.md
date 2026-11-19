@@ -10,12 +10,6 @@ support: Повна
 root: su присутній; допоміжний процес для світлодіода, клімату й п’ятої кнопки
 webview: Chrome 83; заміна через root на LineageOS 150
 released: '2023-08 (оцінка)'
-photos:
-  - src: 'asset:hardware-tuya-tpa10-front.jpg'
-    alt: Tuya TPA10 спереду, з бічною смугою кнопок
-  - src: 'asset:hardware-tuya-tpa10-front-flat.jpg'
-    alt: Tuya TPA10, вигляд спереду з бічною смугою кнопок і краєм рамки
-photoCredit: 'Фото: Tuya'
 sold_as:
   - brand: Tuya
     name: 'TPA10-M2'

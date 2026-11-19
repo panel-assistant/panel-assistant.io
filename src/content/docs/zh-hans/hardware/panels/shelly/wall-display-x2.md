@@ -11,10 +11,6 @@ support: 未测试
 root: 此型号尚未确认
 webview: '尚未确认（WallDisplay 更新分支未提供此型号的 OTA WebView 软件包）'
 released: '2025-01（估计）'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x2-front.jpg'
-    alt: Shelly Wall Display X2 正面
-photoCredit: '照片：Shelly'
 evidence: [firmware, documented]
 sidebar:
   label: Wall Display X2

@@ -10,14 +10,6 @@ support: Nieprzetestowany
 root: Nieustalone dla tego modelu
 webview: 'Nieustalone (kanał WallDisplayV2 nie zawiera pakietu OTA WebView)'
 released: '2025-09 (szac.)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-xl-front.jpg'
-    alt: Shelly Wall Display XL, przód
-  - src: 'asset:hardware-shelly-wall-display-xl-screen-trim.jpg'
-    alt: Shelly Wall Display XL, ekran widziany na wprost
-  - src: 'asset:hardware-shelly-wall-display-xl-profile-trim.jpg'
-    alt: Shelly Wall Display XL, profil boczny pokazujący głębokość montażu
-photoCredit: 'Zdjęcie: Shelly'
 evidence: [firmware, documented, platform]
 sidebar:
   label: Wall Display XL

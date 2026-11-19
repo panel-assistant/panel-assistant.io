@@ -11,14 +11,6 @@ support: 完整支持
 root: userdebug，无 adb 密码；关闭背光需要 su
 webview: 固件 3.5.1 为 Chromium 107；可侧载 LineageOS 138
 released: '2022-09（估计）'
-photos:
-  - src: 'asset:hardware-sonoff-nspanel-pro-front.jpg'
-    alt: 墙上安装的 Sonoff NSPanel Pro 86P 正面
-  - src: 'asset:hardware-sonoff-nspanel-pro-86p-angle-black-trim.jpg'
-    alt: 黑色 Sonoff NSPanel Pro 86P 斜视图，显示安装深度
-  - src: 'asset:hardware-sonoff-nspanel-pro-86p-angle-white-trim.jpg'
-    alt: 白色 Sonoff NSPanel Pro 86P 斜视图，显示安装深度
-photoCredit: '照片：Sonoff'
 evidence: [bench, open, firmware, documented, owners]
 sidebar:
   label: NSPanel Pro 86P

@@ -10,12 +10,6 @@ support: Volledig
 root: su aanwezig; helper voor led, klimaat, vijfde knop
 webview: Chrome 83; vervanging door LineageOS 150 met root
 released: '2023-08 (geschat)'
-photos:
-  - src: 'asset:hardware-tuya-tpa10-front.jpg'
-    alt: Tuya TPA10, voorkant met de knoppenstrook aan de zijkant
-  - src: 'asset:hardware-tuya-tpa10-front-flat.jpg'
-    alt: Tuya TPA10, recht van voren, met de knoppenstrook aan de zijkant en de rand van de omlijsting
-photoCredit: 'Foto: Tuya'
 sold_as:
   - brand: Tuya
     name: 'TPA10-M2'

@@ -10,14 +10,6 @@ support: Повна
 root: userdebug, без пароля adb; su для вимкнення підсвічування
 webview: Chromium 107 на 3.5.1; ручне встановлення LineageOS 138
 released: '2022-09 (прибл.)'
-photos:
-  - src: 'asset:hardware-sonoff-nspanel-pro-front.jpg'
-    alt: Sonoff NSPanel Pro 86P, спереду, на стіні
-  - src: 'asset:hardware-sonoff-nspanel-pro-86p-angle-black-trim.jpg'
-    alt: Sonoff NSPanel Pro 86P, чорний, під кутом із глибиною кріплення
-  - src: 'asset:hardware-sonoff-nspanel-pro-86p-angle-white-trim.jpg'
-    alt: Sonoff NSPanel Pro 86P, білий, під кутом із глибиною кріплення
-photoCredit: 'Фото: Sonoff'
 evidence: [bench, open, firmware, documented, owners]
 sidebar:
   label: NSPanel Pro 86P

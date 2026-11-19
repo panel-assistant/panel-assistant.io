@@ -11,10 +11,6 @@ root: Not established on this model
 webview_ships_with: 'Not established'
 webview_can_reach: 'Not established — no verified provider update route for this model'
 released: '2025-01 (est.)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x2-front.jpg'
-    alt: Shelly Wall Display X2, front
-photoCredit: 'Photo: Shelly'
 evidence: [firmware, documented]
 sidebar:
   label: Wall Display X2

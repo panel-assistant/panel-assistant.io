@@ -11,10 +11,6 @@ support: Niet getest
 root: Niet vastgesteld voor dit model
 webview: 'Niet vastgesteld (het WallDisplay-kanaal bevat geen OTA-WebView-pakket voor dit model)'
 released: '2025-01 (schatting)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x2-front.jpg'
-    alt: Shelly Wall Display X2, voorkant
-photoCredit: 'Foto: Shelly'
 evidence: [firmware, documented]
 sidebar:
   label: Wall Display X2

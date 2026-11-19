@@ -10,12 +10,6 @@ support: Vollständig
 root: su vorhanden; Helfer für LED, Klima, fünfte Taste
 webview: Chrome 83; Austausch mit Root zu LineageOS 150
 released: '2023-08 (geschätzt)'
-photos:
-  - src: 'asset:hardware-tuya-tpa10-front.jpg'
-    alt: Tuya TPA10, Vorderseite mit seitlicher Tastenleiste
-  - src: 'asset:hardware-tuya-tpa10-front-flat.jpg'
-    alt: Tuya TPA10, flache Vorderansicht mit seitlicher Tastenleiste und Rahmenkante
-photoCredit: 'Foto: Tuya'
 sold_as:
   - brand: Tuya
     name: 'TPA10-M2'

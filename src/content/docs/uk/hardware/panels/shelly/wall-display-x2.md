@@ -11,10 +11,6 @@ support: Не перевірено
 root: Не встановлено для цієї моделі
 webview: 'Не встановлено (гілка WallDisplay не містить OTA-пакета WebView для цієї моделі)'
 released: '2025-01 (прибл.)'
-photos:
-  - src: 'asset:hardware-shelly-wall-display-x2-front.jpg'
-    alt: Shelly Wall Display X2, вигляд спереду
-photoCredit: 'Фото: Shelly'
 evidence: [firmware, documented]
 sidebar:
   label: Wall Display X2

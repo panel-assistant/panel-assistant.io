@@ -1,106 +1,392 @@
 ---
-// Every panel model with its own hardware page, grouped by brand exactly as the Hardware → Panels
-// menu groups them, with a bar showing how much evidence backs it. Read from the panel pages' front matter, so
-// a new page appears here with no edit. Family overviews are not models, and a panel below
-// Panel Assistant's minimum Android version is not listed as one that runs it.
+// Every name a panel that runs Panel Assistant is sold under, as a picture card on its brand's
+// shelf, with a bar showing how much evidence backs it. Read from the panel pages' front matter
+// through `supportedPanels`, so a new page appears here with no edit. The pictures are the ones
+// published for each panel: the site fills each slot as it serves the page.
 import { getCollection } from 'astro:content';
-import { catalogueGroups, confidence } from '../hardware/catalogue.mjs';
+import { supportedPanels } from '../hardware/catalogue.mjs';
+import { panelIdentity } from '../product-images/gallery.mjs';
 import ConfidenceBar from './ConfidenceBar.astro';
 
 const t = Astro.locals.t;
 const { locale } = Astro.locals.starlightRoute;
 const prefix = locale ? `/${locale}` : '';
 
-const runs = (data: Record<string, unknown>) =>
-  !data.panelIndex && !(parseFloat(String(data.android ?? '99')) < 8);
-
 const pages = (await getCollection('docs', (e) => e.id.startsWith('hardware/panels/'))).map(
   (e) => ({ slug: e.id, data: e.data as Record<string, unknown> }),
 );
-type Listed = { label: string; href: string; data: Record<string, unknown> };
-const groups: { brand: string; entries: Listed[] }[] = catalogueGroups(pages)
-  .map(({ brand, entries }) => ({
-    brand,
-    entries: entries
-      .filter((e: { data: Record<string, unknown> }) => runs(e.data))
-      .sort(
-        (a: { data: Record<string, unknown> }, b: { data: Record<string, unknown> }) =>
-          confidence(b.data).score - confidence(a.data).score,
-      )
-      .map(
-        (e: { label: string; slug: string; anchor?: string; data: Record<string, unknown> }) => ({
-          label: e.label,
-          href: `${prefix}/${e.slug}/${e.anchor ? `#${e.anchor}` : ''}`,
-          data: e.data,
-        }),
-      ),
-  }))
-  .filter((g: { entries: unknown[] }) => g.entries.length > 0);
-const models = groups.reduce((n: number, g: { entries: unknown[] }) => n + g.entries.length, 0);
+type Card = {
+  id?: string;
+  brand: string;
+  name: string;
+  slug: string;
+  anchor?: string;
+  data: Record<string, unknown>;
+  facts: string[];
+  also: string[];
+  covers: string[];
+  sameAs?: string;
+  search: string;
+};
+const {
+  names,
+  shelves,
+  index,
+}: {
+  names: number;
+  shelves: { brand: string | null; id: string; cards: Card[] }[];
+  index: unknown[];
+} = supportedPanels(pages);
 ---
 
-<p class="coverage">
-  <strong>
-    {t('panels.count')
-      .replace('{models}', String(models))
-      .replace('{brands}', String(groups.length))}
-  </strong>{' '}
-  {t('panels.coverage')}
-</p>
-<div class="brands not-content" data-pagefind-ignore>
-  {groups.map((g) => (
-    <section class="brand">
-      <h3>{g.brand}</h3>
-      <ul>
-        {g.entries.map((e) => (
-          <li>
-            <a href={e.href}>{e.label}</a>
-            <ConfidenceBar data={e.data} />
-            <span class="webview-capability">
-              <strong>WebView — Can reach:</strong>{' '}
-              {String(e.data.webview_can_reach ?? 'Not established')}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  ))}
+<div class="list not-content" data-panel-list data-pagefind-ignore>
+  <div class="find" hidden>
+    <label for="find-panel">{t('panels.find')}</label>
+    <input
+      id="find-panel"
+      type="search"
+      placeholder={t('panels.find_example')}
+      autocomplete="off"
+      spellcheck="false"
+      enterkeyhint="search"
+    />
+  </div>
+  <p class="coverage">
+    <strong>
+      {t('panels.count')
+        .replace('{models}', String(names))
+        .replace('{brands}', String(index.length))}
+    </strong>{' '}
+    {t('panels.coverage')}
+  </p>
+  <div class="panels">
+    {shelves.map((s) => (
+      <section class="shelf">
+        <h3 id={s.id}>{s.brand ?? t('panels.more_brands')}</h3>
+        <ul role="list">
+          {s.cards.map((c) => (
+            <li class="card" id={c.id} data-search={c.search}>
+              <span
+                class="picture"
+                data-panel-images="tile"
+                data-panel-model={panelIdentity(c.slug)?.id}
+                data-panel-alt={`${c.brand} ${c.name}`}
+              />
+              <span class="text">
+                {!s.brand && <span class="brand">{c.brand}</span>}
+                <a class="name" href={`${prefix}/${c.slug}/${c.anchor ? `#${c.anchor}` : ''}`}>
+                  {c.name}
+                </a>
+                {c.facts.length > 0 && <span class="facts">{c.facts.join(' · ')}</span>}
+                {c.sameAs && (
+                  <span class="also">
+                    {t('panels.same_as')} {c.sameAs}
+                  </span>
+                )}
+                {c.covers.length > 0 && (
+                  <span class="also">
+                    {t('panels.covers')} {c.covers.join(', ')}
+                  </span>
+                )}
+                {c.also.length > 0 && (
+                  <span class="also">
+                    {t('panels.also')} {c.also.join(', ')}
+                  </span>
+                )}
+              </span>
+              {c.data.webview_can_reach && (
+                <details class="webview">
+                  <summary>
+                    <span class="webview-label">WebView — Can reach:</span>{' '}
+                    {String(c.data.webview_can_reach).split(/\s[—–]\s|;/)[0]}
+                  </summary>
+                  {String(c.data.webview_can_reach)}
+                </details>
+              )}
+              <span class="evidence">
+                <span class="evidence-label">{t('confidence.title')}</span>
+                <ConfidenceBar data={c.data} />
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+    <p class="none" role="status" hidden>
+      {t('panels.none')}
+    </p>
+  </div>
 </div>
 
+<script>
+  // Narrows the list to the cards whose brand, name or model contains every word typed.
+  const plain = (text: string) =>
+    text
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}]+/gu, ' ')
+      .trim();
+  for (const list of document.querySelectorAll<HTMLElement>('[data-panel-list]')) {
+    const find = list.querySelector<HTMLElement>('.find');
+    const input = list.querySelector<HTMLInputElement>('input');
+    const none = list.querySelector<HTMLElement>('.none');
+    if (!find || !input || !none) continue;
+    const cards = [...list.querySelectorAll<HTMLElement>('.card')].map((card) => ({
+      card,
+      text: ` ${plain(card.dataset.search ?? '')}`,
+    }));
+    const apply = () => {
+      const words = plain(input.value).split(' ').filter(Boolean);
+      let shown = 0;
+      for (const { card, text } of cards) {
+        const hit = words.every((word) => text.includes(word));
+        card.hidden = !hit;
+        if (hit) shown += 1;
+      }
+      for (const shelf of list.querySelectorAll<HTMLElement>('.shelf'))
+        shelf.hidden = !shelf.querySelector('.card:not([hidden])');
+      none.hidden = shown > 0;
+    };
+    input.addEventListener('input', apply);
+    // A brand chosen from the page menu, or any link into the list, shows that brand: a filter
+    // that hides its target is cleared first, so the jump always lands on something.
+    const reveal = (hash: string) => {
+      const target =
+        hash.length > 1 ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+      if (!target || !list.contains(target) || !target.closest('[hidden]')) return null;
+      input.value = '';
+      apply();
+      return target;
+    };
+    document.addEventListener(
+      'click',
+      (event) => {
+        const link = event.target instanceof Element ? event.target.closest('a') : null;
+        if (link?.hash && link.pathname === location.pathname) reveal(link.hash);
+      },
+      true,
+    );
+    window.addEventListener('hashchange', () => reveal(location.hash)?.scrollIntoView());
+    find.hidden = false;
+    apply();
+  }
+</script>
+
 <style>
-  .webview-capability {
-    flex-basis: 100%;
-    font-size: var(--sl-text-sm);
-  }
   .coverage {
+    margin: 0;
     font-size: var(--sl-text-lg);
+    line-height: 1.6;
+    color: var(--sl-color-gray-2);
   }
-  .brands {
+  .coverage strong {
+    color: var(--sl-color-white);
+  }
+  .list {
+    --tile: #e8ecf1;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
-    gap: 1rem;
-    margin-top: 1.5rem;
+    gap: 1.25rem;
+    container-type: inline-size;
+    margin-top: 1.25rem;
   }
-  .brand {
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.5rem;
+  :global([data-theme='dark']) .list {
+    --tile: #c9d1dc;
   }
-  .brand h3 {
-    margin: 0 0 0.5rem;
+  .shelf h3 {
+    margin: 0;
     font-size: var(--sl-text-lg);
+    line-height: 1.3;
   }
-  .brand ul {
-    list-style: none;
+  ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
     margin: 0;
     padding: 0;
+    list-style: none;
   }
-  .brand li {
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+    padding: 0.625rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.625rem;
+    background: var(--sl-color-bg);
+  }
+  /* Raised while in use, so its evidence list opens over the cards below it. */
+  .card:hover,
+  .card:focus-within {
+    z-index: 2;
+    border-color: var(--sl-color-gray-3);
+  }
+  /* The picture area is the same on every card; the whole panel shows inside it, never cropped. */
+  .picture {
+    position: relative;
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0 0.5rem;
-    padding: 0.25rem 0;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+    border-radius: 0.375rem;
+    background: var(--tile);
+  }
+  .picture :global(img) {
+    position: absolute;
+    inset: 0.625rem;
+    width: calc(100% - 1.25rem);
+    height: calc(100% - 1.25rem);
+    object-fit: contain;
+    filter: drop-shadow(0 0.125rem 0.375rem rgb(0 0 0 / 30%));
+  }
+  /* The site fills this with the panel's published picture as it serves the page. With none
+     published, or the image store out of reach, an outline of a panel stands in. */
+  .picture:empty::before {
+    content: '';
+    width: 46%;
+    aspect-ratio: 4 / 3;
+    border: 0.1875rem solid rgb(0 0 0 / 25%);
+    border-bottom-width: 0.5rem;
+    border-radius: 0.375rem;
+  }
+  .text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+  }
+  .brand {
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--sl-color-gray-3);
+  }
+  .name {
+    font-size: var(--sl-text-base);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--sl-color-white);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  /* The whole card opens the hardware page; the confidence bar stays reachable above it. */
+  .name::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+  .card:hover .name {
+    color: var(--sl-color-text-accent);
+    text-decoration: underline;
+  }
+  .name:focus-visible {
+    outline: none;
+  }
+  .name:focus-visible::after {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+  .facts,
+  .also {
+    font-size: var(--sl-text-sm);
+    line-height: 1.4;
+    color: var(--sl-color-gray-2);
+  }
+  .also {
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+  /* The newest browser engine the panel can run: the short answer shows, the conditions open. */
+  .webview {
+    position: relative;
+    z-index: 1;
+    font-size: var(--sl-text-xs);
+    line-height: 1.4;
+    color: var(--sl-color-gray-2);
+  }
+  .webview summary {
+    cursor: pointer;
+  }
+  .webview-label {
+    font-weight: 600;
+  }
+  .evidence {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+  /* The evidence list opens across the card, so it cannot run off a narrow screen. */
+  .evidence :global(.confidence-wrap) {
+    position: static;
+    z-index: 1;
+    flex: 1;
+  }
+  .evidence :global(.confidence) {
+    width: 100%;
+  }
+  .evidence :global(.confidence-wrap:not(.open) .detail) {
+    top: calc(100% - 0.375rem);
+    right: 0;
+    left: 0;
+    z-index: 10;
+    width: auto;
+    max-width: none;
+  }
+
+  .panels {
+    display: grid;
+    gap: 1.75rem;
+  }
+  .shelf {
+    display: grid;
+    gap: 0.75rem;
+  }
+  @container (min-width: 34rem) {
+    ul {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  /* Finding one panel by name, without scrolling the list. */
+  .find {
+    display: grid;
+    gap: 0.375rem;
+  }
+  .find label {
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .find input {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 24rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: 0.5rem;
+    background: var(--sl-color-bg);
+    color: var(--sl-color-white);
+    font: inherit;
+  }
+  .find input:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 1px;
+  }
+  /* What the find field filters out is gone, whatever layout its class gives it. */
+  .card[hidden],
+  .shelf[hidden],
+  .find[hidden] {
+    display: none;
+  }
+  .none {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.625rem;
   }
 </style>

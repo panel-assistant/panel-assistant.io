@@ -41,23 +41,6 @@ export function panelIdentity(entryId) {
   return { id: `${match[2]}/${match[3]}`, locale: match[1] || 'en' };
 }
 
-/** Adapt legacy page metadata without changing localized captions or provenance. */
-export function staticGallery(data, resolveAsset) {
-  return {
-    heroImageId: data.heroImageId,
-    images: (Array.isArray(data.photos) ? data.photos : []).map((photo) => ({
-      id: photo.id,
-      alt: photo.alt,
-      credit: photo.credit?.trim() || data.photoCredit || '',
-      source: photo.source,
-      thumb: resolveAsset(photo.src),
-      large: resolveAsset(photo.full?.trim() || photo.src),
-      width: photo.width,
-      height: photo.height,
-    })),
-  };
-}
-
 export function renderHero(model) {
   const photos = images(model);
   const index = heroIndex(model, photos);
@@ -101,4 +84,19 @@ export function renderThumbnail(model, href) {
   if (!['https:', 'http:'].includes(target.protocol) || target.username || target.password)
     return '';
   return `<a href="${escape(href)}" tabindex="-1" aria-hidden="true"><img src="${escape(photo.thumb)}" alt="" loading="lazy" width="48" height="48"></a>`;
+}
+
+/**
+ * One picture for a model in a list of panels: the chosen hero, else the first image. The caller
+ * names the panel in `alt`, because a photo's own caption describes the shot, not the product.
+ * Empty when the model has no image, so the slot's own placeholder shows.
+ */
+export function renderTile(model, alt) {
+  const photos = images(model);
+  const photo = photos[heroIndex(model, photos)] || photos[0];
+  if (!photo) return '';
+  const size = (value) => (Number.isInteger(value) && value > 0 ? value : 0);
+  const [width, height] = [size(photo.width), size(photo.height)];
+  const box = width && height ? ` width="${width}" height="${height}"` : '';
+  return `<img src="${escape(photo.thumb)}" alt="${escape(alt)}"${box} loading="lazy" decoding="async">`;
 }

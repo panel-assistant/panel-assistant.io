@@ -1,37 +1,17 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { handlePanelImages, hasPanelImages } from './panel-images.js';
 
-test('raw HTMLRewriter attributes preserve localized text and current credits without decoding literal entities twice', async () => {
+test('each slot is filled from the published image set, and a list picture is named by its page', async () => {
   const originalRewriter = globalThis.HTMLRewriter;
-  const rawTexts = JSON.stringify([
-    {
-      id: 'front',
-      alt: `H&T <Panel> "quoted" 'apostrophe' &quot; © 😀`,
-      credit: 'Foto: H&T',
-      canonicalCredit: 'Photo: H&T',
-    },
-    {
-      id: 'rear',
-      alt: 'Rückseite',
-      credit: 'Veralteter Anbieter',
-      canonicalCredit: 'Old provider',
-    },
-  ])
-    .replace(
-      /[&"'<>]/g,
-      (char) => ({ '&': '&amp;', '"': '&quot;', "'": '&#39;', '<': '&lt;', '>': '&gt;' })[char],
-    )
-    .replace('&#39;apostrophe&#39;', '&#39;apostrophe&#x27;')
-    .replace('©', '&#169;')
-    .replace('😀', '&#x1F600;');
   const url = `https://assets.panel-assistant.io/published-images/${'a'.repeat(64)}.png`;
   const model = {
     id: 'vendor/panel',
-    heroImageId: 'front',
+    heroImageId: 'rear',
     images: [
-      { id: 'front', alt: 'English front', credit: 'Photo: H&T', thumb: url, large: url },
-      { id: 'rear', alt: 'English rear', credit: 'Corrected provider', thumb: url, large: url },
+      { id: 'front', alt: 'Front & "side"', credit: 'Photo: H&T', thumb: url, large: url },
+      { id: 'rear', alt: 'Rear', credit: 'Corrected provider', thumb: url, large: url },
     ],
   };
   const replacements = new Map();
@@ -41,17 +21,25 @@ test('raw HTMLRewriter attributes preserve localized text and current credits wi
       return this;
     }
     transform(response) {
-      for (const slot of ['hero', 'gallery', 'thumbnail']) {
+      for (const [slot, id] of [
+        ['hero', model.id],
+        ['gallery', model.id],
+        ['thumbnail', model.id],
+        ['tile', model.id],
+        ['tile', 'vendor/unpublished'],
+        ['other', model.id],
+      ]) {
+        // HTMLRewriter hands over the attribute as written in the page, entities included.
         const attributes = {
           'data-panel-images': slot,
-          'data-panel-model': model.id,
+          'data-panel-model': id,
           'data-panel-locale': 'de',
-          'data-panel-texts': rawTexts,
           'data-panel-href': '/hardware/panels/vendor/panel/',
+          'data-panel-alt': 'H&amp;T &quot;Panel&quot; &amp;lt; &#169; &#x1F600;',
         };
         this.handler.element({
           getAttribute: (name) => attributes[name] ?? null,
-          setInnerContent: (html) => replacements.set(slot, html),
+          setInnerContent: (html) => replacements.set(`${slot} ${id}`, html),
         });
       }
       return response;
@@ -63,7 +51,7 @@ test('raw HTMLRewriter attributes preserve localized text and current credits wi
       {
         ASSETS: {
           fetch: async () =>
-            new Response('<main>Static slots</main>', {
+            new Response('<main>Empty slots</main>', {
               headers: { 'content-type': 'text/html' },
             }),
         },
@@ -75,29 +63,42 @@ test('raw HTMLRewriter attributes preserve localized text and current credits wi
       },
     );
     assert.equal(response.headers.get('x-panel-images-revision'), 'r1');
-    const escapedAlt =
-      'H&amp;T &lt;Panel&gt; &quot;quoted&quot; &#39;apostrophe&#39; &amp;quot; © 😀';
-    assert.ok(replacements.get('hero').includes(`alt="${escapedAlt}"`));
-    const gallery = replacements.get('gallery');
-    assert.ok(gallery.includes(`alt="${escapedAlt}"`));
-    assert.ok(gallery.includes('Foto: H&amp;T'));
-    assert.ok(gallery.includes('Rückseite'));
+    assert.match(
+      replacements.get('hero vendor/panel'),
+      /data-open-photo="1"[^>]*>\s*<img[^>]*alt="Rear"/,
+    );
+    const gallery = replacements.get('gallery vendor/panel');
+    assert.ok(gallery.includes('alt="Front &amp; &quot;side&quot;"'));
+    assert.ok(gallery.includes('Photo: H&amp;T'));
     assert.ok(gallery.includes('Corrected provider'));
-    assert.ok(!gallery.includes('Veralteter Anbieter'));
-    assert.ok(!gallery.includes('English front'));
-    assert.ok(replacements.get('thumbnail').includes(url));
+    assert.ok(replacements.get('thumbnail vendor/panel').includes(url));
+    // A list picture is named by the page, decoded once: a literal "&lt;" stays text.
+    assert.equal(
+      replacements.get('tile vendor/panel'),
+      `<img src="${url}" alt="H&amp;T &quot;Panel&quot; &amp;lt; © 😀" loading="lazy" decoding="async">`,
+    );
+    // A model with nothing published, and a slot this Worker does not know, are left as built.
+    assert.deepEqual([...replacements.keys()].sort(), [
+      'gallery vendor/panel',
+      'hero vendor/panel',
+      'thumbnail vendor/panel',
+      'tile vendor/panel',
+    ]);
   } finally {
     if (originalRewriter === undefined) delete globalThis.HTMLRewriter;
     else globalThis.HTMLRewriter = originalRewriter;
   }
 });
 
-test('only hardware overview and panel routes enter the live image response path', async () => {
+test('only the hardware overview, panel pages and the list of panels enter the live image response path', async () => {
   for (const path of [
     '/hardware/',
     '/hardware',
     '/hardware/panels/meta/portal-go/',
     '/de/hardware/panels/meta/portal-go/',
+    '/install/supported-panels/',
+    '/install/supported-panels',
+    '/zh-hans/install/supported-panels/',
   ])
     assert.equal(hasPanelImages(path), true, path);
   for (const path of [
@@ -107,6 +108,10 @@ test('only hardware overview and panel routes enter the live image response path
     '/go/hardware',
     '/hardware/guides/root-access/',
     '/xx/hardware/',
+    '/install/',
+    '/install/supported-panels/extra/',
+    '/install/prepare-a-panel/',
+    '/xx/install/supported-panels/',
   ]) {
     assert.equal(hasPanelImages(path), false, path);
     assert.equal(await handlePanelImages(new Request(`https://example.com${path}`), {}), null);
@@ -160,4 +165,21 @@ test('hardware fallback HTML cannot retain a conditional static response or stal
     assert.equal(response.headers.get('x-panel-images'), 'unavailable');
     assert.equal(await response.text(), method === 'HEAD' ? '' : '<p>Built fallback</p>');
   }
+});
+
+test('every address that carries picture slots is routed to the Worker before the static page', () => {
+  const config = readFileSync(new URL('./wrangler.jsonc', import.meta.url), 'utf8');
+  const routed = [...config.matchAll(/"(\/[^"]*)\*"/g)].map((match) => match[1]);
+  for (const locale of ['', '/de', '/es', '/fr', '/it', '/nl', '/pl', '/uk', '/zh-hans'])
+    for (const path of [
+      '/hardware/',
+      '/hardware/panels/meta/portal-go/',
+      '/install/supported-panels/',
+    ]) {
+      assert.equal(hasPanelImages(locale + path), true, locale + path);
+      assert.ok(
+        routed.some((prefix) => (locale + path).startsWith(prefix)),
+        `${locale + path} is served without its pictures`,
+      );
+    }
 });

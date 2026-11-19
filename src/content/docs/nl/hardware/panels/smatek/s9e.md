@@ -10,10 +10,6 @@ support: Getest door de gemeenschap
 root: Relais, knopleds, nabijheid (werkende app-su gemeld)
 webview: Chromium 83 op 2024-07; 131 op 2025-12
 released: 'niet vóór 2021 (schatting, RK3566-SoC)'
-photos:
-  - src: 'asset:hardware-smatek-s9e-front.jpg'
-    alt: Smatek S9E, voor- en achterkant met relais- en aansluitbedrading
-photoCredit: 'Foto: Smatek'
 sold_as_note: 'Zigbee-versie (Tuya) met twee netspanningsrelais, AC 100-240 V'
 sold_as:
   - brand: Smatek

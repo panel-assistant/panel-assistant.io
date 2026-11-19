@@ -99,8 +99,8 @@ export default defineConfig({
         Footer: './src/components/Footer.astro',
         LastUpdated: './src/components/LastUpdated.astro',
       },
-      // Panel pages link to their entry in the page editor at /admin/.
-      routeMiddleware: './src/editor/route-data.ts',
+      // Panel pages link to their entry in the page editor; the supported-panels page indexes its brands.
+      routeMiddleware: ['./src/editor/route-data.ts', './src/hardware/route-data.ts'],
       // Untranslated pages are served as English fallbacks, and a translated page must link inside
       // its own language.
       plugins: [

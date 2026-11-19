@@ -10,10 +10,6 @@ support: Von der Community getestet
 root: Relais, Tasten-LEDs, Näherung (su aus Apps laut Bericht funktionsfähig)
 webview: Chromium 83 in 2024-07; 131 in 2025-12
 released: 'nicht vor 2021 (geschätzt, RK3566-SoC)'
-photos:
-  - src: 'asset:hardware-smatek-s9e-front.jpg'
-    alt: Smatek S9E, Vorder- und Rückseite mit Relais und Anschlussverdrahtung
-photoCredit: 'Foto: Smatek'
 sold_as_note: 'Zigbee-Version (Tuya) mit zwei Netzspannungsrelais, AC 100-240 V'
 sold_as:
   - brand: Smatek

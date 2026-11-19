@@ -2,10 +2,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   panelIdentity,
-  staticGallery,
   renderHero,
   renderGallery,
   renderThumbnail,
+  renderTile,
 } from './gallery.mjs';
 
 const front = {
@@ -75,31 +75,6 @@ test('untrusted image text is escaped and unsafe URLs cannot become executable m
   assert.equal(renderThumbnail({ images: [front] }, 'javascript:alert(1)'), '');
 });
 
-test('legacy localized page images retain their own text and fallback credit', () => {
-  const model = staticGallery(
-    {
-      heroImageId: 'front',
-      photoCredit: 'Legacy photographer',
-      photos: [
-        {
-          id: 'front',
-          src: 'asset:front.jpg',
-          full: 'asset:full.jpg',
-          alt: 'Vorne',
-          credit: 'Eigener Fotograf',
-        },
-        { src: 'asset:rear.jpg', alt: 'Hinten' },
-      ],
-    },
-    (src) => src.replace('asset:', 'https://assets.example/'),
-  );
-  assert.equal(model.images[0].large, 'https://assets.example/full.jpg');
-  assert.equal(model.images[0].credit, 'Eigener Fotograf');
-  assert.equal(model.images[1].credit, 'Legacy photographer');
-  assert.match(renderGallery(model), /alt="Vorne"/);
-  assert.match(renderHero(model), /full.jpg/);
-});
-
 test('only exact model entry IDs produce canonical identity across locales', () => {
   assert.deepEqual(panelIdentity('hardware/panels/electron/wf1589t'), {
     id: 'electron/wf1589t',
@@ -117,4 +92,24 @@ test('only exact model entry IDs produce canonical identity across locales', () 
     'guides/hardware/panels/electron/wf1589t',
   ])
     assert.equal(panelIdentity(page), null);
+});
+
+test('a list picture is the chosen hero, named by the caller, and nothing when there is no image', () => {
+  const model = { images: [{ ...front, width: 800, height: 600 }, rear], heroImageId: 'rear' };
+  const hero = renderTile(model, 'Vendor Panel');
+  assert.match(hero, /src="https:\/\/assets.example\/rear-small.webp"/);
+  assert.match(hero, /alt="Vendor Panel"/);
+  assert.doesNotMatch(hero, /alt="Rear"|width=/);
+  // No hero chosen: the first image, with its proportions so the page does not shift.
+  const first = renderTile({ images: model.images }, 'Vendor Panel');
+  assert.match(
+    first,
+    /front-small.webp" alt="Vendor Panel" width="800" height="600" loading="lazy"/,
+  );
+  assert.equal(renderTile({ images: [] }, 'Vendor Panel'), '');
+  assert.equal(renderTile({ images: [{ ...front, thumb: 'javascript:alert(1)' }] }, 'x'), '');
+  assert.match(
+    renderTile({ images: [{ ...front, width: '1" onload="x', height: 2 }] }, '"><script>'),
+    /^<img src="[^"]+" alt="&quot;&gt;&lt;script&gt;" loading="lazy" decoding="async">$/,
+  );
 });
