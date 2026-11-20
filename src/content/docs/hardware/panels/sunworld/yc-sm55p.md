@@ -47,4 +47,4 @@ Basic dashboard compatibility is reported by an owner on Generic. Individual con
 
 ## Published specifications
 
-Sunworld's own listing gives a 5.5 inch IPS screen at 1280 × 720, two microphones, a 1 W speaker and no camera, with RJ45 and RS485, powered from 12 V DC or over Ethernet. Sellers list it with Android 11 or 13; the owner report above is from a unit on Android 14. These are a seller's statements read in November 2026, not measurements: [Sunworld listing](https://www.aliexpress.com/item/1005012430488902.html).
+An AliExpress listing with the brand given as Sunworld describes a 5.5 inch IPS screen at 1280 × 720, two microphones, a 1 W speaker and no camera, with RJ45, powered from 12 V DC or over Ethernet; its title also names RS485. Sellers list the panel with Android 11 or 13; the owner report above is from a unit on Android 14. These are a seller's statements read in November 2026, not measurements: [listing](https://www.aliexpress.com/item/1005012430488902.html).
