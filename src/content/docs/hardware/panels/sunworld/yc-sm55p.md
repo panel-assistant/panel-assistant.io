@@ -4,6 +4,7 @@ description: Owner-reported dashboard compatibility and scoped test evidence for
 vendor: Sunworld
 model: YC-SM55P
 android: '14'
+screen: 5.5 in, 1280 × 720
 support: Community-tested
 evidence: []
 ownerReports:
@@ -43,3 +44,7 @@ ownerReports:
 ---
 
 Basic dashboard compatibility is reported by an owner on Generic. Individual controls and sensors have separate results below; this is not a bench inspection or a claim about every firmware version.
+
+## Published specifications
+
+An AliExpress listing with the brand given as Sunworld describes a 5.5 inch IPS screen at 1280 × 720, two microphones, a 1 W speaker and no camera, with RJ45, powered from 12 V DC or over Ethernet; its title also names RS485. Sellers list the panel with Android 11 or 13; the owner report above is from a unit on Android 14. These are a seller's statements read in November 2026, not measurements: [listing](https://www.aliexpress.com/item/1005012430488902.html).
