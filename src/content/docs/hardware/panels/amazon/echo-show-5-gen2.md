@@ -1,13 +1,10 @@
 ---
-title: Amazon Echo Show 5 (2nd generation)
-description: Owner-reported dashboard compatibility and scoped test evidence for the 2021 Echo Show 5 reflashed with LineageOS 18.1.
+title: Amazon Echo Show 5 (2nd generation, LineageOS report only)
+description: One owner report on LineageOS 18.1 for the 2021 Echo Show 5. Panel Assistant has not verified this on a device, and stock Fire OS is unsupported.
 vendor: Amazon
 model: Echo Show 5 (2nd generation)
 android: '11'
-support: Community-tested
-sold_as:
-  - brand: Amazon
-    name: 'Echo Show 5 Kids (2nd generation)'
+support: Owner report only
 evidence: []
 ownerReports:
   - schemaVersion: 1
@@ -31,10 +28,10 @@ ownerReports:
       revision: unknown
     results:
       - behavior: dashboard
-        outcome: works
-        notes: The owner reported the app working well on Generic. Touch interaction was not separately established.
+        outcome: untested
+        notes: The owner said the app worked well on Generic. The report does not describe a dashboard, touch or Home Assistant connection test.
     limitations:
-      - Runs a community LineageOS 18.1 image, not Amazon's Fire OS. Stock Fire OS cannot run the panel app, and unlocking and reflashing are not covered by Panel Assistant.
+      - The report covers one community LineageOS 18.1 image. Panel Assistant has no supported installation route for stock Fire OS.
   - schemaVersion: 1
     id: android-28-profile
     source: https://github.com/panel-assistant/android/issues/28#issuecomment-4983311989
@@ -51,8 +48,8 @@ ownerReports:
       integrationVersion: unknown
       integrationBuild: unknown
     profile:
-      level: community
-      id: community.cronos-lineageos18
+      level: built-in
+      id: echo-show-5-gen2
       revision: unknown
     results:
       - behavior: brightness
@@ -62,17 +59,19 @@ ownerReports:
         outcome: untested
         notes: Android reports an ambient-light input; a response to real light changes was not established.
       - behavior: proximity
-        outcome: not-fitted
+        outcome: untested
         notes: No proximity sensor was reported.
       - behavior: leds
-        outcome: not-fitted
+        outcome: untested
         notes: No LEDs were reported.
       - behavior: relays
-        outcome: not-fitted
+        outcome: untested
         notes: No relays were reported.
     limitations:
-      - The profile was matched on this panel when it was built in, before it moved to the import-only community catalogue. It is not selected automatically.
-      - Covers only the 2021 second generation (codename cronos). It says nothing about the first or third generation Echo Show 5 or any Echo Show 8.
+      - The owner's July 12 diagnostic showed that the preliminary profile matched while it was bundled. Since v0.9.5 the draft has been available for manual import. This report predates that draft.
+      - Both reports came from the same owner, 2021 second-generation unit and LineageOS image.
 ---
 
-The Echo Show 5 Kids (2nd generation) is the same 2021 device sold with a children's case and subscription, so this page covers it too. Basic dashboard compatibility is reported by one owner on a 2021 Echo Show 5 reflashed with LineageOS 18.1. It does not apply to other Echo Show models or to Amazon's own Fire OS. The import-only [community profile](/reference/profiles/community/echo-show-5-gen2/) page has the full evidence. Individual controls and sensors have separate results in the owner reports; this is not a bench inspection.
+One owner reported running ha-paneld on an Echo Show 5 (2nd generation, 2021, `cronos`) with LineageOS 18.1. The project has yet to confirm this on a device. Stock Fire OS is unsupported, and the report establishes no coverage for the Kids edition or any other Echo Show model.
+
+We recommend choosing a different panel for a Home Assistant dashboard. If you already own this Echo, see the [community profile and buying guide](/reference/profiles/community/echo-show-5-gen2/) for what the owner reported, the limits of the draft profile and better-supported options.

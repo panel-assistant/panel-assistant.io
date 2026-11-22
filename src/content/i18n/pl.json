@@ -88,7 +88,7 @@
   "error.home": "Przejdź do strony głównej",
   "error.pickles.alt": "Panda Pickles",
   "panels.count": "Wymienione modele paneli ({models}) od {brands} marek",
-  "panels.coverage": "mają własne strony sprzętu, a pozostałe zgodne panele z Androidem zaczynają od profilu Generic.",
+  "panels.coverage": "mają własne strony sprzętu, a zgodne panele z Androidem zaczynają od profilu Generic.",
   "confidence.title": "Pewność",
   "confidence.yes": "tak",
   "confidence.partly": "częściowo",

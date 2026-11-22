@@ -140,7 +140,7 @@ Setup can finish even when the panel's browser engine is too old to show a curre
 ## What you need
 
 - Home Assistant 2026.8.3 or newer. Use the built-in Marketplace on 2026.11 or newer, or HACS on supported older versions.
-- An ARM wall panel running Android 8.0 or newer, with debugging access. Most panels work with the generic hardware profile, and [Choose a panel](/install/supported-panels/) lists the models with full hardware support.
+- An ARM wall panel running Android 8.0 or newer, with debugging access. The [panel guide](/install/supported-panels/) lists firmware requirements and available evidence for each model.
 - For the USB option, a Chromium-based browser such as Chrome or Edge.
 
 ## Where the detail lives

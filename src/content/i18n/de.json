@@ -92,7 +92,7 @@
   "error.home": "Zur Startseite",
   "error.pickles.alt": "Pickles, der Panda",
   "panels.count": "{models} namentlich aufgeführte Panels von {brands} Marken",
-  "panels.coverage": "haben eine eigene Hardware-Seite, und andere kompatible Android-Panels starten mit dem Generic-Profil.",
+  "panels.coverage": "haben eine eigene Hardware-Seite, und kompatible Android-Panels starten mit dem Generic-Profil.",
   "confidence.yes": "ja",
   "confidence.partly": "teilweise",
   "confidence.no": "nein",

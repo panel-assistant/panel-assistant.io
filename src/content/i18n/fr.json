@@ -92,7 +92,7 @@
   "error.home": "Aller à la page d’accueil",
   "error.pickles.alt": "Pickles le panda",
   "panels.count": "{models} panneaux de {brands} marques, identifiés par leur nom,",
-  "panels.coverage": "ont leur propre page consacrée au matériel, et les autres panneaux Android compatibles commencent avec le profil générique.",
+  "panels.coverage": "ont leur propre page consacrée au matériel, et les panneaux Android compatibles commencent avec le profil générique.",
   "confidence.title": "Confiance",
   "confidence.yes": "oui",
   "confidence.partly": "en partie",

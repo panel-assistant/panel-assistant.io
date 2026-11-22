@@ -1,6 +1,6 @@
 ---
 title: Panel hardware
-description: Reverse-engineered fact sheets for the Android wall panels Panel Assistant supports, with the method behind them and how the panels compare.
+description: Hardware fact sheets and owner reports for Android panels, with the evidence and installation limits for each model.
 sidebar:
   label: Overview
   order: 0
@@ -10,7 +10,7 @@ import HardwareTable from '../../../components/HardwareTable.astro';
 
 These pages record what is physically on each wall panel and how to drive it: SoC, LED control, sensors, buttons, NFC, Zigbee, relays and the route to adb and root. The devices ship with almost no public documentation, so the facts come from live units (rooted, `userdebug` builds with `adb root`, or unrooted units over adb), from reporter diagnostics, and from firmware analysis. Each panel page says which of those its facts rest on.
 
-Installing, updating and repairing Panel Assistant needs none of the commands on these pages: that all happens in Home Assistant. The exceptions are two vendor firmware limits: some [Sonoff NSPanel Pro](/hardware/panels/sonoff/#gaining-adb-and-root-access) firmware hides the debugging switch, and the [Tuya TPA10](/hardware/panels/tuya/tpa10/#webview-update-this-first) needs its locked WebView replaced once by hand. Otherwise these pages document the hardware for owners and contributors who want to go further.
+Home Assistant installs, updates and repairs the app once a compatible panel is prepared. Some [Sonoff NSPanel Pro](/hardware/panels/sonoff/#gaining-adb-and-root-access) firmware hides the debugging switch, and the [Tuya TPA10](/hardware/panels/tuya/tpa10/#webview-update-this-first) requires a manual WebView update. Check each hardware page for its firmware requirements. The [Echo Show 5 owner report](/hardware/panels/amazon/echo-show-5-gen2/) covers one unit already running LineageOS and offers no installation route for Fire OS.
 
 If your panel is not listed, start with [device profiles](/reference/profiles/), which describe a panel's hardware without building anything. If your panel has a camera that the Camera card does not offer, see [community profiles](/reference/profiles/community/), and keep any unverified hardware fact marked as such.
 
@@ -18,7 +18,7 @@ If your panel is not listed, start with [device profiles](/reference/profiles/),
 
 <HardwareTable />
 
-The `support` column uses these terms: full (inspected on a unit we run, with a verified profile of its own), preliminary (inspected on a unit we run, with its profile still experimental), community-tested (owners run Panel Assistant on it, with no unit of our own), untested (a bundled profile matches it, or is expected to, but no unit has run Panel Assistant yet) and research (firmware and documentation analysis only).
+The `support` column uses full (the project verified a hardware profile on a device it runs), preliminary (the project inspected a device it runs and the profile is still experimental), community-tested (owners run Panel Assistant on the model), owner report only (one report about the stated configuration, with no project validation), untested (a bundled profile matches or is expected to match, and device testing is pending), and research (firmware and documentation analysis).
 
 :::tip
 Before modifying firmware on a rooted Tuya TPA10 or Electron WF1589T, read [Firmware backup and restore](/hardware/guides/firmware-backup-and-restore/). Those Rockchip panels use `adb reboot loader` and `rkdeveloptool` rather than the usual Android button combination. The guide does not apply to the Shelly family, an unrooted panel or uncharacterised hardware, and it does not yet document a write-ready Maskrom recovery path.

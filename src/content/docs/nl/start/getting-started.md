@@ -141,7 +141,7 @@ De configuratie kan worden afgerond, ook als de browser-engine van het paneel te
 ## Wat je nodig hebt
 
 - Home Assistant 2026.8.3 of nieuwer. Gebruik de ingebouwde Marketplace op 2026.11 of nieuwer, of HACS op ondersteunde oudere versies.
-- Een ARM-wandpaneel met Android 8.0 of nieuwer en toegang tot foutopsporing. De meeste panelen werken met het generieke hardwareprofiel, en [Een paneel kiezen](/nl/install/supported-panels/) noemt de modellen met volledige hardware-ondersteuning.
+- Een ARM-wandpaneel met Android 8.0 of nieuwer en toegang tot foutopsporing. De [panelengids](/nl/install/supported-panels/) vermeldt per model de firmwarevereisten en de beschikbare testresultaten.
 - Voor de USB-optie heb je een op Chromium gebaseerde browser nodig, zoals Chrome of Edge.
 
 ## Waar de details staan

@@ -141,7 +141,7 @@ La configuration peut se terminer même si le moteur de navigateur du panneau es
 ## Ce qu’il vous faut
 
 - Home Assistant 2026.8.3 ou ultérieur. Utilisez Marketplace intégré à partir de 2026.11, ou HACS sur les versions antérieures compatibles.
-- Un panneau mural ARM sous Android 8.0 ou une version plus récente, avec un accès au débogage. La plupart des panneaux fonctionnent avec le profil matériel générique, et [Choisir un panneau](/fr/install/supported-panels/) répertorie les modèles dont le matériel est entièrement pris en charge.
+- Un panneau mural ARM sous Android 8.0 ou une version plus récente, avec un accès au débogage. Le [guide des panneaux](/fr/install/supported-panels/) indique les exigences de micrologiciel et les résultats disponibles pour chaque modèle.
 - Pour l’option USB, un navigateur basé sur Chromium, comme Chrome ou Edge.
 
 ## Où trouver les détails

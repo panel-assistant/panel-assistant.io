@@ -89,7 +89,7 @@
   "error.home": "Перейти на головну сторінку",
   "error.pickles.alt": "Панда Піклз",
   "panels.count": "{models} панелей у списку від {brands} брендів",
-  "panels.coverage": "мають власну сторінку обладнання, а інші сумісні панелі Android запускаються з профілем Generic.",
+  "panels.coverage": "мають власну сторінку обладнання, а сумісні панелі Android запускаються з профілем Generic.",
   "confidence.title": "Упевненість",
   "confidence.yes": "так",
   "confidence.partly": "частково",

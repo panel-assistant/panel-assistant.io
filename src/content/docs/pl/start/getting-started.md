@@ -141,7 +141,7 @@ Konfiguracja może się zakończyć nawet wtedy, gdy silnik przeglądarki panelu
 ## Czego potrzebujesz
 
 - Home Assistant w wersji 2026.8.3 lub nowszej. Użyj wbudowanego Marketplace w wersji 2026.11 lub nowszej albo HACS w obsługiwanych starszych wersjach.
-- Panel ścienny z procesorem ARM, Androidem 8.0 lub nowszym i dostępem do debugowania. Większość paneli działa z ogólnym profilem sprzętowym, a [Wybór panelu](/pl/install/supported-panels/) zawiera listę modeli z pełną obsługą sprzętu.
+- Panel ścienny z procesorem ARM, Androidem 8.0 lub nowszym i dostępem do debugowania. [Poradnik wyboru panelu](/pl/install/supported-panels/) zawiera wymagania dotyczące oprogramowania sprzętowego i dostępne wyniki dla każdego modelu.
 - Przy opcji USB przeglądarka oparta na Chromium, np. Chrome lub Edge.
 
 ## Gdzie znajdziesz szczegóły

@@ -91,7 +91,7 @@
   "error.not_found": "404 — Questa pagina non è stata trovata.",
   "error.home": "Vai alla pagina iniziale",
   "error.pickles.alt": "Pickles il panda",
-  "panels.coverage": "hanno una propria pagina hardware, mentre gli altri pannelli Android compatibili iniziano con il profilo Generico.",
+  "panels.coverage": "hanno una propria pagina hardware, e i pannelli Android compatibili iniziano con il profilo Generico.",
   "confidence.title": "Grado di certezza",
   "confidence.yes": "sì",
   "confidence.partly": "in parte",

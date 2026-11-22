@@ -42,7 +42,7 @@ sidebar:
 
 ## 目录
 
-- [`community-cronos-lineageos18.yaml`](https://github.com/panel-assistant/android/blob/main/docs/profiles/unofficial/community-cronos-lineageos18.yaml)：为一位贡献者刷入 LineageOS 18.1 的 Amazon Echo Show 5 Gen 2 编写的草稿。原装 Fire OS 无法运行 ha-paneld；不支持解锁、刷机和恢复，项目也未在硬件上验证该配置文件。参阅[此配置文件的证据说明](/zh-hans/reference/profiles/community/echo-show-5-gen2/)。
+- [`community-cronos-lineageos18.yaml`](https://github.com/panel-assistant/android/blob/main/docs/profiles/unofficial/community-cronos-lineageos18.yaml)：为一位贡献者刷入 LineageOS 18.1 的 Amazon Echo Show 5 Gen 2 编写的草稿。ha-paneld 不支持原装 Fire OS；不支持解锁、刷机和恢复，项目也未在硬件上验证该配置文件。参阅[此配置文件的证据说明](/zh-hans/reference/profiles/community/echo-show-5-gen2/)。
 - [`community-lenovo-thinksmart-view-lineageos.yaml`](https://github.com/panel-assistant/android/blob/main/docs/profiles/unofficial/community-lenovo-thinksmart-view-lineageos.yaml)：为一位贡献者刷入 LineageOS 8.1 的 Lenovo ThinkSmart View 编写的草稿。由于亮度为零时仍明显发光，它选择 Android 休眠，记录触摸无法唤醒面板，并注明贡献者已确认 Home Assistant 可以调暗、完全关闭并再次唤醒。参阅[此配置文件的证据说明](/zh-hans/reference/profiles/community/lenovo-thinksmart-view/)。
 - [`community-sunworld-yc-sm55p-p76s01.yaml`](https://github.com/panel-assistant/android/blob/main/docs/profiles/unofficial/community-sunworld-yc-sm55p-p76s01.yaml)：为一位贡献者使用 Portworld P76S01 主板的 5.5 英寸 Sunworld YC-SM55P 编写的草稿。配置文件记录了由固件佐证的 RK3576S 身份和保守的 Android 控制途径，但在实物测试之前保持可选传感器和相机硬件禁用。其通用 Rockchip 构建身份不足以安全地用于自动选择。参阅[此配置文件的证据说明](/zh-hans/reference/profiles/community/sunworld-yc-sm55p/)。
 

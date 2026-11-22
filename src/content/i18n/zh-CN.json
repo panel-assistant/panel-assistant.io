@@ -92,7 +92,7 @@
   "error.home": "返回首页",
   "error.pickles.alt": "熊猫 Pickles",
   "panels.count": "来自 {brands} 个品牌的 {models} 款有明确名称的面板",
-  "panels.coverage": "各有专属硬件页面，其他兼容的 Android 面板则先使用“通用”配置文件。",
+  "panels.coverage": "各有专属硬件页面。兼容的 Android 面板先使用“通用”配置文件。",
   "confidence.title": "可信度",
   "confidence.yes": "是",
   "confidence.partly": "部分",

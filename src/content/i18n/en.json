@@ -100,7 +100,7 @@
   "panels.find": "Find your panel",
   "panels.find_example": "Brand or model, such as NSPanel",
   "panels.none": "No named panel matches. A panel that is not listed can still run Panel Assistant on the Generic profile, if it meets the requirements further down this page.",
-  "panels.coverage": "have their own hardware page, and other compatible Android panels start on the Generic profile.",
+  "panels.coverage": "have their own hardware page, and compatible Android panels start on the Generic profile.",
   "confidence.title": "Confidence",
   "confidence.yes": "yes",
   "confidence.partly": "partly",

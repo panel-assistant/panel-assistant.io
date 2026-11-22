@@ -141,7 +141,7 @@ La configuración puede terminar aunque el motor del navegador del panel sea dem
 ## Qué necesitas
 
 - Home Assistant 2026.8.3 o posterior. Utiliza Marketplace integrado en 2026.11 o posterior, o HACS en versiones anteriores compatibles.
-- Un panel de pared ARM con Android 8.0 o posterior y acceso de depuración. La mayoría de los paneles funcionan con el perfil de hardware genérico, y [Elegir un panel](/es/install/supported-panels/) enumera los modelos con compatibilidad completa con el hardware.
+- Un panel de pared ARM con Android 8.0 o posterior y acceso de depuración. La [guía de paneles](/es/install/supported-panels/) indica los requisitos de firmware y la evidencia disponible para cada modelo.
 - Para la opción USB, un navegador basado en Chromium, como Chrome o Edge.
 
 ## Dónde encontrar los detalles

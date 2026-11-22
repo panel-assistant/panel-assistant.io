@@ -141,7 +141,7 @@ Die Einrichtung kann auch dann abgeschlossen werden, wenn die Browser-Engine des
 ## Was du brauchst
 
 - Home Assistant 2026.8.3 oder neuer. Verwende ab 2026.11 den integrierten Marketplace oder auf unterstützten älteren Versionen HACS.
-- Ein ARM-Wandpanel mit Android 8.0 oder neuer und Debugging-Zugang. Die meisten Panels funktionieren mit dem generischen Hardwareprofil. [Panel auswählen](/de/install/supported-panels/) listet die Modelle mit vollständiger Hardwareunterstützung auf.
+- Ein ARM-Wandpanel mit Android 8.0 oder neuer und Debugging-Zugang. [Der Panel-Leitfaden](/de/install/supported-panels/) nennt die Firmware-Anforderungen und die verfügbaren Nachweise für jedes Modell.
 - Für die USB-Option einen Chromium-basierten Browser wie Chrome oder Edge.
 
 ## Wo du die Details findest

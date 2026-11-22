@@ -141,7 +141,7 @@ La configurazione può essere completata anche quando il motore del browser del 
 ## Cosa ti serve
 
 - Home Assistant 2026.8.3 o successivo. Usa Marketplace integrato sulla 2026.11 o successiva, oppure HACS sulle versioni precedenti supportate.
-- Un pannello a parete ARM con Android 8.0 o successivo e accesso al debug. La maggior parte dei pannelli funziona con il profilo hardware generico e [Scegli un pannello](/it/install/supported-panels/) elenca i modelli con supporto hardware completo.
+- Un pannello a parete ARM con Android 8.0 o successivo e accesso al debug. La [guida ai pannelli](/it/install/supported-panels/) indica i requisiti del firmware e le verifiche disponibili per ciascun modello.
 - Per l’opzione USB, un browser basato su Chromium come Chrome o Edge.
 
 ## Dove trovi i dettagli

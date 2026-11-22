@@ -141,7 +141,7 @@ sourceCommit: e919a9dd655eb7095993ae5e1e3b5dbe7af600c4
 ## 所需条件
 
 - Home Assistant 2026.8.3 或更新版本。在 2026.11 或更新版本中使用内置 Marketplace，或在受支持的较旧版本中使用 HACS。
-- 一台运行 Android 8.0 或更新版本、可进行调试访问的 ARM 壁挂面板。大多数面板可使用通用硬件配置文件，[选择面板](/zh-hans/install/supported-panels/)列出了获得完整硬件支持的型号。
+- 一台运行 Android 8.0 或更新版本、可进行调试访问的 ARM 壁挂面板。[面板指南](/zh-hans/install/supported-panels/)列出了各型号的固件要求和已有的验证结果。
 - 使用 USB 方式时，需要基于 Chromium 的浏览器，例如 Chrome 或 Edge。
 
 ## 在哪里查看详细说明
