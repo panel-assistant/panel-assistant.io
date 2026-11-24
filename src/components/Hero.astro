@@ -13,6 +13,11 @@ const heart =
 const eyebrow = t('hero.eyebrow').split('{heart}');
 const facts = [t('hero.fact.open'), t('hero.fact.ha'), t('hero.fact.android')];
 
+// Home Assistant's logomark, a trademark of the Open Home Foundation, drawn at the label's cap height after "Install on".
+// The viewBox is cropped to the mark's ink, so its roof meets the cap line and its base the baseline.
+const haMark =
+  'M22.939 10.627 13.061.749a1.505 1.505 0 0 0-2.121 0l-9.879 9.878C.478 11.21 0 12.363 0 13.187v9c0 .826.675 1.5 1.5 1.5h9.227l-4.063-4.062a2.034 2.034 0 0 1-.664.113c-1.13 0-2.05-.92-2.05-2.05s.92-2.05 2.05-2.05 2.05.92 2.05 2.05c0 .233-.041.456-.113.665l3.163 3.163V9.928a2.05 2.05 0 0 1-1.15-1.84c0-1.13.92-2.05 2.05-2.05s2.05.92 2.05 2.05a2.05 2.05 0 0 1-1.15 1.84v8.127l3.146-3.146A2.051 2.051 0 0 1 18 12.239c1.13 0 2.05.92 2.05 2.05s-.92 2.05-2.05 2.05c-.25 0-.488-.047-.709-.13L12.9 20.602v3.088h9.6c.825 0 1.5-.675 1.5-1.5v-9c0-.825-.477-1.977-1.061-2.561z';
+
 const bulb =
   'M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2zM9 20h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z';
 const cards = [
@@ -84,9 +89,22 @@ const lastCards = [
       {tagline && <p class="lede" set:html={tagline} />}
       <div class="actions">
         <div class="actions-row">
-          {actions.map(({ text, link, variant = 'primary' }) => (
-            <a class:list={['action', variant]} href={link}>
+          {actions.map(({ text, link, variant = 'primary', attrs = {} }) => (
+            <a
+              class:list={['action', variant, { mark: attrs['data-logo'] === 'home-assistant' }]}
+              href={link}
+            >
               {text}
+              {attrs['data-logo'] === 'home-assistant' && (
+                <svg
+                  class="ha-mark"
+                  viewBox="0 0.312 24 23.378"
+                  role="img"
+                  aria-label="Home Assistant"
+                >
+                  <path d={haMark} />
+                </svg>
+              )}
               {variant === 'primary' && (
                 <svg viewBox="0 0 16 16" aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" />
@@ -296,6 +314,19 @@ const lastCards = [
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
+  }
+  /* The mark stands on the label's baseline and reaches its cap height, so the button keeps
+     the same height and text line as the buttons beside it. */
+  .action.mark {
+    align-items: baseline;
+    gap: 0.35em;
+  }
+  .action svg.ha-mark {
+    width: auto;
+    height: 1cap;
+    aspect-ratio: 24 / 23.378;
+    fill: currentColor;
+    stroke: none;
   }
   .primary {
     background: var(--sl-color-accent);
