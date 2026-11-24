@@ -97,16 +97,15 @@ const lastCards = [
                 { badge: attrs['data-badge'] === 'my-home-assistant' },
               ]}
               href={link}
+              aria-label={
+                attrs['data-badge'] === 'my-home-assistant'
+                  ? `${text} My Home Assistant`
+                  : undefined
+              }
             >
               {text}
               {attrs['data-badge'] === 'my-home-assistant' && (
-                <svg
-                  class="my-pill"
-                  viewBox="344 16 137 64"
-                  role="img"
-                  aria-label="My Home Assistant"
-                  set:html={myPill}
-                />
+                <svg class="my-pill" viewBox="344 16 137 64" aria-hidden="true" set:html={myPill} />
               )}
               {variant === 'primary' && (
                 <svg viewBox="0 0 16 16" aria-hidden="true">
