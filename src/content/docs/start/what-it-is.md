@@ -7,7 +7,7 @@ Panel Assistant has two parts. One lives in Home Assistant and is what you see a
 
 ## In Home Assistant: the integration
 
-The integration is what you install through HACS. It is where a panel gets added, where every panel appears as a device with its own status and diagnostics, and where administrators can choose a panel in the Panel Assistant sidebar and use its own web interface inside Home Assistant.
+The integration is what you install from Marketplace or HACS. It is where a panel gets added, where every panel appears as a device with its own status and diagnostics, and where administrators can choose a panel in the Panel Assistant sidebar and use its own web interface inside Home Assistant.
 
 It is also the installer. Give it a new panel's address, or plug a new panel into your laptop, and it checks what is there, installs the panel app, starts it, and only then creates the device. If a panel is already running the app, it adopts it instead.
 
