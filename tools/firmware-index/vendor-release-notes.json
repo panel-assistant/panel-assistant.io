@@ -351,6 +351,30 @@
         "review_required": false,
         "section_sha256": "e192c65da08976f0f08cd8f73b29f58d471d5719096eed3caf7ad20b49c16e46",
         "wayback_ts": "20260414120028"
+      },
+      "4.10.0": {
+        "summary": "Changes to climate controls, media and alarms, device controls and sensor readings.",
+        "review_required": false,
+        "section_sha256": "a875787c75bee2056831bc006c64ce4c10b3922f93290d9cb2d640175e3512c9",
+        "wayback_ts": "20261123224751"
+      },
+      "4.9.0": {
+        "summary": "Changes to settings recovery, climate controls, network connections and display controls.",
+        "review_required": false,
+        "section_sha256": "ca7847be4abd56b1603d6b4898ffd59254a56d0a28b442f13e8a1c4d3330eb14",
+        "wayback_ts": "20261123224751"
+      },
+      "4.8.0": {
+        "summary": "Changes to security, dashboard browsing, firmware updates and cameras and audio input.",
+        "review_required": false,
+        "section_sha256": "d46086786c688bcf141b838db7b2758890ccb53fd71c44dd5c69a58375c4db3d",
+        "wayback_ts": "20261123224751"
+      },
+      "4.7.0": {
+        "summary": "Changes to Matter devices, climate controls, network connections and display controls.",
+        "review_required": false,
+        "section_sha256": "78d31a87bdd387d7275d01b7e0159e84fb251868cae76a2d0a0bcb93964d482e",
+        "wayback_ts": "20261123224751"
       }
     },
     "supplements": {
