@@ -296,7 +296,7 @@ test('each panel page lists its evidence with every hit and miss marked', () => 
     if (data.panelIndex) continue;
     const html = page(slug);
     const shown = [
-      ...html.matchAll(/class="item (hit|part|miss)[^"]*">[\s\S]*?<\/span>([^<]*)/g),
+      ...html.matchAll(/class="item (hit|part|miss)[^"]*"[^>]*>[\s\S]*?<\/span>([^<]*)/g),
     ].map((m) => `${m[1]} ${m[2].replace(/&#39;/g, "'").trim()}`);
     const expected = confidenceChecklist(data).map((c) => `${c.state} ${c.text}`);
     // The page shows its list open under the title; the same list is in the bar's hover panel.
