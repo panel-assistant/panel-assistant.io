@@ -13,10 +13,10 @@ const heart =
 const eyebrow = t('hero.eyebrow').split('{heart}');
 const facts = [t('hero.fact.open'), t('hero.fact.ha'), t('hero.fact.android')];
 
-// Home Assistant's logomark, a trademark of the Open Home Foundation, drawn at the label's cap height after "Install on".
-// The viewBox is cropped to the mark's ink, so its roof meets the cap line and its base the baseline.
-const haMark =
-  'M22.939 10.627 13.061.749a1.505 1.505 0 0 0-2.121 0l-9.879 9.878C.478 11.21 0 12.363 0 13.187v9c0 .826.675 1.5 1.5 1.5h9.227l-4.063-4.062a2.034 2.034 0 0 1-.664.113c-1.13 0-2.05-.92-2.05-2.05s.92-2.05 2.05-2.05 2.05.92 2.05 2.05c0 .233-.041.456-.113.665l3.163 3.163V9.928a2.05 2.05 0 0 1-1.15-1.84c0-1.13.92-2.05 2.05-2.05s2.05.92 2.05 2.05a2.05 2.05 0 0 1-1.15 1.84v8.127l3.146-3.146A2.051 2.051 0 0 1 18 12.239c1.13 0 2.05.92 2.05 2.05s-.92 2.05-2.05 2.05c-.25 0-.488-.047-.709-.13L12.9 20.602v3.088h9.6c.825 0 1.5-.675 1.5-1.5v-9c0-.825-.477-1.977-1.061-2.561z';
+// The "MY" pill from the My Home Assistant link badge (my.home-assistant.io/badges), which Home
+// Assistant publishes for links like this one. The Home Assistant logomark is a trademark of the
+// Open Home Foundation. The pill's own coordinates are kept, cropped by the viewBox.
+const myPill = `<rect width="137" height="64" x="344" y="16" fill="#f2f4f9" rx="32"/><path fill="#18bcf2" d="M394.419 37.047V60.5h-4.297V46.797L384.716 60.5h-4.157l-5.343-13.594V60.5h-4.188V37.047h4.188l7.422 18.36 7.484-18.36zm9.365 0 5.344 9.89 5.344-9.89h4.766l-7.969 14.14V60.5h-4.391v-9.312l-8.031-14.141zM457 60c0 1.65-1.35 3-3 3h-24c-1.65 0-3-1.35-3-3v-9c0-1.65.95-3.95 2.12-5.12l10.76-10.76a3 3 0 0 1 4.24 0l10.76 10.76c1.17 1.17 2.12 3.47 2.12 5.12z"/><path fill="#f2f4f9" stroke="#f2f4f9" d="M442 45.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path fill="#f2f4f9" stroke="#f2f4f9" stroke-miterlimit="10" d="M449.5 53.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM434.5 57.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path fill="none" stroke="#f2f4f9" stroke-miterlimit="10" stroke-width="2.25" d="M442 43.48V63l-7.5-7.5M449.5 51.46l-7.41 7.41"/>`;
 
 const bulb =
   'M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2zM9 20h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z';
@@ -91,19 +91,22 @@ const lastCards = [
         <div class="actions-row">
           {actions.map(({ text, link, variant = 'primary', attrs = {} }) => (
             <a
-              class:list={['action', variant, { mark: attrs['data-logo'] === 'home-assistant' }]}
+              class:list={[
+                'action',
+                variant,
+                { badge: attrs['data-badge'] === 'my-home-assistant' },
+              ]}
               href={link}
             >
               {text}
-              {attrs['data-logo'] === 'home-assistant' && (
+              {attrs['data-badge'] === 'my-home-assistant' && (
                 <svg
-                  class="ha-mark"
-                  viewBox="0 0.312 24 23.378"
+                  class="my-pill"
+                  viewBox="344 16 137 64"
                   role="img"
-                  aria-label="Home Assistant"
-                >
-                  <path d={haMark} />
-                </svg>
+                  aria-label="My Home Assistant"
+                  set:html={myPill}
+                />
               )}
               {variant === 'primary' && (
                 <svg viewBox="0 0 16 16" aria-hidden="true">
@@ -315,18 +318,28 @@ const lastCards = [
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-  /* The mark stands on the label's baseline and reaches its cap height, so the button keeps
-     the same height and text line as the buttons beside it. */
-  .action.mark {
-    align-items: baseline;
-    gap: 0.35em;
+  /* The pill's "MY" letters stand on the label's baseline at its cap height (pill units: letters
+     37.05 to 60.5 of 16 to 80). The button lays its label out as a line here: an inline image
+     stands on the baseline by its margin box, and negative margins shrink that box to the
+     letters' cap band, so the line, and the button, keep the height and text line of the
+     buttons beside it while the pill reaches into the padding. */
+  .action.badge {
+    display: inline-block;
   }
-  .action svg.ha-mark {
+  .action svg.my-pill {
+    --pill: calc(1cap * 64 / 23.453);
+    display: inline;
+    vertical-align: baseline;
     width: auto;
-    height: 1cap;
-    aspect-ratio: 24 / 23.378;
-    fill: currentColor;
-    stroke: none;
+    height: var(--pill);
+    aspect-ratio: 137 / 64;
+    margin-block: calc(var(--pill) * -21.047 / 64) calc(var(--pill) * -19.5 / 64);
+    margin-inline-start: 0.1em;
+    fill: initial;
+    stroke: initial;
+    stroke-width: 1;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
   }
   .primary {
     background: var(--sl-color-accent);
