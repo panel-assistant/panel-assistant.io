@@ -14,7 +14,6 @@ Use the existing Repair’s guarded **Try again** only after checking its report
 - [Remove Panel Assistant from &lt;panel&gt;](#remove-panel-assistant-from-panel)
 - [Panel app too old](#panel-app-too-old)
 - [Panel still runs the old app](#old-app-needs-090)
-- [Mqtt panel needs 0.9.0](#mqtt-panel-needs-090)
 - [Panel permissions](#panel-permissions)
 - [Panel proximity setup](#panel-proximity-setup)
 - [Dashboard unfiltered](#dashboard-unfiltered)
@@ -71,17 +70,24 @@ Use the existing Repair’s guarded **Try again** only after checking its report
 
 **What it means:** This panel still runs the old ha-paneld app. Current Panel Assistant cannot move it automatically.
 
-**Why it happens:** Automatic migration from the old ha-paneld app was removed in 1.0. The 0.9.0 move remains the supported route for panels it handles.
+**Why it happens:** Automatic migration from the old ha-paneld app was removed in 1.0.
 
-**How to fix it:** If that move cannot finish, follow the [manual route](/manage/upgrade-to-1-0/#a-panel-still-runs-the-old-app) with the current Panel Assistant: export the old app’s settings, restore the vendor home screen if you quietened vendor apps, keep network ADB on port 5555, then uninstall the old app and add the panel again. Finish setup and Submit in Home Assistant, preview and apply the settings import, then sign in again using Browser sign-in → Reconnect. The guide covers the settings that do not carry over and the checks afterwards. Do not downgrade Panel Assistant for this route.
+**How to fix it:** Use the current Panel Assistant to replace the old app. This creates a new Home Assistant device with fresh history. Check any automations that use the old entities.
 
-## Mqtt panel needs 0.9.0
+1. On the old app’s web interface, open **Install** and use **Export settings**. Keep the file before removing the app. The export leaves out passwords and tokens by default, so keep any credentials you will need to enter again.
+2. If you used the old app to quieten vendor apps, use **Restore the home screen** on its **Install** page before removing it. Keep network ADB enabled on port **5555** so Panel Assistant can install the new app.
+3. Connect to the panel with ADB and remove only the old app:
 
-**What it means:** Panel Assistant cannot connect this unmoved MQTT panel without splitting its entities and history.
+   ```sh
+   adb connect PANEL_IP:5555
+   adb uninstall io.github.maxlyth.hapaneld
+   ```
 
-**Why it happens:** Panel Assistant 1.0 no longer performs the MQTT move.
+   Replace `PANEL_IP` with your panel’s address. Do not reset the panel.
 
-**How to fix it:** Do not redownload Panel Assistant 0.9.0 over a running 1.0 installation: a setting removed by 1.0 can make 0.9.0 return migrated panels to MQTT. Only if no panel has the 1.0 app yet, restore a Home Assistant backup from before the upgrade, finish every move in 0.9.0, then return to 1.0. If any panel already has the 1.0 app, or there is no suitable backup, ask for support before changing versions. See the [1.0 upgrade recovery guide](/manage/upgrade-to-1-0/).
+4. Remove this panel’s existing entry from Panel Assistant in Home Assistant, if it has one. With the current Panel Assistant installed, [add the panel](/install/installing-ha-paneld/) to install the current app. Finish the linked panel setup page, including its name, Home Assistant address, sign-in and dashboard, then return to Home Assistant and select **Submit**.
+5. On the new app’s web interface, open **Install**, choose **Import settings…** and select your export. Review the list of changes before applying them. MQTT settings do not come across. Settings saved at the old app’s defaults can replace the new app’s defaults, so inspect the voice assistant and entity filter on **Configure** afterwards.
+6. After importing, open **Configure → Home Assistant connection** and use **Reconnect** next to **Browser sign-in** to sign in again. The import can clear part of the sign-in and cause **Home Assistant sign-in rejected** when the token next refreshes. Verify that the dashboard loads and that the panel connects in Home Assistant, then check your settings and automations.
 
 ## Panel permissions
 

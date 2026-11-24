@@ -12,10 +12,6 @@ La première heure est la partie difficile de la mise en route de tout panneau. 
 
 Sur Home Assistant **2026.11 ou ultérieur**, installez Panel Assistant depuis **Paramètres**, **Marketplace**. Sur les versions antérieures compatibles, de **2026.8.3 à 2026.10**, installez-le via HACS et redémarrez Home Assistant. Marketplace peut permettre de le configurer immédiatement ; suivez d’abord toute demande de redémarrage. C’est la seule chose que vous installez manuellement. [Installer l’intégration](/fr/home-assistant/custom-integration/) explique les deux méthodes et les mises à jour.
 
-:::note
-Si vous venez de la version 0.9, lisez [Passer à la version 1.0](/fr/manage/upgrade-to-1-0/) avant de commencer et conservez les sauvegardes de Home Assistant et des panneaux qui y sont décrites. Un panneau qui exécute l’application 1.0 ne peut pas revenir à la version 0.9.
-:::
-
 ## 2. Activer le débogage sur le panneau
 
 Ouvrez les options pour les développeurs sur le panneau : sur la plupart des panneaux, ouvrez **Paramètres**, puis **À propos**, et appuyez sept fois sur **Numéro de build**. Activez ensuite le **débogage USB** si vous branchez le panneau par câble, ou **ADB sur le réseau, sur le port TCP 5555** pour la méthode réseau. Tous les panneaux ne disposent pas d’un commutateur ADB réseau ; les [pages consacrées au matériel](/fr/hardware/) répertorient les méthodes connues et indiquent quand l’accès initial n’est pas vérifié. Si l’accès réseau est indisponible, utilisez l’USB une fois le débogage USB et la présence d’un port USB de données confirmés pour votre modèle. [Préparer le panneau](/fr/install/prepare-a-panel/) fournit les détails.

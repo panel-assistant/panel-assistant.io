@@ -12,10 +12,6 @@ La parte difícil de cualquier panel es la primera hora. Panel Assistant se enca
 
 En Home Assistant **2026.11 o posterior**, instala Panel Assistant desde **Configuración**, **Marketplace**. En versiones anteriores compatibles, de **2026.8.3 a 2026.10**, instálalo mediante HACS y reinicia Home Assistant. Marketplace puede permitir configurarlo inmediatamente; sigue primero cualquier indicación de reinicio. Es lo único que instalas manualmente. Consulta [Instalar la integración](/es/home-assistant/custom-integration/) para ambas vías y las actualizaciones.
 
-:::note
-Si actualizas desde 0.9, lee [Actualizar a 1.0](/es/manage/upgrade-to-1-0/) antes de empezar y conserva las copias de seguridad de Home Assistant y de los paneles que allí se describen. Un panel que ejecuta la aplicación 1.0 no puede volver a 0.9.
-:::
-
 ## 2. Activa la depuración en el panel
 
 Abre las opciones para desarrolladores del panel: en la mayoría de los paneles, abre **Ajustes**, luego **Información** y toca **Número de compilación** siete veces. Después activa **Depuración USB** si vas a conectar el panel por cable, o **ADB por red en el puerto TCP 5555** para la opción de red. No todos los paneles tienen un interruptor de ADB por red; las [páginas de hardware](/es/hardware/) enumeran las vías conocidas e indican cuándo el acceso inicial no está verificado. Si el acceso por red no está disponible, utiliza USB una vez que se hayan confirmado la depuración USB y un puerto de datos USB para tu modelo. [Preparar el panel](/es/install/prepare-a-panel/) explica los detalles.

@@ -38,7 +38,7 @@ Prima di una modifica di cui non sei sicuro, crea tu stesso un backup: nell'inte
 
 ## Ripristino
 
-Una plancia che non si carica dopo un aggiornamento dipende solitamente dalla WebView di sistema o dalla plancia stessa e il pannello ha un proprio comportamento di [avvio e ripristino](/it/manage/built-in-renderer/#avvio-e-recupero) per questo caso. [Risoluzione dei problemi](/it/manage/troubleshooting/) descrive le cause abituali. Un pannello con l’app 1.0 non può tornare a una versione precedente; [passare alla versione 1.0](/it/manage/upgrade-to-1-0/#tornare-indietro) spiega cosa è possibile fare.
+Una plancia che non si carica dopo un aggiornamento dipende solitamente dalla WebView di sistema o dalla plancia stessa e il pannello ha un proprio comportamento di [avvio e ripristino](/it/manage/built-in-renderer/#avvio-e-recupero) per questo caso. [Risoluzione dei problemi](/it/manage/troubleshooting/) descrive le cause abituali.
 
 Il ripristino a un livello inferiore all'app è un'altra questione. Panel Assistant non interviene mai sul firmware di un pannello, ma su alcuni pannelli con root è possibile eseguire manualmente il backup e il ripristino delle partizioni del firmware, come descritto in [backup e ripristino del firmware](/it/hardware/guides/firmware-backup-and-restore/).
 

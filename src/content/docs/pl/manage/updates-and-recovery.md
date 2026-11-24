@@ -38,7 +38,7 @@ Przed zmianą, której nie jesteś pewien, samodzielnie utwórz kopię zapasową
 
 ## Odzyskiwanie
 
-Pulpit, który nie ładuje się po aktualizacji, zwykle wskazuje na systemowy WebView lub sam pulpit. Panel ma własne zachowanie [uruchamiania i odzyskiwania](/pl/manage/built-in-renderer/#uruchamianie-i-odzyskiwanie) dla takiej sytuacji. [Rozwiązywanie problemów](/pl/manage/troubleshooting/) opisuje typowe przyczyny. Panel z aplikacją 1.0 nie może wrócić do wcześniejszego wydania; [aktualizacja do 1.0](/pl/manage/upgrade-to-1-0/#powrót-do-poprzedniej-wersji) wyjaśnia, co można cofnąć.
+Pulpit, który nie ładuje się po aktualizacji, zwykle wskazuje na systemowy WebView lub sam pulpit. Panel ma własne zachowanie [uruchamiania i odzyskiwania](/pl/manage/built-in-renderer/#uruchamianie-i-odzyskiwanie) dla takiej sytuacji. [Rozwiązywanie problemów](/pl/manage/troubleshooting/) opisuje typowe przyczyny.
 
 Odzyskiwanie poniżej poziomu aplikacji to inna sprawa. Panel Assistant nigdy nie zmienia firmware panelu, ale na niektórych panelach z rootem można ręcznie tworzyć i przywracać kopie partycji firmware. Opisuje to [kopia zapasowa i przywracanie firmware](/pl/hardware/guides/firmware-backup-and-restore/).
 

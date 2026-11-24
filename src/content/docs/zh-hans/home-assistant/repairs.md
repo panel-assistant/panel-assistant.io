@@ -15,7 +15,6 @@ description: Panel Assistant 各项修复提示的含义、出现原因以及解
 - [从 &lt;面板&gt; 移除 Panel Assistant](#从-面板-移除-panel-assistant)
 - [面板应用过旧](#panel-app-too-old)
 - [面板仍运行旧应用](#old-app-needs-090)
-- [MQTT 面板需要 0.9.0](#mqtt-panel-needs-090)
 - [面板权限](#panel-permissions)
 - [面板接近感应设置](#panel-proximity-setup)
 - [仪表盘未过滤](#dashboard-unfiltered)
@@ -75,19 +74,24 @@ description: Panel Assistant 各项修复提示的含义、出现原因以及解
 
 **含义：**此面板仍运行旧 ha-paneld 应用。当前 Panel Assistant 无法自动迁移它。
 
-**原因：**1.0 移除了从旧 ha-paneld 应用自动迁移的功能。对于 0.9.0 能处理的面板，通过它迁移仍是受支持的方式。
+**原因：**1.0 移除了从旧 ha-paneld 应用自动迁移的功能。
 
-**解决方法：**如果无法完成该迁移，请使用当前 Panel Assistant 按照[手动步骤](/zh-hans/manage/upgrade-to-1-0/#a-panel-still-runs-the-old-app)操作：导出旧应用的设置，如果停用过厂商应用则恢复厂商主屏幕，保持端口 5555 上的网络 ADB 启用，然后卸载旧应用并重新添加面板。完成设置并在 Home Assistant 中提交，预览并应用设置导入，然后通过浏览器登录 → 重新连接再次登录。指南说明了不会迁移的设置以及之后的检查。不要为此方式降级 Panel Assistant。
+**解决方法：**使用当前版本的 Panel Assistant 替换旧应用。这会替换应用并创建新的 Home Assistant 设备：历史记录会重新开始，使用旧实体的自动化需要检查。此方式无需降级 Panel Assistant。
 
-<a id="mqtt-panel-needs-090"></a>
+1. 在旧应用的网页界面中打开**安装**，使用**导出设置**。移除应用前先保存文件。导出默认不包含密码和令牌，因此请保留需要重新输入的凭据。
+2. 如果曾使用旧应用停用厂商应用，请先在其**安装**页面使用**恢复主屏幕**，再移除旧应用。保持端口 **5555** 上的网络 ADB 启用，以便 Panel Assistant 安装新应用。
+3. 通过 ADB 连接面板，仅移除旧应用：
 
-## MQTT 面板需要 0.9.0
+   ```sh
+   adb connect PANEL_IP:5555
+   adb uninstall io.github.maxlyth.hapaneld
+   ```
 
-**含义：**Panel Assistant 无法连接此尚未迁移的 MQTT 面板，否则会拆分其实体和历史记录。
+   将 `PANEL_IP` 替换为面板地址。不要重置面板。
 
-**原因：**Panel Assistant 1.0 不再执行 MQTT 迁移。
-
-**解决方法：**不要在运行中的 1.0 安装上重新下载 Panel Assistant 0.9.0：1.0 移除的一项设置可能导致 0.9.0 将已迁移面板恢复为 MQTT。只有在所有面板都尚未安装 1.0 应用时，才可恢复升级前的 Home Assistant 备份，在 0.9.0 中完成所有迁移，然后返回 1.0。如果已有任何面板安装了 1.0 应用，或没有合适的备份，请先寻求支持，再更改版本。请参阅 [1.0 升级恢复指南](/zh-hans/manage/upgrade-to-1-0/)。
+4. 如果此面板在 Home Assistant 的 Panel Assistant 中已有条目，请移除该条目。安装当前 Panel Assistant 后，[添加面板](/zh-hans/install/installing-ha-paneld/)以安装当前应用。完成链接指向的面板设置页面，包括名称、Home Assistant 地址、登录和仪表盘，然后返回 Home Assistant 并选择**提交**。
+5. 在新应用的网页界面中打开**安装**，选择**导入设置…**，再选择导出的文件。应用前先查看变更列表。MQTT 设置不会迁移。保存为旧应用默认值的设置可能覆盖新应用的默认值，因此之后请在**设置**页面检查语音助手和实体过滤器。
+6. 导入后，打开**设置 → Home Assistant 连接**，使用**浏览器登录**旁的**重新连接**再次登录。导入可能清除部分登录信息，导致下次刷新令牌时出现 **Home Assistant 登录被拒绝**。确认仪表盘可以加载、面板在 Home Assistant 中可以连接，然后检查设置和自动化。
 
 <a id="panel-permissions"></a>
 

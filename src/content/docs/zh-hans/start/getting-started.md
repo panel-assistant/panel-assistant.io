@@ -12,10 +12,6 @@ sourceCommit: e919a9dd655eb7095993ae5e1e3b5dbe7af600c4
 
 在 Home Assistant **2026.11 或更新版本**中，通过 **设置**、**Marketplace** 安装 Panel Assistant。在受支持的较旧版本（**2026.8.3 至 2026.10**）中，通过 HACS 安装，然后重启 Home Assistant。Marketplace 可能允许立即进行配置；请先按提示完成任何必要的重启。这是唯一需要你手动安装的内容。有关两种安装方式和更新，请参见[安装集成](/zh-hans/home-assistant/custom-integration/)。
 
-:::note
-如果从 0.9 升级，请在开始之前阅读[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)，并保留其中所述的 Home Assistant 和面板备份。运行 1.0 应用的面板无法回退到 0.9。
-:::
-
 ## 2. 在面板上开启调试
 
 打开面板的开发者选项：大多数面板可以依次打开**设置**、**关于**，然后连续点按**版本号**七次。如果通过线缆连接面板，则开启 **USB 调试**；如果通过网络安装，则开启 **TCP 端口 5555 上的网络 ADB**。并非所有面板都有网络 ADB 开关；[硬件页面](/zh-hans/hardware/)列出了已知途径，并说明哪些型号的初始访问尚未验证。如果无法使用网络访问，请在确认该型号具备 USB 调试和 USB 数据端口后使用 USB。[准备面板](/zh-hans/install/prepare-a-panel/)提供了详细步骤。

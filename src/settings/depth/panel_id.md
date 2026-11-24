@@ -1,7 +1,5 @@
 ---
 spec: 23d88aa41d47
-related:
-  - /home-assistant/move-from-mqtt/
 ---
 
 Panel Assistant fills this in on first start, before it connects to anything, so a panel always has one:

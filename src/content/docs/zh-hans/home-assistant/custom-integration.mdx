@@ -41,8 +41,6 @@ Panel Assistant 是自定义集成。您需要 Home Assistant **2026.8.3 或更�
 
 默认提供稳定版。在 Home Assistant 2026.11 或更新版本中，集成更新会出现在 **设置**、**更新** 下。安装更新后，按照重启修复项的提示重启 Home Assistant，以加载更新。在受支持的较旧版本中，请在 HACS 中下载更新，并在提示时重启 Home Assistant。更新此集成与[更新面板应用](/zh-hans/manage/updates-and-recovery/)是独立的操作。 Home Assistant 会显示每次更新的简短摘要；[发行说明](/zh-hans/release-notes/)提供完整的变更列表。
 
-从 0.9 升级到 1.0 之前，请阅读[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/)，包括备份步骤。运行 1.0 应用的面板无法回退到 0.9。安装旧版本并不安全；如需回退，请按照指南中的备份恢复说明操作。
-
 ## 您将获得什么
 
 - **安装程序。** 在 Home Assistant 内按照引导流程添加面板。它会检查面板，通过网络或 [USB](/zh-hans/install/install-over-usb/) 安装面板应用，启动应用，最后才创建设备。对于已运行该应用的面板，它会直接接管，而不重新安装。
@@ -53,11 +51,3 @@ Panel Assistant 是自定义集成。您需要 Home Assistant **2026.8.3 或更�
 ## 帮助与反馈
 
 Panel Assistant 刚刚起步，正在快速发展。已安装的面板通过 Home Assistant 中的更新实体进行更新，详见[更新与恢复](/zh-hans/manage/updates-and-recovery/)。欢迎通过 [issues](https://github.com/panel-assistant/ha-integration/issues) 和 [Discord](https://panel-assistant.io/go/discord) 反馈。
-
-## 如果您使用过早期的 0.1.0 集成
-
-在“设备与服务”中移除旧的集成条目，然后从 Marketplace 或 HACS 中移除其下载。在首次重启之前，添加此仓库并安装 Panel Assistant **0.9.0**。在 Marketplace 中，打开仓库的三点菜单，选择 **安装其他版本**；在 HACS 中，选择 **重新下载**。选择版本 **0.9.0**。重启 Home Assistant，然后使用面板的主机名或地址重新添加集成。
-
-如果已经安装 Panel Assistant 1.0，请在更改版本之前按照[如果迁移未完成](/zh-hans/manage/upgrade-to-1-0/#如果迁移未完成)中的说明操作。
-
-当时的面板仍运行旧的 ha-paneld 应用。Panel Assistant 1.0 无法将其迁移到新应用：请先安装 Panel Assistant 0.9.0（在 Marketplace 中，从仓库的三点菜单选择 **安装其他版本**；在 HACS 中，选择 **重新下载**；选择版本 **0.9.0**），添加面板并使用其修复项完成迁移，然后再更新到 1.0。

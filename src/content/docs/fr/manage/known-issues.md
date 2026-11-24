@@ -1,18 +1,10 @@
 ---
-title: Problèmes connus de la version 1.0.2
-description: Limites connues de Panel Assistant 1.0.2 et de l’application du panneau correspondante, et mesures à prendre.
+title: Problèmes connus
+description: Limites connues de Panel Assistant et de l’application du panneau correspondante, et mesures à prendre.
 sourceCommit: 1969c9acf0faa42c05410c5b96af34f9e6b10eb4
 ---
 
-Panel Assistant 1.0.2 et l’application du panneau correspondante sont des versions stables. Cette page répertorie les limites connues et les mesures à prendre pour chacune. Lisez d’abord [Passer à la version 1.0](/fr/manage/upgrade-to-1-0/) : cette page décrit les conditions préalables à l’installation et explique pourquoi un panneau en version 1.0 ne peut pas revenir à la version 0.9. Signalez tout autre problème dans le [suivi des tickets](https://github.com/panel-assistant/ha-integration/issues), avec le modèle du panneau et ce que vous avez observé.
-
-## Un panneau encore sous l’application 0.9 peut nécessiter le rétablissement de sa connexion ADB
-
-La Réparation indiquant qu’un panneau a besoin de l’application 1.0 signifie que son application ne peut pas encore communiquer avec Panel Assistant 1.0. Si Home Assistant indique aussi que le panneau ne peut pas recevoir de mises à jour de l’application, suivez cette Réparation pour rétablir sa voie de mise à jour. Pour un panneau dont le débogage réseau est désactivé, branchez-le à votre ordinateur et lancez l’installateur USB depuis Home Assistant, comme décrit dans [un panneau qui ne peut pas être mis à jour](/fr/manage/updates-and-recovery/#un-panneau-qui-ne-peut-pas-être-mis-à-jour). Sur un panneau où l’application est déjà installée, l’installateur USB peut rétablir la connexion sans réinstaller : si l’invite apparaît, cochez **Toujours autoriser depuis cet ordinateur** et appuyez sur **Autoriser** sur le panneau. L’installateur réactive le débogage réseau pour que Home Assistant puisse mettre à jour l’application.
-
-## La barre latérale ne peut pas ouvrir un panneau tant qu’il n’exécute pas l’application 1.0
-
-Dans la version 1.0, la barre latérale Panel Assistant affiche les pages d’un panneau via sa propre connexion à Home Assistant. Un panneau encore sous une application 0.9 ne peut pas y ouvrir ses pages. Mettez d’abord à jour l’application du panneau.
+Cette page répertorie les limites connues et les mesures à prendre pour chacune. Signalez tout autre problème dans le [suivi des tickets](https://github.com/panel-assistant/ha-integration/issues), avec le modèle du panneau et ce que vous avez observé.
 
 ## La voix est activée au départ lorsque le profil de l’appareil déclare un microphone
 

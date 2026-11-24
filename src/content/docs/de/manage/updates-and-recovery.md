@@ -38,7 +38,7 @@ Erstelle vor einer Änderung, bei der du unsicher bist, selbst eine Sicherung: �
 
 ## Wiederherstellung
 
-Wenn ein Dashboard nach einem Update nicht lädt, liegt das meist an der System-WebView oder am Dashboard selbst. Das Panel hat dafür sein eigenes Verhalten für [Start und Wiederherstellung](/de/manage/built-in-renderer/#start-und-wiederherstellung). [Fehlerbehebung](/de/manage/troubleshooting/) beschreibt die üblichen Ursachen. Ein Panel mit der Panel-App 1.0 kann nicht zu einer früheren Version zurückkehren. [Upgrade auf 1.0](/de/manage/upgrade-to-1-0/#zurückkehren) erklärt, was möglich ist.
+Wenn ein Dashboard nach einem Update nicht lädt, liegt das meist an der System-WebView oder am Dashboard selbst. Das Panel hat dafür sein eigenes Verhalten für [Start und Wiederherstellung](/de/manage/built-in-renderer/#start-und-wiederherstellung). [Fehlerbehebung](/de/manage/troubleshooting/) beschreibt die üblichen Ursachen.
 
 Die Wiederherstellung unterhalb der App-Ebene ist eine andere Sache. Panel Assistant rührt die Firmware eines Panels niemals an. Bei manchen gerooteten Panels lassen sich jedoch die Firmwarepartitionen von Hand sichern und wiederherstellen. Das ist unter [Firmware sichern und wiederherstellen](/de/hardware/guides/firmware-backup-and-restore/) dokumentiert.
 

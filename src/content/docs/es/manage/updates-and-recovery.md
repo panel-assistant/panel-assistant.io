@@ -38,7 +38,7 @@ Antes de un cambio del que no estés seguro, haz tú mismo una copia de segurida
 
 ## Recuperación
 
-Si un panel de control no se carga después de una actualización, el problema suele estar en el WebView del sistema o en el propio panel de control, y el panel tiene su propio comportamiento de [Inicio y recuperación](/es/manage/built-in-renderer/#inicio-y-recuperación) para esos casos. [Solución de problemas](/es/manage/troubleshooting/) explica las causas habituales. Un panel con la aplicación del panel 1.0 no puede volver a una versión anterior; [Actualizar a 1.0](/es/manage/upgrade-to-1-0/#volver-atrás) explica qué se puede hacer.
+Si un panel de control no se carga después de una actualización, el problema suele estar en el WebView del sistema o en el propio panel de control, y el panel tiene su propio comportamiento de [Inicio y recuperación](/es/manage/built-in-renderer/#inicio-y-recuperación) para esos casos. [Solución de problemas](/es/manage/troubleshooting/) explica las causas habituales.
 
 La recuperación por debajo de la aplicación es otra cuestión. Panel Assistant nunca toca el firmware de un panel, pero en algunos paneles con acceso root se pueden hacer copias de seguridad de las particiones del firmware y restaurarlas manualmente; esto se documenta en [Copia de seguridad y restauración del firmware](/es/hardware/guides/firmware-backup-and-restore/).
 

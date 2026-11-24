@@ -12,10 +12,6 @@ Bei jedem Panel ist die erste Stunde der schwierige Teil. Panel Assistant übern
 
 Ab Home Assistant **2026.11** installierst du Panel Assistant unter **Einstellungen**, **Marketplace**. Auf unterstützten älteren Versionen, **2026.8.3 bis 2026.10**, installierst du es über HACS und startest Home Assistant neu. Marketplace ermöglicht die Einrichtung unter Umständen sofort; befolge zuerst jede Aufforderung zum Neustart. Dies ist das Einzige, was du von Hand installierst. [Integration installieren](/de/home-assistant/custom-integration/) erklärt beide Wege und Updates.
 
-:::note
-Wenn du von 0.9 aktualisierst, lies vor Beginn [Upgrade auf 1.0](/de/manage/upgrade-to-1-0/) und bewahre die dort beschriebenen Home Assistant- und Panel-Sicherungen auf. Ein Panel mit der App 1.0 kann nicht zu 0.9 zurückkehren.
-:::
-
 ## 2. Debugging auf dem Panel einschalten
 
 Öffne die Entwickleroptionen auf dem Panel: Öffne bei den meisten Panels **Einstellungen**, dann **Über das Gerät** und tippe siebenmal auf **Build-Nummer**. Aktiviere dann **USB-Debugging**, wenn du das Panel per Kabel anschließt, oder **Netzwerk-ADB auf TCP-Port 5555** für den Netzwerkweg. Nicht jedes Panel hat einen Schalter für Netzwerk-ADB; die [Hardwareseiten](/de/hardware/) nennen bekannte Zugangswege und weisen darauf hin, wenn der erste Zugang nicht verifiziert ist. Wenn kein Netzwerkzugang verfügbar ist, nutze USB, sobald USB-Debugging und ein USB-Datenanschluss für dein Modell bestätigt sind. [Panel vorbereiten](/de/install/prepare-a-panel/) enthält die Einzelheiten.

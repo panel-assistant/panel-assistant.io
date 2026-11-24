@@ -38,7 +38,7 @@ Maak vóór een wijziging waarover je twijfelt zelf een back-up: open in de webi
 
 ## Herstel
 
-Een dashboard dat na een update niet laadt, heeft meestal een probleem met de systeem-WebView of het dashboard zelf. Het paneel heeft daarvoor eigen gedrag bij [opstarten en herstel](/nl/manage/built-in-renderer/#opstarten-en-herstel). [Problemen oplossen](/nl/manage/troubleshooting/) behandelt de gebruikelijke oorzaken. Een paneel met de 1.0-paneel-app kan niet terug naar een eerdere release; [Upgraden naar 1.0](/nl/manage/upgrade-to-1-0/#teruggaan) legt uit wat wel kan.
+Een dashboard dat na een update niet laadt, heeft meestal een probleem met de systeem-WebView of het dashboard zelf. Het paneel heeft daarvoor eigen gedrag bij [opstarten en herstel](/nl/manage/built-in-renderer/#opstarten-en-herstel). [Problemen oplossen](/nl/manage/troubleshooting/) behandelt de gebruikelijke oorzaken.
 
 Herstel onder de app is een ander verhaal. Panel Assistant raakt nooit de firmware van een paneel aan, maar op sommige gerote panelen kun je handmatig een back-up van de firmwarepartities maken en die herstellen. Dat staat beschreven in [Firmwareback-up en herstel](/nl/hardware/guides/firmware-backup-and-restore/).
 

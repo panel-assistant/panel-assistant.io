@@ -52,6 +52,13 @@ export default defineConfig({
   // Old panel URLs in every language, since each language serves the English pages too.
   redirects: {
     ...panelRedirects(localePrefixes),
+    ...Object.fromEntries(
+      localePrefixes.flatMap((prefix) =>
+        ['home-assistant/move-from-mqtt', 'home-assistant/migration', 'manage/upgrade-to-1-0'].map(
+          (page) => [`${prefix}/${page}`, `${prefix}/release-notes/`],
+        ),
+      ),
+    ),
     // Retired 2026-11: the install script page. Panel Assistant installs and updates panels.
     ...Object.fromEntries(
       localePrefixes.map((p) => [
@@ -142,12 +149,10 @@ export default defineConfig({
                   ...label('sidebar.install_integration'),
                   slug: 'home-assistant/custom-integration',
                 },
-                { label: 'Panel Assistant is required', slug: 'home-assistant/migration' },
                 { ...label('sidebar.connect_panel'), slug: 'home-assistant/connect-a-panel' },
                 { ...label('sidebar.support_report'), slug: 'home-assistant/support-report' },
                 { label: 'Repairs', slug: 'home-assistant/repairs' },
                 { label: 'Startup cost', slug: 'home-assistant/startup-cost' },
-                { ...label('sidebar.move_from_mqtt'), slug: 'home-assistant/move-from-mqtt' },
               ],
             },
             {
@@ -170,8 +175,7 @@ export default defineConfig({
               ...label('sidebar.keep_running'),
               items: [
                 { ...label('sidebar.updates_recovery'), slug: 'manage/updates-and-recovery' },
-                { label: 'Upgrading to 1.0', slug: 'manage/upgrade-to-1-0' },
-                { label: 'Known issues in 1.0.0-rc1', slug: 'manage/known-issues' },
+                { label: 'Known issues', slug: 'manage/known-issues' },
                 { label: 'Performance', slug: 'manage/performance' },
                 { label: 'The drag race', slug: 'manage/drag-race' },
                 { ...label('sidebar.troubleshooting'), slug: 'manage/troubleshooting' },

@@ -12,10 +12,6 @@ Het lastigste deel van elk paneel is het eerste uur. Panel Assistant doet dat uu
 
 Installeer Panel Assistant op Home Assistant **2026.11 of nieuwer** via **Instellingen**, **Marketplace**. Installeer het op ondersteunde oudere versies, **2026.8.3 tot en met 2026.10**, via HACS en herstart Home Assistant. In Marketplace kun je de integratie mogelijk meteen instellen; volg eerst eventuele herstartmeldingen. Dit is het enige dat je handmatig installeert. Zie [De integratie installeren](/nl/home-assistant/custom-integration/) voor beide routes en updates.
 
-:::note
-Als je bijwerkt vanaf 0.9, lees dan vóór je begint [Upgraden naar 1.0](/nl/manage/upgrade-to-1-0/) en bewaar de daarin beschreven back-ups van Home Assistant en je panelen. Een paneel waarop de 1.0-app draait, kan niet terug naar 0.9.
-:::
-
 ## 2. Schakel foutopsporing in op het paneel
 
 Open de ontwikkelaarsopties op het paneel: open op de meeste panelen **Instellingen**, dan **Over**, en tik zeven keer op **Buildnummer**. Schakel daarna **USB-foutopsporing** in als je het paneel aansluit, of **netwerk-ADB op TCP-poort 5555** voor de netwerkroute. Niet elk paneel heeft een schakelaar voor netwerk-ADB; de [hardwarepagina’s](/nl/hardware/) vermelden bekende routes en geven aan wanneer de eerste toegang niet is geverifieerd. Is netwerktoegang niet beschikbaar, gebruik dan USB zodra USB-foutopsporing en een USB-datapoort voor je model zijn bevestigd. [Het paneel voorbereiden](/nl/install/prepare-a-panel/) geeft de details.

@@ -12,10 +12,6 @@ La parte difficile di qualsiasi pannello è la prima ora. Panel Assistant se ne 
 
 Su Home Assistant **2026.11 o successivo**, installa Panel Assistant da **Impostazioni**, **Marketplace**. Sulle versioni precedenti supportate, da **2026.8.3 a 2026.10**, installalo tramite HACS e riavvia Home Assistant. Marketplace potrebbe consentire la configurazione immediata; segui prima ogni richiesta di riavvio. È l’unica cosa che installi manualmente. [Installa l’integrazione](/it/home-assistant/custom-integration/) spiega entrambi i percorsi e gli aggiornamenti.
 
-:::note
-Se aggiorni dalla 0.9, leggi [Aggiornare alla versione 1.0](/it/manage/upgrade-to-1-0/) prima di iniziare e conserva i backup di Home Assistant e dei pannelli descritti nella guida. Un pannello che esegue l’app 1.0 non può tornare alla 0.9.
-:::
-
 ## 2. Attiva il debug sul pannello
 
 Apri le opzioni sviluppatore sul pannello: sulla maggior parte dei pannelli, apri **Impostazioni**, poi **Informazioni** e tocca **Numero build** sette volte. Quindi attiva il **debug USB** se colleghi il pannello via cavo, oppure **ADB di rete sulla porta TCP 5555** per l’installazione via rete. Non tutti i pannelli hanno un interruttore per ADB di rete; le [pagine hardware](/it/hardware/) elencano i percorsi noti e indicano quando l’accesso iniziale non è verificato. Se l’accesso tramite rete non è disponibile, usa USB una volta confermati il debug USB e una porta dati USB per il tuo modello. [Prepara il pannello](/it/install/prepare-a-panel/) fornisce i dettagli.

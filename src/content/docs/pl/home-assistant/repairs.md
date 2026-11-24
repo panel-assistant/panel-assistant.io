@@ -15,7 +15,6 @@ Używaj zabezpieczonego działania **Spróbuj ponownie** w istniejącej naprawie
 - [Usuń Panel Assistant z panelu &lt;panel&gt;](#usuń-panel-assistant-z-panelu-panel)
 - [Zbyt stara aplikacja panelu](#panel-app-too-old)
 - [Panel nadal używa starej aplikacji](#old-app-needs-090)
-- [Panel MQTT wymaga 0.9.0](#mqtt-panel-needs-090)
 - [Uprawnienia panelu](#panel-permissions)
 - [Konfiguracja zbliżenia panelu](#panel-proximity-setup)
 - [Niefiltrowany pulpit](#dashboard-unfiltered)
@@ -75,19 +74,24 @@ Używaj zabezpieczonego działania **Spróbuj ponownie** w istniejącej naprawie
 
 **Co to oznacza:** Ten panel nadal używa starej aplikacji ha-paneld. Aktualny Panel Assistant nie może przenieść go automatycznie.
 
-**Dlaczego tak się dzieje:** Automatyczne przenoszenie ze starej aplikacji ha-paneld usunięto w 1.0. Przenoszenie w 0.9.0 pozostaje obsługiwaną drogą dla paneli, które obejmuje.
+**Dlaczego tak się dzieje:** Automatyczne przenoszenie ze starej aplikacji ha-paneld usunięto w 1.0.
 
-**Jak to naprawić:** Jeśli tego przenoszenia nie można zakończyć, wykonaj [procedurę ręczną](/pl/manage/upgrade-to-1-0/#a-panel-still-runs-the-old-app) z aktualnym Panel Assistant: wyeksportuj ustawienia starej aplikacji, przywróć ekran główny producenta, jeśli wyciszono jego aplikacje, pozostaw sieciowe ADB na porcie 5555, potem odinstaluj starą aplikację i dodaj panel ponownie. Dokończ konfigurację i wybierz Zatwierdź w Home Assistant, przejrzyj i zastosuj import ustawień, a następnie zaloguj się ponownie przez Logowanie w przeglądarce → Połącz ponownie. Poradnik opisuje nieprzenoszone ustawienia i późniejsze kontrole. Nie obniżaj wersji Panel Assistant dla tej procedury.
+**Jak to naprawić:** Użyj aktualnej wersji Panel Assistant, aby zastąpić starą aplikację. Zastępuje ona aplikację i tworzy nowe urządzenie Home Assistant: historia zaczyna się od nowa, a automatyzacje korzystające ze starych encji wymagają sprawdzenia. Nie wymaga obniżania wersji Panel Assistant.
 
-<a id="mqtt-panel-needs-090"></a>
+1. W interfejsie internetowym starej aplikacji otwórz **Instalacja** i użyj **Eksportuj ustawienia**. Zachowaj plik przed usunięciem aplikacji. Eksport domyślnie pomija hasła i tokeny, więc zachowaj dane uwierzytelniające potrzebne do ponownego wprowadzenia.
+2. Jeśli stara aplikacja służyła do wyciszenia aplikacji producenta, użyj **Przywróć ekran główny** na stronie **Instalacja** przed jej usunięciem. Pozostaw sieciowe ADB włączone na porcie **5555**, aby Panel Assistant mógł zainstalować nową aplikację.
+3. Połącz się z panelem przez ADB i usuń tylko starą aplikację:
 
-## Panel MQTT wymaga 0.9.0
+   ```sh
+   adb connect PANEL_IP:5555
+   adb uninstall io.github.maxlyth.hapaneld
+   ```
 
-**Co to oznacza:** Panel Assistant nie może podłączyć tego nieprzeniesionego panelu MQTT bez rozdzielenia jego encji i historii.
+   Zastąp `PANEL_IP` adresem panelu. Nie resetuj panelu.
 
-**Dlaczego:** Panel Assistant 1.0 nie wykonuje już przenoszenia z MQTT.
-
-**Jak naprawić:** Nie pobieraj ponownie Panel Assistant 0.9.0 na działającą instalację 1.0: ustawienie usunięte przez 1.0 może spowodować powrót przeniesionych paneli do MQTT w 0.9.0. Tylko jeśli żaden panel nie ma jeszcze aplikacji 1.0, przywróć kopię Home Assistant sprzed aktualizacji, zakończ wszystkie przenoszenia w 0.9.0, a następnie wróć do 1.0. Jeśli którykolwiek panel ma już aplikację 1.0 albo nie ma odpowiedniej kopii, poproś o pomoc przed zmianą wersji. Zobacz [przewodnik odzyskiwania aktualizacji 1.0](/pl/manage/upgrade-to-1-0/).
+4. Usuń istniejący wpis tego panelu z Panel Assistant w Home Assistant, jeśli taki istnieje. Mając zainstalowany aktualny Panel Assistant, [dodaj panel](/pl/install/installing-ha-paneld/), aby zainstalować aktualną aplikację. Dokończ podlinkowaną stronę konfiguracji panelu, w tym nazwę, adres Home Assistant, logowanie i pulpit, potem wróć do Home Assistant i wybierz **Zatwierdź**.
+5. W interfejsie internetowym nowej aplikacji otwórz **Instalacja**, wybierz **Importuj ustawienia…** i wskaż eksport. Przejrzyj listę zmian przed ich zastosowaniem. Ustawienia MQTT nie są przenoszone. Ustawienia zapisane z wartościami domyślnymi starej aplikacji mogą zastąpić domyślne wartości nowej, więc potem sprawdź asystenta głosowego i filtr encji na stronie **Konfiguracja**.
+6. Po imporcie otwórz **Konfiguracja → Połączenie z Home Assistant** i użyj **Połącz ponownie** obok **Logowanie w przeglądarce**, aby ponownie się zalogować. Import może wyczyścić część danych logowania i spowodować **Odrzucono logowanie do Home Assistant** przy kolejnym odświeżeniu tokenu. Sprawdź, czy pulpit się ładuje i panel łączy się w Home Assistant, a następnie sprawdź ustawienia i automatyzacje.
 
 <a id="panel-permissions"></a>
 

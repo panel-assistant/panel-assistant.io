@@ -1,8 +1,6 @@
 ---
 spec: ['9e588f29fd59', 'f264721d9847', 'b4c65908afa8']
 help: 'Credential for this panel.'
-related:
-  - /home-assistant/move-from-mqtt/
 ---
 
 The user name the panel gives the broker, together with [Password](#mqtt_password). With the Mosquitto add-on this is usually a Home Assistant user you created for the panel.

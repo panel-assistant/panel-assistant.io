@@ -38,7 +38,7 @@ Avant une modification dont vous n’êtes pas sûr, faites vous-même une sauve
 
 ## Récupération
 
-Lorsqu’un tableau de bord ne se charge plus après une mise à jour, la cause est généralement le WebView système ou le tableau de bord lui-même, et le panneau possède son propre comportement de [démarrage et récupération](/fr/manage/built-in-renderer/#démarrage-et-récupération) pour y faire face. [Dépannage](/fr/manage/troubleshooting/) présente les causes habituelles. Un panneau exécutant la version 1.0 de l’application ne peut pas revenir à une version antérieure ; [passer à la version 1.0](/fr/manage/upgrade-to-1-0/#revenir-en-arrière) explique les retours possibles.
+Lorsqu’un tableau de bord ne se charge plus après une mise à jour, la cause est généralement le WebView système ou le tableau de bord lui-même, et le panneau possède son propre comportement de [démarrage et récupération](/fr/manage/built-in-renderer/#démarrage-et-récupération) pour y faire face. [Dépannage](/fr/manage/troubleshooting/) présente les causes habituelles.
 
 La récupération à un niveau inférieur à celui de l’application est une autre affaire. Panel Assistant ne touche jamais au micrologiciel d’un panneau, mais les partitions du micrologiciel de certains panneaux disposant d’un accès root peuvent être sauvegardées et restaurées manuellement, comme décrit dans [sauvegarde et restauration du micrologiciel](/fr/hardware/guides/firmware-backup-and-restore/).
 

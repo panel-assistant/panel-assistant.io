@@ -115,37 +115,6 @@ test('no display-sizing page says no standard values ship, and the English page 
   assert.match(english, /puts the previous values back/);
 });
 
-test('the migration page and the 0.1.0 section give the old-app route in order', () => {
-  const route = /old ha-paneld app[\s\S]*?0\.9\.0[\s\S]*?Repair[\s\S]*?1\.0/;
-  assert.match(text('/home-assistant/migration/'), route);
-  // The heading's own anchor link repeats its text, so take what follows the last copy.
-  const section = text('/home-assistant/custom-integration/')
-    .split('If you used the earlier 0.1.0 integration')
-    .at(-1);
-  assert.match(section, route);
-  assert.ok(
-    !text('/home-assistant/migration/').includes('connects to the app already on the panel'),
-  );
-  const unchanged = [
-    'Nothing on the panel itself changes',
-    'Op het paneel zelf verandert niets',
-    'Na samym panelu nic się nie zmienia',
-    'На самій панелі нічого не змінюється',
-  ];
-  for (const path of localized('/home-assistant/custom-integration/')) {
-    for (const phrase of unchanged)
-      assert.ok(!text(path).includes(phrase), `${path} still says "${phrase}"`);
-  }
-});
-
-test('the page the 0.9 panel notice links names that notice and leads on to 1.0', () => {
-  // The 0.9.8 to 0.9.11 panel apps show "Panel Assistant is required" with panel-assistant.io/go/migration.
-  const page = html('/home-assistant/migration/');
-  assert.match(page, /<title>Panel Assistant is required/);
-  assert.ok(!text('/home-assistant/migration/').includes('After the 0.9.8 update'));
-  assert.match(content('/home-assistant/migration/'), /href="\/manage\/upgrade-to-1-0\/"/);
-});
-
 test('no prepare-a-panel page asks for a fixed address, and the English page says a moved panel is followed', () => {
   const pages = localized('/install/prepare-a-panel/');
   assert.ok(pages.length > 1);
@@ -223,23 +192,6 @@ test('the Sonoff WebView section gives the managed route and manual fallback', (
   assert.match(guidance, /Chromium 138/);
 });
 
-test('Move a panel from MQTT sends a reader already on 1.0 to the unfinished-move steps, not back to 0.9.0', () => {
-  // Downloading 0.9.0 again over 1.0 hands moved panels back to MQTT; the upgrade page restores the backup instead.
-  const pages = localized('/home-assistant/move-from-mqtt/');
-  assert.ok(pages.length > 1);
-  for (const path of pages)
-    assert.deepEqual(
-      elements(path).filter((e) => e.includes('0.9.0') && e.includes('HACS')),
-      [],
-      path,
-    );
-  assert.match(
-    content('/home-assistant/move-from-mqtt/'),
-    /href="\/manage\/upgrade-to-1-0\/#if-a-move-was-not-finished"/,
-  );
-  assert.match(html('/manage/upgrade-to-1-0/'), /id="if-a-move-was-not-finished"/);
-});
-
 test('the control reference offers the Volume number only on a panel without a speaker', () => {
   // Panel Assistant 1.0 creates no number.<panel>_volume on a panel with a speaker, and removes an old one.
   const rows = elements('/reference/api/', 'p|li|tr');
@@ -300,6 +252,22 @@ test('panel access guidance distinguishes initial debugging from root and unknow
   assert.match(text('/install/prepare-a-panel/'), /USB access is also unverified/);
 });
 
+test('the active old-app Repair contains the manual route in every locale', () => {
+  for (const locale of ['', ...LOCALES.map((name) => `/${name}`)]) {
+    const path = `${locale}/home-assistant/repairs/`;
+    const body = content(path);
+    const section = body.match(/<a id="old-app-needs-090">[\s\S]*?<\/ol>/)?.[0] ?? '';
+    assert.match(section, /adb uninstall io\.github\.maxlyth\.hapaneld/, path);
+    assert.ok(section.includes(`href="${locale}/install/installing-ha-paneld/"`), path);
+    assert.equal([...section.matchAll(/<li>/g)].length, 6, path);
+    assert.doesNotMatch(body, /upgrade-to-1-0|mqtt-panel-needs-090/, path);
+  }
+  assert.match(
+    text('/home-assistant/repairs/'),
+    /Export settings.*adb uninstall.*Import settings.*Reconnect.*Browser sign-in/,
+  );
+});
+
 // Routine installation, updates and Repairs happen in Home Assistant. Only the documented manual
 // replacement of the retired old app needs a terminal; hardware and reference pages may show commands.
 test('routine install, update and repair guidance needs no command line outside old-app replacement', () => {
@@ -314,8 +282,8 @@ test('routine install, update and repair guidance needs no command line outside 
     /\b(adb (install|shell|devices|tcpip|connect|root|push|pull|reboot)|platform-tools|fastboot)\b/i;
   const offending = pages.filter((p) => {
     let body = content(p);
-    if (p === '/manage/upgrade-to-1-0/') {
-      const manualSection = /<h3 id="a-panel-still-runs-the-old-app">[\s\S]*?<\/ol>/;
+    if (p === '/home-assistant/repairs/') {
+      const manualSection = /<a id="old-app-needs-090">[\s\S]*?<\/ol>/;
       assert.match(body, manualSection, 'the old-app manual route must remain identifiable');
       body = body.replace(manualSection, '');
     }

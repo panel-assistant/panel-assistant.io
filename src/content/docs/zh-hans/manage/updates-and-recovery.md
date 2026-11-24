@@ -38,7 +38,7 @@ Panel Assistant 在做出任何改动前都会检查面板，并在每次更新�
 
 ## 恢复
 
-更新后仪表盘无法加载，通常是系统 WebView 或仪表盘自身的问题。面板为此提供了自身的 [启动与恢复](/zh-hans/manage/built-in-renderer/#启动与恢复)机制。[故障排查](/zh-hans/manage/troubleshooting/)介绍了常见原因。运行 1.0 面板应用的面板无法退回更早的发布版本；[升级到 1.0](/zh-hans/manage/upgrade-to-1-0/#回退)说明了哪些部分可以退回旧版。
+更新后仪表盘无法加载，通常是系统 WebView 或仪表盘自身的问题。面板为此提供了自身的 [启动与恢复](/zh-hans/manage/built-in-renderer/#启动与恢复)机制。[故障排查](/zh-hans/manage/troubleshooting/)介绍了常见原因。
 
 应用以下层级的恢复是另一回事。Panel Assistant 从不改动面板固件，但部分已取得 root 权限的面板可以手动备份和恢复固件分区，相关步骤见 [固件备份与恢复](/zh-hans/hardware/guides/firmware-backup-and-restore/)。
 

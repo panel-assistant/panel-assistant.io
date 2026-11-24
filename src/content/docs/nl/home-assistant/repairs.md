@@ -15,7 +15,6 @@ Gebruik de beveiligde actie **Opnieuw proberen** van de bestaande reparatie pas 
 - [Panel Assistant van &lt;panel&gt; halen](#panel-assistant-van-panel-halen)
 - [Paneelapp te oud](#panel-app-too-old)
 - [Een paneel draait nog de oude app](#old-app-needs-090)
-- [MQTT-paneel heeft 0.9.0 nodig](#mqtt-panel-needs-090)
 - [Paneelmachtigingen](#panel-permissions)
 - [Nabijheid van paneel instellen](#panel-proximity-setup)
 - [Dashboard ongefilterd](#dashboard-unfiltered)
@@ -75,19 +74,24 @@ Gebruik de beveiligde actie **Opnieuw proberen** van de bestaande reparatie pas 
 
 **Wat het betekent:** Dit paneel draait nog de oude ha-paneld-app. De huidige Panel Assistant kan het niet automatisch overzetten.
 
-**Waarom dit gebeurt:** Automatische migratie vanaf de oude ha-paneld-app is verwijderd in 1.0. De overstap via 0.9.0 blijft de ondersteunde route voor panelen die daarmee kunnen worden overgezet.
+**Waarom dit gebeurt:** Automatische migratie vanaf de oude ha-paneld-app is verwijderd in 1.0.
 
-**Hoe je dit oplost:** Als die overstap niet kan worden afgerond, volg dan de [handmatige route](/nl/manage/upgrade-to-1-0/#a-panel-still-runs-the-old-app) met de huidige Panel Assistant: exporteer de instellingen van de oude app, herstel het startscherm van de fabrikant als je de apps van de fabrikant hebt stilgelegd, houd netwerk-ADB op poort 5555 ingeschakeld, verwijder daarna de oude app en voeg het paneel opnieuw toe. Rond de installatie af en kies Verzenden in Home Assistant, controleer de import van de instellingen en pas die toe, en meld je daarna opnieuw aan via Browseraanmelding → Opnieuw verbinden. De handleiding beschrijft welke instellingen niet worden overgenomen en wat je achteraf moet controleren. Downgrade Panel Assistant niet voor deze route.
+**Hoe je dit oplost:** Gebruik de huidige versie van Panel Assistant om de oude app te vervangen. Dit vervangt de app en maakt een nieuw Home Assistant-apparaat: de geschiedenis begint opnieuw en automatiseringen met de oude entiteiten moeten worden gecontroleerd. Panel Assistant hoeft hiervoor niet te worden gedowngraded.
 
-<a id="mqtt-panel-needs-090"></a>
+1. Open in de webinterface van de oude app **Installeren** en gebruik **Instellingen exporteren**. Bewaar het bestand voordat je de app verwijdert. De export bevat standaard geen wachtwoorden en tokens; bewaar dus de inloggegevens die je opnieuw moet invoeren.
+2. Heb je met de oude app de apps van de fabrikant stilgelegd, gebruik dan **Startscherm herstellen** op de pagina **Installeren** voordat je de app verwijdert. Houd netwerk-ADB ingeschakeld op poort **5555**, zodat Panel Assistant de nieuwe app kan installeren.
+3. Verbind via ADB met het paneel en verwijder alleen de oude app:
 
-## MQTT-paneel heeft 0.9.0 nodig
+   ```sh
+   adb connect PANEL_IP:5555
+   adb uninstall io.github.maxlyth.hapaneld
+   ```
 
-**Wat het betekent:** Panel Assistant kan dit nog niet overgezette MQTT-paneel niet verbinden zonder zijn entiteiten en geschiedenis op te splitsen.
+   Vervang `PANEL_IP` door het adres van je paneel. Reset het paneel niet.
 
-**Waarom dit gebeurt:** Panel Assistant 1.0 voert de MQTT-overstap niet meer uit.
-
-**Hoe je dit oplost:** Download Panel Assistant 0.9.0 niet opnieuw over een draaiende 1.0-installatie: een instelling die 1.0 heeft verwijderd kan ervoor zorgen dat 0.9.0 gemigreerde panelen terugzet naar MQTT. Alleen als nog geen enkel paneel de 1.0-app heeft, herstel je een Home Assistant-back-up van vóór de upgrade, voltooi je elke overstap in 0.9.0 en keer je daarna terug naar 1.0. Als een paneel de 1.0-app al heeft of er geen geschikte back-up is, vraag dan ondersteuning voordat je versies wijzigt. Zie de [handleiding voor herstel bij de 1.0-upgrade](/nl/manage/upgrade-to-1-0/).
+4. Verwijder de bestaande vermelding van dit paneel uit Panel Assistant in Home Assistant, als die er is. Met de huidige Panel Assistant geïnstalleerd [voeg je het paneel toe](/nl/install/installing-ha-paneld/) om de huidige app te installeren. Rond de gekoppelde instelpagina van het paneel af, inclusief naam, Home Assistant-adres, aanmelden en dashboard; keer daarna terug naar Home Assistant en kies **Verzenden**.
+5. Open in de webinterface van de nieuwe app **Installeren**, kies **Instellingen importeren…** en selecteer je export. Controleer de lijst met wijzigingen voordat je ze toepast. MQTT-instellingen worden niet overgenomen. Opgeslagen standaardwaarden van de oude app kunnen de standaardwaarden van de nieuwe app vervangen; controleer daarom daarna de spraakassistent en het entiteitsfilter op **Configureren**.
+6. Open na het importeren **Configureren → Home Assistant-verbinding** en gebruik **Opnieuw verbinden** naast **Browseraanmelding** om opnieuw in te loggen. De import kan een deel van de aanmelding wissen en **Home Assistant-aanmelding geweigerd** veroorzaken wanneer het token opnieuw wordt vernieuwd. Controleer of het dashboard laadt en het paneel in Home Assistant verbinding maakt, en controleer daarna je instellingen en automatiseringen.
 
 <a id="panel-permissions"></a>
 
