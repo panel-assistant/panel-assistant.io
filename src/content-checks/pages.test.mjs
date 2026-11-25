@@ -236,7 +236,13 @@ test('no instruction for a Configure page setting asks the reader to save', () =
 
 // Reader contract: inspect built page content, including the routes offered to new owners.
 test('panel access guidance distinguishes initial debugging from root and unknown routes', () => {
-  for (const model of ['electron/wf1589t', 'electron/wf2489t', 'electron/smt156', 'smatek/s9e']) {
+  for (const model of [
+    'electron/wf1589t',
+    'electron/wf2489t',
+    'electron/smt156',
+    'electron/smt97t',
+    'smatek/s9e',
+  ]) {
     const t = text(`/hardware/panels/${model}/`);
     assert.match(t, /Initial debugging access/);
     assert.match(t, /TCP port 5555[^.]*not established/);
