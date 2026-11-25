@@ -10,7 +10,7 @@ sidebar:
 
 The original NSPanel Pro line ships as two physically different panels, the **[86P](/hardware/panels/sonoff/nspanel-pro-86p/)** and the **[120P](/hardware/panels/sonoff/nspanel-pro-120p/)**, named for the EU 86 mm and 120 mm wall boxes. Both are built-in **Zigbee 3.0 coordinator** panels with no NFC or IR, and the lowest-power CPU of the fully supported panels. They share almost everything documented on this page (root process, WebView, LED, sensors, Zigbee gateway); each variant's own page carries only its own clean specification and the handful of facts that differ. This page was reverse-engineered primarily on a live **86P** (Android 8.1, rooted, toolbox `su`), with the 120P separately verified live where noted.
 
-The **[NSPanel Pro Gen2 86](/hardware/panels/sonoff/nspanel-pro-gen2-86/)** is the dual-relay model on the same platform and firmware line (RK3326-**S**, dual relays, EFR32**MG24**). The NSPanel Pro profile recognises it by its RK3326 board name; it does not expose the Gen2's relays yet, and no owner has reported running Panel Assistant on one yet.
+The **[NSPanel Pro Gen2 86](/hardware/panels/sonoff/nspanel-pro-gen2-86/)** is the dual-relay model on the same platform and firmware line (RK3326-**S**, dual relays, EFR32**MG24**). Before panel app 1.0.5 the NSPanel Pro profile recognised it by its RK3326 board name; an owner reports that it works, and panel app 1.0.5 gives it its own profile with both relays.
 
 ## Also sold as
 

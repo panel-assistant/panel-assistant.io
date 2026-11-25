@@ -6,7 +6,7 @@ model: NSPanel Pro Gen2 86
 soc: Rockchip RK3326-S
 android: 'Not established'
 screen: 3.95 in, 480 × 480
-support: Untested
+support: Owner report only
 root: Not established on this model
 webview_ships_with: 'Not established for this model'
 webview_can_reach: 'Not established for this model'
@@ -17,7 +17,7 @@ sidebar:
 ---
 
 :::note
-**Sold as a new product, built on the same platform.** The Gen2 86 is the dual-relay member of the [NSPanel Pro line](/hardware/panels/sonoff/). It runs the same firmware line as the [86P](/hardware/panels/sonoff/nspanel-pro-86p/), and Panel Assistant's existing NSPanel Pro profile recognises its Rockchip RK3326 board, so it is set up like an 86P. Its two relays are **not yet available** in Home Assistant: that profile does not describe them yet. No owner has reported running Panel Assistant on a Gen2 yet; if you have one, a [bug report or support report](https://github.com/panel-assistant/android/issues/new/choose) helps.
+**Sold as a new product, built on the same platform.** The Gen2 86 is the dual-relay member of the [NSPanel Pro line](/hardware/panels/sonoff/) and runs the same firmware line as the [86P](/hardware/panels/sonoff/nspanel-pro-86p/). An owner reports that installation went smoothly and everything works. Panel app 1.0.5 gives the Gen2 its own profile, so its two relays appear in Home Assistant; the same owner switched both relays with these settings. If you have a Gen2, a [bug report or support report](https://github.com/panel-assistant/android/issues/new/choose) helps.
 :::
 
 Sonoff markets the NSPanel Pro Gen2 86 as a new panel for the EU 86 mm wall box, in black (NSPanel86PB-Relay) and white (NSPanel86PW-Relay). What changes from the 86P is the hardware around the same platform: two relays, a newer Zigbee radio and the RK3326-S variant of the Rockchip chip. Everything documented once on the [family page](/hardware/panels/sonoff/), from root and WebView updates to the Zigbee gateway, is where to start; treat any difference you find on a Gen2 as worth reporting.
@@ -33,11 +33,11 @@ NSPanel Pro Gen2, NSPanel86PB-Relay, NSPanel86PW-Relay, NSPanel Pro Gen2 dual-ch
 | RAM     | 2 GB (advertised)                                                                                                               |
 | Storage | 32 GB eMMC (advertised)                                                                                                         |
 | Android | Not established on a unit                                                                                                       |
-| Relays  | **Two**, 5 A per gang, 10 A total resistive load (advertised); not yet exposed by Panel Assistant                               |
+| Relays  | **Two**, 5 A per gang, 10 A total resistive load (advertised); exposed from panel app 1.0.5                                     |
 | Radios  | **Zigbee 3.0** (Silicon Labs EFR32**MG24**, where the 86P has an MG21), dual-band Wi-Fi, Bluetooth LE                           |
 | Sensors | Light and proximity, speaker and microphone (advertised)                                                                        |
 | Source  | [Sonoff product page](https://sonoff.tech/products/sonoff-nspanel-pro-gen2-dual-channel-relay-smart-home-control-panel-86-type) |
 
 ## What carries over from the 86P
 
-Sonoff ships the Gen2 and the original panels on one firmware version line: release 4.7.0 covers both. The panel app's NSPanel Pro profile matches on the RK3326 board name, so installation, the dashboard, screen control and the shared NSPanel Pro behaviour are expected to work as on the 86P. What has not been seen on a Gen2 yet is listed in the specification table above; the relays are the one feature known to need more work.
+Sonoff ships the Gen2 and the original panels on one firmware version line: release 4.7.0 covers both. Before panel app 1.0.5 the panel app's NSPanel Pro profile matched on the RK3326 board name, so installation, the dashboard, screen control and the shared NSPanel Pro behaviour work as on the 86P, and an owner has confirmed this on a Gen2. From 1.0.5 the Gen2 has its own profile, which adds the relays.
