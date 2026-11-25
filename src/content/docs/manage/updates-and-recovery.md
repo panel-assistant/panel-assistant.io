@@ -11,7 +11,7 @@ An update starts when Panel Assistant or you explicitly request it. The panel ap
 
 A panel-app update started from Home Assistant can also install a verified compatible System WebView on supported panels. If the browser-engine stage remains unfinished, use the update Repair's **Try again** action. It checks existing work before requesting another attempt; there is no scheduled retry. Other panels still need the Play Store, vendor firmware or the manual route described in [updating the system WebView](/hardware/guides/update-the-webview/).
 
-A supported rooted panel can keep network ADB off while Panel Assistant manages it through its authenticated app connection. App updates and supported maintenance use that connection and the panel's privileged installer. The local recovery service can reopen network ADB if the app connection stops being renewed or recovery requires it.
+From panel app 1.0.5, a supported rooted panel leaves network ADB as its firmware has it, and its owner can turn on Keep ADB off on the panel's own settings page to keep it off; Panel Assistant manages the panel through its authenticated app connection either way. App updates and supported maintenance use that connection and the panel's privileged installer. The local recovery service can reopen network ADB if the app connection stops being renewed or recovery requires it.
 
 ### Panels that need ADB
 
