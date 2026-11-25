@@ -3,7 +3,7 @@ title: Startup cost
 description: How much time Panel Assistant adds to a Home Assistant start, how it is kept down, and how it was measured.
 ---
 
-Home Assistant waits for every integration to finish setting up before it reports that it has started. This page says how much of that wait is Panel Assistant's, measured for Panel Assistant 1.1 (in development), and what keeps it small.
+Home Assistant waits for every integration to finish setting up before it reports that it has started. This page says how much of that wait is Panel Assistant's, measured for Panel Assistant 1.1, and what keeps it small.
 
 ## What it costs
 

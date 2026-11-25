@@ -29,7 +29,7 @@ Panel Assistant makes these changes only during an install or update you start, 
 
 - **Home screen.** The app becomes the panel's home screen, and each install or update sets it again.
 - **Permissions.** The camera and microphone where the panel has them, notifications on Android 13 or later, and the rights to modify system settings, display over other apps, install its own updates and change secure settings. A permission you turned off is left off.
-- **Network debugging.** Panel Assistant updates the app over network debugging (ADB on port 5555). A USB install turns it on, and on rooted panels installing keeps it on across restarts. Rooted panels keep the port closed while the app's own connection to Home Assistant is working, and the app can open it again if that connection is lost.
+- **Network debugging.** Panel Assistant updates the app over network debugging (ADB on port 5555). A USB install turns it on, and on rooted panels installing keeps it on across restarts. Rooted panels keep the port closed while the app's own connection to Home Assistant is working, and the app can open it again if that connection is lost. In Panel Assistant 1.1, turning on the panel's own **Keep ADB off** setting (off by default) does this instead: once the panel connects to Home Assistant, it closes the port and keeps it closed, because Panel Assistant works over the app's own connection; otherwise network debugging stays as the panel had it.
 - **Device administrator.** Once the panel's own setup is finished, the app becomes a device administrator, which it uses only to lock the screen where Android's screen timeout does not turn it off.
 - **Accessibility service.** Turned on, and turned back on each time the app starts. The app uses it to:
   - send hardware button presses to Home Assistant
@@ -53,6 +53,11 @@ To undo setup, choose **Remove from this panel** in Panel Assistant's options fo
 
 - **Devices that announce network debugging.** Any Android device that announces it is offered as a panel you can install onto.
 - **Panels other apps know.** Panels that Fully Kiosk, Shelly, ESPHome or the Companion app already know are looked for only when you open Add panel, which briefly checks their network debugging and app ports.
+  - In Panel Assistant 1.1, you can also turn on _Look for them after Home Assistant starts_ (sidebar, **All panels**, **Settings**, under _Panels other apps know_; off by default). Panel Assistant then makes the same check once in the background:
+    - at least 15 minutes after Home Assistant has started, and only once it is not busy; if it stays busy for an hour after that, the check is skipped until Home Assistant next starts
+    - four devices at a time, for at most seven seconds each
+    - never contacting an address you have already added
+    - showing each panel it finds under Discovered, and stopping when Home Assistant stops or you turn the setting off
 - **Online.** The USB installer page loads from install.panel-assistant.io, and every six hours Home Assistant checks panel-assistant.io, or GitHub if that list is unavailable, for new releases of the panel app. WebView updates download from panel-assistant.io.
 
 ## After it is installed

@@ -3,7 +3,7 @@ title: Notifications
 description: Showing Home Assistant notifications on a panel as cards with pictures, buttons and a countdown, using the same options as the Companion app.
 ---
 
-**Panel Assistant 1.1, in development.** This page describes a feature that is not in a released version yet.
+This feature comes with Panel Assistant 1.1.
 
 Send a notification from a Home Assistant automation to a panel and it appears over the dashboard as a card drawn in the panel's own design, light on a dark dashboard and dark on a light one. The options are the ones the Home Assistant Companion app uses on a phone, so an automation you already wrote for your phone works on a panel by changing only the notify action.
 
